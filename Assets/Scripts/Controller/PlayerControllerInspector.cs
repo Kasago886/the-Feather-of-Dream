@@ -28,6 +28,10 @@ public class PlayerControllerInspector : Editor
         EditorGUILayout.LabelField("基础数值");
         playerController.walkSpeed = EditorGUILayout.FloatField("移动速度",playerController.walkSpeed);
         playerController.jumpSpeed = EditorGUILayout.FloatField("跳跃初速度",playerController.jumpSpeed);
+        playerController.sprintSpeed = EditorGUILayout.FloatField("冲刺速度", playerController.sprintSpeed);
+        playerController.sprintDuration = EditorGUILayout.FloatField("冲刺持续时间", playerController.sprintDuration);
+        playerController.sprintCooldown = EditorGUILayout.FloatField("冲刺冷却时间", playerController.sprintCooldown);
+
 
         EditorGUILayout.LabelField("判定设置");
         showBottom = EditorGUILayout.Foldout(showBottom, "落地判定");
