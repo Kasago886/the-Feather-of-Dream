@@ -1,0 +1,9 @@
+`Test, test!
+
+testImage`看得见头像吗？
+
+`那就好。
+
+[clear]`头像消失了吗
+
+`ok
