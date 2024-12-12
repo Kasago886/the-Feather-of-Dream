@@ -16,4 +16,8 @@ public class ControllerSprintingState : ControllerState
     public override void OnJump()
     {
     }
+
+    public override void OnAttack()
+    {
+    }
 }

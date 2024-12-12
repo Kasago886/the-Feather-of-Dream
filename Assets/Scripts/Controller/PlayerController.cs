@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum ControllerStateType
 {
@@ -27,6 +28,11 @@ public class PlayerController : MonoBehaviour
     public float bottomCenterX, bottomCenterY;
     Vector2 bottomCenterGlobal;
     public Vector2 bottomSize;
+
+    //¹¥»÷
+    public UnityEvent attackEvent;
+    public float attackCooldown;
+    float attackCooldownTimer = 0;
 
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
@@ -58,6 +64,12 @@ public class PlayerController : MonoBehaviour
         if (sprintDurationTimer > 0)
         {
             SprintUpdate();
+        }
+
+        //¹¥»÷
+        if (attackCooldownTimer > 0)
+        {
+            attackCooldownTimer -= Time.deltaTime;
         }
     }
 
@@ -141,6 +153,23 @@ public class PlayerController : MonoBehaviour
 
             currentState = ControllerStateType.Movable;
         }
+    }
+
+    /// <summary>
+    /// ¹¥»÷
+    /// </summary>
+    public void OnAttack()
+    {
+        if (attackCooldownTimer <= 0)
+        {
+            attackCooldownTimer = attackCooldown;
+            attackEvent?.Invoke();
+        }
+    }
+
+    public void StateAttack()
+    {
+        stateDict[currentState].OnAttack();
     }
 
     /// <summary>

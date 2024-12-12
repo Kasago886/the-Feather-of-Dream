@@ -13,6 +13,7 @@ public class InputListener : MonoBehaviour
     public UnityEvent ShiftEvent;
     public UnityEvent CEvent;
     public UnityEvent TabEvent;
+    public UnityEvent MouseDownEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,10 @@ public class InputListener : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             TabEvent?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            MouseDownEvent?.Invoke();
         }
     }
 }

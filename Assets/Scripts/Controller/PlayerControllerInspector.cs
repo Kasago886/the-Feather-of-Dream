@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.TerrainTools;
+using UnityEngine.Events;
 
 //CustomEditor用于关联要自定义的脚本
 [CustomEditor(typeof(PlayerController))]
@@ -13,10 +14,14 @@ public class PlayerControllerInspector : Editor
     bool showBottom;
     Vector2 bottomCenter;
 
+    SerializedProperty attackEventProperty;
+
     private void OnEnable()
     {
         //获取当前要自定义Inspector的对象
         playerController = (PlayerController)target;
+        //获取attackEvent
+        attackEventProperty = serializedObject.FindProperty("attackEvent");
     }
 
     //自定义Inspector面板
@@ -43,6 +48,14 @@ public class PlayerControllerInspector : Editor
 
             playerController.bottomSize = EditorGUILayout.Vector2Field("BottomSize", playerController.bottomSize);
         }
+
+        EditorGUILayout.LabelField("攻击事件");
+
+        playerController.attackCooldown = EditorGUILayout.FloatField("攻击冷却时间", playerController.attackCooldown);
+
+        serializedObject.Update();
+        EditorGUILayout.PropertyField(attackEventProperty);
+        serializedObject.ApplyModifiedProperties();
 
         EditorGUILayout.EndVertical();
 

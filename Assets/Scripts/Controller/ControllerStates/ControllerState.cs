@@ -22,4 +22,9 @@ public class ControllerState
     {
         controller.OnSprint();
     }
+
+    public virtual void OnAttack()
+    {
+        controller.OnAttack();
+    }
 }
