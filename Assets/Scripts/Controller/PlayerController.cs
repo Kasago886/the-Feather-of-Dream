@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public enum ControllerStateType
 {
-    Movable, Sprinting
+    Movable, Sprinting, Pause
 }
 
 [AddComponentMenu("Controllers/PlayerController")]
@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
         stateDict[ControllerStateType.Movable] = new ControllerMovableState(this);
         stateDict[ControllerStateType.Sprinting] = new ControllerSprintingState(this);
+        stateDict[ControllerStateType.Pause] = new ControllerPauseState(this);
 
         currentState = ControllerStateType.Movable;
     }
@@ -170,6 +171,18 @@ public class PlayerController : MonoBehaviour
     public void StateAttack()
     {
         stateDict[currentState].OnAttack();
+    }
+
+    public void SetPause(bool isPause)
+    {
+        if (isPause)
+        {
+            currentState = ControllerStateType.Pause;
+        }
+        else
+        {
+            currentState = ControllerStateType.Movable;
+        }
     }
 
     /// <summary>

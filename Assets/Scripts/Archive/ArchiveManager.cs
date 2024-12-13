@@ -5,7 +5,7 @@ using System.IO;
 
 public class ArchiveManager : MonoBehaviour
 {
-    string path = Application.dataPath + "/Archives";
+    static string path = Application.dataPath + "/Archives";
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class ArchiveManager : MonoBehaviour
     /// </summary>
     /// <param name="archive">存档信息</param>
     /// <param name="archiveIndex">存档编号</param>
-    public void SaveArchive(Archive archive, int archiveIndex)
+    static public void SaveArchive(Archive archive, int archiveIndex)
     {
         string data = JsonUtility.ToJson(archive);
         
@@ -31,7 +31,7 @@ public class ArchiveManager : MonoBehaviour
     /// </summary>
     /// <param name="archiveIndex">存档编号</param>
     /// <returns>包含存档信息的Archive类</returns>
-    public Archive ReadArchive(int archiveIndex)
+    static public Archive ReadArchive(int archiveIndex)
     {
         foreach (FileInfo file in FindAllJsonFiles(path))
         {
@@ -47,13 +47,30 @@ public class ArchiveManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 删除存档
+    /// </summary>
+    /// <param name="archiveIndex">存档编号</param>
+    static public void DeleteArchive(int archiveIndex)
+    {
+        string targetPath = path + "/" + archiveIndex + ".json";
+        File.Delete(targetPath);
+    }
+
+    /// <summary>
     /// 获取所有存档json
     /// </summary>
     /// <param name="directoryPath">目标路径</param>
     /// <returns></returns>
-    FileInfo[] FindAllJsonFiles(string directoryPath)
+    static FileInfo[] FindAllJsonFiles(string directoryPath)
     {
         DirectoryInfo dirInfo = new DirectoryInfo(directoryPath);
+        FileInfo[] files = dirInfo.GetFiles("*.json", SearchOption.AllDirectories);
+
+        return files;
+    }
+    static public FileInfo[] FindAllJsonFiles()
+    {
+        DirectoryInfo dirInfo = new DirectoryInfo(path);
         FileInfo[] files = dirInfo.GetFiles("*.json", SearchOption.AllDirectories);
 
         return files;
@@ -63,7 +80,7 @@ public class ArchiveManager : MonoBehaviour
     /// 如果文件夹不存在，则创建文件夹
     /// </summary>
     /// <param name="path">要创建的文件夹路径</param>
-    void createDictory(string path)
+    static void createDictory(string path)
     {
 
         //Debug.Log(path);
@@ -75,24 +92,36 @@ public class ArchiveManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 调试：读取0号存档
+    /// 调试：读取存档
     /// </summary>
-    public void DebugArchiveRead()
+    static public void DebugArchiveRead(int index)
     {
-        Archive archive = ReadArchive(0);
+        Archive archive = ReadArchive(index);
 
         Debug.Log("level:"+archive.level);
         Debug.Log("feather:" + archive.feather);
         Debug.Log("tenacity:"+archive.tenacity);
         Debug.Log("strength:"+archive.strength);
+        Debug.Log(archive.background);
     }
 
     /// <summary>
     /// 调试：将0号存档内容保存到1号存档
     /// </summary>
-    public void DebugArchiveSave()
+    static public void DebugArchiveSave()
     {
         Archive archive = ReadArchive(0);
+
+        SaveArchive(archive, 1);
+    }
+
+    /// <summary>
+    /// 调试:保存一个sprite到1号存档
+    /// </summary>
+    static public void DebugArchiveSprite(SpriteRenderer spriteRenderer)
+    {
+        Archive archive = ReadArchive(1);
+        archive.background = spriteRenderer.sprite;
 
         SaveArchive(archive, 1);
     }

@@ -7,4 +7,5 @@ public class Archive
     public int feather;
     public int tenacity;
     public int strength;
+    public Sprite background;
 }
