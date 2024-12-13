@@ -6,6 +6,7 @@ public class Consts
 {
     public const string PlayerTag = "Player";
     public const string EnemyTag = "Enemy";
+    public const string NormalInteractiveObjectTag = "NormalInteractiveObject";
 
     public const string PlayerLayer = "Player";
     public const string EnemyLayer = "Enemy";
