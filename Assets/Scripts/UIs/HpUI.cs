@@ -56,6 +56,10 @@ public class HpUI : MonoBehaviour
                     Image _image = image.GetComponent<Image>();
                     float alpha = Mathf.Max(0, _image.color.a - Time.deltaTime);
                     image.GetComponent<Image>().color = new Color(_image.color.r, _image.color.g, _image.color.b, alpha);
+                    if (_image.GetComponent<Image>().color.a <= 0)
+                    {
+                        Destroy(gameObject);
+                    }
                 }
                 if (image.GetComponent<Text>() != null)
                 {
