@@ -76,7 +76,7 @@ public class HpUI : MonoBehaviour
     {
 
         float x = testHp / testHpMax;
-        timeText.text = ((int)(testTime)).ToString();
+        timeText.text = $"{(int)(testTime)}s";
         if (delhpBox.localScale.x > x)
         {
             hpBox.localScale = new Vector3(x, 1, 1);

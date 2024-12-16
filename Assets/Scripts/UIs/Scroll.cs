@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScrollHP : MonoBehaviour
+public class Scroll : MonoBehaviour
 {
     private ScrollRect scrollRect;
     private float[] rateArr;
