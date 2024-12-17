@@ -35,12 +35,37 @@ public class InteractiveObject : MonoBehaviour
     private float distance;
     void Update()
     {
-        if (keyTrigger&&!mouseTrigger&&mode1)
+        KeyTriggerMode1();
+    }
+    /// <summary>
+    /// 这个方法是用于距离判定的
+    /// </summary>
+    void KeyTriggerMode1()
+    {
+        if (keyTrigger && !mouseTrigger && mode1&&!moreLimit)
         {
-            distance=Vector3.Distance(GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position, gameObject.transform.position);
-            if(distance < maxDistance && Input.GetKeyDown(nameOfKey))
+            distance = Mathf.Abs(Vector3.Distance(GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position, gameObject.transform.position));
+            if (distance < maxDistance && Input.GetKeyDown(nameOfKey))
             {
                 Interact();
+            }
+        }
+        else if (keyTrigger && !mouseTrigger && mode1 && moreLimit)
+        {
+            distance = Mathf.Abs(Vector3.Distance(GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position, gameObject.transform.position));
+            if (maxDistanceOfHorizontal != 0&&maxDistanceOfVertical==0)
+            {
+                if (distance < maxDistance && Input.GetKeyDown(nameOfKey) && Mathf.Abs(GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position.x - transform.position.x) <= maxDistanceOfHorizontal)
+                {
+                    Interact();
+                }
+            }
+            if(maxDistanceOfVertical != 0&&maxDistanceOfHorizontal==0)
+            {
+                if (distance < maxDistance && Input.GetKeyDown(nameOfKey) && Mathf.Abs(GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position.y - transform.position.y) <= maxDistanceOfVertical)
+                {
+                    Interact();
+                }
             }
         }
     }
@@ -51,13 +76,21 @@ public class InteractiveObject : MonoBehaviour
             Interact();
         }
     }
+    /// <summary>
+    /// 这个方法是玩家进入触发器后，将自身添加到玩家控制交互的链表的方法
+    /// </summary>
+    /// <param name="collision"><>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(keyTrigger && !mouseTrigger && mode2)
+        if(keyTrigger && !mouseTrigger && mode2&&collision.tag==Consts.PlayerTag)
         {
             PlayerInteract.trigger.Add(gameObject);
         }
     }
+    /// <summary>
+    /// 这个方法是玩家离开触发器后，将自身从玩家控制交互的链表清除的方法
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (keyTrigger && !mouseTrigger && mode2)
@@ -72,10 +105,16 @@ public class InteractiveObject : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// 这个方法是需要覆写的触发后发生作用的方法
+    /// </summary>
     public virtual void Interact()
     {
 
     }
+    /// <summary>
+    /// 这个方法是用来观测距离触发的可触发范围的
+    /// </summary>
     private void OnDrawGizmos()
     {
         if (!moreLimit)
@@ -100,16 +139,16 @@ public class InteractiveObject : MonoBehaviour
             }
             for (int i = 0; i < 360; i++)
             {
-                if (maxDistanceOfHorizontal == 0 && maxDistanceOfVertical == 0)
+                if ((maxDistanceOfHorizontal == 0 && maxDistanceOfVertical == 0)|| (maxDistanceOfHorizontal != 0 && maxDistanceOfVertical != 0))
                 {
                     Gizmos.DrawLine(pos, new Vector3(transform.position.x + r * Mathf.Cos(((i + 1) * Mathf.PI) / 180), transform.position.y + r * Mathf.Sin(((i + 1) * Mathf.PI) / 180), 0));
                     pos = new Vector3(transform.position.x + r * Mathf.Cos(((i + 1) * Mathf.PI) / 180), transform.position.y + r * Mathf.Sin(((i + 1) * Mathf.PI) / 180), 0);
                 }
                 else if (maxDistanceOfHorizontal == 0 && maxDistanceOfVertical != 0)
                 {
-                     if(r*Mathf.Sin((i + 1) * Mathf.PI)>=maxDistanceOfVertical)
+                     if(Mathf.Abs(r * Mathf.Sin((i + 1) * Mathf.PI / 180)) >= maxDistanceOfVertical)
                     {
-                        Gizmos.DrawLine(pos, new Vector3(transform.position.x + r * Mathf.Cos(((i + 1) * Mathf.PI) / 180), transform.position.y + maxDistanceOfVertical * (Mathf.Sin((i + 1) * Mathf.PI) / Mathf.Abs(Mathf.Sin((i + 1) * Mathf.PI))), 0));
+                        Gizmos.DrawLine(pos, new Vector3(transform.position.x + r * Mathf.Cos(((i + 1) * Mathf.PI) / 180), transform.position.y + maxDistanceOfVertical * (Mathf.Sin((i + 1) * Mathf.PI/180) / Mathf.Abs(Mathf.Sin((i + 1) * Mathf.PI / 180))), 0));
                         pos = new Vector3(transform.position.x + r * Mathf.Cos(((i + 1) * Mathf.PI) / 180), transform.position.y + maxDistanceOfVertical* (Mathf.Sin((i + 1) * Mathf.PI/180) / Mathf.Abs(Mathf.Sin((i + 1) * Mathf.PI/180))), 0);
                     }
                     else
@@ -120,9 +159,9 @@ public class InteractiveObject : MonoBehaviour
                 }
                 else if(maxDistanceOfHorizontal!=0&&maxDistanceOfVertical==0)
                 {
-                    if(r*Mathf.Cos((i + 1) * Mathf.PI)>=maxDistanceOfHorizontal)
+                    if(Mathf.Abs(r*Mathf.Cos((i + 1) * Mathf.PI/180))>=maxDistanceOfHorizontal)
                     {
-                        Gizmos.DrawLine(pos, new Vector3(transform.position.x + maxDistanceOfHorizontal*(Mathf.Cos((i + 1) * Mathf.PI)/Mathf.Abs(Mathf.Cos((i + 1) * Mathf.PI))), transform.position.y + r * Mathf.Sin(((i + 1) * Mathf.PI) / 180), 0));
+                        Gizmos.DrawLine(pos, new Vector3(transform.position.x + maxDistanceOfHorizontal*(Mathf.Cos((i + 1) * Mathf.PI/180)/Mathf.Abs(Mathf.Cos((i + 1) * Mathf.PI/180))), transform.position.y + r * Mathf.Sin(((i + 1) * Mathf.PI) / 180), 0));
                         pos = new Vector3(transform.position.x + maxDistanceOfHorizontal* (Mathf.Cos((i + 1) * Mathf.PI/180) / Mathf.Abs(Mathf.Cos((i + 1) * Mathf.PI / 180))), transform.position.y + r * Mathf.Sin(((i + 1) * Mathf.PI) / 180),0);
                        
                     }
