@@ -4,8 +4,13 @@ using UnityEngine;
 public class Archive
 {
     public int level;
+    public int currentExp;
+    public int maxExp;
     public int feather;
+    public int dream;
     public int tenacity;
     public int strength;
-    public Sprite background;
+    public GameObject[] equipedFeather;
+    public GameObject[] equipedBrokenFeather;
+    public GameObject[] items;
 }

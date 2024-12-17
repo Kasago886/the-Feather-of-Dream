@@ -27,4 +27,14 @@ public class ControllerState
     {
         controller.OnAttack();
     }
+
+    public virtual void OnEnter()
+    {
+
+    }
+
+    public virtual void OnExit()
+    {
+
+    }
 }

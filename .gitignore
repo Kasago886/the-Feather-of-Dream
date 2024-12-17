@@ -33,4 +33,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-/.vs
+
+# Visual Studio cache files
+.vs/
+.vs/the-Feather-of-Dream/v17/DocumentLayout.json
+.vs/the-Feather-of-Dream/v17/DocumentLayout.json

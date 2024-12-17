@@ -102,7 +102,6 @@ public class ArchiveManager : MonoBehaviour
         Debug.Log("feather:" + archive.feather);
         Debug.Log("tenacity:"+archive.tenacity);
         Debug.Log("strength:"+archive.strength);
-        Debug.Log(archive.background);
     }
 
     /// <summary>
@@ -111,17 +110,6 @@ public class ArchiveManager : MonoBehaviour
     static public void DebugArchiveSave()
     {
         Archive archive = ReadArchive(0);
-
-        SaveArchive(archive, 1);
-    }
-
-    /// <summary>
-    /// 调试:保存一个sprite到1号存档
-    /// </summary>
-    static public void DebugArchiveSprite(SpriteRenderer spriteRenderer)
-    {
-        Archive archive = ReadArchive(1);
-        archive.background = spriteRenderer.sprite;
 
         SaveArchive(archive, 1);
     }

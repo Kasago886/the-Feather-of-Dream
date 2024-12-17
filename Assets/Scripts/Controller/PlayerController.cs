@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEditor;
 
 public enum ControllerStateType
 {
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour
     //states
     Dictionary<ControllerStateType, ControllerState> stateDict = new Dictionary<ControllerStateType, ControllerState>();
     ControllerStateType currentState;
+    ControllerStateType UnpausedState;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +55,7 @@ public class PlayerController : MonoBehaviour
         stateDict[ControllerStateType.Pause] = new ControllerPauseState(this);
 
         currentState = ControllerStateType.Movable;
+        UnpausedState = currentState;
     }
 
     // Update is called once per frame
@@ -75,12 +79,24 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// ÇÐ»»×´Ì¬
+    /// </summary>
+    /// <param name="state"></param>
+    void StateTransition(ControllerStateType state)
+    {
+        stateDict[currentState].OnExit();
+        currentState = state;
+        stateDict[currentState].OnEnter();
+    }
+
+
+    /// <summary>
     /// ×óÓÒÒÆ¶¯
     /// </summary>
     /// <param name="horizontal">Horizontal speed scale. Range from -1 to 1.</param>
     public void OnMove(float horizontal)
     {
-        rb.velocity = new Vector2(horizontal * walkSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(HorizontalToSpeed(horizontal), rb.velocity.y);
 
         //×óÓÒ·­×ª
         if (horizontal > 0)
@@ -125,7 +141,7 @@ public class PlayerController : MonoBehaviour
         if (sprintCooldownTimer <= 0 && sprintDurationTimer <= 0)
         {
             sprintDurationTimer = sprintDuration;
-            currentState = ControllerStateType.Sprinting;
+            StateTransition(ControllerStateType.Sprinting);
         }
     }
     public void StateSprint()
@@ -151,8 +167,8 @@ public class PlayerController : MonoBehaviour
         if (sprintDurationTimer <= 0)
         {
             sprintCooldownTimer = sprintCooldown;
-
-            currentState = ControllerStateType.Movable;
+            
+            StateTransition(ControllerStateType.Movable);
         }
     }
 
@@ -173,16 +189,47 @@ public class PlayerController : MonoBehaviour
         stateDict[currentState].OnAttack();
     }
 
+    /// <summary>
+    /// ÉèÖÃÔÝÍ£×´Ì¬
+    /// </summary>
+    /// <param name="isPause"></param>
     public void SetPause(bool isPause)
     {
         if (isPause)
         {
-            currentState = ControllerStateType.Pause;
+            UnpausedState = currentState;
+            StateTransition(ControllerStateType.Pause);
         }
         else
         {
-            currentState = ControllerStateType.Movable;
+            StateTransition(UnpausedState);
         }
+    }
+
+    /// <summary>
+    /// ÇÐ»»ÔÝÍ£×´Ì¬
+    /// </summary>
+    public void SwitchPause()
+    {
+        if (currentState == ControllerStateType.Pause)
+        {
+            StateTransition(UnpausedState);
+        }
+        else if (currentState == ControllerStateType.Movable)
+        {
+            UnpausedState = currentState;
+            StateTransition(ControllerStateType.Pause);
+        }
+    }
+
+    /// <summary>
+    /// ¼ÆËã²Ù×÷ËÙ¶È
+    /// </summary>
+    /// <param name="horizontal"></param>
+    /// <returns></returns>
+    public float HorizontalToSpeed(float horizontal)
+    {
+        return horizontal * walkSpeed;
     }
 
     /// <summary>
