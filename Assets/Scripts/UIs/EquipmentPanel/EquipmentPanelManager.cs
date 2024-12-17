@@ -28,7 +28,7 @@ public class EquipmentPanelManager : MonoBehaviour
         
     }
 
-    public void UpdatePanel(Archive archive)
+    public void SetupPanel(Archive archive)
     {
         levelText.text = "Lv." + archive.level.ToString();
         expNumber.text = archive.currentExp.ToString() + "/" + archive.maxExp.ToString();
