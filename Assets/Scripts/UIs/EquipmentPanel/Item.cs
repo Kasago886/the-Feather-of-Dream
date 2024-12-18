@@ -1,18 +1,118 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class Item : MonoBehaviour
+[Serializable]
+public enum ItemType
 {
+    Feather,BrokenFeather,Other
+}
+
+public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
+{
+    public string itemName;
+    public string information;
+
+    public ItemType type;
+
+    public bool isDreamizable;
+    public int dreamizeCost;
+
+    [HideInInspector] public bool isEquiped;
+
+    Image image;
+    Transform canvas;
+    Transform parent;
+    bool isHover = false;
+    EquipmentPanelManager equipmentPanelManager;
+
+    /// <summary>
+    /// 根据数据初始化
+    /// </summary>
+    /// <param name="itemInfo"></param>
+    public void Init(ItemInfo itemInfo)
+    {
+        itemName = itemInfo.itemName;
+        information = itemInfo.information;
+        type = itemInfo.type;
+        isDreamizable = itemInfo.isDreamizable;
+        dreamizeCost = itemInfo.dreamizeCost;
+    }
+
+    /// <summary>
+    /// 获取数据
+    /// </summary>
+    /// <returns></returns>
+    public ItemInfo GetItemInfo()
+    {
+        ItemInfo info = new ItemInfo();
+        info.itemName = itemName;
+        info.type = type;
+        info.information = information;
+        info.isDreamizable = isDreamizable;
+        info.dreamizeCost = dreamizeCost;
+        return info;
+    }
+
+    /// <summary>
+    /// 按下鼠标拖动
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        equipmentPanelManager.OnClickItem(this, GetComponentInParent<ItemPlace>());
+
+        parent = transform.parent;
+        transform.SetParent(canvas);
+        transform.SetAsLastSibling();
+
+        isHover = true;
+        //取消自身射线检测便于检测松开鼠标时的格子
+        image.raycastTarget = false;
+    }
+
+    /// <summary>
+    /// 松开鼠标放置
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        GameObject upGo = eventData.pointerCurrentRaycast.gameObject;
+        //Debug.Log(upGo);
+        if (upGo.GetComponent<ItemPlace>() != null)
+        {
+            upGo.GetComponent<ItemPlace>().AddItem(this,parent);
+        }
+        else
+        {
+            transform.SetParent(parent);
+            transform.SetAsFirstSibling();
+        }
+
+        equipmentPanelManager.OnClickItem(this, GetComponentInParent<ItemPlace>());
+        transform.localPosition = Vector3.zero;
+        isHover = false;
+        image.raycastTarget = true;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        image = GetComponent<Image>();
+        canvas = GameObject.Find("Canvas").transform;
+        equipmentPanelManager = FindObjectOfType<EquipmentPanelManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (isHover)
+        {
+            transform.position = Input.mousePosition;
+        }
     }
 }

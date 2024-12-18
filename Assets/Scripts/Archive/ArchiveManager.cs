@@ -5,12 +5,30 @@ using System.IO;
 
 public class ArchiveManager : MonoBehaviour
 {
+    public Archive currentArchive;
+    bool isSetup = false;
+
     static string path = Application.dataPath + "/Archives";
 
     private void Start()
     {
         //Debug.Log(path);
         createDictory(path);
+
+        if (isSetup == false)
+        {
+            ReadArchive(0);
+            isSetup = true;
+        }
+    }
+
+    /// <summary>
+    /// …Ë÷√currentArchive
+    /// </summary>
+    /// <param name="archiveIndex">¥Êµµ±‡∫≈</param>
+    public void ReadArchive(int archiveIndex)
+    {
+        currentArchive = GetArchive(archiveIndex);
     }
 
     /// <summary>
@@ -21,17 +39,18 @@ public class ArchiveManager : MonoBehaviour
     static public void SaveArchive(Archive archive, int archiveIndex)
     {
         string data = JsonUtility.ToJson(archive);
-        
+        Debug.Log(data);
+
         string targetPath = path + "/" + archiveIndex + ".json";
         File.WriteAllText(targetPath, data);
     }
 
     /// <summary>
-    /// ∂¡»°¥Êµµ
+    /// ªÒ»°¥Êµµ
     /// </summary>
     /// <param name="archiveIndex">¥Êµµ±‡∫≈</param>
     /// <returns>∞¸∫¨¥Êµµ–≈œ¢µƒArchive¿‡</returns>
-    static public Archive ReadArchive(int archiveIndex)
+    static public Archive GetArchive(int archiveIndex)
     {
         foreach (FileInfo file in FindAllJsonFiles(path))
         {
@@ -96,7 +115,7 @@ public class ArchiveManager : MonoBehaviour
     /// </summary>
     static public void DebugArchiveRead(int index)
     {
-        Archive archive = ReadArchive(index);
+        Archive archive = GetArchive(index);
 
         Debug.Log("level:"+archive.level);
         Debug.Log("feather:" + archive.feather);
@@ -109,7 +128,7 @@ public class ArchiveManager : MonoBehaviour
     /// </summary>
     static public void DebugArchiveSave()
     {
-        Archive archive = ReadArchive(0);
+        Archive archive = GetArchive(0);
 
         SaveArchive(archive, 1);
     }
