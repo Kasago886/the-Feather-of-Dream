@@ -81,12 +81,32 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     public void OnPointerUp(PointerEventData eventData)
     {
         GameObject upGo = eventData.pointerCurrentRaycast.gameObject;
-        //Debug.Log(upGo);
-        if (upGo.GetComponent<ItemPlace>() != null)
+        
+        Transpose(upGo);
+
+        isHover = false;
+        image.raycastTarget = true;
+    }
+
+    /// <summary>
+    /// 尝试放置物品
+    /// </summary>
+    /// <param name="upGo">目标ItemPlace</param>
+    public void Transpose(GameObject upGo)
+    {
+        //放置位置
+        bool isTransposed = false;
+        if (upGo != null)
         {
-            upGo.GetComponent<ItemPlace>().AddItem(this,parent);
+            if (upGo.GetComponent<ItemPlace>() != null)
+            {
+                upGo.GetComponent<ItemPlace>().AddItem(this, parent);
+                isTransposed = true;
+            }
         }
-        else
+
+        //回到原位
+        if (!isTransposed)
         {
             transform.SetParent(parent);
             transform.SetAsFirstSibling();
@@ -94,10 +114,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 
         equipmentPanelManager.OnClickItem(this, GetComponentInParent<ItemPlace>());
         transform.localPosition = Vector3.zero;
-        isHover = false;
-        image.raycastTarget = true;
     }
-
 
     // Start is called before the first frame update
     void Start()

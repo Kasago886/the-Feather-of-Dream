@@ -11,7 +11,6 @@ public class ItemInspector : Editor
 {
     Item item;
     int itemType;
-    string[] itemTypes = { "羽", "残羽", "其它" };
 
     private void OnEnable()
     {
@@ -22,6 +21,8 @@ public class ItemInspector : Editor
     //自定义Inspector面板
     public override void OnInspectorGUI()
     {
+        Undo.RecordObject(item,"Change Item");
+
         //垂直方向布局
         EditorGUILayout.BeginVertical();
 
@@ -42,6 +43,8 @@ public class ItemInspector : Editor
         item.information = EditorGUILayout.TextArea(item.information);
 
         EditorGUILayout.EndVertical();
+
+        EditorUtility.SetDirty(item);
 
     }
 }

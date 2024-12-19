@@ -1765,10 +1765,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3335051151518521830, guid: fe963f7f2e470b24c8d823bcb2578787, type: 3}
-      propertyPath: content
-      value: 
-      objectReference: {fileID: 1240171928925946075}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2649,7 +2645,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 540637103}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 435071032}
+        m_TargetAssemblyTypeName: EquipmentPanelManager, Assembly-CSharp
+        m_MethodName: UnequipItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &540637103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3800,10 +3808,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3335051151518521830, guid: fe963f7f2e470b24c8d823bcb2578787, type: 3}
-      propertyPath: content
-      value: 
-      objectReference: {fileID: 1781028350}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8748,7 +8752,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2067324720}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 435071032}
+        m_TargetAssemblyTypeName: EquipmentPanelManager, Assembly-CSharp
+        m_MethodName: EquipItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2067324720
 MonoBehaviour:
   m_ObjectHideFlags: 0

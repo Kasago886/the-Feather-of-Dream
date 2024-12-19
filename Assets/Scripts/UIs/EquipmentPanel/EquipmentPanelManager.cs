@@ -86,7 +86,7 @@ public class EquipmentPanelManager : MonoBehaviour
             //对应位置
             if (i == archive.equipedFeather.items[count].position)
             {
-                GenerateSingleItem(ip, archive.equipedBrokenFeather.items[count], true);
+                GenerateSingleItem(ip, archive.equipedFeather.items[count]);
 
                 count++;
             }
@@ -102,13 +102,13 @@ public class EquipmentPanelManager : MonoBehaviour
             ip.Clear();
 
             //防止超出索引
-            if (i >= archive.equipedBrokenFeather.items.Length)
+            if (count >= archive.equipedBrokenFeather.items.Length)
                 continue;
 
             //对应位置
             if (i == archive.equipedBrokenFeather.items[count].position)
             {
-                GenerateSingleItem(ip, archive.equipedBrokenFeather.items[count], true);
+                GenerateSingleItem(ip, archive.equipedBrokenFeather.items[count]);
 
                 count++;
             }
@@ -121,18 +121,33 @@ public class EquipmentPanelManager : MonoBehaviour
         {
             Destroy(itemContent.GetChild(i).gameObject);
         }
-        //添加物品
-        foreach (ItemInfo item in archive.items.items)
+        count = 0;
+        //预留足够空位置(30个)
+        int addition = 30;
+        for (int i = 0; addition > 0; i++)
         {
+            //添加物品
             GameObject parent = Instantiate(itemPlaceObj, itemContent, false);
             ItemPlace ip = parent.GetComponent<ItemPlace>();
 
-            GenerateSingleItem(ip, item, false);
-        }
-        //预留足够空位置(30个)
-        for (int i = 0;i < 30; i++)
-        {
-            Instantiate(itemPlaceObj, itemContent, false);
+            //防止超出索引
+            if (count >= archive.items.items.Length)
+            {
+                addition--;
+                continue;
+            }
+
+            //对应位置
+            if (i == archive.items.items[count].position)
+            {
+                GenerateSingleItem(ip, archive.items.items[count]);
+
+                count++;
+            }
+            else
+            {
+                addition--;
+            }
         }
 
         //隐藏按钮
@@ -147,31 +162,28 @@ public class EquipmentPanelManager : MonoBehaviour
     /// <param name="ip">物品所在位置</param>
     /// <param name="item">物品信息</param>
     /// <param name="isEquiped">物品是否被装备</param>
-    void GenerateSingleItem(ItemPlace ip, ItemInfo item, bool isEquiped)
+    void GenerateSingleItem(ItemPlace ip, ItemInfo item)
     {
         //初始化物品
         GameObject instance = Instantiate(itemObj);
         instance.GetComponent<Item>().Init(item);
         //绑定到ItemPlace
         ip.AddItem(instance.GetComponent<Item>(), null);
-
-        //装备状态
-        instance.GetComponent<Item>().isEquiped = isEquiped;
     }
 
     /// <summary>
     /// 物品被点击时的事件
     /// </summary>
     /// <param name="item"></param>
-    public void OnClickItem(Item item, ItemPlace itemPlaceObj)
+    public void OnClickItem(Item item, ItemPlace itemPlace)
     {
         //ChooseFrame
-        itemPlaceObj.chooseFrame.gameObject.SetActive(true);
-        if (selectedItemPlace != null && selectedItemPlace != itemPlaceObj)
+        itemPlace.chooseFrame.gameObject.SetActive(true);
+        if (selectedItemPlace != null && selectedItemPlace != itemPlace)
         {
             selectedItemPlace.chooseFrame.gameObject.SetActive(false);
         }
-        selectedItemPlace = itemPlaceObj;
+        selectedItemPlace = itemPlace;
 
         //Information
         itemName.text = item.itemName;
@@ -185,7 +197,11 @@ public class EquipmentPanelManager : MonoBehaviour
         }
         else
         {
-            if (item.type == ItemType.Feather || item.type == ItemType.BrokenFeather)
+            if (item.type == ItemType.Feather && FindAvailablePlace(featherEquipContent) != null)
+            {
+                equipButton.SetActive(true);
+            }
+            else if (item.type == ItemType.BrokenFeather && FindAvailablePlace(brokenFeatherEquipContent) != null)
             {
                 equipButton.SetActive(true);
             }
@@ -254,6 +270,7 @@ public class EquipmentPanelManager : MonoBehaviour
             {
                 //获取物品信息
                 ItemInfo info = itemPlaceObj.GetComponent<ItemPlace>().content.GetItemInfo();
+                info.position = i;
                 list.Add(info);
             }
         }
@@ -276,5 +293,65 @@ public class EquipmentPanelManager : MonoBehaviour
 
         animationBoolManager.SwitchValue("appear");
         isShow = !isShow;
+    }
+
+    /// <summary>
+    /// 装备物品
+    /// </summary>
+    public void EquipItem()
+    {
+        if (selectedItemPlace != null)
+        {
+            if (selectedItemPlace.content != null)
+            {
+                Item item = selectedItemPlace.content;
+                if (item.type == ItemType.Feather)
+                {
+                    FindAvailablePlace(featherEquipContent).AddItem(item, item.transform.parent);
+                }
+                else if (item.type == ItemType.BrokenFeather)
+                {
+                    FindAvailablePlace(brokenFeatherEquipContent).AddItem(item,item.transform.parent);
+                }
+                OnClickItem(item, item.GetComponentInParent<ItemPlace>());
+            }
+        }
+    }
+
+    /// <summary>
+    /// 卸下物品
+    /// </summary>
+    public void UnequipItem()
+    {
+        if (selectedItemPlace != null)
+        {
+            if (selectedItemPlace.content != null)
+            {
+                Item item = selectedItemPlace.content;
+                FindAvailablePlace(itemContent).AddItem(item, item.transform.parent);
+                OnClickItem(item, item.GetComponentInParent<ItemPlace>());
+            }
+        }
+    }
+
+    /// <summary>
+    /// 获取空的位置
+    /// </summary>
+    /// <param name="contentTransform"></param>
+    /// <returns></returns>
+    ItemPlace FindAvailablePlace(Transform contentTransform)
+    {
+        //遍历所有子对象(itemPlace)
+        int count = contentTransform.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            ItemPlace itemPlace = contentTransform.GetChild(i).gameObject.GetComponent<ItemPlace>();
+            
+            if (itemPlace.content == null)
+            {
+                return itemPlace;
+            }
+        }
+        return null;
     }
 }

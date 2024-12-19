@@ -46,9 +46,11 @@ public class ItemPlace : MonoBehaviour
 
     void Add(Item item, Transform previousParent)
     {
+        //Ìí¼Ó
         item.transform.SetParent(transform, false);
         item.transform.SetAsFirstSibling();
 
+        //½»»»
         if (content != null)
         {
             content.transform.SetParent(previousParent, false);
@@ -72,5 +74,7 @@ public class ItemPlace : MonoBehaviour
             Destroy(content.gameObject);
         }
         content = null;
+
+        chooseFrame.SetActive(false);
     }
 }

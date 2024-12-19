@@ -1,79 +1,70 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Github\\the-Feather-of-Dream\\",
+  "WorkspaceRootPath": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\interactiveobject\\playerinteract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactiveobject\\playerinteract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|d:\\gzs\\github\\the-feather-of-dream\\assets\\scripts\\uis\\equipmentpanel\\equipmentpanelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uis\\equipmentpanel\\equipmentpanelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\interactiveobject\\interactiveobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactiveobject\\interactiveobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\archive\\archive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\archive\\archive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\controller\\playercontrollerinspector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\controller\\playercontrollerinspector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\uis\\equipmentpanel\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uis\\equipmentpanel\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\controller\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\controller\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\uis\\equipmentpanel\\itemplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uis\\equipmentpanel\\itemplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InteractiveObject\\InteractiveObjectInspectorEdit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\InteractiveObject\\InteractiveObjectInspectorEdit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\archive\\archivemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\archive\\archivemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\characters\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\characters\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\uis\\equipmentpanel\\iteminspector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uis\\equipmentpanel\\iteminspector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\resources\\texts\\testdialog.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\resources\\texts\\testdialog.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\resources\\texts\\dialog\u7F16\u5199\u8BF4\u660E.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\resources\\texts\\dialog\u7F16\u5199\u8BF4\u660E.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\controller\\controllerstates\\controllerstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\controller\\controllerstates\\controllerstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\consts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\consts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\buff\\buffinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\buff\\buffinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\inputlistener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\inputlistener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\inputlistener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|d:\\gzs\\github\\the-feather-of-dream\\assets\\scripts\\archivemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\controller\\controllerstates\\controllerpausestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\controller\\controllerstates\\controllerpausestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Github\\the-Feather-of-Dream\\Assets\\Archives\\0.json||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Archives\\0.json||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\animationtools\\animatorboolmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\animationtools\\animatorboolmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\gzs\\Unity3D\\projects\\MindKiosk\\Assets\\Scripts\\StartScene\\startSetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\characters\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\characters\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\controller\\controllerstates\\controllerattackstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\buff\\buffinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\buff\\buffinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\controller\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\controller\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\controller\\controllerstates\\controllerstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\controller\\controllerstates\\controllerstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\consts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\consts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\controller\\controllerstates\\controllerattackstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\controller\\controllerstates\\controllerattackstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\controller\\controllerstates\\controllersprintingstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\controller\\controllerstates\\controllersprintingstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\controller\\controllerstates\\controllersprintingstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\controller\\controllerstates\\controllermovablestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\controller\\controllerstates\\controllermovablestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\gzs\\gitHub\\the-Feather-of-Dream\\assets\\scripts\\archive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -83,90 +74,117 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "InteractiveObjectInspectorEdit.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InteractiveObject\\InteractiveObjectInspectorEdit.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\InteractiveObject\\InteractiveObjectInspectorEdit.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InteractiveObject\\InteractiveObjectInspectorEdit.cs",
-              "RelativeToolTip": "Assets\\Scripts\\InteractiveObject\\InteractiveObjectInspectorEdit.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvxAAAAARAAAA",
+              "DocumentIndex": 5,
+              "Title": "ItemInspector.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\ItemInspector.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\EquipmentPanel\\ItemInspector.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\ItemInspector.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIs\\EquipmentPanel\\ItemInspector.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAACoAAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T01:55:47.108Z",
+              "WhenOpened": "2024-12-18T07:57:51.362Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "testDialog.txt",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Resources\\Texts\\testDialog.txt",
-              "RelativeDocumentMoniker": "Assets\\Resources\\Texts\\testDialog.txt",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Resources\\Texts\\testDialog.txt",
-              "RelativeToolTip": "Assets\\Resources\\Texts\\testDialog.txt",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-12-17T01:08:42.598Z"
+              "DocumentIndex": 2,
+              "Title": "Item.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\Item.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\EquipmentPanel\\Item.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\Item.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIs\\EquipmentPanel\\Item.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAowF0AAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T06:29:56.915Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DIalog\u7F16\u5199\u8BF4\u660E.txt",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Resources\\Texts\\DIalog\u7F16\u5199\u8BF4\u660E.txt",
-              "RelativeDocumentMoniker": "Assets\\Resources\\Texts\\DIalog\u7F16\u5199\u8BF4\u660E.txt",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Resources\\Texts\\DIalog\u7F16\u5199\u8BF4\u660E.txt",
-              "RelativeToolTip": "Assets\\Resources\\Texts\\DIalog\u7F16\u5199\u8BF4\u660E.txt",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-12-17T01:08:35.645Z"
+              "DocumentIndex": 3,
+              "Title": "ItemPlace.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\ItemPlace.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\EquipmentPanel\\ItemPlace.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\ItemPlace.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIs\\EquipmentPanel\\ItemPlace.cs",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAQwE0AAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T06:30:05.141Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PlayerInteract.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InteractiveObject\\PlayerInteract.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\InteractiveObject\\PlayerInteract.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InteractiveObject\\PlayerInteract.cs",
-              "RelativeToolTip": "Assets\\Scripts\\InteractiveObject\\PlayerInteract.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAADwvxcAAAAJAAAA",
+              "Title": "EquipmentPanelManager.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\EquipmentPanelManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\EquipmentPanel\\EquipmentPanelManager.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\EquipmentPanelManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIs\\EquipmentPanel\\EquipmentPanelManager.cs",
+              "ViewState": "AQIAAPIAAAAAAAAAAAAAAEsBAABKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T15:59:23.624Z",
+              "WhenOpened": "2024-12-17T03:36:01.778Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "InteractiveObject.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InteractiveObject\\InteractiveObject.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\InteractiveObject\\InteractiveObject.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InteractiveObject\\InteractiveObject.cs",
-              "RelativeToolTip": "Assets\\Scripts\\InteractiveObject\\InteractiveObject.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAaAAAA",
+              "Title": "Archive.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Archive\\Archive.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Archive\\Archive.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Archive\\Archive.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Archive\\Archive.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-13T14:55:30.947Z",
+              "WhenOpened": "2024-12-17T03:39:58.184Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ArchiveManager.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Archive\\ArchiveManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Archive\\ArchiveManager.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Archive\\ArchiveManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Archive\\ArchiveManager.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAAwBQAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-17T03:42:16.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ControllerPauseState.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerPauseState.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerPauseState.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerPauseState.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerPauseState.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-17T03:24:12.326Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AnimatorBoolManager.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\AnimationTools\\AnimatorBoolManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\AnimationTools\\AnimatorBoolManager.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\AnimationTools\\AnimatorBoolManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\AnimationTools\\AnimatorBoolManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvxgAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-17T02:50:40.985Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
               "Title": "BuffInterface.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Buff\\BuffInterface.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Buff\\BuffInterface.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Buff\\BuffInterface.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Buff\\BuffInterface.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Buff\\BuffInterface.cs",
               "RelativeToolTip": "Assets\\Scripts\\Buff\\BuffInterface.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -174,11 +192,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "Character.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\Character.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\Character.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Characters\\Character.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\Character.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\Character.cs",
               "RelativeToolTip": "Assets\\Scripts\\Characters\\Character.cs",
               "ViewState": "AQIAABsAAAAAAAAAAAAAACcAAABbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -186,69 +204,35 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ArchiveManager.cs",
-              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\ArchiveManager.cs",
-              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\ArchiveManager.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADcAAAAgAAAA",
+              "DocumentIndex": 6,
+              "Title": "InputListener.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\InputListener.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\InputListener.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\InputListener.cs",
+              "RelativeToolTip": "Assets\\Scripts\\InputListener.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAACoAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T13:20:44.425Z"
+              "WhenOpened": "2024-12-11T05:47:30.922Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Archive.cs",
-              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Archive.cs",
-              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Archive.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T13:26:00.083Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "0.json",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Archives\\0.json",
-              "RelativeDocumentMoniker": "Assets\\Archives\\0.json",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Archives\\0.json",
-              "RelativeToolTip": "Assets\\Archives\\0.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-12-12T13:22:24.943Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PlayerControllerInspector.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\PlayerControllerInspector.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\PlayerControllerInspector.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\PlayerControllerInspector.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Controller\\PlayerControllerInspector.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAIwB0AAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T09:13:02.891Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
               "Title": "PlayerController.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\PlayerController.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\PlayerController.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\PlayerController.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\Controller\\PlayerController.cs",
-              "ViewState": "AQIAALAAAAAAAAAAAAAqwF8AAAAqAAAA",
+              "ViewState": "AQIAAEoAAAAAAAAAAAAQwGAAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T08:59:14.847Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T08:59:14.847Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "ControllerAttackState.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerAttackState.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerAttackState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerAttackState.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerAttackState.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerAttackState.cs",
               "RelativeToolTip": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerAttackState.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAADwvwUAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -256,11 +240,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "Consts.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Consts.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Consts.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Consts.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Consts.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Consts.cs",
               "RelativeToolTip": "Assets\\Scripts\\Consts.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAADwvw8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -268,33 +252,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "InputListener.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InputListener.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\InputListener.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InputListener.cs",
-              "RelativeToolTip": "Assets\\Scripts\\InputListener.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAC4AAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T05:47:30.922Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "startSetup.cs",
-              "DocumentMoniker": "D:\\gzs\\Unity3D\\projects\\MindKiosk\\Assets\\Scripts\\StartScene\\startSetup.cs",
-              "ToolTip": "D:\\gzs\\Unity3D\\projects\\MindKiosk\\Assets\\Scripts\\StartScene\\startSetup.cs",
-              "ViewState": "AQIAAIcAAAAAAAAAAAAAAKMAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T13:57:11.025Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "ControllerSprintingState.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerSprintingState.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerSprintingState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerSprintingState.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerSprintingState.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerSprintingState.cs",
               "RelativeToolTip": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerSprintingState.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAADwvxQAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -302,25 +264,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ControllerMovableState.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerMovableState.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerMovableState.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerMovableState.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerMovableState.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAYAAAALAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T09:22:57.688Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "ControllerState.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerState.cs",
+              "DocumentMoniker": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerState.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerState.cs",
+              "ToolTip": "D:\\gzs\\gitHub\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerState.cs",
               "RelativeToolTip": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerState.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAAwBsAAAAeAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAACUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-12T09:53:56.788Z"
             }

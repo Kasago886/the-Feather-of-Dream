@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3571654547229863702}
+  - component: {fileID: 1240171927397317818}
   - component: {fileID: 7695200112112588903}
   - component: {fileID: 2281990534147341680}
-  - component: {fileID: 1240171927397317818}
   m_Layer: 5
   m_Name: TestFeather
   m_TagString: Untagged
@@ -38,6 +38,24 @@ RectTransform:
   m_AnchoredPosition: {x: 210, y: -60}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1240171927397317818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6076283472245307413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b89917c83f8ade41a5d07e173ab0503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: "\u6D4B\u8BD5\u4E4B\u7FBD"
+  information: "\u5E73\u5E73\u65E0\u5947\u7684\u7FBD\u7FFC\n\n\u97E7\u6027+0\n\u529B\u91CF+0"
+  type: 0
+  isDreamizable: 0
+  dreamizeCost: 0
+  isEquiped: 0
 --- !u!222 &7695200112112588903
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -76,21 +94,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1240171927397317818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6076283472245307413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b89917c83f8ade41a5d07e173ab0503, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: "\u6D4B\u8BD5\u4E4B\u7FBD"
-  information: "\u5E73\u5E73\u65E0\u5947\u7684\u7FBD\u7FFC\n\n\u97E7\u6027+0\n\u529B\u91CF+0"
-  type: 0
-  isDreamizable: 0
-  dreamizeCost: 0
-  isEquiped: 0
