@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(PolygonCollider2D))]
+//注意如果使用的是mode2的话那么请安装上rigidbody2D组件
 public class InteractiveObject : MonoBehaviour
 {
     [Header("鼠标触发:")]

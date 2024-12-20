@@ -14,14 +14,14 @@ public class Character : MonoBehaviour
     private List<BuffInterface> buffRunners;
     private int pastValue;
     // Start is called before the first frame update
-    void Start()
+     protected void Start()
     {
         //≥ı ºªØ¡¥±Ì
         buffs = new List<Type>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         BuffActive();
     }
