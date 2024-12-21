@@ -2056,6 +2056,14 @@ MonoBehaviour:
   featherEquipContent: {fileID: 1957952580}
   brokenFeatherEquipContent: {fileID: 1957952580}
   itemContent: {fileID: 1214347566}
+  itemName: {fileID: 0}
+  itemInformation: {fileID: 0}
+  equipButton: {fileID: 0}
+  unequipButton: {fileID: 0}
+  dreamizeButton: {fileID: 0}
+  dreamizeCost: {fileID: 0}
+  itemObj: {fileID: 0}
+  itemPlaceObj: {fileID: 0}
 --- !u!1 &448575754
 GameObject:
   m_ObjectHideFlags: 0
@@ -2418,6 +2426,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1450733d3af92ee43bef6b2b2e7c1c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentArchive:
+    index: 0
+    level: 0
+    currentExp: 0
+    maxExp: 0
+    feather: 0
+    dream: 0
+    tenacity: 0
+    strength: 0
+    equipedFeather:
+      items: []
+    equipedBrokenFeather:
+      items: []
+    items:
+      items: []
 --- !u!4 &474445124
 Transform:
   m_ObjectHideFlags: 0
@@ -3431,6 +3454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 618969687}
   - component: {fileID: 618969688}
+  - component: {fileID: 618969690}
   - component: {fileID: 618969686}
   - component: {fileID: 618969684}
   - component: {fileID: 618969689}
@@ -3616,6 +3640,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 2.5}
   m_EdgeRadius: 0
+--- !u!114 &618969690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618969682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca4f01b425b5e246bad9c622011af87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resilience: 0
+  resilienceMax: 0
+  attack: 0
+  injurySpecialEffect:
+    m_PersistentCalls:
+      m_Calls: []
+  healSpecialEffect:
+    m_PersistentCalls:
+      m_Calls: []
+  resilienceEqualZero:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &627734344
 GameObject:
   m_ObjectHideFlags: 0
