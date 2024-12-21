@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class HpUI : MonoBehaviour
 {
-    public float testTime;
-    public float testHp;
-    public float testHpMax;
+  
+    public float testTime;  //血条存在时间
+    public float testHp;//血量
+    public float testHpMax;//最大血量
     public float delHpSpeed = 1;//延迟血条减少速度
     public float delHpTime = 1;//延时血条减少时间间隔
     private float delHPtime = 1;
