@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
     public float attack;
     [Header("Buff链表")]
     public List<Type> buffs;
-    private List<BuffInterface> buffRunners;
+    private List<BuffInterface> buffRunners = new List<BuffInterface>();
     private int pastValue;
     [Header("受伤特效")]
     public UnityEvent injurySpecialEffect;
