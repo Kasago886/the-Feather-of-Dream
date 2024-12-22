@@ -40,6 +40,12 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         type = itemInfo.type;
         isDreamizable = itemInfo.isDreamizable;
         dreamizeCost = itemInfo.dreamizeCost;
+
+        image = GetComponent<Image>();
+        Sprite sprite = Resources.Load<Sprite>("ItemIcon/"+itemInfo.imageName);
+        Debug.Log(sprite);
+        image.sprite = sprite;
+        Resources.UnloadUnusedAssets();
     }
 
     /// <summary>
@@ -54,6 +60,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         info.information = information;
         info.isDreamizable = isDreamizable;
         info.dreamizeCost = dreamizeCost;
+        info.imageName = image.sprite.name;
         return info;
     }
 

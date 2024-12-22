@@ -31,6 +31,8 @@ public struct ItemInfo
     public bool isDreamizable;
     public int dreamizeCost;
 
+    public string imageName;
+
     public int position;
 }
 
