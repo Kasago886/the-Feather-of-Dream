@@ -29,6 +29,8 @@ public class EquipmentPanelManager : MonoBehaviour
     public GameObject itemObj;
     public GameObject itemPlaceObj;
 
+    [HideInInspector] public List<Item> itemsOnHand = new List<Item>();
+
     ArchiveManager archiveManager;
     ItemPlace selectedItemPlace = null;
     bool isShow = false;
@@ -284,6 +286,17 @@ public class EquipmentPanelManager : MonoBehaviour
     {
         if (isShow)
         {
+            //在鼠标上的物品归位
+            //foreach (Item item in itemsOnHand) //不能用foreach，因为OnPointerUp会删除列表中的元素，导致报错
+            for (int i = itemsOnHand.Count-1; i >= 0 ; i--) //应当使用for循环倒序删除，保证索引不会出错
+            {
+                Item item = itemsOnHand[i];
+                if (item != null)
+                {
+                    item.OnPointerUp(null);
+                }
+            }
+
             SaveItemsState();
         }
         else
