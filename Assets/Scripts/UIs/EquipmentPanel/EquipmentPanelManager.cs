@@ -126,7 +126,7 @@ public class EquipmentPanelManager : MonoBehaviour
         count = 0;
         //Ô¤Áô×ã¹»¿ÕÎ»ÖÃ(30¸ö)
         int addition = 30;
-        for (int i = 0; addition > 0; i++)
+        for (int i = 0; addition > 0 || count < archive.items.items.Length; i++)
         {
             //Ìí¼ÓÎïÆ·
             GameObject parent = Instantiate(itemPlaceObj, itemContent, false);
