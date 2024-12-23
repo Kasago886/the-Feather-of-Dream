@@ -71,6 +71,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         equipmentPanelManager.OnClickItem(this, GetComponentInParent<ItemPlace>());
+        equipmentPanelManager.itemsOnHand.Add(this);
 
         parent = transform.parent;
         transform.SetParent(canvas);
@@ -87,7 +88,15 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <param name="eventData"></param>
     public void OnPointerUp(PointerEventData eventData)
     {
-        GameObject upGo = eventData.pointerCurrentRaycast.gameObject;
+        GameObject upGo;
+        if (eventData != null)
+        {
+            upGo = eventData.pointerCurrentRaycast.gameObject;
+        }
+        else
+        {
+            upGo = null;
+        }
         
         Transpose(upGo);
 
@@ -120,6 +129,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         }
 
         equipmentPanelManager.OnClickItem(this, GetComponentInParent<ItemPlace>());
+        equipmentPanelManager.itemsOnHand.Remove(this);
         transform.localPosition = Vector3.zero;
     }
 
