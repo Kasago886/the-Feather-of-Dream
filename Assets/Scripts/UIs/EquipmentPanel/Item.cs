@@ -43,7 +43,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 
         image = GetComponent<Image>();
         Sprite sprite = Resources.Load<Sprite>("ItemIcon/"+itemInfo.imageName);
-        Debug.Log(sprite);
+        //Debug.Log(sprite);
         image.sprite = sprite;
         Resources.UnloadUnusedAssets();
     }
@@ -70,16 +70,20 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
-        equipmentPanelManager.OnClickItem(this, GetComponentInParent<ItemPlace>());
-        equipmentPanelManager.itemsOnHand.Add(this);
+        //保证是左键点击
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            equipmentPanelManager.OnClickItem(this, GetComponentInParent<ItemPlace>());
+            equipmentPanelManager.itemsOnHand.Add(this);
 
-        parent = transform.parent;
-        transform.SetParent(canvas);
-        transform.SetAsLastSibling();
+            parent = transform.parent;
+            transform.SetParent(canvas);
+            transform.SetAsLastSibling();
 
-        isHover = true;
-        //取消自身射线检测便于检测松开鼠标时的格子
-        image.raycastTarget = false;
+            isHover = true;
+            //取消自身射线检测便于检测松开鼠标时的格子
+            image.raycastTarget = false;
+        }
     }
 
     /// <summary>
@@ -88,20 +92,27 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <param name="eventData"></param>
     public void OnPointerUp(PointerEventData eventData)
     {
-        GameObject upGo;
         if (eventData != null)
         {
-            upGo = eventData.pointerCurrentRaycast.gameObject;
+            //保证是左键松开
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                GameObject upGo = eventData.pointerCurrentRaycast.gameObject;
+                Transpose(upGo);
+
+                isHover = false;
+                image.raycastTarget = true;
+            }
         }
         else
         {
-            upGo = null;
+            //程序手动触发
+            Transpose(null);
+
+            isHover = false;
+            image.raycastTarget = true;
         }
         
-        Transpose(upGo);
-
-        isHover = false;
-        image.raycastTarget = true;
     }
 
     /// <summary>

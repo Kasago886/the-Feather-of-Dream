@@ -29,6 +29,8 @@ public class EquipmentPanelManager : MonoBehaviour
     public GameObject itemObj;
     public GameObject itemPlaceObj;
 
+    public GameObject donotTouchPanel;
+
     [HideInInspector] public List<Item> itemsOnHand = new List<Item>();
 
     ArchiveManager archiveManager;
@@ -297,10 +299,12 @@ public class EquipmentPanelManager : MonoBehaviour
                 }
             }
 
+            donotTouchPanel.SetActive(true);
             SaveItemsState();
         }
         else
         {
+            donotTouchPanel.SetActive(false);
             SetupPanel();
         }
 
