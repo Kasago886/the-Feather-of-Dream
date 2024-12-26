@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Player : Character
 {
-    
-    void Start()
+    ArchiveManager archiveManager;
+    new private void Start()
     {
         base.Start();
-    }
-    void Update()
-    {
-        base.Update();
+        archiveManager = FindAnyObjectByType<ArchiveManager>();
+
+        tenacity = archiveManager.currentArchive.tenacity;
+        strength = archiveManager.currentArchive.strength;
     }
 }

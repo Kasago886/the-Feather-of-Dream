@@ -8,8 +8,10 @@ public class BuffContainer
     //¥Ê¥¢buff√˚≥∆
     public static Dictionary<string, Type> buffDictionary = new Dictionary<string, Type>
     {
-        {"≤‚ ‘π•ª˜",typeof(TestAttackBuff) },
-        {"≤‚ ‘–ßπ˚",typeof (TestEffectBuff) },
+        {"≤‚ ‘π•ª˜", typeof(TestAttackBuff) },
+        {"≤‚ ‘–ßπ˚", typeof(TestEffectBuff) },
+        {"≤‚ ‘◊∞±∏", typeof(TestEquipmentBuff) },
+        {"≤‚ ‘∞Œ”", typeof(TestUnlockFeatherBuff) }
     };
 
     /// <summary>
@@ -57,49 +59,3 @@ public class BuffContainer
 
 }
 
-public class TestAttackBuff : Buff
-{
-    public TestAttackBuff()
-    {
-        timer = 5;
-        isPermanent = false;
-    }
-
-    public override void OnEnter()
-    {
-        Debug.Log("add TestAttackBuff!");
-    }
-
-    public override void OnUpdate()
-    {
-        //Debug.LogWarning("update TestAttackBuff!");
-    }
-
-    public override void OnExit()
-    {
-        Debug.Log("remove TestAttackBuff!");
-    }
-}
-
-public class TestEffectBuff : Buff
-{
-    public TestEffectBuff()
-    {
-        isPermanent = true;
-    }
-
-    public override void OnEnter()
-    {
-        Debug.Log("add TestEffectBuff!");
-    }
-
-    public override void OnUpdate()
-    {
-        //Debug.LogWarning("update TestEffectBuff!");
-    }
-
-    public override void OnExit()
-    {
-        Debug.Log("remove TestEffectBuff!");
-    }
-}

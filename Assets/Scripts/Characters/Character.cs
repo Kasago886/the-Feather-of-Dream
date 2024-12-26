@@ -1,46 +1,76 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.TextCore.Text;
 
 public class Character : MonoBehaviour
 {
+    public bool isDefaultFeather;
+    public int defaultFeatherNum;
     [Header("韧性")]
-    public float resilience;
-    [Header("最大韧性")]
-    [Tooltip("如果最大韧性未填写，或者小于韧性则上面所填的初始韧性就为最大韧性")]
-    public float resilienceMax;
-    private float previousResilioence;
+    public float tenacity;
     [Header("力量")]
-    public float attack;
-    [Header("Buff链表")]
+    public float strength;
+
+    [Header("攻击替身")]
+    public List<GameObject> attackBodyObjList;
+
+    [Header("受伤事件")]
+    public UnityEvent injuryEvent;
+    [Header("治疗事件")]
+    public UnityEvent healEvent;
+    [Header("死亡事件")]
+    public UnityEvent deathEvent;
+
     public List<Buff> buffList = new();
-    private int pastValue;
-    [Header("受伤特效")]
-    public UnityEvent injurySpecialEffect;
-    [Header("回复特效")]
-    public UnityEvent healSpecialEffect;
-    [Header("韧性归零")]
-    public UnityEvent resilienceEqualZero;
+    public List<Feather> feathers = new();
+
     // Start is called before the first frame update
     protected void Start()
     {
-        //最大韧性赋值
-        if (resilience >= resilienceMax)
+        if (isDefaultFeather)
         {
-            resilienceMax = resilience;
+            defaultFeatherNum = EditorGUILayout.IntField("默认羽数", defaultFeatherNum);
+
+            feathers = new();
+            for (int i = 0; i < defaultFeatherNum; i++)
+            {
+                feathers.Add(new DefautFeather());
+            }
         }
-        previousResilioence = resilience;
     }
 
     // Update is called once per frame
     protected void Update()
     {
         BuffUpdate();
-        ResilienceController();
     }
 
+    /// <summary>
+    /// 攻击
+    /// </summary>
+    public void OnAttack()
+    {
+        foreach (GameObject obj in attackBodyObjList)
+        {
+            GameObject instance = Instantiate(obj, transform.position, Quaternion.identity);
+            instance.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
+
+    /// <summary>
+    /// 受伤
+    /// </summary>
+    /// <param name="damage"></param>
+    public void TakeDamage(float damage)
+    {
+
+    }
+
+    #region buff
     /// <summary>
     /// 添加Buff
     /// </summary>
@@ -98,28 +128,5 @@ public class Character : MonoBehaviour
             }
         }
     }
-
-    /// <summary>
-    /// 这个方法是对韧性不同情况的判定，支持覆写
-    /// </summary>
-    protected virtual void ResilienceController()
-    {
-        if (resilience > resilienceMax)
-        {
-            resilience = resilienceMax;
-        }
-        if (resilience < previousResilioence)
-        {
-            injurySpecialEffect?.Invoke();
-        }
-        if(resilience > previousResilioence)
-        {
-            healSpecialEffect?.Invoke();
-        }
-        if (resilience == 0)
-        {
-            resilienceEqualZero?.Invoke();
-        }
-        previousResilioence = resilience;
-    }
+    #endregion
 }
