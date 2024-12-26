@@ -119,3 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d594900be7d72548bb331b9cb2e73ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 50
+  attackType: 0
+  attackCenter: {x: 2, y: 0}
+  attackRegion: {x: 4, y: 4}

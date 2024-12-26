@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -27,15 +28,20 @@ public class Character : MonoBehaviour
 
     public List<Buff> buffList = new();
     public List<Feather> feathers = new();
+    public List<Feather> unlockedFeathers = new();
+
+    public bool isDead = false;
+
+    SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     protected void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        //默认羽
         if (isDefaultFeather)
         {
-            defaultFeatherNum = EditorGUILayout.IntField("默认羽数", defaultFeatherNum);
-
-            feathers = new();
             for (int i = 0; i < defaultFeatherNum; i++)
             {
                 feathers.Add(new DefautFeather());
@@ -46,7 +52,11 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        BuffUpdate();
+        if (!isDead)
+        {
+            BuffUpdate();
+            FeatherUpdate();
+        }
     }
 
     /// <summary>
@@ -57,7 +67,11 @@ public class Character : MonoBehaviour
         foreach (GameObject obj in attackBodyObjList)
         {
             GameObject instance = Instantiate(obj, transform.position, Quaternion.identity);
-            instance.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            if (spriteRenderer.flipX)
+            {
+                instance.GetComponent<SpriteRenderer>().flipX = true;
+                instance.GetComponent<AttackBody>().isleft = true;
+            }
         }
     }
 
@@ -67,8 +81,81 @@ public class Character : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
+        //受伤事件
+        if (unlockedFeathers.Count > 0 && damage > 0)
+        {
+            injuryEvent?.Invoke();
+        }
+        //吃伤
+        while (unlockedFeathers.Count > 0 && damage > 0)
+        {
+            Feather feather = unlockedFeathers[0];
+            feather.health -= damage;
 
+            if (feather.health < 0)
+            {
+                damage = -feather.health;
+                unlockedFeathers.RemoveAt(0);
+            }
+            else
+            {
+                damage = 0;
+            }
+        }
+        //检查是否失去所有羽毛
+        if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
+        {
+            deathEvent?.Invoke();
+        }
     }
+
+
+    #region 羽
+    /// <summary>
+    /// 拔羽
+    /// </summary>
+    /// <param name="num"></param>
+    public void UnlockFeather(int num, float time)
+    {
+        int count = 0;
+        int i = feathers.Count - 1;
+        while (i >= 0 && count < num)
+        {
+            Feather feather = feathers[i];
+            unlockedFeathers.Add(feather);
+            feather.lockTimer = time;
+            
+            feathers.RemoveAt(i);
+
+            count++;
+            i--;
+        }
+    }
+
+    /// <summary>
+    /// 更新羽
+    /// </summary>
+    public void FeatherUpdate()
+    {
+        for (int i = unlockedFeathers.Count - 1; i >= 0; i--)
+        {
+            Feather unlockedFeather = unlockedFeathers[i];
+            unlockedFeather.lockTimer -= Time.deltaTime;
+
+            if (unlockedFeather.lockTimer < 0)
+            {
+                feathers.Add(unlockedFeather);
+                unlockedFeathers.RemoveAt(i);
+            }
+        }
+    }
+
+    public void DebugUnlockFeather(int num)
+    {
+        UnlockFeather(num, 10);
+    }
+
+    #endregion
 
     #region buff
     /// <summary>

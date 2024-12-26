@@ -16,9 +16,16 @@ public class AttackBody : MonoBehaviour
     public Vector2 attackCenter;
     public Vector2 attackRegion;
 
+    [HideInInspector]public bool isleft;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (isleft)
+        {
+            attackCenter.x = -attackCenter.x;
+        }
+
         if (attackType == AttackType.Melee)
         {
             Vector3 center = attackCenter;
@@ -35,7 +42,6 @@ public class AttackBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void Destroy()
@@ -43,7 +49,7 @@ public class AttackBody : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if (attackType == AttackType.Melee)
         {

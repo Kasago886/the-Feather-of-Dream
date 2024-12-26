@@ -6,7 +6,7 @@ public class Feather
 {
     public float health;
     public float maxHealth;
-
+    public float lockTimer = 0;
 }
 
 public class DefautFeather : Feather
