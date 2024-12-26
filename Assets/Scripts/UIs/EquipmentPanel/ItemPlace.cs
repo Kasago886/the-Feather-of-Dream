@@ -25,17 +25,17 @@ public class ItemPlace : MonoBehaviour
         if (isItem)
         {
             Add(item, previousParent);
-            item.isEquiped = false;
+            item.SetEquipState(false);
         }
         else if (item.type == ItemType.Feather && isFeather)
         {
             Add(item, previousParent);
-            item.isEquiped = true;
+            item.SetEquipState(true);
         }
         else if (item.type == ItemType.BrokenFeather && isBrokenFeather)
         {
             Add(item, previousParent);
-            item.isEquiped = true;
+            item.SetEquipState(true);
         }
         else
         {

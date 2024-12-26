@@ -55,6 +55,7 @@ MonoBehaviour:
   type: 2
   isDreamizable: 0
   dreamizeCost: 0
+  buffName: 
   isEquiped: 0
 --- !u!222 &5828613731064432972
 CanvasRenderer:

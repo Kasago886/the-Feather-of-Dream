@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 [Serializable]
 public enum ItemType
@@ -21,6 +22,8 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     public bool isDreamizable;
     public int dreamizeCost;
 
+    public string buffName;
+
     [HideInInspector] public bool isEquiped;
 
     Image image;
@@ -28,6 +31,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     Transform parent;
     bool isHover = false;
     EquipmentPanelManager equipmentPanelManager;
+    Player player;
 
     /// <summary>
     /// 根据数据初始化
@@ -46,6 +50,8 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         //Debug.Log(sprite);
         image.sprite = sprite;
         Resources.UnloadUnusedAssets();
+
+        buffName = itemInfo.buffName;
     }
 
     /// <summary>
@@ -61,6 +67,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         info.isDreamizable = isDreamizable;
         info.dreamizeCost = dreamizeCost;
         info.imageName = image.sprite.name;
+        info.buffName = buffName;
         return info;
     }
 
@@ -144,12 +151,38 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         transform.localPosition = Vector3.zero;
     }
 
+    /// <summary>
+    /// 设置装备状态
+    /// </summary>
+    /// <param name="equipState"></param>
+    public void SetEquipState(bool equipState)
+    {
+        if (player == null)
+        {
+            player = FindAnyObjectByType<Player>();
+        }
+
+        //卸下
+        if (isEquiped && !equipState)
+        {
+            player.RemoveBuff(buffName);
+        }
+        //装备
+        else if (!isEquiped && equipState)
+        {
+            player.AddBuff(buffName);
+        }
+
+        isEquiped = equipState;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         image = GetComponent<Image>();
         canvas = GameObject.Find("Canvas").transform;
         equipmentPanelManager = FindObjectOfType<EquipmentPanelManager>();
+        player = FindAnyObjectByType<Player>();
     }
 
     // Update is called once per frame

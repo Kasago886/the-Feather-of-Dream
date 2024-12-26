@@ -30,6 +30,10 @@ public class ItemInspector : Editor
 
 
         item.type = (ItemType)EditorGUILayout.EnumPopup("物品类型", item.type);
+        if (item.type == ItemType.Feather || item.type == ItemType.BrokenFeather)
+        {
+            item.buffName = EditorGUILayout.TextField("buff名称",item.buffName);
+        }
         if (item.type == ItemType.BrokenFeather)
         {
             item.isDreamizable = EditorGUILayout.Toggle("可梦化", item.isDreamizable);

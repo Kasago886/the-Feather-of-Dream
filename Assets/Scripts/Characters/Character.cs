@@ -15,8 +15,7 @@ public class Character : MonoBehaviour
     [Header("力量")]
     public float attack;
     [Header("Buff链表")]
-    public List<Type> buffs;
-    private List<BuffInterface> buffRunners = new List<BuffInterface>();
+    public List<Buff> buffList = new();
     private int pastValue;
     [Header("受伤特效")]
     public UnityEvent injurySpecialEffect;
@@ -27,8 +26,6 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
-        //初始化链表
-        buffs = new List<Type>();
         //最大韧性赋值
         if (resilience >= resilienceMax)
         {
@@ -40,41 +37,68 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        BuffActive();
+        BuffUpdate();
         ResilienceController();
     }
+
     /// <summary>
-    /// 这个方法的作用是：实例化获得的buff,并调用其中的函数
+    /// 添加Buff
     /// </summary>
-    void BuffActive()
+    /// <param name="buff"></param>
+    public void AddBuff(string buffName)
     {
-        if (buffs.Count > pastValue)
+        Buff buff = BuffContainer.GetBuffInstance(buffName) as Buff;
+        buffList.Add(buff);
+        buff.OnEnter();
+    }
+
+    /// <summary>
+    /// buff更新
+    /// </summary>
+    public void BuffUpdate()
+    {
+        //此处不能用foreach，因为循环中要修改buffList
+        for (int i = buffList.Count - 1; i >= 0; i--)
         {
-            for (int i = pastValue; i < buffs.Count; i++)
+            Buff buff = buffList[i];
+
+            //更新
+            buff.OnUpdate();
+            
+            if (!buff.isPermanent)
             {
-                var buff = buffs[i];
-                if (typeof(BuffInterface).IsAssignableFrom(buff))
+                //减少倒计时
+                buff.timer -= Time.deltaTime;
+                if (buff.timer <= 0)
                 {
-                    BuffInterface buffRunner=(BuffInterface)Activator.CreateInstance(buff);
-                    buffRunners.Add(buffRunner);
-                    buffRunner.Initialize();
+                    //移除buff
+                    buff.OnExit();
+                    buffList.Remove(buff);
                 }
             }
         }
-       for (int i = 0; i < buffRunners.Count; i++)
+    }
+
+    /// <summary>
+    /// 从列表中移除一个buff
+    /// </summary>
+    /// <param name="buffName"></param>
+    public void RemoveBuff(string buffName)
+    {
+        Type buffType = BuffContainer.GetBuffType(buffName);
+        for (int i = buffList.Count - 1; i >= 0; i--)
         {
-            if (buffRunners[i] != null)
+            Buff buff = buffList[i];
+
+            if (buffType.IsInstanceOfType(buff))
             {
-                buffRunners[i].Update();
-            }
-            else
-            {
-                buffRunners.RemoveAt(i);
-                buffs.RemoveAt(i);
+                buff.OnExit();
+                buffList.Remove(buff);
+                break;
             }
         }
-       pastValue=buffs.Count;
     }
+
     /// <summary>
     /// 这个方法是对韧性不同情况的判定，支持覆写
     /// </summary>

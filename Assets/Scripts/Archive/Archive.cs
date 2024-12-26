@@ -33,6 +33,8 @@ public struct ItemInfo
 
     public string imageName;
 
+    public string buffName;
+
     public int position;
 }
 
