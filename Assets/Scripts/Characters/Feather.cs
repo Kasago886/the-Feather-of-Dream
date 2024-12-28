@@ -11,9 +11,9 @@ public class Feather
 
 public class DefautFeather : Feather
 {
-    public DefautFeather()
+    public DefautFeather(float hp = 100)
     {
-        health = 100;
-        maxHealth = 100;
+        maxHealth = hp;
+        health = maxHealth;
     }
 }

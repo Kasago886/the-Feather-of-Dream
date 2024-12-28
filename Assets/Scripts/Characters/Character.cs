@@ -9,8 +9,10 @@ using UnityEngine.TextCore.Text;
 
 public class Character : MonoBehaviour
 {
+    [Header("是否拥有初始羽")]
     public bool isDefaultFeather;
     public int defaultFeatherNum;
+    public float defaultFeatherHealth = 100;
     [Header("韧性")]
     public float tenacity;
     [Header("力量")]
@@ -44,7 +46,7 @@ public class Character : MonoBehaviour
         {
             for (int i = 0; i < defaultFeatherNum; i++)
             {
-                feathers.Add(new DefautFeather());
+                feathers.Add(new DefautFeather(defaultFeatherHealth));
             }
         }
     }
@@ -92,7 +94,9 @@ public class Character : MonoBehaviour
             Feather feather = unlockedFeathers[0];
             feather.health -= damage;
 
-            if (feather.health < 0)
+            Debug.Log(feather.health);
+
+            if (feather.health <= 0)
             {
                 damage = -feather.health;
                 unlockedFeathers.RemoveAt(0);
@@ -103,20 +107,50 @@ public class Character : MonoBehaviour
             }
         }
         //检查是否失去所有羽毛
+        //Debug.Log("unlock feathers:"+unlockedFeathers.Count.ToString() + "\nfeathers:" + feathers.Count.ToString());
         if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
         {
+            isDead = true;
+
             deathEvent?.Invoke();
         }
     }
 
+    #region attackBody
+    /// <summary>
+    /// 添加攻击替身
+    /// </summary>
+    /// <param name="obj"></param>
+    public void AddAttackBody(GameObject obj)
+    {
+        if (obj != null)
+        {
+            attackBodyObjList.Add(obj);
+        }
+    }
 
-    #region 羽
+    /// <summary>
+    /// 去除攻击替身
+    /// </summary>
+    /// <param name="obj"></param>
+    public void RemoveAttackBody(GameObject obj)
+    {
+        if (obj != null)
+        {
+            attackBodyObjList.Remove(obj);
+        }
+    }
+    #endregion
+
+    #region feather
     /// <summary>
     /// 拔羽
     /// </summary>
     /// <param name="num"></param>
     public void UnlockFeather(int num, float time)
     {
+        Debug.Log(num.ToString()+" "+time.ToString());
+
         int count = 0;
         int i = feathers.Count - 1;
         while (i >= 0 && count < num)
@@ -124,6 +158,8 @@ public class Character : MonoBehaviour
             Feather feather = feathers[i];
             unlockedFeathers.Add(feather);
             feather.lockTimer = time;
+
+            //Debug.Log(feather);
             
             feathers.RemoveAt(i);
 
@@ -150,6 +186,10 @@ public class Character : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 拔羽10秒（调试）
+    /// </summary>
+    /// <param name="num"></param>
     public void DebugUnlockFeather(int num)
     {
         UnlockFeather(num, 10);
@@ -166,6 +206,8 @@ public class Character : MonoBehaviour
     {
         Buff buff = BuffContainer.GetBuffInstance(buffName) as Buff;
         buffList.Add(buff);
+
+        buff.Init(this);
         buff.OnEnter();
     }
 
