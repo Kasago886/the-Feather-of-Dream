@@ -43,6 +43,8 @@ public class EquipmentPanelManager : MonoBehaviour
     {
         archiveManager = FindAnyObjectByType<ArchiveManager>();
         animationBoolManager = FindAnyObjectByType<AnimationBoolManager>();
+
+        SetupPanel();
     }
 
     // Update is called once per frame
@@ -305,7 +307,7 @@ public class EquipmentPanelManager : MonoBehaviour
         else
         {
             donotTouchPanel.SetActive(false);
-            SetupPanel();
+            //SetupPanel();
         }
 
         animationBoolManager.SwitchValue("appear");

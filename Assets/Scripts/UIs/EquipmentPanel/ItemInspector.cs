@@ -34,6 +34,10 @@ public class ItemInspector : Editor
         {
             item.buffName = EditorGUILayout.TextField("buff名称",item.buffName);
         }
+        if (item.type == ItemType.Feather)
+        {
+            item.featherHealth = EditorGUILayout.FloatField("羽当前生命值", item.featherHealth);
+        }
         if (item.type == ItemType.BrokenFeather)
         {
             item.isDreamizable = EditorGUILayout.Toggle("可梦化", item.isDreamizable);

@@ -26,7 +26,6 @@ public class Buff
 
     public virtual void OnEnter()
     {
-
     }
 
     public virtual void OnUpdate()
@@ -50,7 +49,7 @@ public class EquipmentBuff: Buff
     {
         base.Init(target, timer, isPermanent);
 
-        isPermanent = true;
+        this.isPermanent = true;
     }
 }
 
@@ -83,6 +82,55 @@ public class TestEquipmentBuff: EquipmentBuff
 
 #endregion
 
+#region 装备羽buff
+/// <summary>
+/// 装备羽buff基类
+/// </summary>
+public class EquipmentFeatherBuff : EquipmentBuff
+{
+    public EquipmentFeather feather = null;
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+        //Debug.Log(target);
+        //Debug.Log(feather);
+        target.AddFeather(feather);
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+        target.RemoveFeather(feather);
+    }
+}
+public class TestEquipmentFeatherBuff: EquipmentFeatherBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.feather = new TestEquipmentFeather();
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+        Debug.Log("testEquipmentFeatherBuff added!");
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+        Debug.Log("testEquipmentFeatherBuff removed!");
+    }
+}
+#endregion
+
 #region 攻击buff
 /// <summary>
 /// 攻击buff基类
@@ -96,7 +144,7 @@ public class AttackBuff : Buff
     {
         base.Init(target, timer, isPermanent);
 
-        isPermanent = false;
+        this.isPermanent = false;
     }
 
     public override void OnEnter()
@@ -121,7 +169,7 @@ public class TestAttackBuff : AttackBuff
         base.Init(target, timer, isPermanent);
 
         this.timer = 10;
-        attackBody = Resources.Load<GameObject>("AttackBodys/testAttackBody");
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/testAttackBody");
     }
 
     public override void OnEnter()
@@ -153,7 +201,7 @@ public class UnlockFeatherBuff: Buff
     {
         base.Init(target, timer, isPermanent);
 
-        isPermanent = false;
+        this.isPermanent = false;
     }
 
     public override void OnEnter()
@@ -171,7 +219,7 @@ public class TestUnlockFeatherBuff: UnlockFeatherBuff
         base.Init(target, timer, isPermanent);
 
         this.timer = 10;
-        unlockFeatherNum = 1;
+        this.unlockFeatherNum = 1;
     }
 }
 
@@ -187,7 +235,7 @@ public class EffectBuff : Buff
     {
         base.Init(target, timer, isPermanent);
 
-        isPermanent = false;
+        this.isPermanent = false;
     }
 }
 

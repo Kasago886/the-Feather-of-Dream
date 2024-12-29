@@ -46,7 +46,7 @@ public class Character : MonoBehaviour
         {
             for (int i = 0; i < defaultFeatherNum; i++)
             {
-                feathers.Add(new DefautFeather(defaultFeatherHealth));
+                AddFeather(new DefautFeather(defaultFeatherHealth));
             }
         }
     }
@@ -92,7 +92,7 @@ public class Character : MonoBehaviour
         while (unlockedFeathers.Count > 0 && damage > 0)
         {
             Feather feather = unlockedFeathers[0];
-            feather.health -= damage;
+            feather.TakeDamage(damage);
 
             Debug.Log(feather.health);
 
@@ -144,12 +144,25 @@ public class Character : MonoBehaviour
 
     #region feather
     /// <summary>
+    /// 增加羽
+    /// </summary>
+    /// <param name="feather"></param>
+    public void AddFeather(Feather feather)
+    {
+        if (feather != null)
+        {
+            feathers.Add(feather);
+            //Debug.Log(feather);
+        }
+    }
+
+    /// <summary>
     /// 拔羽
     /// </summary>
     /// <param name="num"></param>
     public void UnlockFeather(int num, float time)
     {
-        Debug.Log(num.ToString()+" "+time.ToString());
+        //Debug.Log(num.ToString()+" "+time.ToString());
 
         int count = 0;
         int i = feathers.Count - 1;
@@ -159,7 +172,7 @@ public class Character : MonoBehaviour
             unlockedFeathers.Add(feather);
             feather.lockTimer = time;
 
-            //Debug.Log(feather);
+            Debug.Log(feather);
             
             feathers.RemoveAt(i);
 
@@ -187,6 +200,22 @@ public class Character : MonoBehaviour
     }
 
     /// <summary>
+    /// 移除羽
+    /// </summary>
+    /// <param name="feather"></param>
+    public void RemoveFeather(Feather feather)
+    {
+        if (feathers.Contains(feather))
+        {
+            feathers.Remove(feather);
+        }
+        else if (unlockedFeathers.Contains(feather))
+        {
+            unlockedFeathers.Remove(feather);
+        }
+    }
+
+    /// <summary>
     /// 拔羽10秒（调试）
     /// </summary>
     /// <param name="num"></param>
@@ -198,6 +227,7 @@ public class Character : MonoBehaviour
     #endregion
 
     #region buff
+
     /// <summary>
     /// 添加Buff
     /// </summary>
@@ -205,9 +235,13 @@ public class Character : MonoBehaviour
     public void AddBuff(string buffName)
     {
         Buff buff = BuffContainer.GetBuffInstance(buffName) as Buff;
-        buffList.Add(buff);
-
         buff.Init(this);
+
+        AddBuff(buff);
+    }
+    public void AddBuff(Buff buff)
+    {
+        buffList.Add(buff);
         buff.OnEnter();
     }
 
@@ -231,8 +265,7 @@ public class Character : MonoBehaviour
                 if (buff.timer <= 0)
                 {
                     //移除buff
-                    buff.OnExit();
-                    buffList.Remove(buff);
+                    RemoveBuff(buff);
                 }
             }
         }
@@ -245,17 +278,39 @@ public class Character : MonoBehaviour
     public void RemoveBuff(string buffName)
     {
         Type buffType = BuffContainer.GetBuffType(buffName);
-        for (int i = buffList.Count - 1; i >= 0; i--)
+        //移除最旧的该类型buff
+        for (int i = 0; i < buffList.Count; i++)
         {
             Buff buff = buffList[i];
 
             if (buffType.IsInstanceOfType(buff))
             {
-                buff.OnExit();
-                buffList.Remove(buff);
+                RemoveBuff(buff);
                 break;
             }
         }
+    }
+    public void RemoveBuff(Buff buff)
+    {
+        buff.OnExit();
+        buffList.Remove(buff);
+    }
+
+    /// <summary>
+    /// 从列表中获取特定类型的buff
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    public Buff GetBuffOfType(Type type)
+    {
+        foreach (Buff buff in buffList)
+        {
+            if (type.IsInstanceOfType(buff))
+            {
+                return buff;
+            }
+        }
+        return null;
     }
     #endregion
 }

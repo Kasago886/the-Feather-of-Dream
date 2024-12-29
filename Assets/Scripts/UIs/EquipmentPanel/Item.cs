@@ -23,6 +23,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     public int dreamizeCost;
 
     public string buffName;
+    public float featherHealth;
 
     [HideInInspector] public bool isEquiped;
 
@@ -32,6 +33,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     bool isHover = false;
     EquipmentPanelManager equipmentPanelManager;
     Player player;
+    EquipmentFeatherBuff equipmentFeatherBuff;
 
     /// <summary>
     /// 根据数据初始化
@@ -39,6 +41,8 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <param name="itemInfo"></param>
     public void Init(ItemInfo itemInfo)
     {
+        Start();
+
         itemName = itemInfo.itemName;
         information = itemInfo.information;
         type = itemInfo.type;
@@ -52,6 +56,15 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         Resources.UnloadUnusedAssets();
 
         buffName = itemInfo.buffName;
+        featherHealth = itemInfo.featherHealth;
+
+        if (type == ItemType.Feather)
+        {
+            equipmentFeatherBuff = BuffContainer.GetBuffInstance(buffName) as EquipmentFeatherBuff;
+            equipmentFeatherBuff.Init(player);
+            equipmentFeatherBuff.feather.item = this;
+            equipmentFeatherBuff.feather.health = featherHealth;
+        }
     }
 
     /// <summary>
@@ -68,6 +81,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         info.dreamizeCost = dreamizeCost;
         info.imageName = image.sprite.name;
         info.buffName = buffName;
+        info.featherHealth = featherHealth;
         return info;
     }
 
@@ -162,15 +176,32 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
             player = FindAnyObjectByType<Player>();
         }
 
+        //Debug.Log(buffName);
+        //Debug.Log(isEquiped);
         //卸下
         if (isEquiped && !equipState)
         {
-            player.RemoveBuff(buffName);
+            if (type == ItemType.Feather)
+            {
+                player.RemoveBuff(equipmentFeatherBuff);
+
+            }
+            else if (type == ItemType.BrokenFeather)
+            {
+                player.RemoveBuff(buffName);
+            }
         }
         //装备
         else if (!isEquiped && equipState)
         {
-            player.AddBuff(buffName);
+            if (type == ItemType.Feather)
+            {
+                player.AddBuff(equipmentFeatherBuff);
+            }
+            else if (type == ItemType.BrokenFeather)
+            {
+                player.AddBuff(buffName);
+            }
         }
 
         isEquiped = equipState;

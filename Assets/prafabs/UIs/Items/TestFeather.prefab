@@ -55,7 +55,8 @@ MonoBehaviour:
   type: 0
   isDreamizable: 0
   dreamizeCost: 0
-  buffName: "\u6D4B\u8BD5\u6548\u679C"
+  buffName: "\u6D4B\u8BD5\u88C5\u5907\u7FBD"
+  featherHealth: 100
   isEquiped: 0
 --- !u!222 &7695200112112588903
 CanvasRenderer:
