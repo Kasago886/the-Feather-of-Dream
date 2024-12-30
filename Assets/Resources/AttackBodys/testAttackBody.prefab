@@ -123,3 +123,4 @@ MonoBehaviour:
   attackType: 0
   attackCenter: {x: 2, y: 0}
   attackRegion: {x: 4, y: 4}
+  isleft: 0
