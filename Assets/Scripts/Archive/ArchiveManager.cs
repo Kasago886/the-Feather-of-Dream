@@ -10,7 +10,7 @@ public class ArchiveManager : MonoBehaviour
 
     static string path = Application.dataPath + "/Archives";
 
-    private void Start()
+    public void Awake()
     {
         //Debug.Log(path);
         createDictory(path);

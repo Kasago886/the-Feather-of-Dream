@@ -34,6 +34,7 @@ public class AttackBody : MonoBehaviour
             Collider2D[] enemys = Physics2D.OverlapBoxAll(center, attackRegion,0f,LayerMask.GetMask(Consts.EnemyLayer));
             foreach (Collider2D enemy in enemys)
             {
+                //Debug.Log(enemy);
                 enemy.GetComponent<Character>().TakeDamage(damage);
             }
         }

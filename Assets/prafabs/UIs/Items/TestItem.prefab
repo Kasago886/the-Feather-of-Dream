@@ -56,6 +56,7 @@ MonoBehaviour:
   isDreamizable: 0
   dreamizeCost: 0
   buffName: 
+  featherHealth: 0
   isEquiped: 0
 --- !u!222 &5828613731064432972
 CanvasRenderer:

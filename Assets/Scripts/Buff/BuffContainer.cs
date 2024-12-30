@@ -11,6 +11,7 @@ public class BuffContainer
         {"测试攻击", typeof(TestAttackBuff) },
         {"测试效果", typeof(TestEffectBuff) },
         {"测试装备", typeof(TestEquipmentBuff) },
+        {"测试装备羽", typeof(TestEquipmentFeatherBuff) },
         {"测试拔羽", typeof(TestUnlockFeatherBuff) }
     };
 

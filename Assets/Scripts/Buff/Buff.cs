@@ -4,12 +4,28 @@ using UnityEngine;
 
 public class Buff
 {
-    public float timer;
-    public bool isPermanent;
+    //作用对象
+    public Character target = null;
+    //持续时间
+    public float timer = 0;
+    //永久存在
+    public bool isPermanent = false;
+
+    /// <summary>
+    /// 初始化（某些参数对特定类型的buff无效）
+    /// </summary>
+    /// <param name="target">作用对象</param>
+    /// <param name="timer">持续时间</param>
+    /// <param name="isPermanent">是否永久存在</param>
+    public virtual void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        this.target = target;
+        this.timer = timer;
+        this.isPermanent = isPermanent;
+    }
 
     public virtual void OnEnter()
     {
-
     }
 
     public virtual void OnUpdate()
@@ -29,9 +45,11 @@ public class Buff
 /// </summary>
 public class EquipmentBuff: Buff
 {
-    public EquipmentBuff()
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
-        isPermanent = true;
+        base.Init(target, timer, isPermanent);
+
+        this.isPermanent = true;
     }
 }
 
@@ -41,11 +59,13 @@ public class TestEquipmentBuff: EquipmentBuff
 
     public override void OnEnter()
     {
+        base.OnEnter();
         Debug.Log("TestEquipmentBuff is added!");
     }
 
     public override void OnUpdate()
     {
+        base.OnUpdate();
         if (!isUpdated)
         {
             Debug.Log("TestEquipmentBuff is updated succesfully!");
@@ -55,10 +75,60 @@ public class TestEquipmentBuff: EquipmentBuff
 
     public override void OnExit()
     {
+        base.OnExit();
         Debug.Log("TestEquipmentBuff is Removed!");
     }
 }
 
+#endregion
+
+#region 装备羽buff
+/// <summary>
+/// 装备羽buff基类
+/// </summary>
+public class EquipmentFeatherBuff : EquipmentBuff
+{
+    public EquipmentFeather feather = null;
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+        //Debug.Log(target);
+        //Debug.Log(feather);
+        target.AddFeather(feather);
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+        target.RemoveFeather(feather);
+    }
+}
+public class TestEquipmentFeatherBuff: EquipmentFeatherBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.feather = new TestEquipmentFeather();
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+        Debug.Log("testEquipmentFeatherBuff added!");
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+        Debug.Log("testEquipmentFeatherBuff removed!");
+    }
+}
 #endregion
 
 #region 攻击buff
@@ -67,31 +137,52 @@ public class TestEquipmentBuff: EquipmentBuff
 /// </summary>
 public class AttackBuff : Buff
 {
-    public AttackBuff(float t)
+    //攻击替身
+    public GameObject attackBody = null;
+
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
-        timer = t;
-        isPermanent = false;
+        base.Init(target, timer, isPermanent);
+
+        this.isPermanent = false;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+        target.AddAttackBody(attackBody);
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+        target.RemoveAttackBody(attackBody);
     }
 }
 
 public class TestAttackBuff : AttackBuff
 {
-    public TestAttackBuff(float t) : base(t)
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 10;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/testAttackBody");
     }
 
     public override void OnEnter()
     {
-        Debug.Log("TestAttackBuff added!");
-    }
+        base.OnEnter();
 
-    public override void OnUpdate()
-    {
-        
+        Debug.Log("TestAttackBuff added!");
     }
 
     public override void OnExit()
     {
+        base.OnExit();
+
         Debug.Log("TestAttackBuff removed!");
     }
 }
@@ -103,35 +194,35 @@ public class TestAttackBuff : AttackBuff
 /// </summary>
 public class UnlockFeatherBuff: Buff
 {
-    public UnlockFeatherBuff(float t)
+    //拔羽数
+    public int unlockFeatherNum = 0;
+
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
-        timer = t;
-        isPermanent = false;
+        base.Init(target, timer, isPermanent);
+
+        this.isPermanent = false;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+        target.UnlockFeather(unlockFeatherNum, timer);
     }
 }
 
 public class TestUnlockFeatherBuff: UnlockFeatherBuff
 {
-    public TestUnlockFeatherBuff(float t) : base(t)
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
+        base.Init(target, timer, isPermanent);
 
-    }
-
-    public override void OnEnter()
-    {
-
-    }
-
-    public override void OnUpdate()
-    {
-
-    }
-
-    public override void OnExit()
-    {
-
+        this.timer = 10;
+        this.unlockFeatherNum = 1;
     }
 }
+
 #endregion
 
 #region 效果buff
@@ -140,31 +231,30 @@ public class TestUnlockFeatherBuff: UnlockFeatherBuff
 /// </summary>
 public class EffectBuff : Buff
 {
-    public EffectBuff(float t)
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
-        timer = t;
-        isPermanent = false;
+        base.Init(target, timer, isPermanent);
+
+        this.isPermanent = false;
     }
 }
 
 public class TestEffectBuff : EffectBuff
 {
-    public TestEffectBuff(float t): base(t)
-    {
-    }
-
     public override void OnEnter()
     {
+        base.OnEnter();
         Debug.Log("add TestEffectBuff!");
     }
 
     public override void OnUpdate()
     {
-        
+        base.OnUpdate();
     }
 
     public override void OnExit()
     {
+        base.OnExit();
         Debug.Log("remove TestEffectBuff!");
     }
 }

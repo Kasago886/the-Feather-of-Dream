@@ -7,13 +7,48 @@ public class Feather
     public float health;
     public float maxHealth;
     public float lockTimer = 0;
+
+    public virtual void TakeDamage(float damage)
+    {
+        health -= damage;
+    }
 }
 
 public class DefautFeather : Feather
 {
-    public DefautFeather()
+    public DefautFeather(float hp = 100)
     {
-        health = 100;
-        maxHealth = 100;
+        maxHealth = hp;
+        health = maxHealth;
+    }
+}
+
+public class EquipmentFeather : Feather
+{
+    public static float MaxHealth = 100;
+
+    public Item item = null;
+    public EquipmentFeather(float hp = 100)
+    {
+        maxHealth = MaxHealth;
+        health = hp;
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        Debug.Log(item);
+        item.featherHealth = health;
+    }
+}
+
+public class TestEquipmentFeather : EquipmentFeather
+{
+    new public static float MaxHealth = 100;
+
+    public TestEquipmentFeather(float hp = 100): base(hp)
+    {
+        maxHealth = MaxHealth;
     }
 }

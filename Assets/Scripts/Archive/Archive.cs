@@ -35,6 +35,8 @@ public struct ItemInfo
 
     public string buffName;
 
+    public float featherHealth;
+
     public int position;
 }
 
