@@ -34,6 +34,11 @@ public class InteractiveObject : MonoBehaviour
     public string nameOfKey;
 
     private float distance;
+    private int id;
+    private void Start()
+    {
+        id=Random.Range(-100000,100000);
+    }
     void Update()
     {
         KeyTriggerMode1();
@@ -85,7 +90,7 @@ public class InteractiveObject : MonoBehaviour
     {
         if(keyTrigger && !mouseTrigger && mode2&&collision.tag==Consts.PlayerTag)
         {
-            PlayerInteract.trigger.Add(gameObject);
+            PlayerInteract.trigger.Add(id,gameObject);
         }
     }
     /// <summary>
@@ -96,14 +101,7 @@ public class InteractiveObject : MonoBehaviour
     {
         if (keyTrigger && !mouseTrigger && mode2)
         {
-            int n = 0;
-            for(int i = 0; i < PlayerInteract.trigger.Count; i++)
-            {
-                if (PlayerInteract.trigger[i] == gameObject)
-                {
-                    PlayerInteract.trigger.RemoveAt(i);
-                }
-            }
+            PlayerInteract.trigger.Remove(id);
         }
     }
     /// <summary>

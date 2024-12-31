@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    public static List<GameObject> trigger;
+    public static Dictionary<int,GameObject> trigger;
     private void Start()
     {
-        trigger = new List<GameObject>();
+        trigger = new Dictionary<int, GameObject>();
     }
     void Update()
     {
         if (trigger.Count>0)
         {
-            for (int i = 0; i < trigger.Count; i++)
+            foreach (var item in trigger)
             {
-                InteractiveObject interactiveObject=trigger[i].GetComponent<InteractiveObject>();
-                if(Input.GetKeyDown(interactiveObject.nameOfKey))
+                InteractiveObject interactiveObject = item.Value.GetComponent<InteractiveObject>();
+                if (Input.GetKeyDown(interactiveObject.nameOfKey))
                 {
                     interactiveObject.Interact();
                 }
