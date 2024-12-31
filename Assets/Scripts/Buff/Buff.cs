@@ -186,6 +186,17 @@ public class TestAttackBuff : AttackBuff
         Debug.Log("TestAttackBuff removed!");
     }
 }
+
+public class TestEnemyAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 10;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/testEnemyAttackBody");
+    }
+}
 #endregion
 
 #region °ÎÓðbuff
@@ -256,6 +267,24 @@ public class TestEffectBuff : EffectBuff
     {
         base.OnExit();
         Debug.Log("remove TestEffectBuff!");
+    }
+}
+
+public class TestEnemyEffectBuff : EffectBuff
+{
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
     }
 }
 #endregion

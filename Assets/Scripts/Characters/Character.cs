@@ -21,11 +21,8 @@ public class Character : MonoBehaviour
     [Header("攻击替身")]
     public List<GameObject> attackBodyObjList;
 
-    [Header("受伤事件")]
     public UnityEvent injuryEvent;
-    [Header("治疗事件")]
     public UnityEvent healEvent;
-    [Header("死亡事件")]
     public UnityEvent deathEvent;
 
     public List<Buff> buffList = new();
@@ -34,14 +31,14 @@ public class Character : MonoBehaviour
 
     public bool isDead = false;
 
-    SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     protected void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        //默认羽
+        //初始羽
         if (isDefaultFeather)
         {
             for (int i = 0; i < defaultFeatherNum; i++)
@@ -58,6 +55,7 @@ public class Character : MonoBehaviour
         {
             BuffUpdate();
             FeatherUpdate();
+            AIUpdate();
         }
     }
 
@@ -69,11 +67,22 @@ public class Character : MonoBehaviour
         foreach (GameObject obj in attackBodyObjList)
         {
             GameObject instance = Instantiate(obj, transform.position, Quaternion.identity);
+            AttackBody attackBody = instance.GetComponent<AttackBody>();
+
+            //方向
             if (spriteRenderer.flipX)
             {
                 instance.GetComponent<SpriteRenderer>().flipX = true;
                 instance.GetComponent<AttackBody>().isleft = true;
             }
+
+            //额外伤害
+            float addDamage = 0;
+            //力量是按基础伤害进行百分比增伤
+            addDamage += attackBody.damage * strength;
+
+            attackBody.addDamage = addDamage;
+
         }
     }
 
@@ -87,6 +96,19 @@ public class Character : MonoBehaviour
         if (unlockedFeathers.Count > 0 && damage > 0)
         {
             injuryEvent?.Invoke();
+
+            //减伤
+            /// damage = damage * 2^(-tenacity / 100)
+            /// tenacity | ratio
+            ///  10        0.933
+            ///  20        0.871
+            ///  30        0.812
+            ///  40        0.758
+            ///  50        0.707
+            /// 100        0.500
+            /// 200        0.250
+            /// 300        0.125
+            damage = damage * Mathf.Pow(2, -tenacity / 100);
         }
         //吃伤
         while (unlockedFeathers.Count > 0 && damage > 0)
@@ -313,4 +335,12 @@ public class Character : MonoBehaviour
         return null;
     }
     #endregion
+
+    /// <summary>
+    /// 更新AI
+    /// </summary>
+    public virtual void AIUpdate()
+    {
+
+    }
 }

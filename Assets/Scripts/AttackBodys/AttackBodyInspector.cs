@@ -25,6 +25,7 @@ public class AttackBodyInspector : Editor
         //垂直方向布局
         EditorGUILayout.BeginVertical();
 
+        attackBody.isEnemy = EditorGUILayout.Toggle("是否是敌方替身",attackBody.isEnemy);
         attackBody.damage = EditorGUILayout.FloatField("伤害",attackBody.damage);
 
         attackBody.attackType = (AttackType)EditorGUILayout.EnumPopup("攻击类型", attackBody.attackType);

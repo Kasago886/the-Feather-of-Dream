@@ -58,6 +58,5 @@ public class PlayerControllerInspector : Editor
         serializedObject.ApplyModifiedProperties();
 
         EditorGUILayout.EndVertical();
-
     }
 }
