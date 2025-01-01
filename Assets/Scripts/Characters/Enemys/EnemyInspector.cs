@@ -6,7 +6,7 @@ using UnityEditor.TerrainTools;
 using UnityEngine.Events;
 
 //CustomEditor用于关联要自定义的脚本
-[CustomEditor(typeof(Enemy))]
+[CustomEditor(typeof(Enemy),true)]
 public class EnemyInspector : CharacterInspector
 {
     Enemy enemy;
@@ -31,6 +31,7 @@ public class EnemyInspector : CharacterInspector
         EditorGUILayout.LabelField("属性", EditorStyles.boldLabel);
         enemy.runSpeed = EditorGUILayout.FloatField("移动速度",enemy.runSpeed);
         enemy.jumpSpeed = EditorGUILayout.FloatField("跳跃初速度",enemy.jumpSpeed);
+        enemy.attackCooldown = EditorGUILayout.FloatField("攻击冷却", enemy.attackCooldown);
 
         EditorGUILayout.Space(10);
 

@@ -125,3 +125,4 @@ MonoBehaviour:
   attackCenter: {x: 2, y: 0}
   attackRegion: {x: 4, y: 4}
   isleft: 0
+  addDamage: 0

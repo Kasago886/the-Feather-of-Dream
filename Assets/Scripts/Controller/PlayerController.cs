@@ -7,7 +7,7 @@ using UnityEditor;
 
 public enum ControllerStateType
 {
-    Movable, Sprinting, Pause
+    Movable, Sprinting, Pause, Dead
 }
 
 [AddComponentMenu("Controllers/PlayerController")]
@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         stateDict[ControllerStateType.Movable] = new ControllerMovableState(this);
         stateDict[ControllerStateType.Sprinting] = new ControllerSprintingState(this);
         stateDict[ControllerStateType.Pause] = new ControllerPauseState(this);
+        stateDict[ControllerStateType.Dead] = new ControllerDeadState(this);
 
         currentState = ControllerStateType.Movable;
         UnpausedState = currentState;
@@ -220,6 +221,14 @@ public class PlayerController : MonoBehaviour
             UnpausedState = currentState;
             StateTransition(ControllerStateType.Pause);
         }
+    }
+
+    /// <summary>
+    /// ËÀÍö×´Ì¬
+    /// </summary>
+    public void OnDie()
+    {
+        StateTransition(ControllerStateType.Dead);
     }
 
     /// <summary>

@@ -42,6 +42,7 @@ public class BuffContainer
         }
         else 
         { 
+            Debug.LogError("There's no such a buff called "+buffName);
             return null; 
         }
     }

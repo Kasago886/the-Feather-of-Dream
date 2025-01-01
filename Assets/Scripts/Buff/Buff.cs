@@ -272,9 +272,17 @@ public class TestEffectBuff : EffectBuff
 
 public class TestEnemyEffectBuff : EffectBuff
 {
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+    }
+
     public override void OnEnter()
     {
         base.OnEnter();
+        //Debug.Log("add TestEnemyEffectBuff!");
     }
 
     public override void OnUpdate()
@@ -285,6 +293,7 @@ public class TestEnemyEffectBuff : EffectBuff
     public override void OnExit()
     {
         base.OnExit();
+        //Debug.Log("remove TestEnemyEffectBuff!");
     }
 }
 #endregion

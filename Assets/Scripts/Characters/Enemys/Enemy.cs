@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mail;
 using UnityEngine;
 
 public enum EnemySearchType
@@ -16,6 +17,8 @@ public class Enemy : Character
 {
     public float runSpeed;
     public float jumpSpeed;
+    public float attackCooldown;
+    protected float attackCooldownTimer = 0;
 
     public EnemySearchType searchType;
     public bool wallDetect;
@@ -24,9 +27,11 @@ public class Enemy : Character
 
     public float attackCardUseDistance;
     public float attackCardCooldown;
+    protected float attackCardCooldownTimer = 0;
 
     public float effectCardUseDistance;
     public float effectCardCooldown;
+    protected float effectCardCooldownTimer = 0;
 
     [HideInInspector] public Player player;
     public Rigidbody2D rb;
@@ -43,6 +48,7 @@ public class Enemy : Character
 
         stateDict[EnemyStateType.Idle] = new EnemyIdleState(this);
         stateDict[EnemyStateType.Chase] = new EnemyChaseState(this);
+        stateDict[EnemyStateType.Attack] = new EnemyAttackState(this);
 
         currentState = stateDict[EnemyStateType.Idle];
     }
@@ -66,6 +72,10 @@ public class Enemy : Character
         base.AIUpdate();
 
         currentState.OnUpdate();
+
+        attackCooldownTimer -= Time.deltaTime;
+        attackCardCooldownTimer -= Time.deltaTime;
+        effectCardCooldownTimer -= Time.deltaTime;
     }
 
     /// <summary>
@@ -119,26 +129,107 @@ public class Enemy : Character
     }
 
     /// <summary>
+    /// 检测是否可使用攻击卡
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckPlayerInAttackCardDistance()
+    {
+        if (Vector2.Distance(transform.position, player.transform.position) < attackCardUseDistance && attackCardCooldownTimer <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// 检测是否可使用效果卡
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckPlayerInEffectCardDistance()
+    {
+        if (Vector2.Distance(transform.position, player.transform.position) < effectCardUseDistance && effectCardCooldownTimer <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// 检查是否可攻击
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckPlayerInAttackRegion()
+    {
+        foreach (GameObject attackBodyObj in attackBodyObjList)
+        {
+            AttackBody attackBody = attackBodyObj.GetComponent<AttackBody>();
+            if (attackBody.GetTargetsInAttackRegion(transform.position, spriteRenderer.flipX).Length > 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
     /// 移动
     /// </summary>
     /// <param name="horizontalMove"></param>
-    public void OnMove(float horizontalMove)
+    public virtual void OnMove(float horizontalMove)
     {
         float speed = runSpeed * horizontalMove;
         rb.velocity = new Vector2(speed, rb.velocity.y);
         //Debug.Log(rb.velocity);
+
+        if (speed > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (speed < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+    }
+
+    /// <summary>
+    /// 攻击
+    /// </summary>
+    public override void OnAttack()
+    {
+        if (attackCooldownTimer <= 0)
+        {
+            attackCooldownTimer = attackCooldown;
+
+            base.OnAttack();
+        }
+    }
+
+    /// <summary>
+    /// 使用攻击卡
+    /// </summary>
+    public virtual void OnUseAttackCard()
+    {
+    }
+
+    /// <summary>
+    /// 使用效果卡
+    /// </summary>
+    public virtual void OnUseEffectCard()
+    {
     }
 
     private void OnDrawGizmosSelected()
     {
+        int side = 20;
+        float angle = 360f / side;
+
         Gizmos.color = Color.yellow;
 
         switch (searchType)
         {
             //圆形视野
             case EnemySearchType.distance:
-                int side = 20;
-                float angle = 360f / side;
                 for (int i = 0; i < side; i++)
                 {
                     Vector2 from = transform.position + Quaternion.Euler(0, 0, angle * i) * Vector2.right * searchDistance;
@@ -162,6 +253,24 @@ public class Enemy : Character
                 player = FindAnyObjectByType<Player>();
                 Gizmos.DrawLine(transform.position,player.transform.position);
                 break;
+        }
+
+        Gizmos.color = Color.red;
+        for (int i = 0; i < side; i++)
+        {
+            Vector2 from = transform.position + Quaternion.Euler(0, 0, angle * i) * Vector2.right * attackCardUseDistance;
+            Vector2 to = transform.position + Quaternion.Euler(0, 0, angle * (i + 1)) * Vector2.right * attackCardUseDistance;
+
+            Gizmos.DrawLine(from, to);
+        }
+
+        Gizmos.color = Color.green;
+        for (int i = 0; i < side; i++)
+        {
+            Vector2 from = transform.position + Quaternion.Euler(0, 0, angle * i) * Vector2.right * effectCardUseDistance;
+            Vector2 to = transform.position + Quaternion.Euler(0, 0, angle * (i + 1)) * Vector2.right * effectCardUseDistance;
+
+            Gizmos.DrawLine(from, to);
         }
     }
 }

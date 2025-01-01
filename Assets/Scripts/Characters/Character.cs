@@ -62,7 +62,7 @@ public class Character : MonoBehaviour
     /// <summary>
     /// 攻击
     /// </summary>
-    public void OnAttack()
+    public virtual void OnAttack()
     {
         foreach (GameObject obj in attackBodyObjList)
         {
@@ -79,7 +79,9 @@ public class Character : MonoBehaviour
             //额外伤害
             float addDamage = 0;
             //力量是按基础伤害进行百分比增伤
-            addDamage += attackBody.damage * strength;
+            addDamage += attackBody.damage * strength / 100;
+
+            //Debug.Log(addDamage);
 
             attackBody.addDamage = addDamage;
 
@@ -90,7 +92,7 @@ public class Character : MonoBehaviour
     /// 受伤
     /// </summary>
     /// <param name="damage"></param>
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         //受伤事件
         if (unlockedFeathers.Count > 0 && damage > 0)
@@ -108,6 +110,8 @@ public class Character : MonoBehaviour
             /// 100        0.500
             /// 200        0.250
             /// 300        0.125
+
+            //Debug.Log(damage);
             damage = damage * Mathf.Pow(2, -tenacity / 100);
         }
         //吃伤
@@ -116,6 +120,7 @@ public class Character : MonoBehaviour
             Feather feather = unlockedFeathers[0];
             feather.TakeDamage(damage);
 
+            //Debug.Log(damage);
             Debug.Log(feather.health);
 
             if (feather.health <= 0)

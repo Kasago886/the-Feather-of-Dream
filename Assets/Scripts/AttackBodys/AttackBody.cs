@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum AttackType
 {
@@ -23,41 +24,51 @@ public class AttackBody : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (isleft)
+        //攻击
+        Collider2D[] targets = GetTargetsInAttackRegion(transform.position,isleft);
+        foreach (Collider2D target in targets)
         {
-            attackCenter.x = -attackCenter.x;
-        }
-
-        if (attackType == AttackType.Melee)
-        {
-            Vector3 center = attackCenter;
-            center = center + transform.position;
-
-            //判断敌我
-            if (isEnemy)
-            {
-                Collider2D[] players = Physics2D.OverlapBoxAll(center, attackRegion, 0f, LayerMask.GetMask(Consts.PlayerLayer));
-                foreach (Collider2D player in players)
-                {
-                    //Debug.Log(enemy);
-                    player.GetComponent<Character>().TakeDamage(damage + addDamage);
-                }
-            }
-            else
-            {
-                Collider2D[] enemys = Physics2D.OverlapBoxAll(center, attackRegion, 0f, LayerMask.GetMask(Consts.EnemyLayer));
-                foreach (Collider2D enemy in enemys)
-                {
-                    //Debug.Log(enemy);
-                    enemy.GetComponent<Character>().TakeDamage(damage + addDamage);
-                }
-            }
+            target.GetComponent<Character>().TakeDamage(damage + addDamage);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
+
+    /// <summary>
+    /// 获取攻击范围内的目标
+    /// </summary>
+    /// <param name="position">attackBody位置</param>
+    /// <param name="isleft">面朝方向</param>
+    /// <returns></returns>
+    public Collider2D[] GetTargetsInAttackRegion(Vector3 position, bool isleft)
+    {
+        Vector3 center = attackCenter;
+        if (isleft)
+        {
+            center.x = -attackCenter.x;
+        }
+        center = center + position;
+
+        if (attackType == AttackType.Melee)
+        {
+
+            //判断敌我
+            if (isEnemy)
+            {
+                Collider2D[] players = Physics2D.OverlapBoxAll(center, attackRegion, 0f, LayerMask.GetMask(Consts.PlayerLayer));
+                return players;
+            }
+            else
+            {
+                Collider2D[] enemys = Physics2D.OverlapBoxAll(center, attackRegion, 0f, LayerMask.GetMask(Consts.EnemyLayer));
+                return enemys;
+            }
+        }
+
+        return null;
     }
 
     public void Destroy()
@@ -67,6 +78,13 @@ public class AttackBody : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Vector3 center = attackCenter;
+        if (isleft)
+        {
+            center.x = -attackCenter.x;
+        }
+        center = center + transform.position;
+
         if (isEnemy)
         {
             Gizmos.color = Color.red;
@@ -78,9 +96,7 @@ public class AttackBody : MonoBehaviour
 
         if (attackType == AttackType.Melee)
         {
-            Vector3 center = attackCenter;
-
-            Gizmos.DrawWireCube(transform.position + center, attackRegion);
+            Gizmos.DrawWireCube(center, attackRegion);
         }
     }
 }
