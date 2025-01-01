@@ -2,19 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UIElements;
 [CustomEditor(typeof(Card), true)]
 public class CardInspector:Editor
 {
-
-    // Start is called before the first frame update
-    void Start()
+    
+    public override void OnInspectorGUI()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        EditorGUILayout.BeginVertical();
     }
 }

@@ -48,6 +48,9 @@ public class Card : MonoBehaviour
             player.AddBuff(buffs[i]);
         }
     }
+    /// <summary>
+    /// 当玩家鼠标进入该物体中的时候执行该函数
+    /// </summary>
     public void PointerEnter()
     {
         for (int i = 0; i < whatHappenWhenMouseEnter.Length; i++)
@@ -55,6 +58,9 @@ public class Card : MonoBehaviour
             whatHappenWhenMouseEnter[i]?.Invoke();
         }
     }
+    /// <summary>
+    /// 当玩家鼠标离开该物体中的时候执行该函数
+    /// </summary>
     public void PointerExit()
     {
         for (int i = 0; i < whatHappenWhenMouseExit.Length; i++)
@@ -62,6 +68,9 @@ public class Card : MonoBehaviour
             whatHappenWhenMouseExit[i]?.Invoke();
         }
     }
+    /// <summary>
+    /// 当玩家点击该物体的时候执行该函数
+    /// </summary>
     public void PointerClick()
     {
         if (click)
@@ -69,6 +78,9 @@ public class Card : MonoBehaviour
             EffortWhenClick();
         }
     }
+    /// <summary>
+    /// 当玩家拖拽该物品的时候执行该函数
+    /// </summary>
     public void Drag()
     {
         transform.position = Input.mousePosition;
@@ -77,6 +89,9 @@ public class Card : MonoBehaviour
             whatHappenOnDrag[i]?.Invoke();
         }
     }
+    /// <summary>
+    /// 当玩家拖拽结束的时候执行该函数
+    /// </summary>
     public void EndDrag()
     {
         if (dragOnCharactor)
