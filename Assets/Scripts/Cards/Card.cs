@@ -33,6 +33,21 @@ public class Card : MonoBehaviour
     {
 
     }
+    /// <summary>
+    /// 这是敌人作用于玩家的方法，你只需要在编写敌人Ai时引用该方法即可
+    /// </summary>
+    public void EnemyHasEffectOnPlayer()
+    {
+        for (int i = 0; i < effects.Length; i++)
+        {
+            effects[i]?.Invoke();
+        }
+        Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
+        for (int i = 0; i < buffs.Length; i++)
+        {
+            player.AddBuff(buffs[i]);
+        }
+    }
     public void PointerEnter()
     {
         for (int i = 0; i < whatHappenWhenMouseEnter.Length; i++)
