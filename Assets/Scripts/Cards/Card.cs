@@ -16,13 +16,12 @@ public class Card : MonoBehaviour
     public bool click;
     public bool dragOnCharactor;
     public float minDistance;//最小距离
-    public UnityEvent[] whatHappenOnDrag;
-    public UnityEvent[] whatHappenWhenMouseEnter;
-    public UnityEvent[] whatHappenWhenMouseExit;
-    public UnityEvent[] effects;//卡牌效果
+    public UnityEvent whatHappenOnDrag;
+    public UnityEvent whatHappenWhenMouseEnter;
+    public UnityEvent whatHappenWhenMouseExit;
+    public UnityEvent effects;//卡牌效果
     public Buff[] buffs;
-
-
+    public string[] buffNames ;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,14 +37,15 @@ public class Card : MonoBehaviour
     /// </summary>
     public void EnemyHasEffectOnPlayer()
     {
-        for (int i = 0; i < effects.Length; i++)
-        {
-            effects[i]?.Invoke();
-        }
+        effects?.Invoke();
         Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
         for (int i = 0; i < buffs.Length; i++)
         {
             player.AddBuff(buffs[i]);
+        }
+        for (int j = 0; j < buffNames.Length; j++)
+        {
+            player.AddBuff(buffNames[j]);
         }
     }
     /// <summary>
@@ -53,20 +53,18 @@ public class Card : MonoBehaviour
     /// </summary>
     public void PointerEnter()
     {
-        for (int i = 0; i < whatHappenWhenMouseEnter.Length; i++)
-        {
-            whatHappenWhenMouseEnter[i]?.Invoke();
-        }
+
+        whatHappenWhenMouseEnter?.Invoke();
+
     }
     /// <summary>
     /// 当玩家鼠标离开该物体中的时候执行该函数
     /// </summary>
     public void PointerExit()
     {
-        for (int i = 0; i < whatHappenWhenMouseExit.Length; i++)
-        {
-            whatHappenWhenMouseExit[i]?.Invoke();
-        }
+
+        whatHappenWhenMouseExit?.Invoke();
+
     }
     /// <summary>
     /// 当玩家点击该物体的时候执行该函数
@@ -84,10 +82,9 @@ public class Card : MonoBehaviour
     public void Drag()
     {
         transform.position = Input.mousePosition;
-        for (int i = 0; i < whatHappenOnDrag.Length; i++)
-        {
-            whatHappenOnDrag[i]?.Invoke();
-        }
+
+        whatHappenOnDrag?.Invoke();
+
     }
     /// <summary>
     /// 当玩家拖拽结束的时候执行该函数
@@ -103,23 +100,23 @@ public class Card : MonoBehaviour
     {
         if (effortOnPlayer)
         {
-            for (int i = 0; i < effects.Length; i++)
-            {
-                effects[i]?.Invoke();
-            }
+            effects?.Invoke();
             Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
             for (int i = 0; i < buffs.Length; i++)
             {
                 player.AddBuff(buffs[i]);
             }
+            for (int j = 0; j < buffNames.Length; j++)
+            {
+                player.AddBuff(buffNames[j]);
+            }
+            Destroy(gameObject);
         }
         if (effortOnEnmey)
         {
             List<int> enemiesWhoHaveBeenEfforted = new List<int>();
-            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(
-                new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize), 
-                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize),
-                LayerMask.GetMask(Consts.EnemyLayer));//##加上敌人层级筛选
+            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize),LayerMask.GetMask(Consts.EnemyLayer));
             Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
             List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
             for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
@@ -140,12 +137,12 @@ public class Card : MonoBehaviour
                 {
 
                 a:
-                    int n = Random.Range(0, theNumberOfEffortedEnemies);//##为什么是随机选择，不应该是点击之后再选择多个敌人进行使用吗？
+                    int n = Random.Range(0, theNumberOfEffortedEnemies);
                     for (int j = 0; j < enemiesWhoHaveBeenEfforted.Count; j++)
                     {
                         if (n == enemiesWhoHaveBeenEfforted[j])
                         {
-                            goto a;//## goto语句容易让代码混乱，需要重复的语句可以做成迭代函数 //另外，随机数算法太低效了，尽量别用它来穷举
+                            goto a;
                         }
                     }
                     Enemy enemy = enemiesWhoInCameralist[n].GetComponent<Enemy>();
@@ -153,33 +150,32 @@ public class Card : MonoBehaviour
                     {
                         enemy.AddBuff(buffs[j]);
                     }
-                    for (int j = 0; j < effects.Length; j++)
+                    for (int j = 0; j < buffNames.Length; j++)
                     {
-                        effects[j]?.Invoke();
+                        enemy.AddBuff(buffNames[j]);
                     }
+                    effects?.Invoke();
                     enemiesWhoHaveBeenEfforted.Add(n);
                 }
+                Destroy(gameObject);
             }
-            else//##可删除 if (!effortOnMoreEnemies)
+            else if (!effortOnMoreEnemies)
             {
-                int n = Random.Range(0, theNumberOfEffortedEnemies);//为什么是随机选择，不应该是点击之后再点敌人进行使用吗？
+                int n = Random.Range(0, theNumberOfEffortedEnemies);
                 Enemy enemy = enemiesWhoInCameralist[n].GetComponent<Enemy>();
                 for (int j = 0; j < buffs.Length; j++)
                 {
                     enemy.AddBuff(buffs[j]);
                 }
-                /// ##可改为 
-                /// foreach(Buff buff in buffs)
-                /// {
-                ///     enemy.AddBuff(buff);
-                /// }
-                for (int j = 0; j < effects.Length; j++)//##同上，可使用foreach
+                for (int j = 0; j < buffNames.Length; j++)
                 {
-                    effects[j]?.Invoke(); 
+                    enemy.AddBuff(buffNames[j]);
                 }
+                effects?.Invoke();
+                Destroy(gameObject);
             }
         }
-        Destroy(gameObject);
+        
     }
     private void EffortWhenDragEnd()
     {
@@ -187,21 +183,24 @@ public class Card : MonoBehaviour
         {
             if (Vector2.Distance(transform.position, GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position) < minDistance)
             {
-                for (int i = 0; i < effects.Length; i++)
-                {
-                    effects[i]?.Invoke();
-                }
+                effects?.Invoke();
                 Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
                 for (int i = 0; i < buffs.Length; i++)
                 {
                     player.AddBuff(buffs[i]);
                 }
+                for (int j = 0; j < buffNames.Length; j++)
+                {
+                    player.AddBuff(buffNames[j]);
+                }
+                Destroy(gameObject);
             }
         }
         if (effortOnEnmey)
         {
             List<int> enemiesWhoHaveBeenEfforted = new List<int>();
-            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize), new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize));
+            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
             Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
             List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
             for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
@@ -216,7 +215,7 @@ public class Card : MonoBehaviour
             {
                 theNumberOfEffortedEnemies = enemiesWhoInCameralist.Count;
             }
-            bool work = false; //##; 多打了个分号
+            bool work = false; ;
             for (int i = 0; i < enemiesWhoInCameralist.Count; i++)
             {
                 if (Vector2.Distance(transform.position, enemiesWhoInCameralist[i].transform.position) < minDistance)
@@ -228,7 +227,7 @@ public class Card : MonoBehaviour
             if (work)
             {
                 int theNearestNumber = -1;
-                for (int i = 0; i < enemiesWhoInCameralist.Count; i++)//##逻辑错误！！不应该遍历所有enemiesWhoInCameralist，而应该遍历在minDistance之内的enemy
+                for (int i = 0; i < enemiesWhoInCameralist.Count; i++)
                 {
                     if (theNearestNumber != -1)
                     {
@@ -237,7 +236,7 @@ public class Card : MonoBehaviour
                             theNearestNumber = i;
                         }
                     }
-                    else //##可删掉 if (theNearestNumber == -1)
+                    else if (theNearestNumber == -1)
                     {
                         theNearestNumber = i;
                     }
@@ -263,10 +262,11 @@ public class Card : MonoBehaviour
                             {
                                 enemy.AddBuff(buffs[j]);
                             }
-                            for (int j = 0; j < effects.Length; j++)
+                            for (int j = 0; j < buffNames.Length; j++)
                             {
-                                effects[j]?.Invoke();
+                                enemy.AddBuff(buffNames[j]);
                             }
+                            effects?.Invoke();
                             enemiesWhoHaveBeenEfforted.Add(n);
                         }
                     }
@@ -275,23 +275,20 @@ public class Card : MonoBehaviour
                     {
                         enemy0.AddBuff(buffs[j]);
                     }
-                    for (int j = 0; j < effects.Length; j++)
+                    for (int j = 0;j < buffNames.Length; j++)
                     {
-                        effects[j]?.Invoke();
+                        enemy0.AddBuff(buffNames[j]);
                     }
-
+                    effects?.Invoke();
                 }
-                /// else
-                /// {
-                ///     return; //如果拖到空气上这张卡不就凭空消失了吗，应该不销毁，让它回到原位
-                /// }
+                Destroy(gameObject);
             }
         }
-        Destroy(gameObject);
+      
     }
     private void OnDrawGizmos()
     {
-        if (dragOnCharactor)
+        if (dragOnCharactor&&minDistance>0)
         {
             for (int j = 0; j < 360; j++)
             {
