@@ -116,7 +116,10 @@ public class Card : MonoBehaviour
         if (effortOnEnmey)
         {
             List<int> enemiesWhoHaveBeenEfforted = new List<int>();
-            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize), new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize));
+            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(
+                new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize), 
+                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize),
+                LayerMask.GetMask(Consts.EnemyLayer));//##加上敌人层级筛选
             Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
             List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
             for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
@@ -137,12 +140,12 @@ public class Card : MonoBehaviour
                 {
 
                 a:
-                    int n = Random.Range(0, theNumberOfEffortedEnemies);
+                    int n = Random.Range(0, theNumberOfEffortedEnemies);//##为什么是随机选择，不应该是点击之后再选择多个敌人进行使用吗？
                     for (int j = 0; j < enemiesWhoHaveBeenEfforted.Count; j++)
                     {
                         if (n == enemiesWhoHaveBeenEfforted[j])
                         {
-                            goto a;
+                            goto a;//## goto语句容易让代码混乱，需要重复的语句可以做成迭代函数 //另外，随机数算法太低效了，尽量别用它来穷举
                         }
                     }
                     Enemy enemy = enemiesWhoInCameralist[n].GetComponent<Enemy>();
@@ -157,17 +160,22 @@ public class Card : MonoBehaviour
                     enemiesWhoHaveBeenEfforted.Add(n);
                 }
             }
-            else if (!effortOnMoreEnemies)
+            else//##可删除 if (!effortOnMoreEnemies)
             {
-                int n = Random.Range(0, theNumberOfEffortedEnemies);
+                int n = Random.Range(0, theNumberOfEffortedEnemies);//为什么是随机选择，不应该是点击之后再点敌人进行使用吗？
                 Enemy enemy = enemiesWhoInCameralist[n].GetComponent<Enemy>();
                 for (int j = 0; j < buffs.Length; j++)
                 {
                     enemy.AddBuff(buffs[j]);
                 }
-                for (int j = 0; j < effects.Length; j++)
+                /// ##可改为 
+                /// foreach(Buff buff in buffs)
+                /// {
+                ///     enemy.AddBuff(buff);
+                /// }
+                for (int j = 0; j < effects.Length; j++)//##同上，可使用foreach
                 {
-                    effects[j]?.Invoke();
+                    effects[j]?.Invoke(); 
                 }
             }
         }
@@ -208,7 +216,7 @@ public class Card : MonoBehaviour
             {
                 theNumberOfEffortedEnemies = enemiesWhoInCameralist.Count;
             }
-            bool work = false; ;
+            bool work = false; //##; 多打了个分号
             for (int i = 0; i < enemiesWhoInCameralist.Count; i++)
             {
                 if (Vector2.Distance(transform.position, enemiesWhoInCameralist[i].transform.position) < minDistance)
@@ -220,7 +228,7 @@ public class Card : MonoBehaviour
             if (work)
             {
                 int theNearestNumber = -1;
-                for (int i = 0; i < enemiesWhoInCameralist.Count; i++)
+                for (int i = 0; i < enemiesWhoInCameralist.Count; i++)//##逻辑错误！！不应该遍历所有enemiesWhoInCameralist，而应该遍历在minDistance之内的enemy
                 {
                     if (theNearestNumber != -1)
                     {
@@ -229,7 +237,7 @@ public class Card : MonoBehaviour
                             theNearestNumber = i;
                         }
                     }
-                    else if (theNearestNumber == -1)
+                    else //##可删掉 if (theNearestNumber == -1)
                     {
                         theNearestNumber = i;
                     }
@@ -273,6 +281,10 @@ public class Card : MonoBehaviour
                     }
 
                 }
+                /// else
+                /// {
+                ///     return; //如果拖到空气上这张卡不就凭空消失了吗，应该不销毁，让它回到原位
+                /// }
             }
         }
         Destroy(gameObject);
