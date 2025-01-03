@@ -122,20 +122,18 @@ public class CardInspector:Editor
             EditorGUILayout.PropertyField(event3);
             EditorGUILayout.LabelField("在卡牌发生作用时所发生的事件");
             EditorGUILayout.PropertyField(event4);
-            EditorGUILayout.LabelField("需要添加的buff");
             EditorGUILayout.PropertyField(buff,new GUIContent("需要添加的buff"),true);
-            for (int i = 0; i < buff.arraySize; i++)
-            {
-                SerializedProperty element=buff.GetArrayElementAtIndex(i);
-                EditorGUILayout.PropertyField (element,new GUIContent("Element"+i));
-            }
-            EditorGUILayout.LabelField("需要添加的buff的名字");
+            //for (int i = 0; i < buff.arraySize; i++)
+            //{
+            //    SerializedProperty element=buff.GetArrayElementAtIndex(i);
+            //    EditorGUILayout.PropertyField (element,new GUIContent("Element"+i));
+            //}
             EditorGUILayout.PropertyField(buffName, new GUIContent("需要添加的buff的名字"),true);
-            for (int i = 0; i < buffName.arraySize; i++)
-            {
-                SerializedProperty element = buffName.GetArrayElementAtIndex(i);
-                EditorGUILayout.PropertyField(element, new GUIContent("Element" + i));
-            }
+            //for (int i = 0; i < buffName.arraySize; i++)
+            //{
+            //    SerializedProperty element = buffName.GetArrayElementAtIndex(i);
+            //    EditorGUILayout.PropertyField(element, new GUIContent("Element" + i));
+            //}
             if (buff != null&&buffName!=null)
             {
                 EditorGUILayout.HelpBox("注意:\"需要添加的buff\"与\"需要添加的buff的名字\"而这只需要填一个就行，如果这两上面个都填的是同一个buff那么将会对对象施加2次该buff", MessageType.Warning);

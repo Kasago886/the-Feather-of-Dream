@@ -5243,6 +5243,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  buffList: []
   isDead: 0
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
@@ -6908,6 +6909,7 @@ MonoBehaviour:
   deathEvent:
     m_PersistentCalls:
       m_Calls: []
+  buffList: []
   isDead: 0
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
@@ -7815,8 +7817,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1303077855}
   m_HandleRect: {fileID: 1303077854}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.70247936
+  m_Value: 0.9999996
+  m_Size: 0.70284235
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
