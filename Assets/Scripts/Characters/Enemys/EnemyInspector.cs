@@ -63,6 +63,7 @@ public class EnemyInspector : CharacterInspector
         enemy.effectCardCooldown = EditorGUILayout.FloatField(enemy.effectCardCooldown);
         EditorGUILayout.EndHorizontal();
 
+
         EditorGUILayout.Space(10);
 
         EditorGUILayout.EndVertical();

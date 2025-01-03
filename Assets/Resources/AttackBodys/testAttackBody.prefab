@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
-  damage: 50
+  damage: 1
   attackType: 0
   attackCenter: {x: 2, y: 0}
   attackRegion: {x: 4, y: 4}

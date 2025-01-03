@@ -18,6 +18,12 @@ public class Character : MonoBehaviour
     [Header("力量")]
     public float strength;
 
+    public bool injuryForceback;
+    public float forcebackForce;
+    public float forcebackDuration;
+    public float forcebackTimer = 0;
+    protected Transform beAttackedTrans;
+
     [Header("攻击替身")]
     public List<GameObject> attackBodyObjList;
 
@@ -32,11 +38,13 @@ public class Character : MonoBehaviour
     public bool isDead = false;
 
     public SpriteRenderer spriteRenderer;
+    public Rigidbody2D rb;
 
     // Start is called before the first frame update
     protected void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
 
         //初始羽
         if (isDefaultFeather)
@@ -56,6 +64,7 @@ public class Character : MonoBehaviour
             BuffUpdate();
             FeatherUpdate();
             AIUpdate();
+            ForcebackUpdate();
         }
     }
 
@@ -92,11 +101,18 @@ public class Character : MonoBehaviour
     /// 受伤
     /// </summary>
     /// <param name="damage"></param>
-    public virtual void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage, Transform attackTrans = null)
     {
         //受伤事件
         if (unlockedFeathers.Count > 0 && damage > 0)
         {
+            //击退
+            if (injuryForceback)
+            {
+                beAttackedTrans = attackTrans;
+                forcebackTimer = forcebackDuration;
+            }
+
             injuryEvent?.Invoke();
 
             //减伤
@@ -140,6 +156,57 @@ public class Character : MonoBehaviour
             isDead = true;
 
             deathEvent?.Invoke();
+        }
+    }
+
+    /// <summary>
+    /// 受击击退
+    /// </summary>
+    /// <param name="attackPosition">攻击来源</param>
+    public void OnForceback(Vector3 attackPosition)
+    {
+        Vector2 direction = transform.position - attackPosition;
+        Debug.Log(direction);
+        if (direction.x > 0)
+        {
+            rb.AddForce(new Vector2(forcebackForce, rb.velocity.y), ForceMode2D.Impulse);
+        }
+        else if (direction.x < 0)
+        {
+            rb.AddForce(new Vector2(-forcebackForce, rb.velocity.y), ForceMode2D.Impulse);
+        }
+        else
+        {
+            float speed = -forcebackForce;
+            if (spriteRenderer.flipX)
+            {
+                speed = -speed;
+            }
+            rb.AddForce(new Vector2(speed, rb.velocity.y), ForceMode2D.Impulse);
+        }
+    }
+    public void OnForceback(Transform attackTrans)
+    {
+        if (attackTrans == null)
+        {
+            OnForceback(Vector3.zero);
+        }
+        else
+        {
+            OnForceback(attackTrans.position);
+        }
+    }
+
+    /// <summary>
+    /// 更新击退
+    /// </summary>
+    public void ForcebackUpdate()
+    {
+        if (forcebackTimer > 0)
+        {
+            OnForceback(beAttackedTrans);
+
+            forcebackTimer -= Time.deltaTime;
         }
     }
 

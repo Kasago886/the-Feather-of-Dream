@@ -28,7 +28,7 @@ public class AttackBody : MonoBehaviour
         Collider2D[] targets = GetTargetsInAttackRegion(transform.position,isleft);
         foreach (Collider2D target in targets)
         {
-            target.GetComponent<Character>().TakeDamage(damage + addDamage);
+            target.GetComponent<Character>().TakeDamage(damage + addDamage, transform);
         }
     }
 

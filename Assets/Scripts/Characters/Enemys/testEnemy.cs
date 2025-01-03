@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class testEnemy : Enemy
 {
+
     public override void OnUseAttackCard()
     {
         base.OnUseAttackCard();

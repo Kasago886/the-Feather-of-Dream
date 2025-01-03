@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mail;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum EnemySearchType
 {
@@ -34,7 +35,6 @@ public class Enemy : Character
     protected float effectCardCooldownTimer = 0;
 
     [HideInInspector] public Player player;
-    public Rigidbody2D rb;
 
     //states
     Dictionary<EnemyStateType, EnemyState> stateDict = new();
@@ -44,11 +44,13 @@ public class Enemy : Character
     {
         base.Start();
         player = FindAnyObjectByType<Player>();
-        rb = GetComponent<Rigidbody2D>();
+
+        injuryEvent.AddListener(new UnityAction(TransitionToInjury));
 
         stateDict[EnemyStateType.Idle] = new EnemyIdleState(this);
         stateDict[EnemyStateType.Chase] = new EnemyChaseState(this);
         stateDict[EnemyStateType.Attack] = new EnemyAttackState(this);
+        stateDict[EnemyStateType.Injury] = new EnemyInjuryState(this);
 
         currentState = stateDict[EnemyStateType.Idle];
     }
@@ -63,6 +65,13 @@ public class Enemy : Character
         currentState = stateDict[stateType];
         currentState.OnEnter();
     }
+    /// <summary>
+    /// 切换到受伤状态
+    /// </summary>
+    public void TransitionToInjury()
+    {
+        StateTransition(EnemyStateType.Injury);
+    }
 
     /// <summary>
     /// 更新AI
@@ -73,11 +82,15 @@ public class Enemy : Character
 
         currentState.OnUpdate();
 
-        attackCooldownTimer -= Time.deltaTime;
-        attackCardCooldownTimer -= Time.deltaTime;
-        effectCardCooldownTimer -= Time.deltaTime;
+        if (!(forcebackTimer > 0))
+        {
+            attackCooldownTimer -= Time.deltaTime;
+            attackCardCooldownTimer -= Time.deltaTime;
+            effectCardCooldownTimer -= Time.deltaTime;
+        }
     }
 
+    #region 状态检查函数
     /// <summary>
     /// 检测玩家是否在视野内
     /// </summary>
@@ -171,6 +184,8 @@ public class Enemy : Character
 
         return false;
     }
+
+    #endregion
 
     /// <summary>
     /// 移动

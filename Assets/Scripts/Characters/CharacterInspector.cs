@@ -57,6 +57,19 @@ public class CharacterInspector : Editor
 
         EditorGUILayout.Space(10);
 
+        character.injuryForceback = EditorGUILayout.Toggle("受击击退（对玩家无效）", character.injuryForceback);
+        if (character.injuryForceback)
+        {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("击退力", GUILayout.Width(50));
+            character.forcebackForce = EditorGUILayout.FloatField(character.forcebackForce);
+            EditorGUILayout.LabelField("击退时间", GUILayout.Width(50));
+            character.forcebackDuration = EditorGUILayout.FloatField(character.forcebackDuration);
+            EditorGUILayout.EndHorizontal();
+        }
+
+        EditorGUILayout.Space(10);
+
         serializedObject.Update();
         EditorGUILayout.PropertyField(injuryEventProperty, new UnityEngine.GUIContent("受伤事件"));
         EditorGUILayout.PropertyField(healEventProperty, new UnityEngine.GUIContent("治疗事件"));
