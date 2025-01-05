@@ -26,6 +26,8 @@ public class EquipmentPanelManager : MonoBehaviour
     public GameObject dreamizeButton;
     public Text dreamizeCost;
 
+    public Transform encyclopediaContent;
+
     public GameObject itemObj;
     public GameObject itemPlaceObj;
 
@@ -156,6 +158,29 @@ public class EquipmentPanelManager : MonoBehaviour
             }
         }
 
+        //encyclopedia
+        //清空
+        count = encyclopediaContent.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            Destroy(encyclopediaContent.GetChild(i).gameObject);
+        }
+        count = 0;
+        for (int i = 0; count < archive.encyclopedia.items.Length; i++)
+        {
+            //添加物品
+            GameObject parent = Instantiate(itemPlaceObj, encyclopediaContent, false);
+            ItemPlace ip = parent.GetComponent<ItemPlace>();
+
+            //对应位置
+            if (i == archive.encyclopedia.items[count].position)
+            {
+                GenerateSingleItem(ip, archive.encyclopedia.items[count]);
+
+                count++;
+            }
+        }
+
         //隐藏按钮
         equipButton.SetActive(false);
         dreamizeButton.SetActive(false);
@@ -254,6 +279,8 @@ public class EquipmentPanelManager : MonoBehaviour
         archiveManager.currentArchive.equipedBrokenFeather.items = GetItemInfos(brokenFeatherEquipContent).ToArray();
         //items
         archiveManager.currentArchive.items.items = GetItemInfos(itemContent).ToArray();
+        //encyclopedia
+        archiveManager.currentArchive.encyclopedia.items = GetItemInfos(encyclopediaContent).ToArray();
 
         //Save
         ArchiveManager.SaveArchive(archiveManager.currentArchive, archiveManager.currentArchive.index);

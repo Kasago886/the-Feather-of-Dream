@@ -15,6 +15,7 @@ public class Archive
     public ItemInfos equipedFeather;
     public ItemInfos equipedBrokenFeather;
     public ItemInfos items;
+    public ItemInfos encyclopedia;
 }
 
 /// <summary>

@@ -9,7 +9,7 @@ using UnityEngine.Events;
 [Serializable]
 public enum ItemType
 {
-    Feather,BrokenFeather,Other
+    Feather,BrokenFeather,Other,Encyclopedia
 }
 
 public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
@@ -73,6 +73,8 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <returns></returns>
     public ItemInfo GetItemInfo()
     {
+        Start();
+
         ItemInfo info = new ItemInfo();
         info.itemName = itemName;
         info.type = type;
@@ -91,6 +93,13 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
+        //不允许拖动图鉴
+        if (type == ItemType.Encyclopedia)
+        {
+            parent = transform.parent;
+            return;
+        }
+
         //保证是左键点击
         if (eventData.button == PointerEventData.InputButton.Left)
         {
@@ -113,7 +122,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <param name="eventData"></param>
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (eventData != null)
+        if (eventData != null && type != ItemType.Encyclopedia)
         {
             //保证是左键松开
             if (eventData.button == PointerEventData.InputButton.Left)
