@@ -10032,8 +10032,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca4f01b425b5e246bad9c622011af87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDefaultFeather: 0
-  defaultFeatherNum: 0
+  isDefaultFeather: 1
+  defaultFeatherNum: 1
   defaultFeatherHealth: 100
   tenacity: 0
   strength: 0
@@ -10348,7 +10348,6 @@ MonoBehaviour:
     levelInfo:
       level: 0
       title: 
-      imageName: 
     timeInfo:
       year: 0
       month: 0

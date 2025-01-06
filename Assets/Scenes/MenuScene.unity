@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &179936788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 179936790}
+  - component: {fileID: 179936789}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &179936789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179936788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfec63d3a1d48e246b298d3de0fc5fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitPanelAnimator: {fileID: 1653644171}
+--- !u!4 &179936790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179936788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &274532533
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +380,7 @@ GameObject:
   - component: {fileID: 594383078}
   - component: {fileID: 594383077}
   - component: {fileID: 594383076}
+  - component: {fileID: 594383079}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -405,7 +451,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 594383077}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 594383079}
+        m_TargetAssemblyTypeName: ExitButton, Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &594383077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +502,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594383074}
   m_CullTransparentMesh: 1
+--- !u!114 &594383079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594383074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7673d71703b44448296b58d03c4817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &682483586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,7 +1186,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1593308255}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 179936789}
+        m_TargetAssemblyTypeName: ExitPanelManager, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ArchiveChooseScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1593308255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,7 +1250,6 @@ GameObject:
   - component: {fileID: 1653644172}
   - component: {fileID: 1653644171}
   - component: {fileID: 1653644170}
-  - component: {fileID: 1653644169}
   m_Layer: 5
   m_Name: ExitPanel
   m_TagString: Untagged
@@ -1195,18 +1276,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1653644169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653644167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f93068ed3abb0404ba9174556d42b84e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1653644170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1285,5 +1354,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 850344147}
+  - {fileID: 179936790}
   - {fileID: 1349273425}
   - {fileID: 1158130250}

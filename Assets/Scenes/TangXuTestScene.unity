@@ -3165,7 +3165,6 @@ MonoBehaviour:
     levelInfo:
       level: 0
       title: 
-      imageName: 
     timeInfo:
       year: 0
       month: 0

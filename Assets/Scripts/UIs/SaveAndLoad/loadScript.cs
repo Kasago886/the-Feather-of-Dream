@@ -37,16 +37,13 @@ public class loadScript : MonoBehaviour
             LevelInfo levelInfo = archive.levelInfo;
             PlayerInfo playerInfo = archive.playerInfo;
 
-            if (levelInfo.imageName != "")
+            try
             {
-                try
-                {
-                    image.overrideSprite = ArchiveManager.GetSprite(path + "/" + levelInfo.imageName + ".jpg");
-                }
-                catch
-                {
-                    Debug.LogWarning("Image loading failed! ImageName: " + levelInfo.imageName);
-                }
+                image.overrideSprite = ArchiveManager.GetSprite(path + "/" + levelInfo.level + ".jpg");
+            }
+            catch
+            {
+                Debug.LogWarning("Image loading failed!\nImageName: " + path + "/" + levelInfo.level + ".jpg");
             }
 
             str = string.Format("{0:D3}  {1:D4}/{2:D2}/{3:D2}  {4:D2}:{5:D2}:{6:D2}\n", index, timeInfo.year, timeInfo.month, timeInfo.day, timeInfo.hour, timeInfo.minute, timeInfo.second);

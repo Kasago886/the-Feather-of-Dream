@@ -292,6 +292,9 @@ public class EquipmentPanelManager : MonoBehaviour
         archiveManager.currentArchive.timeInfo.minute = time.Minute;
         archiveManager.currentArchive.timeInfo.second = time.Second;
 
+        //screenShot
+        ScreenCapture.CaptureScreenshot(Application.dataPath + "/Archives/ArchiveScreenShot/" + archiveManager.currentArchive.levelInfo.level.ToString() + ".jpg");
+
         //Save
         ArchiveManager.SaveArchive(archiveManager.currentArchive, archiveManager.currentArchive.index);
     }
@@ -339,7 +342,7 @@ public class EquipmentPanelManager : MonoBehaviour
             }
 
             donotTouchPanel.SetActive(true);
-            SaveItemsState();
+            //SaveItemsState();
         }
         else
         {
