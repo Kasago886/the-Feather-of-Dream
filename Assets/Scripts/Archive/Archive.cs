@@ -5,6 +5,19 @@ using UnityEngine;
 public class Archive
 {
     public int index;
+    public LevelInfo levelInfo;
+    public TimeInfo timeInfo;
+    public PlayerInfo playerInfo;
+    
+    public ItemInfos equipedFeather;
+    public ItemInfos equipedBrokenFeather;
+    public ItemInfos items;
+    public ItemInfos encyclopedia;
+}
+
+[Serializable]
+public struct PlayerInfo
+{
     public int level;
     public int currentExp;
     public int maxExp;
@@ -12,12 +25,7 @@ public class Archive
     public int dream;
     public int tenacity;
     public int strength;
-    public ItemInfos equipedFeather;
-    public ItemInfos equipedBrokenFeather;
-    public ItemInfos items;
-    public ItemInfos encyclopedia;
 }
-
 /// <summary>
 /// 物品信息
 /// </summary>
@@ -45,4 +53,23 @@ public struct ItemInfo
 public struct ItemInfos
 {
     public ItemInfo[] items;
+}
+
+[Serializable]
+public struct TimeInfo
+{
+    public int year;
+    public int month;
+    public int day;
+    public int hour;
+    public int minute;
+    public int second;
+}
+
+[Serializable]
+public struct LevelInfo
+{
+    public int level;
+    public string title;
+    public string imageName;
 }

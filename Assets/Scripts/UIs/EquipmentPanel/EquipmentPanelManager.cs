@@ -63,20 +63,21 @@ public class EquipmentPanelManager : MonoBehaviour
         selectedItemPlace = null;
         //¶ÁÈ¡´æµµ
         Archive archive = archiveManager.currentArchive;
+        PlayerInfo playerInfo = archive.playerInfo;
         //Debug.Log(archive.level);
 
-        levelText.text = "Lv." + archive.level.ToString();
+        levelText.text = "Lv." + playerInfo.level.ToString();
         //·ÀÖ¹³ýÒÔ0
-        if (archive.maxExp == 0)
+        if (playerInfo.maxExp == 0)
         {
-            archive.maxExp = 1;
+            playerInfo.maxExp = 1;
         }
-        expNumber.text = archive.currentExp.ToString() + "/" + archive.maxExp.ToString();
-        expProgress.sizeDelta = new Vector2(300 * archive.currentExp/archive.maxExp, expProgress.sizeDelta.y);  
-        tenacity.text = archive.tenacity.ToString();
-        strength.text = archive.strength.ToString();
-        feather.text = archive.feather.ToString();
-        dream.text = archive.dream.ToString();
+        expNumber.text = playerInfo.currentExp.ToString() + "/" + playerInfo.maxExp.ToString();
+        expProgress.sizeDelta = new Vector2(300 * playerInfo.currentExp/playerInfo.maxExp, expProgress.sizeDelta.y);  
+        tenacity.text = playerInfo.tenacity.ToString();
+        strength.text = playerInfo.strength.ToString();
+        feather.text = playerInfo.feather.ToString();
+        dream.text = playerInfo.dream.ToString();
 
         //featherEquip
         int count = 0;
@@ -250,7 +251,7 @@ public class EquipmentPanelManager : MonoBehaviour
             dreamizeButton.SetActive(item.isDreamizable);
             if (item.isDreamizable)
             {
-                if (item.dreamizeCost > archiveManager.currentArchive.dream)
+                if (item.dreamizeCost > archiveManager.currentArchive.playerInfo.dream)
                 {
                     dreamizeButton.GetComponent<Button>().interactable = false;
                 }
@@ -281,6 +282,15 @@ public class EquipmentPanelManager : MonoBehaviour
         archiveManager.currentArchive.items.items = GetItemInfos(itemContent).ToArray();
         //encyclopedia
         archiveManager.currentArchive.encyclopedia.items = GetItemInfos(encyclopediaContent).ToArray();
+
+        //TimeInfo
+        System.DateTime time = System.DateTime.Now;
+        archiveManager.currentArchive.timeInfo.year = time.Year;
+        archiveManager.currentArchive.timeInfo.month = time.Month;
+        archiveManager.currentArchive.timeInfo.day = time.Day;
+        archiveManager.currentArchive.timeInfo.hour = time.Hour;
+        archiveManager.currentArchive.timeInfo.minute = time.Minute;
+        archiveManager.currentArchive.timeInfo.second = time.Second;
 
         //Save
         ArchiveManager.SaveArchive(archiveManager.currentArchive, archiveManager.currentArchive.index);

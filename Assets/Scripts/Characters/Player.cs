@@ -11,7 +11,7 @@ public class Player : Character
         base.Start();
         archiveManager = FindAnyObjectByType<ArchiveManager>();
 
-        tenacity = archiveManager.currentArchive.tenacity;
-        strength = archiveManager.currentArchive.strength;
+        tenacity = archiveManager.currentArchive.playerInfo.tenacity;
+        strength = archiveManager.currentArchive.playerInfo.strength;
     }
 }
