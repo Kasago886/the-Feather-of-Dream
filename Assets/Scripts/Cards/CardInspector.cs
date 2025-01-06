@@ -9,7 +9,7 @@ public class CardInspector:Editor
 {
     private Card card;
     private bool b1, b2, b3;
-    private SerializedProperty event1, event2, event3, event4, buff, buffName;
+    private SerializedProperty event1, event2, event3, event4,event5, buff, buffName;
     //作用对象
      bool effortOnPlayer;//作用于玩家
     bool effortOnEnmey;//作用于敌方
@@ -34,6 +34,7 @@ public class CardInspector:Editor
         event2 = serializedObject.FindProperty("whatHappenWhenMouseEnter");
         event3 = serializedObject.FindProperty("whatHappenWhenMouseExit");
         event4 = serializedObject.FindProperty("effects");
+        event5 = serializedObject.FindProperty("whatHappenWhenBeChoosen");
         buff = serializedObject.FindProperty("buffs");
         buffName= serializedObject.FindProperty("buffNames");
     }
@@ -93,6 +94,10 @@ public class CardInspector:Editor
         if (b2)
         {
             card.click = EditorGUILayout.Toggle("点击", card.click);
+            if(card.click )
+            {
+                card.isRandom = EditorGUILayout.Toggle("主动选择", card.isRandom);
+            }
             card.dragOnCharactor = EditorGUILayout.Toggle("拖拽", card.dragOnCharactor);
             if (card.dragOnCharactor)
             {
@@ -122,6 +127,8 @@ public class CardInspector:Editor
             EditorGUILayout.PropertyField(event3);
             EditorGUILayout.LabelField("在卡牌发生作用时所发生的事件");
             EditorGUILayout.PropertyField(event4);
+            EditorGUILayout.LabelField("在选择角色作为卡牌作用目标时所发生的事件");
+            EditorGUILayout.PropertyField(event5);
             EditorGUILayout.PropertyField(buff,new GUIContent("需要添加的buff"),true);
             //for (int i = 0; i < buff.arraySize; i++)
             //{
