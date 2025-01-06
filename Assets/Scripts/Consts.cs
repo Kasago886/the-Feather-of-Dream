@@ -12,4 +12,6 @@ public class Consts
     public const string EnemyLayer = "Enemy";
     public const string GroundLayer = "Ground";
     public const string WallLayer = "Wall";
+
+    public const string CurrentArchivePlayerPrefTag = "Current Archive";
 }

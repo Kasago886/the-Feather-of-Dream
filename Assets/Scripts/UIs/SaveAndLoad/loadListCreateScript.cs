@@ -24,12 +24,20 @@ public class loadListCreateScript : MonoBehaviour
         while (archiveIndex < archives.Length)
         {
             //创建实例
-            GameObject instance = (GameObject)Instantiate(Resources.Load("Prefabs/load"),Vector3.zero, Quaternion.identity);
+            GameObject instance = (GameObject)Instantiate(Resources.Load("SaveAndLoad/load"),Vector3.zero, Quaternion.identity);
             instance.transform.SetParent(transform,false);
 
             loadScript script = instance.GetComponent<loadScript>();
             if (archives[archiveIndex].index == loadIndex)
             {
+                script.setUp(loadIndex, archives[archiveIndex]);
+                archiveIndex++;
+            }
+            else if (archives[archiveIndex].index < loadIndex)
+            {
+                script.setUp(loadIndex, null);
+
+                script = transform.GetChild(archives[archiveIndex].index).GetComponent<loadScript>();
                 script.setUp(loadIndex, archives[archiveIndex]);
                 archiveIndex++;
             }
@@ -39,7 +47,18 @@ public class loadListCreateScript : MonoBehaviour
             }
 
             loadIndex++;
+            if (loadIndex > 100)
+            {
+                Debug.LogWarning("Too Many Archives! Archives whose index is above 100 are hided!");
+                break;
+            }
         }
+        //空存档
+        GameObject ins = (GameObject)Instantiate(Resources.Load("SaveAndLoad/load"), Vector3.zero, Quaternion.identity);
+        ins.transform.SetParent(transform, false);
+        loadScript scr = ins.GetComponent<loadScript>();
+        scr.setUp(loadIndex, null);
+
         Resources.UnloadUnusedAssets();
     }
 }

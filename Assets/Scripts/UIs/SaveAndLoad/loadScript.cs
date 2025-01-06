@@ -11,33 +11,122 @@ public class loadScript : MonoBehaviour
     public Text text;
     public Image image;
 
-    int index;
-    Archive archive;
+    int index = 0;
+    Archive archive = null;
+    Button button;
+
+    private void Start()
+    {
+        button = GetComponent<Button>();
+    }
 
     public void setUp(int indexnum, Archive archiveInfo)
     {
         index = indexnum;
         archive = archiveInfo;
 
-        text.text = string.Format("{0:D3}  ----/--/--  --:--:--", index);
+        string str = string.Format("{0:D3}  ----/--/--  --:--:--", index);
+        str = str + "\nNew Archive";
+
+        text.text = str;
 
         if (archive != null)
         {
             //获取data
             TimeInfo timeInfo = archive.timeInfo;
             LevelInfo levelInfo = archive.levelInfo;
+            PlayerInfo playerInfo = archive.playerInfo;
 
-            image.overrideSprite = ArchiveManager.GetSprite(path + "/" + levelInfo.imageName + ".jpg");
+            if (levelInfo.imageName != "")
+            {
+                try
+                {
+                    image.overrideSprite = ArchiveManager.GetSprite(path + "/" + levelInfo.imageName + ".jpg");
+                }
+                catch
+                {
+                    Debug.LogWarning("Image loading failed! ImageName: " + levelInfo.imageName);
+                }
+            }
 
-            text.text = string.Format("{0:D3}  {1:D4}/{2:D2}/{3:D2}  {4:D2}:{5:D2}:{6:D2}\n"+levelInfo.title, index, timeInfo.year, timeInfo.month, timeInfo.day, timeInfo.hour, timeInfo.minute, timeInfo.second);
+            str = string.Format("{0:D3}  {1:D4}/{2:D2}/{3:D2}  {4:D2}:{5:D2}:{6:D2}\n", index, timeInfo.year, timeInfo.month, timeInfo.day, timeInfo.hour, timeInfo.minute, timeInfo.second);
+            str = str + levelInfo.title;
+            str = str + "\nLv." + playerInfo.level + "   " + playerInfo.currentExp +"/"+playerInfo.maxExp;
+
+            text.text = str;
         }
         else
         {
-            gameObject.GetComponent<Button>().interactable = false;
+            //gameObject.GetComponent<Button>().interactable = false;
         }
     }
 
-    public void clickEvent()
+    /// <summary>
+    /// 点击时将自身信息传给salManager
+    /// </summary>
+    public void OnClick()
     {
+        bool isNull = (archive == null);
+
+        SalManager salManager = FindAnyObjectByType<SalManager>();
+        salManager.SetChosenLoad(this, isNull);
+
+        ///设置可点击状态
+        Button[] childButtons = transform.parent.GetComponentsInChildren<Button>();
+        foreach (Button childButton in childButtons)
+        {
+            childButton.interactable = true;
+        }
+        button.interactable = false;
+    }
+
+    /// <summary>
+    /// 读取或新建存档
+    /// </summary>
+    public void LoadOrNew()
+    {
+        if (archive != null)
+        {
+            PlayerPrefs.SetInt(Consts.CurrentArchivePlayerPrefTag, index);
+            PlayerPrefs.Save();
+
+            int level = archive.levelInfo.level;
+            ExitPanelManager exitPanelManager = FindAnyObjectByType<ExitPanelManager>();
+            exitPanelManager.LoadScene("Level" + level.ToString());
+        }
+        else
+        {
+            //新建存档
+            Archive newArchive = new Archive();
+            newArchive.index = index;
+            newArchive.levelInfo.level = 0;
+            //TimeInfo
+            System.DateTime time = System.DateTime.Now;
+            newArchive.timeInfo.year = time.Year;
+            newArchive.timeInfo.month = time.Month;
+            newArchive.timeInfo.day = time.Day;
+            newArchive.timeInfo.hour = time.Hour;
+            newArchive.timeInfo.minute = time.Minute;
+            newArchive.timeInfo.second = time.Second;
+
+            ArchiveManager.SaveArchive(newArchive, index);
+
+            PlayerPrefs.SetInt(Consts.CurrentArchivePlayerPrefTag, index);
+            PlayerPrefs.Save();
+
+            int level = 0;
+            ExitPanelManager exitPanelManager = FindAnyObjectByType<ExitPanelManager>();
+            exitPanelManager.LoadScene("Level" + level.ToString());
+        }
+    }
+
+    /// <summary>
+    /// 删除存档
+    /// </summary>
+    public void Delete()
+    {
+        ArchiveManager.DeleteArchive(index);
+        setUp(index, null);
+        OnClick();
     }
 }

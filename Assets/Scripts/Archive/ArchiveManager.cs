@@ -17,7 +17,15 @@ public class ArchiveManager : MonoBehaviour
 
         if (currentArchive == null)
         {
-            ReadArchive(0);
+            //∂¡»°µ±«∞¥Êµµ
+            if (PlayerPrefs.HasKey(Consts.CurrentArchivePlayerPrefTag))
+            {
+                ReadArchive(PlayerPrefs.GetInt(Consts.CurrentArchivePlayerPrefTag));
+            }
+            else
+            {
+                ReadArchive(0);
+            }
         }
     }
 
