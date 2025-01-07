@@ -358,7 +358,7 @@ public class Card : MonoBehaviour
             if (effortOnPlayer)
             {
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0)&&effortTarget!=null)
                 {
                     Bounds bound = effortTarget[0].bounds;
                     if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)))
