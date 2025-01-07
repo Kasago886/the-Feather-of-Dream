@@ -4,6 +4,10 @@ using UnityEngine;
 [System.Serializable]
 public class Buff
 {
+    //基础信息
+    public string name;
+    public string description;
+    public Sprite sprite;
     //作用对象
     public Character target = null;
     //持续时间
@@ -22,6 +26,9 @@ public class Buff
         this.target = target;
         this.timer = timer;
         this.isPermanent = isPermanent;
+        this.name = "无名buff";
+        this.description = "没有任何效果";
+        this.sprite = Resources.Load<Sprite>("BuffIcon/testIcon");
     }
 
     public virtual void OnEnter()
