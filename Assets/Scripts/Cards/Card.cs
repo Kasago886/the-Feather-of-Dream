@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -26,14 +27,15 @@ public class Card : MonoBehaviour
     public UnityEvent effects;//卡牌效果
     public Buff[] buffs;
     public string[] buffNames;
-    private bool choose,getEnemy;
+    private bool choose, getEnemy;
     private List<Collider2D> effortTarget;
     private List<Enemy> finalTarget;
     private int effortNumber;
     // Start is called before the first frame update
     void Start()
     {
-
+        effortTarget = new List<Collider2D>();
+        finalTarget = new List<Enemy>();
     }
     // Update is called once per frame
     void Update()
@@ -81,7 +83,7 @@ public class Card : MonoBehaviour
     {
         if (click)
         {
-            if (isRandom)
+            if (!isRandom)
             {
                 EffortWhenClickRandomly();
             }
@@ -105,10 +107,12 @@ public class Card : MonoBehaviour
     /// </summary>
     public void Drag()
     {
-        transform.position = Input.mousePosition;
+        if (dragOnCharactor)
+        {
+            transform.position = Input.mousePosition;
 
-        whatHappenOnDrag?.Invoke();
-
+            whatHappenOnDrag?.Invoke();
+        }
     }
     /// <summary>
     /// 当玩家拖拽结束的时候执行该函数
@@ -134,6 +138,7 @@ public class Card : MonoBehaviour
             {
                 player.AddBuff(buffNames[j]);
             }
+            Debug.Log("workWhenBeClickedAndEffectOnPlayer");
             Destroy(gameObject);
         }
         if (effortOnEnmey)
@@ -205,8 +210,9 @@ public class Card : MonoBehaviour
     {
         if (effortOnPlayer)
         {
-            if (Vector2.Distance(transform.position, GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position) < minDistance)
+            if (Vector2.Distance(Camera.main.ScreenToWorldPoint(transform.position), GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position) < minDistance)
             {
+
                 effects?.Invoke();
                 Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
                 for (int i = 0; i < buffs.Length; i++)
@@ -242,7 +248,7 @@ public class Card : MonoBehaviour
             bool work = false; ;
             for (int i = 0; i < enemiesWhoInCameralist.Count; i++)
             {
-                if (Vector2.Distance(transform.position, enemiesWhoInCameralist[i].transform.position) < minDistance)
+                if (Vector2.Distance(Camera.main.ScreenToWorldPoint(transform.position), enemiesWhoInCameralist[i].transform.position) < minDistance)
                 {
                     work = true;
                     break;
@@ -312,14 +318,16 @@ public class Card : MonoBehaviour
     }
     private void GetWhatInCamera()
     {
-        if(effortOnPlayer)
+
+        if (effortOnPlayer)
         {
-            effortTarget.AddRange( Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+
+            effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
                     new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.PlayerLayer)));
         }
         else if (effortOnEnmey)
         {
-            effortTarget.AddRange( Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+            effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
                     new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer)));
             effortNumber = 1;
             if (effortOnOneEnemy)
@@ -341,16 +349,21 @@ public class Card : MonoBehaviour
     }
     private void ChooseWhenClick()
     {
-        if (choose)
+        if (!choose)
+        {
+            effortTarget.Clear();
+        }
+        if (choose && isRandom)
         {
             if (effortOnPlayer)
             {
-                
-                if (Input.GetMouseButtonDown(0))
+
+                if (Input.GetMouseButtonDown(0)&&effortTarget!=null)
                 {
                     Bounds bound = effortTarget[0].bounds;
-                    if (bound.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
+                    if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)))
                     {
+
                         whatHappenWhenBeChoosen?.Invoke();
                         effects?.Invoke();
                         Player player0 = effortTarget[0].GetComponent<Player>();
@@ -366,21 +379,22 @@ public class Card : MonoBehaviour
                     }
                     else
                     {
+
                         choose = false;
                     }
                 }
             }
-            if(effortOnEnmey)
+            if (effortOnEnmey)
             {
-                if(Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0))
                 {
-                    bool b= false;
-                    if (effortNumber >finalTarget.Count)
+                    bool b = false;
+                    if (effortNumber > finalTarget.Count)
                     {
                         for (int i = 0; i < effortTarget.Count; i++)
                         {
-                            Bounds bound=effortTarget[i].bounds;
-                            if(bound.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
+                            Bounds bound = effortTarget[i].bounds;
+                            if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)))
                             {
                                 b = true;
                                 whatHappenWhenBeChoosen?.Invoke();
@@ -390,17 +404,17 @@ public class Card : MonoBehaviour
                             }
                         }
                     }
-                    if(!b)
+                    if (!b)
                     {
                         choose = false;
                     }
                 }
-                if(effortNumber == finalTarget.Count)
+                if (effortNumber == finalTarget.Count)
                 {
                     effects?.Invoke();
-                    for (int i = 0;i < finalTarget.Count; i++)
+                    for (int i = 0; i < finalTarget.Count; i++)
                     {
-                        
+
                         for (int j = 0; j < buffs.Length; j++)
                         {
                             finalTarget[i].AddBuff(buffs[j]);
@@ -422,7 +436,7 @@ public class Card : MonoBehaviour
             for (int j = 0; j < 360; j++)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawLine(new Vector3(transform.position.x + minDistance * Mathf.Cos((j * Mathf.PI) / 180), transform.position.y + minDistance * Mathf.Sin((j * Mathf.PI) / 180), 0), new Vector3(transform.position.x + minDistance * Mathf.Cos(((j + 1) * Mathf.PI) / 180), transform.position.y + minDistance * Mathf.Sin(((j + 1) * Mathf.PI) / 180), 0));
+                Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance * Mathf.Cos((j * Mathf.PI) / 180), Camera.main.ScreenToWorldPoint(transform.position).y + minDistance * Mathf.Sin((j * Mathf.PI) / 180), 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance * Mathf.Cos(((j + 1) * Mathf.PI) / 180), Camera.main.ScreenToWorldPoint(transform.position).y + minDistance * Mathf.Sin(((j + 1) * Mathf.PI) / 180), 0));
             }
         }
     }
