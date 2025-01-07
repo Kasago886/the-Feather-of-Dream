@@ -11,7 +11,7 @@ public class PlayerInspector : CharacterInspector
 
     SerializedProperty hpScrollProperty;
 
-    protected void OnEnable()
+    new protected void OnEnable()
     {
         base.OnEnable();
         //获取当前要自定义Inspector的对象

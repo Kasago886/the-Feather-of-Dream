@@ -37,8 +37,10 @@ public class Player : Character
         HpUI hpUI = hpScroll.AddHp();
 
         hpUI.testTime = feather.lockTimer;
+        hpUI.testHp = feather.health;
         hpUI.testHpMax = feather.maxHealth;
         
         feather.hpUI = hpUI;
     }
+
 }

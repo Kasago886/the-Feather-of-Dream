@@ -45,8 +45,8 @@ public class HpUI : MonoBehaviour
                     image.GetComponent<Text>().color = new Color(_image.color.r, _image.color.g, _image.color.b, 1);
                 }
                 gameObject.SetActive(true);
-                testTime -= Time.deltaTime;
             }
+            testTime -= Time.deltaTime;
         }
         if (testTime <= 0)
         {
