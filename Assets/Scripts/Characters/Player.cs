@@ -7,6 +7,7 @@ public class Player : Character
 {
     ArchiveManager archiveManager;
     EquipmentPanelManager equipmentPanelManager;
+    public Scroll hpScroll;
 
     new private void Start()
     {
@@ -18,10 +19,26 @@ public class Player : Character
         strength = archiveManager.currentArchive.playerInfo.strength;
     }
 
+    /// <summary>
+    /// ÃÌº”√Œ
+    /// </summary>
+    /// <param name="num"></param>
     public void AddDream(int num)
     {
         archiveManager.currentArchive.playerInfo.dream += num;
 
         equipmentPanelManager.SetUpPlayerInfo();
+    }
+
+    public override void ShowUnlockFeather(Feather feather)
+    {
+        base.ShowUnlockFeather(feather);
+
+        HpUI hpUI = hpScroll.AddHp();
+
+        hpUI.testTime = feather.lockTimer;
+        hpUI.testHpMax = feather.maxHealth;
+        
+        feather.hpUI = hpUI;
     }
 }

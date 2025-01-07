@@ -270,9 +270,20 @@ public class Character : MonoBehaviour
             
             feathers.RemoveAt(i);
 
+            ShowUnlockFeather(feather);
+
             count++;
             i--;
         }
+    }
+
+    /// <summary>
+    /// Õ¹Ê¾ÑªÌõ
+    /// </summary>
+    /// <param name="feather"></param>
+    public virtual void ShowUnlockFeather(Feather feather)
+    {
+
     }
 
     /// <summary>

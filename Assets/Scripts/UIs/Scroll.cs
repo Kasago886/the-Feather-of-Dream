@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[Serializable]
 public class Scroll : MonoBehaviour
 {
     private ScrollRect scrollRect;
@@ -32,7 +34,7 @@ public class Scroll : MonoBehaviour
         temp.localScale = Vector3.one;
     }
 
-    public void AddHp()
+    public HpUI AddHp()
     {
         Transform temp = Instantiate(itemTransform).transform;
         temp.SetParent(contentTransform);
@@ -40,5 +42,6 @@ public class Scroll : MonoBehaviour
         temp.localRotation = Quaternion.identity;
         temp.localScale = Vector3.one;
 
+        return temp.GetComponent<HpUI>();
     }
 }

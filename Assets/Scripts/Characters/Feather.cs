@@ -8,9 +8,16 @@ public class Feather
     public float maxHealth;
     public float lockTimer = 0;
 
+    public HpUI hpUI = null;
+
     public virtual void TakeDamage(float damage)
     {
         health -= damage;
+
+        if (hpUI != null)
+        {
+            hpUI.testHp = health;
+        }
     }
 }
 
