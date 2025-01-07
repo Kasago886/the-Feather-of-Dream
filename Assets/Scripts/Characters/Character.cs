@@ -266,7 +266,7 @@ public class Character : MonoBehaviour
             unlockedFeathers.Add(feather);
             feather.lockTimer = time;
 
-            Debug.Log(feather);
+            //Debug.Log(feather);
             
             feathers.RemoveAt(i);
 

@@ -32,4 +32,14 @@ public class Scroll : MonoBehaviour
             temp.localScale = Vector3.one;
         }
     }
+
+    public void AddHp()
+    {
+        Transform temp = Instantiate(itemTransform).transform;
+        temp.SetParent(contentTransform);
+        temp.localPosition = Vector3.zero;
+        temp.localRotation = Quaternion.identity;
+        temp.localScale = Vector3.one;
+
+    }
 }
