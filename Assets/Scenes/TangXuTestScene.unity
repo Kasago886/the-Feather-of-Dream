@@ -4075,6 +4075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e059228ffa46045a375252c54773df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contentTransform: {fileID: 0}
   itemTransform: {fileID: 4803567398920384309, guid: f459e320c2a808946aaf00510f7cb7cd, type: 3}
 --- !u!1 &554200786
 GameObject:
@@ -4440,8 +4441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca4f01b425b5e246bad9c622011af87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDefaultFeather: 0
-  defaultFeatherNum: 0
+  isDefaultFeather: 1
+  defaultFeatherNum: 1
   defaultFeatherHealth: 100
   tenacity: 0
   strength: 0
@@ -4475,6 +4476,7 @@ MonoBehaviour:
   isDead: 0
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
+  hpScroll: {fileID: 553856172}
 --- !u!1 &627734344
 GameObject:
   m_ObjectHideFlags: 0
@@ -6926,6 +6928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e059228ffa46045a375252c54773df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contentTransform: {fileID: 0}
   itemTransform: {fileID: 2843837952314818256, guid: 3d6cf1a461b73004c949629e299f69e8, type: 3}
 --- !u!114 &1128661426
 MonoBehaviour:
@@ -7986,6 +7989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e059228ffa46045a375252c54773df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contentTransform: {fileID: 0}
   itemTransform: {fileID: 654288269430953301, guid: 921a5ff72943b8a4aa17ab01ce2ae7e3, type: 3}
 --- !u!114 &1327073668
 MonoBehaviour:
@@ -10016,6 +10020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e059228ffa46045a375252c54773df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contentTransform: {fileID: 0}
   itemTransform: {fileID: 2697710905239104754, guid: 0be63ad2553b8a844878a286cc773fd6, type: 3}
 --- !u!114 &1752626001
 MonoBehaviour:
