@@ -63,21 +63,8 @@ public class EquipmentPanelManager : MonoBehaviour
         selectedItemPlace = null;
         //∂¡»°¥Êµµ
         Archive archive = archiveManager.currentArchive;
-        PlayerInfo playerInfo = archive.playerInfo;
-        //Debug.Log(archive.level);
 
-        levelText.text = "Lv." + playerInfo.level.ToString();
-        //∑¿÷π≥˝“‘0
-        if (playerInfo.maxExp == 0)
-        {
-            playerInfo.maxExp = 1;
-        }
-        expNumber.text = playerInfo.currentExp.ToString() + "/" + playerInfo.maxExp.ToString();
-        expProgress.sizeDelta = new Vector2(300 * playerInfo.currentExp/playerInfo.maxExp, expProgress.sizeDelta.y);  
-        tenacity.text = playerInfo.tenacity.ToString();
-        strength.text = playerInfo.strength.ToString();
-        feather.text = playerInfo.feather.ToString();
-        dream.text = playerInfo.dream.ToString();
+        SetUpPlayerInfo();
 
         //featherEquip
         int count = 0;
@@ -186,6 +173,27 @@ public class EquipmentPanelManager : MonoBehaviour
         equipButton.SetActive(false);
         dreamizeButton.SetActive(false);
         unequipButton.SetActive(false);
+    }
+
+    public void SetUpPlayerInfo()
+    {
+        //∂¡»°¥Êµµ
+        Archive archive = archiveManager.currentArchive;
+        PlayerInfo playerInfo = archive.playerInfo;
+        //Debug.Log(archive.level);
+
+        levelText.text = "Lv." + playerInfo.level.ToString();
+        //∑¿÷π≥˝“‘0
+        if (playerInfo.maxExp == 0)
+        {
+            playerInfo.maxExp = 1;
+        }
+        expNumber.text = playerInfo.currentExp.ToString() + "/" + playerInfo.maxExp.ToString();
+        expProgress.sizeDelta = new Vector2(300 * playerInfo.currentExp / playerInfo.maxExp, expProgress.sizeDelta.y);
+        tenacity.text = playerInfo.tenacity.ToString();
+        strength.text = playerInfo.strength.ToString();
+        feather.text = playerInfo.feather.ToString();
+        dream.text = playerInfo.dream.ToString();
     }
 
     /// <summary>
