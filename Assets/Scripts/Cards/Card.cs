@@ -38,7 +38,7 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        ChooseWhenClick();
     }
     /// <summary>
     /// 这是敌人作用于玩家的方法，你只需要在编写敌人Ai时引用该方法即可
@@ -397,9 +397,10 @@ public class Card : MonoBehaviour
                 }
                 if(effortNumber == finalTarget.Count)
                 {
-                    for(int i = 0;i < finalTarget.Count; i++)
+                    effects?.Invoke();
+                    for (int i = 0;i < finalTarget.Count; i++)
                     {
-                        effects?.Invoke();
+                        
                         for (int j = 0; j < buffs.Length; j++)
                         {
                             finalTarget[i].AddBuff(buffs[j]);
