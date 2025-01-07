@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Scroll : MonoBehaviour
 {
-    [HideInInspector] public  bool add;
     private ScrollRect scrollRect;
     private float[] rateArr;
     //»ñÈ¡ContentµÄRectTransform
@@ -23,15 +22,14 @@ public class Scroll : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
-        if (add)
-        {
-            Transform temp = Instantiate(itemTransform).transform;
-            temp.SetParent(contentTransform);
-            temp.localPosition = Vector3.zero;
-            temp.localRotation = Quaternion.identity;
-            temp.localScale = Vector3.one;
-            add = false;
-        }
+    }
+    public void Additem(RectTransform item)
+    {
+        Transform temp = Instantiate(item).transform;
+        temp.SetParent(contentTransform);
+        temp.localPosition = Vector3.zero;
+        temp.localRotation = Quaternion.identity;
+        temp.localScale = Vector3.one;
     }
 
     public void AddHp()

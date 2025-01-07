@@ -17,10 +17,11 @@ public class BuffUI : Scroll
         if(target != null)
         {
             for (int i = 0; target.GetComponent<Character>().buffList[i] != null; i++) {
-                itemTransform.GetChild(0).GetComponent<Text>().text = "buff名称";
-               // itemTransform.GetChild(1).GetComponent<Image>().sprite = "buff图标";
-               itemTransform.GetChild(2).GetComponent<Text>().text = $"{(int)(target.GetComponent<Character>().buffList[i].timer)}s";
-                add = true;
+                RectTransform buff = itemTransform;
+                buff.GetChild(0).GetComponent<Text>().text = "buff名称";
+               //buff.GetChild(1).GetComponent<Image>().sprite = "buff图标";
+               buff.GetChild(2).GetComponent<Text>().text = $"{(int)(target.GetComponent<Character>().buffList[i].timer)}s";
+                Additem(buff);
 
             }
         }
