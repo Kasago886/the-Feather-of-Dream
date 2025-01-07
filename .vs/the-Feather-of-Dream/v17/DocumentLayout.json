@@ -3,7 +3,19 @@
   "WorkspaceRootPath": "E:\\game\\the-Feather-of-Dream\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\game\\the-Feather-of-Dream\\assets\\scripts\\interactiveobject\\objects\\dreambottle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\game\\the-Feather-of-Dream\\assets\\scripts\\uis\\buffui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uis\\buffui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\game\\the-Feather-of-Dream\\assets\\scripts\\buff\\buff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\buff\\buff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\game\\the-Feather-of-Dream\\assets\\scripts\\uis\\hpui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uis\\hpui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|e:\\game\\the-feather-of-dream\\assets\\scripts\\interactiveobject\\objects\\dreambottle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactiveobject\\objects\\dreambottle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -11,24 +23,12 @@
       "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\characters\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|e:\\game\\the-feather-of-dream\\assets\\scripts\\uis\\buffui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uis\\buffui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|e:\\game\\the-feather-of-dream\\assets\\scripts\\uis\\scroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\game\\the-Feather-of-Dream\\assets\\scripts\\uis\\scroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uis\\scroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|e:\\game\\the-feather-of-dream\\assets\\scripts\\uis\\hpui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uis\\hpui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\game\\the-Feather-of-Dream\\assets\\scripts\\uis\\saveandload\\loadscript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uis\\saveandload\\loadscript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\game\\the-Feather-of-Dream\\assets\\scripts\\buff\\buff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\buff\\buff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\game\\the-Feather-of-Dream\\assets\\scripts\\characters\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -178,7 +178,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 30,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -194,7 +194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Scroll.cs",
               "DocumentMoniker": "E:\\game\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\Scroll.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\Scroll.cs",
@@ -202,25 +202,24 @@
               "RelativeToolTip": "Assets\\Scripts\\UIs\\Scroll.cs",
               "ViewState": "AQIAAAIAAAAAAAAAAAAAAAgAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T04:48:41.475Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T04:48:41.475Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "BuffUI.cs",
               "DocumentMoniker": "E:\\game\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\BuffUI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\BuffUI.cs",
               "ToolTip": "E:\\game\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\BuffUI.cs",
               "RelativeToolTip": "Assets\\Scripts\\UIs\\BuffUI.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAAABcAAAAeAAAA",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAwwBwAAABOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-07T04:46:53.245Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "HpUI.cs",
               "DocumentMoniker": "E:\\game\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\HpUI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\HpUI.cs",
@@ -241,8 +240,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Characters\\Enemys\\EnemyStates\\EnemyAttackState.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T10:52:46.524Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T10:52:46.524Z"
             },
             {
               "$type": "Document",
@@ -290,8 +288,7 @@
               "RelativeToolTip": "Assets\\Scripts\\AnimationTools\\AutoDestory.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAABIAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T01:19:02.047Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T01:19:02.047Z"
             },
             {
               "$type": "Document",
@@ -303,12 +300,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Characters\\CharacterInspector.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAABoAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-21T09:20:15.452Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-21T09:20:15.452Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Player.cs",
               "DocumentMoniker": "E:\\game\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Characters\\Player.cs",
@@ -316,8 +312,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Characters\\Player.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T08:29:14.482Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-20T08:29:14.482Z"
             },
             {
               "$type": "Document",
@@ -329,8 +324,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Cards\\Card.cs",
               "ViewState": "AQIAAEQAAAAAAAAAAAAAwFEAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-31T09:38:07.251Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-31T09:38:07.251Z"
             },
             {
               "$type": "Document",
@@ -346,7 +340,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "loadScript.cs",
               "DocumentMoniker": "E:\\game\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\SaveAndLoad\\loadScript.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\SaveAndLoad\\loadScript.cs",
@@ -354,8 +348,7 @@
               "RelativeToolTip": "Assets\\Scripts\\UIs\\SaveAndLoad\\loadScript.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAAwC0AAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T06:12:39.04Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T06:12:39.04Z"
             },
             {
               "$type": "Document",
@@ -371,13 +364,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Buff.cs",
               "DocumentMoniker": "E:\\game\\the-Feather-of-Dream\\Assets\\Scripts\\Buff\\Buff.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Buff\\Buff.cs",
               "ToolTip": "E:\\game\\the-Feather-of-Dream\\Assets\\Scripts\\Buff\\Buff.cs",
               "RelativeToolTip": "Assets\\Scripts\\Buff\\Buff.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAkAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-26T06:11:33.614Z",
               "EditorCaption": ""
@@ -404,8 +397,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Characters\\Character.cs",
               "ViewState": "AQIAAG0BAAAAAAAAAAAmwIUBAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-13T13:41:39.675Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-13T13:41:39.675Z"
             },
             {
               "$type": "Document",
@@ -529,7 +521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "DreamBottle.cs",
               "DocumentMoniker": "E:\\game\\the-Feather-of-Dream\\Assets\\Scripts\\InteractiveObject\\Objects\\DreamBottle.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\InteractiveObject\\Objects\\DreamBottle.cs",

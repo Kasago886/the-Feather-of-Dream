@@ -8,19 +8,28 @@ using UnityEngine.UI;
 public class BuffUI : Scroll
 {
     public Character target;
+    private List<Buff> buffs;
+    public override void Start()
+    {
+        base.Start();
+        buffs = new List<Buff>();
+    }
     public override void Update()
     {
+        base.Update();
         foreach(Transform child in contentTransform)
         {
             Destroy(child.gameObject);
         }
-        if(target != null)
+        buffs = target.GetComponent<Character>().buffList;
+        if (target != null)
         {
-            for (int i = 0; target.GetComponent<Character>().buffList[i] != null; i++) {
+            for (int i = 0; buffs[i] != null; i++) {
                 RectTransform buff = itemTransform;
-                buff.GetChild(0).GetComponent<Text>().text = "buffÃû³Æ";
-               //buff.GetChild(1).GetComponent<Image>().sprite = "buffÍ¼±ê";
-               buff.GetChild(2).GetComponent<Text>().text = $"{(int)(target.GetComponent<Character>().buffList[i].timer)}s";
+                buff.GetChild(0).GetComponent<Text>().text =$"{buffs[i].name}:";
+               buff.GetChild(1).GetComponent<Image>().sprite = buffs[i].sprite;
+               buff.GetChild(2).GetComponent<Text>().text = buffs[i].description;
+               buff.GetChild(3).GetComponent<Text>().text = $"{(int)(buffs[i].timer)}s";
                 Additem(buff);
 
             }
