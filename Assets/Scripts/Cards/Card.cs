@@ -437,6 +437,8 @@ public class Card : MonoBehaviour
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance * Mathf.Cos((j * Mathf.PI) / 180), Camera.main.ScreenToWorldPoint(transform.position).y + minDistance * Mathf.Sin((j * Mathf.PI) / 180), 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance * Mathf.Cos(((j + 1) * Mathf.PI) / 180), Camera.main.ScreenToWorldPoint(transform.position).y + minDistance * Mathf.Sin(((j + 1) * Mathf.PI) / 180), 0));
+                Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x-minDistance/4, Camera.main.ScreenToWorldPoint(transform.position).y, 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance / 4, Camera.main.ScreenToWorldPoint(transform.position).y, 0));
+                Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x , Camera.main.ScreenToWorldPoint(transform.position).y - minDistance / 4, 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x , Camera.main.ScreenToWorldPoint(transform.position).y + minDistance / 4, 0));
             }
         }
     }
