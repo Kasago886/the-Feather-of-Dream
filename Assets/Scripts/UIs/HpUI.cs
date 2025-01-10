@@ -20,6 +20,13 @@ public class HpUI : MonoBehaviour
     {
         hpBox = transform.GetChild(2);
         delhpBox = transform.GetChild(1);
+
+        //≥ı ºªØ
+        if (testHpMax == 0) testHpMax = 1;
+        float x = testHp / testHpMax; 
+        if (x < 0) x = 0;
+        hpBox.localScale = new Vector3(x, 1, 1);
+        delhpBox.localScale = new Vector3(x, 1, 1);
     }
 
     // Update is called once per frame
@@ -77,6 +84,11 @@ public class HpUI : MonoBehaviour
     {
 
         float x = testHp / testHpMax;
+        if (x < 0)
+        {
+            x = 0;
+        }
+
         timeText.text = $"{(int)(testTime)}s";
         if (delhpBox.localScale.x > x)
         {
