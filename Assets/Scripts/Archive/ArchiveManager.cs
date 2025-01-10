@@ -14,18 +14,20 @@ public class ArchiveManager : MonoBehaviour
     {
         //Debug.Log(path);
         createDictory(path);
-
-        if (currentArchive == null)
+        
+        //读取当前存档
+        if (PlayerPrefs.HasKey(Consts.CurrentArchivePlayerPrefTag))
         {
-            //读取当前存档
-            if (PlayerPrefs.HasKey(Consts.CurrentArchivePlayerPrefTag))
-            {
-                ReadArchive(PlayerPrefs.GetInt(Consts.CurrentArchivePlayerPrefTag));
-            }
-            else
-            {
-                ReadArchive(0);
-            }
+            int archiveindex = PlayerPrefs.GetInt(Consts.CurrentArchivePlayerPrefTag);
+            ReadArchive(archiveindex);
+
+            Debug.Log(archiveindex);
+        }
+        else
+        {
+            ReadArchive(0);
+
+            Debug.Log(currentArchive.index);
         }
     }
 
