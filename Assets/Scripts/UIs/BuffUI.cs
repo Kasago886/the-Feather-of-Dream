@@ -24,12 +24,12 @@ public class BuffUI : Scroll
         buffs = target.GetComponent<Character>().buffList;
         if (target != null)
         {
-            for (int i = 0; buffs[i] != null; i++) {
+            foreach (Buff _buff in buffs) {
                 RectTransform buff = itemTransform;
-                buff.GetChild(0).GetComponent<Text>().text =$"{buffs[i].name}:";
-               buff.GetChild(1).GetComponent<Image>().sprite = buffs[i].sprite;
-               buff.GetChild(2).GetComponent<Text>().text = buffs[i].description;
-               buff.GetChild(3).GetComponent<Text>().text = $"{(int)(buffs[i].timer)}s";
+                buff.GetChild(0).GetComponent<Text>().text =$"{_buff.name}:";
+               buff.GetChild(1).GetComponent<Image>().sprite = _buff.sprite;
+               buff.GetChild(2).GetComponent<Text>().text = _buff.description;
+               buff.GetChild(3).GetComponent<Text>().text = $"{(int)(_buff.timer)}s";
                 Additem(buff);
 
             }
