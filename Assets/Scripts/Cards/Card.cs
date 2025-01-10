@@ -1,12 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Reflection.Emit;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using static UnityEditor.Experimental.GraphView.GraphView;
 [RequireComponent(typeof(EventTrigger))]
+[RequireComponent(typeof(GlowControl))]
 public class Card : MonoBehaviour
 {
     //作用对象
@@ -27,15 +28,26 @@ public class Card : MonoBehaviour
     public UnityEvent effects;//卡牌效果
     public Buff[] buffs;
     public string[] buffNames;
-    private bool choose, getEnemy;
+    private bool choose, getEnemy, endChoose;
     private List<Collider2D> effortTarget;
     private List<Enemy> finalTarget;
     private int effortNumber;
+    private RectTransform rectTransform;
+    private Image image;
+    private GlowControl glowControl;
+    private int sibling;
+    private GameObject captions;
+    private TextMesh textMesh;
+    private Bounds textBound;
     // Start is called before the first frame update
     void Start()
     {
         effortTarget = new List<Collider2D>();
         finalTarget = new List<Enemy>();
+        rectTransform = GetComponent<RectTransform>();
+        image = GetComponent<Image>();
+        rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 13));
+        glowControl = GetComponent<GlowControl>();
     }
     // Update is called once per frame
     void Update()
@@ -45,17 +57,43 @@ public class Card : MonoBehaviour
     /// <summary>
     /// 这是敌人作用于玩家的方法，你只需要在编写敌人Ai时引用该方法即可
     /// </summary>
-    public void EnemyHasEffectOnPlayer()
+    /// <param name="enemyName">
+    /// 输入敌人的名字
+    /// </param>
+    public void EnemyHasEffectOnPlayer(string enemyName)
     {
+        captions = new GameObject("captions");
+        captions.transform.SetAsFirstSibling();
+        captions.AddComponent<TextMesh>();
+        textMesh = captions.GetComponent<TextMesh>();
+        textMesh.characterSize = 0.5f;
+        textMesh.anchor = TextAnchor.MiddleCenter;
+        captions.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y + Camera.main.orthographicSize * 4 / 5, 0f);
         effects?.Invoke();
         Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
+        List<string> buffCaptions = new List<string>();
         for (int i = 0; i < buffs.Length; i++)
         {
             player.AddBuff(buffs[i]);
+            buffCaptions.Add(buffs[i].ToString());
         }
         for (int j = 0; j < buffNames.Length; j++)
         {
             player.AddBuff(buffNames[j]);
+            buffCaptions.Add(buffNames[j]);
+        }
+        int stringNumber = 0;
+        if (Time.time % 2 == 0)
+        {
+            stringNumber++;
+        }
+        if (stringNumber < buffCaptions.Count)
+        {
+            textMesh.text = enemyName + "对你使用了" + buffCaptions[stringNumber];
+        }
+        else
+        {
+            Destroy(textMesh);
         }
     }
     /// <summary>
@@ -63,9 +101,11 @@ public class Card : MonoBehaviour
     /// </summary>
     public void PointerEnter()
     {
-
         whatHappenWhenMouseEnter?.Invoke();
-
+        rectTransform.localScale = new Vector3(rectTransform.localScale.x * 1.3f, rectTransform.localScale.y * 1.3f, rectTransform.localScale.z);
+        glowControl.useGlowEffect = true;
+        sibling = rectTransform.GetSiblingIndex();
+        rectTransform.SetAsFirstSibling();
     }
     /// <summary>
     /// 当玩家鼠标离开该物体中的时候执行该函数
@@ -74,7 +114,9 @@ public class Card : MonoBehaviour
     {
 
         whatHappenWhenMouseExit?.Invoke();
-
+        rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
+        glowControl.useGlowEffect = false;
+        rectTransform.SetSiblingIndex(sibling);
     }
     /// <summary>
     /// 当玩家点击该物体的时候执行该函数
@@ -83,21 +125,36 @@ public class Card : MonoBehaviour
     {
         if (click)
         {
-            if (!isRandom)
+            if (effortNumber == finalTarget.Count && choose)
             {
-                EffortWhenClickRandomly();
+                endChoose = true;
             }
-            else
+            if (!endChoose)
             {
-                if (!choose)
+                if (!isRandom)
                 {
-                    choose = true;
-                    getEnemy = true;
-                    GetWhatInCamera();
+                    EffortWhenClickRandomly();
                 }
                 else
                 {
-                    choose = false;
+                    if (!choose)
+                    {
+                        captions = new GameObject("captions");
+                        captions.transform.SetAsFirstSibling();
+                        captions.AddComponent<TextMesh>();
+                        textMesh = captions.GetComponent<TextMesh>();
+
+                        textMesh.characterSize = 0.5f;
+                        textMesh.anchor = TextAnchor.MiddleCenter;
+                        captions.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y + Camera.main.orthographicSize * 4 / 5, 0f);
+                        choose = true;
+                        getEnemy = true;
+                        GetWhatInCamera();
+                    }
+                    else
+                    {
+                        choose = false;
+                    }
                 }
             }
         }
@@ -139,7 +196,7 @@ public class Card : MonoBehaviour
                 player.AddBuff(buffNames[j]);
             }
             Debug.Log("workWhenBeClickedAndEffectOnPlayer");
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         if (effortOnEnmey)
         {
@@ -186,7 +243,7 @@ public class Card : MonoBehaviour
                     effects?.Invoke();
                     enemiesWhoHaveBeenEfforted.Add(n);
                 }
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
             else if (!effortOnMoreEnemies)
             {
@@ -201,7 +258,7 @@ public class Card : MonoBehaviour
                     enemy.AddBuff(buffNames[j]);
                 }
                 effects?.Invoke();
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
 
@@ -212,7 +269,7 @@ public class Card : MonoBehaviour
         {
             if (Vector2.Distance(Camera.main.ScreenToWorldPoint(transform.position), GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position) < minDistance)
             {
-
+                Debug.Log("workonplayer");
                 effects?.Invoke();
                 Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
                 for (int i = 0; i < buffs.Length; i++)
@@ -223,7 +280,7 @@ public class Card : MonoBehaviour
                 {
                     player.AddBuff(buffNames[j]);
                 }
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
         if (effortOnEnmey)
@@ -311,7 +368,7 @@ public class Card : MonoBehaviour
                     }
                     effects?.Invoke();
                 }
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
 
@@ -321,7 +378,7 @@ public class Card : MonoBehaviour
 
         if (effortOnPlayer)
         {
-
+            Debug.Log("Get!");
             effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
                     new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.PlayerLayer)));
         }
@@ -352,18 +409,29 @@ public class Card : MonoBehaviour
         if (!choose)
         {
             effortTarget.Clear();
+            if (captions != null)
+            {
+                Destroy(captions);
+            }
         }
         if (choose && isRandom)
         {
             if (effortOnPlayer)
             {
-
-                if (Input.GetMouseButtonDown(0)&&effortTarget!=null)
+                if (textMesh != null)
+                {
+                    textMesh.text = "请点击玩家";
+                }
+                if (captions.transform.position != new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y + Camera.main.orthographicSize * 4 / 5, 0f))
+                {
+                    captions.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y + Camera.main.orthographicSize * 4 / 5, 0f);
+                }
+                if (Input.GetMouseButtonDown(0))
                 {
                     Bounds bound = effortTarget[0].bounds;
                     if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)))
                     {
-
+                        Debug.Log("workOnPlayer");
                         whatHappenWhenBeChoosen?.Invoke();
                         effects?.Invoke();
                         Player player0 = effortTarget[0].GetComponent<Player>();
@@ -375,17 +443,29 @@ public class Card : MonoBehaviour
                         {
                             player0.AddBuff(buffNames[j]);
                         }
-                        Destroy(gameObject);
+                        Destroy(captions);
+                        gameObject.SetActive(false);
                     }
                     else
                     {
-
+                        Debug.Log("outOfPlayer");
                         choose = false;
                     }
                 }
             }
             if (effortOnEnmey)
             {
+                if (textMesh != null)
+                {
+                    if (effortNumber == finalTarget.Count)
+                    {
+                        textMesh.text = "请点击卡牌";
+                    }
+                    else
+                    {
+                        textMesh.text = "请选择敌人，已选择" + (effortNumber / finalTarget.Count).ToString();
+                    }
+                }
                 if (Input.GetMouseButtonDown(0))
                 {
                     bool b = false;
@@ -409,7 +489,7 @@ public class Card : MonoBehaviour
                         choose = false;
                     }
                 }
-                if (effortNumber == finalTarget.Count)
+                if (endChoose)
                 {
                     effects?.Invoke();
                     for (int i = 0; i < finalTarget.Count; i++)
@@ -424,7 +504,8 @@ public class Card : MonoBehaviour
                             finalTarget[i].AddBuff(buffNames[j]);
                         }
                     }
-                    Destroy(gameObject);
+                    Destroy(captions);
+                    gameObject.SetActive(false);
                 }
             }
         }
@@ -437,9 +518,10 @@ public class Card : MonoBehaviour
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance * Mathf.Cos((j * Mathf.PI) / 180), Camera.main.ScreenToWorldPoint(transform.position).y + minDistance * Mathf.Sin((j * Mathf.PI) / 180), 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance * Mathf.Cos(((j + 1) * Mathf.PI) / 180), Camera.main.ScreenToWorldPoint(transform.position).y + minDistance * Mathf.Sin(((j + 1) * Mathf.PI) / 180), 0));
-                Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x-minDistance/4, Camera.main.ScreenToWorldPoint(transform.position).y, 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance / 4, Camera.main.ScreenToWorldPoint(transform.position).y, 0));
-                Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x , Camera.main.ScreenToWorldPoint(transform.position).y - minDistance / 4, 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x , Camera.main.ScreenToWorldPoint(transform.position).y + minDistance / 4, 0));
+                Gizmos.DrawLine(Camera.main.WorldToScreenPoint(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance * Mathf.Cos((j * Mathf.PI) / 180), Camera.main.ScreenToWorldPoint(transform.position).y + minDistance * Mathf.Sin((j * Mathf.PI) / 180), 0)), Camera.main.WorldToScreenPoint(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance * Mathf.Cos(((j + 1) * Mathf.PI) / 180), Camera.main.ScreenToWorldPoint(transform.position).y + minDistance * Mathf.Sin(((j + 1) * Mathf.PI) / 180), 0)));
             }
+            Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x - minDistance / 4, Camera.main.ScreenToWorldPoint(transform.position).y, 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance / 4, Camera.main.ScreenToWorldPoint(transform.position).y, 0));
+            Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x, Camera.main.ScreenToWorldPoint(transform.position).y - minDistance / 4, 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x, Camera.main.ScreenToWorldPoint(transform.position).y + minDistance / 4, 0));
         }
     }
 }
