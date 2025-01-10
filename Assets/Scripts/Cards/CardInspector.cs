@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEngine.Events;
+using Unity.VisualScripting;
 [CustomEditor(typeof(Card), true)]
 public class CardInspector:Editor
 {
     private Card card;
-    private bool b1, b2, b3;
+    private bool b0,b1, b2, b3;
     private SerializedProperty event1, event2, event3, event4,event5, buff, buffName;
     //作用对象
      bool effortOnPlayer;//作用于玩家
@@ -41,6 +42,16 @@ public class CardInspector:Editor
     public override void OnInspectorGUI()
     {
         EditorGUILayout.BeginVertical();
+
+        EditorGUILayout.Space(2);
+        b0 = EditorGUILayout.Foldout(b0, "卡牌信息");
+        if (b0)
+        {
+            card.id=EditorGUILayout.IntField("卡牌ID",card.id);
+            card.name= EditorGUILayout.TextField("卡牌名称",card.name);
+            card.rarity = (int)EditorGUILayout.Slider("卡牌稀有度",card.rarity,1,5);
+            card.description=EditorGUILayout.TextArea("卡牌描述",card.description);
+        }
         EditorGUILayout.Space(2);
 
         b1=EditorGUILayout.Foldout( b1,"作用对象");

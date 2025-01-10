@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "E:\\Github\\the-Feather-of-Dream\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|e:\\github\\the-feather-of-dream\\assets\\scripts\\cards\\objectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cards\\objectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|e:\\github\\the-feather-of-dream\\assets\\scripts\\cards\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cards\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|e:\\github\\the-feather-of-dream\\assets\\scripts\\cards\\playercardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cards\\playercardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\cards\\cardinspector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,6 +13,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\cards\\glowcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cards\\glowcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|e:\\github\\the-feather-of-dream\\assets\\scripts\\cards\\objectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cards\\objectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|E:\\Github\\the-Feather-of-Dream\\assets\\scripts\\cards\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54A9D93C-CB51-E89C-2B3A-8A127D85717C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cards\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|e:\\github\\the-feather-of-dream\\assets\\scripts\\cards\\gloeborder.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
@@ -203,43 +207,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PlayerCardController.cs",
+              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\PlayerCardController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Cards\\PlayerCardController.cs",
+              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\PlayerCardController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Cards\\PlayerCardController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAIwAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T09:07:47.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ObjectPool.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\ObjectPool.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Cards\\ObjectPool.cs",
               "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\ObjectPool.cs",
               "RelativeToolTip": "Assets\\Scripts\\Cards\\ObjectPool.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAH0AAAAAAAAA",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAkwFYAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-10T09:03:32.612Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GlowController.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\GlowController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Cards\\GlowController.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\GlowController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Cards\\GlowController.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAADwvzEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T06:36:56.806Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "HpUI.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\HpUI.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\HpUI.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\HpUI.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UIs\\HpUI.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAADwvxoAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T07:35:25.482Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Scroll.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\Scroll.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\Scroll.cs",
@@ -251,7 +244,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "SalManager.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\SaveAndLoad\\SalManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\SaveAndLoad\\SalManager.cs",
@@ -263,7 +256,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "loadScript.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\SaveAndLoad\\loadScript.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\SaveAndLoad\\loadScript.cs",
@@ -275,7 +268,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "ExitPanelManager.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\ExitPanelManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\ExitPanelManager.cs",
@@ -287,7 +280,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "ExitPanel.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\ExitPanel.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\ExitPanel.cs",
@@ -299,7 +292,58 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 4,
+              "Title": "Card.cs",
+              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\Card.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Cards\\Card.cs",
+              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\Card.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Cards\\Card.cs",
+              "ViewState": "AQIAADcAAAAAAAAAAAAAwGwAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-31T09:38:07.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CardInspector.cs",
+              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\CardInspector.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Cards\\CardInspector.cs",
+              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\CardInspector.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Cards\\CardInspector.cs",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAIwDQAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-01T09:16:57.341Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GlowController.cs",
+              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\GlowController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Cards\\GlowController.cs",
+              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\GlowController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Cards\\GlowController.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAAwDEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T06:36:56.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HpUI.cs",
+              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\HpUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\HpUI.cs",
+              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\HpUI.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIs\\HpUI.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAADwvxoAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T07:35:25.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
               "Title": "loadListCreateScript.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\SaveAndLoad\\loadListCreateScript.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\SaveAndLoad\\loadListCreateScript.cs",
@@ -311,32 +355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CardInspector.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\CardInspector.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Cards\\CardInspector.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\CardInspector.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Cards\\CardInspector.cs",
-              "ViewState": "AQIAAHgAAAAAAAAAAAAAAH4AAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-01T09:16:57.341Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Card.cs",
-              "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\Card.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Cards\\Card.cs",
-              "ToolTip": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\Card.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Cards\\Card.cs",
-              "ViewState": "AQIAADsAAAAAAAAAAAAmwA8CAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-31T09:38:07.251Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "GloeBorder.shader",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Cards\\GloeBorder.shader",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Cards\\GloeBorder.shader",
@@ -348,7 +367,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "AutoDestory.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\AnimationTools\\AutoDestory.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AnimationTools\\AutoDestory.cs",
@@ -360,7 +379,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Feather.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\Feather.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Characters\\Feather.cs",
@@ -372,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Character.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\Character.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Characters\\Character.cs",
@@ -384,7 +403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Player.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Characters\\Player.cs",
@@ -396,7 +415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "PlayerInspector.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\PlayerInspector.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Characters\\PlayerInspector.cs",
@@ -408,7 +427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "testEnemy.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\Enemys\\testEnemy.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Characters\\Enemys\\testEnemy.cs",
@@ -420,7 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "CharacterInspector.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\CharacterInspector.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Characters\\CharacterInspector.cs",
@@ -432,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Buff.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Buff\\Buff.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Buff\\Buff.cs",
@@ -444,7 +463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "BuffContainer.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Buff\\BuffContainer.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Buff\\BuffContainer.cs",
@@ -456,7 +475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "InteractiveObject.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InteractiveObject\\InteractiveObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\InteractiveObject\\InteractiveObject.cs",
@@ -468,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "PlayerInteract.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InteractiveObject\\PlayerInteract.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\InteractiveObject\\PlayerInteract.cs",
@@ -480,7 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "InputListener.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InputListener.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\InputListener.cs",
@@ -492,7 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "Consts.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Consts.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Consts.cs",
@@ -504,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "Enemy.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Characters\\Enemys\\Enemy.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Characters\\Enemys\\Enemy.cs",
@@ -516,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "DIalog\u7F16\u5199\u8BF4\u660E.txt",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Resources\\Texts\\DIalog\u7F16\u5199\u8BF4\u660E.txt",
               "RelativeDocumentMoniker": "Assets\\Resources\\Texts\\DIalog\u7F16\u5199\u8BF4\u660E.txt",
@@ -528,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 43,
               "Title": "CardUI.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\CardUI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\CardUI.cs",
@@ -540,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 44,
               "Title": "ItemInspector.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\ItemInspector.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\EquipmentPanel\\ItemInspector.cs",
@@ -552,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 41,
               "Title": "DreamBottle.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\InteractiveObject\\Objects\\DreamBottle.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\InteractiveObject\\Objects\\DreamBottle.cs",
@@ -564,7 +583,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "ItemPlace.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\ItemPlace.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\EquipmentPanel\\ItemPlace.cs",
@@ -576,7 +595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "AttackBody.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\AttackBodys\\AttackBody.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AttackBodys\\AttackBody.cs",
@@ -588,7 +607,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "Item.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\Item.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\EquipmentPanel\\Item.cs",
@@ -600,7 +619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "EquipmentPanelManager.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\EquipmentPanel\\EquipmentPanelManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\EquipmentPanel\\EquipmentPanelManager.cs",
@@ -612,7 +631,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "ArchiveManager.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Archive\\ArchiveManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Archive\\ArchiveManager.cs",
@@ -624,7 +643,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "Archive.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Archive\\Archive.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Archive\\Archive.cs",
@@ -636,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "AttackBodyInspector.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\AttackBodys\\AttackBodyInspector.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AttackBodys\\AttackBodyInspector.cs",
@@ -648,7 +667,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "ControllerState.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerState.cs",
@@ -660,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\PlayerController.cs",
@@ -672,7 +691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "Dialog.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\UIs\\Dialog.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIs\\Dialog.cs",
@@ -684,7 +703,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "ControllerAttackState.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerAttackState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerAttackState.cs",
@@ -696,7 +715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "AnimatorBoolManager.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\AnimationTools\\AnimatorBoolManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AnimationTools\\AnimatorBoolManager.cs",
@@ -708,7 +727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "ControllerSprintingState.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerSprintingState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerSprintingState.cs",
@@ -720,7 +739,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "ControllerMovableState.cs",
               "DocumentMoniker": "E:\\Github\\the-Feather-of-Dream\\Assets\\Scripts\\Controller\\ControllerStates\\ControllerMovableState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Controller\\ControllerStates\\ControllerMovableState.cs",

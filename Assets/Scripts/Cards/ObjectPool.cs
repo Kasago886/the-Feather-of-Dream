@@ -68,6 +68,16 @@ public class ObjectPool<T> where T : Component
         }
         return null;
     }
+    public T GetFromPool()
+    {
+        if (pool.Count > 0)
+        {
+            T obj = pool.Pop();
+            obj.gameObject.SetActive(true);
+            return obj;
+        }
+        return null;
+    }
     private void ReturnToPool(T obj, Transform container)
     {
         obj.gameObject.SetActive(false);
@@ -75,7 +85,7 @@ public class ObjectPool<T> where T : Component
         pool.Push(obj);
     }
     /// <summary>
-    /// 归还所使用的对象添加新的对象
+    /// 归还所使用的对象或添加新的对象
     /// </summary>
     /// <param name="obj">
     /// 对象

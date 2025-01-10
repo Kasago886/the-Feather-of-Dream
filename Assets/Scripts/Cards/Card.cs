@@ -10,6 +10,10 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 [RequireComponent(typeof(GlowControl))]
 public class Card : MonoBehaviour
 {
+    public int id;
+    public string name;
+    public int rarity;
+    public string description;
     //作用对象
     public bool effortOnPlayer;//作用于玩家
     public bool effortOnEnmey;//作用于敌方
