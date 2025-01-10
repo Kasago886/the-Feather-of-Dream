@@ -5,30 +5,23 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEngine.Events;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 [CustomEditor(typeof(Card), true)]
 public class CardInspector:Editor
 {
     private Card card;
     private bool b0,b1, b2, b3;
     private SerializedProperty event1, event2, event3, event4,event5, buff, buffName;
-    //作用对象
-     bool effortOnPlayer;//作用于玩家
+    private GameObject prefob;
+    bool effortOnPlayer;//作用于玩家
     bool effortOnEnmey;//作用于敌方
     bool effortOnOneEnemy;//作用于一个敌方
     bool effortOnMoreEnemies;//作用于多个敌方
-    //public int theNumberOfEffortedEnemies;//作用的敌方个数
-    ////作用方式
     bool click;
     bool dragOnCharactor;
-    //public float minDistance;//最小距离
-    //public UnityEvent whatHappenOnDrag;
-    //public UnityEvent whatHappenWhenMouseEnter;
-    //public UnityEvent whatHappenWhenMouseExit;
-    //public UnityEvent effects;//卡牌效果
-    //public Buff[] buffs;
-    //public string[] buffNames;
     private void OnEnable()
     {
+        b1 = true; b2 = true; b0 = true; 
         card= (Card)target;
         effortOnPlayer = card.effortOnPlayer;effortOnEnmey = card.effortOnEnmey;effortOnOneEnemy = card.effortOnOneEnemy;effortOnMoreEnemies = card.effortOnMoreEnemies; click = card.click; dragOnCharactor = card.dragOnCharactor;
         event1 = serializedObject.FindProperty("whatHappenOnDrag");
@@ -48,9 +41,10 @@ public class CardInspector:Editor
         if (b0)
         {
             card.id=EditorGUILayout.IntField("卡牌ID",card.id);
-            card.name= EditorGUILayout.TextField("卡牌名称",card.name);
+            card.name= EditorGUILayout.TextField("卡牌名称",card.name);          
             card.rarity = (int)EditorGUILayout.Slider("卡牌稀有度",card.rarity,1,5);
-            card.description=EditorGUILayout.TextArea("卡牌描述",card.description);
+            card.description=EditorGUILayout.DelayedTextField("卡牌描述",card.description,GUILayout.Height(100));
+            card.backGroundStory = EditorGUILayout.DelayedTextField("卡牌背景故事", card.backGroundStory, GUILayout.Height(100));
         }
         EditorGUILayout.Space(2);
 

@@ -14,6 +14,7 @@ public class Card : MonoBehaviour
     public string name;
     public int rarity;
     public string description;
+    public string backGroundStory;
     //作用对象
     public bool effortOnPlayer;//作用于玩家
     public bool effortOnEnmey;//作用于敌方
@@ -43,6 +44,8 @@ public class Card : MonoBehaviour
     private GameObject captions;
     private TextMesh textMesh;
     private Bounds textBound;
+    private bool shake;
+    private float shakeTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,11 +55,32 @@ public class Card : MonoBehaviour
         image = GetComponent<Image>();
         rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 13));
         glowControl = GetComponent<GlowControl>();
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            if (gameObject.transform.GetChild(i).name == "name")
+            {
+                gameObject.transform.GetChild(i).GetComponent<Text>().text =name;
+            }
+            if (gameObject.transform.GetChild(i).name == "description")
+            {
+                gameObject.transform.GetChild(i).GetComponent<Text>().text = description;
+            }
+            if (gameObject.transform.GetChild(i).name == "backGroundStory")
+            {
+                gameObject.transform.GetChild(i).GetComponent<Text>().text = backGroundStory;
+            }
+        }
+
     }
     // Update is called once per frame
     void Update()
     {
         ChooseWhenClick();
+        if (shake&&Time.time%2<=1)
+        {
+            shakeTimer += Time.deltaTime;
+            transform.rotation = Quaternion.Euler(new Vector3(0,0,13+Mathf.Sin(shakeTimer*4*Mathf.PI*3)));
+        }
     }
     /// <summary>
     /// 这是敌人作用于玩家的方法，你只需要在编写敌人Ai时引用该方法即可
@@ -110,6 +134,8 @@ public class Card : MonoBehaviour
         glowControl.useGlowEffect = true;
         sibling = rectTransform.GetSiblingIndex();
         rectTransform.SetAsFirstSibling();
+        shake = true;
+        shakeTimer = 0;
     }
     /// <summary>
     /// 当玩家鼠标离开该物体中的时候执行该函数
@@ -121,6 +147,7 @@ public class Card : MonoBehaviour
         rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
         glowControl.useGlowEffect = false;
         rectTransform.SetSiblingIndex(sibling);
+        shake = false;
     }
     /// <summary>
     /// 当玩家点击该物体的时候执行该函数
