@@ -153,5 +153,7 @@ public class CardInspector:Editor
             serializedObject.ApplyModifiedProperties();
         }
         EditorGUILayout.EndVertical();
+
+        EditorUtility.SetDirty(card);
     }
 }
