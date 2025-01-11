@@ -9,11 +9,13 @@ public class ArchiveManager : MonoBehaviour
     public Archive currentArchive = null;
 
     static string path = Application.dataPath + "/Archives";
+    static string archiveScreenShotPath = Application.dataPath + "/Archives/ArchiveScreenShot";
 
     public void Awake()
     {
         //Debug.Log(path);
         createDictory(path);
+        createDictory(archiveScreenShotPath);
         
         //∂¡»°µ±«∞¥Êµµ
         if (PlayerPrefs.HasKey(Consts.CurrentArchivePlayerPrefTag))
@@ -26,6 +28,10 @@ public class ArchiveManager : MonoBehaviour
         else
         {
             ReadArchive(0);
+            if (currentArchive == null)
+            {
+
+            }
 
             Debug.Log(currentArchive.index);
         }

@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 [RequireComponent(typeof(EventTrigger))]
 [RequireComponent(typeof(GlowControl))]
 public class Card : MonoBehaviour

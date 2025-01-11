@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.TerrainTools;
 using UnityEngine.Events;
 
 //CustomEditor用于关联要自定义的脚本

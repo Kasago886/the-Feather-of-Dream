@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class loadListCreateScript : MonoBehaviour
 {
-
+    public GameObject load;
     void Awake()
     {
         reLoadList();
@@ -24,7 +24,7 @@ public class loadListCreateScript : MonoBehaviour
         while (archiveIndex < archives.Length)
         {
             //创建实例
-            GameObject instance = (GameObject)Instantiate(Resources.Load("SaveAndLoad/load"),Vector3.zero, Quaternion.identity);
+            GameObject instance = Instantiate(load,Vector3.zero, Quaternion.identity);
             instance.transform.SetParent(transform,false);
 
             loadScript script = instance.GetComponent<loadScript>();
@@ -54,11 +54,10 @@ public class loadListCreateScript : MonoBehaviour
             }
         }
         //空存档
-        GameObject ins = (GameObject)Instantiate(Resources.Load("SaveAndLoad/load"), Vector3.zero, Quaternion.identity);
+        GameObject ins = Instantiate(load, Vector3.zero, Quaternion.identity);
         ins.transform.SetParent(transform, false);
         loadScript scr = ins.GetComponent<loadScript>();
         scr.setUp(loadIndex, null);
 
-        Resources.UnloadUnusedAssets();
     }
 }
