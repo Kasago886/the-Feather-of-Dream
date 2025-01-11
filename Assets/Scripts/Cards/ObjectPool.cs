@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool<T> where T : Component
+public class ObjectPool<T>:MonoBehaviour where T : Component
 {
     private Stack<T> pool = new Stack<T>();
     private Stack<T> otherPool = new Stack<T>();
     private GameObject prefob;
-    private List<Transform> container = new List<Transform>();
+    private List<RectTransform> container = new List<RectTransform>();
     /// <summary>
     /// 创建ObjectPool
     /// </summary>
@@ -17,16 +17,16 @@ public class ObjectPool<T> where T : Component
     /// <param name="container">
     /// 实例生成的位置
     /// </param>
-    public ObjectPool(GameObject prefob, Transform[] container)
+    public ObjectPool(GameObject prefob, RectTransform[] container)
     {
         this.prefob = prefob;
-        foreach (Transform t in container)
+        foreach (RectTransform t in container)
         {
             this.container.Add(t);
         }
         for (int i = 0; i < this.container.Count; i++)
         {
-            T obj = CreateNewGameObject();
+            T obj = CreateNewGameObject(this.container[i]);
             ReturnToPool(obj, this.container[i]);
         }
     }
@@ -37,7 +37,7 @@ public class ObjectPool<T> where T : Component
     /// 卡牌所对应的位置
     /// </param>
     /// <returns></returns>
-    public T GetFromPool(Transform container)
+    public T GetFromPool(RectTransform container)
     {
         if (pool.Count > 0)
         {
@@ -78,7 +78,7 @@ public class ObjectPool<T> where T : Component
         }
         return null;
     }
-    private void ReturnToPool(T obj, Transform container)
+    private void ReturnToPool(T obj, RectTransform container)
     {
         obj.gameObject.SetActive(false);
         obj.transform.parent = container;
@@ -103,7 +103,7 @@ public class ObjectPool<T> where T : Component
         }
         if (number == this.container.Count)
         {
-            this.container.Add(obj.gameObject.transform.parent);
+            this.container.Add(obj.gameObject.GetComponent<RectTransform>());
         }
         pool.Push(obj);
     }
@@ -115,9 +115,9 @@ public class ObjectPool<T> where T : Component
             pool.Push(other);
         }
     }
-    private T CreateNewGameObject()
+    private T CreateNewGameObject(RectTransform container)
     {
-        GameObject gameObject = new GameObject();
+        GameObject gameObject = Instantiate(prefob, container);
         gameObject.SetActive(false);
         return gameObject.GetComponent<T>();
     }
@@ -126,9 +126,9 @@ public class ObjectPool<T> where T : Component
     /// </summary>
     public void ClearPool()
     {
-        for (int i = 0; i < this.pool.Count; i++)
+        while (pool.Count > 0)
         {
-            pool.Pop();
+            Destroy(pool.Pop().gameObject);
         }
         container.Clear();
     }

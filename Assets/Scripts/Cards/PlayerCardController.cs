@@ -11,7 +11,7 @@ public class PlayerCardController : MonoBehaviour
     private List<GameObject> activeCards;
     private List<int> activeCardsId;
     [Header("卡牌生成的位置")]
-    public Transform[] positions;
+    public RectTransform[] positions;
     private Dictionary<string, int> nameToID;
     private Dictionary<int, ObjectPool<Card>> idToCard;
     // Start is called before the first frame update

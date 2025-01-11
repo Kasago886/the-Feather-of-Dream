@@ -131,8 +131,8 @@ public class Card : MonoBehaviour
         whatHappenWhenMouseEnter?.Invoke();
         rectTransform.localScale = new Vector3(rectTransform.localScale.x * 1.3f, rectTransform.localScale.y * 1.3f, rectTransform.localScale.z);
         glowControl.useGlowEffect = true;
-        sibling = rectTransform.GetSiblingIndex();
-        rectTransform.SetAsFirstSibling();
+        //sibling = rectTransform.GetSiblingIndex();
+        //rectTransform.SetAsFirstSibling();
         shake = true;
         shakeTimer = 0;
     }
@@ -145,7 +145,7 @@ public class Card : MonoBehaviour
         whatHappenWhenMouseExit?.Invoke();
         rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
         glowControl.useGlowEffect = false;
-        rectTransform.SetSiblingIndex(sibling);
+        //rectTransform.SetSiblingIndex(sibling);
         shake = false;
     }
     /// <summary>
