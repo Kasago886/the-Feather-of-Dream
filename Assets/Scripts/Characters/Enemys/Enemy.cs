@@ -16,6 +16,8 @@ public enum EnemyStateType
 
 public class Enemy : Character
 {
+    public string enemyName;
+
     public float runSpeed;
     public float jumpSpeed;
     public float attackCooldown;
@@ -228,9 +230,13 @@ public class Enemy : Character
     /// </summary>
     public virtual void OnUseAttackCard()
     {
-        //Random.Range(a,b)不含右值
-        int index = Random.Range(0, attackCards.Count);
-        Card card = attackCards[index];
+        if (attackBodyObjList.Count > 0)
+        {
+            //Random.Range(a,b)不含右值
+            int index = Random.Range(0, attackCards.Count);
+            Card card = attackCards[index];
+            card.EnemyHasEffectOnPlayer(enemyName);
+        }
         
     }
 
@@ -239,8 +245,12 @@ public class Enemy : Character
     /// </summary>
     public virtual void OnUseEffectCard()
     {
-        int index = Random.Range(0, effectCards.Count);
-        Card card = effectCards[index];
+        if (effectCards.Count > 0)
+        {
+            int index = Random.Range(0, effectCards.Count);
+            Card card = effectCards[index];
+            card.EnemyHasEffectOnPlayer(enemyName);
+        }
     }
 
     private void OnDrawGizmosSelected()

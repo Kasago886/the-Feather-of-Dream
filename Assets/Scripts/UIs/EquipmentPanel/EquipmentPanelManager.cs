@@ -43,7 +43,7 @@ public class EquipmentPanelManager : MonoBehaviour
     void Start()
     {
         archiveManager = FindAnyObjectByType<ArchiveManager>();
-        animationBoolManager = FindAnyObjectByType<AnimationBoolManager>();
+        animationBoolManager = GetComponent<AnimationBoolManager>();
 
         SetupPanel();
     }

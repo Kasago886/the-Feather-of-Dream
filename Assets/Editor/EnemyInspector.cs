@@ -35,6 +35,7 @@ public class EnemyInspector : CharacterInspector
         EditorGUILayout.BeginVertical();
 
         EditorGUILayout.LabelField("属性", EditorStyles.boldLabel);
+        enemy.enemyName = EditorGUILayout.TextField("名字",enemy.enemyName);
         enemy.runSpeed = EditorGUILayout.FloatField("移动速度",enemy.runSpeed);
         enemy.jumpSpeed = EditorGUILayout.FloatField("跳跃初速度",enemy.jumpSpeed);
         enemy.attackCooldown = EditorGUILayout.FloatField("攻击冷却", enemy.attackCooldown);

@@ -10,6 +10,8 @@ public class PlayerInspector : CharacterInspector
     Player player;
 
     SerializedProperty hpScrollProperty;
+    SerializedProperty cardGenerateTextProperty;
+    SerializedProperty cardGenerateListProperty;
 
     new protected void OnEnable()
     {
@@ -18,6 +20,8 @@ public class PlayerInspector : CharacterInspector
         player = (Player)target;
 
         hpScrollProperty = serializedObject.FindProperty("hpScroll");
+        cardGenerateTextProperty = serializedObject.FindProperty("cardGenerateText");
+        cardGenerateListProperty = serializedObject.FindProperty("cardGenerateList");
     }
     public override void OnInspectorGUI()
     {
@@ -28,6 +32,8 @@ public class PlayerInspector : CharacterInspector
 
         serializedObject.Update();
         EditorGUILayout.PropertyField(hpScrollProperty, new UnityEngine.GUIContent("血条ui ScrollView"));
+        EditorGUILayout.PropertyField(cardGenerateTextProperty, new UnityEngine.GUIContent("cardGenerateText"));
+        EditorGUILayout.PropertyField(cardGenerateListProperty, new UnityEngine.GUIContent("可以得到的卡牌"));
         serializedObject.ApplyModifiedProperties();
 
         player.cardGenerateCooldown = EditorGUILayout.FloatField("卡牌生成冷却时间",player.cardGenerateCooldown);

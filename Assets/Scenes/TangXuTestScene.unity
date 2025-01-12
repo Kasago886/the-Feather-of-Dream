@@ -443,9 +443,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   hpScroll: {fileID: 1619336298}
   cardGenerateList: []
-  cardGenerateCooldown: 0
+  cardGenerateCooldown: 10
   cardGenerateCooldownTimer: 0
-  cardGenerateText: {fileID: 0}
+  cardGenerateText: {fileID: 1218303799}
+  cardController: {fileID: 0}
 --- !u!1 &41680011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3502,14 +3503,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8805031, g: 0.5288556, b: 0.8022329, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d84f87c3fdface449ab2b5d4f92376c8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5396,14 +5397,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.3238992, b: 0.3238992, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7c23e0b3d317024419e9f772989a7973, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6750,7 +6751,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 8e19cf951dbb18a4fa9a03f4e3515d78, type: 3}
     m_FontSize: 50
     m_FontStyle: 3
     m_BestFit: 0
@@ -6962,6 +6963,7 @@ MonoBehaviour:
   isDead: 0
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
+  enemyName: 
   runSpeed: 5
   jumpSpeed: 7
   attackCooldown: 2

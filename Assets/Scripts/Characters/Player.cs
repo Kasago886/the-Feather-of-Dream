@@ -10,16 +10,19 @@ public class Player : Character
     EquipmentPanelManager equipmentPanelManager;
     public Scroll hpScroll;
 
-    public List<Card> cardGenerateList;
+    public List<string> cardGenerateList;
     public float cardGenerateCooldown;
     public float cardGenerateCooldownTimer = 0;
     public Text cardGenerateText;
+
+    public PlayerCardController cardController;
 
     new private void Start()
     {
         base.Start();
         archiveManager = FindAnyObjectByType<ArchiveManager>();
         equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
+        cardController = FindAnyObjectByType<PlayerCardController>();
 
         tenacity = archiveManager.currentArchive.playerInfo.tenacity;
         strength = archiveManager.currentArchive.playerInfo.strength;
@@ -55,7 +58,13 @@ public class Player : Character
     /// </summary>
     public void GenerateCard()
     {
+        if (cardGenerateList.Count > 0)
+        {
+            int index = Random.Range(0, cardGenerateList.Count);
+            string card = cardGenerateList[index];
 
+            cardController.GetCard(card);
+        }
     }
 
     /// <summary>
