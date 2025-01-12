@@ -117,7 +117,7 @@ public class ObjectPool<T>:MonoBehaviour where T : Component
     }
     private T CreateNewGameObject(RectTransform container)
     {
-        GameObject gameObject = Instantiate(prefob, container);
+        GameObject gameObject = Instantiate(prefob, container.position,Quaternion.identity);
         gameObject.SetActive(false);
         return gameObject.GetComponent<T>();
     }

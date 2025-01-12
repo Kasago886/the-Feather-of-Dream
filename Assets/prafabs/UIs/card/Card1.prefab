@@ -201,7 +201,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -273.82507, y: -221.33427}
-  m_SizeDelta: {x: 160, y: 200}
+  m_SizeDelta: {x: 120, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1450007684689770585
 CanvasRenderer:
@@ -265,7 +265,7 @@ MonoBehaviour:
   theNumberOfEffortedEnemies: 0
   click: 0
   isRandom: 0
-  dragOnCharactor: 0
+  dragOnCharactor: 1
   minDistance: 0
   whatHappenOnDrag:
     m_PersistentCalls:
@@ -429,7 +429,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 150}
+  m_SizeDelta: {x: 160, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &5287457536513717812
 CanvasRenderer:

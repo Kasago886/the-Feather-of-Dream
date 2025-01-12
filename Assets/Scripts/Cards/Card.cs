@@ -44,10 +44,13 @@ public class Card : MonoBehaviour
     private TextMesh textMesh;
     private Bounds textBound;
     private bool shake;
-    private float shakeTimer;
+    private float shakeTimer,sibiling;
+    private Vector3 oriPlace;
+    private Transform parent;
     // Start is called before the first frame update
     void Start()
     {
+        parent = gameObject.transform.parent;
         effortTarget = new List<Collider2D>();
         finalTarget = new List<Enemy>();
         rectTransform = GetComponent<RectTransform>();
@@ -69,7 +72,7 @@ public class Card : MonoBehaviour
                 gameObject.transform.GetChild(i).GetComponent<Text>().text = backGroundStory;
             }
         }
-
+        oriPlace = rectTransform.localPosition;
     }
     // Update is called once per frame
     void Update()
@@ -79,7 +82,7 @@ public class Card : MonoBehaviour
         {
             shakeTimer += Time.deltaTime;
             transform.rotation = Quaternion.Euler(new Vector3(0,0,13+Mathf.Sin(shakeTimer*4*Mathf.PI*3)));
-        }
+        }       
     }
     /// <summary>
     /// 这是敌人作用于玩家的方法，你只需要在编写敌人Ai时引用该方法即可
@@ -197,7 +200,7 @@ public class Card : MonoBehaviour
         if (dragOnCharactor)
         {
             transform.position = Input.mousePosition;
-
+            gameObject.transform.SetParent(GameObject.Find("CardPanel").transform);
             whatHappenOnDrag?.Invoke();
         }
     }
@@ -208,7 +211,9 @@ public class Card : MonoBehaviour
     {
         if (dragOnCharactor)
         {
+            gameObject.transform.SetParent(parent);
             EffortWhenDragEnd();
+            rectTransform.localPosition = oriPlace;
         }
     }
     private void EffortWhenClickRandomly()

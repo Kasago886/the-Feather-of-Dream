@@ -28,6 +28,7 @@ public class PlayerCardController : MonoBehaviour
             Card card = cardPool.GetFromPool();
             nameToID.Add(card.name,card.id);
             idToCard.Add(card.id, cardPool);
+            cardPool.ReturnToPool(card);
         }
     }
     /// <summary>
@@ -38,6 +39,10 @@ public class PlayerCardController : MonoBehaviour
         if (Time.time % 1 == 0)
         {
             ReduceCard();
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            GetCard(1);
         }
     }
     /// <summary>
@@ -50,9 +55,9 @@ public class PlayerCardController : MonoBehaviour
     {
         if(activeCards.Count<positions.Length)
         {
+            Debug.Log(activeCards.Count);
             activeCards.Add(idToCard[id].GetFromPool(positions[activeCards.Count]).gameObject);
             activeCardsId.Add(id);
-            activeCards[activeCards.Count].GetComponent<RectTransform>().SetAsFirstSibling();
         }
     }
     /// <summary>
