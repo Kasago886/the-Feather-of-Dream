@@ -8473,8 +8473,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 848569478}
   m_HandleRect: {fileID: 848569477}
   m_Direction: 2
-  m_Value: 0.9999997
-  m_Size: 0.6193078
+  m_Value: 1
+  m_Size: 0.6148282
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10790,8 +10790,10 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
   hpScroll: {fileID: 1917429858}
-  cardGenerateList: []
-  cardGenerateCooldown: 10
+  cardGenerateList:
+  - "\u6D4B\u8BD5\u62D4\u7FBD"
+  - "\u6D4B\u8BD5\u653B\u51FB"
+  cardGenerateCooldown: 2
   cardGenerateCooldownTimer: 0
   cardGenerateText: {fileID: 1368254081}
   cardController: {fileID: 0}
