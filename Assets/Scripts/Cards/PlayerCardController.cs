@@ -9,7 +9,7 @@ public class PlayerCardController : MonoBehaviour
     [Header("全体卡牌预制体")]
     public GameObject[] cardsList;
     private List<GameObject> activeCards;
-    private List<int> activeCardsId;
+    private List<int> activeCardsId,nextActiveCardId;
     [Header("卡牌生成的位置")]
     public RectTransform[] positions;
     private Dictionary<string, int> nameToID;
@@ -21,6 +21,7 @@ public class PlayerCardController : MonoBehaviour
         idToCard = new Dictionary<int, ObjectPool<Card>>();
         activeCards = new List<GameObject>();
         activeCardsId = new List<int>();
+        nextActiveCardId = new List<int>();
         for (int i = 0; i < cardsList.Length; i++)
         {
             ObjectPool<Card> cardPool;
@@ -36,7 +37,7 @@ public class PlayerCardController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (Time.time % 1 == 0)
+        if (Time.time % 1 <= 0.02)
         {
             ReduceCard();
         }
@@ -70,6 +71,13 @@ public class PlayerCardController : MonoBehaviour
     {
         GetCard(nameToID[cardName]);
     }
+    private void GetCard(int id,bool b)
+    {
+        if (activeCards.Count < positions.Length)
+        {
+            activeCards.Add(idToCard[id].GetFromPool(positions[activeCards.Count]).gameObject);
+        }
+    }
     /// <summary>
     /// 少牌重新排序
     /// </summary>
@@ -95,7 +103,7 @@ public class PlayerCardController : MonoBehaviour
             activeCards.Clear();
             foreach (int id in activeCardsId)
             {
-                GetCard(id);
+                GetCard(id, true);
             }
         }
     }

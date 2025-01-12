@@ -45,7 +45,7 @@ public class Card : MonoBehaviour
     private Bounds textBound;
     private bool shake;
     private float shakeTimer,sibiling;
-    private Vector3 oriPlace;
+    private Vector3 oriPlace,scale;
     private Transform parent;
     // Start is called before the first frame update
     void Start()
@@ -158,8 +158,11 @@ public class Card : MonoBehaviour
     {
         if (click)
         {
-            if (effortNumber == finalTarget.Count && choose)
+            if(effortNumber == finalTarget.Count)
+            Debug.Log("equal");
+            if (effortNumber == finalTarget.Count && finalTarget.Count >0&& isRandom)
             {
+                Debug.Log("true");
                 endChoose = true;
             }
             if (!endChoose)
@@ -231,7 +234,8 @@ public class Card : MonoBehaviour
                 player.AddBuff(buffNames[j]);
             }
             Debug.Log("workWhenBeClickedAndEffectOnPlayer");
-            gameObject.SetActive(false);
+            gameObject.SetActive(false); 
+            rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
         }
         if (effortOnEnmey)
         {
@@ -279,6 +283,7 @@ public class Card : MonoBehaviour
                     enemiesWhoHaveBeenEfforted.Add(n);
                 }
                 gameObject.SetActive(false);
+                rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
             }
             else if (!effortOnMoreEnemies)
             {
@@ -294,6 +299,7 @@ public class Card : MonoBehaviour
                 }
                 effects?.Invoke();
                 gameObject.SetActive(false);
+                rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
             }
         }
 
@@ -316,6 +322,7 @@ public class Card : MonoBehaviour
                     player.AddBuff(buffNames[j]);
                 }
                 gameObject.SetActive(false);
+                rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
             }
         }
         if (effortOnEnmey)
@@ -404,6 +411,7 @@ public class Card : MonoBehaviour
                     effects?.Invoke();
                 }
                 gameObject.SetActive(false);
+                rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
             }
         }
 
@@ -480,10 +488,10 @@ public class Card : MonoBehaviour
                         }
                         Destroy(captions);
                         gameObject.SetActive(false);
+                        rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
                     }
                     else
                     {
-                        Debug.Log("outOfPlayer");
                         choose = false;
                     }
                 }
@@ -524,25 +532,28 @@ public class Card : MonoBehaviour
                         choose = false;
                     }
                 }
-                if (endChoose)
-                {
-                    effects?.Invoke();
-                    for (int i = 0; i < finalTarget.Count; i++)
-                    {
+                
+            }
+        }
+        if (endChoose)
+        {
+            effects?.Invoke();
+            for (int i = 0; i < finalTarget.Count; i++)
+            {
 
-                        for (int j = 0; j < buffs.Length; j++)
-                        {
-                            finalTarget[i].AddBuff(buffs[j]);
-                        }
-                        for (int j = 0; j < buffNames.Length; j++)
-                        {
-                            finalTarget[i].AddBuff(buffNames[j]);
-                        }
-                    }
-                    Destroy(captions);
-                    gameObject.SetActive(false);
+                for (int j = 0; j < buffs.Length; j++)
+                {
+                    finalTarget[i].AddBuff(buffs[j]);
+                }
+                for (int j = 0; j < buffNames.Length; j++)
+                {
+                    finalTarget[i].AddBuff(buffNames[j]);
                 }
             }
+            Debug.Log("IGet");
+            Destroy(captions);
+            gameObject.SetActive(false);
+            rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
         }
     }
     private void OnDrawGizmos()
