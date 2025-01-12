@@ -34,6 +34,9 @@ public class Enemy : Character
     public float effectCardCooldown;
     protected float effectCardCooldownTimer = 0;
 
+    public List<Card> attackCards = new();
+    public List<Card> effectCards = new();
+
     [HideInInspector] public Player player;
 
     //states
@@ -225,6 +228,10 @@ public class Enemy : Character
     /// </summary>
     public virtual void OnUseAttackCard()
     {
+        //Random.Range(a,b)≤ª∫¨”“÷µ
+        int index = Random.Range(0, attackCards.Count);
+        Card card = attackCards[index];
+        
     }
 
     /// <summary>
@@ -232,6 +239,8 @@ public class Enemy : Character
     /// </summary>
     public virtual void OnUseEffectCard()
     {
+        int index = Random.Range(0, effectCards.Count);
+        Card card = effectCards[index];
     }
 
     private void OnDrawGizmosSelected()

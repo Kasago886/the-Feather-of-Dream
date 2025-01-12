@@ -11,18 +11,25 @@ public class EnemyInspector : CharacterInspector
     Enemy enemy;
     int enemyType;
 
+    SerializedProperty attackCardsProperty;
+    SerializedProperty effectCardsProperty;
+
     new private void OnEnable()
     {
         base.OnEnable();
 
         //获取当前要自定义Inspector的对象
         enemy = (Enemy)target;
+
+        attackCardsProperty = serializedObject.FindProperty("attackCards");
+        effectCardsProperty = serializedObject.FindProperty("effectCards");
     }
 
     //自定义Inspector面板
     public override void OnInspectorGUI()
     {
         Undo.RecordObject(enemy, "Change Enemy");
+        serializedObject.Update();
 
         //垂直方向布局
         EditorGUILayout.BeginVertical();
@@ -53,6 +60,7 @@ public class EnemyInspector : CharacterInspector
         EditorGUILayout.LabelField("冷却时间", GUILayout.Width(50));
         enemy.attackCardCooldown = EditorGUILayout.FloatField(enemy.attackCardUseDistance);
         EditorGUILayout.EndHorizontal();
+        EditorGUILayout.PropertyField(attackCardsProperty, new UnityEngine.GUIContent("攻击卡"));
 
         EditorGUILayout.LabelField("效果卡");
         EditorGUILayout.BeginHorizontal();
@@ -61,12 +69,14 @@ public class EnemyInspector : CharacterInspector
         EditorGUILayout.LabelField("冷却时间", GUILayout.Width(50));
         enemy.effectCardCooldown = EditorGUILayout.FloatField(enemy.effectCardCooldown);
         EditorGUILayout.EndHorizontal();
+        EditorGUILayout.PropertyField(effectCardsProperty, new UnityEngine.GUIContent("效果卡"));
 
 
         EditorGUILayout.Space(10);
 
         EditorGUILayout.EndVertical();
 
+        serializedObject.ApplyModifiedProperties();
         EditorUtility.SetDirty(enemy);
 
         base.OnInspectorGUI();

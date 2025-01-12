@@ -30,6 +30,10 @@ public class PlayerInspector : CharacterInspector
         EditorGUILayout.PropertyField(hpScrollProperty, new UnityEngine.GUIContent("血条ui ScrollView"));
         serializedObject.ApplyModifiedProperties();
 
+        player.cardGenerateCooldown = EditorGUILayout.FloatField("卡牌生成冷却时间",player.cardGenerateCooldown);
+
+        EditorGUILayout.Space(10);
+
         EditorGUILayout.EndVertical();
 
         base.OnInspectorGUI();
