@@ -498,7 +498,7 @@ public class Card : MonoBehaviour
                     }
                     else
                     {
-                        textMesh.text = "请选择敌人，已选择" + (effortNumber / finalTarget.Count).ToString();
+                        textMesh.text = "请选择敌人，已选择" + finalTarget.Count.ToString() + "/" + effortNumber.ToString();
                     }
                 }
                 if (Input.GetMouseButtonDown(0))
@@ -513,8 +513,8 @@ public class Card : MonoBehaviour
                             {
                                 b = true;
                                 whatHappenWhenBeChoosen?.Invoke();
-                                effortTarget.RemoveAt(i);
                                 finalTarget.Add(effortTarget[i].GetComponent<Enemy>());
+                                effortTarget.RemoveAt(i);
                                 break;
                             }
                         }

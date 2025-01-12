@@ -166,7 +166,7 @@ public class Character : MonoBehaviour
     public void OnForceback(Vector3 attackPosition)
     {
         Vector2 direction = transform.position - attackPosition;
-        Debug.Log(direction);
+        //Debug.Log(direction);
         if (direction.x > 0)
         {
             rb.AddForce(new Vector2(forcebackForce, rb.velocity.y), ForceMode2D.Impulse);

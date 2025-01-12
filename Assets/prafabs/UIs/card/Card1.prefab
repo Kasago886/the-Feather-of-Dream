@@ -254,18 +254,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  name: dsfdgf
+  name: "\u6D4B\u8BD5\u653B\u51FB"
   rarity: 1
-  description: adhsgfn
+  description: "\u7ED9\u81EA\u8EAB\u589E\u52A0\u4E00\u4E2A10s\u7684\u653B\u51FB\u66FF\u8EAB"
   backGroundStory: 12233
-  effortOnPlayer: 0
+  effortOnPlayer: 1
   effortOnEnmey: 0
   effortOnOneEnemy: 0
   effortOnMoreEnemies: 0
   theNumberOfEffortedEnemies: 0
-  click: 0
+  click: 1
   isRandom: 0
-  dragOnCharactor: 1
+  dragOnCharactor: 0
   minDistance: 0
   whatHappenOnDrag:
     m_PersistentCalls:
@@ -283,7 +283,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   buffs: []
-  buffNames: []
+  buffNames:
+  - "\u6D4B\u8BD5\u653B\u51FB"
 --- !u!114 &956570312101519618
 MonoBehaviour:
   m_ObjectHideFlags: 0
