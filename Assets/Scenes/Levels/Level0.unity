@@ -6444,6 +6444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b0b0fa7c95d244a91602851c003f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  content: {fileID: 949562591}
   cardsList:
   - {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
   - {fileID: 4056058898571058497, guid: 5a394e9de2650c5449bfbca809b22c67, type: 3}
@@ -8473,8 +8474,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 848569478}
   m_HandleRect: {fileID: 848569477}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.6148282
+  m_Value: 0.9999997
+  m_Size: 0.6193078
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

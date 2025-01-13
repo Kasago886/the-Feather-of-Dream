@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool<T>:MonoBehaviour where T : Component
+public class ObjectPool<T> : MonoBehaviour where T : Component
 {
     private Stack<T> pool = new Stack<T>();
     private Stack<T> otherPool = new Stack<T>();
@@ -29,6 +29,13 @@ public class ObjectPool<T>:MonoBehaviour where T : Component
             T obj = CreateNewGameObject(this.container[i]);
             ReturnToPool(obj, this.container[i]);
         }
+    }
+    public ObjectPool(GameObject prefob, RectTransform container)
+    {
+        this.prefob = prefob;
+        this.container.Add(container);
+        T obj = CreateNewGameObject(container);
+        ReturnToPool(obj, container);
     }
     /// <summary>
     /// 使用该方法从对象池中获取对象
@@ -117,7 +124,7 @@ public class ObjectPool<T>:MonoBehaviour where T : Component
     }
     private T CreateNewGameObject(RectTransform container)
     {
-        GameObject gameObject = Instantiate(prefob, container.position,Quaternion.identity);
+        GameObject gameObject = Instantiate(prefob, container.position, Quaternion.identity);
         gameObject.SetActive(false);
         return gameObject.GetComponent<T>();
     }

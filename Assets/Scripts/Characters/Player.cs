@@ -48,7 +48,7 @@ public class Player : Character
         }
         else
         {
-            cardGenerateCooldownTimer -= Time.deltaTime;
+            if (cardController.GetCardOrNot()) { cardGenerateCooldownTimer -= Time.deltaTime; }
             if (cardGenerateCooldownTimer < 0) { cardGenerateCooldownTimer = 0; }
         }
         cardGenerateText.text = ((int)cardGenerateCooldownTimer).ToString() + "s";
@@ -58,7 +58,7 @@ public class Player : Character
     /// </summary>
     public void GenerateCard()
     {
-        if (cardGenerateList.Count > 0)
+        if (cardGenerateList.Count > 0&&cardController.GetCardOrNot())
         {
             int index = Random.Range(0, cardGenerateList.Count);
             string card = cardGenerateList[index];

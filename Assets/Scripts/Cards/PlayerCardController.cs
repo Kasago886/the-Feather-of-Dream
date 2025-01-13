@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 
 public class PlayerCardController : MonoBehaviour
 {
+    [Header("父物体")]
+    public GameObject content;
     [Header("全体卡牌预制体")]
     public GameObject[] cardsList;
     private List<GameObject> activeCards;
@@ -14,9 +17,12 @@ public class PlayerCardController : MonoBehaviour
     public RectTransform[] positions;
     private Dictionary<string, int> nameToID;
     private Dictionary<int, ObjectPool<Card>> idToCard;
+    private float timer,useNumber,timerUseNumber;
+    private int slotNumber;
     // Start is called before the first frame update
     void Start()
     {
+        slotNumber = 5;
         nameToID = new Dictionary<string, int>();
         idToCard = new Dictionary<int, ObjectPool<Card>>();
         activeCards = new List<GameObject>();
@@ -31,20 +37,13 @@ public class PlayerCardController : MonoBehaviour
             idToCard.Add(card.id, cardPool);
             cardPool.ReturnToPool(card);
         }
+        InvokeRepeating("ReduceCard", 1.0f, 1.0f);
     }
     /// <summary>
-    /// 每两秒自动检测是否少牌
+    /// 每秒自动检测是否少牌
     /// </summary>
     private void Update()
     {
-        if (Time.time % 1 <= 0.02)
-        {
-            ReduceCard();
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            GetCard(1);
-        }
     }
     /// <summary>
     /// 调用本函数增加玩家手牌
@@ -56,7 +55,6 @@ public class PlayerCardController : MonoBehaviour
     {
         if(activeCards.Count<positions.Length)
         {
-            Debug.Log(activeCards.Count);
             activeCards.Add(idToCard[id].GetFromPool(positions[activeCards.Count]).gameObject);
             activeCardsId.Add(id);
         }
@@ -83,28 +81,63 @@ public class PlayerCardController : MonoBehaviour
     /// </summary>
     private void ReduceCard()
     {
+        Debug.Log("Uesed When"+Time.time);
+        Debug.Log("ID.Count=" + activeCardsId.Count);
         bool clear=false;
         for(int i = 0;i < activeCards.Count;i++)
         {
             if(!activeCards[i].activeSelf)
             {
                 clear=true;
+                if (activeCardsId[i] == 1)
+                {
+                    Debug.Log("Remove拔羽" );
+                }
+                else
+                {
+                    Debug.Log("Remove攻击");
+                }
                 idToCard[activeCardsId[i]].ReturnToPool(activeCards[i].GetComponent<Card>());
                 activeCardsId.RemoveAt(i);
                 activeCards.RemoveAt(i);
+                i--;
             }
         }
+        Debug.Log("Clear=" + clear);
         if (clear)
         {
+            string names = null;
+            useNumber++;
             for (int i = 0; i < activeCards.Count; i++)
             {
+                if (activeCardsId[i] == 1)
+                {
+                    names+= "拔羽|";
+                }
+                else
+                {
+                    names += "攻击|";
+                }
+                Debug.Log(names);
                 idToCard[activeCardsId[i]].ReturnToPool(activeCards[i].GetComponent<Card>());
             }
             activeCards.Clear();
+            string ids=null;
             foreach (int id in activeCardsId)
             {
+                if (id == 1)
+                {
+                    ids +=  "拔羽|";
+                }
+                else
+                {
+                    ids +=  "攻击|";
+                }
                 GetCard(id, true);
             }
+            Debug.Log(ids);
+            Debug.Log("useNumber="+useNumber);
+            Debug.Log("ID.Count=" + activeCardsId.Count+"InEnd");
         }
     }
     /// <summary>
@@ -116,14 +149,14 @@ public class PlayerCardController : MonoBehaviour
     /// <param name="reduceNumber">
     /// 想要减少的卡牌数量
     /// </param>
-    public void ReduceCard(int id,int reduceNumber=1)
+    public void ReduceCard(int id, int reduceNumber = 1)
     {
         if (reduceNumber > 1)
         {
             List<int> n = new List<int>();
-            for(int i = 0; i < activeCardsId.Count; i++)
+            for (int i = 0; i < activeCardsId.Count; i++)
             {
-                if(id == activeCardsId[i])
+                if (id == activeCardsId[i])
                 {
                     n.Add(i);
                 }
@@ -132,7 +165,7 @@ public class PlayerCardController : MonoBehaviour
             {
                 reduceNumber = n.Count;
             }
-            for(int i = 0; i < reduceNumber; i++)
+            for (int i = 0; i < reduceNumber; i++)
             {
                 activeCards[n[i]].SetActive(false);
             }
@@ -160,9 +193,9 @@ public class PlayerCardController : MonoBehaviour
     /// <param name="reduceNumber">
     /// 想要减少的卡牌数量
     /// </param>
-    public void ReduceCard(string name, int reduceNumber=1)
+    public void ReduceCard(string name, int reduceNumber = 1)
     {
-        ReduceCard(nameToID[name],reduceNumber);
+        ReduceCard(nameToID[name], reduceNumber);
     }
     /// <summary>
     /// 调用本函数清空玩家手牌
@@ -175,5 +208,36 @@ public class PlayerCardController : MonoBehaviour
         }
         activeCards.Clear();
         activeCardsId.Clear();
+    }
+    public bool GetCardOrNot()
+    {
+        if (activeCardsId.Count < positions.Length)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    /// <summary>
+    /// 增加卡槽
+    /// </summary>
+    public void AddPosition()
+    {
+        slotNumber++;
+        GameObject newSlot=new GameObject("Slot"+slotNumber);
+        newSlot.AddComponent<RectTransform>();
+        newSlot.transform.SetParent(content.transform);
+        positions[positions.Length]=newSlot.GetComponent<RectTransform>();
+        for (int i = 0; i < cardsList.Length; i++)
+        {
+            ObjectPool<Card> cardPool;
+            cardPool = new ObjectPool<Card>(cardsList[i], positions[positions.Length]);
+            Card card = cardPool.GetFromPool();
+            nameToID.Add(card.name, card.id);
+            idToCard.Add(card.id, cardPool);
+            cardPool.ReturnToPool(card);
+        }
     }
 }

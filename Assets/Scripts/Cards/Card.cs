@@ -32,19 +32,16 @@ public class Card : MonoBehaviour
     public UnityEvent effects;//¿¨ÅÆÐ§¹û
     public Buff[] buffs;
     public string[] buffNames;
-    private bool choose, getEnemy, endChoose;
+    private bool choose, endChoose;
     private List<Collider2D> effortTarget;
     private List<Enemy> finalTarget;
     private int effortNumber;
     private RectTransform rectTransform;
-    private Image image;
     private GlowControl glowControl;
-    private int sibling;
     private GameObject captions;
     private TextMesh textMesh;
-    private Bounds textBound;
     private bool shake;
-    private float shakeTimer,sibiling;
+    private float shakeTimer;
     private Vector3 oriPlace,scale;
     private Transform parent;
     // Start is called before the first frame update
@@ -54,7 +51,6 @@ public class Card : MonoBehaviour
         effortTarget = new List<Collider2D>();
         finalTarget = new List<Enemy>();
         rectTransform = GetComponent<RectTransform>();
-        image = GetComponent<Image>();
         rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 13));
         glowControl = GetComponent<GlowControl>();
         for (int i = 0; i < gameObject.transform.childCount; i++)
@@ -134,8 +130,6 @@ public class Card : MonoBehaviour
         whatHappenWhenMouseEnter?.Invoke();
         rectTransform.localScale = new Vector3(rectTransform.localScale.x * 1.3f, rectTransform.localScale.y * 1.3f, rectTransform.localScale.z);
         glowControl.useGlowEffect = true;
-        //sibling = rectTransform.GetSiblingIndex();
-        //rectTransform.SetAsFirstSibling();
         shake = true;
         shakeTimer = 0;
     }
@@ -148,7 +142,6 @@ public class Card : MonoBehaviour
         whatHappenWhenMouseExit?.Invoke();
         rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
         glowControl.useGlowEffect = false;
-        //rectTransform.SetSiblingIndex(sibling);
         shake = false;
     }
     /// <summary>
@@ -158,11 +151,8 @@ public class Card : MonoBehaviour
     {
         if (click)
         {
-            if(effortNumber == finalTarget.Count)
-            Debug.Log("equal");
             if (effortNumber == finalTarget.Count && finalTarget.Count >0&& isRandom)
             {
-                Debug.Log("true");
                 endChoose = true;
             }
             if (!endChoose)
@@ -184,7 +174,7 @@ public class Card : MonoBehaviour
                         textMesh.anchor = TextAnchor.MiddleCenter;
                         captions.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y + Camera.main.orthographicSize * 4 / 5, 0f);
                         choose = true;
-                        getEnemy = true;
+
                         GetWhatInCamera();
                     }
                     else
@@ -233,7 +223,6 @@ public class Card : MonoBehaviour
             {
                 player.AddBuff(buffNames[j]);
             }
-            Debug.Log("workWhenBeClickedAndEffectOnPlayer");
             gameObject.SetActive(false); 
             rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
         }
@@ -421,7 +410,6 @@ public class Card : MonoBehaviour
 
         if (effortOnPlayer)
         {
-            Debug.Log("Get!");
             effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
                     new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.PlayerLayer)));
         }
@@ -569,5 +557,24 @@ public class Card : MonoBehaviour
             Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x - minDistance / 4, Camera.main.ScreenToWorldPoint(transform.position).y, 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x + minDistance / 4, Camera.main.ScreenToWorldPoint(transform.position).y, 0));
             Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x, Camera.main.ScreenToWorldPoint(transform.position).y - minDistance / 4, 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x, Camera.main.ScreenToWorldPoint(transform.position).y + minDistance / 4, 0));
         }
+    }
+    private void OnDisable()
+    {
+        if (glowControl != null)
+        {
+            glowControl.useGlowEffect = false;
+        }
+        if(effortTarget != null)
+        {
+            effortTarget.Clear();
+        }
+        if (finalTarget!=null)
+        {
+            finalTarget.Clear();
+        }
+        effortNumber = 0;
+        choose = false;
+        endChoose = false;
+        shake = false;
     }
 }
