@@ -54,7 +54,7 @@ public class saveScript : MonoBehaviour
         }
         else
         {
-            //gameObject.GetComponent<Button>().interactable = false;
+            image.overrideSprite = null;
         }
     }
 

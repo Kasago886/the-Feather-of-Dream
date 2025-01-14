@@ -54,7 +54,7 @@ public class loadScript : MonoBehaviour
         }
         else
         {
-            //gameObject.GetComponent<Button>().interactable = false;
+            image.overrideSprite = null;
         }
     }
 
