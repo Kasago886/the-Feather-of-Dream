@@ -35,11 +35,13 @@ public class InteractiveObject : MonoBehaviour
 
     private float distance;
     private int id;
-    private void Start()
+    private GameObject player;
+    protected virtual void Start()
     {
         id=Random.Range(-100000,100000);
+        player = GameObject.FindGameObjectWithTag(Consts.PlayerTag);
     }
-    void Update()
+    private void Update()
     {
         KeyTriggerMode1();
     }
@@ -50,7 +52,7 @@ public class InteractiveObject : MonoBehaviour
     {
         if (keyTrigger && !mouseTrigger && mode1&&!moreLimit)
         {
-            distance = Mathf.Abs(Vector3.Distance(GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position, gameObject.transform.position));
+            distance = Mathf.Abs(Vector3.Distance(player.transform.position, gameObject.transform.position));
             if (distance < maxDistance && Input.GetKeyDown(nameOfKey))
             {
                 Interact();
@@ -58,17 +60,17 @@ public class InteractiveObject : MonoBehaviour
         }
         else if (keyTrigger && !mouseTrigger && mode1 && moreLimit)
         {
-            distance = Mathf.Abs(Vector3.Distance(GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position, gameObject.transform.position));
+            distance = Mathf.Abs(Vector3.Distance(player.transform.position, gameObject.transform.position));
             if (maxDistanceOfHorizontal != 0&&maxDistanceOfVertical==0)
             {
-                if (distance < maxDistance && Input.GetKeyDown(nameOfKey) && Mathf.Abs(GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position.x - transform.position.x) <= maxDistanceOfHorizontal)
+                if (distance < maxDistance && Input.GetKeyDown(nameOfKey) && Mathf.Abs(player.transform.position.x - transform.position.x) <= maxDistanceOfHorizontal)
                 {
                     Interact();
                 }
             }
             if(maxDistanceOfVertical != 0&&maxDistanceOfHorizontal==0)
             {
-                if (distance < maxDistance && Input.GetKeyDown(nameOfKey) && Mathf.Abs(GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position.y - transform.position.y) <= maxDistanceOfVertical)
+                if (distance < maxDistance && Input.GetKeyDown(nameOfKey) && Mathf.Abs(player.transform.position.y - transform.position.y) <= maxDistanceOfVertical)
                 {
                     Interact();
                 }

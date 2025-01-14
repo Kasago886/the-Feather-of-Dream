@@ -42,13 +42,15 @@ public class Player : Character
     {
         if (cardGenerateCooldownTimer <= 0)
         {
-            cardGenerateCooldownTimer = cardGenerateCooldown;
-
-            GenerateCard();
+            if (cardController.GetCardOrNot())
+            {
+                cardGenerateCooldownTimer = cardGenerateCooldown;
+                GenerateCard();
+            }
         }
         else
         {
-            if (cardController.GetCardOrNot()) { cardGenerateCooldownTimer -= Time.deltaTime; }
+            cardGenerateCooldownTimer -= Time.deltaTime;
             if (cardGenerateCooldownTimer < 0) { cardGenerateCooldownTimer = 0; }
         }
         cardGenerateText.text = ((int)cardGenerateCooldownTimer).ToString() + "s";

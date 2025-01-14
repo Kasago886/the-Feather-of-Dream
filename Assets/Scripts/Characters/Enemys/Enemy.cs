@@ -230,7 +230,7 @@ public class Enemy : Character
     /// </summary>
     public virtual void OnUseAttackCard()
     {
-        if (attackBodyObjList.Count > 0)
+        if (attackCards.Count > 0)
         {
             //Random.Range(a,b)²»º¬ÓÒÖµ
             int index = Random.Range(0, attackCards.Count);

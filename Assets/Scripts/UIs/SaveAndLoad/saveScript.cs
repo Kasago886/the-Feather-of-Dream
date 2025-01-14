@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class loadScript : MonoBehaviour
+public class saveScript : MonoBehaviour
 {
     static string path = Application.dataPath + "/Archives/ArchiveScreenShot";
 
@@ -12,7 +12,7 @@ public class loadScript : MonoBehaviour
     public Image image;
 
     int index = 0;
-    Archive archive = null;
+    public Archive archive = null;
     Button button;
 
     private void Start()
@@ -66,7 +66,7 @@ public class loadScript : MonoBehaviour
         bool isNull = (archive == null);
 
         SalManager salManager = FindAnyObjectByType<SalManager>();
-        salManager.SetChosenLoad(this, isNull);
+        salManager.SetChosenSave(this, isNull);
 
         ///设置可点击状态
         Button[] childButtons = transform.parent.GetComponentsInChildren<Button>();
@@ -78,44 +78,19 @@ public class loadScript : MonoBehaviour
     }
 
     /// <summary>
-    /// 读取或新建存档
+    /// 保存或覆盖存档
     /// </summary>
-    public void LoadOrNew()
+    public void SaveOrRewrite()
     {
-        if (archive != null)
-        {
-            PlayerPrefs.SetInt(Consts.CurrentArchivePlayerPrefTag, index);
-            PlayerPrefs.Save();
+        //保存完成后刷新
+        saveListCreateScript saveListCreateScript = GetComponentInParent<saveListCreateScript>();
+        Action finishAction = saveListCreateScript.reSaveList;
 
-            int level = archive.levelInfo.level;
-            ExitPanelManager exitPanelManager = FindAnyObjectByType<ExitPanelManager>();
-            exitPanelManager.LoadScene("Level" + level.ToString());
-        }
-        else
-        {
-            //新建存档
-            ArchiveManager archiveManager = FindAnyObjectByType<ArchiveManager>();
-            Archive newArchive = new Archive();
-            newArchive.levelInfo.level = -1;
+        //保存
+        ArchiveManager archiveManager = FindAnyObjectByType<ArchiveManager>();
+        archiveManager.SaveCurrentArchive(index, finishAction);
 
-            archiveManager.currentArchive = newArchive;
-            archiveManager.SaveCurrentArchive(index);
-
-            PlayerPrefs.SetInt(Consts.CurrentArchivePlayerPrefTag, index);
-            PlayerPrefs.Save();
-
-            ExitPanelManager exitPanelManager = FindAnyObjectByType<ExitPanelManager>();
-            exitPanelManager.LoadScene("Level0");
-        }
-    }
-
-    /// <summary>
-    /// 删除存档
-    /// </summary>
-    public void Delete()
-    {
-        ArchiveManager.DeleteArchive(index);
-        setUp(index, null);
-        OnClick();
+        PlayerPrefs.SetInt(Consts.CurrentArchivePlayerPrefTag, index);
+        PlayerPrefs.Save();
     }
 }

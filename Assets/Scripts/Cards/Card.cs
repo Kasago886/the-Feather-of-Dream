@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class Card : MonoBehaviour
 {
     public int id;
-    public string name;
+    new public string name;
     public int rarity;
     public string description;
     public string backGroundStory;

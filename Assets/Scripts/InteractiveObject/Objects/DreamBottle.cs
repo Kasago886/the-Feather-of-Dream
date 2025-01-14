@@ -4,15 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DreamBottle : InteractiveObject {
-    private Player player;
-    private void Start()
+    private Player player_;
+    protected override void Start()
     {
-        player = FindObjectOfType<Player>();
+        base.Start();
+        player_ = FindObjectOfType<Player>();
     }
+
     public override void Interact()
     {
         base.Interact();
-        player.AddDream(1);
+        player_.AddDream(1);
         GetComponent<Animator>().Play("usedBottle");
     }
 }

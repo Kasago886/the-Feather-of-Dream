@@ -279,31 +279,18 @@ public class EquipmentPanelManager : MonoBehaviour
     /// <summary>
     /// ±£´æÎïÆ·×´Ì¬
     /// </summary>
-    public void SaveItemsState()
+    public Archive SaveItemsState(Archive inputArchive)
     {
         //equipedFeather
-        archiveManager.currentArchive.equipedFeather.items = GetItemInfos(featherEquipContent).ToArray();
+        inputArchive.equipedFeather.items = GetItemInfos(featherEquipContent).ToArray();
         //equipedBrokenFeather
-        archiveManager.currentArchive.equipedBrokenFeather.items = GetItemInfos(brokenFeatherEquipContent).ToArray();
+        inputArchive.equipedBrokenFeather.items = GetItemInfos(brokenFeatherEquipContent).ToArray();
         //items
-        archiveManager.currentArchive.items.items = GetItemInfos(itemContent).ToArray();
+        inputArchive.items.items = GetItemInfos(itemContent).ToArray();
         //encyclopedia
-        archiveManager.currentArchive.encyclopedia.items = GetItemInfos(encyclopediaContent).ToArray();
+        inputArchive.encyclopedia.items = GetItemInfos(encyclopediaContent).ToArray();
 
-        //TimeInfo
-        System.DateTime time = System.DateTime.Now;
-        archiveManager.currentArchive.timeInfo.year = time.Year;
-        archiveManager.currentArchive.timeInfo.month = time.Month;
-        archiveManager.currentArchive.timeInfo.day = time.Day;
-        archiveManager.currentArchive.timeInfo.hour = time.Hour;
-        archiveManager.currentArchive.timeInfo.minute = time.Minute;
-        archiveManager.currentArchive.timeInfo.second = time.Second;
-
-        //screenShot
-        ScreenCapture.CaptureScreenshot(Application.dataPath + "/Archives/ArchiveScreenShot/" + archiveManager.currentArchive.levelInfo.level.ToString() + ".jpg");
-
-        //Save
-        ArchiveManager.SaveArchive(archiveManager.currentArchive, archiveManager.currentArchive.index);
+        return inputArchive;
     }
 
     /// <summary>

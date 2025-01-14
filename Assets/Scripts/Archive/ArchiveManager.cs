@@ -6,14 +6,21 @@ using System;
 
 public class ArchiveManager : MonoBehaviour
 {
-    public Archive currentArchive = null;
+    public int level = -1;
+    public string title = "";
+
+    [HideInInspector] public Archive currentArchive = null;
+
+    EquipmentPanelManager equipmentPanelManager = null;
 
     static string path = Application.dataPath + "/Archives";
     static string archiveScreenShotPath = Application.dataPath + "/Archives/ArchiveScreenShot";
 
     public void Awake()
     {
-        //Debug.Log(path);
+        equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
+
+        //创建路径
         createDictory(path);
         createDictory(archiveScreenShotPath);
         
@@ -22,18 +29,21 @@ public class ArchiveManager : MonoBehaviour
         {
             int archiveindex = PlayerPrefs.GetInt(Consts.CurrentArchivePlayerPrefTag);
             ReadArchive(archiveindex);
-
-            Debug.Log(archiveindex);
         }
         else
         {
             ReadArchive(0);
-            if (currentArchive == null)
-            {
+        }
+        Debug.Log(currentArchive.index);
 
-            }
-
-            Debug.Log(currentArchive.index);
+        //保存当前关卡信息
+        if (level != -1)
+        {
+            currentArchive.levelInfo.level = level;
+        }
+        if (title != "")
+        {
+            currentArchive.levelInfo.title = title;
         }
     }
 
@@ -44,6 +54,77 @@ public class ArchiveManager : MonoBehaviour
     public void ReadArchive(int archiveIndex)
     {
         currentArchive = GetArchive(archiveIndex);
+    }
+
+    /// <summary>
+    /// 保存当前存档
+    /// </summary>
+    /// <param name="archiveIndex"></param>
+    public void SaveCurrentArchive(int archiveIndex, Action finishAction = null)
+    {
+        //Index
+        currentArchive.index = archiveIndex;
+        
+        //Items
+        if (equipmentPanelManager != null)
+        {
+            currentArchive = equipmentPanelManager.SaveItemsState(currentArchive);
+        }
+
+        //TimeInfo
+        System.DateTime time = System.DateTime.Now;
+        currentArchive.timeInfo.year = time.Year;
+        currentArchive.timeInfo.month = time.Month;
+        currentArchive.timeInfo.day = time.Day;
+        currentArchive.timeInfo.hour = time.Hour;
+        currentArchive.timeInfo.minute = time.Minute;
+        currentArchive.timeInfo.second = time.Second;
+
+        //screenShot
+        if (currentArchive.levelInfo.level != -1)
+        {
+            StartCoroutine(CaptureCamera(Camera.main, finishAction));
+        }
+
+        //save
+        SaveArchive(currentArchive, archiveIndex);
+    }
+
+    /// <summary>
+    /// 对相机截图
+    /// </summary>
+    /// <param name="camera">要被截屏的相机</param>
+    IEnumerator CaptureCamera(Camera camera, Action finishAction = null)
+    {
+        // 获取相机渲染的屏幕尺寸
+        int width = Screen.width;
+        int height = Screen.height;
+
+        // 创建一个RenderTexture对象，尺寸与屏幕相同，并设置sRGB为true
+        RenderTexture rt = new RenderTexture(width, height, 24, RenderTextureFormat.Default);
+        camera.targetTexture = rt;
+
+        // 等待一帧，确保相机渲染完成
+        yield return new WaitForEndOfFrame();
+
+        // 激活这个rt, 并从中读取像素。
+        RenderTexture.active = rt;
+        Texture2D screenShot = new Texture2D(width, height, TextureFormat.RGB24, false);
+        screenShot.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+        screenShot.Apply();
+
+        // 重置相关参数，以使用camera继续在屏幕上显示
+        camera.targetTexture = null;
+        RenderTexture.active = null; // 避免错误
+        GameObject.Destroy(rt);
+
+        // 将纹理数据编码为JPG格式的字节数组
+        byte[] bytes = screenShot.EncodeToJPG();
+        // 设置JPG图片的保存路径
+        string filename = Application.dataPath + "/Archives/ArchiveScreenShot/" + currentArchive.index.ToString() + ".jpg";
+        System.IO.File.WriteAllBytes(filename, bytes);
+
+        finishAction?.Invoke();
     }
 
     /// <summary>

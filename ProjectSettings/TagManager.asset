@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - NormalInteractiveObject
+  - SavePanel
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Wall
   - Ground
   - Enemy
-  - 
+  - InteractiveObject
   - 
   - 
   - 
