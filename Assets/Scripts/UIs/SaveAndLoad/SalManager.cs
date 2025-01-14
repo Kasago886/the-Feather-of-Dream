@@ -17,9 +17,12 @@ public class SalManager : MonoBehaviour
     loadScript chosenLoad;
     saveScript chosenSave;
 
+    InputListener inputListener;
+
     // Start is called before the first frame update
     void Start()
     {
+        inputListener = FindAnyObjectByType<InputListener>();
     }
 
     // Update is called once per frame
@@ -77,6 +80,11 @@ public class SalManager : MonoBehaviour
     {
         savePanel.SetActive(true);
         Time.timeScale = 0f;
+
+        inputListener.StateTransition(InputListenerState.option);
+        OptionListenerState optionListenerState = inputListener.currentState as OptionListenerState;
+        optionListenerState.escapeEvent.RemoveAllListeners();
+        optionListenerState.escapeEvent.AddListener(CloseSavePanel);
     }
 
     /// <summary>
@@ -86,6 +94,8 @@ public class SalManager : MonoBehaviour
     {
         savePanel.SetActive(false);
         Time.timeScale = 1.0f;
+
+        inputListener.StateTransition(InputListenerState.normal);
     }
 
     /// <summary>
