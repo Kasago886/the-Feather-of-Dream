@@ -81,8 +81,8 @@ public class PlayerCardController : MonoBehaviour
     /// </summary>
     private void ReduceCard()
     {
-        Debug.Log("Uesed When"+Time.time);
-        Debug.Log("ID.Count=" + activeCardsId.Count);
+        //Debug.Log("Uesed When"+Time.time);
+        //Debug.Log("ID.Count=" + activeCardsId.Count);
         bool clear=false;
         for(int i = 0;i < activeCards.Count;i++)
         {
@@ -103,7 +103,7 @@ public class PlayerCardController : MonoBehaviour
                 i--;
             }
         }
-        Debug.Log("Clear=" + clear);
+        //Debug.Log("Clear=" + clear);
         if (clear)
         {
             string names = null;

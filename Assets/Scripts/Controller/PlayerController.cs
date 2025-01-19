@@ -120,6 +120,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnJump()
     {
+        //Debug.Log("OnJump");
+
         //检测是否踩在地面上
         bottomCenterGlobal = transform.position + new Vector3(bottomCenterX,bottomCenterY);
         Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal,bottomSize,0,LayerMask.GetMask(Consts.GroundLayer));
