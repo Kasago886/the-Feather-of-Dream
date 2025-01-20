@@ -11605,6 +11605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b596010f663a0004f9931061de4f2443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpScroll: {fileID: 0}
   isDefaultFeather: 1
   defaultFeatherNum: 1
   defaultFeatherHealth: 100
@@ -13967,6 +13968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca4f01b425b5e246bad9c622011af87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpScroll: {fileID: 1917429858}
   isDefaultFeather: 1
   defaultFeatherNum: 1
   defaultFeatherHealth: 100
@@ -14002,7 +14004,6 @@ MonoBehaviour:
   isDead: 0
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
-  hpScroll: {fileID: 1917429858}
   cardGenerateList:
   - "\u6D4B\u8BD5\u62D4\u7FBD"
   - "\u6D4B\u8BD5\u653B\u51FB"

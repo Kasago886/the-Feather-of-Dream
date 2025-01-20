@@ -13,6 +13,7 @@ public class CharacterInspector : Editor
     SerializedProperty injuryEventProperty;
     SerializedProperty healEventProperty;
     SerializedProperty deathEventProperty;
+    SerializedProperty hpScrollProperty;
 
     protected void OnEnable()
     {
@@ -23,13 +24,16 @@ public class CharacterInspector : Editor
         injuryEventProperty = serializedObject.FindProperty("injuryEvent");
         healEventProperty = serializedObject.FindProperty("healEvent");
         deathEventProperty = serializedObject.FindProperty("deathEvent");
+        hpScrollProperty = serializedObject.FindProperty("hpScroll");
     }
     public override void OnInspectorGUI()
     {
         Undo.RecordObject(character, "Change Character");
+        serializedObject.Update();
 
         //垂直方向布局
         EditorGUILayout.BeginVertical();
+        EditorGUILayout.PropertyField(hpScrollProperty, new UnityEngine.GUIContent("血条ui ScrollView"));
 
         character.isDefaultFeather = EditorGUILayout.Toggle("添加初始羽", character.isDefaultFeather);
         if (character.isDefaultFeather)
@@ -70,14 +74,13 @@ public class CharacterInspector : Editor
 
         EditorGUILayout.Space(10);
 
-        serializedObject.Update();
         EditorGUILayout.PropertyField(injuryEventProperty, new UnityEngine.GUIContent("受伤事件"));
         EditorGUILayout.PropertyField(healEventProperty, new UnityEngine.GUIContent("治疗事件"));
         EditorGUILayout.PropertyField(deathEventProperty, new UnityEngine.GUIContent("死亡事件"));
-        serializedObject.ApplyModifiedProperties();
 
         EditorGUILayout.EndVertical();
 
+        serializedObject.ApplyModifiedProperties();
         EditorUtility.SetDirty(character);
     }
 }

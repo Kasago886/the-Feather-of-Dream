@@ -9,7 +9,6 @@ public class PlayerInspector : CharacterInspector
 {
     Player player;
 
-    SerializedProperty hpScrollProperty;
     SerializedProperty cardGenerateTextProperty;
     SerializedProperty cardGenerateListProperty;
 
@@ -19,7 +18,6 @@ public class PlayerInspector : CharacterInspector
         //获取当前要自定义Inspector的对象
         player = (Player)target;
 
-        hpScrollProperty = serializedObject.FindProperty("hpScroll");
         cardGenerateTextProperty = serializedObject.FindProperty("cardGenerateText");
         cardGenerateListProperty = serializedObject.FindProperty("cardGenerateList");
     }
@@ -31,7 +29,6 @@ public class PlayerInspector : CharacterInspector
         EditorGUILayout.BeginVertical();
 
         serializedObject.Update();
-        EditorGUILayout.PropertyField(hpScrollProperty, new UnityEngine.GUIContent("血条ui ScrollView"));
         EditorGUILayout.PropertyField(cardGenerateTextProperty, new UnityEngine.GUIContent("cardGenerateText"));
         EditorGUILayout.PropertyField(cardGenerateListProperty, new UnityEngine.GUIContent("可以得到的卡牌"));
         serializedObject.ApplyModifiedProperties();

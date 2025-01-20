@@ -8,7 +8,6 @@ public class Player : Character
 {
     ArchiveManager archiveManager;
     EquipmentPanelManager equipmentPanelManager;
-    public Scroll hpScroll;
 
     public List<string> cardGenerateList;
     public float cardGenerateCooldown;
@@ -79,18 +78,4 @@ public class Player : Character
 
         equipmentPanelManager.SetUpPlayerInfo();
     }
-
-    public override void ShowUnlockFeather(Feather feather)
-    {
-        base.ShowUnlockFeather(feather);
-
-        HpUI hpUI = hpScroll.AddHp();
-
-        hpUI.testTime = feather.lockTimer;
-        hpUI.testHp = feather.health;
-        hpUI.testHpMax = feather.maxHealth;
-        
-        feather.hpUI = hpUI;
-    }
-
 }

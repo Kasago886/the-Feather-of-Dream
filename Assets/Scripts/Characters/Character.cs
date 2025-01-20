@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,6 +10,9 @@ using UnityEngine.TextCore.Text;
 
 public class Character : MonoBehaviour
 {
+    //血条
+    public Scroll hpScroll;
+
     [Header("是否拥有初始羽")]
     public bool isDefaultFeather;
     public int defaultFeatherNum;
@@ -283,7 +287,13 @@ public class Character : MonoBehaviour
     /// <param name="feather"></param>
     public virtual void ShowUnlockFeather(Feather feather)
     {
+        HpUI hpUI = hpScroll.AddHp();
 
+        hpUI.testTime = feather.lockTimer;
+        hpUI.testHp = feather.health;
+        hpUI.testHpMax = feather.maxHealth;
+
+        feather.hpUI = hpUI;
     }
 
     /// <summary>
