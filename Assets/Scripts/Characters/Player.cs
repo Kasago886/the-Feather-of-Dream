@@ -78,4 +78,22 @@ public class Player : Character
 
         equipmentPanelManager.SetUpPlayerInfo();
     }
+
+
+    /// <summary>
+    /// Õ¹Ê¾ÑªÌõ
+    /// </summary>
+    /// <param name="feather"></param>
+    public override void ShowUnlockFeather(Feather feather)
+    {
+        base.ShowUnlockFeather(feather);
+
+        HpUI hpUI = hpScroll.AddHp();
+
+        hpUI.testTime = feather.lockTimer;
+        hpUI.testHp = feather.health;
+        hpUI.testHpMax = feather.maxHealth;
+
+        feather.hpUI = hpUI;
+    }
 }

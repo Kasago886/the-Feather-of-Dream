@@ -60,7 +60,7 @@ public class HpUi2_FollowEnemy : MonoBehaviour
         //∑÷≈‰…Ì∑›
         scrollRect.content = contentRectTransform;
         scrollRect.viewport = viewPortRectTransform;
-        enemy.hpScroll = scrollView.GetComponent<Scroll>();
+        //enemy.hpScroll = scrollView.GetComponent<Scroll>();
     }
 
     // Update is called once per frame
