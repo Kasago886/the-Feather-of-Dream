@@ -30,6 +30,8 @@ public class ExitPanelManager : MonoBehaviour
 
     public void ExitPanelStart()
     {
+        Time.timeScale = 1.0f;
+
         exitPanelAnimator.gameObject.SetActive(true);
         exitPanelAnimator.Play("ExitPanel");
     }

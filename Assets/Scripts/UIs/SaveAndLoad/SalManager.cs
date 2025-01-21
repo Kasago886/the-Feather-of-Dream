@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,19 @@ public class SalManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    /// <summary>
+    /// ∂¡»°µ±«∞¥Êµµ
+    /// </summary>
+    public void LoadCurrentArchive()
+    {
+        int currentArchiveIndex = PlayerPrefs.GetInt(Consts.CurrentArchivePlayerPrefTag);
+        Archive archive = ArchiveManager.GetArchive(currentArchiveIndex);
+
+        int level = archive.levelInfo.level;
+        ExitPanelManager exitPanelManager = FindAnyObjectByType<ExitPanelManager>();
+        exitPanelManager.LoadScene("Level" + level.ToString());
     }
 
     /// <summary>

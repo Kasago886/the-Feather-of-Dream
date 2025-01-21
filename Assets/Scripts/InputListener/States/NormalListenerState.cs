@@ -37,5 +37,10 @@ public class NormalListenerState : IListenerState
         {
             listener.playerController.StateAttack();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            listener.SwitchPausePanel();
+        }
     }
 }

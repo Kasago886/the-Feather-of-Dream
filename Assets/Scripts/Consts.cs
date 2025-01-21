@@ -7,7 +7,6 @@ public class Consts
     public const string PlayerTag = "Player";
     public const string EnemyTag = "Enemy";
     public const string NormalInteractiveObjectTag = "NormalInteractiveObject";
-    public const string SavePanelTag = "SavePanel";
 
     public const string PlayerLayer = "Player";
     public const string EnemyLayer = "Enemy";
@@ -16,4 +15,6 @@ public class Consts
     public const string InteractiveObjectLayer = "InteractiveObject";
 
     public const string CurrentArchivePlayerPrefTag = "Current Archive";
+    public const string BGMPlayerPrefTag = "BGM";
+    public const string EffectPlayerPrefTag = "Effect";
 }

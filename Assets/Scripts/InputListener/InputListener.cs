@@ -15,6 +15,7 @@ public class InputListener : MonoBehaviour
     public PlayerController playerController;
     public AnimationBoolManager cardPanelAnimationManager;
     public EquipmentPanelManager equipmentPanelManager;
+    public GameObject PausePanel;
 
     Dictionary<InputListenerState, IListenerState> states = new();
     [HideInInspector] public IListenerState currentState;
@@ -38,5 +39,23 @@ public class InputListener : MonoBehaviour
     void Update()
     {
         currentState.Update();
+    }
+
+    public void SwitchPausePanel()
+    {
+        if (PausePanel.activeInHierarchy)
+        {
+            Time.timeScale = 1.0f;
+            PausePanel.SetActive(false);
+
+            StateTransition(InputListenerState.normal);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            PausePanel.SetActive(true);
+
+            StateTransition(InputListenerState.option);
+        }
     }
 }

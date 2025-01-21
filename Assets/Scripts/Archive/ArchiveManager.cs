@@ -94,6 +94,7 @@ public class ArchiveManager : MonoBehaviour
     /// 对相机截图
     /// </summary>
     /// <param name="camera">要被截屏的相机</param>
+    /// <param name="finishAction">截屏完成后执行的Action</param>
     IEnumerator CaptureCamera(Camera camera, Action finishAction = null)
     {
         // 获取相机渲染的屏幕尺寸

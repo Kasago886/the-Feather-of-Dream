@@ -20,5 +20,10 @@ public class OptionListenerState : IListenerState
         {
             escapeEvent?.Invoke();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            listener.SwitchPausePanel();
+        }
     }
 }
