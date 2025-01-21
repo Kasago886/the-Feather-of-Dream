@@ -373,7 +373,10 @@ MonoBehaviour:
   readButton: {fileID: 579006572}
   deleteButton: {fileID: 526138271}
   ensureDeleteButton: {fileID: 1101282585}
-  chosenLoad: {fileID: 0}
+  saveButton: {fileID: 0}
+  savePanel: {fileID: 0}
+  ensureRewriteButton: {fileID: 0}
+  ensureRewritePanel: {fileID: 0}
 --- !u!114 &68561355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,6 +389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1450733d3af92ee43bef6b2b2e7c1c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: -1
+  title: 
   currentArchive:
     index: 0
     levelInfo:
@@ -1351,7 +1356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
