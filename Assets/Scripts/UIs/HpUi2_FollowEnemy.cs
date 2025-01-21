@@ -66,10 +66,6 @@ public class HpUi2_FollowEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Feather feather=new Feather();
-        feather.health = 100;
-        feather.maxHealth = 100;
-        feather.lockTimer = 100000000;
         if (sprite != null)
         {
             scrollViewRectTransform.position=Camera.main.WorldToScreenPoint(new Vector3(gameObject.transform.position.x + sprite.rect.width  / sprite.pixelsPerUnit, gameObject.transform.position.y + sprite.rect.height*3/sprite.pixelsPerUnit, 0));

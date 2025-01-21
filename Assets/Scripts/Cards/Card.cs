@@ -20,6 +20,7 @@ public class Card : MonoBehaviour
     public bool effortOnOneEnemy;//作用于一个敌方
     public bool effortOnMoreEnemies;//作用于多个敌方
     public int theNumberOfEffortedEnemies;//作用的敌方个数
+    public bool effortOnPlayerAndEnemy;//作用所有对象
     //作用方式
     public bool click;
     public bool isRandom;
@@ -32,6 +33,22 @@ public class Card : MonoBehaviour
     public UnityEvent effects;//卡牌效果
     public Buff[] buffs;
     public string[] buffNames;
+    //作用玩家
+    public UnityEvent whatHappenOnDragPlayer;
+    public UnityEvent whatHappenWhenMouseEnterPlayer;
+    public UnityEvent whatHappenWhenMouseExitPlayer;
+    public UnityEvent whatHappenWhenBeChoosenPlayer;
+    public UnityEvent effectsPlayer;//卡牌效果
+    public Buff[] buffsPlayer;
+    public string[] buffNamesPlayer;
+    //作用敌方
+    public UnityEvent whatHappenOnDragEnemy;
+    public UnityEvent whatHappenWhenMouseEnterEnemy;
+    public UnityEvent whatHappenWhenMouseExitEnemy;
+    public UnityEvent whatHappenWhenBeChoosenEnemy;
+    public UnityEvent effectsEnemy;//卡牌效果
+    public Buff[] buffsEnemy;
+    public string[] buffNamesEnemy;
     private bool choose, endChoose;
     private List<Collider2D> effortTarget;
     private List<Enemy> finalTarget;

@@ -263,6 +263,7 @@ MonoBehaviour:
   effortOnOneEnemy: 0
   effortOnMoreEnemies: 0
   theNumberOfEffortedEnemies: 0
+  effortOnPlayerAndEnemy: 0
   click: 1
   isRandom: 0
   dragOnCharactor: 0
@@ -285,6 +286,40 @@ MonoBehaviour:
   buffs: []
   buffNames:
   - "\u6D4B\u8BD5\u653B\u51FB"
+  whatHappenOnDragPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  whatHappenWhenMouseEnterPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  whatHappenWhenMouseExitPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  whatHappenWhenBeChoosenPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  effectsPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  buffsPlayer: []
+  buffNamesPlayer: []
+  whatHappenOnDragEnemy:
+    m_PersistentCalls:
+      m_Calls: []
+  whatHappenWhenMouseEnterEnemy:
+    m_PersistentCalls:
+      m_Calls: []
+  whatHappenWhenMouseExitEnemy:
+    m_PersistentCalls:
+      m_Calls: []
+  whatHappenWhenBeChoosenEnemy:
+    m_PersistentCalls:
+      m_Calls: []
+  effectsEnemy:
+    m_PersistentCalls:
+      m_Calls: []
+  buffsEnemy: []
+  buffNamesEnemy: []
 --- !u!114 &956570312101519618
 MonoBehaviour:
   m_ObjectHideFlags: 0
