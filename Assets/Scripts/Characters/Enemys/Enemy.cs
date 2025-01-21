@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public enum EnemySearchType
 {
@@ -13,7 +14,7 @@ public enum EnemyStateType
 {
     Idle,Chase,Attack,Injury
 }
-
+[RequireComponent(typeof(HpUi2_FollowEnemy))]
 public class Enemy : Character
 {
     public string enemyName;

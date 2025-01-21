@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HpUi2_FollowEnemy : MonoBehaviour
 {
+    [Header("请放入预制体：EnemyHp")]
     public GameObject HpPrefab;
     private Enemy enemy;
     private GameObject scrollView, viewPort, content;
@@ -17,6 +18,7 @@ public class HpUi2_FollowEnemy : MonoBehaviour
     private Dictionary<HpUI,Feather> hpDic;
     void Start()
     {
+        hpDic = new Dictionary<HpUI,Feather>();
         enemy = GetComponent<Enemy>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
@@ -25,12 +27,12 @@ public class HpUi2_FollowEnemy : MonoBehaviour
         }
         scrollView = new GameObject(enemy.enemyName + "TemporaryEnemyHealthUi", typeof(ScrollRect));
         scrollView.AddComponent<Scroll>();
-        viewPort = new GameObject("EnemyHealthViewPort", typeof(RectMask2D));
-        content = new GameObject("HealthUi", typeof(RectTransform), typeof(ContentSizeFitter), typeof(LayoutGroup));
+        viewPort = new GameObject("Viewport", typeof(RectMask2D));
+        content = new GameObject("Content", typeof(RectTransform), typeof(ContentSizeFitter), typeof(VerticalLayoutGroup));
         scrollViewRectTransform = scrollView.GetComponent<RectTransform>();
         viewPortRectTransform = viewPort.GetComponent<RectTransform>();
         contentRectTransform = content.GetComponent<RectTransform>();
-        scrollViewRectTransform.SetParent(GameObject.FindGameObjectWithTag("Canvas").GetComponent<RectTransform>());
+        scrollViewRectTransform.SetParent(GameObject.Find("Canvas").GetComponent<RectTransform>());
         viewPortRectTransform.SetParent(scrollViewRectTransform);
         contentRectTransform.SetParent(viewPortRectTransform);
         scrollViewRectTransform.sizeDelta = new Vector2(90, 120);
@@ -64,13 +66,16 @@ public class HpUi2_FollowEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Feather feather=new Feather();
+        feather.health = 100;
+        feather.maxHealth = 100;
+        feather.lockTimer = 100000000;
         if (sprite != null)
         {
-            scrollViewRectTransform.position = Camera.main.WorldToScreenPoint(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + sprite.rect.height / 2, 0));
+            scrollViewRectTransform.position=Camera.main.WorldToScreenPoint(new Vector3(gameObject.transform.position.x + sprite.rect.width  / sprite.pixelsPerUnit, gameObject.transform.position.y + sprite.rect.height*3/sprite.pixelsPerUnit, 0));
         }
         AddHpUi();
-        Controller();
-        
+        Controller();       
     }
     void AddHpUi()
     {
@@ -78,11 +83,13 @@ public class HpUi2_FollowEnemy : MonoBehaviour
         {
             GameObject hpUiObject = Instantiate(HpPrefab);
             RectTransform transform = hpUiObject.GetComponent<RectTransform>();
+            transform.localScale /= 4;
             transform.SetParent(contentRectTransform);
+            transform.localPosition = contentRectTransform.position;
             HpUI hpUI = hpUiObject.GetComponent<HpUI>();
             hpUI.testHpMax = enemy.unlockedFeathers[content.transform.childCount - 1].maxHealth;
             hpUI.testHp = enemy.unlockedFeathers[content.transform.childCount - 1].health;
-            hpUI.testTime = 1;
+            hpUI.testTime = 10000;
             hpDic.Add(hpUI, enemy.unlockedFeathers[content.transform.childCount - 1]);
         }
     }

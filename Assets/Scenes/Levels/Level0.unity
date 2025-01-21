@@ -10853,8 +10853,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 848569478}
   m_HandleRect: {fileID: 848569477}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.6148282
+  m_Value: 0.9999997
+  m_Size: 0.6193078
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11462,6 +11462,7 @@ GameObject:
   - component: {fileID: 1517636956}
   - component: {fileID: 1517636955}
   - component: {fileID: 1517636954}
+  - component: {fileID: 1517636959}
   m_Layer: 9
   m_Name: testEnemy
   m_TagString: Enemy
@@ -11670,6 +11671,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1517636959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517636953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2e1a8faec99af46b244dab002aa5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HpPrefab: {fileID: 1766162527712917300, guid: 2c9105a39e74bcb41a9d8228fcf85b5b, type: 3}
 --- !u!1 &1537492950
 GameObject:
   m_ObjectHideFlags: 0
