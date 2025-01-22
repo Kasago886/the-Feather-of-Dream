@@ -53,14 +53,18 @@ public class Card : MonoBehaviour
     private List<Collider2D> effortTarget;
     private List<Enemy> finalTarget;
     private int effortNumber;
-    private RectTransform rectTransform;
+    private RectTransform rectTransform,scale;
     private GlowControl glowControl;
     private GameObject captions;
     private TextMesh textMesh;
     private bool shake;
     private float shakeTimer;
-    private Vector3 oriPlace,scale;
+    private Vector3 oriPlace;
     private Transform parent;
+    private void Awake()
+    {
+        scale = GetComponent<RectTransform>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +78,7 @@ public class Card : MonoBehaviour
         {
             if (gameObject.transform.GetChild(i).name == "name")
             {
-                gameObject.transform.GetChild(i).GetComponent<Text>().text =name;
+                gameObject.transform.GetChild(i).GetComponent<Text>().text = name;
             }
             if (gameObject.transform.GetChild(i).name == "description")
             {
@@ -91,11 +95,12 @@ public class Card : MonoBehaviour
     void Update()
     {
         ChooseWhenClick();
-        if (shake&&Time.time%2<=1)
+        BothChooseWhenClick();
+        if (shake && Time.time % 2 <= 1)
         {
             shakeTimer += Time.deltaTime;
-            transform.rotation = Quaternion.Euler(new Vector3(0,0,13+Mathf.Sin(shakeTimer*4*Mathf.PI*3)));
-        }       
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 13 + Mathf.Sin(shakeTimer * 4 * Mathf.PI * 3)));
+        }
     }
     /// <summary>
     /// 这是敌人作用于玩家的方法，你只需要在编写敌人Ai时引用该方法即可
@@ -144,7 +149,15 @@ public class Card : MonoBehaviour
     /// </summary>
     public void PointerEnter()
     {
-        whatHappenWhenMouseEnter?.Invoke();
+        if (!effortOnPlayerAndEnemy)
+        {
+            whatHappenWhenMouseEnter?.Invoke();
+        }
+        else
+        {
+            whatHappenWhenMouseEnterPlayer?.Invoke();
+            whatHappenWhenMouseEnterEnemy?.Invoke();
+        }
         rectTransform.localScale = new Vector3(rectTransform.localScale.x * 1.3f, rectTransform.localScale.y * 1.3f, rectTransform.localScale.z);
         glowControl.useGlowEffect = true;
         shake = true;
@@ -155,8 +168,15 @@ public class Card : MonoBehaviour
     /// </summary>
     public void PointerExit()
     {
-
-        whatHappenWhenMouseExit?.Invoke();
+        if (!effortOnPlayerAndEnemy)
+        {
+            whatHappenWhenMouseExit?.Invoke();
+        }
+        else
+        {
+            whatHappenWhenMouseExitPlayer?.Invoke();
+            whatHappenWhenMouseExitEnemy?.Invoke();
+        }
         rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
         glowControl.useGlowEffect = false;
         shake = false;
@@ -168,7 +188,7 @@ public class Card : MonoBehaviour
     {
         if (click)
         {
-            if (effortNumber == finalTarget.Count && finalTarget.Count >0&& isRandom)
+            if (effortNumber == finalTarget.Count && finalTarget.Count > 0 && isRandom)
             {
                 endChoose = true;
             }
@@ -177,6 +197,7 @@ public class Card : MonoBehaviour
                 if (!isRandom)
                 {
                     EffortWhenClickRandomly();
+                    BothEffortWhenClickRandomly();
                 }
                 else
                 {
@@ -191,8 +212,14 @@ public class Card : MonoBehaviour
                         textMesh.anchor = TextAnchor.MiddleCenter;
                         captions.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y + Camera.main.orthographicSize * 4 / 5, 0f);
                         choose = true;
-
-                        GetWhatInCamera();
+                        if (effortOnPlayerAndEnemy)
+                        {
+                            GetBothInCamera();
+                        }
+                        else
+                        {
+                            GetWhatInCamera();
+                        }
                     }
                     else
                     {
@@ -211,7 +238,15 @@ public class Card : MonoBehaviour
         {
             transform.position = Input.mousePosition;
             gameObject.transform.SetParent(GameObject.Find("CardPanel").transform);
-            whatHappenOnDrag?.Invoke();
+            if (!effortOnPlayerAndEnemy)
+            {
+                whatHappenOnDrag?.Invoke();
+            }
+            else
+            {
+                whatHappenOnDragPlayer?.Invoke();
+                whatHappenOnDragEnemy?.Invoke();
+            }
         }
     }
     /// <summary>
@@ -240,7 +275,7 @@ public class Card : MonoBehaviour
             {
                 player.AddBuff(buffNames[j]);
             }
-            gameObject.SetActive(false); 
+            gameObject.SetActive(false);
             rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
         }
         if (effortOnEnmey)
@@ -537,7 +572,7 @@ public class Card : MonoBehaviour
                         choose = false;
                     }
                 }
-                
+
             }
         }
         if (endChoose)
@@ -561,6 +596,301 @@ public class Card : MonoBehaviour
             rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
         }
     }
+    private void BothEffortWhenClickRandomly()
+    {
+        if (effortOnPlayerAndEnemy)
+        {
+            effectsPlayer?.Invoke();
+            Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
+            for (int i = 0; i < buffs.Length; i++)
+            {
+                player.AddBuff(buffsPlayer[i]);
+            }
+            for (int j = 0; j < buffNames.Length; j++)
+            {
+                player.AddBuff(buffNamesPlayer[j]);
+            }
+            List<int> enemiesWhoHaveBeenEfforted = new List<int>();
+            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+            List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
+            for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
+            {
+                Bounds bounds = enemiesThatBeenChoose[i].bounds;
+                if (GeometryUtility.TestPlanesAABB(planes, bounds))
+                {
+                    enemiesWhoInCameralist.Add(enemiesThatBeenChoose[i].gameObject);
+                }
+            }
+            if (theNumberOfEffortedEnemies > enemiesWhoInCameralist.Count)
+            {
+                theNumberOfEffortedEnemies = enemiesWhoInCameralist.Count;
+            }
+            if (effortOnMoreEnemies)
+            {
+                for (int i = 0; i < theNumberOfEffortedEnemies; i++)
+                {
+
+                a:
+                    int n = Random.Range(0, theNumberOfEffortedEnemies);
+                    for (int j = 0; j < enemiesWhoHaveBeenEfforted.Count; j++)
+                    {
+                        if (n == enemiesWhoHaveBeenEfforted[j])
+                        {
+                            goto a;
+                        }
+                    }
+                    Enemy enemy = enemiesWhoInCameralist[n].GetComponent<Enemy>();
+                    for (int j = 0; j < buffs.Length; j++)
+                    {
+                        enemy.AddBuff(buffsEnemy[j]);
+                    }
+                    for (int j = 0; j < buffNames.Length; j++)
+                    {
+                        enemy.AddBuff(buffNamesEnemy[j]);
+                    }
+                    effectsEnemy?.Invoke();
+                    enemiesWhoHaveBeenEfforted.Add(n);
+                }
+                gameObject.SetActive(false);
+                rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
+            }
+            else if (!effortOnMoreEnemies)
+            {
+                int n = Random.Range(0, theNumberOfEffortedEnemies);
+                Enemy enemy = enemiesWhoInCameralist[n].GetComponent<Enemy>();
+                for (int j = 0; j < buffs.Length; j++)
+                {
+                    enemy.AddBuff(buffsEnemy[j]);
+                }
+                for (int j = 0; j < buffNames.Length; j++)
+                {
+                    enemy.AddBuff(buffNamesEnemy[j]);
+                }
+                effectsEnemy?.Invoke();
+                gameObject.SetActive(false);
+                rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
+            }
+        }
+    }
+    private void BothEffortWhenDragEnd()
+    {
+        if (effortOnPlayerAndEnemy)
+        {
+            if (Vector2.Distance(Camera.main.ScreenToWorldPoint(transform.position), GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position) < minDistance)
+            {
+                effectsPlayer?.Invoke();
+                Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
+                for (int i = 0; i < buffs.Length; i++)
+                {
+                    player.AddBuff(buffsPlayer[i]);
+                }
+                for (int j = 0; j < buffNames.Length; j++)
+                {
+                    player.AddBuff(buffNamesPlayer[j]);
+                }              
+            }
+            List<int> enemiesWhoHaveBeenEfforted = new List<int>();
+            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+            List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
+            for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
+            {
+                Bounds bounds = enemiesThatBeenChoose[i].bounds;
+                if (GeometryUtility.TestPlanesAABB(planes, bounds))
+                {
+                    enemiesWhoInCameralist.Add(enemiesThatBeenChoose[i].gameObject);
+                }
+            }
+            if (theNumberOfEffortedEnemies > enemiesWhoInCameralist.Count)
+            {
+                theNumberOfEffortedEnemies = enemiesWhoInCameralist.Count;
+            }
+            bool work = false; ;
+            for (int i = 0; i < enemiesWhoInCameralist.Count; i++)
+            {
+                if (Vector2.Distance(Camera.main.ScreenToWorldPoint(transform.position), enemiesWhoInCameralist[i].transform.position) < minDistance)
+                {
+                    work = true;
+                    break;
+                }
+            }
+            if (work)
+            {
+                int theNearestNumber = -1;
+                for (int i = 0; i < enemiesWhoInCameralist.Count; i++)
+                {
+                    if (theNearestNumber != -1)
+                    {
+                        if (Vector2.Distance(transform.position, enemiesWhoInCameralist[i].transform.position) < Vector2.Distance(transform.position, enemiesWhoInCameralist[theNearestNumber].transform.position))
+                        {
+                            theNearestNumber = i;
+                        }
+                    }
+                    else if (theNearestNumber == -1)
+                    {
+                        theNearestNumber = i;
+                    }
+                }
+                if (theNearestNumber != -1)
+                {
+                    if (effortOnMoreEnemies)
+                    {
+                        for (int i = 0; i < theNumberOfEffortedEnemies - 1; i++)
+                        {
+
+                        a:
+                            int n = Random.Range(0, theNumberOfEffortedEnemies);
+                            for (int j = 0; j < enemiesWhoHaveBeenEfforted.Count; j++)
+                            {
+                                if (n == enemiesWhoHaveBeenEfforted[j] || n == theNearestNumber)
+                                {
+                                    goto a;
+                                }
+                            }
+                            Enemy enemy = enemiesWhoInCameralist[n].GetComponent<Enemy>();
+                            for (int j = 0; j < buffs.Length; j++)
+                            {
+                                enemy.AddBuff(buffsEnemy[j]);
+                            }
+                            for (int j = 0; j < buffNames.Length; j++)
+                            {
+                                enemy.AddBuff(buffNamesEnemy[j]);
+                            }
+                            effectsEnemy?.Invoke();
+                            enemiesWhoHaveBeenEfforted.Add(n);
+                        }
+                    }
+                    Enemy enemy0 = enemiesWhoInCameralist[theNearestNumber].GetComponent<Enemy>();
+                    for (int j = 0; j < buffs.Length; j++)
+                    {
+                        enemy0.AddBuff(buffsEnemy[j]);
+                    }
+                    for (int j = 0; j < buffNames.Length; j++)
+                    {
+                        enemy0.AddBuff(buffNamesEnemy[j]);
+                    }
+                    effectsEnemy?.Invoke();
+                }
+                gameObject.SetActive(false);
+                rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
+            }
+        }
+
+    }
+    private void GetBothInCamera()
+    {
+        if (effortOnPlayerAndEnemy)
+        {
+            effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.PlayerLayer)));
+            effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer)));
+            effortNumber = 1;
+            if (effortOnOneEnemy)
+            {
+                effortNumber = 1;
+            }
+            else if (effortOnMoreEnemies)
+            {
+                if (theNumberOfEffortedEnemies < effortTarget.Count)
+                {
+                    effortNumber = theNumberOfEffortedEnemies;
+                }
+                else
+                {
+                    effortNumber = effortTarget.Count;
+                }
+            }
+        }
+    }
+    private void BothChooseWhenClick()
+    {
+        if (!choose)
+        {
+            effortTarget.Clear();
+            if (captions != null)
+            {
+                Destroy(captions);
+            }
+        }
+        if (choose && isRandom)
+        {
+            if (effortOnPlayerAndEnemy)
+            {               
+                if (textMesh != null)
+                {
+                    if (effortNumber == finalTarget.Count)
+                    {
+                        textMesh.text = "请点击卡牌";
+                    }
+                    else
+                    {
+                        textMesh.text = "请选择敌人，已选择" + finalTarget.Count.ToString() + "/" + effortNumber.ToString();
+                    }
+                }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    bool b = false;
+                    if (effortNumber > finalTarget.Count)
+                    {
+                        for (int i = 0; i < effortTarget.Count; i++)
+                        {
+                            Bounds bound = effortTarget[i].bounds;
+                            if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)))
+                            {
+                                b = true;
+                                whatHappenWhenBeChoosen?.Invoke();
+                                finalTarget.Add(effortTarget[i].GetComponent<Enemy>());
+                                effortTarget.RemoveAt(i);
+                                break;
+                            }
+                        }
+                    }
+                    if (!b)
+                    {
+                        choose = false;
+                    }
+                }
+
+            }
+        }
+        if (endChoose)
+        {
+            effectsEnemy?.Invoke();
+            for (int i = 0; i < finalTarget.Count; i++)
+            {
+
+                for (int j = 0; j < buffs.Length; j++)
+                {
+                    finalTarget[i].AddBuff(buffsEnemy[j]);
+                }
+                for (int j = 0; j < buffNames.Length; j++)
+                {
+                    finalTarget[i].AddBuff(buffNamesEnemy[j]);
+                }
+            }
+            effectsPlayer?.Invoke();
+            Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
+            for (int i = 0; i < buffs.Length; i++)
+            {
+                player.AddBuff(buffsPlayer[i]);
+            }
+            for (int j = 0; j < buffNames.Length; j++)
+            {
+                player.AddBuff(buffNamesPlayer[j]);
+            }
+            if (textMesh != null)
+            {
+                textMesh.text = "已默认选择玩家";
+            }
+            Destroy(captions,1f);
+            gameObject.SetActive(false);
+            rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
+        }
+    }
     private void OnDrawGizmos()
     {
         if (dragOnCharactor && minDistance > 0)
@@ -577,15 +907,16 @@ public class Card : MonoBehaviour
     }
     private void OnDisable()
     {
+        rectTransform.localScale=scale.localScale;  
         if (glowControl != null)
         {
             glowControl.useGlowEffect = false;
         }
-        if(effortTarget != null)
+        if (effortTarget != null)
         {
             effortTarget.Clear();
         }
-        if (finalTarget!=null)
+        if (finalTarget != null)
         {
             finalTarget.Clear();
         }
