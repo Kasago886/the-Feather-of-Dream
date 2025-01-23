@@ -34,6 +34,7 @@ public class PlayerCardController : MonoBehaviour
             cardPool = new ObjectPool<Card>(cardsList[i], positions);
             Card card = cardPool.GetFromPool();
             nameToID.Add(card.name,card.id);
+            Debug.Log("Add"+card.name + card.id+"!!!");
             idToCard.Add(card.id, cardPool);
             cardPool.ReturnToPool(card);
         }
@@ -67,7 +68,10 @@ public class PlayerCardController : MonoBehaviour
     /// </param>
     public void GetCard(string cardName)
     {
-        GetCard(nameToID[cardName]);
+        if (nameToID.ContainsKey(cardName))
+        {
+            GetCard(nameToID[cardName]);
+        }
     }
     private void GetCard(int id,bool b)
     {

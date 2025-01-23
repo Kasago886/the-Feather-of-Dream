@@ -19,16 +19,19 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
     /// </param>
     public ObjectPool(GameObject prefob, RectTransform[] container)
     {
+        Debug.Log("Idoit1");
         this.prefob = prefob;
+        Debug.Log("Idoit2");
         foreach (RectTransform t in container)
         {
             this.container.Add(t);
         }
+        Debug.Log("Idoit3");
         for (int i = 0; i < this.container.Count; i++)
         {
-            T obj = CreateNewGameObject(this.container[i]);
-            ReturnToPool(obj, this.container[i]);
+            ReturnToPool(CreateNewGameObject(this.container[i]), this.container[i]);
         }
+        Debug.Log("Idoit4");
     }
     public ObjectPool(GameObject prefob, RectTransform container)
     {
@@ -124,8 +127,11 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
     }
     private T CreateNewGameObject(RectTransform container)
     {
-        GameObject gameObject = Instantiate(prefob, container.position, Quaternion.identity);
-        gameObject.SetActive(false);
+        GameObject gameObject1 = Instantiate(prefob, container.position, Quaternion.identity);
+        if (gameObject1 != null)
+        {
+            gameObject1.SetActive(false);
+        }
         return gameObject.GetComponent<T>();
     }
     /// <summary>

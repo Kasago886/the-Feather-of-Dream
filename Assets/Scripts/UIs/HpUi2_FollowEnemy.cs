@@ -91,15 +91,18 @@ public class HpUi2_FollowEnemy : MonoBehaviour
     }
     void Controller()
     {
-        foreach (var hp in hpDic)
+        if (hpDic!=null)
         {
-            if (hp.Value != null)
+            foreach (var hp in hpDic)
             {
-                hp.Key.testHp = hp.Value.health;
-            }
-            else
-            {
-                hpDic.Remove(hp.Key);
+                if (hp.Value != null)
+                {
+                    hp.Key.testHp = hp.Value.health;
+                }
+                else
+                {
+                    hpDic.Remove(hp.Key);
+                }
             }
         }
     }
