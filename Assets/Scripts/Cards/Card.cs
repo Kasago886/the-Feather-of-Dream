@@ -13,6 +13,9 @@ public class Card : MonoBehaviour
     public int rarity;
     public string description;
     public string backGroundStory;
+    //使用对象
+    public bool playerUse=true;
+    public bool enemyUse;
     //作用对象
     public bool effortOnPlayer;//作用于玩家
     public bool effortOnEnmey;//作用于敌方
@@ -60,12 +63,10 @@ public class Card : MonoBehaviour
     private float shakeTimer;
     private Vector3 oriPlace,scale1;
     private Transform parent;
-    private int number;
-    //private void Awake()
-    //{
-    //    scale = GetComponent<RectTransform>();
-    //}
-    // Start is called before the first frame update
+    private int number,stringNumber;
+    private List<string> buffCaptions = new List<string>();
+    private string enemyName;
+    private float timer;
     void Start()
     {
         parent = gameObject.transform.parent;
@@ -116,7 +117,7 @@ public class Card : MonoBehaviour
     /// </param>
     public void EnemyHasEffectOnPlayer(string enemyName)
     {
-        captions = new GameObject("captions");
+        captions = new GameObject("EnemyCaptions");
         captions.transform.SetAsFirstSibling();
         captions.AddComponent<TextMesh>();
         textMesh = captions.GetComponent<TextMesh>();
@@ -124,31 +125,10 @@ public class Card : MonoBehaviour
         textMesh.anchor = TextAnchor.MiddleCenter;
         captions.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y + Camera.main.orthographicSize * 4 / 5, 0f);
         effects?.Invoke();
-        Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
-        List<string> buffCaptions = new List<string>();
-        for (int i = 0; i < buffs.Length; i++)
-        {
-            player.AddBuff(buffs[i]);
-            buffCaptions.Add(buffs[i].ToString());
-        }
-        for (int j = 0; j < buffNames.Length; j++)
-        {
-            player.AddBuff(buffNames[j]);
-            buffCaptions.Add(buffNames[j]);
-        }
-        int stringNumber = 0;
-        if (Time.time % 2 == 0)
-        {
-            stringNumber++;
-        }
-        if (stringNumber < buffCaptions.Count)
-        {
-            textMesh.text = enemyName + "对你使用了" + buffCaptions[stringNumber];
-        }
-        else
-        {
-            Destroy(textMesh);
-        }
+        textMesh.text = enemyName+"使用了"+name;
+        Destroy(textMesh ,1f);
+        EnemyEffectOnPlayer();
+        EnemyEffectOnSelf();
     }
     /// <summary>
     /// 当玩家鼠标进入该物体中的时候执行该函数
@@ -895,6 +875,59 @@ public class Card : MonoBehaviour
             Destroy(captions,1f);
             gameObject.SetActive(false);
             rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
+        }
+    }
+    private void EnemyEffectOnPlayer()
+    {
+        if (effortOnPlayer)
+        {
+            Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
+            for (int i = 0; i < buffs.Length; i++)
+            {
+                player.AddBuff(buffs[i]);
+            }
+            for (int j = 0; j < buffNames.Length; j++)
+            {
+                player.AddBuff(buffNames[j]);
+            }
+        }
+    }
+    private void EnemyEffectOnSelf()
+    {
+        if (effortOnOneEnemy)
+        {
+            Enemy enemy = GetComponent<Enemy>();
+            for (int i = 0; i < buffs.Length; i++)
+            {
+                enemy.AddBuff(buffs[i]);
+            }
+            for (int j = 0; j < buffNames.Length; j++)
+            {
+                enemy.AddBuff(buffNames[j]);
+            }
+        }
+    }
+    private void EnemyEffectOnSelfAndOtherEnemy()
+    {
+        if (effortOnMoreEnemies)
+        {
+            List<int> enemiesWhoHaveBeenEfforted = new List<int>();
+            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+            List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
+            for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
+            {
+                Bounds bounds = enemiesThatBeenChoose[i].bounds;
+                if (GeometryUtility.TestPlanesAABB(planes, bounds))
+                {
+                    enemiesWhoInCameralist.Add(enemiesThatBeenChoose[i].gameObject);
+                }
+            }
+            if (theNumberOfEffortedEnemies > enemiesWhoInCameralist.Count)
+            {
+                theNumberOfEffortedEnemies = enemiesWhoInCameralist.Count;
+            }
         }
     }
     private void OnDrawGizmos()

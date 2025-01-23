@@ -11,7 +11,7 @@ public class CardInspector : Editor
 {
 
     private Card card;
-    private bool b0, b1, b2, b3;
+    private bool b0, b1, b2, b3, b4;
     private SerializedProperty event1, event2, event3, event4, event5, buff, buffName, event6, event7, event8, event9, event10, buff1, buffName1, event11, event12, event13, event14, event15, buff2, buffName2;
     private GameObject prefob;
     bool effortOnPlayer;//作用于玩家
@@ -20,9 +20,11 @@ public class CardInspector : Editor
     bool effortOnMoreEnemies;//作用于多个敌方
     bool click;
     bool dragOnCharactor;
+    bool playerUse;
+    bool enemyUse;
     private void OnEnable()
     {
-        b1 = true; b2 = true; b0 = true;
+        b1 = true; b2 = true; b0 = true; b4 = true;
         card = (Card)target;
         effortOnPlayer = card.effortOnPlayer; effortOnEnmey = card.effortOnEnmey; effortOnOneEnemy = card.effortOnOneEnemy; effortOnMoreEnemies = card.effortOnMoreEnemies; click = card.click; dragOnCharactor = card.dragOnCharactor;
         event1 = serializedObject.FindProperty("whatHappenOnDrag");
@@ -46,10 +48,28 @@ public class CardInspector : Editor
         buffName1 = serializedObject.FindProperty("buffNamesPlayer");
         buff2 = serializedObject.FindProperty("buffsEnemy");
         buffName2 = serializedObject.FindProperty("buffNamesEnemy");
+        card.playerUse = true;
     }
     public override void OnInspectorGUI()
     {
         EditorGUILayout.BeginVertical();
+        EditorGUILayout.Space(2);
+        b4 = EditorGUILayout.Foldout(b4, "使用者");
+        if (b4)
+        {
+            card.playerUse = EditorGUILayout.Toggle("玩家使用", card.playerUse);
+            card.enemyUse = EditorGUILayout.Toggle("敌人使用", card.enemyUse);
+            if (card.playerUse != playerUse)
+            {
+                card.enemyUse = false;
+                playerUse = card.playerUse;
+            }
+            else if (card.enemyUse != enemyUse)
+            {
+                card.playerUse = false;
+                enemyUse = card.enemyUse;
+            }
+        }
 
         EditorGUILayout.Space(2);
         b0 = EditorGUILayout.Foldout(b0, "卡牌信息");
@@ -114,28 +134,31 @@ public class CardInspector : Editor
                 }
             }
         }
-        EditorGUILayout.Space(2);
-
-        b2 = EditorGUILayout.Foldout(b2, "作用方法");
-        if (b2)
+        if (card.playerUse)
         {
-            card.click = EditorGUILayout.Toggle("点击", card.click);
-            if (card.click)
+            EditorGUILayout.Space(2);
+
+            b2 = EditorGUILayout.Foldout(b2, "作用方法");
+            if (b2)
             {
-                card.isRandom = EditorGUILayout.Toggle("主动选择", card.isRandom);
-            }
-            card.dragOnCharactor = EditorGUILayout.Toggle("拖拽", card.dragOnCharactor);
-            if (card.dragOnCharactor)
-            {
-                card.minDistance = EditorGUILayout.FloatField("最小触发范围", card.minDistance);
-                if (card.minDistance > 0)
+                card.click = EditorGUILayout.Toggle("点击", card.click);
+                if (card.click)
                 {
-                    EditorGUILayout.HelpBox("注意实际范围", MessageType.Info);
+                    card.isRandom = EditorGUILayout.Toggle("主动选择", card.isRandom);
                 }
-                else if (card.minDistance < 0)
+                card.dragOnCharactor = EditorGUILayout.Toggle("拖拽", card.dragOnCharactor);
+                if (card.dragOnCharactor)
                 {
-                    EditorGUILayout.HelpBox("不可以小于0", MessageType.Warning);
-                    card.theNumberOfEffortedEnemies = 0;
+                    card.minDistance = EditorGUILayout.FloatField("最小触发范围", card.minDistance);
+                    if (card.minDistance > 0)
+                    {
+                        EditorGUILayout.HelpBox("注意实际范围", MessageType.Info);
+                    }
+                    else if (card.minDistance < 0)
+                    {
+                        EditorGUILayout.HelpBox("不可以小于0", MessageType.Warning);
+                        card.theNumberOfEffortedEnemies = 0;
+                    }
                 }
             }
         }
@@ -146,17 +169,21 @@ public class CardInspector : Editor
         {
             if (!card.effortOnPlayerAndEnemy)
             {
+
                 serializedObject.Update();
-                EditorGUILayout.LabelField("在卡牌被拖拽时所发生的事件");
-                EditorGUILayout.PropertyField(event1);
-                EditorGUILayout.LabelField("在鼠标在卡牌上所发生的事件");
-                EditorGUILayout.PropertyField(event2);
-                EditorGUILayout.LabelField("在鼠标离开卡牌所发生的事件");
-                EditorGUILayout.PropertyField(event3);
-                EditorGUILayout.LabelField("在卡牌发生作用时所发生的事件");
-                EditorGUILayout.PropertyField(event4);
-                EditorGUILayout.LabelField("在选择角色作为卡牌作用目标时所发生的事件");
-                EditorGUILayout.PropertyField(event5);
+                if (card.playerUse)
+                {
+                    EditorGUILayout.LabelField("在卡牌被拖拽时所发生的事件");
+                    EditorGUILayout.PropertyField(event1);
+                    EditorGUILayout.LabelField("在鼠标在卡牌上所发生的事件");
+                    EditorGUILayout.PropertyField(event2);
+                    EditorGUILayout.LabelField("在鼠标离开卡牌所发生的事件");
+                    EditorGUILayout.PropertyField(event3);
+                    EditorGUILayout.LabelField("在卡牌发生作用时所发生的事件");
+                    EditorGUILayout.PropertyField(event4);
+                    EditorGUILayout.LabelField("在选择角色作为卡牌作用目标时所发生的事件");
+                    EditorGUILayout.PropertyField(event5);
+                }
                 EditorGUILayout.PropertyField(buff, new GUIContent("需要添加的buff"), true);
                 //for (int i = 0; i < buff.arraySize; i++)
                 //{
@@ -177,16 +204,19 @@ public class CardInspector : Editor
             else
             {
                 serializedObject.Update();
-                EditorGUILayout.LabelField("敌人在卡牌被拖拽时所发生的事件");
-                EditorGUILayout.PropertyField(event11);
-                EditorGUILayout.LabelField("敌人在鼠标在卡牌上所发生的事件");
-                EditorGUILayout.PropertyField(event12);
-                EditorGUILayout.LabelField("敌人在鼠标离开卡牌所发生的事件");
-                EditorGUILayout.PropertyField(event13);
-                EditorGUILayout.LabelField("敌人在卡牌发生作用时所发生的事件");
-                EditorGUILayout.PropertyField(event14);
-                EditorGUILayout.LabelField("敌人在选择角色作为卡牌作用目标时所发生的事件");
-                EditorGUILayout.PropertyField(event15);
+                if (card.playerUse)
+                {
+                    EditorGUILayout.LabelField("敌人在卡牌被拖拽时所发生的事件");
+                    EditorGUILayout.PropertyField(event11);
+                    EditorGUILayout.LabelField("敌人在鼠标在卡牌上所发生的事件");
+                    EditorGUILayout.PropertyField(event12);
+                    EditorGUILayout.LabelField("敌人在鼠标离开卡牌所发生的事件");
+                    EditorGUILayout.PropertyField(event13);
+                    EditorGUILayout.LabelField("敌人在卡牌发生作用时所发生的事件");
+                    EditorGUILayout.PropertyField(event14);
+                    EditorGUILayout.LabelField("敌人在选择角色作为卡牌作用目标时所发生的事件");
+                    EditorGUILayout.PropertyField(event15);
+                }
                 EditorGUILayout.PropertyField(buff2, new GUIContent("敌人需要添加的buff"), true);
                 //for (int i = 0; i < buff.arraySize; i++)
                 //{
@@ -203,16 +233,19 @@ public class CardInspector : Editor
                 {
                     EditorGUILayout.HelpBox("注意:\"需要添加的buff\"与\"需要添加的buff的名字\"而这只需要填一个就行，如果这两上面个都填的是同一个buff那么将会对对象施加2次该buff", MessageType.Warning);
                 }
-                EditorGUILayout.LabelField("玩家在卡牌被拖拽时所发生的事件");
-                EditorGUILayout.PropertyField(event6);
-                EditorGUILayout.LabelField("玩家在鼠标在卡牌上所发生的事件");
-                EditorGUILayout.PropertyField(event7);
-                EditorGUILayout.LabelField("玩家在鼠标离开卡牌所发生的事件");
-                EditorGUILayout.PropertyField(event8);
-                EditorGUILayout.LabelField("玩家在卡牌发生作用时所发生的事件");
-                EditorGUILayout.PropertyField(event9);
-                EditorGUILayout.LabelField("玩家在选择角色作为卡牌作用目标时所发生的事件");
-                EditorGUILayout.PropertyField(event10);
+                if (card.playerUse)
+                {
+                    EditorGUILayout.LabelField("玩家在卡牌被拖拽时所发生的事件");
+                    EditorGUILayout.PropertyField(event6);
+                    EditorGUILayout.LabelField("玩家在鼠标在卡牌上所发生的事件");
+                    EditorGUILayout.PropertyField(event7);
+                    EditorGUILayout.LabelField("玩家在鼠标离开卡牌所发生的事件");
+                    EditorGUILayout.PropertyField(event8);
+                    EditorGUILayout.LabelField("玩家在卡牌发生作用时所发生的事件");
+                    EditorGUILayout.PropertyField(event9);
+                    EditorGUILayout.LabelField("玩家在选择角色作为卡牌作用目标时所发生的事件");
+                    EditorGUILayout.PropertyField(event10);
+                }
                 EditorGUILayout.PropertyField(buff1, new GUIContent("玩家需要添加的buff"), true);
                 //for (int i = 0; i < buff.arraySize; i++)
                 //{

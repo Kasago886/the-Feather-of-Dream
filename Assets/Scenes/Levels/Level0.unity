@@ -12090,12 +12090,7 @@ MonoBehaviour:
   cardsList:
   - {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
   - {fileID: 4056058898571058497, guid: 5a394e9de2650c5449bfbca809b22c67, type: 3}
-  positions:
-  - {fileID: 896047149}
-  - {fileID: 55478726}
-  - {fileID: 1232462547}
-  - {fileID: 1116889108}
-  - {fileID: 1390188946}
+  positionNumber: 0
 --- !u!1 &1195162909
 GameObject:
   m_ObjectHideFlags: 0
@@ -13977,7 +13972,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1646145561}
   m_HandleRect: {fileID: 1646145560}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -14931,8 +14926,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 848569478}
   m_HandleRect: {fileID: 848569477}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.6148282
+  m_Value: 0.9999997
+  m_Size: 0.6193078
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
