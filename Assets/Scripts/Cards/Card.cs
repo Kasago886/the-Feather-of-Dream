@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Reflection.Emit;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -53,18 +52,19 @@ public class Card : MonoBehaviour
     private List<Collider2D> effortTarget;
     private List<Enemy> finalTarget;
     private int effortNumber;
-    private RectTransform rectTransform,scale;
+    private RectTransform rectTransform;
     private GlowControl glowControl;
     private GameObject captions;
     private TextMesh textMesh;
     private bool shake;
     private float shakeTimer;
-    private Vector3 oriPlace;
+    private Vector3 oriPlace,scale1;
     private Transform parent;
-    private void Awake()
-    {
-        scale = GetComponent<RectTransform>();
-    }
+    private int number;
+    //private void Awake()
+    //{
+    //    scale = GetComponent<RectTransform>();
+    //}
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +72,12 @@ public class Card : MonoBehaviour
         effortTarget = new List<Collider2D>();
         finalTarget = new List<Enemy>();
         rectTransform = GetComponent<RectTransform>();
+        if (number == 0)
+        {
+            rectTransform = GetComponent<RectTransform>();
+            scale1 = new Vector3(rectTransform.localScale.x,rectTransform.localScale.y,rectTransform.localScale.z);
+            number++;
+        }
         rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 13));
         glowControl = GetComponent<GlowControl>();
         for (int i = 0; i < gameObject.transform.childCount; i++)
@@ -907,7 +913,6 @@ public class Card : MonoBehaviour
     }
     private void OnDisable()
     {
-        rectTransform.localScale=scale.localScale;  
         if (glowControl != null)
         {
             glowControl.useGlowEffect = false;
@@ -924,5 +929,9 @@ public class Card : MonoBehaviour
         choose = false;
         endChoose = false;
         shake = false;
+        if (number == 1)
+        {
+            rectTransform.localScale = new Vector3(scale1.x, scale1.y, scale1.z);   
+        }
     }
 }

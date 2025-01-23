@@ -85,22 +85,12 @@ public class PlayerCardController : MonoBehaviour
     /// </summary>
     private void ReduceCard()
     {
-        //Debug.Log("Uesed When"+Time.time);
-        //Debug.Log("ID.Count=" + activeCardsId.Count);
         bool clear=false;
         for(int i = 0;i < activeCards.Count;i++)
         {
             if(!activeCards[i].activeSelf)
             {
                 clear=true;
-                if (activeCardsId[i] == 1)
-                {
-                    Debug.Log("Remove°ÎÓð" );
-                }
-                else
-                {
-                    Debug.Log("Remove¹¥»÷");
-                }
                 idToCard[activeCardsId[i]].ReturnToPool(activeCards[i].GetComponent<Card>());
                 activeCardsId.RemoveAt(i);
                 activeCards.RemoveAt(i);

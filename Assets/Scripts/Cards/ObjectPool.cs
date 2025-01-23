@@ -19,19 +19,15 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
     /// </param>
     public ObjectPool(GameObject prefob, RectTransform[] container)
     {
-        Debug.Log("Idoit1");
         this.prefob = prefob;
-        Debug.Log("Idoit2");
         foreach (RectTransform t in container)
         {
             this.container.Add(t);
         }
-        Debug.Log("Idoit3");
         for (int i = 0; i < this.container.Count; i++)
         {
             ReturnToPool(CreateNewGameObject(this.container[i]), this.container[i]);
         }
-        Debug.Log("Idoit4");
     }
     public ObjectPool(GameObject prefob, RectTransform container)
     {
@@ -90,7 +86,10 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
     }
     private void ReturnToPool(T obj, RectTransform container)
     {
-        obj.gameObject.SetActive(false);
+        if (obj != null)
+        {
+            obj.gameObject.SetActive(false);
+        }
         obj.transform.parent = container;
         pool.Push(obj);
     }
@@ -102,7 +101,10 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
     /// </param>
     public void ReturnToPool(T obj)
     {
-        obj.gameObject.SetActive(false);
+        if (obj != null)
+        {
+            obj.gameObject.SetActive(false);
+        }
         int number = 0;
         for (int i = 0; i < this.container.Count; i++)
         {
@@ -128,11 +130,11 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
     private T CreateNewGameObject(RectTransform container)
     {
         GameObject gameObject1 = Instantiate(prefob, container.position, Quaternion.identity);
-        if (gameObject1 != null)
+        if(gameObject1.GetComponent<T>() == null)
         {
-            gameObject1.SetActive(false);
+            Debug.Log("null!");
         }
-        return gameObject.GetComponent<T>();
+        return gameObject1.GetComponent<T>();
     }
     /// <summary>
     /// Çå¿Õ¶ÔÏó³Ø
