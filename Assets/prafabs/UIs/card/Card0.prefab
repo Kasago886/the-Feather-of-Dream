@@ -261,11 +261,11 @@ MonoBehaviour:
   playerUse: 1
   enemyUse: 0
   effortOnPlayer: 0
-  effortOnEnmey: 1
-  effortOnOneEnemy: 0
+  effortOnEnmey: 0
+  effortOnOneEnemy: 1
   effortOnMoreEnemies: 0
   theNumberOfEffortedEnemies: 0
-  effortOnPlayerAndEnemy: 0
+  effortOnPlayerAndEnemy: 1
   click: 1
   isRandom: 1
   dragOnCharactor: 0

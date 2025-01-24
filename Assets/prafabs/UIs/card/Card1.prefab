@@ -258,6 +258,8 @@ MonoBehaviour:
   rarity: 1
   description: "\u7ED9\u81EA\u8EAB\u589E\u52A0\u4E00\u4E2A10s\u7684\u653B\u51FB\u66FF\u8EAB"
   backGroundStory: 12233
+  playerUse: 1
+  enemyUse: 0
   effortOnPlayer: 1
   effortOnEnmey: 0
   effortOnOneEnemy: 0

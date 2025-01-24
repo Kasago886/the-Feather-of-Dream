@@ -30,10 +30,15 @@ public class Character : MonoBehaviour
 
     [Header("攻击替身")]
     public List<GameObject> attackBodyObjList;
+    public AudioClip attackSound;
 
     public UnityEvent injuryEvent;
+    public AudioClip injurySound;
+
     public UnityEvent healEvent;
+
     public UnityEvent deathEvent;
+    public AudioClip deathSound;
 
     public List<Buff> buffList = new();
     public List<Feather> feathers = new();
@@ -43,12 +48,14 @@ public class Character : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
+    public AudioSource effectAudioSource;
 
     // Start is called before the first frame update
     protected void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        effectAudioSource = GameObject.Find("EffectSound").GetComponent<AudioSource>();
 
         //初始羽
         if (isDefaultFeather)
@@ -77,6 +84,11 @@ public class Character : MonoBehaviour
     /// </summary>
     public virtual void OnAttack()
     {
+        if (attackSound != null && attackBodyObjList.Count > 0)
+        {
+            effectAudioSource.PlayOneShot(attackSound);
+        }
+
         foreach (GameObject obj in attackBodyObjList)
         {
             GameObject instance = Instantiate(obj, transform.position, Quaternion.identity);
@@ -110,6 +122,12 @@ public class Character : MonoBehaviour
         //受伤事件
         if (unlockedFeathers.Count > 0 && damage > 0)
         {
+            //音效
+            if (injurySound != null)
+            {
+                effectAudioSource.PlayOneShot(injurySound);
+            }
+
             //击退
             if (injuryForceback)
             {
@@ -158,6 +176,12 @@ public class Character : MonoBehaviour
         if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
         {
             isDead = true;
+
+            //音效
+            if (deathSound != null)
+            {
+                effectAudioSource.PlayOneShot(deathSound);
+            }
 
             deathEvent?.Invoke();
         }

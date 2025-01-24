@@ -1,3 +1,4 @@
+using Cinemachine.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -10,10 +11,14 @@ public class CharacterInspector : Editor
     Character character;
     bool setDefaultTS;
 
-    SerializedProperty injuryEventProperty;
-    SerializedProperty healEventProperty;
-    SerializedProperty deathEventProperty;
-    SerializedProperty hpScrollProperty;
+    SerializedProperty injuryEvent;
+    SerializedProperty healEvent;
+    SerializedProperty deathEvent;
+    SerializedProperty hpScroll;
+
+    SerializedProperty attackSound;
+    SerializedProperty injurySound;
+    SerializedProperty deathSound;
 
     protected void OnEnable()
     {
@@ -21,10 +26,13 @@ public class CharacterInspector : Editor
         character = (Character)target;
 
         //获取property
-        injuryEventProperty = serializedObject.FindProperty("injuryEvent");
-        healEventProperty = serializedObject.FindProperty("healEvent");
-        deathEventProperty = serializedObject.FindProperty("deathEvent");
-        hpScrollProperty = serializedObject.FindProperty("hpScroll");
+        injuryEvent = serializedObject.FindProperty("injuryEvent");
+        healEvent = serializedObject.FindProperty("healEvent");
+        deathEvent = serializedObject.FindProperty("deathEvent");
+        hpScroll = serializedObject.FindProperty("hpScroll");
+        attackSound = serializedObject.FindProperty("attackSound");
+        injurySound = serializedObject.FindProperty("injurySound");
+        deathSound = serializedObject.FindProperty("deathSound");
     }
     public override void OnInspectorGUI()
     {
@@ -33,7 +41,7 @@ public class CharacterInspector : Editor
 
         //垂直方向布局
         EditorGUILayout.BeginVertical();
-        EditorGUILayout.PropertyField(hpScrollProperty, new UnityEngine.GUIContent("血条ui ScrollView"));
+        EditorGUILayout.PropertyField(hpScroll, new UnityEngine.GUIContent("血条ui ScrollView"));
 
         character.isDefaultFeather = EditorGUILayout.Toggle("添加初始羽", character.isDefaultFeather);
         if (character.isDefaultFeather)
@@ -74,9 +82,16 @@ public class CharacterInspector : Editor
 
         EditorGUILayout.Space(10);
 
-        EditorGUILayout.PropertyField(injuryEventProperty, new UnityEngine.GUIContent("受伤事件"));
-        EditorGUILayout.PropertyField(healEventProperty, new UnityEngine.GUIContent("治疗事件"));
-        EditorGUILayout.PropertyField(deathEventProperty, new UnityEngine.GUIContent("死亡事件"));
+        EditorGUILayout.PropertyField(attackSound, new UnityEngine.GUIContent("攻击音效"));
+        EditorGUILayout.Space(10);
+
+        EditorGUILayout.PropertyField(injurySound, new UnityEngine.GUIContent("受伤音效"));
+        EditorGUILayout.PropertyField(injuryEvent, new UnityEngine.GUIContent("受伤事件"));
+
+        EditorGUILayout.PropertyField(healEvent, new UnityEngine.GUIContent("治疗事件"));
+
+        EditorGUILayout.PropertyField(deathSound, new UnityEngine.GUIContent("死亡音效"));
+        EditorGUILayout.PropertyField(deathEvent, new UnityEngine.GUIContent("死亡事件"));
 
         EditorGUILayout.EndVertical();
 

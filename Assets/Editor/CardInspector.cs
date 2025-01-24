@@ -6,12 +6,12 @@ using UnityEngine.UIElements;
 using UnityEngine.Events;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using UnityEngine.TextCore.Text;
 [CustomEditor(typeof(Card), true)]
 public class CardInspector : Editor
 {
 
     private Card card;
-    private bool b0, b1, b2, b3, b4;
     private SerializedProperty event1, event2, event3, event4, event5, buff, buffName, event6, event7, event8, event9, event10, buff1, buffName1, event11, event12, event13, event14, event15, buff2, buffName2;
     private GameObject prefob;
     bool effortOnPlayer;//作用于玩家
@@ -24,7 +24,6 @@ public class CardInspector : Editor
     bool enemyUse;
     private void OnEnable()
     {
-        b1 = true; b2 = true; b0 = true; b4 = true;
         card = (Card)target;
         effortOnPlayer = card.effortOnPlayer; effortOnEnmey = card.effortOnEnmey; effortOnOneEnemy = card.effortOnOneEnemy; effortOnMoreEnemies = card.effortOnMoreEnemies; click = card.click; dragOnCharactor = card.dragOnCharactor;
         event1 = serializedObject.FindProperty("whatHappenOnDrag");
@@ -48,14 +47,15 @@ public class CardInspector : Editor
         buffName1 = serializedObject.FindProperty("buffNamesPlayer");
         buff2 = serializedObject.FindProperty("buffsEnemy");
         buffName2 = serializedObject.FindProperty("buffNamesEnemy");
-        card.playerUse = true;
     }
     public override void OnInspectorGUI()
     {
+        Undo.RecordObject(card, "Change Card");
+        serializedObject.Update();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space(2);
-        b4 = EditorGUILayout.Foldout(b4, "使用者");
-        if (b4)
+        card.b4 = EditorGUILayout.Foldout(card.b4, "使用者");
+        if (card.b4)
         {
             card.playerUse = EditorGUILayout.Toggle("玩家使用", card.playerUse);
             card.enemyUse = EditorGUILayout.Toggle("敌人使用", card.enemyUse);
@@ -72,19 +72,27 @@ public class CardInspector : Editor
         }
 
         EditorGUILayout.Space(2);
-        b0 = EditorGUILayout.Foldout(b0, "卡牌信息");
-        if (b0)
+        card.b0 = EditorGUILayout.Foldout(card.b0, "卡牌信息");
+        if (card.b0)
         {
             card.id = EditorGUILayout.IntField("卡牌ID", card.id);
             card.name = EditorGUILayout.TextField("卡牌名称", card.name);
             card.rarity = (int)EditorGUILayout.Slider("卡牌稀有度", card.rarity, 1, 5);
-            card.description = EditorGUILayout.DelayedTextField("卡牌描述", card.description, GUILayout.Height(100));
-            card.backGroundStory = EditorGUILayout.DelayedTextField("卡牌背景故事", card.backGroundStory, GUILayout.Height(100));
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("卡牌描述", GUILayout.Width(50));
+            card.description = EditorGUILayout.TextArea(card.description, GUILayout.Height(100));
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("卡牌背景\n故事", GUILayout.Width(50),GUILayout.Height(50));
+            card.backGroundStory = EditorGUILayout.TextArea(card.backGroundStory, GUILayout.Height(100));
+            EditorGUILayout.EndHorizontal();
         }
         EditorGUILayout.Space(2);
 
-        b1 = EditorGUILayout.Foldout(b1, "作用对象");
-        if (b1)
+        card.b1 = EditorGUILayout.Foldout(card.b1, "作用对象");
+        if (card.b1)
         {
             card.effortOnPlayer = EditorGUILayout.Toggle("作用于玩家", card.effortOnPlayer);
             card.effortOnEnmey = EditorGUILayout.Toggle("作用于敌人", card.effortOnEnmey);
@@ -138,8 +146,8 @@ public class CardInspector : Editor
         {
             EditorGUILayout.Space(2);
 
-            b2 = EditorGUILayout.Foldout(b2, "作用方法");
-            if (b2)
+            card.b2 = EditorGUILayout.Foldout(card.b2, "作用方法");
+            if (card.b2)
             {
                 card.click = EditorGUILayout.Toggle("点击", card.click);
                 if (card.click)
@@ -164,13 +172,11 @@ public class CardInspector : Editor
         }
         EditorGUILayout.Space(2);
 
-        b3 = EditorGUILayout.Foldout(b3, "作用效果");
-        if (b3)
+        card.b3 = EditorGUILayout.Foldout(card.b3, "作用效果");
+        if (card.b3)
         {
             if (!card.effortOnPlayerAndEnemy)
             {
-
-                serializedObject.Update();
                 if (card.playerUse)
                 {
                     EditorGUILayout.LabelField("在卡牌被拖拽时所发生的事件");
@@ -203,7 +209,6 @@ public class CardInspector : Editor
             }
             else
             {
-                serializedObject.Update();
                 if (card.playerUse)
                 {
                     EditorGUILayout.LabelField("敌人在卡牌被拖拽时所发生的事件");
@@ -263,10 +268,10 @@ public class CardInspector : Editor
                     EditorGUILayout.HelpBox("注意:\"需要添加的buff\"与\"需要添加的buff的名字\"而这只需要填一个就行，如果这两上面个都填的是同一个buff那么将会对对象施加2次该buff", MessageType.Warning);
                 }
             }
-            serializedObject.ApplyModifiedProperties();
         }
         EditorGUILayout.EndVertical();
 
+        serializedObject.ApplyModifiedProperties();
         EditorUtility.SetDirty(card);
     }
 }

@@ -16,7 +16,12 @@ public class BuffContainer
         {"测试装备羽", typeof(TestEquipmentFeatherBuff) },
         {"测试拔羽", typeof(TestUnlockFeatherBuff) },
         {"测试敌人攻击", typeof(TestEnemyAttackBuff) },
-        {"测试敌人效果", typeof(TestEnemyEffectBuff) }
+        {"测试敌人效果", typeof(TestEnemyEffectBuff) },
+        {"拔羽5s", typeof(UnlockFeather5sBuff) },
+        {"拔羽10s", typeof(UnlockFeather10sBuff) },
+        {"拔羽15s", typeof(UnlockFeather15sBuff) },
+        {"拔羽20s", typeof(UnlockFeather20sBuff) },
+        {"王子之剑", typeof(PrinceSwordAttackBuff) }
     };
 
 

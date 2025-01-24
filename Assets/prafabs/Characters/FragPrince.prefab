@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5194438090788217055}
-  - component: {fileID: 5128290654602833240}
+  - component: {fileID: 7928231937612195929}
   - component: {fileID: 1021564070518008926}
   - component: {fileID: 1114919163909731784}
   - component: {fileID: 7659605523863590511}
@@ -36,7 +36,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5128290654602833240
+--- !u!114 &7928231937612195929
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,46 +45,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 2990081651964721786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b596010f663a0004f9931061de4f2443, type: 3}
+  m_Script: {fileID: 11500000, guid: 9940b6079b5acf74ba4dfe60ccbafc87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hpScroll: {fileID: 0}
   isDefaultFeather: 1
-  defaultFeatherNum: 1
+  defaultFeatherNum: 2
   defaultFeatherHealth: 100
-  tenacity: 0
-  strength: 0
+  tenacity: 5
+  strength: 5
   injuryForceback: 1
   forcebackForce: 1
   forcebackDuration: 0.1
   forcebackTimer: 0
   attackBodyObjList: []
+  attackSound: {fileID: 8300000, guid: e3142df1339cc114ea880f5387af4d95, type: 3}
   injuryEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: PlayOneShot
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 58048ac41ad14ea43918c363d77cae68, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  injurySound: {fileID: 8300000, guid: 48a6104f1643a374fbc4313e25790b0c, type: 3}
   healEvent:
     m_PersistentCalls:
       m_Calls: []
   deathEvent:
     m_PersistentCalls:
       m_Calls: []
+  deathSound: {fileID: 8300000, guid: 0ef81a521db27774ca4f80f8f495b445, type: 3}
   buffList: []
   isDead: 0
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
-  enemyName: test Enemy
+  effectAudioSource: {fileID: 0}
+  enemyName: "\u9752\u86D9\u738B\u5B50"
   runSpeed: 5
   jumpSpeed: 7
   attackCooldown: 2
@@ -92,10 +84,11 @@ MonoBehaviour:
   wallDetect: 0
   searchDistance: 20
   attackCardUseDistance: 10
-  attackCardCooldown: 10
-  effectCardUseDistance: 15
+  attackCardCooldown: 6
+  effectCardUseDistance: 20
   effectCardCooldown: 10
-  attackCards: []
+  attackCards:
+  - {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
   effectCards: []
   player: {fileID: 0}
 --- !u!212 &1021564070518008926

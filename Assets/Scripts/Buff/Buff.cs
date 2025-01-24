@@ -204,6 +204,17 @@ public class TestEnemyAttackBuff : AttackBuff
         this.attackBody = Resources.Load<GameObject>("AttackBodys/testEnemyAttackBody");
     }
 }
+
+public class PrinceSwordAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/PrinceSwordAttackBody");
+    }
+}
 #endregion
 
 #region °ÎÓðbuff
@@ -237,6 +248,50 @@ public class TestUnlockFeatherBuff: UnlockFeatherBuff
         base.Init(target, timer, isPermanent);
 
         this.timer = 10;
+        this.unlockFeatherNum = 1;
+    }
+}
+
+public class UnlockFeather5sBuff : UnlockFeatherBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+        this.unlockFeatherNum = 1;
+    }
+}
+
+public class UnlockFeather10sBuff : UnlockFeatherBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 10;
+        this.unlockFeatherNum = 1;
+    }
+}
+
+public class UnlockFeather15sBuff : UnlockFeatherBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 15;
+        this.unlockFeatherNum = 1;
+    }
+}
+
+public class UnlockFeather20sBuff : UnlockFeatherBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 20;
         this.unlockFeatherNum = 1;
     }
 }

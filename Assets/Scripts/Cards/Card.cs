@@ -13,8 +13,11 @@ public class Card : MonoBehaviour
     public int rarity;
     public string description;
     public string backGroundStory;
+
+    //InspectorChoice
+    public bool b0, b1, b2, b3, b4;
     //使用对象
-    public bool playerUse=true;
+    public bool playerUse;
     public bool enemyUse;
     //作用对象
     public bool effortOnPlayer;//作用于玩家

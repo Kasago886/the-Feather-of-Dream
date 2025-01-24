@@ -59,7 +59,7 @@ public class EnemyInspector : CharacterInspector
         EditorGUILayout.LabelField(" π”√æ‡¿Î", GUILayout.Width(50));
         enemy.attackCardUseDistance = EditorGUILayout.FloatField(enemy.attackCardUseDistance);
         EditorGUILayout.LabelField("¿‰»¥ ±º‰", GUILayout.Width(50));
-        enemy.attackCardCooldown = EditorGUILayout.FloatField(enemy.attackCardUseDistance);
+        enemy.attackCardCooldown = EditorGUILayout.FloatField(enemy.attackCardCooldown);
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.PropertyField(attackCardsProperty, new UnityEngine.GUIContent("π•ª˜ø®"));
 

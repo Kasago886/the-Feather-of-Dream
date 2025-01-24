@@ -237,8 +237,8 @@ public class PlayerCardController : MonoBehaviour
     public GameObject[] cardsList;
     [Header("初始生成数量")]
     public int positionNumber;
-    private Dictionary<string, int> nameToID;
-    private Dictionary<int, GameObject> idToCard;
+    private Dictionary<string, int> nameToID = new();
+    private Dictionary<int, GameObject> idToCard = new();
     private RectTransform rectTransform;
 
     private void Start()
