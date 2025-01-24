@@ -41,7 +41,7 @@ public class Player : Character
     {
         if (cardGenerateCooldownTimer <= 0)
         {
-            Debug.Log(cardController.GetCardOrNot());
+            Debug.Log("cardController.GetCardOrNot()="+cardController.GetCardOrNot());
             if (cardController.GetCardOrNot())
             {
                 cardGenerateCooldownTimer = cardGenerateCooldown;
@@ -52,8 +52,8 @@ public class Player : Character
         {
             cardGenerateCooldownTimer -= Time.deltaTime;
             if (cardGenerateCooldownTimer < 0) { cardGenerateCooldownTimer = 0; }
-        }
-        cardGenerateText.text = ((int)cardGenerateCooldownTimer).ToString() + "s";
+        }      
+            cardGenerateText.text = ((int)cardGenerateCooldownTimer).ToString() + "s";
     }
     /// <summary>
     /// Éú³É¿¨ÅÆ
@@ -88,13 +88,13 @@ public class Player : Character
     public override void ShowUnlockFeather(Feather feather)
     {
         base.ShowUnlockFeather(feather);
-
-        HpUI hpUI = hpScroll.AddHp();
-
-        hpUI.testTime = feather.lockTimer;
-        hpUI.testHp = feather.health;
-        hpUI.testHpMax = feather.maxHealth;
-
-        feather.hpUI = hpUI;
+        if (hpScroll != null)
+        {
+            HpUI hpUI = hpScroll.AddHp();
+            hpUI.testTime = feather.lockTimer;
+            hpUI.testHp = feather.health;
+            hpUI.testHpMax = feather.maxHealth;
+            feather.hpUI = hpUI;
+        }
     }
 }

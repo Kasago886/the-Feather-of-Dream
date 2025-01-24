@@ -14,7 +14,6 @@ public class NormalListenerState : IListenerState
     public void Update()
     {
         listener.playerController.StateMove(Input.GetAxis("Horizontal"));
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             listener.playerController.StateJump();
