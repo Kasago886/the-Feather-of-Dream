@@ -24,7 +24,7 @@ public class BuffContainer
         {"王子之剑", typeof(PrinceSwordAttackBuff) }
     };
 
-
+    /*
     /// <summary>
     /// 存储一套buff
     /// </summary>
@@ -33,6 +33,7 @@ public class BuffContainer
         buffDictionary["测试敌人攻击"],
         buffDictionary["测试敌人效果"]
     };
+    */
 
     /// <summary>
     /// 获取buff新实例
