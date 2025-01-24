@@ -231,8 +231,10 @@ public class Enemy : Character
     /// </summary>
     public virtual void OnUseAttackCard()
     {
-        if (attackCards.Count > 0)
+        if (attackCards.Count > 0 && attackCardCooldownTimer <= 0)
         {
+            attackCardCooldownTimer = attackCardCooldown;
+
             //Random.Range(a,b)²»º¬ÓÒÖµ
             int index = Random.Range(0, attackCards.Count);
             Card card = attackCards[index];
@@ -246,8 +248,10 @@ public class Enemy : Character
     /// </summary>
     public virtual void OnUseEffectCard()
     {
-        if (effectCards.Count > 0)
+        if (effectCards.Count > 0 && effectCardCooldownTimer <= 0)
         {
+            effectCardCooldownTimer = effectCardCooldown;
+
             int index = Random.Range(0, effectCards.Count);
             Card card = effectCards[index];
             card.EnemyHasEffectOnPlayer(enemyName);

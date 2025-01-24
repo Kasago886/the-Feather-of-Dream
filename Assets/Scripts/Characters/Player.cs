@@ -41,6 +41,7 @@ public class Player : Character
     {
         if (cardGenerateCooldownTimer <= 0)
         {
+            Debug.Log(cardController.GetCardOrNot());
             if (cardController.GetCardOrNot())
             {
                 cardGenerateCooldownTimer = cardGenerateCooldown;
@@ -59,7 +60,7 @@ public class Player : Character
     /// </summary>
     public void GenerateCard()
     {
-        if (cardGenerateList.Count > 0&&cardController.GetCardOrNot())
+        if (cardGenerateList.Count > 0 && cardController.GetCardOrNot())
         {
             int index = Random.Range(0, cardGenerateList.Count);
             string card = cardGenerateList[index];

@@ -34,7 +34,7 @@ public class ArchiveManager : MonoBehaviour
         {
             ReadArchive(0);
         }
-        Debug.Log(currentArchive.index);
+        Debug.Log("Level Index:"+currentArchive.index);
 
         //保存当前关卡信息
         if (level != -1)

@@ -213,6 +213,7 @@ public class PrinceSwordAttackBuff : AttackBuff
 
         this.timer = 5;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/PrinceSwordAttackBody");
+        //Debug.Log(attackBody);
     }
 }
 #endregion

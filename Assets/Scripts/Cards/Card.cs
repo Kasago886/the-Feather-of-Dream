@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -292,7 +293,7 @@ public class Card : MonoBehaviour
                 {
 
                 a:
-                    int n = Random.Range(0, theNumberOfEffortedEnemies);
+                    int n = UnityEngine.Random.Range(0, theNumberOfEffortedEnemies);
                     for (int j = 0; j < enemiesWhoHaveBeenEfforted.Count; j++)
                     {
                         if (n == enemiesWhoHaveBeenEfforted[j])
@@ -317,7 +318,7 @@ public class Card : MonoBehaviour
             }
             else if (!effortOnMoreEnemies)
             {
-                int n = Random.Range(0, theNumberOfEffortedEnemies);
+                int n = UnityEngine.Random.Range(0, theNumberOfEffortedEnemies);
                 Enemy enemy = enemiesWhoInCameralist[n].GetComponent<Enemy>();
                 for (int j = 0; j < buffs.Length; j++)
                 {
@@ -408,7 +409,7 @@ public class Card : MonoBehaviour
                         {
 
                         a:
-                            int n = Random.Range(0, theNumberOfEffortedEnemies);
+                            int n = UnityEngine.Random.Range(0, theNumberOfEffortedEnemies);
                             for (int j = 0; j < enemiesWhoHaveBeenEfforted.Count; j++)
                             {
                                 if (n == enemiesWhoHaveBeenEfforted[j] || n == theNearestNumber)
@@ -622,7 +623,7 @@ public class Card : MonoBehaviour
                 {
 
                 a:
-                    int n = Random.Range(0, theNumberOfEffortedEnemies);
+                    int n = UnityEngine.Random.Range(0, theNumberOfEffortedEnemies);
                     for (int j = 0; j < enemiesWhoHaveBeenEfforted.Count; j++)
                     {
                         if (n == enemiesWhoHaveBeenEfforted[j])
@@ -647,7 +648,7 @@ public class Card : MonoBehaviour
             }
             else if (!effortOnMoreEnemies)
             {
-                int n = Random.Range(0, theNumberOfEffortedEnemies);
+                int n = UnityEngine.Random.Range(0, theNumberOfEffortedEnemies);
                 Enemy enemy = enemiesWhoInCameralist[n].GetComponent<Enemy>();
                 for (int j = 0; j < buffs.Length; j++)
                 {
@@ -731,7 +732,7 @@ public class Card : MonoBehaviour
                         {
 
                         a:
-                            int n = Random.Range(0, theNumberOfEffortedEnemies);
+                            int n = UnityEngine.Random.Range(0, theNumberOfEffortedEnemies);
                             for (int j = 0; j < enemiesWhoHaveBeenEfforted.Count; j++)
                             {
                                 if (n == enemiesWhoHaveBeenEfforted[j] || n == theNearestNumber)
@@ -882,16 +883,16 @@ public class Card : MonoBehaviour
     }
     private void EnemyEffectOnPlayer()
     {
-        if (effortOnPlayer)
+        if (effortOnPlayerAndEnemy)
         {
             Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
-            for (int i = 0; i < buffs.Length; i++)
+            for (int i = 0; i < buffsPlayer.Length; i++)
             {
-                player.AddBuff(buffs[i]);
+                player.AddBuff(buffsPlayer[i]);
             }
-            for (int j = 0; j < buffNames.Length; j++)
+            for (int j = 0; j < buffNamesPlayer.Length; j++)
             {
-                player.AddBuff(buffNames[j]);
+                player.AddBuff(buffNamesPlayer[j]);
             }
         }
     }
@@ -899,14 +900,15 @@ public class Card : MonoBehaviour
     {
         if (effortOnOneEnemy)
         {
-            Enemy enemy = GetComponent<Enemy>();
-            for (int i = 0; i < buffs.Length; i++)
+            Enemy enemy = GetComponentInParent<Enemy>();
+            for (int i = 0; i < buffsEnemy.Length; i++)
             {
-                enemy.AddBuff(buffs[i]);
+                enemy.AddBuff(buffsEnemy[i]);
             }
-            for (int j = 0; j < buffNames.Length; j++)
+            for (int j = 0; j < buffNamesEnemy.Length; j++)
             {
-                enemy.AddBuff(buffNames[j]);
+                enemy.AddBuff(buffNamesEnemy[j]);
+                Debug.Log(buffNamesEnemy.Length);
             }
         }
     }
