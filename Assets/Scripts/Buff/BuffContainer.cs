@@ -21,7 +21,8 @@ public class BuffContainer
         {"拔羽10s", typeof(UnlockFeather10sBuff) },
         {"拔羽15s", typeof(UnlockFeather15sBuff) },
         {"拔羽20s", typeof(UnlockFeather20sBuff) },
-        {"王子之剑", typeof(PrinceSwordAttackBuff) }
+        {"王子之剑", typeof(PrinceSwordAttackBuff) },
+        {"猎人预感", typeof(CrazyHunterAttackBuff) }
     };
 
     /*

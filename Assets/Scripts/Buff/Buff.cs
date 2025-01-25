@@ -216,6 +216,17 @@ public class PrinceSwordAttackBuff : AttackBuff
         //Debug.Log(attackBody);
     }
 }
+public class CrazyHunterAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunterAttackBody");
+    }
+}
+
 #endregion
 
 #region °ÎÓðbuff
