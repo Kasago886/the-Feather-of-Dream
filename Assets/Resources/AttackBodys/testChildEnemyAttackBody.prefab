@@ -74,7 +74,7 @@ MonoBehaviour:
   hpScroll: {fileID: 0}
   isDefaultFeather: 1
   defaultFeatherNum: 1
-  defaultFeatherHealth: 100
+  defaultFeatherHealth: 50
   tenacity: 0
   strength: 0
   injuryForceback: 1
@@ -101,14 +101,14 @@ MonoBehaviour:
   effectAudioSource: {fileID: 0}
   enemyName: test Child Enemy
   runSpeed: 5
-  jumpSpeed: 7
+  jumpSpeed: 3.5
   attackCooldown: 2
   searchType: 0
   wallDetect: 0
-  searchDistance: 20
-  attackCardUseDistance: 10
+  searchDistance: 10
+  attackCardUseDistance: 5
   attackCardCooldown: 10
-  effectCardUseDistance: 15
+  effectCardUseDistance: 7.5
   effectCardCooldown: 10
   attackCards: []
   effectCards: []

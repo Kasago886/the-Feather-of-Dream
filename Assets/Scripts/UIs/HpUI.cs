@@ -87,6 +87,7 @@ public class HpUI : MonoBehaviour
         if (x < 0)
         {
             x = 0;
+            Destroy(gameObject);
         }
 
         timeText.text = $"{(int)(testTime)}s";

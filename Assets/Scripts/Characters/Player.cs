@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class Player : Character
 {
-    ArchiveManager archiveManager;
-    EquipmentPanelManager equipmentPanelManager;
+    public Text featherNumText;
 
     public List<string> cardGenerateList;
     public float cardGenerateCooldown;
@@ -15,6 +14,9 @@ public class Player : Character
     public Text cardGenerateText;
 
     public PlayerCardController cardController;
+
+    ArchiveManager archiveManager;
+    EquipmentPanelManager equipmentPanelManager;
 
     new private void Start()
     {
@@ -27,6 +29,9 @@ public class Player : Character
         strength = archiveManager.currentArchive.playerInfo.strength;
     }
 
+    /// <summary>
+    /// Update
+    /// </summary>
     public override void AIUpdate()
     {
         base.AIUpdate();
@@ -80,7 +85,6 @@ public class Player : Character
         equipmentPanelManager.SetUpPlayerInfo();
     }
 
-
     /// <summary>
     /// 展示血条
     /// </summary>
@@ -96,5 +100,17 @@ public class Player : Character
             hpUI.testHpMax = feather.maxHealth;
             feather.hpUI = hpUI;
         }
+    }
+
+    /// <summary>
+    /// 受伤后更新羽数量
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="attackTrans"></param>
+    public override void TakeDamage(float damage, Transform attackTrans = null)
+    {
+        base.TakeDamage(damage, attackTrans);
+
+        featherNumText.text = (feathers.Count + unlockedFeathers.Count).ToString();
     }
 }

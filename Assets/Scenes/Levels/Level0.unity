@@ -3049,10 +3049,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArchiveSaver
       objectReference: {fileID: 0}
-    - target: {fileID: 5377542293832221337, guid: 3ac23ffbb95dabf4c8e028d9b8b9ab13, type: 3}
-      propertyPath: moreLimit
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8010309870145944334, guid: 3ac23ffbb95dabf4c8e028d9b8b9ab13, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.944353
@@ -10191,16 +10187,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8e19cf951dbb18a4fa9a03f4e3515d78, type: 3}
-    m_FontSize: 30
+    m_FontSize: 50
     m_FontStyle: 3
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 40
+    m_MaxSize: 50
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 0
 --- !u!222 &1006833506
@@ -17677,6 +17673,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2854415599559411844, guid: 9c0c48cc05fa52c4589895e562bead2a, type: 3}
+      propertyPath: featherNumText
+      value: 
+      objectReference: {fileID: 1006833505}
+    - target: {fileID: 2854415599559411844, guid: 9c0c48cc05fa52c4589895e562bead2a, type: 3}
       propertyPath: cardGenerateText
       value: 
       objectReference: {fileID: 1368254081}
@@ -21729,18 +21729,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: testEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 5128290654602833240, guid: f1067a8de576b6e42bfa622b32a4ee5f, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128290654602833240, guid: f1067a8de576b6e42bfa622b32a4ee5f, type: 3}
-      propertyPath: injurySound
-      value: 
-      objectReference: {fileID: 8300000, guid: 58048ac41ad14ea43918c363d77cae68, type: 3}
-    - target: {fileID: 5128290654602833240, guid: f1067a8de576b6e42bfa622b32a4ee5f, type: 3}
-      propertyPath: injuryEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 967218673}
     - target: {fileID: 5194438090788217055, guid: f1067a8de576b6e42bfa622b32a4ee5f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.58

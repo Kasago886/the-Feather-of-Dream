@@ -1434,6 +1434,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2038574087}
     - target: {fileID: 2854415599559411844, guid: 9c0c48cc05fa52c4589895e562bead2a, type: 3}
+      propertyPath: featherNumText
+      value: 
+      objectReference: {fileID: 1134657704}
+    - target: {fileID: 2854415599559411844, guid: 9c0c48cc05fa52c4589895e562bead2a, type: 3}
       propertyPath: cardGenerateText
       value: 
       objectReference: {fileID: 1115972626}
@@ -9743,10 +9747,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArchiveSaver
       objectReference: {fileID: 0}
-    - target: {fileID: 5377542293832221337, guid: 3ac23ffbb95dabf4c8e028d9b8b9ab13, type: 3}
-      propertyPath: moreLimit
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8010309870145944334, guid: 3ac23ffbb95dabf4c8e028d9b8b9ab13, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.944353
@@ -12142,16 +12142,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8e19cf951dbb18a4fa9a03f4e3515d78, type: 3}
-    m_FontSize: 30
+    m_FontSize: 50
     m_FontStyle: 3
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 40
+    m_MaxSize: 50
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 0
 --- !u!222 &1134657705
@@ -18227,30 +18227,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: testChildEnemyAttackBody
       objectReference: {fileID: 0}
-    - target: {fileID: 4040090747212517637, guid: c301ae8a3c333734ca13db734f3a5f3a, type: 3}
-      propertyPath: attackType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128290654602833240, guid: c301ae8a3c333734ca13db734f3a5f3a, type: 3}
-      propertyPath: jumpSpeed
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128290654602833240, guid: c301ae8a3c333734ca13db734f3a5f3a, type: 3}
-      propertyPath: searchDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128290654602833240, guid: c301ae8a3c333734ca13db734f3a5f3a, type: 3}
-      propertyPath: defaultFeatherHealth
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128290654602833240, guid: c301ae8a3c333734ca13db734f3a5f3a, type: 3}
-      propertyPath: attackCardUseDistance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128290654602833240, guid: c301ae8a3c333734ca13db734f3a5f3a, type: 3}
-      propertyPath: effectCardUseDistance
-      value: 7.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5194438090788217055, guid: c301ae8a3c333734ca13db734f3a5f3a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.4
@@ -21927,10 +21903,6 @@ PrefabInstance:
     - target: {fileID: 5463133022128078969, guid: 848a7f06235906146a92ea9f01831b07, type: 3}
       propertyPath: m_Name
       value: testEnemyGunAttackBody
-      objectReference: {fileID: 0}
-    - target: {fileID: 5725097676368282535, guid: 848a7f06235906146a92ea9f01831b07, type: 3}
-      propertyPath: isAiming
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7526730861971197118, guid: 848a7f06235906146a92ea9f01831b07, type: 3}
       propertyPath: m_LocalPosition.x

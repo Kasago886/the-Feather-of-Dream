@@ -53,7 +53,7 @@ MonoBehaviour:
   attackCenter: {x: 1, y: 0}
   attackRegion: {x: 4, y: 4}
   bullet: {fileID: 53726181187038591, guid: f222d1d2ed64b2e44b858407f3629dd7, type: 3}
-  isAiming: 0
+  isAiming: 1
   isleft: 0
   addDamage: 0
 --- !u!212 &9172624031020631597

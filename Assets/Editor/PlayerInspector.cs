@@ -11,6 +11,7 @@ public class PlayerInspector : CharacterInspector
 
     SerializedProperty cardGenerateTextProperty;
     SerializedProperty cardGenerateListProperty;
+    SerializedProperty featherNumText;
 
     new protected void OnEnable()
     {
@@ -20,6 +21,7 @@ public class PlayerInspector : CharacterInspector
 
         cardGenerateTextProperty = serializedObject.FindProperty("cardGenerateText");
         cardGenerateListProperty = serializedObject.FindProperty("cardGenerateList");
+        featherNumText = serializedObject.FindProperty("featherNumText");
     }
     public override void OnInspectorGUI()
     {
@@ -30,6 +32,7 @@ public class PlayerInspector : CharacterInspector
 
         serializedObject.Update();
         EditorGUILayout.PropertyField(cardGenerateTextProperty, new UnityEngine.GUIContent("cardGenerateText"));
+        EditorGUILayout.PropertyField(featherNumText, new UnityEngine.GUIContent("featherNumText"));
         EditorGUILayout.PropertyField(cardGenerateListProperty, new UnityEngine.GUIContent("可以得到的卡牌"));
         serializedObject.ApplyModifiedProperties();
 
