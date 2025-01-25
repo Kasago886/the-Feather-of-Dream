@@ -525,7 +525,7 @@ public class Card : MonoBehaviour
                         for (int i = 0; i < effortTarget.Count; i++)
                         {
                             Bounds bound = effortTarget[i].bounds;
-                            if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)))
+                            if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0))&& effortTarget[i].GetComponent<Enemy>()!=null)
                             {
                                 b = true;
                                 whatHappenWhenBeChoosen?.Invoke();
@@ -804,10 +804,13 @@ public class Card : MonoBehaviour
                             Bounds bound = effortTarget[i].bounds;
                             if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)))
                             {
-                                b = true;
-                                whatHappenWhenBeChoosen?.Invoke();
-                                finalTarget.Add(effortTarget[i].GetComponent<Enemy>());
-                                effortTarget.RemoveAt(i);
+                                if (effortTarget[i].GetComponent<Enemy>() != null)
+                                {
+                                    b = true;
+                                    whatHappenWhenBeChoosen?.Invoke();
+                                    finalTarget.Add(effortTarget[i].GetComponent<Enemy>());
+                                    effortTarget.RemoveAt(i);
+                                }
                                 break;
                             }
                         }
@@ -1035,7 +1038,7 @@ public class Card : MonoBehaviour
         {
             text1.font = defaultFont;
         }
-        text1.fontSize = 12;
+        text1.fontSize = 15;
         text1.fontStyle = FontStyle.Bold;
         text1.alignment = TextAnchor.MiddleCenter;
         // 自动调整文本框大小以适应内容
