@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public enum AttackType
 {
-    Melee,Ranged
+    Melee, Gun, Child
 }
 
 public class AttackBody : MonoBehaviour
 {
     public bool isEnemy;
+    public bool immediateAttack;
     public float damage;
 
     public AttackType attackType;
@@ -18,23 +20,78 @@ public class AttackBody : MonoBehaviour
     public Vector2 attackCenter;
     public Vector2 attackRegion;
 
+    public GameObject bullet;
+    public bool isAiming;
+
     [HideInInspector]public bool isleft;
     [HideInInspector] public float addDamage = 0;
+
+    Vector3 center;
 
     // Start is called before the first frame update
     void Start()
     {
-        //攻击
-        Collider2D[] targets = GetTargetsInAttackRegion(transform.position,isleft);
-        foreach (Collider2D target in targets)
+        //攻击中心的绝对位置
+        center = attackCenter;
+        if (isleft)
         {
-            target.GetComponent<Character>().TakeDamage(damage + addDamage, transform);
+            center.x = -attackCenter.x;
+        }
+        center = center + transform.position;
+
+        if (immediateAttack)
+        {
+            OnAttack();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public void OnAttack()
+    {
+        //攻击
+        switch (attackType)
+        {
+            //近战
+            case AttackType.Melee:
+                Collider2D[] targets = GetTargetsInAttackRegion(transform.position, isleft);
+                foreach (Collider2D target in targets)
+                {
+                    target.GetComponent<Character>().TakeDamage(damage + addDamage, transform);
+                }
+                break;
+
+            //发射子弹
+            case AttackType.Gun:
+                GameObject bulletObj = Instantiate(bullet);
+                bulletObj.transform.position = center;
+
+                Bullet b = bulletObj.GetComponent<Bullet>();
+                b.damage = damage + addDamage;
+
+                //是否瞄准
+                if (isAiming)
+                {
+                    Vector2 direction = GetTargetDirection(transform.position, isleft);
+                    b.direction = direction;
+                }
+                else
+                {
+                    if (isleft)
+                    {
+                        b.direction = Vector2.left;
+                    }
+                    else
+                    {
+                        b.direction = Vector2.right;
+                    }
+                }
+
+                break;
+        }
     }
 
     /// <summary>
@@ -52,6 +109,7 @@ public class AttackBody : MonoBehaviour
         }
         center = center + position;
 
+        //有限视距
         if (attackType == AttackType.Melee)
         {
 
@@ -67,8 +125,63 @@ public class AttackBody : MonoBehaviour
                 return enemys;
             }
         }
+        //无限视距
+        else
+        {
+            if (isEnemy)
+            {
+                Collider2D player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Collider2D>();
 
-        return null;
+                return new Collider2D[] { player };
+            }
+            else
+            {
+                List<Collider2D> list = new();
+                GameObject[] enemys = GameObject.FindGameObjectsWithTag(Consts.EnemyTag);
+                foreach (GameObject enemy in enemys)
+                {
+                    list.Add(enemy.GetComponent<Collider2D>());
+                }
+
+                return list.ToArray();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 计算目标方向
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="isleft"></param>
+    /// <returns></returns>
+    Vector2 GetTargetDirection(Vector3 position, bool isleft)
+    {
+        Vector3 center = attackCenter;
+        if (isleft)
+        {
+            center.x = -attackCenter.x;
+        }
+        center = center + position;
+
+        Collider2D[] targets = GetTargetsInAttackRegion(position, isleft);
+        if (targets.Length == 0)
+        {
+            return Vector2.zero;
+        }
+        else
+        {
+            //找到最近的目标
+            Collider2D target = targets[0];
+            foreach(Collider2D collider in targets)
+            {
+                if (Vector2.Distance(center, collider.transform.position) < Vector2.Distance(center, target.transform.position))
+                {
+                    target = collider;
+                }
+            }
+
+            return target.transform.position - center;
+        }
     }
 
     public void Destroy()
@@ -97,6 +210,26 @@ public class AttackBody : MonoBehaviour
         if (attackType == AttackType.Melee)
         {
             Gizmos.DrawWireCube(center, attackRegion);
+        }
+        else if (attackType == AttackType.Gun)
+        {
+            Gizmos.DrawCube(center, new Vector3(0.1f,0.1f));
+
+            if (isAiming)
+            {
+                Gizmos.DrawRay(center, GetTargetDirection(transform.position, isleft));
+            }
+            else
+            {
+                if(isleft)
+                {
+                    Gizmos.DrawRay(center, Vector3.left * 5);
+                }
+                else
+                {
+                    Gizmos.DrawRay(center, Vector3.right * 5);
+                }
+            }
         }
     }
 }
