@@ -1020,17 +1020,23 @@ public class Card : MonoBehaviour
     private void Captions(string text, bool isPlayer)
     {
         GameObject textObject = new GameObject("playerText", typeof(Text));
-        textObject.transform.position=GameObject.Find("textScrollContent").transform.position;
-        RectTransform rectTransform1 = textObject.GetComponent<RectTransform>();       
+        //GameObject imageObject = new GameObject("playerTextBack", typeof(Image));
+        //textObject.transform.SetParent(imageObject.transform);
+        //imageObject.transform.position=GameObject.Find("textScrollContent").transform.position;
+        //RectTransform rectTransform1 = imageObject.GetComponent<RectTransform>();
+        RectTransform rectTransform2 = textObject.GetComponent<RectTransform>();
         Text text1 = textObject.GetComponent<Text>();
-        rectTransform1.SetParent(GameObject.Find("textScrollContent").GetComponent<RectTransform>());
+        //Image image = imageObject.GetComponent<Image>();
+        rectTransform2.SetParent(GameObject.Find("textScrollContent").GetComponent<RectTransform>());
         if (isPlayer)
         {
             text1.color = Color.blue;
+            //image.color = new Color(89f / 255f, 249f / 255f, 212f / 255f);
         }
         else
         {
             text1.color = Color.red;
+            //image.color = new Color(89f / 255f, 249f / 255f, 212f / 255f);
         }
         text1.text = text;
         Font defaultFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
@@ -1038,20 +1044,19 @@ public class Card : MonoBehaviour
         {
             text1.font = defaultFont;
         }
-        text1.fontSize = 15;
+        text1.fontSize = 21;
         text1.fontStyle = FontStyle.Bold;
         text1.alignment = TextAnchor.MiddleCenter;
         // 自动调整文本框大小以适应内容
-        LayoutElement layoutElement = textObject.AddComponent<LayoutElement>();
         ContentSizeFitter contentSizeFitter = textObject.AddComponent<ContentSizeFitter>();
         contentSizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
         contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-
         // 确保文本框在Scroll View中正确显示
-        rectTransform1.anchorMin = Vector2.zero;
-        rectTransform1.anchorMax = Vector2.one;
-        rectTransform1.pivot = Vector2.up;
-        rectTransform1.sizeDelta = Vector2.zero;
+        rectTransform2.anchorMin = Vector2.zero;
+        rectTransform2.anchorMax = Vector2.one;
+        rectTransform2.pivot = Vector2.up;
+        rectTransform2.sizeDelta = Vector2.zero;
+        //rectTransform2.position = rectTransform1.position;
         Destroy(textObject, 1f);
     }
     private void OnDrawGizmos()
@@ -1068,4 +1073,23 @@ public class Card : MonoBehaviour
             Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x, Camera.main.ScreenToWorldPoint(transform.position).y - minDistance / 4, 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x, Camera.main.ScreenToWorldPoint(transform.position).y + minDistance / 4, 0));
         }
     }
+    //public class AdjustText:MonoBehaviour
+    //{
+    //    private RectTransform c_RectTransform;
+    //    private RectTransform rectTransform;
+    //    private void Start()
+    //    {
+    //        c_RectTransform = gameObject.GetComponentInChildren<RectTransform>();
+    //        rectTransform=GetComponent<RectTransform>();
+    //    }
+    //    private void Update()
+    //    {
+    //        Rect rect = rectTransform.rect;
+    //        Rect cRect=c_RectTransform.rect;
+    //        rect.width = cRect.width*2;
+    //        rect.height = cRect.height;
+    //        c_RectTransform.localPosition=rectTransform.localPosition  ;
+    //    }
+    //}
 }
+
