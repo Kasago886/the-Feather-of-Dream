@@ -41,7 +41,7 @@ public class Player : Character
     {
         if (cardGenerateCooldownTimer <= 0)
         {
-            Debug.Log("cardController.GetCardOrNot()="+cardController.GetCardOrNot());
+            //Debug.Log("cardController.GetCardOrNot()="+cardController.GetCardOrNot());
             if (cardController.GetCardOrNot())
             {
                 cardGenerateCooldownTimer = cardGenerateCooldown;

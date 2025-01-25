@@ -51,7 +51,7 @@ MonoBehaviour:
   keyTrigger: 1
   mode1: 1
   maxDistance: 5
-  moreLimit: 1
+  moreLimit: 0
   maxDistanceOfHorizontal: 0
   maxDistanceOfVertical: 2
   mode2: 0
