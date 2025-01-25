@@ -85,7 +85,7 @@ public class HpUi2_FollowEnemy : MonoBehaviour
             HpUI hpUI = hpUiObject.GetComponent<HpUI>();
             hpUI.testHpMax = enemy.unlockedFeathers[content.transform.childCount - 1].maxHealth;
             hpUI.testHp = enemy.unlockedFeathers[content.transform.childCount - 1].health;
-            hpUI.testTime = 10000;
+            hpUI.testTime = enemy.unlockedFeathers[content.transform.childCount - 1].lockTimer;
             hpDic.Add(hpUI, enemy.unlockedFeathers[content.transform.childCount - 1]);
         }
     }

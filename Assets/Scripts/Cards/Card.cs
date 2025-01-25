@@ -543,7 +543,7 @@ public class Card : MonoBehaviour
 
             }
         }
-        if (endChoose)
+        if (endChoose && effortOnEnmey)
         {
             effects?.Invoke();
             for (int i = 0; i < finalTarget.Count; i++)
@@ -820,7 +820,7 @@ public class Card : MonoBehaviour
 
             }
         }
-        if (endChoose)
+        if (endChoose && effortOnPlayerAndEnemy)
         {
             effectsEnemy?.Invoke();
             for (int i = 0; i < finalTarget.Count; i++)

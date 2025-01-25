@@ -159,7 +159,7 @@ public class Character : MonoBehaviour
             feather.TakeDamage(damage);
 
             //Debug.Log(damage);
-            Debug.Log(feather.health);
+            //Debug.Log(feather.health);
 
             if (feather.health <= 0)
             {
