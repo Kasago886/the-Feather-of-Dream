@@ -50,7 +50,7 @@ public class Buff
 /// <summary>
 /// 装备buff基类
 /// </summary>
-public class EquipmentBuff: Buff
+public class EquipmentBuff : Buff
 {
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
@@ -60,7 +60,7 @@ public class EquipmentBuff: Buff
     }
 }
 
-public class TestEquipmentBuff: EquipmentBuff
+public class TestEquipmentBuff : EquipmentBuff
 {
     bool isUpdated = false;
 
@@ -113,7 +113,7 @@ public class EquipmentFeatherBuff : EquipmentBuff
         target.RemoveFeather(feather);
     }
 }
-public class TestEquipmentFeatherBuff: EquipmentFeatherBuff
+public class TestEquipmentFeatherBuff : EquipmentFeatherBuff
 {
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
@@ -241,7 +241,7 @@ public class TinWoodmanAttackBuff : AttackBuff
 /// <summary>
 /// 拔羽buff基类
 /// </summary>
-public class UnlockFeatherBuff: Buff
+public class UnlockFeatherBuff : Buff
 {
     //拔羽数
     public int unlockFeatherNum = 0;
@@ -261,7 +261,7 @@ public class UnlockFeatherBuff: Buff
     }
 }
 
-public class TestUnlockFeatherBuff: UnlockFeatherBuff
+public class TestUnlockFeatherBuff : UnlockFeatherBuff
 {
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
@@ -393,29 +393,39 @@ public class TinWoodmanEffectBuff : EffectBuff
     public override void OnEnter()
     {
         base.OnEnter();
-        enemy=target.GetComponent<Enemy>();
-        if(enemy.unlockedFeathers.Count > 0)
+        enemy = target.GetComponent<Enemy>();
+        if (enemy.unlockedFeathers.Count > 0)
         {
-            enemy.unlockedFeathers[enemy.unlockedFeathers.Count - 1].health -= enemy.unlockedFeathers[enemy.unlockedFeathers.Count - 1].health/40;
-            orihealth = enemy.unlockedFeathers[enemy.unlockedFeathers.Count - 1].health;
+            enemy.unlockedFeathers[0].health -= enemy.unlockedFeathers[0].health / 40;
+            orihealth = enemy.unlockedFeathers[0].health;
         }
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if(timer>2)
+        buffTimer += Time.deltaTime;
+        if (buffTimer > 2)
         {
             enemy.strength += oriStrength / 10;
+            buffTimer = 0;
         }
     }
 
     public override void OnExit()
     {
         base.OnExit();
-        if (enemy.unlockedFeathers.Count > 0&&orihealth- enemy.unlockedFeathers[enemy.unlockedFeathers.Count - 1].health>20)
+        if (enemy.unlockedFeathers.Count > 0 && orihealth - enemy.unlockedFeathers[0].health > 20)
         {
-            enemy.unlockedFeathers[enemy.unlockedFeathers.Count - 1].health -= 40;
+            if (enemy.unlockedFeathers[0].health >= 40)
+            {
+                enemy.unlockedFeathers[0].health -= 40;
+            }
+            if (enemy.unlockedFeathers.Count > 1&& enemy.unlockedFeathers[0].health < 40)
+            {
+                enemy.unlockedFeathers[1].health -= (40 - enemy.unlockedFeathers[0].health);
+                enemy.unlockedFeathers[0].health = 0;
+            }
         }
     }
 }

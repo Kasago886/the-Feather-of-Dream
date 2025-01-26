@@ -120,12 +120,15 @@ public class Card : MonoBehaviour
     /// </param>
     public void EnemyHasEffectOnPlayer(string enemyName)
     {
-        effects?.Invoke();
-        Captions(enemyName + "使用了" + name, false);
-        EnemyEffectOnPlayer();
-        EnemyEffectOnSelf();
-        EnemyEffectOnSelfAndOtherEnemy();
-        BothEnemyEffectOn();
+        if (ConditionsOfUseCard())
+        {
+            effects?.Invoke();
+            Captions(enemyName + "使用了" + name, false);
+            EnemyEffectOnPlayer();
+            EnemyEffectOnSelf();
+            EnemyEffectOnSelfAndOtherEnemy();
+            BothEnemyEffectOn();
+        }
     }
     /// <summary>
     /// 当玩家鼠标进入该物体中的时候执行该函数
@@ -171,38 +174,45 @@ public class Card : MonoBehaviour
     {
         if (click)
         {
-            if (effortNumber == finalTarget.Count && finalTarget.Count > 0 && isRandom)
+            if (ConditionsOfUseCard())
             {
-                endChoose = true;
-            }
-            if (!endChoose)
-            {
-                if (!isRandom)
+                if (effortNumber == finalTarget.Count && finalTarget.Count > 0 && isRandom)
                 {
-                    EffortWhenClickRandomly();
-                    BothEffortWhenClickRandomly();
+                    endChoose = true;
                 }
-                else
+                if (!endChoose)
                 {
-                    if (!choose)
+                    if (!isRandom)
                     {
-                        choose = true;
-                        onlyOne = 0;
-                        haveChoose = -1;
-                        if (effortOnPlayerAndEnemy)
-                        {
-                            GetBothInCamera();
-                        }
-                        else
-                        {
-                            GetWhatInCamera();
-                        }
+                        EffortWhenClickRandomly();
+                        BothEffortWhenClickRandomly();
                     }
                     else
                     {
-                        choose = false;
+                        if (!choose)
+                        {
+                            choose = true;
+                            onlyOne = 0;
+                            haveChoose = -1;
+                            if (effortOnPlayerAndEnemy)
+                            {
+                                GetBothInCamera();
+                            }
+                            else
+                            {
+                                GetWhatInCamera();
+                            }
+                        }
+                        else
+                        {
+                            choose = false;
+                        }
                     }
                 }
+            }
+            else
+            {
+                Captions("当前无法使用", true);
             }
         }
     }
@@ -233,8 +243,15 @@ public class Card : MonoBehaviour
     {
         if (dragOnCharactor)
         {
-            gameObject.transform.SetParent(parent);
-            EffortWhenDragEnd();
+            if (ConditionsOfUseCard())
+            {
+                gameObject.transform.SetParent(parent);
+                EffortWhenDragEnd();
+            }
+            else
+            {
+                Captions("当前无法使用", true);
+            }
             rectTransform.localPosition = oriPlace;
         }
     }
@@ -1073,23 +1090,9 @@ public class Card : MonoBehaviour
             Gizmos.DrawLine(new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x, Camera.main.ScreenToWorldPoint(transform.position).y - minDistance / 4, 0), new Vector3(Camera.main.ScreenToWorldPoint(transform.position).x, Camera.main.ScreenToWorldPoint(transform.position).y + minDistance / 4, 0));
         }
     }
-    //public class AdjustText:MonoBehaviour
-    //{
-    //    private RectTransform c_RectTransform;
-    //    private RectTransform rectTransform;
-    //    private void Start()
-    //    {
-    //        c_RectTransform = gameObject.GetComponentInChildren<RectTransform>();
-    //        rectTransform=GetComponent<RectTransform>();
-    //    }
-    //    private void Update()
-    //    {
-    //        Rect rect = rectTransform.rect;
-    //        Rect cRect=c_RectTransform.rect;
-    //        rect.width = cRect.width*2;
-    //        rect.height = cRect.height;
-    //        c_RectTransform.localPosition=rectTransform.localPosition  ;
-    //    }
-    //}
+    public virtual bool ConditionsOfUseCard()
+    {
+        return true;
+    }
 }
 

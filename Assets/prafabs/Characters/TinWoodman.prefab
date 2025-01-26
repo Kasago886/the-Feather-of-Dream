@@ -107,7 +107,7 @@ MonoBehaviour:
   defaultFeatherNum: 1
   defaultFeatherHealth: 200
   tenacity: 6
-  strength: 0
+  strength: 5
   injuryForceback: 1
   forcebackForce: 0.5
   forcebackDuration: 0.1
@@ -140,7 +140,7 @@ MonoBehaviour:
   attackCardUseDistance: 10
   attackCardCooldown: 6
   effectCardUseDistance: 10
-  effectCardCooldown: 6
+  effectCardCooldown: 8
   attackCards:
   - {fileID: 1702797019205561690}
   effectCards:
