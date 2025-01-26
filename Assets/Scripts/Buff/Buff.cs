@@ -226,7 +226,15 @@ public class CrazyHunterAttackBuff : AttackBuff
         this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunterAttackBody");
     }
 }
-
+public class TinWoodmanAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 6;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/TinWoodmanAttackBody");
+    }
+}
 #endregion
 
 #region °ÎÓðbuff
@@ -368,6 +376,47 @@ public class TestEnemyEffectBuff : EffectBuff
     {
         base.OnExit();
         //Debug.Log("remove TestEnemyEffectBuff!");
+    }
+}
+public class TinWoodmanEffectBuff : EffectBuff
+{
+    private float buffTimer;
+    private float oriStrength;
+    private float orihealth;
+    private Enemy enemy;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 6;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        enemy=target.GetComponent<Enemy>();
+        if(enemy.unlockedFeathers.Count > 0)
+        {
+            enemy.unlockedFeathers[enemy.unlockedFeathers.Count - 1].health -= enemy.unlockedFeathers[enemy.unlockedFeathers.Count - 1].health/40;
+            orihealth = enemy.unlockedFeathers[enemy.unlockedFeathers.Count - 1].health;
+        }
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if(timer>2)
+        {
+            enemy.strength += oriStrength / 10;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        if (enemy.unlockedFeathers.Count > 0&&orihealth- enemy.unlockedFeathers[enemy.unlockedFeathers.Count - 1].health>20)
+        {
+            enemy.unlockedFeathers[enemy.unlockedFeathers.Count - 1].health -= 40;
+        }
     }
 }
 #endregion
