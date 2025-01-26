@@ -88,6 +88,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
   effectAudioSource: {fileID: 0}
+  featherNumText: {fileID: 0}
   cardGenerateList:
   - "\u6D4B\u8BD5\u62D4\u7FBD"
   cardGenerateCooldown: 2

@@ -256,7 +256,7 @@ MonoBehaviour:
   id: 4
   name: "\u730E\u4EBA\u9884\u611F"
   rarity: 1
-  description: "\u5BF9\u73A9\u5BB6\u62D4\u7FBD10s\uFF0C\u5E76\u4F7F\u81EA\u5DF1\u83B7\u5F9710%\u514D\u4F243s\u3002\n"
+  description: "\u5BF9\u73A9\u5BB6\u62D4\u7FBD5s\uFF0C\u5E76\u4F7F\u81EA\u8EAB\u6839\u636E\u4E0E\u73A9\u5BB6\u8DDD\u79BB\n\u5207\u6362\u8FD1\u6218\u6216\u8FDC\u7A0B\u3002"
   backGroundStory: 
   b0: 1
   b1: 1
@@ -316,7 +316,7 @@ MonoBehaviour:
       m_Calls: []
   buffsPlayer: []
   buffNamesPlayer:
-  - "\u62D4\u7FBD10s"
+  - "\u62D4\u7FBD5s"
   whatHappenOnDragEnemy:
     m_PersistentCalls:
       m_Calls: []

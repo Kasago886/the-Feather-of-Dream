@@ -23,6 +23,7 @@ public class BuffContainer
         {"拔羽20s", typeof(UnlockFeather20sBuff) },
         {"王子之剑", typeof(PrinceSwordAttackBuff) },
         {"猎人预感", typeof(CrazyHunterAttackBuff) },
+        {"狂暴", typeof(CrazyHunterEffectBuff) },
         {"破损引擎", typeof(TinWoodmanAttackBuff) },
         {"修补空虚", typeof(TinWoodmanEffectBuff) }
     };

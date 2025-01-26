@@ -223,7 +223,14 @@ public class CrazyHunterAttackBuff : AttackBuff
         base.Init(target, timer, isPermanent);
 
         this.timer = 5;
-        this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunterAttackBody");
+        if (target.GetComponent<CrazyHunter>().attackWay == true)
+        {
+            this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunterAttackBody");
+        }
+        else
+        {
+            this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunterAttackBodyGun");
+        }
     }
 }
 public class TinWoodmanAttackBuff : AttackBuff
@@ -375,6 +382,35 @@ public class TestEnemyEffectBuff : EffectBuff
     public override void OnExit()
     {
         base.OnExit();
+        //Debug.Log("remove TestEnemyEffectBuff!");
+    }
+}
+public class CrazyHunterEffectBuff : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.GetComponent<Enemy>().runSpeed *= 1.5f;
+        target.GetComponent<Enemy>().strength=80;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        target.GetComponent<Enemy>().runSpeed /= 1.3f;
+        target.GetComponent<Enemy>().strength = 0;
         //Debug.Log("remove TestEnemyEffectBuff!");
     }
 }

@@ -256,7 +256,7 @@ MonoBehaviour:
   id: 3
   name: "\u72C2\u66B4"
   rarity: 1
-  description: "\u83B7\u5F9730%\u52A0\u901F\uFF0C20%\u653B\u51FB\u529B\u52A0\u6210\uFF0C\u6301\u7EED5s"
+  description: "\u83B7\u5F9750%\u52A0\u901F\uFF0C80%\u653B\u51FB\u529B\u52A0\u6210\uFF0C\u6301\u7EED5s"
   backGroundStory: 12233
   b0: 1
   b1: 1
@@ -291,7 +291,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   buffs: []
-  buffNames: []
+  buffNames:
+  - "\u72C2\u66B4"
   whatHappenOnDragPlayer:
     m_PersistentCalls:
       m_Calls: []
