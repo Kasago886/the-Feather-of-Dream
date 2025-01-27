@@ -29,7 +29,9 @@ public class BuffContainer
         {"破损引擎", typeof(TinWoodmanAttackBuff) },
         {"修补空虚", typeof(TinWoodmanEffectBuff) },
         {"被奴役者", typeof(EnslavedDwarfsAttackBuff) },
-        {"麻木", typeof(EnslavedDwarfsEffectBuff) }
+        {"麻木", typeof(EnslavedDwarfsEffectBuff) },
+        {"矮人短剑", typeof(DwarfsAttackBuff) },
+        {"合力", typeof(DwarfsEffectBuff) }
     };
 
     /*

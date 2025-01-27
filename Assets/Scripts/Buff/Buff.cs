@@ -263,6 +263,15 @@ public class EnslavedDwarfsAttackBuff : AttackBuff
         this.attackBody = Resources.Load<GameObject>("AttackBodys/EnslavedDwarfsAttackBody");
     }
 }
+public class DwarfsAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 8;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/DwarfsAttackBody");
+    }
+}
 #endregion
 
 #region °ÎÓðbuff
@@ -544,6 +553,35 @@ public class PrincePowerEffectBuff : EffectBuff
     {
         base.OnExit();
         target.strength -= 20;
+    }
+}
+public class DwarfsEffectBuff : EffectBuff
+{
+    float Num;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 5;
+        Num = target.GetComponent<Dwarfs>().DwarfsNumber;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.strength += 20*Num;
+        target.tenacity += 20*Num;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        target.strength -= 20 * Num;
+        target.tenacity -= 20 * Num;
     }
 }
 #endregion
