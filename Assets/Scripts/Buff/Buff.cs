@@ -532,7 +532,7 @@ public class PrincePowerEffectBuff : EffectBuff
     public override void OnEnter()
     {
         base.OnEnter();
-        target.strength += 50;
+        target.strength += 20;
     }
 
     public override void OnUpdate()
@@ -543,7 +543,7 @@ public class PrincePowerEffectBuff : EffectBuff
     public override void OnExit()
     {
         base.OnExit();
-        target.strength -= 50;
+        target.strength -= 20;
     }
 }
 #endregion

@@ -88,6 +88,10 @@ MonoBehaviour:
   attackCardCooldown: 10
   effectCardUseDistance: 20
   effectCardCooldown: 10
+  isSingleAttackCardCooldown: 0
+  isSingleEffectCardCooldown: 0
+  attackCardsWithTimer: []
+  effectCardsWithTimer: []
   attackCards:
   - {fileID: 2118790953074700783}
   effectCards: []

@@ -94,9 +94,11 @@ MonoBehaviour:
   attackCardsWithTimer:
   - card: {fileID: 0}
     cooldown: 0
+    timer: 0
   effectCardsWithTimer:
   - card: {fileID: 0}
     cooldown: 0
+    timer: 0
   attackCards:
   - {fileID: 1590407948924484016}
   effectCards:
