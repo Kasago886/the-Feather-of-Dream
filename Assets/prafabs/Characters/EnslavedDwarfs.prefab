@@ -139,8 +139,8 @@ MonoBehaviour:
   searchDistance: 15
   attackCardUseDistance: 10
   attackCardCooldown: 10
-  effectCardUseDistance: 20
-  effectCardCooldown: 3
+  effectCardUseDistance: 30
+  effectCardCooldown: 2
   attackCards: []
   effectCards: []
   player: {fileID: 0}
@@ -279,7 +279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4056058898571058497, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: m_Name
-      value: TinWoodmanEffectBuff
+      value: EnslavedDwarfsEffectBuff
       objectReference: {fileID: 0}
     - target: {fileID: 6564618522710615933, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: m_Pivot.x
@@ -371,19 +371,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: id
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: name
-      value: "\u4FEE\u8865\u7684\u6E34\u671B"
+      value: "\u5FCD\u8010"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: rarity
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: description
-      value: "\u5931\u53BB\u5F53\u524D\u751F\u547D\u503C\u76842.5%\uFF0C\n\u83B7\u5F976\u79D2\u7684\u201C\u4FEE\u8865\u7A7A\u865A\u201D"
+      value: "\u4F7F\u81EA\u8EAB\u83B7\u5F97\"\u9EBB\u6728\""
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: effortOnEnmey
@@ -399,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: buffNames.Array.data[0]
-      value: "\u4FEE\u8865\u7A7A\u865A"
+      value: "\u9EBB\u6728"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: buffNamesEnemy.Array.data[0]
@@ -465,7 +465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4056058898571058497, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: m_Name
-      value: TinWoodmanAttackCard
+      value: EnslavedDwarfsAttackCard
       objectReference: {fileID: 0}
     - target: {fileID: 6564618522710615933, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: m_Pivot.x
@@ -557,19 +557,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: id
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: name
-      value: "\u7834\u788E\u7684\u8EAF\u58F3"
+      value: "\u6C89\u9ED8"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: description
-      value: "\u62D4\u7FBD5s\n\u5524\u9192\u653B\u51FB\u6A21\u5757"
+      value: "\u62D4\u7FBD5s\n\u4F7F\u81EA\u8EAB\u83B7\u5F97\"\u88AB\u5974\u5F79\u8005\""
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: buffNamesEnemy.Array.data[0]
-      value: "\u7834\u635F\u5F15\u64CE"
+      value: "\u88AB\u5974\u5F79\u8005"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

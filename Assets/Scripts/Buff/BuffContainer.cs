@@ -25,7 +25,9 @@ public class BuffContainer
         {"ÁÔÈËÔ¤¸Ð", typeof(CrazyHunterAttackBuff) },
         {"¿ñ±©", typeof(CrazyHunterEffectBuff) },
         {"ÆÆËðÒýÇæ", typeof(TinWoodmanAttackBuff) },
-        {"ÐÞ²¹¿ÕÐé", typeof(TinWoodmanEffectBuff) }
+        {"ÐÞ²¹¿ÕÐé", typeof(TinWoodmanEffectBuff) },
+        {"±»Å«ÒÛÕß", typeof(EnslavedDwarfsAttackBuff) },
+        {"ÂéÄ¾", typeof(EnslavedDwarfsEffectBuff) }
     };
 
     /*

@@ -242,6 +242,15 @@ public class TinWoodmanAttackBuff : AttackBuff
         this.attackBody = Resources.Load<GameObject>("AttackBodys/TinWoodmanAttackBody");
     }
 }
+public class EnslavedDwarfsAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 8;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/EnslavedDwarfsAttackBody");
+    }
+}
 #endregion
 
 #region °ÎÓðbuff
@@ -463,6 +472,39 @@ public class TinWoodmanEffectBuff : EffectBuff
                 enemy.unlockedFeathers[0].health = 0;
             }
         }
+    }
+}
+public class EnslavedDwarfsEffectBuff : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        Enemy enemy =target.GetComponent<Enemy>();
+        float health = 0;
+        for (int i = 0;i<enemy.unlockedFeathers.Count;i++)
+        {
+            health += enemy.unlockedFeathers[i].health;
+        }
+        if (enemy.unlockedFeathers.Count > 0)
+        {
+            enemy.unlockedFeathers[0].health += health/20;
+        }
+        this.timer = 0;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
     }
 }
 #endregion

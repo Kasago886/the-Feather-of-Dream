@@ -120,9 +120,10 @@ public class Card : MonoBehaviour
     /// </param>
     public void EnemyHasEffectOnPlayer(string enemyName)
     {
-        if (ConditionsOfUseCard())
+        if (ConditionsOfUseCard()&&false)
         {
             effects?.Invoke();
+            Debug.Log(name + "已被使用");
             Captions(enemyName + "使用了" + name, false);
             EnemyEffectOnPlayer();
             EnemyEffectOnSelf();
@@ -247,6 +248,7 @@ public class Card : MonoBehaviour
             {
                 gameObject.transform.SetParent(parent);
                 EffortWhenDragEnd();
+                BothEffortWhenDragEnd();
             }
             else
             {
@@ -767,8 +769,8 @@ public class Card : MonoBehaviour
     {
         if (effortOnPlayerAndEnemy)
         {
-            effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.PlayerLayer)));
+            //effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                    //new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.PlayerLayer)));
             effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
                     new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer)));
             effortNumber = 1;
@@ -819,7 +821,7 @@ public class Card : MonoBehaviour
                         for (int i = 0; i < effortTarget.Count; i++)
                         {
                             Bounds bound = effortTarget[i].bounds;
-                            if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)))
+                            if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)) && effortTarget[i].GetComponent<Enemy>() != null)
                             {
                                 if (effortTarget[i].GetComponent<Enemy>() != null)
                                 {
