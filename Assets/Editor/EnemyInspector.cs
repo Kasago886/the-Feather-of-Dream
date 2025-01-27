@@ -51,8 +51,9 @@ public class EnemyInspector : CharacterInspector
 
         if ( enemy.searchType == EnemySearchType.distance || enemy.searchType == EnemySearchType.horizontal)
         {
-            enemy.searchDistance = EditorGUILayout.FloatField("Ë÷µÐ¾àÀë", enemy.searchDistance);
+            enemy.searchDistance = EditorGUILayout.FloatField("Ë÷µÐ×îÔ¶¾àÀë", enemy.searchDistance);
         }
+        enemy.minDistance = EditorGUILayout.FloatField("×·»÷Ê±µÄ×î½ü¾àÀë", enemy.minDistance);
 
         enemy.wallDetect = EditorGUILayout.Toggle("Ç½Ìå¼ì²â",enemy.wallDetect);
 

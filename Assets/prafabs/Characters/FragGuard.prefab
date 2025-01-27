@@ -84,6 +84,7 @@ MonoBehaviour:
   searchType: 0
   wallDetect: 0
   searchDistance: 20
+  minDistance: 2
   attackCardUseDistance: 10
   attackCardCooldown: 10
   effectCardUseDistance: 20

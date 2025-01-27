@@ -85,6 +85,7 @@ MonoBehaviour:
   searchType: 0
   wallDetect: 0
   searchDistance: 20
+  minDistance: 2
   attackCardUseDistance: 10
   attackCardCooldown: 6
   effectCardUseDistance: 20
@@ -380,6 +381,14 @@ PrefabInstance:
     - target: {fileID: 6564618522710615933, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
+      propertyPath: name
+      value: "\u738B\u5B50\u4E4B\u5251"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
+      propertyPath: description
+      value: "\u62D4\u7FBD5s\n\u4F7F\u7528\u738B\u5B50\u4E4B\u5251\u653B\u51FB"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
       propertyPath: buffNamesEnemy.Array.data[0]

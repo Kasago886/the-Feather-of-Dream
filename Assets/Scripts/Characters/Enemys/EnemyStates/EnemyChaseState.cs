@@ -22,7 +22,14 @@ public class EnemyChaseState : EnemyState
 
     public void OnUpdate()
     {
-        //×·»÷×´Ì¬
+        //¹¥»÷
+        if (enemy.CheckPlayerInAttackRegion())
+        {
+            enemy.StateTransition(EnemyStateType.Attack);
+            return;
+        }
+
+        //Í£Ö¹×·»÷
         if (!enemy.CheckPlayerInSight())
         {
             enemy.StateTransition(EnemyStateType.Idle);
@@ -39,13 +46,6 @@ public class EnemyChaseState : EnemyState
         if (enemy.CheckPlayerInEffectCardDistance())
         {
             enemy.OnUseEffectCard();
-        }
-
-        //¹¥»÷
-        if (enemy.CheckPlayerInAttackRegion())
-        {
-            enemy.StateTransition(EnemyStateType.Attack);
-            return;
         }
 
         //×·»÷

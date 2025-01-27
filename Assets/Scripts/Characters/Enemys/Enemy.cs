@@ -38,6 +38,7 @@ public class Enemy : Character
     public bool wallDetect;
 
     public float searchDistance;
+    public float minDistance;
 
     public float attackCardUseDistance;
     public float attackCardCooldown;
@@ -153,11 +154,13 @@ public class Enemy : Character
             }
         }
 
+        float distance = -1;
         switch (searchType)
         {
             //圆形视野
             case EnemySearchType.distance:
-                if (Vector2.Distance(transform.position, player.transform.position) < searchDistance)
+                distance = Vector2.Distance(transform.position, player.transform.position);
+                if (distance < searchDistance && distance > minDistance)
                 {
                     return true;
                 }
@@ -165,7 +168,8 @@ public class Enemy : Character
 
             //水平距离视野
             case EnemySearchType.horizontal:
-                if (Mathf.Abs(transform.position.x - player.transform.position.x) < searchDistance)
+                distance = Mathf.Abs(transform.position.x - player.transform.position.x);
+                if (distance < searchDistance && distance > minDistance)
                 {
                     return true;
                 }
@@ -173,7 +177,12 @@ public class Enemy : Character
 
             //无穷视野
             case EnemySearchType.infinity:
-                return true;
+                distance = Vector2.Distance(transform.position, player.transform.position);
+                if (distance > minDistance)
+                {
+                    return true;
+                }
+                break;
         }
 
         return false;
@@ -361,29 +370,60 @@ public class Enemy : Character
             case EnemySearchType.distance:
                 for (int i = 0; i < side; i++)
                 {
+                    //最远
                     Vector2 from = transform.position + Quaternion.Euler(0, 0, angle * i) * Vector2.right * searchDistance;
                     Vector2 to = transform.position + Quaternion.Euler(0,0,angle * (i+1)) * Vector2.right * searchDistance;
+                    //最近
+                    Vector2 from2 = transform.position + Quaternion.Euler(0, 0, angle * i) * Vector2.right * minDistance;
+                    Vector2 to2 = transform.position + Quaternion.Euler(0, 0, angle * (i + 1)) * Vector2.right * minDistance;
 
+                    //圆圈
                     Gizmos.DrawLine(from,to);
+                    Gizmos.DrawLine(from2, to2);
+
+                    //阴影
+                    Gizmos.DrawLine(from, from2);
                 }
 
                 break;
 
             //水平距离视野
             case EnemySearchType.horizontal:
+                //最远
                 Gizmos.DrawLine(new Vector2(transform.position.x - searchDistance, transform.position.y + 50), new Vector2(transform.position.x - searchDistance, transform.position.y - 50));
                 Gizmos.DrawLine(new Vector2(transform.position.x + searchDistance, transform.position.y + 50), new Vector2(transform.position.x + searchDistance, transform.position.y - 50));
-                Gizmos.DrawLine(new Vector2(transform.position.x + searchDistance, transform.position.y), new Vector2(transform.position.x - searchDistance, transform.position.y));
+                //最近
+                Gizmos.DrawLine(new Vector2(transform.position.x - minDistance, transform.position.y + 10), new Vector2(transform.position.x - minDistance, transform.position.y - 10));
+                Gizmos.DrawLine(new Vector2(transform.position.x + minDistance, transform.position.y + 10), new Vector2(transform.position.x + minDistance, transform.position.y - 10));
+
+                //连线
+                Gizmos.DrawLine(new Vector2(transform.position.x + searchDistance, transform.position.y), new Vector2(transform.position.x + minDistance, transform.position.y));
+                Gizmos.DrawLine(new Vector2(transform.position.x - searchDistance, transform.position.y), new Vector2(transform.position.x - minDistance, transform.position.y));
 
                 break;
 
             //无穷视野
             case EnemySearchType.infinity:
+                for (int i = 0; i < side; i++)
+                {
+                    //最近
+                    Vector2 from2 = transform.position + Quaternion.Euler(0, 0, angle * i) * Vector2.right * minDistance;
+                    Vector2 to2 = transform.position + Quaternion.Euler(0, 0, angle * (i + 1)) * Vector2.right * minDistance;
+
+                    //圆圈
+                    Gizmos.DrawLine(from2, to2);
+                }
+                //连线
                 player = FindAnyObjectByType<Player>();
-                Gizmos.DrawLine(transform.position,player.transform.position);
+                Vector3 direction = player.transform.position - transform.position;
+                if (direction.sqrMagnitude > minDistance * minDistance)
+                {
+                    Gizmos.DrawRay(transform.position + direction.normalized * minDistance, direction - direction.normalized * minDistance);
+                }
                 break;
         }
 
+        //攻击卡使用范围
         Gizmos.color = Color.red;
         for (int i = 0; i < side; i++)
         {
@@ -393,6 +433,7 @@ public class Enemy : Character
             Gizmos.DrawLine(from, to);
         }
 
+        //效果卡使用范围
         Gizmos.color = Color.green;
         for (int i = 0; i < side; i++)
         {

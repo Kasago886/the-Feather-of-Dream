@@ -21,10 +21,23 @@ public class EnemyAttackState : EnemyState
 
     public void OnUpdate()
     {
+        //Í£Ö¹¹¥»÷
         if (!enemy.CheckPlayerInAttackRegion())
         {
             enemy.StateTransition(EnemyStateType.Idle);
             return;
+        }
+
+        //¹¥»÷¿¨
+        if (enemy.CheckPlayerInAttackCardDistance())
+        {
+            enemy.OnUseAttackCard();
+        }
+
+        //Ð§¹û¿¨
+        if (enemy.CheckPlayerInEffectCardDistance())
+        {
+            enemy.OnUseEffectCard();
         }
 
         enemy.OnAttack();

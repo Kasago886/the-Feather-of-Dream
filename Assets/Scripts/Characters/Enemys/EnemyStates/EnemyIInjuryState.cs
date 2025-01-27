@@ -24,6 +24,7 @@ public class EnemyInjuryState : EnemyState
         if (enemy.forcebackTimer <= 0)
         {
             enemy.StateTransition(EnemyStateType.Idle);
+            return;
         }
     }
 }

@@ -21655,14 +21655,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1590407948924484016, guid: 0e9c1b9fc113a954da746217fce4d0b8, type: 3}
-      propertyPath: name
-      value: "\u738B\u5B50\u4E4B\u5251"
-      objectReference: {fileID: 0}
-    - target: {fileID: 1590407948924484016, guid: 0e9c1b9fc113a954da746217fce4d0b8, type: 3}
-      propertyPath: description
-      value: "\u62D4\u7FBD5s\n\u4F7F\u7528\u738B\u5B50\u4E4B\u5251\u653B\u51FB"
-      objectReference: {fileID: 0}
     - target: {fileID: 2990081651964721786, guid: 0e9c1b9fc113a954da746217fce4d0b8, type: 3}
       propertyPath: m_Name
       value: FragPrince
