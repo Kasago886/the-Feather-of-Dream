@@ -216,6 +216,18 @@ public class PrinceSwordAttackBuff : AttackBuff
         //Debug.Log(attackBody);
     }
 }
+public class PrinceGuardSwordAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/PrinceGuardSwordAttackBody");
+        //Debug.Log(attackBody);
+    }
+}
+
 public class CrazyHunterAttackBuff : AttackBuff
 {
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
@@ -506,6 +518,32 @@ public class EnslavedDwarfsEffectBuff : EffectBuff
     public override void OnExit()
     {
         base.OnExit();
+    }
+}
+public class PrincePowerEffectBuff : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.strength += 50;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        target.strength -= 50;
     }
 }
 #endregion

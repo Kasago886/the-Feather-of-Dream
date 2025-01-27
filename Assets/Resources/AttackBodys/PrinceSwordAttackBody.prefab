@@ -48,10 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnemy: 1
   immediateAttack: 1
-  damage: 5
+  damage: 10
   attackType: 0
-  attackCenter: {x: 2, y: 0}
-  attackRegion: {x: 4, y: 4}
+  attackCenter: {x: 4, y: 0}
+  attackRegion: {x: 8, y: 4}
   bullet: {fileID: 0}
   isAiming: 0
   isleft: 0

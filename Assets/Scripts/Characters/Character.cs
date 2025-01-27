@@ -119,71 +119,74 @@ public class Character : MonoBehaviour
     /// <param name="damage"></param>
     public virtual void TakeDamage(float damage, Transform attackTrans = null)
     {
-        //受伤事件
-        if (unlockedFeathers.Count > 0 && damage > 0)
+        if (!isDead)
         {
-            //音效
-            if (injurySound != null)
+            //受伤事件
+            if (unlockedFeathers.Count > 0 && damage > 0)
             {
-                effectAudioSource.PlayOneShot(injurySound);
-            }
+                //音效
+                if (injurySound != null)
+                {
+                    effectAudioSource.PlayOneShot(injurySound);
+                }
 
-            //击退
-            if (injuryForceback)
+                //击退
+                if (injuryForceback)
+                {
+                    beAttackedTrans = attackTrans;
+                    forcebackTimer = forcebackDuration;
+                }
+
+                injuryEvent?.Invoke();
+
+                //减伤
+                /// damage = damage * 2^(-tenacity / 100)
+                /// tenacity | ratio
+                ///  10        0.933
+                ///  20        0.871
+                ///  30        0.812
+                ///  40        0.758
+                ///  50        0.707
+                /// 100        0.500
+                /// 200        0.250
+                /// 300        0.125
+
+                //Debug.Log(damage);
+                damage = damage * Mathf.Pow(2, -tenacity / 100);
+            }
+            //吃伤
+            while (unlockedFeathers.Count > 0 && damage > 0)
             {
-                beAttackedTrans = attackTrans;
-                forcebackTimer = forcebackDuration;
+                Feather feather = unlockedFeathers[0];
+                feather.TakeDamage(damage);
+
+                //Debug.Log(damage);
+                //Debug.Log(feather.health);
+
+                if (feather.health <= 0)
+                {
+                    damage = -feather.health;
+                    unlockedFeathers.RemoveAt(0);
+                }
+                else
+                {
+                    damage = 0;
+                }
             }
-
-            injuryEvent?.Invoke();
-
-            //减伤
-            /// damage = damage * 2^(-tenacity / 100)
-            /// tenacity | ratio
-            ///  10        0.933
-            ///  20        0.871
-            ///  30        0.812
-            ///  40        0.758
-            ///  50        0.707
-            /// 100        0.500
-            /// 200        0.250
-            /// 300        0.125
-
-            //Debug.Log(damage);
-            damage = damage * Mathf.Pow(2, -tenacity / 100);
-        }
-        //吃伤
-        while (unlockedFeathers.Count > 0 && damage > 0)
-        {
-            Feather feather = unlockedFeathers[0];
-            feather.TakeDamage(damage);
-
-            //Debug.Log(damage);
-            //Debug.Log(feather.health);
-
-            if (feather.health <= 0)
+            //检查是否失去所有羽毛
+            //Debug.Log("unlock feathers:"+unlockedFeathers.Count.ToString() + "\nfeathers:" + feathers.Count.ToString());
+            if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
             {
-                damage = -feather.health;
-                unlockedFeathers.RemoveAt(0);
-            }
-            else
-            {
-                damage = 0;
-            }
-        }
-        //检查是否失去所有羽毛
-        //Debug.Log("unlock feathers:"+unlockedFeathers.Count.ToString() + "\nfeathers:" + feathers.Count.ToString());
-        if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
-        {
-            isDead = true;
+                isDead = true;
 
-            //音效
-            if (deathSound != null)
-            {
-                effectAudioSource.PlayOneShot(deathSound);
-            }
+                //音效
+                if (deathSound != null)
+                {
+                    effectAudioSource.PlayOneShot(deathSound);
+                }
 
-            deathEvent?.Invoke();
+                deathEvent?.Invoke();
+            }
         }
     }
 
