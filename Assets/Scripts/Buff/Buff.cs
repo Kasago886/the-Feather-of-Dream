@@ -488,6 +488,7 @@ public class EnslavedDwarfsEffectBuff : EffectBuff
         if (enemy.unlockedFeathers.Count > 0)
         {
             enemy.unlockedFeathers[0].health += health/20;
+            enemy.unlockedFeathers[0].maxHealth += health / 20;
         }
         this.timer = 0;
     }

@@ -120,7 +120,7 @@ public class Card : MonoBehaviour
     /// </param>
     public void EnemyHasEffectOnPlayer(string enemyName)
     {
-        if (ConditionsOfUseCard()&&false)
+        if (ConditionsOfUseCard()&& enemyUse)
         {
             effects?.Invoke();
             Debug.Log(name + "已被使用");
