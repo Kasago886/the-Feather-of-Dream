@@ -47,13 +47,24 @@ public class EnemyInspector : CharacterInspector
         EditorGUILayout.Space(10);
 
         EditorGUILayout.LabelField("索敌",EditorStyles.boldLabel);
+        enemy.keepDistanceWhenNotArmed = EditorGUILayout.Toggle("无攻击替身时保持距离", enemy.keepDistanceWhenNotArmed);
         enemy.searchType = (EnemySearchType)EditorGUILayout.EnumPopup("索敌类型", enemy.searchType);
 
         if ( enemy.searchType == EnemySearchType.distance || enemy.searchType == EnemySearchType.horizontal)
         {
             enemy.searchDistance = EditorGUILayout.FloatField("索敌最远距离", enemy.searchDistance);
         }
-        enemy.minDistance = EditorGUILayout.FloatField("追击时的最近距离", enemy.minDistance);
+        if (enemy.keepDistanceWhenNotArmed)
+        {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("无攻击替身时\n保持的距离", GUILayout.Width(120), GUILayout.Height(30));
+            enemy.minDistance = EditorGUILayout.FloatField(enemy.minDistance,GUILayout.Height(30));
+            EditorGUILayout.EndHorizontal();
+        }
+        else
+        {
+            enemy.minDistance = EditorGUILayout.FloatField("追击时的最近距离", enemy.minDistance);
+        }
 
         enemy.wallDetect = EditorGUILayout.Toggle("墙体检测",enemy.wallDetect);
 

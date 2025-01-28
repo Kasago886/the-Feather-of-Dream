@@ -22,6 +22,11 @@ public class EnemyIdleState : EnemyState
 
     public void OnUpdate()
     {
+        ///各个范围由外向内依次是：
+        ///                  视野外            静止
+        ///视野内            攻击范围外        Chase
+        ///攻击范围内                          Attack
+        
         //攻击
         if (enemy.CheckPlayerInAttackRegion())
         {

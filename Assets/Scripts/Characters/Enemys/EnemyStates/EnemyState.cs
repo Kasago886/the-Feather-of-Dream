@@ -4,9 +4,9 @@ using UnityEngine;
 
 public interface EnemyState
 {
-    public void OnEnter();
+    public abstract void OnEnter();
 
-    public void OnExit();
+    public abstract void OnExit();
 
-    public void OnUpdate();
+    public abstract void OnUpdate();
 }

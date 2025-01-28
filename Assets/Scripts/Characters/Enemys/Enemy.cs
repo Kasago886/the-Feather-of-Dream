@@ -5,6 +5,7 @@ using System.Net.Mail;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public enum EnemySearchType
 {
@@ -36,6 +37,7 @@ public class Enemy : Character
 
     public EnemySearchType searchType;
     public bool wallDetect;
+    public bool keepDistanceWhenNotArmed;
 
     public float searchDistance;
     public float minDistance;
@@ -58,8 +60,8 @@ public class Enemy : Character
     [HideInInspector] public Player player;
 
     //states
-    Dictionary<EnemyStateType, EnemyState> stateDict = new();
-    EnemyState currentState;
+    protected Dictionary<EnemyStateType, EnemyState> stateDict = new();
+    protected EnemyState currentState;
 
     new protected void Start()
     {
@@ -69,7 +71,14 @@ public class Enemy : Character
         injuryEvent.AddListener(new UnityAction(TransitionToInjury));
 
         stateDict[EnemyStateType.Idle] = new EnemyIdleState(this);
-        stateDict[EnemyStateType.Chase] = new EnemyChaseState(this);
+        if (keepDistanceWhenNotArmed)
+        {
+            stateDict[EnemyStateType.Chase] = new KeepDistanceWhenNotArmedChaseState(this);
+        }
+        else
+        {
+            stateDict[EnemyStateType.Chase] = new EnemyChaseState(this);
+        }
         stateDict[EnemyStateType.Attack] = new EnemyAttackState(this);
         stateDict[EnemyStateType.Injury] = new EnemyInjuryState(this);
 
@@ -144,6 +153,10 @@ public class Enemy : Character
     /// <returns></returns>
     public bool CheckPlayerInSight(EnemySearchType searchType)
     {
+        return CheckPlayerInSight(searchType, searchDistance, 0);
+    }
+    public bool CheckPlayerInSight(EnemySearchType searchType, float maxDistance, float minDistance)
+    {
         //检测墙体阻挡
         if (wallDetect)
         {
@@ -160,7 +173,7 @@ public class Enemy : Character
             //圆形视野
             case EnemySearchType.distance:
                 distance = Vector2.Distance(transform.position, player.transform.position);
-                if (distance < searchDistance && distance > minDistance)
+                if (distance < maxDistance && distance > minDistance)
                 {
                     return true;
                 }
@@ -169,7 +182,7 @@ public class Enemy : Character
             //水平距离视野
             case EnemySearchType.horizontal:
                 distance = Mathf.Abs(transform.position.x - player.transform.position.x);
-                if (distance < searchDistance && distance > minDistance)
+                if (distance < maxDistance && distance > minDistance)
                 {
                     return true;
                 }
@@ -189,12 +202,12 @@ public class Enemy : Character
     }
 
     /// <summary>
-    /// 检测是否可使用攻击卡
+    /// 检测是否在攻击卡范围内
     /// </summary>
     /// <returns></returns>
     public bool CheckPlayerInAttackCardDistance()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) < attackCardUseDistance && attackCardCooldownTimer <= 0)
+        if (Vector2.Distance(transform.position, player.transform.position) < attackCardUseDistance)
         {
             return true;
         }
@@ -202,12 +215,12 @@ public class Enemy : Character
     }
 
     /// <summary>
-    /// 检测是否可使用效果卡
+    /// 检测是否可使用效果卡范围内
     /// </summary>
     /// <returns></returns>
     public bool CheckPlayerInEffectCardDistance()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) < effectCardUseDistance && effectCardCooldownTimer <= 0)
+        if (Vector2.Distance(transform.position, player.transform.position) < effectCardUseDistance)
         {
             return true;
         }
@@ -251,6 +264,21 @@ public class Enemy : Character
         else if (speed < 0)
         {
             spriteRenderer.flipX = true;
+        }
+    }
+    /// <summary>
+    /// 相对于玩家移动
+    /// </summary>
+    /// <param name="forward">forward = 1为靠近，forward = -1为远离</param>
+    public virtual void MoveRelateToPlayer(float forward)
+    {
+        if (player.transform.position.x > transform.position.x)
+        {
+            OnMove(forward);
+        }
+        else if (player.transform.position.x < transform.position.x)
+        {
+            OnMove(-forward);
         }
     }
 

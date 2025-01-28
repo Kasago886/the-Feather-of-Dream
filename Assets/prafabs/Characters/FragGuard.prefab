@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5194438090788217055
 Transform:
   m_ObjectHideFlags: 0
@@ -83,8 +83,9 @@ MonoBehaviour:
   attackCooldown: 2
   searchType: 0
   wallDetect: 0
+  keepDistanceWhenNotArmed: 1
   searchDistance: 20
-  minDistance: 2
+  minDistance: 3
   attackCardUseDistance: 10
   attackCardCooldown: 10
   effectCardUseDistance: 20
