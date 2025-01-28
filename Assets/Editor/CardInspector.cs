@@ -12,7 +12,7 @@ public class CardInspector : Editor
 {
 
     private Card card;
-    private SerializedProperty event1, event2, event3, event4, event5, buff, buffName, event6, event7, event8, event9, event10, buff1, buffName1, event11, event12, event13, event14, event15, buff2, buffName2,position;
+    private SerializedProperty event1, event2, event3, event4, event5, buff, buffName, event6, event7, event8, event9, event10, buff1, buffName1, event11, event12, event13, event14, event15, buff2, buffName2,position,materia;
     private GameObject prefob;
     bool effortOnPlayer;//作用于玩家
     bool effortOnEnmey;//作用于敌方
@@ -48,6 +48,7 @@ public class CardInspector : Editor
         buff2 = serializedObject.FindProperty("buffsEnemy");
         buffName2 = serializedObject.FindProperty("buffNamesEnemy");
         position= serializedObject.FindProperty("targetTransform");
+        materia= serializedObject.FindProperty("speacialMaterial");
     }
     public override void OnInspectorGUI()
     {
@@ -59,6 +60,11 @@ public class CardInspector : Editor
         if (card.b4)
         {
             card.playerUse = EditorGUILayout.Toggle("玩家使用", card.playerUse);
+            if (card.playerUse )
+            {
+                EditorGUILayout.LabelField("请放入Custom_UI_SpriteGlowBorder");
+                EditorGUILayout.PropertyField(materia);
+            }
             card.enemyUse = EditorGUILayout.Toggle("敌人使用", card.enemyUse);
             if (card.playerUse != playerUse)
             {

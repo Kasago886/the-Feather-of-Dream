@@ -265,6 +265,7 @@ MonoBehaviour:
   b4: 1
   b5: 1
   playerUse: 1
+  speacialMaterial: {fileID: 2100000, guid: f64101cea1336cd46b6f80df9cddae60, type: 2}
   enemyUse: 0
   effortOnPlayer: 0
   effortOnEnmey: 0

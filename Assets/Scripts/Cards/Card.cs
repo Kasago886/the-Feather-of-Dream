@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Timers;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -24,6 +25,7 @@ public class Card : MonoBehaviour
     public bool b0, b1, b2, b3, b4, b5;
     //使用对象
     public bool playerUse;
+    public Material speacialMaterial;
     public bool enemyUse;
     //作用对象
     public bool effortOnPlayer;//作用于玩家
@@ -83,11 +85,13 @@ public class Card : MonoBehaviour
     private string enemyName;
     private float timer;
     private int haveChoose = -1, onlyOne;
+    private List<Material> oriMaterial;
     void Start()
     {
         parent = gameObject.transform.parent;
         effortTarget = new List<Collider2D>();
         finalTarget = new List<Enemy>();
+        oriMaterial = new List<Material>();
         rectTransform = GetComponent<RectTransform>();
         if (number == 0)
         {
@@ -117,6 +121,27 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (effortNumber == finalTarget.Count && finalTarget.Count > 0 && isRandom&& Input.GetMouseButtonDown(0))
+        {
+            endChoose = true;
+        }
+        if (!choose&&!endChoose)
+        {
+            for (int i = 0; i < finalTarget.Count; i++)
+            {
+                finalTarget[i].gameObject.GetComponent<SpriteRenderer>().material = oriMaterial[i];
+            }
+            finalTarget.Clear();
+            oriMaterial.Clear();
+        }
+        else if (!choose && endChoose)
+        {
+            for (int i = 0; i < finalTarget.Count; i++)
+            {
+                finalTarget[i].gameObject.GetComponent<SpriteRenderer>().material = oriMaterial[i];
+            }
+            oriMaterial.Clear();
+        }
         ChooseWhenClick();
         BothChooseWhenClick();
         if (shake && Time.time % 2 <= 1)
@@ -565,7 +590,7 @@ public class Card : MonoBehaviour
     {
         if (!choose)
         {
-            effortTarget.Clear();
+            effortTarget.Clear();         
         }
         if (choose && isRandom)
         {
@@ -628,6 +653,9 @@ public class Card : MonoBehaviour
                                 b = true;
                                 whatHappenWhenBeChoosen?.Invoke();
                                 finalTarget.Add(effortTarget[i].GetComponent<Enemy>());
+                                SpriteRenderer spriteRenderer = effortTarget[i].gameObject.GetComponent<SpriteRenderer>();
+                                oriMaterial.Add(spriteRenderer.material);
+                                spriteRenderer.material = speacialMaterial;
                                 effortTarget.RemoveAt(i);
                                 break;
                             }
@@ -646,7 +674,7 @@ public class Card : MonoBehaviour
             effects?.Invoke();
             for (int i = 0; i < finalTarget.Count; i++)
             {
-
+                finalTarget[i].gameObject.GetComponent<SpriteRenderer>().material = oriMaterial[i];
                 for (int j = 0; j < buffs.Length; j++)
                 {
                     finalTarget[i].AddBuff(buffs[j]);
@@ -656,6 +684,7 @@ public class Card : MonoBehaviour
                     finalTarget[i].AddBuff(buffNames[j]);
                 }
             }
+            oriMaterial.Clear();
             Captions(name, true);
             Destroy(gameObject);
         }
@@ -889,7 +918,7 @@ public class Card : MonoBehaviour
             }
             else
             {
-                if(targetTransform != null)
+                if (targetTransform != null)
                 {
                     effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
                         new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer)));
@@ -955,6 +984,9 @@ public class Card : MonoBehaviour
                                     b = true;
                                     whatHappenWhenBeChoosen?.Invoke();
                                     finalTarget.Add(effortTarget[i].GetComponent<Enemy>());
+                                    SpriteRenderer spriteRenderer = effortTarget[i].gameObject.GetComponent<SpriteRenderer>();
+                                    oriMaterial.Add(spriteRenderer.material);
+                                    spriteRenderer.material = speacialMaterial;
                                     effortTarget.RemoveAt(i);
                                 }
                                 break;
@@ -974,7 +1006,7 @@ public class Card : MonoBehaviour
             effectsEnemy?.Invoke();
             for (int i = 0; i < finalTarget.Count; i++)
             {
-
+                finalTarget[i].gameObject.GetComponent<SpriteRenderer>().material = oriMaterial[i];
                 for (int j = 0; j < buffsEnemy.Length; j++)
                 {
                     finalTarget[i].AddBuff(buffsEnemy[j]);
@@ -995,6 +1027,7 @@ public class Card : MonoBehaviour
                 player.AddBuff(buffNamesPlayer[j]);
             }
             Captions("已默认选择玩家", true);
+            oriMaterial.Clear();
             Captions(name, true);
             Destroy(gameObject);
         }
