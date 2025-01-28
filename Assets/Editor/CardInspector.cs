@@ -12,7 +12,7 @@ public class CardInspector : Editor
 {
 
     private Card card;
-    private SerializedProperty event1, event2, event3, event4, event5, buff, buffName, event6, event7, event8, event9, event10, buff1, buffName1, event11, event12, event13, event14, event15, buff2, buffName2;
+    private SerializedProperty event1, event2, event3, event4, event5, buff, buffName, event6, event7, event8, event9, event10, buff1, buffName1, event11, event12, event13, event14, event15, buff2, buffName2,position;
     private GameObject prefob;
     bool effortOnPlayer;//作用于玩家
     bool effortOnEnmey;//作用于敌方
@@ -47,6 +47,7 @@ public class CardInspector : Editor
         buffName1 = serializedObject.FindProperty("buffNamesPlayer");
         buff2 = serializedObject.FindProperty("buffsEnemy");
         buffName2 = serializedObject.FindProperty("buffNamesEnemy");
+        position= serializedObject.FindProperty("targetTransform");
     }
     public override void OnInspectorGUI()
     {
@@ -85,7 +86,7 @@ public class CardInspector : Editor
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("卡牌背景\n故事", GUILayout.Width(50),GUILayout.Height(50));
+            EditorGUILayout.LabelField("卡牌背景\n故事", GUILayout.Width(50), GUILayout.Height(50));
             card.backGroundStory = EditorGUILayout.TextArea(card.backGroundStory, GUILayout.Height(100));
             EditorGUILayout.EndHorizontal();
         }
@@ -268,6 +269,24 @@ public class CardInspector : Editor
                     EditorGUILayout.HelpBox("注意:\"需要添加的buff\"与\"需要添加的buff的名字\"而这只需要填一个就行，如果这两上面个都填的是同一个buff那么将会对对象施加2次该buff", MessageType.Warning);
                 }
             }
+        }
+        card.b5 = EditorGUILayout.Foldout(card.b5, "自定义判定范围");
+        if (card.b5)
+        {
+            EditorGUILayout.HelpBox("注意:此处修改的为敌人的判定范围，默认判定范围为屏幕内，如需修改请勾选下方自定义判定范围", MessageType.Warning);
+            card.customMode = EditorGUILayout.Toggle("自定义判定范围", card.customMode);
+            card.pleaseChooseOneMethod=(targetMethod)EditorGUILayout.EnumPopup("中心位置", card.pleaseChooseOneMethod);
+            if(card.pleaseChooseOneMethod==0)
+            {
+                EditorGUILayout.LabelField("中心物体");
+                EditorGUILayout.PropertyField(position);
+            }
+            else
+            {
+                card.theNumberOfTargetPosition=EditorGUILayout.Vector3Field("中心坐标", card.theNumberOfTargetPosition);
+            }
+            card.getObjectDistanceInX=EditorGUILayout.FloatField("X方向上的范围", card.getObjectDistanceInX);
+            card.getObjectDistanceInY = EditorGUILayout.FloatField("Y方向上的范围", card.getObjectDistanceInY);
         }
         EditorGUILayout.EndVertical();
 
