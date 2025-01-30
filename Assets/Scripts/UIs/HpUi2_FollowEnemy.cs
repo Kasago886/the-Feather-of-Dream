@@ -20,11 +20,8 @@ public class HpUi2_FollowEnemy : MonoBehaviour
     {
         hpDic = new Dictionary<HpUI,Feather>();
         enemy = GetComponent<Enemy>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            sprite = spriteRenderer.sprite;
-        }
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        sprite = spriteRenderer.sprite;
         scrollView = new GameObject(enemy.enemyName + "TemporaryEnemyHealthUi", typeof(ScrollRect));
         scrollView.AddComponent<Scroll>();
         viewPort = new GameObject("Viewport", typeof(RectMask2D));
@@ -68,7 +65,9 @@ public class HpUi2_FollowEnemy : MonoBehaviour
     {
         if (sprite != null)
         {
-            scrollViewRectTransform.position=Camera.main.WorldToScreenPoint(new Vector3(gameObject.transform.position.x + sprite.rect.width  / sprite.pixelsPerUnit, gameObject.transform.position.y + sprite.rect.height*3/sprite.pixelsPerUnit, 0));
+            scrollViewRectTransform.position = Camera.main.WorldToScreenPoint(new Vector3(
+                gameObject.transform.position.x + spriteRenderer.transform.localScale.x * sprite.rect.width / sprite.pixelsPerUnit / 2,
+                gameObject.transform.position.y + spriteRenderer.transform.localScale.y * sprite.rect.height / sprite.pixelsPerUnit, 0));
         }
         AddHpUi();
         Controller();       

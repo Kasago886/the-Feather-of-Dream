@@ -129,7 +129,7 @@ public class Card : MonoBehaviour
         {
             for (int i = 0; i < finalTarget.Count; i++)
             {
-                finalTarget[i].gameObject.GetComponent<SpriteRenderer>().material = oriMaterial[i];
+                finalTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>().material = oriMaterial[i];
             }
             finalTarget.Clear();
             oriMaterial.Clear();
@@ -138,7 +138,7 @@ public class Card : MonoBehaviour
         {
             for (int i = 0; i < finalTarget.Count; i++)
             {
-                finalTarget[i].gameObject.GetComponent<SpriteRenderer>().material = oriMaterial[i];
+                finalTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>().material = oriMaterial[i];
             }
             oriMaterial.Clear();
         }
@@ -653,7 +653,7 @@ public class Card : MonoBehaviour
                                 b = true;
                                 whatHappenWhenBeChoosen?.Invoke();
                                 finalTarget.Add(effortTarget[i].GetComponent<Enemy>());
-                                SpriteRenderer spriteRenderer = effortTarget[i].gameObject.GetComponent<SpriteRenderer>();
+                                SpriteRenderer spriteRenderer = effortTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>();
                                 oriMaterial.Add(spriteRenderer.material);
                                 spriteRenderer.material = speacialMaterial;
                                 effortTarget.RemoveAt(i);
@@ -674,7 +674,7 @@ public class Card : MonoBehaviour
             effects?.Invoke();
             for (int i = 0; i < finalTarget.Count; i++)
             {
-                finalTarget[i].gameObject.GetComponent<SpriteRenderer>().material = oriMaterial[i];
+                finalTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>().material = oriMaterial[i];
                 for (int j = 0; j < buffs.Length; j++)
                 {
                     finalTarget[i].AddBuff(buffs[j]);
@@ -984,7 +984,7 @@ public class Card : MonoBehaviour
                                     b = true;
                                     whatHappenWhenBeChoosen?.Invoke();
                                     finalTarget.Add(effortTarget[i].GetComponent<Enemy>());
-                                    SpriteRenderer spriteRenderer = effortTarget[i].gameObject.GetComponent<SpriteRenderer>();
+                                    SpriteRenderer spriteRenderer = effortTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>();
                                     oriMaterial.Add(spriteRenderer.material);
                                     spriteRenderer.material = speacialMaterial;
                                     effortTarget.RemoveAt(i);
@@ -1006,7 +1006,7 @@ public class Card : MonoBehaviour
             effectsEnemy?.Invoke();
             for (int i = 0; i < finalTarget.Count; i++)
             {
-                finalTarget[i].gameObject.GetComponent<SpriteRenderer>().material = oriMaterial[i];
+                finalTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>().material = oriMaterial[i];
                 for (int j = 0; j < buffsEnemy.Length; j++)
                 {
                     finalTarget[i].AddBuff(buffsEnemy[j]);

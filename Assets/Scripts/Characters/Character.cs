@@ -385,7 +385,7 @@ public class Character : MonoBehaviour
     /// <param name="buff"></param>
     public void AddBuff(string buffName)
     {
-        //Debug.Log(buffName+" added!");
+        Debug.Log(buffName+" added!");
 
         Buff buff = BuffContainer.GetBuffInstance(buffName) as Buff;
         buff.Init(this);
