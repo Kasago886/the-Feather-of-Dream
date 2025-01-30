@@ -84,7 +84,9 @@ MonoBehaviour:
   attackCooldown: 2
   searchType: 0
   wallDetect: 0
+  keepDistanceWhenNotArmed: 0
   searchDistance: 20
+  minDistance: 0
   attackCardUseDistance: 20
   attackCardCooldown: 5
   effectCardUseDistance: 10

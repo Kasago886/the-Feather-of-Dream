@@ -192,11 +192,11 @@ public class CardInspector : Editor
                     EditorGUILayout.PropertyField(event2);
                     EditorGUILayout.LabelField("在鼠标离开卡牌所发生的事件");
                     EditorGUILayout.PropertyField(event3);
-                    EditorGUILayout.LabelField("在卡牌发生作用时所发生的事件");
-                    EditorGUILayout.PropertyField(event4);
                     EditorGUILayout.LabelField("在选择角色作为卡牌作用目标时所发生的事件");
                     EditorGUILayout.PropertyField(event5);
                 }
+                EditorGUILayout.LabelField("在卡牌发生作用时所发生的事件");
+                EditorGUILayout.PropertyField(event4);
                 EditorGUILayout.PropertyField(buff, new GUIContent("需要添加的buff"), true);
                 //for (int i = 0; i < buff.arraySize; i++)
                 //{
@@ -224,11 +224,11 @@ public class CardInspector : Editor
                     EditorGUILayout.PropertyField(event12);
                     EditorGUILayout.LabelField("敌人在鼠标离开卡牌所发生的事件");
                     EditorGUILayout.PropertyField(event13);
-                    EditorGUILayout.LabelField("敌人在卡牌发生作用时所发生的事件");
-                    EditorGUILayout.PropertyField(event14);
                     EditorGUILayout.LabelField("敌人在选择角色作为卡牌作用目标时所发生的事件");
                     EditorGUILayout.PropertyField(event15);
                 }
+                EditorGUILayout.LabelField("敌人在卡牌发生作用时所发生的事件");
+                EditorGUILayout.PropertyField(event14);
                 EditorGUILayout.PropertyField(buff2, new GUIContent("敌人需要添加的buff"), true);
                 //for (int i = 0; i < buff.arraySize; i++)
                 //{
@@ -253,11 +253,11 @@ public class CardInspector : Editor
                     EditorGUILayout.PropertyField(event7);
                     EditorGUILayout.LabelField("玩家在鼠标离开卡牌所发生的事件");
                     EditorGUILayout.PropertyField(event8);
-                    EditorGUILayout.LabelField("玩家在卡牌发生作用时所发生的事件");
-                    EditorGUILayout.PropertyField(event9);
                     EditorGUILayout.LabelField("玩家在选择角色作为卡牌作用目标时所发生的事件");
                     EditorGUILayout.PropertyField(event10);
                 }
+                EditorGUILayout.LabelField("玩家在卡牌发生作用时所发生的事件");
+                EditorGUILayout.PropertyField(event9);
                 EditorGUILayout.PropertyField(buff1, new GUIContent("玩家需要添加的buff"), true);
                 //for (int i = 0; i < buff.arraySize; i++)
                 //{
