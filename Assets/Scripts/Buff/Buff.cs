@@ -738,4 +738,77 @@ public class Terrified : EffectBuff
         base.OnExit();
     }
 }
+public class Depressed : EffectBuff
+{
+    private Player player;
+    private Enemy enemy;
+    private Color baseColor;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            player = target.GetComponent<Player>();
+        }
+        if (target.GetComponent<Enemy>() != null)
+        {
+            enemy = target.GetComponent<Enemy>();
+        }
+        this.timer = 12;
+    }
+
+    public override void OnEnter()
+    {
+        if(player != null)
+        {
+            player.cardGenerateCooldown += 1;
+            baseColor=player.cardGenerateText.color;
+            player.cardGenerateText.color= Color.red;
+        }
+        if (enemy != null)
+        {
+            if(!enemy.isSingleAttackCardCooldown)
+            {
+                enemy.attackCardCooldown += 1;
+            }
+            else
+            {
+                foreach(var v in enemy.attackCardsWithTimer)
+                {
+                    v.cooldown += 1;
+                }
+            }
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (player != null)
+        {
+            player.cardGenerateCooldown -= 1;
+            player.cardGenerateText.color = baseColor;
+        }
+        if (enemy != null)
+        {
+            if (!enemy.isSingleAttackCardCooldown)
+            {
+                enemy.attackCardCooldown += 1;
+            }
+            else
+            {
+                foreach (var v in enemy.attackCardsWithTimer)
+                {
+                    v.cooldown += 1;
+                }
+            }
+        }
+        base.OnExit();
+    }
+}
 #endregion

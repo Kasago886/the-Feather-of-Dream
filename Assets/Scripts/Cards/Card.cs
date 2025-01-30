@@ -69,7 +69,6 @@ public class Card : MonoBehaviour
     public Vector3 theNumberOfTargetPosition;
     public float getObjectDistanceInX;
     public float getObjectDistanceInY;
-
     private bool choose, endChoose;
     private List<Collider2D> effortTarget;
     private List<Enemy> finalTarget;

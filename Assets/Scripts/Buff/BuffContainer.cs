@@ -34,7 +34,8 @@ public class BuffContainer
         {"合力", typeof(DwarfsEffectBuff) },
         {"利爪", typeof(TheMisunderstoodWerewolfBuff) },
         {"伤痕", typeof(Trauma) },//在有羽解锁的条件下，受到不低于1点伤害后扣除1滴血，并有1/3的概率解除该buff，玩家和敌人通用
-        {"惊惶", typeof(Terrified) }//在有羽解锁的条件下，立即受到1点伤害，并回复1滴血，玩家和敌人通用
+        {"惊惶", typeof(Terrified) },//在有羽解锁的条件下，立即受到1点伤害，并回复1滴血，玩家和敌人通用
+        {"忧郁",typeof(Depressed) }//使玩家的获得卡牌的时间间隔增加1秒，使敌人使用攻击牌的间隔增加1秒，持续12秒
     };
 
     /*
