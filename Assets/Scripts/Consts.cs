@@ -17,4 +17,7 @@ public class Consts
     public const string CurrentArchivePlayerPrefTag = "Current Archive";
     public const string BGMPlayerPrefTag = "BGM";
     public const string EffectPlayerPrefTag = "Effect";
+
+    public const string SpeedAnimatorArgument = "speed";
+    public const string IsDeadAnimatorArgument = "isDead";
 }

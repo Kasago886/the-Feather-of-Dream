@@ -52,8 +52,11 @@ public class AttackBodyInspector : Editor
 
         EditorGUILayout.EndVertical();
 
-        serializedObject.ApplyModifiedProperties();
-        EditorUtility.SetDirty(attackBody);
+        if (GUI.changed)
+        {
+            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(attackBody);
+        }
 
     }
 }

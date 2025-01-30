@@ -265,6 +265,12 @@ public class Enemy : Character
         {
             spriteRenderer.flipX = true;
         }
+
+        //动画
+        if (animator != null)
+        {
+            animator.SetFloat(Consts.SpeedAnimatorArgument, Mathf.Abs(horizontalMove));
+        }
     }
     /// <summary>
     /// 相对于玩家移动

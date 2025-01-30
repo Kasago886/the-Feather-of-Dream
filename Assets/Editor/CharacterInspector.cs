@@ -95,7 +95,10 @@ public class CharacterInspector : Editor
 
         EditorGUILayout.EndVertical();
 
-        serializedObject.ApplyModifiedProperties();
-        EditorUtility.SetDirty(character);
+        if (GUI.changed)
+        {
+            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(character);
+        }
     }
 }

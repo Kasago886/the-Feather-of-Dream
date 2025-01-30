@@ -50,12 +50,15 @@ public class Character : MonoBehaviour
     public Rigidbody2D rb;
     public AudioSource effectAudioSource;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     protected void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         effectAudioSource = GameObject.Find("EffectSound").GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
 
         //初始羽
         if (isDefaultFeather)
@@ -97,7 +100,6 @@ public class Character : MonoBehaviour
             //方向
             if (spriteRenderer.flipX)
             {
-                instance.GetComponent<SpriteRenderer>().flipX = true;
                 instance.GetComponent<AttackBody>().isleft = true;
             }
 
@@ -177,17 +179,31 @@ public class Character : MonoBehaviour
             //Debug.Log("unlock feathers:"+unlockedFeathers.Count.ToString() + "\nfeathers:" + feathers.Count.ToString());
             if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
             {
-                isDead = true;
-
-                //音效
-                if (deathSound != null)
-                {
-                    effectAudioSource.PlayOneShot(deathSound);
-                }
-
-                deathEvent?.Invoke();
+                OnDeath();
             }
         }
+    }
+
+    /// <summary>
+    /// 死亡
+    /// </summary>
+    public virtual void OnDeath()
+    {
+        isDead = true;
+
+        //音效
+        if (deathSound != null)
+        {
+            effectAudioSource.PlayOneShot(deathSound);
+        }
+
+        //动画
+        if (animator != null)
+        {
+            animator.SetBool(Consts.IsDeadAnimatorArgument, true);
+        }
+
+        deathEvent?.Invoke();
     }
 
     /// <summary>

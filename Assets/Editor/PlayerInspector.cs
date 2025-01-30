@@ -44,6 +44,10 @@ public class PlayerInspector : CharacterInspector
 
         base.OnInspectorGUI();
 
-        EditorUtility.SetDirty(player);
+        if (GUI.changed)
+        {
+            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(player);
+        }
     }
 }

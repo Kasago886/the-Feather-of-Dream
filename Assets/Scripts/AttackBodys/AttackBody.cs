@@ -36,6 +36,7 @@ public class AttackBody : MonoBehaviour
         if (isleft)
         {
             center.x = -attackCenter.x;
+            transform.localScale = new Vector3(-transform.localScale.x,transform.localScale.y,transform.localScale.z);
         }
         center = center + transform.position;
 

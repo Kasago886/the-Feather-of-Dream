@@ -109,8 +109,11 @@ public class EnemyInspector : CharacterInspector
 
         EditorGUILayout.EndVertical();
 
-        serializedObject.ApplyModifiedProperties();
-        EditorUtility.SetDirty(enemy);
+        if (GUI.changed)
+        {
+            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(enemy);
+        }
 
         base.OnInspectorGUI();
     }
