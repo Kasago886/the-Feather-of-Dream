@@ -86,6 +86,7 @@ public class Card : MonoBehaviour
     private float timer;
     private int haveChoose = -1, onlyOne;
     private List<Material> oriMaterial;
+    private Dictionary<SpriteRenderer, Material> spMaterial;
     void Start()
     {
         parent = gameObject.transform.parent;
@@ -117,6 +118,7 @@ public class Card : MonoBehaviour
             }
         }
         oriPlace = rectTransform.localPosition;
+        spMaterial = new Dictionary<SpriteRenderer, Material>();
     }
     // Update is called once per frame
     void Update()
@@ -273,6 +275,8 @@ public class Card : MonoBehaviour
                 whatHappenOnDragPlayer?.Invoke();
                 whatHappenOnDragEnemy?.Invoke();
             }
+            ShowEnemy();
+            PlayerCardController.cantUseCard = true;
         }
     }
     /// <summary>
@@ -287,6 +291,11 @@ public class Card : MonoBehaviour
                 gameObject.transform.SetParent(parent);
                 EffortWhenDragEnd();
                 BothEffortWhenDragEnd();
+                foreach (var s in spMaterial)
+                {
+                    s.Key.material = s.Value;
+                }
+                PlayerCardController.cantUseCard= false;
             }
             else
             {
@@ -737,6 +746,7 @@ public class Card : MonoBehaviour
             {
                 theNumberOfEffortedEnemies = enemiesWhoInCameralist.Count;
             }
+
             if (effortOnMoreEnemies)
             {
                 for (int i = 0; i < theNumberOfEffortedEnemies; i++)
@@ -787,20 +797,7 @@ public class Card : MonoBehaviour
     private void BothEffortWhenDragEnd()
     {
         if (effortOnPlayerAndEnemy)
-        {
-            if (Vector2.Distance(Camera.main.ScreenToWorldPoint(transform.position), GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position) < minDistance)
-            {
-                effectsPlayer?.Invoke();
-                Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
-                for (int i = 0; i < buffsPlayer.Length; i++)
-                {
-                    player.AddBuff(buffsPlayer[i]);
-                }
-                for (int j = 0; j < buffNamesPlayer.Length; j++)
-                {
-                    player.AddBuff(buffNamesPlayer[j]);
-                }
-            }
+        {                         
             List<int> enemiesWhoHaveBeenEfforted = new List<int>();
             Collider2D[] enemiesThatBeenChoose = null;
             if (!customMode)
@@ -900,6 +897,16 @@ public class Card : MonoBehaviour
                         enemy0.AddBuff(buffNamesEnemy[j]);
                     }
                     effectsEnemy?.Invoke();
+                }
+                effectsPlayer?.Invoke();
+                Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
+                for (int i = 0; i < buffsPlayer.Length; i++)
+                {
+                    player.AddBuff(buffsPlayer[i]);
+                }
+                for (int j = 0; j < buffNamesPlayer.Length; j++)
+                {
+                    player.AddBuff(buffNamesPlayer[j]);
                 }
                 Captions(name, true);
                 Destroy(gameObject);
@@ -1227,6 +1234,66 @@ public class Card : MonoBehaviour
                         enemy1.AddBuff(buffNamesEnemy[j]);
                     }
                 }
+            }
+        }
+    }
+    private void ShowEnemy()
+    {
+        Collider2D[] enemiesThatBeenChoose = null;
+        if (!customMode)
+        {
+            enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+        }
+        else
+        {
+            if (targetTransform != null)
+            {
+                enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                    new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+            }
+            if (theNumberOfTargetPosition != null)
+            {
+                enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                    new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+            }
+        }
+        List<Transform> targetsTransform = new List<Transform>();
+        for (int i = 0;i<enemiesThatBeenChoose.Length;i++)
+        {
+            if(Vector2.Distance(enemiesThatBeenChoose[i].transform.position, Camera.main.ScreenToWorldPoint(transform.position)) < minDistance)
+            {
+                targetsTransform.Add(enemiesThatBeenChoose[i].transform);
+            }
+        }
+        if(targetsTransform.Count > 1)
+        {
+            for (int i = 0; i < targetsTransform.Count-1; i++)
+            {
+                if (Vector2.Distance(targetsTransform[i].transform.position, Camera.main.ScreenToWorldPoint(transform.position)) < Vector2.Distance(targetsTransform[i + 1].transform.position, Camera.main.ScreenToWorldPoint(transform.position))) 
+                { targetsTransform.RemoveAt(i + 1); } 
+                else 
+                { targetsTransform.RemoveAt(i); }
+                i--;
+            }
+        }
+        if (targetsTransform.Count > 0)
+        {
+            SpriteRenderer spriteRenderer = targetsTransform[0].GetComponentInChildren<SpriteRenderer>();
+            if (spriteRenderer != null && spriteRenderer.material != speacialMaterial)
+            {
+                if (!spMaterial.ContainsKey(spriteRenderer))
+                {
+                    spMaterial.Add(spriteRenderer, spriteRenderer.material);
+                }
+                spriteRenderer.material = speacialMaterial;
+            }
+        }
+        else
+        {
+            foreach (var s in spMaterial)
+            {
+                s.Key.material=s.Value;
             }
         }
     }
