@@ -1298,10 +1298,19 @@ public class Card : MonoBehaviour
     }
     private void Captions(string text, bool isPlayer)
     {
-        GameObject textObject = new GameObject("playerText", typeof(Text));
+        //GameObject captions = new GameObject("Captions", typeof(RectTransform), typeof(DynamicTextBackground));
+        GameObject textObject = new GameObject("Text", typeof(Text));
+        //GameObject backGroud = new GameObject("Background", typeof(Image));
+        //RectTransform rectTransform1 = captions.GetComponent<RectTransform>();
         RectTransform rectTransform2 = textObject.GetComponent<RectTransform>();
+        //RectTransform rectTransform3= backGroud.GetComponent<RectTransform>();
+        //DynamicTextBackground dynamicTextBackground=captions.GetComponent<DynamicTextBackground>();
+        //dynamicTextBackground.textComponent=textObject.GetComponent<Text>();
+        //dynamicTextBackground.backgroundImage=backGroud.GetComponent<Image>();
         Text text1 = textObject.GetComponent<Text>();
         rectTransform2.SetParent(GameObject.Find("textScrollContent").GetComponent<RectTransform>());
+        //rectTransform3.SetParent(rectTransform1);
+        //rectTransform2.SetParent(rectTransform1);
         if (isPlayer)
         {
             text1.color = Color.blue;
