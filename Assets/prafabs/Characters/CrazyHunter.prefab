@@ -61,7 +61,7 @@ MonoBehaviour:
   forcebackDuration: 0.05
   forcebackTimer: 0
   attackBodyObjList: []
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 51d203b3dae1408439470f1c40e9b288, type: 3}
   injuryEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -78,6 +78,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
   effectAudioSource: {fileID: 0}
+  animator: {fileID: 0}
   enemyName: "\u88AB\u54AC\u4F24\u53D1\u75AF\u7684\u730E\u4EBA"
   runSpeed: 5
   jumpSpeed: 7

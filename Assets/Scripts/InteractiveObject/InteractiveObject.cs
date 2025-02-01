@@ -41,7 +41,7 @@ public class InteractiveObject : MonoBehaviour
         id=Random.Range(-100000,100000);
         player = GameObject.FindGameObjectWithTag(Consts.PlayerTag);
     }
-    private void Update()
+    protected virtual void Update()
     {
         KeyTriggerMode1();
     }

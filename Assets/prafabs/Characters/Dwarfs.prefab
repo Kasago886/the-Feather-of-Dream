@@ -61,11 +61,11 @@ MonoBehaviour:
   forcebackDuration: 0.1
   forcebackTimer: 0
   attackBodyObjList: []
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 508722e03d82b5c42ba10ea0efc293d6, type: 3}
   injuryEvent:
     m_PersistentCalls:
       m_Calls: []
-  injurySound: {fileID: 0}
+  injurySound: {fileID: 8300000, guid: 8febdf0d802043a46b8f7593ce8f74cf, type: 3}
   healEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -78,13 +78,16 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
   effectAudioSource: {fileID: 0}
+  animator: {fileID: 0}
   enemyName: "\u5C0F\u77EE\u4EBA"
   runSpeed: 5
   jumpSpeed: 7
   attackCooldown: 2
   searchType: 0
   wallDetect: 0
+  keepDistanceWhenNotArmed: 0
   searchDistance: 15
+  minDistance: 1
   attackCardUseDistance: 10
   attackCardCooldown: 8
   effectCardUseDistance: 10
