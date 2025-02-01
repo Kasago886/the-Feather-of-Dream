@@ -273,9 +273,9 @@ MonoBehaviour:
   effortOnMoreEnemies: 0
   theNumberOfEffortedEnemies: 0
   effortOnPlayerAndEnemy: 1
-  click: 1
+  click: 0
   isRandom: 1
-  dragOnCharactor: 0
+  dragOnCharactor: 1
   minDistance: 5
   whatHappenOnDrag:
     m_PersistentCalls:

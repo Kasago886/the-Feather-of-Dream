@@ -83,9 +83,10 @@ public class Card : MonoBehaviour
     private List<string> buffCaptions = new List<string>();
     private string enemyName;
     private float timer;
-    private int haveChoose = -1, onlyOne;
+    private int haveChoose = -1, onlyOne,useNumber;
     private List<Material> oriMaterial;
     private Dictionary<SpriteRenderer, Material> spMaterial;
+    private Collider2D[] enemiesThatBeenChoose1;
     void Start()
     {
         parent = gameObject.transform.parent;
@@ -285,6 +286,7 @@ public class Card : MonoBehaviour
     {
         if (dragOnCharactor)
         {
+            useNumber = 0;
             if (ConditionsOfUseCard())
             {
                 gameObject.transform.SetParent(parent);
@@ -1238,31 +1240,34 @@ public class Card : MonoBehaviour
     }
     private void ShowEnemy()
     {
-        Collider2D[] enemiesThatBeenChoose = null;
-        if (!customMode)
+        if (useNumber == 0)
         {
-            enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
-        }
-        else
-        {
-            if (targetTransform != null)
+            useNumber++;
+            if (!customMode)
             {
-                enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
-                    new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                enemiesThatBeenChoose1 = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
             }
-            if (theNumberOfTargetPosition != null)
+            else
             {
-                enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
-                    new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                if (targetTransform != null)
+                {
+                    enemiesThatBeenChoose1 = Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                        new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+                if (theNumberOfTargetPosition != null)
+                {
+                    enemiesThatBeenChoose1 = Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                        new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
             }
         }
         List<Transform> targetsTransform = new List<Transform>();
-        for (int i = 0;i<enemiesThatBeenChoose.Length;i++)
+        for (int i = 0;i<enemiesThatBeenChoose1.Length;i++)
         {
-            if(Vector2.Distance(enemiesThatBeenChoose[i].transform.position, Camera.main.ScreenToWorldPoint(transform.position)) < minDistance)
+            if(Vector2.Distance(enemiesThatBeenChoose1[i].transform.position, Camera.main.ScreenToWorldPoint(transform.position)) < minDistance)
             {
-                targetsTransform.Add(enemiesThatBeenChoose[i].transform);
+                targetsTransform.Add(enemiesThatBeenChoose1[i].transform);
             }
         }
         if(targetsTransform.Count > 1)

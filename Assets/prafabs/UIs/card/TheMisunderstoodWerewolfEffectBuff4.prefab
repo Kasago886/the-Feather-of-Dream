@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 5848249873419317024}
   - component: {fileID: 3609512844006539255}
   - component: {fileID: 2831457185267480616}
-  - component: {fileID: 7063637173366311077}
+  - component: {fileID: -4245300701002310434}
   - component: {fileID: 7048944131886058621}
   - component: {fileID: 1503527729357132766}
   m_Layer: 5
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7063637173366311077
+--- !u!114 &-4245300701002310434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,10 +172,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2623924060404161504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e18d51474219541baa0e293a6ee587, type: 3}
+  m_Script: {fileID: 11500000, guid: eb5227b9940a67f459b92bbe6e41a331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 6
+  id: 0
   name: "\u8BEF\u89E3\u4E4B\u6B87"
   rarity: 3
   description: "\u7ACB\u5373\u4E3A\u73A9\u5BB6\u65BD\u52A01\u5C42\u201C\u60CA\u60F6\u201D\n\u4F7F\u63A5\u4E0B\u6765\u76843\u6B21\u653B\u51FB\u5C06\u4E3A\u73A9\n\u5BB6\u5206\u522B\u65BD\u52A05\uFF0C5\uFF0C9\u5C42\u201C\u4F24\u75D5\u201D\n\uFF08\u8BE5\u6280\u80FD\u4EC5\u9650\u5355\u4E2A\u7FBD\u7684\u8840\u91CF\n\u7B2C\u4E00\u6B21\u4F4E\u4E8E50%\u65F6\u4F7F\u7528\uFF09"
@@ -191,14 +191,14 @@ MonoBehaviour:
   enemyUse: 1
   effortOnPlayer: 1
   effortOnEnmey: 0
-  effortOnOneEnemy: 1
+  effortOnOneEnemy: 0
   effortOnMoreEnemies: 0
   theNumberOfEffortedEnemies: 0
   effortOnPlayerAndEnemy: 0
-  click: 1
-  isRandom: 1
+  click: 0
+  isRandom: 0
   dragOnCharactor: 0
-  minDistance: 5
+  minDistance: 0
   whatHappenOnDrag:
     m_PersistentCalls:
       m_Calls: []
@@ -245,8 +245,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   buffsPlayer: []
-  buffNamesPlayer:
-  - "\u62D4\u7FBD5s"
+  buffNamesPlayer: []
   whatHappenOnDragEnemy:
     m_PersistentCalls:
       m_Calls: []
@@ -263,8 +262,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   buffsEnemy: []
-  buffNamesEnemy:
-  - "\u738B\u5B50\u4E4B\u5251"
+  buffNamesEnemy: []
   customMode: 0
   pleaseChooseOneMethod: 0
   targetTransform: {fileID: 0}

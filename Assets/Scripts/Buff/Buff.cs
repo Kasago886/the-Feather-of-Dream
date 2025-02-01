@@ -278,7 +278,7 @@ public class TheMisunderstoodWerewolfBuff : AttackBuff
     {
         base.Init(target, timer, isPermanent);
         this.timer = 7;
-        this.attackBody = Resources.Load<GameObject>("AttackBodys/TheMisunderstoodWerewolfAttackBody");
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/TheMisunderstoodWerewolfAttackBody 1");
     }
 }
 #endregion
@@ -656,6 +656,7 @@ public class Trauma : EffectBuff
                 if (health - player.unlockedFeathers[0].health >= 1)
                 {
                     player.unlockedFeathers[0].health--;
+                    attackTimer = 0;
                     if (Random.Range(0, 3) > 1)
                     {
                         isPermanent = false;
@@ -667,6 +668,7 @@ public class Trauma : EffectBuff
                 if (health - enemy.unlockedFeathers[0].health >= 1)
                 {
                     enemy.unlockedFeathers[0].health--;
+                    attackTimer = 0;
                     if (Random.Range(0, 3) > 1)
                     {
                         isPermanent = false;

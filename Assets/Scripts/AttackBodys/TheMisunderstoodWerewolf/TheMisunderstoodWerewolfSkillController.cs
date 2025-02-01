@@ -9,9 +9,12 @@ public class TheMisunderstoodWerewolfSkillController : MonoBehaviour
     public float speed;
     public void UseSkill()
     {
-        TheMisunderstoodWerewolfSkill.instance.useSkill = true;
-        TheMisunderstoodWerewolfSkill.instance.limitR = limitR;
-        TheMisunderstoodWerewolfSkill.instance.speed = speed;
-        TheMisunderstoodWerewolfSkill.instance.number = 2;
+        if (TheMisunderstoodWerewolfSkill.instance != null)
+        {
+            TheMisunderstoodWerewolfSkill.instance.useSkill = true;
+            TheMisunderstoodWerewolfSkill.instance.limitR = limitR;
+            TheMisunderstoodWerewolfSkill.instance.speed = speed;
+            TheMisunderstoodWerewolfSkill.instance.number = 2;
+        }
     }
 }

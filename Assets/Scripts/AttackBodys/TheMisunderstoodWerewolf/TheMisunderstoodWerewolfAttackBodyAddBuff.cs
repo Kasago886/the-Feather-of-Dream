@@ -13,6 +13,9 @@ public class TheMisunderstoodWerewolfAttackBodyAddBuff : MonoBehaviour
         {
             list.Add(number[i]);
         }
-        TheMisunderstoodWerewolfAttackBody.instance.next.Add(buffName, list);
+        if (TheMisunderstoodWerewolfAttackBody.instance != null)
+        {
+            TheMisunderstoodWerewolfAttackBody.instance.next.Add(buffName, list);
+        }
     }
 }
