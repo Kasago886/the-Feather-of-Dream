@@ -387,7 +387,7 @@ public class Character : MonoBehaviour
     {
         Buff buff = BuffContainer.GetBuffInstance(buffName) as Buff;
         buff.Init(this);
-
+        buff.name = buffName;
         AddBuff(buff);
     }
     public void AddBuff(Buff buff)

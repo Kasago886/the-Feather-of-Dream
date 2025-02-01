@@ -17,14 +17,12 @@ public class BuffScroll : MonoBehaviour
     public Player player;
     public RectTransform contentRectTransform;
     public List<BuffImformation> buffImformation;
-    private Dictionary<Type, BuffImformation> buffImformationDict;
     private Dictionary<string,float> buffNameDict;
     private Dictionary<string, BuffImformation> nameToImformation;
     private Dictionary<string,Text> buffDescDict;
     private float oriNumber;
     private void Start()
     {
-        buffImformationDict = new Dictionary<Type, BuffImformation>();
         buffNameDict = new Dictionary<string,float>();
         buffDescDict = new Dictionary<string,Text>();
         nameToImformation = new Dictionary<string, BuffImformation>();
@@ -32,7 +30,6 @@ public class BuffScroll : MonoBehaviour
         {
             if (BuffContainer.buffDictionary.ContainsKey(buffImformation[i].name))
             {
-                buffImformationDict.Add(BuffContainer.buffDictionary[buffImformation[i].name], buffImformation[i]);
                 nameToImformation.Add(buffImformation[i].name, buffImformation[i]);
             }
         }
@@ -80,16 +77,16 @@ public class BuffScroll : MonoBehaviour
         {
             for (int i = 0; i < player.buffList.Count; i++)
             {
-                if (buffImformationDict.ContainsKey(player.buffList[i].GetType()))
+                if (nameToImformation.ContainsKey(player.buffList[i].name))
                 {
                     Debug.Log("спик╨ш");
-                    if (buffNameDict1.ContainsKey(buffImformationDict[player.buffList[i].GetType()].name))
+                    if (buffNameDict1.ContainsKey(nameToImformation[player.buffList[i].name].name))
                     {
-                        buffNameDict1[buffImformationDict[player.buffList[i].GetType()].name]++;
+                        buffNameDict1[nameToImformation[player.buffList[i].name].name]++;
                     }
                     else
                     {
-                        buffNameDict1.Add(buffImformationDict[player.buffList[i].GetType()].name, 1);
+                        buffNameDict1.Add(nameToImformation[player.buffList[i].name].name, 1);
                     }
                 }
             }
