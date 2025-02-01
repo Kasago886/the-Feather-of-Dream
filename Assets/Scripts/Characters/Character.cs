@@ -389,6 +389,8 @@ public class Character : MonoBehaviour
         buff.Init(this);
         buff.name = buffName;
         AddBuff(buff);
+        Debug.Log("应当添加" + buffName);
+        Debug.Log("实际添加" + buff.name);
     }
     public void AddBuff(Buff buff)
     {
