@@ -146,31 +146,36 @@ MonoBehaviour:
   searchDistance: 20
   minDistance: 5
   attackCardUseDistance: 20
-  attackCardCooldown: 9
   effectCardUseDistance: 25
-  effectCardCooldown: 0
-  isSingleAttackCardCooldown: 0
-  isSingleEffectCardCooldown: 1
-  attackCardsWithTimer: []
-  effectCardsWithTimer:
-  - card: {fileID: 398501618887008028}
+  attackCardLineList:
+  - cards:
+    - card: {fileID: 7958383244657977382}
+      cooldown: 10
+      timer: 0
     cooldown: 10
     timer: 0
-  - card: {fileID: 2665966837275764178}
-    cooldown: 15
+  effectCardLineList:
+  - cards:
+    - card: {fileID: 398501618887008028}
+      cooldown: 9
+      timer: 0
+    - card: {fileID: 2665966837275764178}
+      cooldown: 12
+      timer: 0
+    - card: {fileID: 8053221182880331217}
+      cooldown: 15
+      timer: 0
+    - card: {fileID: 4091213195421454461}
+      cooldown: 20
+      timer: 0
+    cooldown: 0
     timer: 0
-  - card: {fileID: 8053221182880331217}
-    cooldown: 8
+  - cards:
+    - card: {fileID: 3497625030627569441}
+      cooldown: 0
+      timer: 0
+    cooldown: 0
     timer: 0
-  - card: {fileID: 3497625030627569441}
-    cooldown: 2
-    timer: 0
-  - card: {fileID: 4091213195421454461}
-    cooldown: 30
-    timer: 0
-  attackCards:
-  - {fileID: 7958383244657977382}
-  effectCards: []
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:

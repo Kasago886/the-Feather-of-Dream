@@ -627,15 +627,21 @@ public class Trauma : EffectBuff
     {
         base.Init(target, timer, isPermanent);
         isPermanent = true;
-        if (target.GetComponent<Player>() != null)
+        if (target.GetComponent<Player>() != null )
         {
             player = target.GetComponent<Player>();
-            health = player.unlockedFeathers[0].health;
+            if (player.unlockedFeathers.Count > 0)
+            {
+                health = player.unlockedFeathers[0].health;
+            }
         }
         if (target.GetComponent<Enemy>() != null)
         {
             enemy = target.GetComponent<Enemy>();
-            health = enemy.unlockedFeathers[0].health;
+            if (enemy.unlockedFeathers.Count > 0)
+            {
+                health = enemy.unlockedFeathers[0].health;
+            }
         }
         this.timer = 0;
     }
@@ -653,7 +659,7 @@ public class Trauma : EffectBuff
         {
             if (player != null)
             {
-                if (health - player.unlockedFeathers[0].health >= 1)
+                if ( player.unlockedFeathers.Count > 0&&health - player.unlockedFeathers[0].health >= 1)
                 {
                     player.unlockedFeathers[0].health--;
                     attackTimer = 0;
@@ -665,7 +671,7 @@ public class Trauma : EffectBuff
             }
             if (enemy != null)
             {
-                if (health - enemy.unlockedFeathers[0].health >= 1)
+                if (enemy.unlockedFeathers.Count > 0&&health - enemy.unlockedFeathers[0].health >= 1)
                 {
                     enemy.unlockedFeathers[0].health--;
                     attackTimer = 0;
@@ -676,11 +682,11 @@ public class Trauma : EffectBuff
                 }
             }
         }
-        if(player != null)
+        if(player != null && player.unlockedFeathers.Count > 0)
         {
             health = player.unlockedFeathers[0].health;
         }
-        if(enemy != null)
+        if(enemy != null && enemy.unlockedFeathers.Count > 0)
         {
             health = enemy.unlockedFeathers[0].health;
         }
@@ -711,11 +717,11 @@ public class Terrified : EffectBuff
 
     public override void OnEnter()
     {
-        if (player != null)
+        if (player != null && player.unlockedFeathers.Count > 0)
         {
             player.unlockedFeathers[0].health -= 1f;
         }
-        if (enemy != null)
+        if (enemy != null && enemy.unlockedFeathers.Count > 0)
         {
             enemy.unlockedFeathers[0].health -= 1f;
         }
@@ -729,11 +735,11 @@ public class Terrified : EffectBuff
 
     public override void OnExit()
     {
-        if (player != null)
+        if (player != null && player.unlockedFeathers.Count > 0)
         {
             player.unlockedFeathers[0].health += 1f;
         }
-        if (enemy != null)
+        if (enemy != null && enemy.unlockedFeathers.Count > 0)
         {
             enemy.unlockedFeathers[0].health += 1f;
         }
