@@ -767,15 +767,11 @@ public class Depressed : EffectBuff
         }
         if (enemy != null)
         {
-            if(!enemy.isSingleAttackCardCooldown)
+            foreach (EnemyCardLine line in enemy.attackCardLineList)
             {
-                enemy.attackCardCooldown += 1;
-            }
-            else
-            {
-                foreach(var v in enemy.attackCardsWithTimer)
+                foreach(EnemyCardWithTimer ectw in line.cards)
                 {
-                    v.cooldown += 1;
+                    ectw.timer += 1;
                 }
             }
         }
@@ -796,15 +792,11 @@ public class Depressed : EffectBuff
         }
         if (enemy != null)
         {
-            if (!enemy.isSingleAttackCardCooldown)
+            foreach (EnemyCardLine line in enemy.attackCardLineList)
             {
-                enemy.attackCardCooldown += 1;
-            }
-            else
-            {
-                foreach (var v in enemy.attackCardsWithTimer)
+                foreach (EnemyCardWithTimer ectw in line.cards)
                 {
-                    v.cooldown += 1;
+                    ectw.timer += 1;
                 }
             }
         }

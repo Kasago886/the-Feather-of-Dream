@@ -254,26 +254,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  name: "\u6D4B\u8BD5\u653B\u51FB"
+  name: "\u6D4B\u8BD5\u62D4\u7FBD-Enemy"
   rarity: 1
-  description: "\u7ED9\u81EA\u8EAB\u589E\u52A0\u4E00\u4E2A10s\u7684\u653B\u51FB\u66FF\u8EAB"
+  description: "\u62D4\u51FA\u73A9\u5BB6\u76841\u6839\u7FBD10s\n\u5E76\u4E3A\u81EA\u8EAB\u6DFB\u52A0\u653B\u51FB\u66FF\u8EAB"
   backGroundStory: 12233
   b0: 1
   b1: 1
-  b2: 1
+  b2: 0
   b3: 1
   b4: 1
   b5: 0
   playerUse: 1
   speacialMaterial: {fileID: 2100000, guid: f64101cea1336cd46b6f80df9cddae60, type: 2}
   enemyUse: 0
-  effortOnPlayer: 1
+  effortOnPlayer: 0
   effortOnEnmey: 0
-  effortOnOneEnemy: 0
+  effortOnOneEnemy: 1
   effortOnMoreEnemies: 0
   theNumberOfEffortedEnemies: 0
-  effortOnPlayerAndEnemy: 0
-  click: 1
+  effortOnPlayerAndEnemy: 1
+  click: 0
   isRandom: 0
   dragOnCharactor: 0
   minDistance: 0
@@ -311,7 +311,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   buffsPlayer: []
-  buffNamesPlayer: []
+  buffNamesPlayer:
+  - "\u62D4\u7FBD10s"
   whatHappenOnDragEnemy:
     m_PersistentCalls:
       m_Calls: []
@@ -328,7 +329,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   buffsEnemy: []
-  buffNamesEnemy: []
+  buffNamesEnemy:
+  - "\u6D4B\u8BD5\u654C\u4EBA\u653B\u51FB"
   customMode: 0
   pleaseChooseOneMethod: 0
   targetTransform: {fileID: 0}

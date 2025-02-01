@@ -90,23 +90,21 @@ MonoBehaviour:
   searchDistance: 20
   minDistance: 5
   attackCardUseDistance: 10
-  attackCardCooldown: 10
   effectCardUseDistance: 20
-  effectCardCooldown: 10
-  isSingleAttackCardCooldown: 0
-  isSingleEffectCardCooldown: 0
-  attackCardsWithTimer:
-  - card: {fileID: 0}
+  attackCardLineList:
+  - cards:
+    - card: {fileID: 1590407948924484016}
+      cooldown: 7
+      timer: 0
     cooldown: 0
     timer: 0
-  effectCardsWithTimer:
-  - card: {fileID: 0}
+  effectCardLineList:
+  - cards:
+    - card: {fileID: 794024782493832859}
+      cooldown: 10
+      timer: 0
     cooldown: 0
     timer: 0
-  attackCards:
-  - {fileID: 1590407948924484016}
-  effectCards:
-  - {fileID: 794024782493832859}
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:

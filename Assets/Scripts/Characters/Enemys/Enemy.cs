@@ -25,6 +25,14 @@ public class EnemyCardWithTimer
     [HideInInspector]public float timer;
 }
 
+[System.Serializable]
+public class EnemyCardLine
+{
+    public List<EnemyCardWithTimer> cards;
+    public float cooldown;
+    [HideInInspector] public float timer;
+}
+
 [RequireComponent(typeof(HpUi2_FollowEnemy))]
 public class Enemy : Character
 {
@@ -43,19 +51,10 @@ public class Enemy : Character
     public float minDistance;
 
     public float attackCardUseDistance;
-    public float attackCardCooldown;
-    protected float attackCardCooldownTimer = 0;
-
     public float effectCardUseDistance;
-    public float effectCardCooldown;
-    protected float effectCardCooldownTimer = 0;
 
-    public bool isSingleAttackCardCooldown;
-    public bool isSingleEffectCardCooldown;
-    public List<EnemyCardWithTimer> attackCardsWithTimer = new();
-    public List<EnemyCardWithTimer> effectCardsWithTimer = new();
-    public List<Card> attackCards = new();
-    public List<Card> effectCards = new();
+    public List<EnemyCardLine> attackCardLineList = new();
+    public List<EnemyCardLine> effectCardLineList = new();
 
     [HideInInspector] public Player player;
 
@@ -117,22 +116,23 @@ public class Enemy : Character
             if (!(forcebackTimer > 0))
             {
                 attackCooldownTimer -= Time.deltaTime;
-                attackCardCooldownTimer -= Time.deltaTime;
-                effectCardCooldownTimer -= Time.deltaTime;
             }
 
-            if (isSingleAttackCardCooldown)
+            //遍历line
+            foreach (EnemyCardLine cardLine in attackCardLineList)
             {
-                foreach(EnemyCardWithTimer ecwt in attackCardsWithTimer)
+                cardLine.timer -= Time.deltaTime;
+                foreach (EnemyCardWithTimer ectw in cardLine.cards)
                 {
-                    ecwt.timer -= Time.deltaTime;
+                    ectw.timer -= Time.deltaTime;
                 }
             }
-            if (isSingleEffectCardCooldown)
+            foreach (EnemyCardLine cardLine in effectCardLineList)
             {
-                foreach (EnemyCardWithTimer ecwt in effectCardsWithTimer)
+                cardLine.timer -= Time.deltaTime;
+                foreach (EnemyCardWithTimer ectw in cardLine.cards)
                 {
-                    ecwt.timer -= Time.deltaTime;
+                    ectw.timer -= Time.deltaTime;
                 }
             }
         }
@@ -306,14 +306,15 @@ public class Enemy : Character
     /// </summary>
     public virtual void OnUseAttackCard()
     {
-        if (attackCards.Count > 0 && attackCardCooldownTimer <= 0)
+        //遍历line
+        foreach (EnemyCardLine cardLine in attackCardLineList)
         {
-            //单独cd
-            if (isSingleAttackCardCooldown)
+            //找到cd到了且不为空的line
+            if (cardLine.timer <= 0 && cardLine.cards.Count > 0)
             {
-                //找出cd到了的卡牌信息实例
+                //找出cd到了的ecwt
                 List<EnemyCardWithTimer> availableECWT = new List<EnemyCardWithTimer>();
-                foreach(EnemyCardWithTimer ecwt in attackCardsWithTimer)
+                foreach (EnemyCardWithTimer ecwt in cardLine.cards)
                 {
                     if (ecwt.timer <= 0)
                     {
@@ -321,27 +322,18 @@ public class Enemy : Character
                     }
                 }
 
-                //抽卡
+                //随机抽卡
                 if (availableECWT.Count > 0)
                 {
                     int index = UnityEngine.Random.Range(0, availableECWT.Count);
-                    Card card = availableECWT[index].card;
+                    EnemyCardWithTimer ecwt = availableECWT[index];
+                    Card card = ecwt.card;
                     card.EnemyHasEffectOnPlayer(enemyName);
 
                     //冷却时间
-                    availableECWT[index].timer = availableECWT[index].cooldown;
-                    attackCardCooldownTimer = attackCardCooldown;
+                    ecwt.timer = ecwt.cooldown;
+                    cardLine.timer = cardLine.cooldown;
                 }
-            }
-            //无单独cd
-            else if (attackCards.Count > 0)
-            {
-                //Random.Range(a,b)不含右值
-                int index = UnityEngine.Random.Range(0, attackCards.Count);
-                Card card = attackCards[index];
-                card.EnemyHasEffectOnPlayer(enemyName);
-
-                attackCardCooldownTimer = attackCardCooldown;
             }
         }
         
@@ -352,14 +344,15 @@ public class Enemy : Character
     /// </summary>
     public virtual void OnUseEffectCard()
     {
-        if (effectCards.Count > 0 && effectCardCooldownTimer <= 0)
+        //遍历line
+        foreach (EnemyCardLine cardLine in effectCardLineList)
         {
-            //单独cd
-            if (isSingleEffectCardCooldown)
+            //找到cd到了且不为空的line
+            if (cardLine.timer <= 0 && cardLine.cards.Count > 0)
             {
-                //找出cd到了的卡牌信息实例
+                //找出cd到了的ecwt
                 List<EnemyCardWithTimer> availableECWT = new List<EnemyCardWithTimer>();
-                foreach (EnemyCardWithTimer ecwt in effectCardsWithTimer)
+                foreach (EnemyCardWithTimer ecwt in cardLine.cards)
                 {
                     if (ecwt.timer <= 0)
                     {
@@ -367,26 +360,18 @@ public class Enemy : Character
                     }
                 }
 
-                //抽卡
+                //随机抽卡
                 if (availableECWT.Count > 0)
                 {
                     int index = UnityEngine.Random.Range(0, availableECWT.Count);
-                    Card card = availableECWT[index].card;
+                    EnemyCardWithTimer ecwt = availableECWT[index];
+                    Card card = ecwt.card;
                     card.EnemyHasEffectOnPlayer(enemyName);
 
                     //冷却时间
-                    availableECWT[index].timer = availableECWT[index].cooldown;
-                    effectCardCooldownTimer = effectCardCooldown;
+                    ecwt.timer = ecwt.cooldown;
+                    cardLine.timer = cardLine.cooldown;
                 }
-            }
-            //无单独cd
-            else if (effectCards.Count > 0)
-            {
-                int index = UnityEngine.Random.Range(0, effectCards.Count);
-                Card card = effectCards[index];
-                card.EnemyHasEffectOnPlayer(enemyName);
-
-                effectCardCooldownTimer = effectCardCooldown;
             }
         }
     }

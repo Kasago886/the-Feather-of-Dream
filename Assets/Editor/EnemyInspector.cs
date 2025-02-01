@@ -11,10 +11,8 @@ public class EnemyInspector : CharacterInspector
     Enemy enemy;
     int enemyType;
 
-    SerializedProperty attackCardsProperty;
-    SerializedProperty effectCardsProperty;
-    SerializedProperty attackCardsWithTimerProperty;
-    SerializedProperty effectCardsWithTimerProperty;
+    SerializedProperty attackCardLineList;
+    SerializedProperty effectCardLineList;
 
     new private void OnEnable()
     {
@@ -23,10 +21,8 @@ public class EnemyInspector : CharacterInspector
         //获取当前要自定义Inspector的对象
         enemy = (Enemy)target;
 
-        attackCardsProperty = serializedObject.FindProperty("attackCards");
-        effectCardsProperty = serializedObject.FindProperty("effectCards");
-        attackCardsWithTimerProperty = serializedObject.FindProperty("attackCardsWithTimer");
-        effectCardsWithTimerProperty = serializedObject.FindProperty("effectCardsWithTimer");
+        attackCardLineList = serializedObject.FindProperty("attackCardLineList");
+        effectCardLineList = serializedObject.FindProperty("effectCardLineList");
     }
 
     //自定义Inspector面板
@@ -71,38 +67,14 @@ public class EnemyInspector : CharacterInspector
         EditorGUILayout.Space(10);
 
         EditorGUILayout.LabelField("攻击卡");
-        EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("使用距离", GUILayout.Width(50));
         enemy.attackCardUseDistance = EditorGUILayout.FloatField(enemy.attackCardUseDistance);
-        EditorGUILayout.LabelField("冷却时间", GUILayout.Width(50));
-        enemy.attackCardCooldown = EditorGUILayout.FloatField(enemy.attackCardCooldown);
-        EditorGUILayout.EndHorizontal();
-        enemy.isSingleAttackCardCooldown = EditorGUILayout.Toggle("每张卡单独cd",enemy.isSingleAttackCardCooldown);
-        if (enemy.isSingleAttackCardCooldown)
-        {
-            EditorGUILayout.PropertyField(attackCardsWithTimerProperty, new UnityEngine.GUIContent("攻击卡"), true);
-        }
-        else
-        {
-            EditorGUILayout.PropertyField(attackCardsProperty, new UnityEngine.GUIContent("攻击卡"), true);
-        }
+        EditorGUILayout.PropertyField(attackCardLineList, new UnityEngine.GUIContent("攻击卡"), true);
 
         EditorGUILayout.LabelField("效果卡");
-        EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("使用距离", GUILayout.Width(50));
         enemy.effectCardUseDistance = EditorGUILayout.FloatField(enemy.effectCardUseDistance);
-        EditorGUILayout.LabelField("冷却时间", GUILayout.Width(50));
-        enemy.effectCardCooldown = EditorGUILayout.FloatField(enemy.effectCardCooldown);
-        EditorGUILayout.EndHorizontal();
-        enemy.isSingleEffectCardCooldown = EditorGUILayout.Toggle("每张卡单独cd", enemy.isSingleEffectCardCooldown);
-        if (enemy.isSingleEffectCardCooldown)
-        {
-            EditorGUILayout.PropertyField(effectCardsWithTimerProperty, new UnityEngine.GUIContent("效果卡"), true);
-        }
-        else
-        {
-            EditorGUILayout.PropertyField(effectCardsProperty, new UnityEngine.GUIContent("效果卡"), true);
-        }
+        EditorGUILayout.PropertyField(effectCardLineList, new UnityEngine.GUIContent("效果卡"), true);
 
 
         EditorGUILayout.Space(10);
