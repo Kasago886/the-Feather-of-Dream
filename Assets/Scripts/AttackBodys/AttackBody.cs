@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public enum AttackType
@@ -23,6 +24,8 @@ public class AttackBody : MonoBehaviour
     public GameObject bullet;
     public bool isAiming;
 
+    public UnityEvent whatHappenWhenAttack;
+
     [HideInInspector]public bool isleft;
     [HideInInspector] public float addDamage = 0;
 
@@ -42,6 +45,7 @@ public class AttackBody : MonoBehaviour
 
         if (immediateAttack)
         {
+            whatHappenWhenAttack?.Invoke();
             OnAttack();
         }
     }

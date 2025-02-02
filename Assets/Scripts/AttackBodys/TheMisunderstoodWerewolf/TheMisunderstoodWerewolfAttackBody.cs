@@ -1,36 +1,44 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public class AttackBuffDict
+{
+    public string buffName;
+    public List<int> next=new List<int>();
+    public AttackBuffDict(string buffName,List<int> next)
+    {
+        this.buffName = buffName;
+        this.next = next;
+    }
+}
 public class TheMisunderstoodWerewolfAttackBody : MonoBehaviour
 {
-    public static TheMisunderstoodWerewolfAttackBody instance;
-    public Dictionary<string, List<int>> next;
+    public static List<AttackBuffDict> next = new List<AttackBuffDict>();
     private AttackBody attackBody;
     private Player player;
     void Start()
-    {
-        next = new Dictionary<string, List<int>>();
+    { 
         attackBody = GetComponentInParent<AttackBody>();
         player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
     }
-
-    // Update is called once per frame
-    void Update()
+    public void AddBuff()
     {
-        if (attackBody != null && attackBody.immediateAttack && player != null && next.Count > 0)
+        Debug.Log("AddBuff"+next.Count);
+        Invoke("AddBuff1", 0.1f);
+    }
+    private void AddBuff1()
+    {
+        foreach (var item in next)
         {
-            foreach (var item in next)
+            for (int i = 0; i < item.next[0]; i++)
             {
-                for (int i = 0; i < item.Value[0]; i++)
-                {
-                    player.AddBuff(item.Key);
-                }
-                item.Value.Remove(0);
-                if(item.Value.Count == 0)
-                {
-                    next.Remove(item.Key);
-                }
+                player.AddBuff(item.buffName);
+            }
+            item.next.Remove(0);
+            if (item.next.Count == 0)
+            {
+                next.Remove(item);
             }
         }
     }

@@ -6,16 +6,36 @@ public class TheMisunderstoodWerewolfAttackBodyAddBuff : MonoBehaviour
 {
     public string buffName;
     public int[] number;
-   public void AddBuff()
+    private bool late;
+    private void Update()
+    {
+        if (late && GameObject.Find("TheMisunderstoodWerewolfAttackBody 1(Clone)") != null)
+        {
+            List<int> list = new List<int>();
+            for (int i = 0; i < number.Length; i++)
+            {
+                list.Add(number[i]);
+            }
+            Debug.Log("AddBuff1113");
+            TheMisunderstoodWerewolfAttackBody.next.Add(new AttackBuffDict(buffName,list));
+            late = false;
+        }
+    }
+    public void AddBuff()
     {
         List<int> list = new List<int>();
         for (int i = 0; i < number.Length; i++)
         {
             list.Add(number[i]);
         }
-        if (TheMisunderstoodWerewolfAttackBody.instance != null)
+        if (GameObject.Find("TheMisunderstoodWerewolfAttackBody 1(Clone)") != null)
         {
-            TheMisunderstoodWerewolfAttackBody.instance.next.Add(buffName, list);
+            Debug.Log("AddBuff1112");
+            TheMisunderstoodWerewolfAttackBody.next.Add(new AttackBuffDict(buffName, list));
+        }
+        else
+        {
+            late = true;
         }
     }
 }

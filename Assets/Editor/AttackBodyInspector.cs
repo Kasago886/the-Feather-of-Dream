@@ -9,7 +9,7 @@ using UnityEngine.Events;
 public class AttackBodyInspector : Editor
 {
     AttackBody attackBody;
-    SerializedProperty bullet;
+    SerializedProperty bullet,attackEvent;
 
     private void OnEnable()
     {
@@ -17,6 +17,7 @@ public class AttackBodyInspector : Editor
         attackBody = (AttackBody)target;
 
         bullet = serializedObject.FindProperty("bullet");
+        attackEvent = serializedObject.FindProperty("whatHappenWhenAttack");
     }
 
     //自定义Inspector面板
@@ -48,6 +49,8 @@ public class AttackBodyInspector : Editor
                 EditorGUILayout.PropertyField(bullet, new GUIContent("子弹"));
                 attackBody.isAiming = EditorGUILayout.Toggle("是否瞄准目标发射", attackBody.isAiming);
             }
+            EditorGUILayout.LabelField("攻击时发生的事件");
+            EditorGUILayout.PropertyField(attackEvent);
         }
 
         EditorGUILayout.EndVertical();

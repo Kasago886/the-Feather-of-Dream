@@ -163,7 +163,6 @@ public class Card : MonoBehaviour
         if (ConditionsOfUseCard() && enemyUse)
         {
             effects?.Invoke();
-            Debug.Log(name + "已被使用");
             Captions(enemyName + "使用了" + name, false);
             EnemyEffectOnPlayer();
             EnemyEffectOnSelf();
