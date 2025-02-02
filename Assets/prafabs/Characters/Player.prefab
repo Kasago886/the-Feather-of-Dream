@@ -88,6 +88,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
   effectAudioSource: {fileID: 0}
+  animator: {fileID: 0}
   featherNumText: {fileID: 0}
   cardGenerateList:
   - "\u6D4B\u8BD5\u62D4\u7FBD"
@@ -242,7 +243,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.121944666, y: -0.19511151}
+  m_Offset: {x: -0.121944666, y: -0.40359044}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -253,5 +254,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.166631, y: 4.5486703}
+  m_Size: {x: 2.166631, y: 4.1317124}
   m_EdgeRadius: 0
