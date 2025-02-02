@@ -45,7 +45,6 @@ public class AttackBody : MonoBehaviour
 
         if (immediateAttack)
         {
-            whatHappenWhenAttack?.Invoke();
             OnAttack();
         }
     }
@@ -66,6 +65,7 @@ public class AttackBody : MonoBehaviour
                 foreach (Collider2D target in targets)
                 {
                     target.GetComponent<Character>().TakeDamage(damage + addDamage, transform);
+                    whatHappenWhenAttack?.Invoke();
                 }
                 break;
 

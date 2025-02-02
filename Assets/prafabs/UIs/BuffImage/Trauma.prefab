@@ -97,7 +97,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8559244845758174180}
           m_TargetAssemblyTypeName: BuffImage, Assembly-CSharp
-          m_MethodName: Enter
+          m_MethodName: Exit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -113,7 +113,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8559244845758174180}
           m_TargetAssemblyTypeName: BuffImage, Assembly-CSharp
-          m_MethodName: Exit
+          m_MethodName: Enter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

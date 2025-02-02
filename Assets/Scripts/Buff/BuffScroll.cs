@@ -39,11 +39,16 @@ public class BuffScroll : MonoBehaviour
     {
         Debug.Log("player.buffList.Count=" + player.buffList.Count);
         AddGameObject();
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Debug.Log("Add…À∫€");
-        //    player.AddBuff("…À∫€");
-        //}
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Add…À∫€");
+            player.AddBuff("…À∫€");
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            player.AddBuff("∞Œ”10s");
+            player.unlockedFeathers[0].health-=2;
+        }
     }
     private void AddGameObject()
     {
@@ -60,6 +65,7 @@ public class BuffScroll : MonoBehaviour
         }
         for (int i = 0;i < list.Count;i++)
         {
+            Debug.Log(list[i] + "ªπ¥Ê‘⁄");
             buffNameDict.Remove(list[i]);
         }
         foreach (var item in newDict)
