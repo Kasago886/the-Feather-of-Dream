@@ -15,6 +15,8 @@ public class Player : Character
 
     public PlayerCardController cardController;
 
+    [HideInInspector] public bool isSprinting = false;
+
     ArchiveManager archiveManager;
     EquipmentPanelManager equipmentPanelManager;
 
@@ -109,8 +111,11 @@ public class Player : Character
     /// <param name="attackTrans"></param>
     public override void TakeDamage(float damage, Transform attackTrans = null)
     {
-        base.TakeDamage(damage, attackTrans);
+        if (!isSprinting)
+        {
+            base.TakeDamage(damage, attackTrans);
 
-        featherNumText.text = (feathers.Count + unlockedFeathers.Count).ToString();
+            featherNumText.text = (feathers.Count + unlockedFeathers.Count).ToString();
+        }
     }
 }

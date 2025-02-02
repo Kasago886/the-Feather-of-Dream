@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5571706776750737997}
   - component: {fileID: 9090041749762828193}
   - component: {fileID: 2914287033646057724}
+  - component: {fileID: 4914172698798964061}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -109,13 +110,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 10
-  jumpSpeed: 7
+  jumpSpeed: 14
   sprintSpeed: 50
   sprintDuration: 0.2
   sprintCooldown: 1
   bottomCenterX: -0.125
   bottomCenterY: -2.5
-  bottomSize: {x: 2.2, y: 0.2}
+  bottomSize: {x: 2.1, y: 0.2}
   attackEvent:
     m_PersistentCalls:
       m_Calls:
@@ -199,8 +200,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 2
+  m_Material: {fileID: 6200000, guid: 8b7013cf672fd044c80be42ed7c7500b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -243,7 +244,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.121944666, y: -0.40359044}
+  m_Offset: {x: -0.121944666, y: -0.36914825}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -254,5 +255,40 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.166631, y: 4.1317124}
+  m_Size: {x: 2.166631, y: 4.062828}
   m_EdgeRadius: 0
+--- !u!70 &4914172698798964061
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7154825430195362745}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.12145573, y: -2.4013712}
+  m_Size: {x: 2.1655757, y: 0.13510896}
+  m_Direction: 1
