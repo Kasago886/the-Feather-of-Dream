@@ -25,6 +25,7 @@ public class BuffContainer
         {"侍卫短剑", typeof(PrinceGuardSwordAttackBuff) },
         {"王子权柄", typeof(PrincePowerEffectBuff) },
         {"猎人预感", typeof(CrazyHunterAttackBuff) },
+        {"狩猎", typeof(CrazyHunterAttackBuff1) },
         {"狂暴", typeof(CrazyHunterEffectBuff) },
         {"破损引擎", typeof(TinWoodmanAttackBuff) },
         {"修补空虚", typeof(TinWoodmanEffectBuff) },//立即扣除2.5%单个解锁羽的血量，每2秒增加1层力量，buff持续6秒，6秒内如若单个解锁羽受到超过20点生命值，则全体单个解锁羽一共扣除40点生命值

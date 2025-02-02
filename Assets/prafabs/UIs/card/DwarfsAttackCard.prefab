@@ -263,7 +263,9 @@ MonoBehaviour:
   b2: 1
   b3: 1
   b4: 1
+  b5: 0
   playerUse: 0
+  speacialMaterial: {fileID: 0}
   enemyUse: 1
   effortOnPlayer: 0
   effortOnEnmey: 0
@@ -329,6 +331,12 @@ MonoBehaviour:
   buffsEnemy: []
   buffNamesEnemy:
   - "\u77EE\u4EBA\u77ED\u5251"
+  customMode: 0
+  pleaseChooseOneMethod: 0
+  targetTransform: {fileID: 0}
+  theNumberOfTargetPosition: {x: 0, y: 0, z: 0}
+  getObjectDistanceInX: 0
+  getObjectDistanceInY: 0
 --- !u!114 &956570312101519618
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class CrazyHunter : Enemy
     public override void OnMove(float horizontalMove)
     {
         base.OnMove(horizontalMove);
+        
         switch (searchType)
         {
             //‘≤–Œ ”“∞

@@ -89,17 +89,21 @@ MonoBehaviour:
   searchDistance: 15
   minDistance: 1
   attackCardUseDistance: 10
-  attackCardCooldown: 8
   effectCardUseDistance: 10
-  effectCardCooldown: 15
-  isSingleAttackCardCooldown: 0
-  isSingleEffectCardCooldown: 0
-  attackCardsWithTimer: []
-  effectCardsWithTimer: []
-  attackCards:
-  - {fileID: 1203684545836028733}
-  effectCards:
-  - {fileID: 7154918104119127542}
+  attackCardLineList:
+  - cards:
+    - card: {fileID: 8308702727041960155, guid: 16587c770044c474088406d227f715a5, type: 3}
+      cooldown: 0
+      timer: 0
+    cooldown: 8
+    timer: 0
+  effectCardLineList:
+  - cards:
+    - card: {fileID: 8308702727041960155, guid: 3d81a67ed82d1d04086ce49df5047483, type: 3}
+      cooldown: 15
+      timer: 0
+    cooldown: 0
+    timer: 0
   player: {fileID: 0}
   DwarfsNumber: 0
 --- !u!212 &1021564070518008926
@@ -341,17 +345,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6564618522710615933, guid: 3d81a67ed82d1d04086ce49df5047483, type: 3}
   m_PrefabInstance: {fileID: 1154347573951063341}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7154918104119127542 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8308702727041960155, guid: 3d81a67ed82d1d04086ce49df5047483, type: 3}
-  m_PrefabInstance: {fileID: 1154347573951063341}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e18d51474219541baa0e293a6ee587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7204116373944458214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -449,17 +442,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16587c770044c474088406d227f715a5, type: 3}
---- !u!114 &1203684545836028733 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8308702727041960155, guid: 16587c770044c474088406d227f715a5, type: 3}
-  m_PrefabInstance: {fileID: 7204116373944458214}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e18d51474219541baa0e293a6ee587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &4098306926953462939 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6564618522710615933, guid: 16587c770044c474088406d227f715a5, type: 3}
