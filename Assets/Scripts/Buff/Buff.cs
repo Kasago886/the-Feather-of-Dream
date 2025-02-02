@@ -626,7 +626,6 @@ public class Trauma : EffectBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        isPermanent = true;
         if (target.GetComponent<Player>() != null )
         {
             player = target.GetComponent<Player>();
@@ -643,7 +642,7 @@ public class Trauma : EffectBuff
                 health = enemy.unlockedFeathers[0].health;
             }
         }
-        this.timer = 0;
+        this.timer = 999999;
     }
 
     public override void OnEnter()
@@ -665,7 +664,7 @@ public class Trauma : EffectBuff
                     attackTimer = 0;
                     if (Random.Range(0, 3) > 1)
                     {
-                        isPermanent = false;
+                        this.timer = 0;
                     }
                 }
             }
@@ -677,7 +676,7 @@ public class Trauma : EffectBuff
                     attackTimer = 0;
                     if (Random.Range(0, 3) > 1)
                     {
-                        isPermanent = false;
+                        this.timer=0;
                     }
                 }
             }

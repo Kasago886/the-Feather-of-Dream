@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class BuffImage : MonoBehaviour
 {
-    public GameObject description;
+    private GameObject description;
     [HideInInspector]
     public string text;
+    private void Start()
+    {
+        description = GameObject.Find("buffDescription");
+    }
     public void Enter()
     {
         description.SetActive(true);
