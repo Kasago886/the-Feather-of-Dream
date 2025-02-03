@@ -386,11 +386,15 @@ public class Character : MonoBehaviour
     public void AddBuff(string buffName)
     {
         Buff buff = BuffContainer.GetBuffInstance(buffName) as Buff;
+        if (buff == null)
+        {
+            Debug.LogError("Buff不存在："+buffName);
+        }
         buff.Init(this);
         buff.name = buffName;
         AddBuff(buff);
-        Debug.Log("应当添加" + buffName);
-        Debug.Log("实际添加" + buff.name);
+        //Debug.Log("应当添加" + buffName);
+        //Debug.Log("实际添加" + buff.name);
     }
     public void AddBuff(Buff buff)
     {

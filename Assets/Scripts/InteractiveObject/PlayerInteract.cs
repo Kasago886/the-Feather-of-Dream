@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    public static Dictionary<int,GameObject> trigger;
+    public static Dictionary<int,GameObject> trigger = new Dictionary<int, GameObject>();
     private void Start()
     {
-        trigger = new Dictionary<int, GameObject>();
     }
     void Update()
     {
@@ -16,10 +15,8 @@ public class PlayerInteract : MonoBehaviour
             foreach (var item in trigger)
             {
                 InteractiveObject interactiveObject = item.Value.GetComponent<InteractiveObject>();
-                if (Input.GetKeyDown(interactiveObject.nameOfKey))
-                {
-                    interactiveObject.Interact();
-                }
+                interactiveObject.ButtonDetect();
+                Debug.Log(interactiveObject.name);
             }
         }
     }

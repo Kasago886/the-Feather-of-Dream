@@ -34,12 +34,14 @@ public class InteractiveObject : MonoBehaviour
     [Header("触发使用的按键:")]
     [Tooltip("小写字母")]
     public string nameOfKey;
+    [Header("按住持续触发")]
+    public bool isKeepPush;
     [Tooltip("提示按键的预制体")]
     public GameObject noticer;
 
     private float distance;
     private int id;
-    private GameObject player;
+    protected GameObject player;
     protected virtual void Start()
     {
         id=Random.Range(-100000,100000);
@@ -68,11 +70,9 @@ public class InteractiveObject : MonoBehaviour
             distance = Mathf.Abs(Vector3.Distance(player.transform.position, gameObject.transform.position));
             if (distance < maxDistance)
             {
+                //Debug.Log(distance);
                 ShowNoticer();
-                if (Input.GetKeyDown(nameOfKey))
-                {
-                    Interact();
-                }
+                ButtonDetect();
             }
             else
             {
@@ -87,10 +87,7 @@ public class InteractiveObject : MonoBehaviour
                 if (distance < maxDistance && Mathf.Abs(player.transform.position.x - transform.position.x) <= maxDistanceOfHorizontal)
                 {
                     ShowNoticer();
-                    if (Input.GetKeyDown(nameOfKey))
-                    {
-                        Interact();
-                    }
+                    ButtonDetect();
                 }
                 else
                 {
@@ -102,10 +99,7 @@ public class InteractiveObject : MonoBehaviour
                 if (distance < maxDistance && Mathf.Abs(player.transform.position.y - transform.position.y) <= maxDistanceOfVertical)
                 {
                     ShowNoticer();
-                    if (Input.GetKeyDown(nameOfKey))
-                    {
-                        Interact();
-                    }
+                    ButtonDetect();
                 }
                 else
                 {
@@ -127,8 +121,12 @@ public class InteractiveObject : MonoBehaviour
     /// <param name="collision"><>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(keyTrigger && !mouseTrigger && mode2&&collision.tag==Consts.PlayerTag)
+        if(keyTrigger && !mouseTrigger && mode2&&collision.tag==Consts.PlayerTag && !PlayerInteract.trigger.ContainsValue(gameObject))
         {
+            while (PlayerInteract.trigger.ContainsKey(id))
+            {
+                id = Random.Range(-10000, 10000);
+            }
             PlayerInteract.trigger.Add(id,gameObject);
             ShowNoticer() ;
         }
@@ -173,9 +171,30 @@ public class InteractiveObject : MonoBehaviour
     }
 
     /// <summary>
+    /// 检测按键
+    /// </summary>
+    public void ButtonDetect()
+    {
+        if (isKeepPush)
+        {
+            if (Input.GetKey(nameOfKey))
+            {
+                Interact();
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(nameOfKey))
+            {
+                Interact();
+            }
+        }
+    }
+
+    /// <summary>
     /// 这个方法是用来观测距离触发的可触发范围的
     /// </summary>
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         if (!moreLimit)
         {

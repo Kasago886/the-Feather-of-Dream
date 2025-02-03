@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4954373275396503042}
   - component: {fileID: 2854415599559411844}
   - component: {fileID: 206331674388102575}
+  - component: {fileID: 128682768631732230}
   - component: {fileID: 5571706776750737997}
   - component: {fileID: 9090041749762828193}
   - component: {fileID: 2914287033646057724}
@@ -97,6 +98,7 @@ MonoBehaviour:
   cardGenerateCooldownTimer: 0
   cardGenerateText: {fileID: 0}
   cardController: {fileID: 0}
+  isSprinting: 0
 --- !u!114 &206331674388102575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +115,7 @@ MonoBehaviour:
   jumpSpeed: 14
   sprintSpeed: 50
   sprintDuration: 0.2
-  sprintCooldown: 1
+  sprintCooldown: 0.5
   bottomCenterX: -0.125
   bottomCenterY: -2.5
   bottomSize: {x: 2.1, y: 0.2}
@@ -133,6 +135,18 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   attackCooldown: 0.5
+--- !u!114 &128682768631732230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7154825430195362745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ff4963b28904a48ad50a9c753a2ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &5571706776750737997
 SpriteRenderer:
   m_ObjectHideFlags: 0

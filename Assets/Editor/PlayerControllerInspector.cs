@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Events;
+using UnityEngine.TextCore.Text;
 
 //CustomEditor用于关联要自定义的脚本
 [CustomEditor(typeof(PlayerController))]
@@ -54,8 +55,14 @@ public class PlayerControllerInspector : Editor
 
         serializedObject.Update();
         EditorGUILayout.PropertyField(attackEventProperty);
-        serializedObject.ApplyModifiedProperties();
 
         EditorGUILayout.EndVertical();
+
+
+        if (GUI.changed)
+        {
+            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(playerController);
+        }
     }
 }
