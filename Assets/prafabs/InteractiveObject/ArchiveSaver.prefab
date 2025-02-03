@@ -56,6 +56,7 @@ MonoBehaviour:
   maxDistanceOfVertical: 2
   mode2: 0
   nameOfKey: e
+  noticer: {fileID: 5697553654017046295, guid: f018f4f299052334eaf80ff569a425ec, type: 3}
 --- !u!212 &386084743115995698
 SpriteRenderer:
   m_ObjectHideFlags: 0

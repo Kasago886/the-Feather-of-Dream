@@ -50,12 +50,15 @@ public class Character : MonoBehaviour
     public Rigidbody2D rb;
     public AudioSource effectAudioSource;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     protected void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         effectAudioSource = GameObject.Find("EffectSound").GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
 
         //初始羽
         if (isDefaultFeather)
@@ -97,7 +100,6 @@ public class Character : MonoBehaviour
             //方向
             if (spriteRenderer.flipX)
             {
-                instance.GetComponent<SpriteRenderer>().flipX = true;
                 instance.GetComponent<AttackBody>().isleft = true;
             }
 
@@ -119,72 +121,89 @@ public class Character : MonoBehaviour
     /// <param name="damage"></param>
     public virtual void TakeDamage(float damage, Transform attackTrans = null)
     {
-        //受伤事件
-        if (unlockedFeathers.Count > 0 && damage > 0)
+        if (!isDead)
         {
-            //音效
-            if (injurySound != null)
+            //受伤事件
+            if (unlockedFeathers.Count > 0 && damage > 0)
             {
-                effectAudioSource.PlayOneShot(injurySound);
-            }
+                //音效
+                if (injurySound != null)
+                {
+                    effectAudioSource.PlayOneShot(injurySound);
+                }
 
-            //击退
-            if (injuryForceback)
+                //击退
+                if (injuryForceback)
+                {
+                    beAttackedTrans = attackTrans;
+                    forcebackTimer = forcebackDuration;
+                }
+
+                injuryEvent?.Invoke();
+
+                //减伤
+                /// damage = damage * 2^(-tenacity / 100)
+                /// tenacity | ratio
+                ///  10        0.933
+                ///  20        0.871
+                ///  30        0.812
+                ///  40        0.758
+                ///  50        0.707
+                /// 100        0.500
+                /// 200        0.250
+                /// 300        0.125
+
+                //Debug.Log(damage);
+                damage = damage * Mathf.Pow(2, -tenacity / 100);
+            }
+            //吃伤
+            while (unlockedFeathers.Count > 0 && damage > 0)
             {
-                beAttackedTrans = attackTrans;
-                forcebackTimer = forcebackDuration;
+                Feather feather = unlockedFeathers[0];
+                feather.TakeDamage(damage);
+
+                //Debug.Log(damage);
+                //Debug.Log(feather.health);
+
+                if (feather.health <= 0)
+                {
+                    damage = -feather.health;
+                    unlockedFeathers.RemoveAt(0);
+                }
+                else
+                {
+                    damage = 0;
+                }
             }
-
-            injuryEvent?.Invoke();
-
-            //减伤
-            /// damage = damage * 2^(-tenacity / 100)
-            /// tenacity | ratio
-            ///  10        0.933
-            ///  20        0.871
-            ///  30        0.812
-            ///  40        0.758
-            ///  50        0.707
-            /// 100        0.500
-            /// 200        0.250
-            /// 300        0.125
-
-            //Debug.Log(damage);
-            damage = damage * Mathf.Pow(2, -tenacity / 100);
+            //检查是否失去所有羽毛
+            //Debug.Log("unlock feathers:"+unlockedFeathers.Count.ToString() + "\nfeathers:" + feathers.Count.ToString());
+            if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
+            {
+                OnDeath();
+            }
         }
-        //吃伤
-        while (unlockedFeathers.Count > 0 && damage > 0)
+    }
+
+    /// <summary>
+    /// 死亡
+    /// </summary>
+    public virtual void OnDeath()
+    {
+        isDead = true;
+
+        //音效
+        if (deathSound != null)
         {
-            Feather feather = unlockedFeathers[0];
-            feather.TakeDamage(damage);
-
-            //Debug.Log(damage);
-            //Debug.Log(feather.health);
-
-            if (feather.health <= 0)
-            {
-                damage = -feather.health;
-                unlockedFeathers.RemoveAt(0);
-            }
-            else
-            {
-                damage = 0;
-            }
+            effectAudioSource.PlayOneShot(deathSound);
         }
-        //检查是否失去所有羽毛
-        //Debug.Log("unlock feathers:"+unlockedFeathers.Count.ToString() + "\nfeathers:" + feathers.Count.ToString());
-        if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
+
+        //动画
+        if (animator != null)
         {
-            isDead = true;
-
-            //音效
-            if (deathSound != null)
-            {
-                effectAudioSource.PlayOneShot(deathSound);
-            }
-
-            deathEvent?.Invoke();
+            animator.SetBool(Consts.IsDeadAnimatorArgument, true);
         }
+
+        deathEvent?.Invoke();
     }
 
     /// <summary>
@@ -366,12 +385,12 @@ public class Character : MonoBehaviour
     /// <param name="buff"></param>
     public void AddBuff(string buffName)
     {
-        //Debug.Log(buffName+" added!");
-
         Buff buff = BuffContainer.GetBuffInstance(buffName) as Buff;
         buff.Init(this);
-
+        buff.name = buffName;
         AddBuff(buff);
+        Debug.Log("应当添加" + buffName);
+        Debug.Log("实际添加" + buff.name);
     }
     public void AddBuff(Buff buff)
     {

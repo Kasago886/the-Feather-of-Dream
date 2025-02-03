@@ -12,7 +12,7 @@ public class CardInspector : Editor
 {
 
     private Card card;
-    private SerializedProperty event1, event2, event3, event4, event5, buff, buffName, event6, event7, event8, event9, event10, buff1, buffName1, event11, event12, event13, event14, event15, buff2, buffName2;
+    private SerializedProperty event1, event2, event3, event4, event5, buff, buffName, event6, event7, event8, event9, event10, buff1, buffName1, event11, event12, event13, event14, event15, buff2, buffName2,position,materia;
     private GameObject prefob;
     bool effortOnPlayer;//作用于玩家
     bool effortOnEnmey;//作用于敌方
@@ -47,6 +47,8 @@ public class CardInspector : Editor
         buffName1 = serializedObject.FindProperty("buffNamesPlayer");
         buff2 = serializedObject.FindProperty("buffsEnemy");
         buffName2 = serializedObject.FindProperty("buffNamesEnemy");
+        position= serializedObject.FindProperty("targetTransform");
+        materia= serializedObject.FindProperty("speacialMaterial");
     }
     public override void OnInspectorGUI()
     {
@@ -58,6 +60,11 @@ public class CardInspector : Editor
         if (card.b4)
         {
             card.playerUse = EditorGUILayout.Toggle("玩家使用", card.playerUse);
+            if (card.playerUse )
+            {
+                EditorGUILayout.LabelField("请放入Custom_UI_SpriteGlowBorder");
+                EditorGUILayout.PropertyField(materia);
+            }
             card.enemyUse = EditorGUILayout.Toggle("敌人使用", card.enemyUse);
             if (card.playerUse != playerUse)
             {
@@ -85,7 +92,7 @@ public class CardInspector : Editor
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("卡牌背景\n故事", GUILayout.Width(50),GUILayout.Height(50));
+            EditorGUILayout.LabelField("卡牌背景\n故事", GUILayout.Width(50), GUILayout.Height(50));
             card.backGroundStory = EditorGUILayout.TextArea(card.backGroundStory, GUILayout.Height(100));
             EditorGUILayout.EndHorizontal();
         }
@@ -185,11 +192,11 @@ public class CardInspector : Editor
                     EditorGUILayout.PropertyField(event2);
                     EditorGUILayout.LabelField("在鼠标离开卡牌所发生的事件");
                     EditorGUILayout.PropertyField(event3);
-                    EditorGUILayout.LabelField("在卡牌发生作用时所发生的事件");
-                    EditorGUILayout.PropertyField(event4);
                     EditorGUILayout.LabelField("在选择角色作为卡牌作用目标时所发生的事件");
                     EditorGUILayout.PropertyField(event5);
                 }
+                EditorGUILayout.LabelField("在卡牌发生作用时所发生的事件");
+                EditorGUILayout.PropertyField(event4);
                 EditorGUILayout.PropertyField(buff, new GUIContent("需要添加的buff"), true);
                 //for (int i = 0; i < buff.arraySize; i++)
                 //{
@@ -217,11 +224,11 @@ public class CardInspector : Editor
                     EditorGUILayout.PropertyField(event12);
                     EditorGUILayout.LabelField("敌人在鼠标离开卡牌所发生的事件");
                     EditorGUILayout.PropertyField(event13);
-                    EditorGUILayout.LabelField("敌人在卡牌发生作用时所发生的事件");
-                    EditorGUILayout.PropertyField(event14);
                     EditorGUILayout.LabelField("敌人在选择角色作为卡牌作用目标时所发生的事件");
                     EditorGUILayout.PropertyField(event15);
                 }
+                EditorGUILayout.LabelField("敌人在卡牌发生作用时所发生的事件");
+                EditorGUILayout.PropertyField(event14);
                 EditorGUILayout.PropertyField(buff2, new GUIContent("敌人需要添加的buff"), true);
                 //for (int i = 0; i < buff.arraySize; i++)
                 //{
@@ -246,11 +253,11 @@ public class CardInspector : Editor
                     EditorGUILayout.PropertyField(event7);
                     EditorGUILayout.LabelField("玩家在鼠标离开卡牌所发生的事件");
                     EditorGUILayout.PropertyField(event8);
-                    EditorGUILayout.LabelField("玩家在卡牌发生作用时所发生的事件");
-                    EditorGUILayout.PropertyField(event9);
                     EditorGUILayout.LabelField("玩家在选择角色作为卡牌作用目标时所发生的事件");
                     EditorGUILayout.PropertyField(event10);
                 }
+                EditorGUILayout.LabelField("玩家在卡牌发生作用时所发生的事件");
+                EditorGUILayout.PropertyField(event9);
                 EditorGUILayout.PropertyField(buff1, new GUIContent("玩家需要添加的buff"), true);
                 //for (int i = 0; i < buff.arraySize; i++)
                 //{
@@ -268,6 +275,24 @@ public class CardInspector : Editor
                     EditorGUILayout.HelpBox("注意:\"需要添加的buff\"与\"需要添加的buff的名字\"而这只需要填一个就行，如果这两上面个都填的是同一个buff那么将会对对象施加2次该buff", MessageType.Warning);
                 }
             }
+        }
+        card.b5 = EditorGUILayout.Foldout(card.b5, "自定义判定范围");
+        if (card.b5)
+        {
+            EditorGUILayout.HelpBox("注意:此处修改的为敌人的判定范围，默认判定范围为屏幕内，如需修改请勾选下方自定义判定范围", MessageType.Warning);
+            card.customMode = EditorGUILayout.Toggle("自定义判定范围", card.customMode);
+            card.pleaseChooseOneMethod=(targetMethod)EditorGUILayout.EnumPopup("中心位置", card.pleaseChooseOneMethod);
+            if(card.pleaseChooseOneMethod==0)
+            {
+                EditorGUILayout.LabelField("中心物体");
+                EditorGUILayout.PropertyField(position);
+            }
+            else
+            {
+                card.theNumberOfTargetPosition=EditorGUILayout.Vector3Field("中心坐标", card.theNumberOfTargetPosition);
+            }
+            card.getObjectDistanceInX=EditorGUILayout.FloatField("X方向上的范围", card.getObjectDistanceInX);
+            card.getObjectDistanceInY = EditorGUILayout.FloatField("Y方向上的范围", card.getObjectDistanceInY);
         }
         EditorGUILayout.EndVertical();
 

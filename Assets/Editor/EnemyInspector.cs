@@ -11,8 +11,8 @@ public class EnemyInspector : CharacterInspector
     Enemy enemy;
     int enemyType;
 
-    SerializedProperty attackCardsProperty;
-    SerializedProperty effectCardsProperty;
+    SerializedProperty attackCardLineList;
+    SerializedProperty effectCardLineList;
 
     new private void OnEnable()
     {
@@ -21,8 +21,8 @@ public class EnemyInspector : CharacterInspector
         //获取当前要自定义Inspector的对象
         enemy = (Enemy)target;
 
-        attackCardsProperty = serializedObject.FindProperty("attackCards");
-        effectCardsProperty = serializedObject.FindProperty("effectCards");
+        attackCardLineList = serializedObject.FindProperty("attackCardLineList");
+        effectCardLineList = serializedObject.FindProperty("effectCardLineList");
     }
 
     //自定义Inspector面板
@@ -43,11 +43,23 @@ public class EnemyInspector : CharacterInspector
         EditorGUILayout.Space(10);
 
         EditorGUILayout.LabelField("索敌",EditorStyles.boldLabel);
+        enemy.keepDistanceWhenNotArmed = EditorGUILayout.Toggle("无攻击替身时保持距离", enemy.keepDistanceWhenNotArmed);
         enemy.searchType = (EnemySearchType)EditorGUILayout.EnumPopup("索敌类型", enemy.searchType);
 
         if ( enemy.searchType == EnemySearchType.distance || enemy.searchType == EnemySearchType.horizontal)
         {
-            enemy.searchDistance = EditorGUILayout.FloatField("索敌距离", enemy.searchDistance);
+            enemy.searchDistance = EditorGUILayout.FloatField("索敌最远距离", enemy.searchDistance);
+        }
+        if (enemy.keepDistanceWhenNotArmed)
+        {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("无攻击替身时\n保持的距离", GUILayout.Width(120), GUILayout.Height(30));
+            enemy.minDistance = EditorGUILayout.FloatField(enemy.minDistance,GUILayout.Height(30));
+            EditorGUILayout.EndHorizontal();
+        }
+        else
+        {
+            enemy.minDistance = EditorGUILayout.FloatField("追击时的最近距离", enemy.minDistance);
         }
 
         enemy.wallDetect = EditorGUILayout.Toggle("墙体检测",enemy.wallDetect);
@@ -55,30 +67,25 @@ public class EnemyInspector : CharacterInspector
         EditorGUILayout.Space(10);
 
         EditorGUILayout.LabelField("攻击卡");
-        EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("使用距离", GUILayout.Width(50));
         enemy.attackCardUseDistance = EditorGUILayout.FloatField(enemy.attackCardUseDistance);
-        EditorGUILayout.LabelField("冷却时间", GUILayout.Width(50));
-        enemy.attackCardCooldown = EditorGUILayout.FloatField(enemy.attackCardCooldown);
-        EditorGUILayout.EndHorizontal();
-        EditorGUILayout.PropertyField(attackCardsProperty, new UnityEngine.GUIContent("攻击卡"));
+        EditorGUILayout.PropertyField(attackCardLineList, new UnityEngine.GUIContent("攻击卡"), true);
 
         EditorGUILayout.LabelField("效果卡");
-        EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("使用距离", GUILayout.Width(50));
         enemy.effectCardUseDistance = EditorGUILayout.FloatField(enemy.effectCardUseDistance);
-        EditorGUILayout.LabelField("冷却时间", GUILayout.Width(50));
-        enemy.effectCardCooldown = EditorGUILayout.FloatField(enemy.effectCardCooldown);
-        EditorGUILayout.EndHorizontal();
-        EditorGUILayout.PropertyField(effectCardsProperty, new UnityEngine.GUIContent("效果卡"));
+        EditorGUILayout.PropertyField(effectCardLineList, new UnityEngine.GUIContent("效果卡"), true);
 
 
         EditorGUILayout.Space(10);
 
         EditorGUILayout.EndVertical();
 
-        serializedObject.ApplyModifiedProperties();
-        EditorUtility.SetDirty(enemy);
+        if (GUI.changed)
+        {
+            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(enemy);
+        }
 
         base.OnInspectorGUI();
     }

@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mail;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public enum EnemySearchType
 {
@@ -14,6 +16,23 @@ public enum EnemyStateType
 {
     Idle,Chase,Attack,Injury
 }
+
+[System.Serializable]
+public class EnemyCardWithTimer
+{
+    public Card card;
+    public float cooldown;
+    [HideInInspector]public float timer;
+}
+
+[System.Serializable]
+public class EnemyCardLine
+{
+    public List<EnemyCardWithTimer> cards;
+    public float cooldown;
+    [HideInInspector] public float timer;
+}
+
 [RequireComponent(typeof(HpUi2_FollowEnemy))]
 public class Enemy : Character
 {
@@ -26,25 +45,22 @@ public class Enemy : Character
 
     public EnemySearchType searchType;
     public bool wallDetect;
+    public bool keepDistanceWhenNotArmed;
 
     public float searchDistance;
+    public float minDistance;
 
     public float attackCardUseDistance;
-    public float attackCardCooldown;
-    protected float attackCardCooldownTimer = 0;
-
     public float effectCardUseDistance;
-    public float effectCardCooldown;
-    protected float effectCardCooldownTimer = 0;
 
-    public List<Card> attackCards = new();
-    public List<Card> effectCards = new();
+    public List<EnemyCardLine> attackCardLineList = new();
+    public List<EnemyCardLine> effectCardLineList = new();
 
     [HideInInspector] public Player player;
 
     //states
-    Dictionary<EnemyStateType, EnemyState> stateDict = new();
-    EnemyState currentState;
+    protected Dictionary<EnemyStateType, EnemyState> stateDict = new();
+    protected EnemyState currentState;
 
     new protected void Start()
     {
@@ -54,7 +70,14 @@ public class Enemy : Character
         injuryEvent.AddListener(new UnityAction(TransitionToInjury));
 
         stateDict[EnemyStateType.Idle] = new EnemyIdleState(this);
-        stateDict[EnemyStateType.Chase] = new EnemyChaseState(this);
+        if (keepDistanceWhenNotArmed)
+        {
+            stateDict[EnemyStateType.Chase] = new KeepDistanceWhenNotArmedChaseState(this);
+        }
+        else
+        {
+            stateDict[EnemyStateType.Chase] = new EnemyChaseState(this);
+        }
         stateDict[EnemyStateType.Attack] = new EnemyAttackState(this);
         stateDict[EnemyStateType.Injury] = new EnemyInjuryState(this);
 
@@ -88,11 +111,30 @@ public class Enemy : Character
 
         currentState.OnUpdate();
 
-        if (!(forcebackTimer > 0))
+        if (!isDead)
         {
-            attackCooldownTimer -= Time.deltaTime;
-            attackCardCooldownTimer -= Time.deltaTime;
-            effectCardCooldownTimer -= Time.deltaTime;
+            if (!(forcebackTimer > 0))
+            {
+                attackCooldownTimer -= Time.deltaTime;
+            }
+
+            //遍历line
+            foreach (EnemyCardLine cardLine in attackCardLineList)
+            {
+                cardLine.timer -= Time.deltaTime;
+                foreach (EnemyCardWithTimer ectw in cardLine.cards)
+                {
+                    ectw.timer -= Time.deltaTime;
+                }
+            }
+            foreach (EnemyCardLine cardLine in effectCardLineList)
+            {
+                cardLine.timer -= Time.deltaTime;
+                foreach (EnemyCardWithTimer ectw in cardLine.cards)
+                {
+                    ectw.timer -= Time.deltaTime;
+                }
+            }
         }
     }
 
@@ -111,6 +153,10 @@ public class Enemy : Character
     /// <returns></returns>
     public bool CheckPlayerInSight(EnemySearchType searchType)
     {
+        return CheckPlayerInSight(searchType, searchDistance, 0);
+    }
+    public bool CheckPlayerInSight(EnemySearchType searchType, float maxDistance, float minDistance)
+    {
         //检测墙体阻挡
         if (wallDetect)
         {
@@ -121,11 +167,13 @@ public class Enemy : Character
             }
         }
 
+        float distance = -1;
         switch (searchType)
         {
             //圆形视野
             case EnemySearchType.distance:
-                if (Vector2.Distance(transform.position, player.transform.position) < searchDistance)
+                distance = Vector2.Distance(transform.position, player.transform.position);
+                if (distance < maxDistance && distance > minDistance)
                 {
                     return true;
                 }
@@ -133,7 +181,8 @@ public class Enemy : Character
 
             //水平距离视野
             case EnemySearchType.horizontal:
-                if (Mathf.Abs(transform.position.x - player.transform.position.x) < searchDistance)
+                distance = Mathf.Abs(transform.position.x - player.transform.position.x);
+                if (distance < maxDistance && distance > minDistance)
                 {
                     return true;
                 }
@@ -141,19 +190,24 @@ public class Enemy : Character
 
             //无穷视野
             case EnemySearchType.infinity:
-                return true;
+                distance = Vector2.Distance(transform.position, player.transform.position);
+                if (distance > minDistance)
+                {
+                    return true;
+                }
+                break;
         }
 
         return false;
     }
 
     /// <summary>
-    /// 检测是否可使用攻击卡
+    /// 检测是否在攻击卡范围内
     /// </summary>
     /// <returns></returns>
     public bool CheckPlayerInAttackCardDistance()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) < attackCardUseDistance && attackCardCooldownTimer <= 0)
+        if (Vector2.Distance(transform.position, player.transform.position) < attackCardUseDistance)
         {
             return true;
         }
@@ -161,12 +215,12 @@ public class Enemy : Character
     }
 
     /// <summary>
-    /// 检测是否可使用效果卡
+    /// 检测是否可使用效果卡范围内
     /// </summary>
     /// <returns></returns>
     public bool CheckPlayerInEffectCardDistance()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) < effectCardUseDistance && effectCardCooldownTimer <= 0)
+        if (Vector2.Distance(transform.position, player.transform.position) < effectCardUseDistance)
         {
             return true;
         }
@@ -211,6 +265,27 @@ public class Enemy : Character
         {
             spriteRenderer.flipX = true;
         }
+
+        //动画
+        if (animator != null)
+        {
+            animator.SetFloat(Consts.SpeedAnimatorArgument, Mathf.Abs(horizontalMove));
+        }
+    }
+    /// <summary>
+    /// 相对于玩家移动
+    /// </summary>
+    /// <param name="forward">forward = 1为靠近，forward = -1为远离</param>
+    public virtual void MoveRelateToPlayer(float forward)
+    {
+        if (player.transform.position.x > transform.position.x)
+        {
+            OnMove(forward);
+        }
+        else if (player.transform.position.x < transform.position.x)
+        {
+            OnMove(-forward);
+        }
     }
 
     /// <summary>
@@ -231,14 +306,35 @@ public class Enemy : Character
     /// </summary>
     public virtual void OnUseAttackCard()
     {
-        if (attackCards.Count > 0 && attackCardCooldownTimer <= 0)
+        //遍历line
+        foreach (EnemyCardLine cardLine in attackCardLineList)
         {
-            attackCardCooldownTimer = attackCardCooldown;
+            //找到cd到了且不为空的line
+            if (cardLine.timer <= 0 && cardLine.cards.Count > 0)
+            {
+                //找出cd到了的ecwt
+                List<EnemyCardWithTimer> availableECWT = new List<EnemyCardWithTimer>();
+                foreach (EnemyCardWithTimer ecwt in cardLine.cards)
+                {
+                    if (ecwt.timer <= 0)
+                    {
+                        availableECWT.Add(ecwt);
+                    }
+                }
 
-            //Random.Range(a,b)不含右值
-            int index = Random.Range(0, attackCards.Count);
-            Card card = attackCards[index];
-            card.EnemyHasEffectOnPlayer(enemyName);
+                //随机抽卡
+                if (availableECWT.Count > 0)
+                {
+                    int index = UnityEngine.Random.Range(0, availableECWT.Count);
+                    EnemyCardWithTimer ecwt = availableECWT[index];
+                    Card card = ecwt.card;
+                    card.EnemyHasEffectOnPlayer(enemyName);
+
+                    //冷却时间
+                    ecwt.timer = ecwt.cooldown;
+                    cardLine.timer = cardLine.cooldown;
+                }
+            }
         }
         
     }
@@ -248,13 +344,35 @@ public class Enemy : Character
     /// </summary>
     public virtual void OnUseEffectCard()
     {
-        if (effectCards.Count > 0 && effectCardCooldownTimer <= 0)
+        //遍历line
+        foreach (EnemyCardLine cardLine in effectCardLineList)
         {
-            effectCardCooldownTimer = effectCardCooldown;
+            //找到cd到了且不为空的line
+            if (cardLine.timer <= 0 && cardLine.cards.Count > 0)
+            {
+                //找出cd到了的ecwt
+                List<EnemyCardWithTimer> availableECWT = new List<EnemyCardWithTimer>();
+                foreach (EnemyCardWithTimer ecwt in cardLine.cards)
+                {
+                    if (ecwt.timer <= 0)
+                    {
+                        availableECWT.Add(ecwt);
+                    }
+                }
 
-            int index = Random.Range(0, effectCards.Count);
-            Card card = effectCards[index];
-            card.EnemyHasEffectOnPlayer(enemyName);
+                //随机抽卡
+                if (availableECWT.Count > 0)
+                {
+                    int index = UnityEngine.Random.Range(0, availableECWT.Count);
+                    EnemyCardWithTimer ecwt = availableECWT[index];
+                    Card card = ecwt.card;
+                    card.EnemyHasEffectOnPlayer(enemyName);
+
+                    //冷却时间
+                    ecwt.timer = ecwt.cooldown;
+                    cardLine.timer = cardLine.cooldown;
+                }
+            }
         }
     }
 
@@ -271,29 +389,60 @@ public class Enemy : Character
             case EnemySearchType.distance:
                 for (int i = 0; i < side; i++)
                 {
+                    //最远
                     Vector2 from = transform.position + Quaternion.Euler(0, 0, angle * i) * Vector2.right * searchDistance;
                     Vector2 to = transform.position + Quaternion.Euler(0,0,angle * (i+1)) * Vector2.right * searchDistance;
+                    //最近
+                    Vector2 from2 = transform.position + Quaternion.Euler(0, 0, angle * i) * Vector2.right * minDistance;
+                    Vector2 to2 = transform.position + Quaternion.Euler(0, 0, angle * (i + 1)) * Vector2.right * minDistance;
 
+                    //圆圈
                     Gizmos.DrawLine(from,to);
+                    Gizmos.DrawLine(from2, to2);
+
+                    //阴影
+                    Gizmos.DrawLine(from, from2);
                 }
 
                 break;
 
             //水平距离视野
             case EnemySearchType.horizontal:
+                //最远
                 Gizmos.DrawLine(new Vector2(transform.position.x - searchDistance, transform.position.y + 50), new Vector2(transform.position.x - searchDistance, transform.position.y - 50));
                 Gizmos.DrawLine(new Vector2(transform.position.x + searchDistance, transform.position.y + 50), new Vector2(transform.position.x + searchDistance, transform.position.y - 50));
-                Gizmos.DrawLine(new Vector2(transform.position.x + searchDistance, transform.position.y), new Vector2(transform.position.x - searchDistance, transform.position.y));
+                //最近
+                Gizmos.DrawLine(new Vector2(transform.position.x - minDistance, transform.position.y + 10), new Vector2(transform.position.x - minDistance, transform.position.y - 10));
+                Gizmos.DrawLine(new Vector2(transform.position.x + minDistance, transform.position.y + 10), new Vector2(transform.position.x + minDistance, transform.position.y - 10));
+
+                //连线
+                Gizmos.DrawLine(new Vector2(transform.position.x + searchDistance, transform.position.y), new Vector2(transform.position.x + minDistance, transform.position.y));
+                Gizmos.DrawLine(new Vector2(transform.position.x - searchDistance, transform.position.y), new Vector2(transform.position.x - minDistance, transform.position.y));
 
                 break;
 
             //无穷视野
             case EnemySearchType.infinity:
+                for (int i = 0; i < side; i++)
+                {
+                    //最近
+                    Vector2 from2 = transform.position + Quaternion.Euler(0, 0, angle * i) * Vector2.right * minDistance;
+                    Vector2 to2 = transform.position + Quaternion.Euler(0, 0, angle * (i + 1)) * Vector2.right * minDistance;
+
+                    //圆圈
+                    Gizmos.DrawLine(from2, to2);
+                }
+                //连线
                 player = FindAnyObjectByType<Player>();
-                Gizmos.DrawLine(transform.position,player.transform.position);
+                Vector3 direction = player.transform.position - transform.position;
+                if (direction.sqrMagnitude > minDistance * minDistance)
+                {
+                    Gizmos.DrawRay(transform.position + direction.normalized * minDistance, direction - direction.normalized * minDistance);
+                }
                 break;
         }
 
+        //攻击卡使用范围
         Gizmos.color = Color.red;
         for (int i = 0; i < side; i++)
         {
@@ -303,6 +452,7 @@ public class Enemy : Character
             Gizmos.DrawLine(from, to);
         }
 
+        //效果卡使用范围
         Gizmos.color = Color.green;
         for (int i = 0; i < side; i++)
         {

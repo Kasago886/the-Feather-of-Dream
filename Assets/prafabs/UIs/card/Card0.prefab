@@ -263,7 +263,9 @@ MonoBehaviour:
   b2: 1
   b3: 1
   b4: 1
+  b5: 1
   playerUse: 1
+  speacialMaterial: {fileID: 2100000, guid: f64101cea1336cd46b6f80df9cddae60, type: 2}
   enemyUse: 0
   effortOnPlayer: 0
   effortOnEnmey: 0
@@ -271,9 +273,9 @@ MonoBehaviour:
   effortOnMoreEnemies: 0
   theNumberOfEffortedEnemies: 0
   effortOnPlayerAndEnemy: 1
-  click: 1
+  click: 0
   isRandom: 1
-  dragOnCharactor: 0
+  dragOnCharactor: 1
   minDistance: 5
   whatHappenOnDrag:
     m_PersistentCalls:
@@ -329,6 +331,12 @@ MonoBehaviour:
   buffsEnemy: []
   buffNamesEnemy:
   - "\u6D4B\u8BD5\u62D4\u7FBD"
+  customMode: 0
+  pleaseChooseOneMethod: 1
+  targetTransform: {fileID: 0}
+  theNumberOfTargetPosition: {x: 0, y: 0, z: 0}
+  getObjectDistanceInX: 0
+  getObjectDistanceInY: 0
 --- !u!114 &956570312101519618
 MonoBehaviour:
   m_ObjectHideFlags: 0

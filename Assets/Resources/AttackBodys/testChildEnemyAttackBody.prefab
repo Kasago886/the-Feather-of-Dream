@@ -105,11 +105,17 @@ MonoBehaviour:
   attackCooldown: 2
   searchType: 0
   wallDetect: 0
+  keepDistanceWhenNotArmed: 0
   searchDistance: 10
+  minDistance: 0
   attackCardUseDistance: 5
   attackCardCooldown: 10
   effectCardUseDistance: 7.5
   effectCardCooldown: 10
+  isSingleAttackCardCooldown: 0
+  isSingleEffectCardCooldown: 0
+  attackCardsWithTimer: []
+  effectCardsWithTimer: []
   attackCards: []
   effectCards: []
   player: {fileID: 0}

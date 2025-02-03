@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     public float bottomCenterX, bottomCenterY;
     Vector2 bottomCenterGlobal;
     public Vector2 bottomSize;
+    bool isOnSlope = false;
+    bool isJumping = false;
 
     //攻击
     public UnityEvent attackEvent;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
+    Player player;
 
     //states
     Dictionary<ControllerStateType, ControllerState> stateDict = new Dictionary<ControllerStateType, ControllerState>();
@@ -49,6 +52,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        player = GetComponent<Player>();
+
+        bottomCenterGlobal = transform.position + new Vector3(bottomCenterX, bottomCenterY);
 
         stateDict[ControllerStateType.Movable] = new ControllerMovableState(this);
         stateDict[ControllerStateType.Sprinting] = new ControllerSprintingState(this);
@@ -76,6 +82,58 @@ public class PlayerController : MonoBehaviour
         if (attackCooldownTimer > 0)
         {
             attackCooldownTimer -= Time.deltaTime;
+        }
+
+        //脚下判定
+        //Debug.Log("isJumping:" + isJumping.ToString());
+        //Debug.Log("isOnSlope:"+isOnSlope.ToString());
+        //不在斜坡上时
+        if (!isOnSlope)
+        {
+            Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal, bottomSize, 0, LayerMask.GetMask(Consts.WallLayer));
+            //不在跳跃过程中时，脚下是斜坡则判定在斜坡上
+            if (hit.Length > 0)
+            {
+                if (!isJumping)
+                {
+                    foreach (Collider2D col in hit)
+                    {
+                        if (col.tag == Consts.SlopeTag)
+                        {
+                            isOnSlope = true;
+                        }
+                    }
+                }
+            }
+            //脚下没有地面时跳跃过程结束
+            else
+            {
+                isJumping = false;
+            }
+        }
+        //在斜坡上时
+        else
+        {
+            //若脚下不是斜坡，则判定离开斜坡
+            bool isLeaveSlope = true;
+            Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal, bottomSize, 0, LayerMask.GetMask(Consts.WallLayer));
+            if (hit.Length > 0)
+            {
+                foreach (Collider2D col in hit)
+                {
+                    if (col.tag == Consts.SlopeTag)
+                    {
+                        isLeaveSlope = false;
+                    }
+                }
+            }
+
+            //若离开斜坡,则纵向速度归零
+            if (isLeaveSlope)
+            {
+                isOnSlope = false;
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+            }
         }
     }
 
@@ -124,11 +182,14 @@ public class PlayerController : MonoBehaviour
 
         //检测是否踩在地面上
         bottomCenterGlobal = transform.position + new Vector3(bottomCenterX,bottomCenterY);
-        Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal,bottomSize,0,LayerMask.GetMask(Consts.GroundLayer));
+        Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal,bottomSize,0,LayerMask.GetMask(Consts.WallLayer));
         if (hit.Length > 0)
         {
             //Debug.Log(hit[0]);
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+
+            isJumping = true;
+            isOnSlope = false;
         }
     }
     public void StateJump()
@@ -145,6 +206,8 @@ public class PlayerController : MonoBehaviour
         {
             sprintDurationTimer = sprintDuration;
             StateTransition(ControllerStateType.Sprinting);
+
+            player.isSprinting = true;
         }
     }
     public void StateSprint()
@@ -172,6 +235,8 @@ public class PlayerController : MonoBehaviour
             sprintCooldownTimer = sprintCooldown;
             
             StateTransition(ControllerStateType.Movable);
+
+            player.isSprinting = false;
         }
     }
 

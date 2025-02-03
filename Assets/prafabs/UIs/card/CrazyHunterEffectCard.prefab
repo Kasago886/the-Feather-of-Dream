@@ -256,14 +256,16 @@ MonoBehaviour:
   id: 3
   name: "\u72C2\u66B4"
   rarity: 1
-  description: "\u83B7\u5F9730%\u52A0\u901F\uFF0C20%\u653B\u51FB\u529B\u52A0\u6210\uFF0C\u6301\u7EED5s"
+  description: "\u83B7\u5F9750%\u52A0\u901F\uFF0C80%\u653B\u51FB\u529B\u52A0\u6210\uFF0C\u6301\u7EED5s"
   backGroundStory: 12233
   b0: 1
   b1: 1
   b2: 1
   b3: 1
   b4: 1
+  b5: 0
   playerUse: 0
+  speacialMaterial: {fileID: 0}
   enemyUse: 1
   effortOnPlayer: 0
   effortOnEnmey: 1
@@ -291,7 +293,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   buffs: []
-  buffNames: []
+  buffNames:
+  - "\u72C2\u66B4"
   whatHappenOnDragPlayer:
     m_PersistentCalls:
       m_Calls: []
@@ -326,6 +329,12 @@ MonoBehaviour:
       m_Calls: []
   buffsEnemy: []
   buffNamesEnemy: []
+  customMode: 0
+  pleaseChooseOneMethod: 0
+  targetTransform: {fileID: 0}
+  theNumberOfTargetPosition: {x: 0, y: 0, z: 0}
+  getObjectDistanceInX: 0
+  getObjectDistanceInY: 0
 --- !u!114 &956570312101519618
 MonoBehaviour:
   m_ObjectHideFlags: 0

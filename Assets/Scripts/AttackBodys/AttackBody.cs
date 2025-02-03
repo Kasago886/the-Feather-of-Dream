@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public enum AttackType
@@ -23,6 +24,8 @@ public class AttackBody : MonoBehaviour
     public GameObject bullet;
     public bool isAiming;
 
+    public UnityEvent whatHappenWhenAttack;
+
     [HideInInspector]public bool isleft;
     [HideInInspector] public float addDamage = 0;
 
@@ -36,6 +39,7 @@ public class AttackBody : MonoBehaviour
         if (isleft)
         {
             center.x = -attackCenter.x;
+            transform.localScale = new Vector3(-transform.localScale.x,transform.localScale.y,transform.localScale.z);
         }
         center = center + transform.position;
 
@@ -61,6 +65,7 @@ public class AttackBody : MonoBehaviour
                 foreach (Collider2D target in targets)
                 {
                     target.GetComponent<Character>().TakeDamage(damage + addDamage, transform);
+                    whatHappenWhenAttack?.Invoke();
                 }
                 break;
 

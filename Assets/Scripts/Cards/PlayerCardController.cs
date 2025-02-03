@@ -237,10 +237,10 @@ public class PlayerCardController : MonoBehaviour
     public GameObject[] cardsList;
     [Header("初始生成数量")]
     public int positionNumber;
+    public static bool cantUseCard;
     private Dictionary<string, int> nameToID = new();
     private Dictionary<int, GameObject> idToCard = new();
     private RectTransform rectTransform;
-
     private void Start()
     {
         rectTransform=content.GetComponent<RectTransform>();
@@ -316,7 +316,11 @@ public class PlayerCardController : MonoBehaviour
     /// <returns></returns>
     public bool GetCardOrNot()
     {
-        if (content.transform.childCount < positionNumber)
+        if(cantUseCard&& content.transform.childCount < positionNumber-1)
+        {
+            return true;
+        }
+        else if (content.transform.childCount < positionNumber&&!cantUseCard)
         {
             return true;
         }

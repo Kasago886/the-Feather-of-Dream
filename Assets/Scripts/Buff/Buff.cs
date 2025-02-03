@@ -216,6 +216,18 @@ public class PrinceSwordAttackBuff : AttackBuff
         //Debug.Log(attackBody);
     }
 }
+public class PrinceGuardSwordAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/PrinceGuardSwordAttackBody");
+        //Debug.Log(attackBody);
+    }
+}
+
 public class CrazyHunterAttackBuff : AttackBuff
 {
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
@@ -223,16 +235,63 @@ public class CrazyHunterAttackBuff : AttackBuff
         base.Init(target, timer, isPermanent);
 
         this.timer = 5;
-        this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunterAttackBody");
+        if (target.GetComponent<CrazyHunter>().attackWay == true)
+        {
+            this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunter/CrazyHunterAttackBody");
+            target.GetComponent<CrazyHunter>().tenacity = 10;
+        }
+        else
+        {
+            this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunter/CrazyHunterAttackBodyGun");
+            target.GetComponent<CrazyHunter>().tenacity = -10;
+
+        }
     }
 }
-public class TinWoodmanAttackBuff : AttackBuff
+public class CrazyHunterAttackBuff1 : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 1;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunter/CrazyHunterAttackBodyTrap");
+       
+    }
+}
+    public class TinWoodmanAttackBuff : AttackBuff
 {
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
         this.timer = 6;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/TinWoodmanAttackBody");
+    }
+}
+public class EnslavedDwarfsAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 8;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/EnslavedDwarfsAttackBody");
+    }
+}
+public class DwarfsAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 8;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/DwarfsAttackBody");
+    }
+}
+public class TheMisunderstoodWerewolfBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 7;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/TheMisunderstoodWerewolfAttackBody 1");
     }
 }
 #endregion
@@ -378,7 +437,35 @@ public class TestEnemyEffectBuff : EffectBuff
         //Debug.Log("remove TestEnemyEffectBuff!");
     }
 }
-public class TinWoodmanEffectBuff : EffectBuff
+public class CrazyHunterEffectBuff : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.GetComponent<Enemy>().runSpeed *= 1.5f;
+        target.GetComponent<Enemy>().strength = 80;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        target.GetComponent<Enemy>().runSpeed /= 1.5f;
+        target.GetComponent<Enemy>().strength = 0;
+    }
+}
+    public class TinWoodmanEffectBuff : EffectBuff
 {
     private float buffTimer;
     private float oriStrength;
@@ -421,12 +508,318 @@ public class TinWoodmanEffectBuff : EffectBuff
             {
                 enemy.unlockedFeathers[0].health -= 40;
             }
-            if (enemy.unlockedFeathers.Count > 1&& enemy.unlockedFeathers[0].health < 40)
+            if (enemy.unlockedFeathers.Count > 1 && enemy.unlockedFeathers[0].health < 40)
             {
                 enemy.unlockedFeathers[1].health -= (40 - enemy.unlockedFeathers[0].health);
                 enemy.unlockedFeathers[0].health = 0;
             }
         }
+    }
+}
+public class EnslavedDwarfsEffectBuff : EffectBuff
+{
+    private Player player;
+    private Enemy enemy;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            player = target.GetComponent<Player>();
+        }
+        if (target.GetComponent<Enemy>() != null)
+        {
+            enemy = target.GetComponent<Enemy>();
+        }
+        float health = 0;
+        if (enemy != null)
+        {
+            for (int i = 0; i < enemy.unlockedFeathers.Count; i++)
+            {
+                health += enemy.unlockedFeathers[i].health;
+            }
+            if (enemy.unlockedFeathers.Count > 0)
+            {
+                enemy.unlockedFeathers[0].health += health / 20;
+                enemy.unlockedFeathers[0].maxHealth += health / 20;
+            }
+        }
+        if (player != null)
+        {
+            for (int i = 0; i < player.unlockedFeathers.Count; i++)
+            {
+                health += player.unlockedFeathers[i].health;
+            }
+            if (player.unlockedFeathers.Count > 0)
+            {
+                player.unlockedFeathers[0].health += health / 20;
+                player.unlockedFeathers[0].maxHealth += health / 20;
+            }
+        }
+        this.timer = 0;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class PrincePowerEffectBuff : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.strength += 20;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        target.strength -= 20;
+    }
+}
+public class DwarfsEffectBuff : EffectBuff
+{
+    float Num;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 5;
+        //Num = target.GetComponent<Dwarfs>().DwarfsNumber;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.strength += 20 * Num;
+        target.tenacity += 20 * Num;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        target.strength -= 20 * Num;
+        target.tenacity -= 20 * Num;
+    }
+}
+public class Trauma : EffectBuff
+{
+    private Player player;
+    private Enemy enemy;
+    private float health;
+    private float attackTimer;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null )
+        {
+            player = target.GetComponent<Player>();
+            if (player.unlockedFeathers.Count > 0)
+            {
+                health = player.unlockedFeathers[0].health;
+            }
+        }
+        if (target.GetComponent<Enemy>() != null)
+        {
+            enemy = target.GetComponent<Enemy>();
+            if (enemy.unlockedFeathers.Count > 0)
+            {
+                health = enemy.unlockedFeathers[0].health;
+            }
+        }
+        this.timer = 999999;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        attackTimer += Time.deltaTime;
+        if (attackTimer > 0.1f)
+        {
+            if (player != null)
+            {
+                if ( player.unlockedFeathers.Count > 0&&health - player.unlockedFeathers[0].health >= 1)
+                {
+                    player.unlockedFeathers[0].health--;
+                    attackTimer = 0;
+                    if (Random.Range(0, 3) > 1)
+                    {
+                        this.timer = 0;
+                    }
+                }
+            }
+            if (enemy != null)
+            {
+                if (enemy.unlockedFeathers.Count > 0&&health - enemy.unlockedFeathers[0].health >= 1)
+                {
+                    enemy.unlockedFeathers[0].health--;
+                    attackTimer = 0;
+                    if (Random.Range(0, 3) > 1)
+                    {
+                        this.timer=0;
+                    }
+                }
+            }
+        }
+        if(player != null && player.unlockedFeathers.Count > 0)
+        {
+            health = player.unlockedFeathers[0].health;
+        }
+        if(enemy != null && enemy.unlockedFeathers.Count > 0)
+        {
+            health = enemy.unlockedFeathers[0].health;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class Terrified : EffectBuff
+{
+    private Player player;
+    private Enemy enemy;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            player = target.GetComponent<Player>();
+        }
+        if (target.GetComponent<Enemy>() != null)
+        {
+            enemy = target.GetComponent<Enemy>();
+        }
+        this.timer = 0;
+    }
+
+    public override void OnEnter()
+    {
+        if (player != null && player.unlockedFeathers.Count > 0)
+        {
+            player.unlockedFeathers[0].health -= 1f;
+        }
+        if (enemy != null && enemy.unlockedFeathers.Count > 0)
+        {
+            enemy.unlockedFeathers[0].health -= 1f;
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (player != null && player.unlockedFeathers.Count > 0)
+        {
+            player.unlockedFeathers[0].health += 1f;
+        }
+        if (enemy != null && enemy.unlockedFeathers.Count > 0)
+        {
+            enemy.unlockedFeathers[0].health += 1f;
+        }
+        base.OnExit();
+    }
+}
+public class Depressed : EffectBuff
+{
+    private Player player;
+    private Enemy enemy;
+    private Color baseColor;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            player = target.GetComponent<Player>();
+        }
+        if (target.GetComponent<Enemy>() != null)
+        {
+            enemy = target.GetComponent<Enemy>();
+        }
+        this.timer = 12;
+    }
+
+    public override void OnEnter()
+    {
+        if(player != null)
+        {
+            player.cardGenerateCooldown += 1;
+            baseColor=player.cardGenerateText.color;
+            player.cardGenerateText.color= Color.red;
+        }
+        if (enemy != null)
+        {
+            foreach (EnemyCardLine line in enemy.attackCardLineList)
+            {
+                foreach(EnemyCardWithTimer ectw in line.cards)
+                {
+                    ectw.timer += 1;
+                }
+            }
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (player != null)
+        {
+            player.cardGenerateCooldown -= 1;
+            player.cardGenerateText.color = baseColor;
+        }
+        if (enemy != null)
+        {
+            foreach (EnemyCardLine line in enemy.attackCardLineList)
+            {
+                foreach (EnemyCardWithTimer ectw in line.cards)
+                {
+                    ectw.timer += 1;
+                }
+            }
+        }
+        base.OnExit();
     }
 }
 #endregion

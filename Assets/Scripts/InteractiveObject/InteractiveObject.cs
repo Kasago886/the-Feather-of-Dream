@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEditor.Progress;
 [RequireComponent(typeof(PolygonCollider2D))]
 //注意如果使用的是mode2的话那么请安装上rigidbody2D组件
 public class InteractiveObject : MonoBehaviour
@@ -32,6 +34,8 @@ public class InteractiveObject : MonoBehaviour
     [Header("触发使用的按键:")]
     [Tooltip("小写字母")]
     public string nameOfKey;
+    [Tooltip("提示按键的预制体")]
+    public GameObject noticer;
 
     private float distance;
     private int id;
@@ -40,8 +44,17 @@ public class InteractiveObject : MonoBehaviour
     {
         id=Random.Range(-100000,100000);
         player = GameObject.FindGameObjectWithTag(Consts.PlayerTag);
+
+        SetNoticer();
+        HideNoticer();
+
+        if (mouseTrigger)
+        {
+            noticer.GetComponentInChildren<Text>().text = "Click";
+            ShowNoticer();
+        }
     }
-    private void Update()
+    protected virtual void Update()
     {
         KeyTriggerMode1();
     }
@@ -53,9 +66,17 @@ public class InteractiveObject : MonoBehaviour
         if (keyTrigger && !mouseTrigger && mode1&&!moreLimit)
         {
             distance = Mathf.Abs(Vector3.Distance(player.transform.position, gameObject.transform.position));
-            if (distance < maxDistance && Input.GetKeyDown(nameOfKey))
+            if (distance < maxDistance)
             {
-                Interact();
+                ShowNoticer();
+                if (Input.GetKeyDown(nameOfKey))
+                {
+                    Interact();
+                }
+            }
+            else
+            {
+                HideNoticer();
             }
         }
         else if (keyTrigger && !mouseTrigger && mode1 && moreLimit)
@@ -63,16 +84,32 @@ public class InteractiveObject : MonoBehaviour
             distance = Mathf.Abs(Vector3.Distance(player.transform.position, gameObject.transform.position));
             if (maxDistanceOfHorizontal != 0&&maxDistanceOfVertical==0)
             {
-                if (distance < maxDistance && Input.GetKeyDown(nameOfKey) && Mathf.Abs(player.transform.position.x - transform.position.x) <= maxDistanceOfHorizontal)
+                if (distance < maxDistance && Mathf.Abs(player.transform.position.x - transform.position.x) <= maxDistanceOfHorizontal)
                 {
-                    Interact();
+                    ShowNoticer();
+                    if (Input.GetKeyDown(nameOfKey))
+                    {
+                        Interact();
+                    }
+                }
+                else
+                {
+                    HideNoticer();
                 }
             }
             if(maxDistanceOfVertical != 0&&maxDistanceOfHorizontal==0)
             {
-                if (distance < maxDistance && Input.GetKeyDown(nameOfKey) && Mathf.Abs(player.transform.position.y - transform.position.y) <= maxDistanceOfVertical)
+                if (distance < maxDistance && Mathf.Abs(player.transform.position.y - transform.position.y) <= maxDistanceOfVertical)
                 {
-                    Interact();
+                    ShowNoticer();
+                    if (Input.GetKeyDown(nameOfKey))
+                    {
+                        Interact();
+                    }
+                }
+                else
+                {
+                    HideNoticer();
                 }
             }
         }
@@ -93,6 +130,7 @@ public class InteractiveObject : MonoBehaviour
         if(keyTrigger && !mouseTrigger && mode2&&collision.tag==Consts.PlayerTag)
         {
             PlayerInteract.trigger.Add(id,gameObject);
+            ShowNoticer() ;
         }
     }
     /// <summary>
@@ -104,6 +142,7 @@ public class InteractiveObject : MonoBehaviour
         if (keyTrigger && !mouseTrigger && mode2)
         {
             PlayerInteract.trigger.Remove(id);
+            HideNoticer() ;
         }
     }
     /// <summary>
@@ -113,6 +152,26 @@ public class InteractiveObject : MonoBehaviour
     {
 
     }
+
+    /// <summary>
+    /// 按键提示
+    /// </summary>
+    public void ShowNoticer()
+    {
+        noticer.SetActive(true);
+    }
+    public void HideNoticer()
+    {
+        noticer.SetActive(false);
+    }
+    public void SetNoticer()
+    {
+        GameObject instance = Instantiate(noticer);
+        instance.GetComponent<Noticer>().target = gameObject;
+        instance.GetComponentInChildren<Text>().text = nameOfKey.ToUpper();
+        noticer = instance;
+    }
+
     /// <summary>
     /// 这个方法是用来观测距离触发的可触发范围的
     /// </summary>

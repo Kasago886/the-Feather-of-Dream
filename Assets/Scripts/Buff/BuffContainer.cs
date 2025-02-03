@@ -22,9 +22,21 @@ public class BuffContainer
         {"拔羽15s", typeof(UnlockFeather15sBuff) },
         {"拔羽20s", typeof(UnlockFeather20sBuff) },
         {"王子之剑", typeof(PrinceSwordAttackBuff) },
+        {"侍卫短剑", typeof(PrinceGuardSwordAttackBuff) },
+        {"王子权柄", typeof(PrincePowerEffectBuff) },
         {"猎人预感", typeof(CrazyHunterAttackBuff) },
+        {"狩猎", typeof(CrazyHunterAttackBuff1) },
+        {"狂暴", typeof(CrazyHunterEffectBuff) },
         {"破损引擎", typeof(TinWoodmanAttackBuff) },
-        {"修补空虚", typeof(TinWoodmanEffectBuff) }
+        {"修补空虚", typeof(TinWoodmanEffectBuff) },//立即扣除2.5%单个解锁羽的血量，每2秒增加1层力量，buff持续6秒，6秒内如若单个解锁羽受到超过20点生命值，则全体单个解锁羽一共扣除40点生命值
+        {"被奴役者", typeof(EnslavedDwarfsAttackBuff) },
+        {"麻木", typeof(EnslavedDwarfsEffectBuff) },//在有羽解锁的条件下，立即回复总血量的5%，提高总血量5%的血量上限，玩家和敌人通用
+        {"矮人短剑", typeof(DwarfsAttackBuff) },
+        {"合力", typeof(DwarfsEffectBuff) },
+        {"利爪", typeof(TheMisunderstoodWerewolfBuff) },
+        {"伤痕", typeof(Trauma) },//在有羽解锁的条件下，受到不低于1点伤害后扣除1滴血，并有1/3的概率解除该buff，玩家和敌人通用
+        {"惊惶", typeof(Terrified) },//在有羽解锁的条件下，立即受到1点伤害，并回复1滴血，玩家和敌人通用
+        {"忧郁",typeof(Depressed) }//使玩家的获得卡牌的时间间隔增加1秒，使敌人使用攻击牌的间隔增加1秒，持续12秒
     };
 
     /*
@@ -51,7 +63,6 @@ public class BuffContainer
         }
         else 
         { 
-            Debug.LogError("There's no such a buff called "+buffName);
             return null; 
         }
     }

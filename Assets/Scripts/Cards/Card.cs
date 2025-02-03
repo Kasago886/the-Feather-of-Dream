@@ -1,10 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Timers;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+public enum targetMethod
+{
+    置入物体Transform,
+    填入Vector3
+}
 [RequireComponent(typeof(EventTrigger))]
 [RequireComponent(typeof(GlowControl))]
 public class Card : MonoBehaviour
@@ -16,9 +22,10 @@ public class Card : MonoBehaviour
     public string backGroundStory;
 
     //InspectorChoice
-    public bool b0, b1, b2, b3, b4;
+    public bool b0, b1, b2, b3, b4, b5;
     //使用对象
     public bool playerUse;
+    public Material speacialMaterial;
     public bool enemyUse;
     //作用对象
     public bool effortOnPlayer;//作用于玩家
@@ -55,6 +62,13 @@ public class Card : MonoBehaviour
     public UnityEvent effectsEnemy;//卡牌效果
     public Buff[] buffsEnemy;
     public string[] buffNamesEnemy;
+    //获取对象的方式
+    public bool customMode;
+    public targetMethod pleaseChooseOneMethod;
+    public Transform targetTransform;
+    public Vector3 theNumberOfTargetPosition;
+    public float getObjectDistanceInX;
+    public float getObjectDistanceInY;
     private bool choose, endChoose;
     private List<Collider2D> effortTarget;
     private List<Enemy> finalTarget;
@@ -69,12 +83,16 @@ public class Card : MonoBehaviour
     private List<string> buffCaptions = new List<string>();
     private string enemyName;
     private float timer;
-    private int haveChoose=-1,onlyOne;
+    private int haveChoose = -1, onlyOne,useNumber;
+    private List<Material> oriMaterial;
+    private Dictionary<SpriteRenderer, Material> spMaterial;
+    private Collider2D[] enemiesThatBeenChoose1;
     void Start()
     {
         parent = gameObject.transform.parent;
         effortTarget = new List<Collider2D>();
         finalTarget = new List<Enemy>();
+        oriMaterial = new List<Material>();
         rectTransform = GetComponent<RectTransform>();
         if (number == 0)
         {
@@ -100,10 +118,32 @@ public class Card : MonoBehaviour
             }
         }
         oriPlace = rectTransform.localPosition;
+        spMaterial = new Dictionary<SpriteRenderer, Material>();
     }
     // Update is called once per frame
     void Update()
     {
+        if (effortNumber == finalTarget.Count && finalTarget.Count > 0 && isRandom&& Input.GetMouseButtonDown(0))
+        {
+            endChoose = true;
+        }
+        if (!choose&&!endChoose)
+        {
+            for (int i = 0; i < finalTarget.Count; i++)
+            {
+                finalTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>().material = oriMaterial[i];
+            }
+            finalTarget.Clear();
+            oriMaterial.Clear();
+        }
+        else if (!choose && endChoose)
+        {
+            for (int i = 0; i < finalTarget.Count; i++)
+            {
+                finalTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>().material = oriMaterial[i];
+            }
+            oriMaterial.Clear();
+        }
         ChooseWhenClick();
         BothChooseWhenClick();
         if (shake && Time.time % 2 <= 1)
@@ -120,7 +160,7 @@ public class Card : MonoBehaviour
     /// </param>
     public void EnemyHasEffectOnPlayer(string enemyName)
     {
-        if (ConditionsOfUseCard())
+        if (ConditionsOfUseCard() && enemyUse)
         {
             effects?.Invoke();
             Captions(enemyName + "使用了" + name, false);
@@ -234,6 +274,8 @@ public class Card : MonoBehaviour
                 whatHappenOnDragPlayer?.Invoke();
                 whatHappenOnDragEnemy?.Invoke();
             }
+            ShowEnemy();
+            PlayerCardController.cantUseCard = true;
         }
     }
     /// <summary>
@@ -243,10 +285,17 @@ public class Card : MonoBehaviour
     {
         if (dragOnCharactor)
         {
+            useNumber = 0;
             if (ConditionsOfUseCard())
             {
                 gameObject.transform.SetParent(parent);
                 EffortWhenDragEnd();
+                BothEffortWhenDragEnd();
+                foreach (var s in spMaterial)
+                {
+                    s.Key.material = s.Value;
+                }
+                PlayerCardController.cantUseCard= false;
             }
             else
             {
@@ -275,8 +324,25 @@ public class Card : MonoBehaviour
         if (effortOnEnmey)
         {
             List<int> enemiesWhoHaveBeenEfforted = new List<int>();
-            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            Collider2D[] enemiesThatBeenChoose = null;
+            if (!customMode)
+            {
+                enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            }
+            else
+            {
+                if (targetTransform != null)
+                {
+                    enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                        new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+                if (theNumberOfTargetPosition != null)
+                {
+                    enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                        new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+            }
             Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
             List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
             for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
@@ -362,8 +428,25 @@ public class Card : MonoBehaviour
         if (effortOnEnmey)
         {
             List<int> enemiesWhoHaveBeenEfforted = new List<int>();
-            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            Collider2D[] enemiesThatBeenChoose = null;
+            if (!customMode)
+            {
+                enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            }
+            else
+            {
+                if (targetTransform != null)
+                {
+                    enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                        new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+                if (theNumberOfTargetPosition != null)
+                {
+                    enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                        new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+            }
             Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
             List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
             for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
@@ -455,13 +538,45 @@ public class Card : MonoBehaviour
 
         if (effortOnPlayer)
         {
-            effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.PlayerLayer)));
+            if (!customMode)
+            {
+                effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                        new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.PlayerLayer)));
+            }
+            else
+            {
+                if (targetTransform != null)
+                {
+                    effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                        new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.PlayerLayer)));
+                }
+                if (theNumberOfTargetPosition != null)
+                {
+                    effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                        new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.PlayerLayer)));
+                }
+            }
         }
         else if (effortOnEnmey)
         {
-            effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer)));
+            if (!customMode)
+            {
+                effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                        new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer)));
+            }
+            else
+            {
+                if (targetTransform != null)
+                {
+                    effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                        new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer)));
+                }
+                if (theNumberOfTargetPosition != null)
+                {
+                    effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                        new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer)));
+                }
+            }
             effortNumber = 1;
             if (effortOnOneEnemy)
             {
@@ -484,7 +599,7 @@ public class Card : MonoBehaviour
     {
         if (!choose)
         {
-            effortTarget.Clear();
+            effortTarget.Clear();         
         }
         if (choose && isRandom)
         {
@@ -542,11 +657,14 @@ public class Card : MonoBehaviour
                         for (int i = 0; i < effortTarget.Count; i++)
                         {
                             Bounds bound = effortTarget[i].bounds;
-                            if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0))&& effortTarget[i].GetComponent<Enemy>()!=null)
+                            if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)) && effortTarget[i].GetComponent<Enemy>() != null)
                             {
                                 b = true;
                                 whatHappenWhenBeChoosen?.Invoke();
                                 finalTarget.Add(effortTarget[i].GetComponent<Enemy>());
+                                SpriteRenderer spriteRenderer = effortTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>();
+                                oriMaterial.Add(spriteRenderer.material);
+                                spriteRenderer.material = speacialMaterial;
                                 effortTarget.RemoveAt(i);
                                 break;
                             }
@@ -565,7 +683,7 @@ public class Card : MonoBehaviour
             effects?.Invoke();
             for (int i = 0; i < finalTarget.Count; i++)
             {
-
+                finalTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>().material = oriMaterial[i];
                 for (int j = 0; j < buffs.Length; j++)
                 {
                     finalTarget[i].AddBuff(buffs[j]);
@@ -575,6 +693,7 @@ public class Card : MonoBehaviour
                     finalTarget[i].AddBuff(buffNames[j]);
                 }
             }
+            oriMaterial.Clear();
             Captions(name, true);
             Destroy(gameObject);
         }
@@ -594,8 +713,25 @@ public class Card : MonoBehaviour
                 player.AddBuff(buffNamesPlayer[j]);
             }
             List<int> enemiesWhoHaveBeenEfforted = new List<int>();
-            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            Collider2D[] enemiesThatBeenChoose = null;
+            if (!customMode)
+            {
+                enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            }
+            else
+            {
+                if (targetTransform != null)
+                {
+                    enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                        new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+                if (theNumberOfTargetPosition != null)
+                {
+                    enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                        new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+            }
             Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
             List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
             for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
@@ -610,6 +746,7 @@ public class Card : MonoBehaviour
             {
                 theNumberOfEffortedEnemies = enemiesWhoInCameralist.Count;
             }
+
             if (effortOnMoreEnemies)
             {
                 for (int i = 0; i < theNumberOfEffortedEnemies; i++)
@@ -660,23 +797,27 @@ public class Card : MonoBehaviour
     private void BothEffortWhenDragEnd()
     {
         if (effortOnPlayerAndEnemy)
-        {
-            if (Vector2.Distance(Camera.main.ScreenToWorldPoint(transform.position), GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position) < minDistance)
+        {                         
+            List<int> enemiesWhoHaveBeenEfforted = new List<int>();
+            Collider2D[] enemiesThatBeenChoose = null;
+            if (!customMode)
             {
-                effectsPlayer?.Invoke();
-                Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
-                for (int i = 0; i < buffsPlayer.Length; i++)
+                enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            }
+            else
+            {
+                if (targetTransform != null)
                 {
-                    player.AddBuff(buffsPlayer[i]);
+                    enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                        new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
                 }
-                for (int j = 0; j < buffNamesPlayer.Length; j++)
+                if (theNumberOfTargetPosition != null)
                 {
-                    player.AddBuff(buffNamesPlayer[j]);
+                    enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                        new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
                 }
             }
-            List<int> enemiesWhoHaveBeenEfforted = new List<int>();
-            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
             Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
             List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
             for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
@@ -757,6 +898,16 @@ public class Card : MonoBehaviour
                     }
                     effectsEnemy?.Invoke();
                 }
+                effectsPlayer?.Invoke();
+                Player player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
+                for (int i = 0; i < buffsPlayer.Length; i++)
+                {
+                    player.AddBuff(buffsPlayer[i]);
+                }
+                for (int j = 0; j < buffNamesPlayer.Length; j++)
+                {
+                    player.AddBuff(buffNamesPlayer[j]);
+                }
                 Captions(name, true);
                 Destroy(gameObject);
             }
@@ -767,10 +918,24 @@ public class Card : MonoBehaviour
     {
         if (effortOnPlayerAndEnemy)
         {
-            effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.PlayerLayer)));
-            effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer)));
+            if (!customMode)
+            {
+                effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                        new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer)));
+            }
+            else
+            {
+                if (targetTransform != null)
+                {
+                    effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                        new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer)));
+                }
+                if (theNumberOfTargetPosition != null)
+                {
+                    effortTarget.AddRange(Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                        new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer)));
+                }
+            }
             effortNumber = 1;
             if (effortOnOneEnemy)
             {
@@ -809,7 +974,7 @@ public class Card : MonoBehaviour
                     {
                         Captions("请选择敌人，已选择" + finalTarget.Count.ToString() + "/" + effortNumber.ToString(), true);
                     }
-                    haveChoose=finalTarget.Count;
+                    haveChoose = finalTarget.Count;
                 }
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -819,13 +984,16 @@ public class Card : MonoBehaviour
                         for (int i = 0; i < effortTarget.Count; i++)
                         {
                             Bounds bound = effortTarget[i].bounds;
-                            if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)))
+                            if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)) && effortTarget[i].GetComponent<Enemy>() != null)
                             {
                                 if (effortTarget[i].GetComponent<Enemy>() != null)
                                 {
                                     b = true;
                                     whatHappenWhenBeChoosen?.Invoke();
                                     finalTarget.Add(effortTarget[i].GetComponent<Enemy>());
+                                    SpriteRenderer spriteRenderer = effortTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>();
+                                    oriMaterial.Add(spriteRenderer.material);
+                                    spriteRenderer.material = speacialMaterial;
                                     effortTarget.RemoveAt(i);
                                 }
                                 break;
@@ -845,7 +1013,7 @@ public class Card : MonoBehaviour
             effectsEnemy?.Invoke();
             for (int i = 0; i < finalTarget.Count; i++)
             {
-
+                finalTarget[i].gameObject.GetComponentInChildren<SpriteRenderer>().material = oriMaterial[i];
                 for (int j = 0; j < buffsEnemy.Length; j++)
                 {
                     finalTarget[i].AddBuff(buffsEnemy[j]);
@@ -866,6 +1034,7 @@ public class Card : MonoBehaviour
                 player.AddBuff(buffNamesPlayer[j]);
             }
             Captions("已默认选择玩家", true);
+            oriMaterial.Clear();
             Captions(name, true);
             Destroy(gameObject);
         }
@@ -905,8 +1074,25 @@ public class Card : MonoBehaviour
         if (effortOnMoreEnemies && effortOnEnmey)
         {
             List<int> enemiesWhoHaveBeenEfforted = new List<int>();
-            Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            Collider2D[] enemiesThatBeenChoose = null;
+            if (!customMode)
+            {
+                enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            }
+            else
+            {
+                if (targetTransform != null)
+                {
+                    enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                        new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+                if (theNumberOfTargetPosition != null)
+                {
+                    enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                        new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+            }
             Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
             List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
             for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
@@ -983,8 +1169,25 @@ public class Card : MonoBehaviour
             if (effortOnMoreEnemies)
             {
                 List<int> enemiesWhoHaveBeenEfforted = new List<int>();
-                Collider2D[] enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
-                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+                Collider2D[] enemiesThatBeenChoose = null;
+                if (!customMode)
+                {
+                    enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                        new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+                else
+                {
+                    if (targetTransform != null)
+                    {
+                        enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                            new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                    }
+                    if (theNumberOfTargetPosition != null)
+                    {
+                        enemiesThatBeenChoose = Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                            new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                    }
+                }
                 Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
                 List<GameObject> enemiesWhoInCameralist = new List<GameObject>();
                 for (int i = 0; i < enemiesThatBeenChoose.Length; i++)
@@ -1034,30 +1237,95 @@ public class Card : MonoBehaviour
             }
         }
     }
+    private void ShowEnemy()
+    {
+        if (useNumber == 0)
+        {
+            useNumber++;
+            if (!customMode)
+            {
+                enemiesThatBeenChoose1 = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                    new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+            }
+            else
+            {
+                if (targetTransform != null)
+                {
+                    enemiesThatBeenChoose1 = Physics2D.OverlapAreaAll(new Vector2(targetTransform.position.x + getObjectDistanceInX / 2, targetTransform.position.y + getObjectDistanceInY / 2),
+                        new Vector2(targetTransform.position.x - getObjectDistanceInX / 2, targetTransform.position.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+                if (theNumberOfTargetPosition != null)
+                {
+                    enemiesThatBeenChoose1 = Physics2D.OverlapAreaAll(new Vector2(theNumberOfTargetPosition.x + getObjectDistanceInX / 2, theNumberOfTargetPosition.y + getObjectDistanceInY / 2),
+                        new Vector2(theNumberOfTargetPosition.x - getObjectDistanceInX / 2, theNumberOfTargetPosition.y - getObjectDistanceInY / 2), LayerMask.GetMask(Consts.EnemyLayer));
+                }
+            }
+        }
+        List<Transform> targetsTransform = new List<Transform>();
+        for (int i = 0;i<enemiesThatBeenChoose1.Length;i++)
+        {
+            if(Vector2.Distance(enemiesThatBeenChoose1[i].transform.position, Camera.main.ScreenToWorldPoint(transform.position)) < minDistance)
+            {
+                targetsTransform.Add(enemiesThatBeenChoose1[i].transform);
+            }
+        }
+        if(targetsTransform.Count > 1)
+        {
+            for (int i = 0; i < targetsTransform.Count-1; i++)
+            {
+                if (Vector2.Distance(targetsTransform[i].transform.position, Camera.main.ScreenToWorldPoint(transform.position)) < Vector2.Distance(targetsTransform[i + 1].transform.position, Camera.main.ScreenToWorldPoint(transform.position))) 
+                { targetsTransform.RemoveAt(i + 1); } 
+                else 
+                { targetsTransform.RemoveAt(i); }
+                i--;
+            }
+        }
+        if (targetsTransform.Count > 0)
+        {
+            SpriteRenderer spriteRenderer = targetsTransform[0].GetComponentInChildren<SpriteRenderer>();
+            if (spriteRenderer != null && spriteRenderer.material != speacialMaterial)
+            {
+                if (!spMaterial.ContainsKey(spriteRenderer))
+                {
+                    spMaterial.Add(spriteRenderer, spriteRenderer.material);
+                }
+                spriteRenderer.material = speacialMaterial;
+            }
+        }
+        else
+        {
+            foreach (var s in spMaterial)
+            {
+                s.Key.material=s.Value;
+            }
+        }
+    }
     private void Captions(string text, bool isPlayer)
     {
-        GameObject textObject = new GameObject("playerText", typeof(Text));
-        //GameObject imageObject = new GameObject("playerTextBack", typeof(Image));
-        //textObject.transform.SetParent(imageObject.transform);
-        //imageObject.transform.position=GameObject.Find("textScrollContent").transform.position;
-        //RectTransform rectTransform1 = imageObject.GetComponent<RectTransform>();
+        //GameObject captions = new GameObject("Captions", typeof(RectTransform), typeof(DynamicTextBackground));
+        GameObject textObject = new GameObject("Text", typeof(Text));
+        //GameObject backGroud = new GameObject("Background", typeof(Image));
+        //RectTransform rectTransform1 = captions.GetComponent<RectTransform>();
         RectTransform rectTransform2 = textObject.GetComponent<RectTransform>();
+        //RectTransform rectTransform3= backGroud.GetComponent<RectTransform>();
+        //DynamicTextBackground dynamicTextBackground=captions.GetComponent<DynamicTextBackground>();
+        //dynamicTextBackground.textComponent=textObject.GetComponent<Text>();
+        //dynamicTextBackground.backgroundImage=backGroud.GetComponent<Image>();
         Text text1 = textObject.GetComponent<Text>();
-        //Image image = imageObject.GetComponent<Image>();
         rectTransform2.SetParent(GameObject.Find("textScrollContent").GetComponent<RectTransform>());
+        //rectTransform3.SetParent(rectTransform1);
+        //rectTransform2.SetParent(rectTransform1);
         if (isPlayer)
         {
             text1.color = Color.blue;
-            //image.color = new Color(89f / 255f, 249f / 255f, 212f / 255f);
         }
         else
         {
             text1.color = Color.red;
-            //image.color = new Color(89f / 255f, 249f / 255f, 212f / 255f);
         }
         text1.text = text;
         Font defaultFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        if (defaultFont != null) 
+        if (defaultFont != null)
         {
             text1.font = defaultFont;
         }
