@@ -48,12 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnemy: 1
   immediateAttack: 1
-  damage: 0
+  damage: 10
   attackType: 1
-  attackCenter: {x: 4, y: -1}
+  attackCenter: {x: 4, y: 0}
   attackRegion: {x: 10, y: 4}
   bullet: {fileID: 53726181187038591, guid: 4ad705fb0c4685342a862d0d807f2f21, type: 3}
-  isAiming: 0
+  isAiming: 1
   whatHappenWhenAttack:
     m_PersistentCalls:
       m_Calls:

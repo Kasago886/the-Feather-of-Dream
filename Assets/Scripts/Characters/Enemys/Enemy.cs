@@ -41,7 +41,7 @@ public class Enemy : Character
     public float runSpeed;
     public float jumpSpeed;
     public float attackCooldown;
-    protected float attackCooldownTimer = 0;
+    [HideInInspector] public float attackCooldownTimer = 0;
 
     public EnemySearchType searchType;
     public bool wallDetect;
