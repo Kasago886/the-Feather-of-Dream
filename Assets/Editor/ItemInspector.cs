@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Events;
+using Unity.VisualScripting;
 
 //CustomEditor用于关联要自定义的脚本
 [CustomEditor(typeof(Item))]
@@ -11,15 +12,20 @@ public class ItemInspector : Editor
     Item item;
     int itemType;
 
+    SerializedProperty dreamizedFeather;
+
     private void OnEnable()
     {
         //获取当前要自定义Inspector的对象
         item = (Item)target;
+
+        dreamizedFeather = serializedObject.FindProperty("dreamizedFeather");
     }
 
     //自定义Inspector面板
     public override void OnInspectorGUI()
     {
+        serializedObject.Update();
         Undo.RecordObject(item,"Change Item");
 
         //垂直方向布局
@@ -43,6 +49,8 @@ public class ItemInspector : Editor
             if (item.isDreamizable)
             {
                 item.dreamizeCost = EditorGUILayout.IntField("梦化消耗", item.dreamizeCost);
+
+                EditorGUILayout.PropertyField(dreamizedFeather, new UnityEngine.GUIContent("梦羽"));
             }
         }
 
@@ -51,7 +59,11 @@ public class ItemInspector : Editor
 
         EditorGUILayout.EndVertical();
 
-        EditorUtility.SetDirty(item);
+        if (GUI.changed)
+        {
+            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(item);
+        }
 
     }
 }

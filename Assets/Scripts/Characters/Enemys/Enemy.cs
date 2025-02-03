@@ -56,6 +56,8 @@ public class Enemy : Character
     public List<EnemyCardLine> attackCardLineList = new();
     public List<EnemyCardLine> effectCardLineList = new();
 
+    public DropItem[] dropItems;
+
     [HideInInspector] public Player player;
 
     //states
@@ -372,6 +374,23 @@ public class Enemy : Character
                     ecwt.timer = ecwt.cooldown;
                     cardLine.timer = cardLine.cooldown;
                 }
+            }
+        }
+    }
+
+    /// <summary>
+    /// À¿ÕˆµÙ¬‰ŒÔ∆∑
+    /// </summary>
+    public override void OnDeath()
+    {
+        base.OnDeath();
+
+        foreach(DropItem dropItem in dropItems)
+        {
+            if (dropItem != null)
+            {
+                GameObject instance = Instantiate(dropItem.gameObject);
+                instance.transform.position = transform.position;
             }
         }
     }

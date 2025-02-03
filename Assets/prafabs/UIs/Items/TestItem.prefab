@@ -55,6 +55,7 @@ MonoBehaviour:
   type: 2
   isDreamizable: 0
   dreamizeCost: 0
+  dreamizedFeather: {fileID: 0}
   buffName: 
   featherHealth: 0
   isEquiped: 0

@@ -115,7 +115,7 @@ MonoBehaviour:
   jumpSpeed: 14
   sprintSpeed: 50
   sprintDuration: 0.2
-  sprintCooldown: 0.5
+  sprintCooldown: 0.3
   bottomCenterX: -0.125
   bottomCenterY: -2.5
   bottomSize: {x: 2.1, y: 0.2}

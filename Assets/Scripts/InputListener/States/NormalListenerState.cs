@@ -29,6 +29,7 @@ public class NormalListenerState : IListenerState
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             listener.equipmentPanelManager.SwitchShow();
+            listener.playerController.StateMove(0);
 
             listener.StateTransition(InputListenerState.equipment);
         }

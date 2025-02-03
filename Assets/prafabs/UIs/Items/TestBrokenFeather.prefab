@@ -55,6 +55,7 @@ MonoBehaviour:
   type: 1
   isDreamizable: 1
   dreamizeCost: 1
+  dreamizedFeather: {fileID: 1240171927397317818, guid: 3f752d1b02561264a85719512c565f18, type: 3}
   buffName: "\u6D4B\u8BD5\u88C5\u5907"
   featherHealth: 0
   isEquiped: 0

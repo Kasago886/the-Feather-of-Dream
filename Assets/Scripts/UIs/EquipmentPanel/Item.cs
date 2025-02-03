@@ -21,6 +21,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 
     public bool isDreamizable;
     public int dreamizeCost;
+    public Item dreamizedFeather;
 
     public string buffName;
     public float featherHealth;
