@@ -37,7 +37,7 @@ public class BuffScroll : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log("player.buffList.Count=" + player.buffList.Count);
+        //Debug.Log("player.buffList.Count=" + player.buffList.Count);
         AddGameObject();
         if (Input.GetMouseButtonDown(0))
         {
@@ -65,7 +65,7 @@ public class BuffScroll : MonoBehaviour
         }
         for (int i = 0;i < list.Count;i++)
         {
-            Debug.Log(list[i] + "还存在");
+            //Debug.Log(list[i] + "还存在");
             buffNameDict.Remove(list[i]);
         }
         foreach (var item in newDict)

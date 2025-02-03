@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -110,63 +111,10 @@ public class EquipmentPanelManager : MonoBehaviour
         }
 
         //items
-        //清空
-        count = itemContent.childCount;
-        for (int i = 0; i < count; i++)
-        {
-            Destroy(itemContent.GetChild(i).gameObject);
-        }
-        count = 0;
-        //预留足够空位置(30个)
-        int addition = 30;
-        for (int i = 0; addition > 0 || count < archive.items.items.Length; i++)
-        {
-            //添加物品
-            GameObject parent = Instantiate(itemPlaceObj, itemContent, false);
-            ItemPlace ip = parent.GetComponent<ItemPlace>();
-
-            //防止超出索引
-            if (count >= archive.items.items.Length)
-            {
-                addition--;
-                continue;
-            }
-
-            //对应位置
-            if (i == archive.items.items[count].position)
-            {
-                GenerateSingleItem(ip, archive.items.items[count]);
-
-                count++;
-            }
-            else
-            {
-                addition--;
-            }
-        }
+        GenerateItems(archive);
 
         //encyclopedia
-        //清空
-        count = encyclopediaContent.childCount;
-        for (int i = 0; i < count; i++)
-        {
-            Destroy(encyclopediaContent.GetChild(i).gameObject);
-        }
-        count = 0;
-        for (int i = 0; count < archive.encyclopedia.items.Length; i++)
-        {
-            //添加物品
-            GameObject parent = Instantiate(itemPlaceObj, encyclopediaContent, false);
-            ItemPlace ip = parent.GetComponent<ItemPlace>();
-
-            //对应位置
-            if (i == archive.encyclopedia.items[count].position)
-            {
-                GenerateSingleItem(ip, archive.encyclopedia.items[count]);
-
-                count++;
-            }
-        }
+        GenerateEncyclopedia(archive);
 
         //隐藏按钮
         equipButton.SetActive(false);
@@ -174,6 +122,67 @@ public class EquipmentPanelManager : MonoBehaviour
         unequipButton.SetActive(false);
     }
 
+    /// <summary>
+    /// 添加物品
+    /// </summary>
+    /// <param name="item"></param>
+    public void AddItem(Item item)
+    {
+        //找到空位置
+        ItemInfo newinfo = item.GetItemInfo();
+        List<int> positions = new List<int>();
+        foreach(ItemInfo itemInfo in archiveManager.currentArchive.items.items)
+        {
+            positions.Add(itemInfo.position);
+        }
+        int newposition = 0;
+        while (positions.Contains(newposition))
+        {
+            newposition++;
+        }
+        newinfo.position = newposition;
+
+        //添加新物品
+        List<ItemInfo> itemInfos = archiveManager.currentArchive.items.items.ToList();
+        itemInfos.Add(newinfo);
+        archiveManager.currentArchive.items.items = itemInfos.ToArray();
+
+        //刷新
+        GenerateItems(archiveManager.currentArchive);
+    }
+
+    /// <summary>
+    /// 添加图鉴
+    /// </summary>
+    /// <param name="item"></param>
+    public void AddEncyclopedia(Item item)
+    {
+        //找到空位置
+        ItemInfo newinfo = item.GetItemInfo();
+        List<int> positions = new List<int>();
+        foreach (ItemInfo itemInfo in archiveManager.currentArchive.encyclopedia.items)
+        {
+            positions.Add(itemInfo.position);
+        }
+        int newposition = 0;
+        while (positions.Contains(newposition))
+        {
+            newposition++;
+        }
+        newinfo.position = newposition;
+
+        //添加新物品
+        List<ItemInfo> itemInfos = archiveManager.currentArchive.encyclopedia.items.ToList();
+        itemInfos.Add(newinfo);
+        archiveManager.currentArchive.items.items = itemInfos.ToArray();
+
+        //刷新
+        GenerateEncyclopedia(archiveManager.currentArchive);
+    }
+
+    /// <summary>
+    /// 初始化玩家信息
+    /// </summary>
     public void SetUpPlayerInfo()
     {
         //读取存档
@@ -208,6 +217,77 @@ public class EquipmentPanelManager : MonoBehaviour
         instance.GetComponent<Item>().Init(item);
         //绑定到ItemPlace
         ip.AddItem(instance.GetComponent<Item>(), null);
+    }
+
+    /// <summary>
+    /// items生成
+    /// </summary>
+    /// <param name="archive"></param>
+    void GenerateItems(Archive archive)
+    {
+        //清空
+        int count = itemContent.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            Destroy(itemContent.GetChild(i).gameObject);
+        }
+        count = 0;
+        //预留足够空位置(30个)
+        int addition = 30;
+        for (int i = 0; addition > 0 || count < archive.items.items.Length; i++)
+        {
+            //添加物品
+            GameObject parent = Instantiate(itemPlaceObj, itemContent, false);
+            ItemPlace ip = parent.GetComponent<ItemPlace>();
+
+            //防止超出索引
+            if (count >= archive.items.items.Length)
+            {
+                addition--;
+                continue;
+            }
+
+            //对应位置
+            if (i == archive.items.items[count].position)
+            {
+                GenerateSingleItem(ip, archive.items.items[count]);
+
+                count++;
+            }
+            else
+            {
+                addition--;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Encyclopedias生成
+    /// </summary>
+    /// <param name="archive"></param>
+    void GenerateEncyclopedia(Archive archive)
+    {
+        //清空
+        int count = encyclopediaContent.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            Destroy(encyclopediaContent.GetChild(i).gameObject);
+        }
+        count = 0;
+        for (int i = 0; count < archive.encyclopedia.items.Length; i++)
+        {
+            //添加物品
+            GameObject parent = Instantiate(itemPlaceObj, encyclopediaContent, false);
+            ItemPlace ip = parent.GetComponent<ItemPlace>();
+
+            //对应位置
+            if (i == archive.encyclopedia.items[count].position)
+            {
+                GenerateSingleItem(ip, archive.encyclopedia.items[count]);
+
+                count++;
+            }
+        }
     }
 
     /// <summary>

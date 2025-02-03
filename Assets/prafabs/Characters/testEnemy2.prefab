@@ -77,29 +77,23 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
   effectAudioSource: {fileID: 0}
+  animator: {fileID: 0}
   enemyName: "test\u9752\u86D9\u738B\u5B50"
   runSpeed: 5
   jumpSpeed: 7
   attackCooldown: 2
+  attackCooldownTimer: 0
   searchType: 0
   wallDetect: 0
-  keepDistanceWhenNotArmed: 0
+  keepDistanceWhenNotArmed: 1
   searchDistance: 20
-  minDistance: 0
+  minDistance: 3
   attackCardUseDistance: 10
-  attackCardCooldown: 6
   effectCardUseDistance: 20
-  effectCardCooldown: 10
-  isSingleAttackCardCooldown: 1
-  isSingleEffectCardCooldown: 0
-  attackCardsWithTimer:
-  - card: {fileID: 1590407948924484016}
-    cooldown: 10
-    timer: 0
-  effectCardsWithTimer: []
-  attackCards:
-  - {fileID: 1590407948924484016}
-  effectCards: []
+  attackCardLineList: []
+  effectCardLineList: []
+  dropItems:
+  - {fileID: 2158636381633551328, guid: 97622c9ee42ad6a46ad55b50c5306f0e, type: 3}
   player: {fileID: 0}
 --- !u!212 &1021564070518008926
 SpriteRenderer:
@@ -395,17 +389,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2700145ae58593a41a19323d57878b57, type: 3}
---- !u!114 &1590407948924484016 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8308702727041960155, guid: 2700145ae58593a41a19323d57878b57, type: 3}
-  m_PrefabInstance: {fileID: 7303768228377801067}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e18d51474219541baa0e293a6ee587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &4487282060014360086 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6564618522710615933, guid: 2700145ae58593a41a19323d57878b57, type: 3}

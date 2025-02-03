@@ -13,6 +13,7 @@ public class EnemyInspector : CharacterInspector
 
     SerializedProperty attackCardLineList;
     SerializedProperty effectCardLineList;
+    SerializedProperty dropItems;
 
     new private void OnEnable()
     {
@@ -23,6 +24,7 @@ public class EnemyInspector : CharacterInspector
 
         attackCardLineList = serializedObject.FindProperty("attackCardLineList");
         effectCardLineList = serializedObject.FindProperty("effectCardLineList");
+        dropItems = serializedObject.FindProperty("dropItems");
     }
 
     //自定义Inspector面板
@@ -76,6 +78,9 @@ public class EnemyInspector : CharacterInspector
         enemy.effectCardUseDistance = EditorGUILayout.FloatField(enemy.effectCardUseDistance);
         EditorGUILayout.PropertyField(effectCardLineList, new UnityEngine.GUIContent("效果卡"), true);
 
+        EditorGUILayout.Space(10);
+
+        EditorGUILayout.PropertyField(dropItems, new UnityEngine.GUIContent("掉落物"), true);
 
         EditorGUILayout.Space(10);
 

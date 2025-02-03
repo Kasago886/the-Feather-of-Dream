@@ -255,6 +255,7 @@ public class CrazyHunterAttackBuff1 : AttackBuff
         base.Init(target, timer, isPermanent);
         this.timer = 1;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunter/CrazyHunterAttackBodyTrap");
+        target.GetComponent<Enemy>().attackCooldownTimer = 0;
        
     }
 }
