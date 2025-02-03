@@ -16,7 +16,7 @@ public class PlayerInteract : MonoBehaviour
             {
                 InteractiveObject interactiveObject = item.Value.GetComponent<InteractiveObject>();
                 interactiveObject.ButtonDetect();
-                Debug.Log(interactiveObject.name);
+                //Debug.Log(interactiveObject.name);
             }
         }
     }
