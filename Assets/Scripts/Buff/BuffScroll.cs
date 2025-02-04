@@ -56,7 +56,7 @@ public class BuffScroll : MonoBehaviour
         List<string> list = new List<string>();
         foreach (var item in buffNameDict)
         {
-            if (newDict.ContainsKey(item.Key))
+            if (!newDict.ContainsKey(item.Key))
             {
                 Destroy(buffDescDict[item.Key].gameObject);
                 buffDescDict.Remove(item.Key);
@@ -74,16 +74,15 @@ public class BuffScroll : MonoBehaviour
             {
                 buffNameDict.Add(item.Key, item.Value);
                 GameObject g = Instantiate(nameToImformation[item.Key].buffPrefab,contentRectTransform);
-                g.GetComponent<BuffImage>().text = nameToImformation[item.Key].description;
+                g.GetComponent<BuffImage>().text = nameToImformation[item.Key].name+"\n"+ nameToImformation[item.Key].description;
                 buffDescDict.Add(item.Key, g.GetComponent<BuffImage>());
                 buffDescDict[item.Key].gameObject.GetComponentInChildren<Text>().text = newDict[item.Key].ToString();
             }
             else
             {
-                buffDescDict[item.Key].text = newDict[item.Key].ToString();
+                buffDescDict[item.Key].gameObject.GetComponentInChildren<Text>().text = newDict[item.Key].ToString();
             }
         }
-
     }
     private Dictionary<string, float> GetBuffNumber()
     {
