@@ -140,6 +140,7 @@ MonoBehaviour:
   runSpeed: 6
   jumpSpeed: 7
   attackCooldown: 1.5
+  attackCooldownTimer: 0
   searchType: 0
   wallDetect: 0
   keepDistanceWhenNotArmed: 1
@@ -157,16 +158,16 @@ MonoBehaviour:
   effectCardLineList:
   - cards:
     - card: {fileID: 398501618887008028}
-      cooldown: 9
+      cooldown: 18
       timer: 0
     - card: {fileID: 2665966837275764178}
-      cooldown: 12
+      cooldown: 32
       timer: 0
     - card: {fileID: 8053221182880331217}
-      cooldown: 15
+      cooldown: 35
       timer: 0
     - card: {fileID: 4091213195421454461}
-      cooldown: 20
+      cooldown: 40
       timer: 0
     cooldown: 0
     timer: 0
@@ -176,6 +177,7 @@ MonoBehaviour:
       timer: 0
     cooldown: 0
     timer: 0
+  dropItems: []
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:
@@ -411,10 +413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3492bdf265607b488723b291ad59e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSkill: 0
-  speed: 0
-  limitR: 0
-  number: 0
 --- !u!1 &8072216105297457717
 GameObject:
   m_ObjectHideFlags: 0

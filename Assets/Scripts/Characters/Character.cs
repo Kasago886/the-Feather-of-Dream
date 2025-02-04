@@ -19,8 +19,12 @@ public class Character : MonoBehaviour
     public float defaultFeatherHealth = 100;
     [Header("韧性")]
     public float tenacity;
+    [HideInInspector]
+    public float oriTenacity;
     [Header("力量")]
     public float strength;
+    [HideInInspector]
+    public float oriStrength;
 
     public bool injuryForceback;
     public float forcebackForce;
@@ -59,6 +63,9 @@ public class Character : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         effectAudioSource = GameObject.Find("EffectSound").GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        //记录初始数值
+        oriStrength = strength;
+        oriTenacity = tenacity;
 
         //初始羽
         if (isDefaultFeather)

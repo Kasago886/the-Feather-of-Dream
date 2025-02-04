@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class TheMisunderstoodWerewolfSkillController : MonoBehaviour
@@ -9,12 +6,12 @@ public class TheMisunderstoodWerewolfSkillController : MonoBehaviour
     public float speed;
     public void UseSkill()
     {
-        if (TheMisunderstoodWerewolfSkill.instance != null)
+        if (GameObject.Find("TheMisunderstoodWerewolf") != null)
         {
-            TheMisunderstoodWerewolfSkill.instance.useSkill = true;
-            TheMisunderstoodWerewolfSkill.instance.limitR = limitR;
-            TheMisunderstoodWerewolfSkill.instance.speed = speed;
-            TheMisunderstoodWerewolfSkill.instance.number = 2;
+            TheMisunderstoodWerewolfSkill.useSkill = true;
+            TheMisunderstoodWerewolfSkill.limitR = limitR;
+            TheMisunderstoodWerewolfSkill.speed = speed;
+            TheMisunderstoodWerewolfSkill.number = 2;
         }
     }
 }

@@ -3,16 +3,15 @@ using UnityEngine;
 public class TheMisunderstoodWerewolfSkill : MonoBehaviour
 {
     private LineRenderer lineRenderer;
-    public static TheMisunderstoodWerewolfSkill instance;
     [HideInInspector]
-    public bool useSkill;
+    public static bool useSkill;
     [HideInInspector]
-    public float speed;
+    public static float speed;
     [HideInInspector]
-    public float limitR;
+    public static float limitR;
     private float r;
     [HideInInspector]
-    public int number;
+    public static int number;
     private float timer;
     private Player player;
     void Start()
@@ -32,6 +31,7 @@ public class TheMisunderstoodWerewolfSkill : MonoBehaviour
             timer += Time.deltaTime;
             lineRenderer.enabled = true;
             r += speed*Time.deltaTime;
+            lineRenderer.positionCount = 360;
             for (int i = 0; i < 360; i++)
             {
                 float x = transform.position.x + r * Mathf.Cos(i * Mathf.PI / 180f);

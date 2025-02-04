@@ -36,7 +36,9 @@ public class BuffContainer
         {"利爪", typeof(TheMisunderstoodWerewolfBuff) },
         {"伤痕", typeof(Trauma) },//在有羽解锁的条件下，受到不低于1点伤害后扣除1滴血，并有1/3的概率解除该buff，玩家和敌人通用
         {"惊惶", typeof(Terrified) },//在有羽解锁的条件下，立即受到1点伤害，并回复1滴血，玩家和敌人通用
-        {"忧郁",typeof(Depressed) }//使玩家的获得卡牌的时间间隔增加1秒，使敌人使用攻击牌的间隔增加1秒，持续12秒
+        {"忧郁",typeof(Depressed) },//使玩家的获得卡牌的时间间隔增加1秒，使敌人使用攻击牌的间隔增加1秒，持续12秒
+        {"崩溃",typeof(Crash) },//使玩家或敌人的力量和韧性降低初始最初力量和韧性的10%，持续13秒
+        {"凡庸",typeof(Mediocre) }//使玩家减少一个卡槽，使敌人的效果牌使用时间间隔+3s，持续1分钟
     };
 
     /*

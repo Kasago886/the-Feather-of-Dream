@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 public class AttackBuffDict
 {
     public string buffName;
@@ -15,30 +16,37 @@ public class AttackBuffDict
 public class TheMisunderstoodWerewolfAttackBody : MonoBehaviour
 {
     public static List<AttackBuffDict> next = new List<AttackBuffDict>();
-    private AttackBody attackBody;
     private Player player;
     void Start()
     { 
-        attackBody = GetComponentInParent<AttackBody>();
         player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
     }
     public void AddBuff()
     {
-        Debug.Log("AddBuff"+next.Count);
         Invoke("AddBuff1", 0.1f);
     }
     private void AddBuff1()
     {
-        foreach (var item in next)
+        if (player != null)
         {
-            for (int i = 0; i < item.next[0]; i++)
+            foreach (var item in next)
             {
-                player.AddBuff(item.buffName);
+                if (item.next.Count > 0)
+                {
+                    for (int i = 0; i < item.next[0]; i++)
+                    {
+                        player.AddBuff(item.buffName);
+                    }
+                    item.next.RemoveAt(0);
+                }             
             }
-            item.next.Remove(0);
-            if (item.next.Count == 0)
+            for (int i = 0;i < next.Count;i++)
             {
-                next.Remove(item);
+                if (next[i].next.Count == 0)
+                {
+                    next.RemoveAt(i);
+                    i--;
+                }              
             }
         }
     }

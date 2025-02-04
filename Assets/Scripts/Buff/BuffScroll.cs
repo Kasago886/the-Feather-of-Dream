@@ -37,18 +37,7 @@ public class BuffScroll : MonoBehaviour
     }
     void Update()
     {
-        //Debug.Log("player.buffList.Count=" + player.buffList.Count);
         AddGameObject();
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Add…À∫€");
-            player.AddBuff("…À∫€");
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            player.AddBuff("∞Œ”10s");
-            player.unlockedFeathers[0].health-=2;
-        }
     }
     private void AddGameObject()
     {

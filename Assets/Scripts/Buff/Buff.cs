@@ -823,4 +823,119 @@ public class Depressed : EffectBuff
         base.OnExit();
     }
 }
+public class Crash : EffectBuff
+{
+    private Player player;
+    private Enemy enemy;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            player = target.GetComponent<Player>();
+        }
+        if (target.GetComponent<Enemy>() != null)
+        {
+            enemy = target.GetComponent<Enemy>();
+        }
+        this.timer = 13;
+    }
+
+    public override void OnEnter()
+    {
+        if (player != null)
+        {
+            player.strength -= player.oriStrength / 10;
+            player.tenacity -= player.oriTenacity / 10;
+        }
+        if (enemy != null && enemy.unlockedFeathers.Count > 0)
+        {
+            enemy.strength -= enemy.oriStrength / 10;
+            enemy.tenacity -= enemy.oriTenacity / 10;
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (player != null)
+        {
+            player.strength += player.oriStrength / 10;
+            player.tenacity += player.oriTenacity / 10;
+        }
+        if (enemy != null && enemy.unlockedFeathers.Count > 0)
+        {
+            enemy.strength += enemy.oriStrength / 10;
+            enemy.tenacity += enemy.oriTenacity / 10;
+        }
+        base.OnExit();
+    }
+}
+public class Mediocre : EffectBuff
+{
+    private PlayerCardController playerCardController;
+    private Enemy enemy;
+    private Color baseColor;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            playerCardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
+        }
+        if (target.GetComponent<Enemy>() != null)
+        {
+            enemy = target.GetComponent<Enemy>();
+        }
+        this.timer = 60;
+    }
+
+    public override void OnEnter()
+    {
+        if (playerCardController != null)
+        {
+            playerCardController.positionNumber--;
+        }
+        if (enemy != null)
+        {
+            foreach (EnemyCardLine line in enemy.effectCardLineList)
+            {
+                foreach (EnemyCardWithTimer ectw in line.cards)
+                {
+                    ectw.timer += 3;
+                }
+            }
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (playerCardController != null)
+        {
+            playerCardController.positionNumber++;
+        }
+        if (enemy != null)
+        {
+            foreach (EnemyCardLine line in enemy.effectCardLineList)
+            {
+                foreach (EnemyCardWithTimer ectw in line.cards)
+                {
+                    ectw.timer -= 3;
+                }
+            }
+        }
+        base.OnExit();
+    }
+}
 #endregion
