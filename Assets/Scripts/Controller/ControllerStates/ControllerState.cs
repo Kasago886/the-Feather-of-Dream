@@ -13,9 +13,11 @@ public class ControllerState
         controller.OnMove(horizontal);
     }
 
-    public virtual void OnJump()
+    public virtual void OnJump(bool isNoGroundJump = false)
     {
-        controller.OnJump();
+
+        //Debug.Log("isNoGroundJump:" + isNoGroundJump);
+        controller.OnJump(isNoGroundJump);
     }
 
     public virtual void OnSprint()

@@ -16,7 +16,7 @@ public class ControllerDeadState : ControllerState
         }
     }
 
-    public override void OnJump()
+    public override void OnJump(bool isNoGroundJump = false)
     {
     }
 

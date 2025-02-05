@@ -12,7 +12,6 @@ public enum ControllerStateType
 
 [AddComponentMenu("Controllers/PlayerController")]
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
 {
     //移动
@@ -51,7 +50,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         player = GetComponent<Player>();
 
         bottomCenterGlobal = transform.position + new Vector3(bottomCenterX, bottomCenterY);
@@ -166,6 +165,8 @@ public class PlayerController : MonoBehaviour
         {
             spriteRenderer.flipX = true;
         }
+
+        player.animator.SetFloat(Consts.SpeedAnimatorArgument,Mathf.Abs(horizontal));
     }
 
     public void StateMove(float horizontal)
@@ -176,14 +177,15 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 跳跃
     /// </summary>
-    public void OnJump()
+    public void OnJump(bool isNoGroundJump = false)
     {
-        //Debug.Log("OnJump");
+        //Debug.Log("isNoGroundJump:" + isNoGroundJump);
 
         //检测是否踩在地面上
         bottomCenterGlobal = transform.position + new Vector3(bottomCenterX,bottomCenterY);
         Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal,bottomSize,0,LayerMask.GetMask(Consts.WallLayer));
-        if (hit.Length > 0)
+        //Debug.Log(hit);
+        if (hit.Length > 0 || isNoGroundJump)
         {
             //Debug.Log(hit[0]);
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
@@ -192,9 +194,10 @@ public class PlayerController : MonoBehaviour
             isOnSlope = false;
         }
     }
-    public void StateJump()
+    public void StateJump(bool isNoGroundJump = false)
     {
-        stateDict[currentState].OnJump();
+        //Debug.Log("isNoGroundJump:" + isNoGroundJump);
+        stateDict[currentState].OnJump(isNoGroundJump);
     }
 
     /// <summary>

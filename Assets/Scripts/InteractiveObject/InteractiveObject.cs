@@ -37,6 +37,7 @@ public class InteractiveObject : MonoBehaviour
     [Header("按住持续触发")]
     public bool isKeepPush;
     [Tooltip("提示按键的预制体")]
+    public bool isNoticer = true;
     public GameObject noticer;
 
     private float distance;
@@ -156,18 +157,27 @@ public class InteractiveObject : MonoBehaviour
     /// </summary>
     public void ShowNoticer()
     {
-        noticer.SetActive(true);
+        if (isNoticer)
+        {
+            noticer.SetActive(true);
+        }
     }
     public void HideNoticer()
     {
-        noticer.SetActive(false);
+        if (isNoticer)
+        {
+            noticer.SetActive(false);
+        }
     }
     public void SetNoticer()
     {
-        GameObject instance = Instantiate(noticer);
-        instance.GetComponent<Noticer>().target = gameObject;
-        instance.GetComponentInChildren<Text>().text = nameOfKey.ToUpper();
-        noticer = instance;
+        if (isNoticer)
+        {
+            GameObject instance = Instantiate(noticer);
+            instance.GetComponent<Noticer>().target = gameObject;
+            instance.GetComponentInChildren<Text>().text = nameOfKey.ToUpper();
+            noticer = instance;
+        }
     }
 
     /// <summary>
