@@ -71,4 +71,6 @@ public struct LevelInfo
 {
     public int level;
     public string title;
+
+    public int archivePoint;
 }

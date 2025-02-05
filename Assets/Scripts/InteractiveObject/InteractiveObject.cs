@@ -138,7 +138,7 @@ public class InteractiveObject : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (keyTrigger && !mouseTrigger && mode2)
+        if (keyTrigger && !mouseTrigger && mode2 && !noticer.IsDestroyed())
         {
             PlayerInteract.trigger.Remove(id);
             HideNoticer() ;

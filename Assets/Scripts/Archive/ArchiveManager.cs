@@ -6,12 +6,14 @@ using System;
 
 public class ArchiveManager : MonoBehaviour
 {
-    public int level = -1;
     public string title = "";
+
+    public List<Transform> archivePointers = new();
 
     [HideInInspector] public Archive currentArchive = null;
 
     EquipmentPanelManager equipmentPanelManager = null;
+    Player player;
 
     static string path = Application.dataPath + "/Archives";
     static string archiveScreenShotPath = Application.dataPath + "/Archives/ArchiveScreenShot";
@@ -19,6 +21,7 @@ public class ArchiveManager : MonoBehaviour
     public void Awake()
     {
         equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
+        player = FindAnyObjectByType<Player>();
 
         //创建路径
         createDictory(path);
@@ -37,13 +40,17 @@ public class ArchiveManager : MonoBehaviour
         Debug.Log("Level Index:"+currentArchive.index);
 
         //保存当前关卡信息
-        if (level != -1)
-        {
-            currentArchive.levelInfo.level = level;
-        }
         if (title != "")
         {
             currentArchive.levelInfo.title = title;
+        }
+        SaveCurrentArchive();
+
+        //记录点
+        if (archivePointers.Count > 0 && currentArchive.levelInfo.archivePoint != -1)
+        {
+            Debug.Log(currentArchive.levelInfo.archivePoint);
+            player.transform.position = archivePointers[currentArchive.levelInfo.archivePoint].position;
         }
     }
 
@@ -60,10 +67,13 @@ public class ArchiveManager : MonoBehaviour
     /// 保存当前存档
     /// </summary>
     /// <param name="archiveIndex"></param>
-    public void SaveCurrentArchive(int archiveIndex, Action finishAction = null)
+    public void SaveCurrentArchive(int archiveIndex = -1, Action finishAction = null, int level = -1, int archivePoint = -1)
     {
         //Index
-        currentArchive.index = archiveIndex;
+        if (archiveIndex != -1)
+        {
+            currentArchive.index = archiveIndex;
+        }
         
         //Items
         if (equipmentPanelManager != null)
@@ -80,6 +90,16 @@ public class ArchiveManager : MonoBehaviour
         currentArchive.timeInfo.minute = time.Minute;
         currentArchive.timeInfo.second = time.Second;
 
+        //level
+        if (level != -1)
+        {
+            currentArchive.levelInfo.level = level;
+        }
+        if (archivePoint != -1)
+        {
+            currentArchive.levelInfo.archivePoint = archivePoint;
+        }
+
         //screenShot
         if (currentArchive.levelInfo.level != -1)
         {
@@ -87,7 +107,7 @@ public class ArchiveManager : MonoBehaviour
         }
 
         //save
-        SaveArchive(currentArchive, archiveIndex);
+        SaveArchive(currentArchive, currentArchive.index);
     }
 
     /// <summary>

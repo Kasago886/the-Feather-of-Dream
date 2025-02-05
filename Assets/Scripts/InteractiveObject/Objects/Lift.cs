@@ -7,13 +7,17 @@ public class Lift : InteractiveObject
 {
     [Header("µçÌÝ£º")]
     public bool Lock;
-    public string targetSceneName = "";
-    public int targetSceneIndex;
+    public int targetLevelIndex = 0;
+    public int targetArchivePoint = 0;
+    //public string targetSceneName = "";
+    //public int targetSceneIndex;
     ExitPanelManager exitPanelManager;
+    ArchiveManager archiveManager;
     protected override void Start()
     {
         base.Start();
         exitPanelManager = FindObjectOfType<ExitPanelManager>();
+        archiveManager = FindObjectOfType<ArchiveManager>();
     }
 
     public override void Interact()
@@ -21,6 +25,13 @@ public class Lift : InteractiveObject
         base.Interact();
         if (!Lock)
         {
+            //±£´æ
+            archiveManager.SaveCurrentArchive(level: targetLevelIndex, archivePoint: targetArchivePoint); 
+            
+            //Ìø×ª
+            exitPanelManager.LoadScene("level"+targetLevelIndex);
+
+            /*
             if (targetSceneName != "")
             {
                 exitPanelManager.LoadScene(targetSceneName);
@@ -28,7 +39,7 @@ public class Lift : InteractiveObject
             else if (targetSceneIndex != -1)
             {
                 exitPanelManager.LoadScene(targetSceneIndex);
-            }
+            }*/
         }
     }
 }
