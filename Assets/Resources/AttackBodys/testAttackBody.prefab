@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5725097676368282535}
   - component: {fileID: 9172624031020631597}
   - component: {fileID: 8876494479822081963}
+  - component: {fileID: 9200089803880975187}
   m_Layer: 0
   m_Name: testAttackBody
   m_TagString: Untagged
@@ -54,6 +55,22 @@ MonoBehaviour:
   attackRegion: {x: 4, y: 4}
   bullet: {fileID: 0}
   isAiming: 0
+  whatHappenWhenAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9200089803880975187}
+        m_TargetAssemblyTypeName: AttackBodyBuffAdder, Assembly-CSharp
+        m_MethodName: AddBuff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  whatBeAttack: []
   isleft: 0
   addDamage: 0
 --- !u!212 &9172624031020631597
@@ -129,3 +146,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9200089803880975187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5463133022128078969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0650e82a1ff9204cb96cbe46f682c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  user: 0
+  enemy: {fileID: 0}
+  player: {fileID: 0}

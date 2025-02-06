@@ -103,7 +103,23 @@ public class Character : MonoBehaviour
         {
             GameObject instance = Instantiate(obj, transform.position, Quaternion.identity);
             AttackBody attackBody = instance.GetComponent<AttackBody>();
-
+            if (instance.GetComponentInChildren<AttackBodyBuffAdder>() != null)
+            {
+                AttackBodyBuffAdder attack = instance.GetComponent<AttackBodyBuffAdder>();
+                if (gameObject.GetComponentsInChildren<AttackBodyBuffAdderController>().Length > 0)
+                {
+                    AttackBodyBuffAdderController[] attackBodyBuffAdderController = gameObject.GetComponentsInChildren<AttackBodyBuffAdderController>();
+                    for (int i = 0;i< attackBodyBuffAdderController.Length;i++)
+                    {
+                        attackBodyBuffAdderController[i].theAttackBody = attack;
+                    }
+                }
+                switch (attack.user)
+                {
+                    case User.敌人: attack.enemy = GetComponent<Enemy>(); break;
+                    case User.玩家: attack.player = GetComponent<Player>(); break;
+                }
+            }
             //方向
             if (spriteRenderer.flipX)
             {
@@ -321,7 +337,7 @@ public class Character : MonoBehaviour
             feather.lockTimer = time;
 
             //Debug.Log(feather);
-            
+
             feathers.RemoveAt(i);
 
             ShowUnlockFeather(feather);
@@ -395,7 +411,7 @@ public class Character : MonoBehaviour
         Buff buff = BuffContainer.GetBuffInstance(buffName) as Buff;
         if (buff == null)
         {
-            Debug.LogError("Buff不存在："+buffName);
+            Debug.LogError("Buff不存在：" + buffName);
         }
         buff.Init(this);
         buff.name = buffName;
@@ -421,7 +437,7 @@ public class Character : MonoBehaviour
 
             //更新
             buff.OnUpdate();
-            
+
             if (!buff.isPermanent)
             {
                 //减少倒计时

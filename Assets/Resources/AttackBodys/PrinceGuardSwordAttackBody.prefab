@@ -138,6 +138,9 @@ MonoBehaviour:
   attackRegion: {x: 3, y: 1}
   bullet: {fileID: 0}
   isAiming: 0
+  whatHappenWhenAttack:
+    m_PersistentCalls:
+      m_Calls: []
   isleft: 0
   addDamage: 0
 --- !u!95 &8876494479822081963

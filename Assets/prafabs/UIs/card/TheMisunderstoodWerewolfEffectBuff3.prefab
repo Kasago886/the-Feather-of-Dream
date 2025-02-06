@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 3609512844006539255}
   - component: {fileID: 2831457185267480616}
   - component: {fileID: 7063637173366311077}
+  - component: {fileID: 6111663583780111438}
   - component: {fileID: 7048944131886058621}
   - component: {fileID: 1503527729357132766}
   m_Layer: 5
@@ -261,6 +262,24 @@ MonoBehaviour:
   theNumberOfTargetPosition: {x: 0, y: 0, z: 0}
   getObjectDistanceInX: 0
   getObjectDistanceInY: 0
+--- !u!114 &6111663583780111438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623924060404161504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b301af2f5d0cae14184f6b6825d7b139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffNameAndNumber:
+  - effectOnPlayer: 0
+    effectOnEnemy: 0
+    name: 
+    number: 00000000000000000000000000000000
+  theAttackBody: {fileID: 0}
 --- !u!114 &7048944131886058621
 MonoBehaviour:
   m_ObjectHideFlags: 0

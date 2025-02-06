@@ -938,4 +938,174 @@ public class Mediocre : EffectBuff
         base.OnExit();
     }
 }
+public class Talent : EffectBuff
+{
+   private Character character;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if(target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 29.7f;
+    }
+
+    public override void OnEnter()
+    {
+        character.tenacity *= 10;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        character.tenacity /= 10;
+        base.OnExit();
+    }
+}
+public class Erudite : EffectBuff
+{
+    private Character character;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 29.7f;
+    }
+
+    public override void OnEnter()
+    {
+        character.strength *= 2;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        character.strength /= 2;
+        base.OnExit();
+    }
+}
+public class Ignore : EffectBuff
+{
+    private Enemy enemy;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        isPermanent = true;
+        this.timer = 99999999999;
+    }
+
+    public override void OnEnter()
+    {
+        if (enemy != null)
+        {
+            foreach (EnemyCardLine line in enemy.effectCardLineList)
+            {
+                foreach (EnemyCardWithTimer ectw in line.cards)
+                {
+                    ectw.timer += 0.05f;
+                }
+            }
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class ImperfectWork: EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        isPermanent = true;
+        this.timer = 99999999999;
+    }
+
+    public override void OnEnter()
+    {
+        
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class CraveRecognition: EffectBuff
+{
+    private Enemy enemy;
+    private float health;
+    private float attackTimer;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Enemy>() != null)
+        {
+            enemy = target.GetComponent<Enemy>();
+            if (enemy.unlockedFeathers.Count > 0)
+            {
+                health = enemy.unlockedFeathers[0].health;
+            }
+        }
+        this.timer = 999999;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        attackTimer += Time.deltaTime;
+        if (attackTimer > 0.1f)
+        {
+            if (enemy != null)
+            {
+                if (enemy.unlockedFeathers.Count > 0 && health - enemy.unlockedFeathers[0].health >= 1)
+                {
+                    enemy.unlockedFeathers[0].health-=0.5f;
+                    attackTimer = 0;
+                }
+            }
+        }
+        if (enemy != null && enemy.unlockedFeathers.Count > 0)
+        {
+            health = enemy.unlockedFeathers[0].health;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
 #endregion

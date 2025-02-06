@@ -1,8 +1,5 @@
-using JetBrains.Annotations;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 public class AttackBuffDict
 {
     public string buffName;
@@ -15,7 +12,7 @@ public class AttackBuffDict
 }
 public class TheMisunderstoodWerewolfAttackBody : MonoBehaviour
 {
-    public static List<AttackBuffDict> next = new List<AttackBuffDict>();
+    public List<AttackBuffDict> next = new List<AttackBuffDict>();
     private Player player;
     void Start()
     { 

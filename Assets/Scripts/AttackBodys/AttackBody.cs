@@ -25,6 +25,8 @@ public class AttackBody : MonoBehaviour
     public bool isAiming;
 
     public UnityEvent whatHappenWhenAttack;
+    [HideInInspector]
+    public List<GameObject> whatBeAttack;
 
     [HideInInspector]public bool isleft;
     [HideInInspector] public float addDamage = 0;
@@ -66,7 +68,9 @@ public class AttackBody : MonoBehaviour
                 {
                     target.GetComponent<Character>().TakeDamage(damage + addDamage, transform);
                     whatHappenWhenAttack?.Invoke();
+                    whatBeAttack.Add(target.gameObject);
                 }
+                Invoke("ClearTarget", 0.2f);
                 break;
 
             //·¢Éä×Óµ¯
@@ -235,6 +239,13 @@ public class AttackBody : MonoBehaviour
                     Gizmos.DrawRay(center, Vector3.right * 5);
                 }
             }
+        }
+    }
+    private void ClearTarget()
+    {
+        if(whatBeAttack!=null)
+        {
+            whatBeAttack.Clear();
         }
     }
 }
