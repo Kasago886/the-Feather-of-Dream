@@ -14,25 +14,25 @@ public enum ControllerStateType
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    //ÒÆ¶¯
+    //ç§»åŠ¨
     public float walkSpeed;
-    //ÌøÔ¾
+    //è·³è·ƒ
     public float jumpSpeed;
-    //³å´Ì
+    //å†²åˆº
     public float sprintSpeed;
     public float sprintDuration;
     float sprintDurationTimer = 0;
     public float sprintCooldown;
     float sprintCooldownTimer = 0;
 
-    //ÂäµØÅĞ¶¨
+    //è½åœ°åˆ¤å®š
     public float bottomCenterX, bottomCenterY;
     Vector2 bottomCenterGlobal;
     public Vector2 bottomSize;
     bool isOnSlope = false;
     bool isJumping = false;
 
-    //¹¥»÷
+    //æ”»å‡»
     public UnityEvent attackEvent;
     public float attackCooldown;
     float attackCooldownTimer = 0;
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
     Player player;
+    Collider2D[] colliders;
 
     //states
     Dictionary<ControllerStateType, ControllerState> stateDict = new Dictionary<ControllerStateType, ControllerState>();
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         player = GetComponent<Player>();
+        colliders = GetComponents<Collider2D>();
 
         bottomCenterGlobal = transform.position + new Vector3(bottomCenterX, bottomCenterY);
 
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //³å´Ì
+        //å†²åˆº
         if (sprintCooldownTimer > 0)
         {
             sprintCooldownTimer -= Time.deltaTime;
@@ -77,26 +79,27 @@ public class PlayerController : MonoBehaviour
             SprintUpdate();
         }
 
-        //¹¥»÷
+        //æ”»å‡»
         if (attackCooldownTimer > 0)
         {
             attackCooldownTimer -= Time.deltaTime;
         }
 
-        //½ÅÏÂÅĞ¶¨
+        //è„šä¸‹åˆ¤å®š
         //Debug.Log("isJumping:" + isJumping.ToString());
         //Debug.Log("isOnSlope:"+isOnSlope.ToString());
-        //²»ÔÚĞ±ÆÂÉÏÊ±
+        //ä¸åœ¨æ–œå¡ä¸Šæ—¶
         if (!isOnSlope)
         {
             Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal, bottomSize, 0, LayerMask.GetMask(Consts.WallLayer));
-            //²»ÔÚÌøÔ¾¹ı³ÌÖĞÊ±£¬½ÅÏÂÊÇĞ±ÆÂÔòÅĞ¶¨ÔÚĞ±ÆÂÉÏ
+            //ä¸åœ¨è·³è·ƒè¿‡ç¨‹ä¸­æ—¶ï¼Œè„šä¸‹æ˜¯æ–œå¡åˆ™åˆ¤å®šåœ¨æ–œå¡ä¸Š
             if (hit.Length > 0)
             {
                 if (!isJumping)
                 {
                     foreach (Collider2D col in hit)
                     {
+                        //Debug.Log(col.gameObject.name);
                         if (col.tag == Consts.SlopeTag)
                         {
                             isOnSlope = true;
@@ -104,22 +107,23 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-            //½ÅÏÂÃ»ÓĞµØÃæÊ±ÌøÔ¾¹ı³Ì½áÊø
+            //è„šä¸‹æ²¡æœ‰åœ°é¢æ—¶è·³è·ƒè¿‡ç¨‹ç»“æŸ
             else
             {
                 isJumping = false;
             }
         }
-        //ÔÚĞ±ÆÂÉÏÊ±
+        //åœ¨æ–œå¡ä¸Šæ—¶
         else
         {
-            //Èô½ÅÏÂ²»ÊÇĞ±ÆÂ£¬ÔòÅĞ¶¨Àë¿ªĞ±ÆÂ
+            //è‹¥è„šä¸‹ä¸æ˜¯æ–œå¡ï¼Œåˆ™åˆ¤å®šç¦»å¼€æ–œå¡
             bool isLeaveSlope = true;
             Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal, bottomSize, 0, LayerMask.GetMask(Consts.WallLayer));
             if (hit.Length > 0)
             {
                 foreach (Collider2D col in hit)
                 {
+                    Debug.Log(col.gameObject.name);
                     if (col.tag == Consts.SlopeTag)
                     {
                         isLeaveSlope = false;
@@ -127,7 +131,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            //ÈôÀë¿ªĞ±ÆÂ,Ôò×İÏòËÙ¶È¹éÁã
+            //è‹¥ç¦»å¼€æ–œå¡,åˆ™çºµå‘é€Ÿåº¦å½’é›¶
             if (isLeaveSlope)
             {
                 isOnSlope = false;
@@ -137,7 +141,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇĞ»»×´Ì¬
+    /// åˆ‡æ¢çŠ¶æ€
     /// </summary>
     /// <param name="state"></param>
     void StateTransition(ControllerStateType state)
@@ -149,14 +153,14 @@ public class PlayerController : MonoBehaviour
 
 
     /// <summary>
-    /// ×óÓÒÒÆ¶¯
+    /// å·¦å³ç§»åŠ¨
     /// </summary>
     /// <param name="horizontal">Horizontal speed scale. Range from -1 to 1.</param>
     public void OnMove(float horizontal)
     {
         rb.velocity = new Vector2(HorizontalToSpeed(horizontal), rb.velocity.y);
 
-        //×óÓÒ·­×ª
+        //å·¦å³ç¿»è½¬
         if (horizontal > 0)
         {
             spriteRenderer.flipX = false;
@@ -175,13 +179,13 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÌøÔ¾
+    /// è·³è·ƒ
     /// </summary>
     public void OnJump(bool isNoGroundJump = false)
     {
         //Debug.Log("isNoGroundJump:" + isNoGroundJump);
 
-        //¼ì²âÊÇ·ñ²ÈÔÚµØÃæÉÏ
+        //æ£€æµ‹æ˜¯å¦è¸©åœ¨åœ°é¢ä¸Š
         bottomCenterGlobal = transform.position + new Vector3(bottomCenterX,bottomCenterY);
         Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal,bottomSize,0,LayerMask.GetMask(Consts.WallLayer));
         //Debug.Log(hit);
@@ -201,7 +205,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿ªÊ¼³å´Ì
+    /// å¼€å§‹å†²åˆº
     /// </summary>
     public void OnSprint()
     {
@@ -219,11 +223,11 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ³å´Ì¸üĞÂ
+    /// å†²åˆºæ›´æ–°
     /// </summary>
     void SprintUpdate()
     {
-        //ÅĞ¶Ï·½Ïò
+        //åˆ¤æ–­æ–¹å‘
         float tempSpeed = sprintSpeed;
         if (spriteRenderer.flipX)
         {
@@ -244,7 +248,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ¹¥»÷
+    /// æ”»å‡»
     /// </summary>
     public void OnAttack()
     {
@@ -261,7 +265,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÉèÖÃÔİÍ£×´Ì¬
+    /// è®¾ç½®æš‚åœçŠ¶æ€
     /// </summary>
     /// <param name="isPause"></param>
     public void SetPause(bool isPause)
@@ -278,7 +282,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇĞ»»ÔİÍ£×´Ì¬
+    /// åˆ‡æ¢æš‚åœçŠ¶æ€
     /// </summary>
     public void SwitchPause()
     {
@@ -294,7 +298,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ËÀÍö×´Ì¬
+    /// æ­»äº¡çŠ¶æ€
     /// </summary>
     public void OnDie()
     {
@@ -302,7 +306,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼ÆËã²Ù×÷ËÙ¶È
+    /// è®¡ç®—æ“ä½œé€Ÿåº¦
     /// </summary>
     /// <param name="horizontal"></param>
     /// <returns></returns>
@@ -312,11 +316,53 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// æ¥¼æ¢¯åˆ¤å®š
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(Consts.SlopeTag))
+        {
+            //Debug.LogWarning(isOnSlope);
+            Collider2D[] collisions = collision.GetComponents<Collider2D>();
+
+            if (!isOnSlope)
+            {
+                foreach (Collider2D collision2 in collisions)
+                {
+                    if (!collision2.isTrigger)
+                    {
+                        foreach (Collider2D collider in colliders)
+                        {
+                            Physics2D.IgnoreCollision(collision2, collider, true);
+                        }
+                    }
+                }
+                //Debug.LogWarning("ignored");
+            }
+            else if (rb.velocity.y < walkSpeed) //ç§»åŠ¨æ–¹å‘å°äº45åº¦
+            {
+                foreach (Collider2D collision2 in collisions)
+                {
+                    if (!collision2.isTrigger)
+                    {
+                        foreach (Collider2D collider in colliders)
+                        {
+                            Physics2D.IgnoreCollision(collision2, collider, false);
+                        }
+                    }
+                }
+                //Debug.LogWarning("not ignored");
+            }
+        }
+    }
+
+    /// <summary>
     /// Debug
     /// </summary>
     private void OnDrawGizmosSelected()
     {
-        //ÂäµØÅĞ¶¨ÇøÓò
+        //è½åœ°åˆ¤å®šåŒºåŸŸ
         Gizmos.color = Color.yellow;
         bottomCenterGlobal = transform.position + new Vector3(bottomCenterX, bottomCenterY);
         Gizmos.DrawWireCube(bottomCenterGlobal,bottomSize);
