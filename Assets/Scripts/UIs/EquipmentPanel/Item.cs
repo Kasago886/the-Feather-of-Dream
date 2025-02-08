@@ -71,6 +71,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
                 player = FindAnyObjectByType<Player>();
             }
 
+            Debug.Log(buffName);
             equipmentFeatherBuff = BuffContainer.GetBuffInstance(buffName) as EquipmentFeatherBuff;
             equipmentFeatherBuff.Init(player);
             equipmentFeatherBuff.feather.item = this;

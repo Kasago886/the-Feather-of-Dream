@@ -493,7 +493,7 @@ public class EquipmentPanelManager : MonoBehaviour
                 //获取物品信息
                 ItemInfo info = itemPlaceObj.GetComponent<ItemPlace>().content.GetItemInfo();
                 info.position = i;
-                Debug.Log(i);
+                //Debug.Log(i);
                 list.Add(info);
             }
         }
@@ -588,12 +588,16 @@ public class EquipmentPanelManager : MonoBehaviour
                     {
                         dreamizedFeatherInfo = item.dreamizedFeather.GetItemInfo();
                     }
-                    else
+                    else if (item.dreamizedFeatherInfo != null)
                     {
                         dreamizedFeatherInfo = item.dreamizedFeatherInfo;
                     }
-                    selectedItemPlace.Clear();
-
+                    else
+                    {
+                        dreamizedFeatherInfo = null;
+                        Debug.LogError("Null DreamizedFeather!");
+                    }
+                    RemoveItem(item);
                     AddItem(dreamizedFeatherInfo);
                 }
             }

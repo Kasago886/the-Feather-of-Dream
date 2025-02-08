@@ -13,7 +13,7 @@ public enum InputListenerState
 public class InputListener : MonoBehaviour
 {
     public PlayerController playerController;
-    public EquipmentPanelManager equipmentPanelManager;
+    [HideInInspector]public EquipmentPanelManager equipmentPanelManager;
     public GameObject PausePanel;
 
     [HideInInspector] public AnimationBoolManager cardPanelAnimationManager;
@@ -24,6 +24,7 @@ public class InputListener : MonoBehaviour
     void Start()
     {
         cardPanelAnimationManager = GameObject.FindGameObjectWithTag(Consts.CardPanelTag).GetComponent<AnimationBoolManager>();
+        equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
 
         states[InputListenerState.normal] = new NormalListenerState(this);
         states[InputListenerState.equipment] = new EquipmentListenerState(this);
