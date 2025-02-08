@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 [RequireComponent(typeof(PolygonCollider2D))]
 //注意如果使用的是mode2的话那么请安装上rigidbody2D组件
 public class InteractiveObject : MonoBehaviour
 {
+    public UnityEvent unityEvent;
     [Header("鼠标触发:")]
     [Tooltip("如果同时选择两种触发模式，就只进行鼠标触发")]
     public bool mouseTrigger;
@@ -36,6 +38,8 @@ public class InteractiveObject : MonoBehaviour
     public string nameOfKey;
     [Header("按住持续触发")]
     public bool isKeepPush;
+    [Header("仅触发一次(仅对unityEvent有效)")]
+    public bool onceTrigger;
     [Tooltip("提示按键的预制体")]
     public bool isNoticer = true;
     public GameObject noticer;
@@ -43,6 +47,7 @@ public class InteractiveObject : MonoBehaviour
     private float distance;
     private int id;
     protected GameObject player;
+    protected bool triggered = false;
     protected virtual void Start()
     {
         id=Random.Range(-100000,100000);
@@ -149,7 +154,11 @@ public class InteractiveObject : MonoBehaviour
     /// </summary>
     public virtual void Interact()
     {
-
+        if (!triggered || !onceTrigger)
+        {
+            triggered = true;
+            unityEvent?.Invoke();
+        }
     }
 
     /// <summary>

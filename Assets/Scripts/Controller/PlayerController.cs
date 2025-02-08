@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour
             tempSpeed = -tempSpeed;
         }
 
-        rb.velocity = new Vector2(tempSpeed, 0);
+        rb.velocity = new Vector2(tempSpeed, rb.velocity.y);
 
         sprintDurationTimer -= Time.deltaTime;
         if (sprintDurationTimer <= 0)

@@ -46,7 +46,6 @@ public class Teleportor : InteractiveObject
     {
         yield return null;
         player.transform.position = position;
-        cameraManager.TeleportCamera();
 
         if (isCameraChange)
             cameraManager.SetCameraSize(size);
