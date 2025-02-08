@@ -71,6 +71,7 @@ public class ItemPlace : MonoBehaviour
     {
         if (content != null)
         {
+            content.SetEquipState(false);
             Destroy(content.gameObject);
         }
         content = null;

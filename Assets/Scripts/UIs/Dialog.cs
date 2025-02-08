@@ -36,7 +36,7 @@ public class Dialog : MonoBehaviour
     //当前行的总有效文字（已显示+未显示）
     string sayText;
     //暂停播放
-    bool ifPause;
+    [HideInInspector]public bool ifPause;
 
     //设置报错信息，便于检查
     string wrongtext;
@@ -277,6 +277,7 @@ public class Dialog : MonoBehaviour
 
         //对话结束
         endEvent?.Invoke();
+        endEvent = null;
     }
 
     public void Clear()

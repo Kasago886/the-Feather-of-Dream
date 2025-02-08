@@ -150,6 +150,84 @@ public class EquipmentPanelManager : MonoBehaviour
         //刷新
         GenerateItems(archiveManager.currentArchive);
     }
+    /// <summary>
+    /// 是否拥有物品
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public bool HasItem(Item item)
+    {
+        List<ItemInfo> itemInfos = GetItemInfos(itemContent);
+        foreach (ItemInfo itemInfo in itemInfos)
+        {
+            if (itemInfo.itemName == item.itemName && itemInfo.information == item.information)
+            {
+                return true;
+            }
+        }
+        itemInfos = GetItemInfos(featherEquipContent);
+        foreach (ItemInfo itemInfo in itemInfos)
+        {
+            if (itemInfo.itemName == item.itemName && itemInfo.information == item.information)
+            {
+                return true;
+            }
+        }
+        itemInfos = GetItemInfos(brokenFeatherEquipContent);
+        foreach (ItemInfo itemInfo in itemInfos)
+        {
+            if (itemInfo.itemName == item.itemName && itemInfo.information == item.information)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    /// <summary>
+    /// 删除物品
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns>是否删除成功</returns>
+    public bool RemoveItem(Item item)
+    {
+        List<ItemInfo> itemInfos = GetItemInfos(itemContent);
+        foreach (ItemInfo itemInfo in itemInfos)
+        {
+            if (itemInfo.itemName == item.itemName && itemInfo.information == item.information)
+            {
+                List<ItemInfo> list = new(itemInfos);
+                list.Remove(itemInfo);
+                archiveManager.currentArchive.items.items = list.ToArray();
+                GenerateItems(archiveManager.currentArchive);
+                return true;
+            }
+        }
+        itemInfos = GetItemInfos(featherEquipContent);
+        foreach (ItemInfo itemInfo in itemInfos)
+        {
+            if (itemInfo.itemName == item.itemName && itemInfo.information == item.information)
+            {
+                List<ItemInfo> list = new(itemInfos);
+                list.Remove(itemInfo);
+                archiveManager.currentArchive.equipedFeather.items = list.ToArray();
+                SetupPanel();
+                return true;
+            }
+        }
+        itemInfos = GetItemInfos(brokenFeatherEquipContent);
+        foreach (ItemInfo itemInfo in itemInfos)
+        {
+            if (itemInfo.itemName == item.itemName && itemInfo.information == item.information)
+            {
+                List<ItemInfo> list = new(itemInfos);
+                list.Remove(itemInfo);
+                archiveManager.currentArchive.equipedBrokenFeather.items = list.ToArray();
+                SetupPanel();
+                return true;
+            }
+        }
+        return false;
+    }
 
     /// <summary>
     /// 添加图鉴
