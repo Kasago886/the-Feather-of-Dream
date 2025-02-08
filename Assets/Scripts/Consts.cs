@@ -23,4 +23,7 @@ public class Consts
 
     public const string SpeedAnimatorArgument = "speed";
     public const string IsDeadAnimatorArgument = "isDead";
+    public const string IsJumpingAnimatorArgument = "isJumping";
+    public const string IsAirAnimatorArgument = "isAir";
+    public const string YSpeedAnimatorArgument = "ySpeed";
 }

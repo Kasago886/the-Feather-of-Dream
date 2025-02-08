@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Player player;
     Collider2D[] colliders;
+    Animator animator;
 
     //states
     Dictionary<ControllerStateType, ControllerState> stateDict = new Dictionary<ControllerStateType, ControllerState>();
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         player = GetComponent<Player>();
         colliders = GetComponents<Collider2D>();
+        animator = GetComponent<Animator>();
 
         bottomCenterGlobal = transform.position + new Vector3(bottomCenterX, bottomCenterY);
 
@@ -86,15 +88,17 @@ public class PlayerController : MonoBehaviour
         }
 
         //脚下判定
+        bottomCenterGlobal = transform.position + new Vector3(bottomCenterX, bottomCenterY);
+        Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal, bottomSize, 0, LayerMask.GetMask(Consts.WallLayer));
         //Debug.Log("isJumping:" + isJumping.ToString());
         //Debug.Log("isOnSlope:"+isOnSlope.ToString());
         //不在斜坡上时
         if (!isOnSlope)
         {
-            Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal, bottomSize, 0, LayerMask.GetMask(Consts.WallLayer));
             //不在跳跃过程中时，脚下是斜坡则判定在斜坡上
             if (hit.Length > 0)
             {
+                //Debug.Log(hit[0]);
                 if (!isJumping)
                 {
                     foreach (Collider2D col in hit)
@@ -110,6 +114,7 @@ public class PlayerController : MonoBehaviour
             //脚下没有地面时跳跃过程结束
             else
             {
+                //Debug.Log(hit.Length);
                 isJumping = false;
             }
         }
@@ -118,7 +123,6 @@ public class PlayerController : MonoBehaviour
         {
             //若脚下不是斜坡，则判定离开斜坡
             bool isLeaveSlope = true;
-            Collider2D[] hit = Physics2D.OverlapBoxAll(bottomCenterGlobal, bottomSize, 0, LayerMask.GetMask(Consts.WallLayer));
             if (hit.Length > 0)
             {
                 foreach (Collider2D col in hit)
@@ -138,6 +142,20 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 0);
             }
         }
+
+        //动画
+        animator.SetBool(Consts.IsJumpingAnimatorArgument, isJumping);
+        if (hit.Length <= 0)
+        {
+            //Debug.Log(hit.Length);
+            animator.SetBool(Consts.IsAirAnimatorArgument, true);
+        }
+        else
+        {
+            //Debug.Log(hit[0]);
+            animator.SetBool(Consts.IsAirAnimatorArgument, false);
+        }
+        animator.SetFloat(Consts.YSpeedAnimatorArgument, rb.velocity.y);
     }
 
     /// <summary>
@@ -320,7 +338,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    {/*
         if (collision.CompareTag(Consts.SlopeTag))
         {
             Debug.LogWarning(isOnSlope);
@@ -355,7 +373,7 @@ public class PlayerController : MonoBehaviour
                 }
                 //Debug.LogWarning("not ignored");
             }
-        }
+        }*/
     }
 
     /// <summary>
