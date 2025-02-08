@@ -29,4 +29,15 @@ public class PlayerDistanceDetector : MonoBehaviour
             exitEvent?.Invoke();
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+
+        float r = distance;
+        for (int i = 0; i < 360; i++)
+        {
+            Gizmos.DrawLine(new Vector3(transform.position.x + r * Mathf.Cos((i * Mathf.PI) / 180), transform.position.y + r * Mathf.Sin((i * Mathf.PI) / 180), 0), new Vector3(transform.position.x + r * Mathf.Cos(((i + 1) * Mathf.PI) / 180), transform.position.y + r * Mathf.Sin(((i + 1) * Mathf.PI) / 180), 0));
+        }
+    }
 }

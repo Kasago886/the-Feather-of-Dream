@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DreamBottle : InteractiveObject {
     private Player player_;
+
+    bool used = false;
     protected override void Start()
     {
         base.Start();
@@ -13,8 +15,12 @@ public class DreamBottle : InteractiveObject {
 
     public override void Interact()
     {
-        base.Interact();
-        player_.AddDream(1);
-        GetComponent<Animator>().Play("usedBottle");
+        if (!used)
+        {
+            base.Interact();
+            used = true;
+            player_.AddDream(1);
+            GetComponent<Animator>().Play("usedBottle");
+        }
     }
 }

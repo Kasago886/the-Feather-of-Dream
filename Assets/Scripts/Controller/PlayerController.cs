@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
             {
                 foreach (Collider2D col in hit)
                 {
-                    Debug.Log(col.gameObject.name);
+                    //Debug.Log(col.gameObject.name);
                     if (col.tag == Consts.SlopeTag)
                     {
                         isLeaveSlope = false;
@@ -323,9 +323,10 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag(Consts.SlopeTag))
         {
-            //Debug.LogWarning(isOnSlope);
+            Debug.LogWarning(isOnSlope);
             Collider2D[] collisions = collision.GetComponents<Collider2D>();
 
+            //Debug.LogWarning(rb.velocity.y + "  " + walkSpeed);
             if (!isOnSlope)
             {
                 foreach (Collider2D collision2 in collisions)

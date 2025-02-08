@@ -11,25 +11,33 @@ public class Teleportor : InteractiveObject
     [Header("传送至某物体")]
     public bool objectTeleport;
     public GameObject targetObj;
+    public bool locked;
+    [Header("改变相机大小")]
+    public bool isCameraChange;
+    public float size;
 
-
+    CameraManager cameraManager;
     protected override void Start()
     {
         base.Start();
+        cameraManager = FindAnyObjectByType<CameraManager>();
+
         TeleportPosition3 = TeleportPosition;
     }
     public override void Interact()
     {
         base.Interact();
-
-        if (!objectTeleport)
+        if (!locked)
         {
-            StartCoroutine(Teleport(transform.position + TeleportPosition3));
-        }
-        else
-        {
-            //Debug.Log("this:"+gameObject+"  target:"+targetObj);
-            StartCoroutine(Teleport(targetObj.transform.position));
+            if (!objectTeleport)
+            {
+                StartCoroutine(Teleport(transform.position + TeleportPosition3));
+            }
+            else
+            {
+                //Debug.Log("this:"+gameObject+"  target:"+targetObj);
+                StartCoroutine(Teleport(targetObj.transform.position));
+            }
         }
     }
 
@@ -38,6 +46,10 @@ public class Teleportor : InteractiveObject
     {
         yield return null;
         player.transform.position = position;
+        cameraManager.TeleportCamera();
+
+        if (isCameraChange)
+            cameraManager.SetCameraSize(size);
     }
 
     protected override void OnDrawGizmos()
