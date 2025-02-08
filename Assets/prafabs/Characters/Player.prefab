@@ -99,8 +99,8 @@ MonoBehaviour:
   - "\u6D4B\u8BD5\u62D4\u7FBD"
   cardGenerateCooldown: 2
   cardGenerateCooldownTimer: 0
-  cardGenerateText: {fileID: 0}
   cardController: {fileID: 0}
+  cardGenerateText: {fileID: 0}
   isSprinting: 0
 --- !u!114 &206331674388102575
 MonoBehaviour:

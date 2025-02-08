@@ -13,16 +13,18 @@ public enum InputListenerState
 public class InputListener : MonoBehaviour
 {
     public PlayerController playerController;
-    public AnimationBoolManager cardPanelAnimationManager;
     public EquipmentPanelManager equipmentPanelManager;
     public GameObject PausePanel;
 
+    [HideInInspector] public AnimationBoolManager cardPanelAnimationManager;
     Dictionary<InputListenerState, IListenerState> states = new();
     [HideInInspector] public IListenerState currentState;
 
     // Start is called before the first frame update
     void Start()
     {
+        cardPanelAnimationManager = GameObject.FindGameObjectWithTag(Consts.CardPanelTag).GetComponent<AnimationBoolManager>();
+
         states[InputListenerState.normal] = new NormalListenerState(this);
         states[InputListenerState.equipment] = new EquipmentListenerState(this);
         states[InputListenerState.option] = new OptionListenerState(this);

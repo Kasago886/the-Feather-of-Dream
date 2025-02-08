@@ -9,6 +9,8 @@ public class Consts
     public const string NormalInteractiveObjectTag = "NormalInteractiveObject";
     public const string SlopeTag = "Slope";
     public const string GroundTag = "Ground";
+    public const string CardGenerateTextTag = "CardGenerateText";
+    public const string CardPanelTag = "CardPanel";
 
     public const string PlayerLayer = "Player";
     public const string EnemyLayer = "Enemy";

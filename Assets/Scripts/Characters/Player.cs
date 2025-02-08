@@ -11,10 +11,10 @@ public class Player : Character
     public List<string> cardGenerateList;
     public float cardGenerateCooldown;
     public float cardGenerateCooldownTimer = 0;
-    public Text cardGenerateText;
 
     public PlayerCardController cardController;
 
+    [HideInInspector] public Text cardGenerateText;
     [HideInInspector] public bool isSprinting = false;
 
     ArchiveManager archiveManager;
@@ -26,6 +26,7 @@ public class Player : Character
         archiveManager = FindAnyObjectByType<ArchiveManager>();
         equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
         cardController = FindAnyObjectByType<PlayerCardController>();
+        cardGenerateText = GameObject.FindGameObjectWithTag(Consts.CardGenerateTextTag).GetComponent<Text>();
 
         tenacity = archiveManager.currentArchive.playerInfo.tenacity;
         strength = archiveManager.currentArchive.playerInfo.strength;

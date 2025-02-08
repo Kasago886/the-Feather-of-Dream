@@ -8,6 +8,8 @@ TagManager:
   - NormalInteractiveObject
   - Ground
   - Slope
+  - CardGenerateText
+  - CardPanel
   layers:
   - Default
   - TransparentFX
