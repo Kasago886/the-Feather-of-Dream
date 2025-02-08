@@ -816,7 +816,7 @@ public class Depressed : EffectBuff
             {
                 foreach (EnemyCardWithTimer ectw in line.cards)
                 {
-                    ectw.timer += 1;
+                    ectw.timer -= 1;
                 }
             }
         }
@@ -941,6 +941,7 @@ public class Mediocre : EffectBuff
 public class Talent : EffectBuff
 {
    private Character character;
+    private float change;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -953,6 +954,7 @@ public class Talent : EffectBuff
 
     public override void OnEnter()
     {
+        change = character.tenacity * 9;
         character.tenacity *= 10;
         base.OnEnter();
     }
@@ -964,13 +966,21 @@ public class Talent : EffectBuff
 
     public override void OnExit()
     {
-        character.tenacity /= 10;
+        if (target.GetComponent<Player>() != null)
+        {
+            character.tenacity -= change;
+        }
+        if (target.GetComponent<Enemy>() != null)
+        {
+            character.tenacity /= 10;
+        }
         base.OnExit();
     }
 }
 public class Erudite : EffectBuff
 {
     private Character character;
+    private float change;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -983,6 +993,7 @@ public class Erudite : EffectBuff
 
     public override void OnEnter()
     {
+        change = character.strength;
         character.strength *= 2;
         base.OnEnter();
     }
@@ -994,7 +1005,14 @@ public class Erudite : EffectBuff
 
     public override void OnExit()
     {
-        character.strength /= 2;
+        if (target.GetComponent<Player>() != null)
+        {
+            character.strength -= change;
+        }
+        if (target.GetComponent<Enemy>() != null)
+        {
+            character.strength /= 2;
+        }
         base.OnExit();
     }
 }
@@ -1105,6 +1123,485 @@ public class CraveRecognition: EffectBuff
 
     public override void OnExit()
     {
+        base.OnExit();
+    }
+}
+public class UpLifting : EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        change = character.strength*0.1f;
+        if (change > 1)
+        {
+            change = 1;
+        }
+        character.strength +=change;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        character.strength -= change;
+        base.OnExit();
+    }
+}
+public class Toughness : EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        change = character.tenacity * 0.1f;
+        if (change > 2)
+        {
+            change = 2;
+        }
+        character.tenacity += change;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        character.tenacity -= change;
+        base.OnExit();
+    }
+}
+public class BlazingSpeed: EffectBuff
+{
+    private Enemy character;
+    private PlayerController playerController;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Enemy>() != null)
+        {
+            character = target.GetComponent<Enemy>();
+        }
+        if(target.GetComponent<PlayerController>() != null)
+        {
+            playerController = target.GetComponent<PlayerController>(); 
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        if (character != null)
+        {
+            change = character.runSpeed * 0.1f;
+            character.runSpeed += change;
+        }
+        if (playerController != null)
+        {
+            change = playerController.walkSpeed * 0.1f;
+            playerController.walkSpeed += change; 
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (character != null)
+        {
+            character.runSpeed -= change;
+        }
+        if (playerController != null)
+        {
+            playerController.walkSpeed -= change;
+        }
+        base.OnExit();
+    }
+}
+public class Agile : EffectBuff
+{
+    private Enemy character;
+    private PlayerController playerController;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Enemy>() != null)
+        {
+            character = target.GetComponent<Enemy>();
+        }
+        if (target.GetComponent<PlayerController>() != null)
+        {
+            playerController = target.GetComponent<PlayerController>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        if (character != null)
+        {
+            change = character.jumpSpeed * 0.1f;
+            character.jumpSpeed += change;
+        }
+        if (playerController != null)
+        {
+            change = playerController.jumpSpeed * 0.1f;
+            playerController.jumpSpeed += change;
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (character != null)
+        {
+            character.jumpSpeed -= change;
+        }
+        if (playerController != null)
+        {
+            playerController.jumpSpeed -= change;
+        }
+        base.OnExit();
+    }
+}
+public class Steadfast : EffectBuff
+{
+    private Player player;
+    private Enemy enemy;
+    private Color baseColor;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            player = target.GetComponent<Player>();
+        }
+        if (target.GetComponent<Enemy>() != null)
+        {
+            enemy = target.GetComponent<Enemy>();
+        }
+        this.timer = 12;
+    }
+
+    public override void OnEnter()
+    {
+        if (player != null)
+        {
+            player.cardGenerateCooldown -= 1;
+            baseColor = player.cardGenerateText.color;
+            player.cardGenerateText.color = Color.green;       
+        }
+        if (enemy != null)
+        {
+            foreach (EnemyCardLine line in enemy.attackCardLineList)
+            {
+                foreach (EnemyCardWithTimer ectw in line.cards)
+                {
+                    ectw.timer -= 1;
+                }
+            }
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (player != null)
+        {
+            player.cardGenerateCooldown += 1;
+            player.cardGenerateText.color = baseColor;
+        }
+        if (enemy != null)
+        {
+            foreach (EnemyCardLine line in enemy.attackCardLineList)
+            {
+                foreach (EnemyCardWithTimer ectw in line.cards)
+                {
+                    ectw.timer += 1;
+                }
+            }
+        }
+        base.OnExit();
+    }
+}
+public class Superb : EffectBuff
+{
+    private PlayerCardController playerCardController;
+    private Enemy enemy;
+    private Color baseColor;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            playerCardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
+        }
+        if (target.GetComponent<Enemy>() != null)
+        {
+            enemy = target.GetComponent<Enemy>();
+        }
+        this.timer = 60;
+    }
+
+    public override void OnEnter()
+    {
+        if (playerCardController != null)
+        {
+            playerCardController.positionNumber++;
+        }
+        if (enemy != null)
+        {
+            foreach (EnemyCardLine line in enemy.effectCardLineList)
+            {
+                foreach (EnemyCardWithTimer ectw in line.cards)
+                {
+                    ectw.timer -= 3;
+                }
+            }
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (playerCardController != null)
+        {
+            playerCardController.positionNumber--;
+        }
+        if (enemy != null)
+        {
+            foreach (EnemyCardLine line in enemy.effectCardLineList)
+            {
+                foreach (EnemyCardWithTimer ectw in line.cards)
+                {
+                    ectw.timer += 3;
+                }
+            }
+        }
+        base.OnExit();
+    }
+}
+public class Lethargic : EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        change = character.strength * 0.1f;
+        if (change > 1)
+        {
+            change = 1;
+        }
+        character.strength -= change;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        character.strength += change;
+        base.OnExit();
+    }
+}
+public class Fragile : EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        change = character.tenacity * 0.1f;
+        if (change > 2)
+        {
+            change = 2;
+        }
+        character.tenacity -= change;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        character.tenacity += change;
+        base.OnExit();
+    }
+}
+public class Sluggish : EffectBuff
+{
+    private Enemy character;
+    private PlayerController playerController;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Enemy>() != null)
+        {
+            character = target.GetComponent<Enemy>();
+        }
+        if (target.GetComponent<PlayerController>() != null)
+        {
+            playerController = target.GetComponent<PlayerController>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        if (character != null)
+        {
+            change = character.runSpeed * 0.1f;
+            character.runSpeed -= change;
+        }
+        if (playerController != null)
+        {
+            change = playerController.walkSpeed * 0.1f;
+            playerController.walkSpeed -= change;
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (character != null)
+        {
+            character.runSpeed += change;
+        }
+        if (playerController != null)
+        {
+            playerController.walkSpeed += change;
+        }
+        base.OnExit();
+    }
+}
+public class Grave : EffectBuff
+{
+    private Enemy character;
+    private PlayerController playerController;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Enemy>() != null)
+        {
+            character = target.GetComponent<Enemy>();
+        }
+        if (target.GetComponent<PlayerController>() != null)
+        {
+            playerController = target.GetComponent<PlayerController>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        if (character != null)
+        {
+            change = character.jumpSpeed * 0.1f;
+            character.jumpSpeed -= change;
+        }
+        if (playerController != null)
+        {
+            change = playerController.jumpSpeed * 0.1f;
+            playerController.jumpSpeed -= change;
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (character != null)
+        {
+            character.jumpSpeed += change;
+        }
+        if (playerController != null)
+        {
+            playerController.jumpSpeed += change;
+        }
         base.OnExit();
     }
 }

@@ -10,7 +10,7 @@ public class TheMisunderstoodWerewolfAttackBodyAddBuff : MonoBehaviour
     private bool late;
     private void Update()
     {
-        if(theAttackBody == null)
+        if(theAttackBody == null&& GameObject.Find("TheMisunderstoodWerewolfAttackBody 1(Clone)"))
         {
             theAttackBody = GameObject.Find("TheMisunderstoodWerewolfAttackBody 1(Clone)").GetComponent<TheMisunderstoodWerewolfAttackBody>();
         }

@@ -112,7 +112,9 @@ MonoBehaviour:
   defaultFeatherNum: 3
   defaultFeatherHealth: 200
   tenacity: 6
+  oriTenacity: 0
   strength: 7
+  oriStrength: 0
   injuryForceback: 1
   forcebackForce: 0.5
   forcebackDuration: 0.1

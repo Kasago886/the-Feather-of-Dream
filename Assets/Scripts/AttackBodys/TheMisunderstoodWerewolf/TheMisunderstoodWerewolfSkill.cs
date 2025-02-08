@@ -28,11 +28,15 @@ public class TheMisunderstoodWerewolfSkill : MonoBehaviour
     {
         if(useSkill)
         {
+            Debug.Log("useSkill");
             timer += Time.deltaTime;
             lineRenderer.enabled = true;
+            lineRenderer.startWidth = 0.1f;
+            lineRenderer.endWidth = 0.1f;
             r += speed*Time.deltaTime;
-            lineRenderer.positionCount = 360;
-            for (int i = 0; i < 360; i++)
+            Debug.Log("R="+r);
+            lineRenderer.positionCount = 361;
+            for (int i = 0; i < 361; i++)
             {
                 float x = transform.position.x + r * Mathf.Cos(i * Mathf.PI / 180f);
                 float y = transform.position.y + r * Mathf.Sin(i * Mathf.PI / 180f);
@@ -46,6 +50,7 @@ public class TheMisunderstoodWerewolfSkill : MonoBehaviour
             if (r > limitR)
             {
                 r = 0;
+                useSkill = false;
                 lineRenderer.enabled = false;
             }
         }
