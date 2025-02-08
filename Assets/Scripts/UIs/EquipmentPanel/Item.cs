@@ -22,11 +22,13 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     public bool isDreamizable;
     public int dreamizeCost;
     public Item dreamizedFeather;
+    public ItemInfo dreamizedFeatherInfo;
 
     public string buffName;
     public float featherHealth;
 
     [HideInInspector] public bool isEquiped;
+    [HideInInspector] public string imageName;
 
     Image image;
     Transform canvas;
@@ -42,16 +44,19 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <param name="itemInfo"></param>
     public void Init(ItemInfo itemInfo)
     {
-        Start();
-
         itemName = itemInfo.itemName;
         information = itemInfo.information;
         type = itemInfo.type;
         isDreamizable = itemInfo.isDreamizable;
         dreamizeCost = itemInfo.dreamizeCost;
+        if (itemInfo.isDreamizable && itemInfo.dreamizedFeather != null)
+        {
+            dreamizedFeatherInfo = itemInfo.dreamizedFeather;
+        }
 
+        imageName = itemInfo.imageName;
         image = GetComponent<Image>();
-        Sprite sprite = Resources.Load<Sprite>("ItemIcon/"+itemInfo.imageName);
+        Sprite sprite = Resources.Load<Sprite>("ItemIcon/" + itemInfo.imageName);
         //Debug.Log(sprite);
         image.sprite = sprite;
         Resources.UnloadUnusedAssets();
@@ -61,6 +66,11 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 
         if (type == ItemType.Feather)
         {
+            if (player == null)
+            {
+                player = FindAnyObjectByType<Player>();
+            }
+
             equipmentFeatherBuff = BuffContainer.GetBuffInstance(buffName) as EquipmentFeatherBuff;
             equipmentFeatherBuff.Init(player);
             equipmentFeatherBuff.feather.item = this;
@@ -82,6 +92,19 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         info.information = information;
         info.isDreamizable = isDreamizable;
         info.dreamizeCost = dreamizeCost;
+
+        if (isDreamizable && dreamizedFeather != null)
+        {
+            if (dreamizedFeather != null)
+            {
+                info.dreamizedFeather = dreamizedFeather.GetItemInfo();
+            }
+            else if (dreamizedFeatherInfo != null)
+            {
+                info.dreamizedFeather = dreamizedFeatherInfo;
+            }
+        }
+
         info.imageName = image.sprite.name;
         info.buffName = buffName;
         info.featherHealth = featherHealth;

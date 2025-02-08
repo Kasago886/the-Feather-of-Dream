@@ -30,7 +30,7 @@ public struct PlayerInfo
 /// 物品信息
 /// </summary>
 [Serializable]
-public struct ItemInfo
+public class ItemInfo
 {
     public string itemName;
     public string information;
@@ -39,6 +39,7 @@ public struct ItemInfo
 
     public bool isDreamizable;
     public int dreamizeCost;
+    public ItemInfo dreamizedFeather;
 
     public string imageName;
 

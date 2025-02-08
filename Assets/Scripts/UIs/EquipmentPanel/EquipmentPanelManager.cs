@@ -128,10 +128,34 @@ public class EquipmentPanelManager : MonoBehaviour
     /// <param name="item"></param>
     public void AddItem(Item item)
     {
+        Debug.Log(item);
         //找到空位置
         ItemInfo newinfo = item.GetItemInfo();
         List<int> positions = new List<int>();
         foreach(ItemInfo itemInfo in archiveManager.currentArchive.items.items)
+        {
+            positions.Add(itemInfo.position);
+        }
+        int newposition = 0;
+        while (positions.Contains(newposition))
+        {
+            newposition++;
+        }
+        newinfo.position = newposition;
+
+        //添加新物品
+        List<ItemInfo> itemInfos = archiveManager.currentArchive.items.items.ToList();
+        itemInfos.Add(newinfo);
+        archiveManager.currentArchive.items.items = itemInfos.ToArray();
+
+        //刷新
+        GenerateItems(archiveManager.currentArchive);
+    }
+    public void AddItem(ItemInfo newinfo)
+    {
+        //找到空位置
+        List<int> positions = new List<int>();
+        foreach (ItemInfo itemInfo in archiveManager.currentArchive.items.items)
         {
             positions.Add(itemInfo.position);
         }
@@ -469,6 +493,7 @@ public class EquipmentPanelManager : MonoBehaviour
                 //获取物品信息
                 ItemInfo info = itemPlaceObj.GetComponent<ItemPlace>().content.GetItemInfo();
                 info.position = i;
+                Debug.Log(i);
                 list.Add(info);
             }
         }
@@ -541,6 +566,36 @@ public class EquipmentPanelManager : MonoBehaviour
                 Item item = selectedItemPlace.content;
                 FindAvailablePlace(itemContent).AddItem(item, item.transform.parent);
                 OnClickItem(item, item.GetComponentInParent<ItemPlace>());
+            }
+        }
+    }
+
+    /// <summary>
+    /// 梦化物品
+    /// </summary>
+    public void DreamizeItem()
+    {
+        if (selectedItemPlace != null)
+        {
+            if (selectedItemPlace.content != null)
+            {
+                Item item = selectedItemPlace.content;
+                
+                if (item.isDreamizable)
+                {
+                    ItemInfo dreamizedFeatherInfo;
+                    if (item.dreamizedFeather != null)
+                    {
+                        dreamizedFeatherInfo = item.dreamizedFeather.GetItemInfo();
+                    }
+                    else
+                    {
+                        dreamizedFeatherInfo = item.dreamizedFeatherInfo;
+                    }
+                    selectedItemPlace.Clear();
+
+                    AddItem(dreamizedFeatherInfo);
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using Newtonsoft.Json;
 
 public class ArchiveManager : MonoBehaviour
 {
@@ -44,10 +45,9 @@ public class ArchiveManager : MonoBehaviour
         {
             currentArchive.levelInfo.title = title;
         }
-        SaveCurrentArchive();
 
         //¼ÇÂ¼µã
-        if (archivePointers.Count > 0 && currentArchive.levelInfo.archivePoint != -1)
+        if (archivePointers.Count > currentArchive.levelInfo.archivePoint && currentArchive.levelInfo.archivePoint != -1)
         {
             Debug.Log(currentArchive.levelInfo.archivePoint);
             player.transform.position = archivePointers[currentArchive.levelInfo.archivePoint].position;
@@ -155,7 +155,7 @@ public class ArchiveManager : MonoBehaviour
     /// <param name="archiveIndex">´æµµ±àºÅ</param>
     static public void SaveArchive(Archive archive, int archiveIndex)
     {
-        string data = JsonUtility.ToJson(archive);
+        string data = JsonConvert.SerializeObject(archive);
         Debug.Log(data);
 
         string targetPath = path + "/" + archiveIndex + ".json";
@@ -174,7 +174,7 @@ public class ArchiveManager : MonoBehaviour
             if (file.Name.Split('.')[0] == archiveIndex.ToString())
             {
                 string data = File.ReadAllText(file.FullName);
-                Archive archive = JsonUtility.FromJson<Archive>(data);
+                Archive archive = JsonConvert.DeserializeObject<Archive>(data);
 
                 return archive;
             }
@@ -193,7 +193,7 @@ public class ArchiveManager : MonoBehaviour
         {
             FileInfo file = files[i];
             string data = File.ReadAllText(file.FullName);
-            Archive archive = JsonUtility.FromJson<Archive>(data);
+            Archive archive = JsonConvert.DeserializeObject<Archive>(data);
 
             list.Add(archive);
         }
