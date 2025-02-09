@@ -1440,6 +1440,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: c2a3b5c194cc7e84887b65a17ca74ae2, type: 3}
   isOnPointerEnter: 0
+  isTimerLimit: 0
+  time: 0
 --- !u!1 &3077995935641591630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,6 +1590,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: c2a3b5c194cc7e84887b65a17ca74ae2, type: 3}
   isOnPointerEnter: 0
+  isTimerLimit: 0
+  time: 0
 --- !u!1 &3459508222684987528
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,6 +3102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: c2a3b5c194cc7e84887b65a17ca74ae2, type: 3}
   isOnPointerEnter: 0
+  isTimerLimit: 0
+  time: 0
 --- !u!1 &6044961046726335944
 GameObject:
   m_ObjectHideFlags: 0
