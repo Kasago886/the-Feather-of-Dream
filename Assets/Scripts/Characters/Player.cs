@@ -16,20 +16,48 @@ public class Player : Character
 
     [HideInInspector] public Text cardGenerateText;
     [HideInInspector] public bool isSprinting = false;
+    [HideInInspector] public int baseTenacity;
+    [HideInInspector] public int baseStrength;
+    [HideInInspector] public bool setUped = false;
 
     ArchiveManager archiveManager;
     EquipmentPanelManager equipmentPanelManager;
 
+    static Dictionary<int,List<int>> level_maxExp_tenacity_strength = new Dictionary<int, List<int>>
+    {
+        {0,new List<int> {20,0,0}},
+        {1,new List<int> {20,10,10}},
+        {2,new List<int> {20,20,20}},
+        {3,new List<int> {20,30,30}},
+        {4,new List<int> {20,40,40}},
+    };
+
     new private void Start()
     {
         base.Start();
+
+        if (!setUped)
+            SetUp();
+    }
+
+    /// <summary>
+    /// 初始化（被EquipmentPanelManager引用，保证在其之前初始化，方便计算Item附加的属性）
+    /// </summary>
+    public void SetUp()
+    {
         archiveManager = FindAnyObjectByType<ArchiveManager>();
         equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
         cardController = FindAnyObjectByType<PlayerCardController>();
         cardGenerateText = GameObject.FindGameObjectWithTag(Consts.CardGenerateTextTag).GetComponent<Text>();
 
-        tenacity = archiveManager.currentArchive.playerInfo.tenacity;
-        strength = archiveManager.currentArchive.playerInfo.strength;
+        List<int> levelInfo = level_maxExp_tenacity_strength[archiveManager.currentArchive.playerInfo.level];
+        baseTenacity = levelInfo[1];
+        baseStrength = levelInfo[2];
+
+        tenacity = baseTenacity;
+        strength = baseStrength;
+
+        setUped = true;
     }
 
     /// <summary>
@@ -42,6 +70,7 @@ public class Player : Character
         CardGenerateUpdate();
     }
 
+    #region Card
     /// <summary>
     /// 更新卡牌生成
     /// </summary>
@@ -76,6 +105,7 @@ public class Player : Character
             cardController.GetCard(card);
         }
     }
+    #endregion
 
     /// <summary>
     /// 添加梦
@@ -87,6 +117,65 @@ public class Player : Character
 
         equipmentPanelManager.SetUpPlayerInfo();
     }
+
+    /// <summary>
+    /// 添加经验
+    /// </summary>
+    /// <param name="exp"></param>
+    public void AddExp(int exp)
+    {
+        bool upgrade = false;
+
+        archiveManager.currentArchive.playerInfo.currentExp += exp;
+        while (archiveManager.currentArchive.playerInfo.currentExp >= archiveManager.currentArchive.playerInfo.maxExp)
+        {
+            archiveManager.currentArchive.playerInfo.currentExp -= archiveManager.currentArchive.playerInfo.maxExp;
+            archiveManager.currentArchive.playerInfo.level += 1;
+
+            upgrade = true;
+        }
+
+        //升级后重新计算属性
+        if (upgrade)
+        {
+            //原附加值
+            float addTenacity = tenacity - baseTenacity;
+            float addStrength = strength - baseStrength;
+
+            List<int> levelInfo = level_maxExp_tenacity_strength[archiveManager.currentArchive.playerInfo.level];
+            baseTenacity = levelInfo[1];
+            baseStrength = levelInfo[2];
+
+            archiveManager.currentArchive.playerInfo.tenacity = baseTenacity;
+            archiveManager.currentArchive.playerInfo.strength = baseStrength;
+
+            tenacity = baseTenacity + addTenacity;
+            strength = baseStrength + addStrength;
+        }
+
+        equipmentPanelManager.SetUpPlayerInfo();
+    }
+
+    #region feather
+    /// <summary>
+    /// 添加羽
+    /// </summary>
+    /// <param name="feather"></param>
+    public override void AddFeather(Feather feather)
+    {
+        base.AddFeather(feather);
+        archiveManager.currentArchive.playerInfo.feather = feathers.Count + unlockedFeathers.Count;
+    }
+    /// <summary>
+    /// 移除羽
+    /// </summary>
+    /// <param name="feather"></param>
+    public override void RemoveFeather(Feather feather)
+    {
+        base.RemoveFeather(feather);
+        archiveManager.currentArchive.playerInfo.feather = feathers.Count + unlockedFeathers.Count;
+    }
+    #endregion
 
     /// <summary>
     /// 展示血条
