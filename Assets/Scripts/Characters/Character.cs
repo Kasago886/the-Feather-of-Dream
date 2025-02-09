@@ -311,7 +311,7 @@ public class Character : MonoBehaviour
     /// Ôö¼ÓÓğ
     /// </summary>
     /// <param name="feather"></param>
-    public void AddFeather(Feather feather)
+    public virtual void AddFeather(Feather feather)
     {
         if (feather != null)
         {
@@ -377,7 +377,7 @@ public class Character : MonoBehaviour
     /// ÒÆ³ıÓğ
     /// </summary>
     /// <param name="feather"></param>
-    public void RemoveFeather(Feather feather)
+    public virtual void RemoveFeather(Feather feather)
     {
         if (feathers.Contains(feather))
         {

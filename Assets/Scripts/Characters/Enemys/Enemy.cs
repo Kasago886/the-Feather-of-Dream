@@ -57,6 +57,7 @@ public class Enemy : Character
     public List<EnemyCardLine> effectCardLineList = new();
 
     public DropItem[] dropItems;
+    public int exp;
 
     [HideInInspector] public Player player;
 
@@ -379,13 +380,14 @@ public class Enemy : Character
     }
 
     /// <summary>
-    /// 死亡掉落物品
+    /// 死亡
     /// </summary>
     public override void OnDeath()
     {
         base.OnDeath();
 
-        foreach(DropItem dropItem in dropItems)
+        //掉落物品
+        foreach (DropItem dropItem in dropItems)
         {
             if (dropItem != null)
             {
@@ -393,6 +395,9 @@ public class Enemy : Character
                 instance.transform.position = transform.position;
             }
         }
+
+        //经验
+        player.AddExp(exp);
     }
 
     private void OnDrawGizmosSelected()

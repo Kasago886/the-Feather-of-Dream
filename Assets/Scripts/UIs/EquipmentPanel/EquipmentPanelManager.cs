@@ -39,12 +39,14 @@ public class EquipmentPanelManager : MonoBehaviour
     ItemPlace selectedItemPlace = null;
     bool isShow = false;
     AnimationBoolManager animationBoolManager;
+    Player player;
 
     // Start is called before the first frame update
     void Start()
     {
         archiveManager = FindAnyObjectByType<ArchiveManager>();
         animationBoolManager = GetComponent<AnimationBoolManager>();
+        player = FindAnyObjectByType<Player>();
 
         SetupPanel();
     }
@@ -60,6 +62,11 @@ public class EquipmentPanelManager : MonoBehaviour
     /// </summary>
     public void SetupPanel()
     {
+        if (!player.setUped)
+        {
+            player.SetUp();
+        }
+
         selectedItemPlace = null;
         //∂¡»°¥Êµµ
         Archive archive = archiveManager.currentArchive;
@@ -300,9 +307,10 @@ public class EquipmentPanelManager : MonoBehaviour
         }
         expNumber.text = playerInfo.currentExp.ToString() + "/" + playerInfo.maxExp.ToString();
         expProgress.sizeDelta = new Vector2(300 * playerInfo.currentExp / playerInfo.maxExp, expProgress.sizeDelta.y);
-        tenacity.text = playerInfo.tenacity.ToString();
-        strength.text = playerInfo.strength.ToString();
+        tenacity.text = player.tenacity.ToString();
+        strength.text = player.strength.ToString();
         feather.text = playerInfo.feather.ToString();
+
         dream.text = playerInfo.dream.ToString();
     }
 

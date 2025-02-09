@@ -8,9 +8,13 @@ public class bottonSoundFromEffect : MonoBehaviour, IPointerEnterHandler, IPoint
 {
     public AudioClip clip;
     public bool isOnPointerEnter;
+    public bool isTimerLimit;
+    public float time;
+
     AudioSource source;
     Button button;
     bool isbutton = false;
+    float timer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +31,10 @@ public class bottonSoundFromEffect : MonoBehaviour, IPointerEnterHandler, IPoint
     // Update is called once per frame
     void Update()
     {
-        
+        if (isTimerLimit && timer > 0)
+        {
+            timer -= Time.unscaledDeltaTime;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)    //鼠标移入
@@ -46,6 +53,27 @@ public class bottonSoundFromEffect : MonoBehaviour, IPointerEnterHandler, IPoint
         if (isbutton)
         {
             if (button.interactable)
+            {
+                source.PlayOneShot(clip);
+            }
+        }
+    }
+
+    public void PlaySound()
+    {
+        //Debug.Log(source);
+        //Debug.Log(timer);
+        if (source != null)
+        {
+            if (isTimerLimit)
+            {
+                if (timer <= 0)
+                {
+                    timer = time;
+                    source.PlayOneShot(clip);
+                }
+            }
+            else
             {
                 source.PlayOneShot(clip);
             }

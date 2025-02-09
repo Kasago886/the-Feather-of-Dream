@@ -10,6 +10,9 @@ TagManager:
   - Slope
   - CardGenerateText
   - CardPanel
+  - BGMSlider
+  - EffectSlider
+  - PausePanel
   layers:
   - Default
   - TransparentFX
