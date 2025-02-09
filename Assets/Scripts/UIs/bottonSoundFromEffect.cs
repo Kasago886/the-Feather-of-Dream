@@ -61,8 +61,8 @@ public class bottonSoundFromEffect : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void PlaySound()
     {
-        Debug.Log(source);
-        Debug.Log(timer);
+        //Debug.Log(source);
+        //Debug.Log(timer);
         if (source != null)
         {
             if (isTimerLimit)
