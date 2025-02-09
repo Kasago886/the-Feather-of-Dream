@@ -81,6 +81,7 @@ public class EnemyInspector : CharacterInspector
         EditorGUILayout.Space(10);
 
         EditorGUILayout.PropertyField(dropItems, new UnityEngine.GUIContent("掉落物"), true);
+        enemy.exp = EditorGUILayout.IntField("死亡获得经验值",enemy.exp);
 
         EditorGUILayout.Space(10);
 
