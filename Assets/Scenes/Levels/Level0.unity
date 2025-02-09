@@ -3326,11 +3326,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4073656887174430166, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
   m_PrefabInstance: {fileID: 715301937}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &720164910 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1322751311617512027, guid: 423fe13c1a39e5d4484ab46540c359bb, type: 3}
-  m_PrefabInstance: {fileID: 2390267796848652925}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &720164911 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4111304450067480347, guid: 423fe13c1a39e5d4484ab46540c359bb, type: 3}
@@ -11822,7 +11817,6 @@ MonoBehaviour:
   isBoxMap: 0
   playerController: {fileID: 1987884398}
   equipmentPanelManager: {fileID: 0}
-  PausePanel: {fileID: 720164910}
   cardPanelAnimationManager: {fileID: 1195047099}
 --- !u!4 &2140482257
 Transform:
