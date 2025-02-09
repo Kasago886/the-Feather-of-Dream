@@ -47,7 +47,7 @@ public class ArchiveManager : MonoBehaviour
         }
 
         //¼ÇÂ¼µã
-        if (archivePointers.Count > currentArchive.levelInfo.archivePoint && currentArchive.levelInfo.archivePoint != -1)
+        if (archivePointers.Count > currentArchive.levelInfo.archivePoint && currentArchive.levelInfo.archivePoint != -1 && player != null)
         {
             Debug.Log(currentArchive.levelInfo.archivePoint);
             player.transform.position = archivePointers[currentArchive.levelInfo.archivePoint].position;

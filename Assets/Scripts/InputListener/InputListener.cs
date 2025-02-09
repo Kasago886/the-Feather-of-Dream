@@ -7,11 +7,12 @@ using UnityEngine.UIElements;
 
 public enum InputListenerState
 {
-    normal, equipment, option
+    normal, equipment, option, boxMap
 }
 
 public class InputListener : MonoBehaviour
 {
+    public bool isBoxMap;
     public PlayerController playerController;
     [HideInInspector]public EquipmentPanelManager equipmentPanelManager;
     public GameObject PausePanel;
@@ -23,14 +24,22 @@ public class InputListener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cardPanelAnimationManager = GameObject.FindGameObjectWithTag(Consts.CardPanelTag).GetComponent<AnimationBoolManager>();
-        equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
-
         states[InputListenerState.normal] = new NormalListenerState(this);
         states[InputListenerState.equipment] = new EquipmentListenerState(this);
         states[InputListenerState.option] = new OptionListenerState(this);
+        states[InputListenerState.boxMap] = new BoxMapListenerState(this);
 
-        currentState = states[InputListenerState.normal];
+        if (isBoxMap)
+        {
+            currentState = states[InputListenerState.boxMap];
+        }
+        else
+        {
+            cardPanelAnimationManager = GameObject.FindGameObjectWithTag(Consts.CardPanelTag).GetComponent<AnimationBoolManager>();
+            equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
+
+            currentState = states[InputListenerState.normal];
+        }
     }
 
     public void StateTransition(InputListenerState state)
@@ -51,7 +60,14 @@ public class InputListener : MonoBehaviour
             Time.timeScale = 1.0f;
             PausePanel.SetActive(false);
 
-            StateTransition(InputListenerState.normal);
+            if (isBoxMap)
+            {
+                StateTransition(InputListenerState.boxMap);
+            }
+            else
+            {
+                StateTransition(InputListenerState.normal);
+            }
         }
         else
         {

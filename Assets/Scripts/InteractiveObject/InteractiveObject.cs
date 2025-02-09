@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 [RequireComponent(typeof(PolygonCollider2D))]
 //注意如果使用的是mode2的话那么请安装上rigidbody2D组件
 public class InteractiveObject : MonoBehaviour
