@@ -86,7 +86,35 @@ public class TestEquipmentBuff : EquipmentBuff
         Debug.Log("TestEquipmentBuff is Removed!");
     }
 }
+public class CrazyHunterEquipmentBuff : EquipmentBuff
+{
+    bool isUpdated = false;
+    Player player;
 
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player=target.GetComponent<Player>();
+        player.tenacity += 10;
+        
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (!isUpdated)
+        {
+            Debug.Log("TestEquipmentBuff is updated succesfully!");
+            isUpdated = true;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        Debug.Log("TestEquipmentBuff is Removed!");
+    }
+}
 #endregion
 
 #region ×°±¸Óðbuff
@@ -292,10 +320,10 @@ public class CrazyHunterAttackBuff1 : AttackBuff
         this.timer = 1;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunter/CrazyHunterAttackBodyTrap");
         target.GetComponent<Enemy>().attackCooldownTimer = 0;
-       
+
     }
 }
-    public class TinWoodmanAttackBuff : AttackBuff
+public class TinWoodmanAttackBuff : AttackBuff
 {
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
@@ -502,7 +530,7 @@ public class CrazyHunterEffectBuff : EffectBuff
         target.GetComponent<Enemy>().strength = 0;
     }
 }
-    public class TinWoodmanEffectBuff : EffectBuff
+public class TinWoodmanEffectBuff : EffectBuff
 {
     private float buffTimer;
     private float oriStrength;
@@ -675,7 +703,7 @@ public class Trauma : EffectBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        if (target.GetComponent<Player>() != null )
+        if (target.GetComponent<Player>() != null)
         {
             player = target.GetComponent<Player>();
             if (player.unlockedFeathers.Count > 0)
@@ -707,7 +735,7 @@ public class Trauma : EffectBuff
         {
             if (player != null)
             {
-                if ( player.unlockedFeathers.Count > 0&&health - player.unlockedFeathers[0].health >= 1)
+                if (player.unlockedFeathers.Count > 0 && health - player.unlockedFeathers[0].health >= 1)
                 {
                     player.unlockedFeathers[0].health--;
                     attackTimer = 0;
@@ -719,22 +747,22 @@ public class Trauma : EffectBuff
             }
             if (enemy != null)
             {
-                if (enemy.unlockedFeathers.Count > 0&&health - enemy.unlockedFeathers[0].health >= 1)
+                if (enemy.unlockedFeathers.Count > 0 && health - enemy.unlockedFeathers[0].health >= 1)
                 {
                     enemy.unlockedFeathers[0].health--;
                     attackTimer = 0;
                     if (Random.Range(0, 3) > 1)
                     {
-                        this.timer=0;
+                        this.timer = 0;
                     }
                 }
             }
         }
-        if(player != null && player.unlockedFeathers.Count > 0)
+        if (player != null && player.unlockedFeathers.Count > 0)
         {
             health = player.unlockedFeathers[0].health;
         }
-        if(enemy != null && enemy.unlockedFeathers.Count > 0)
+        if (enemy != null && enemy.unlockedFeathers.Count > 0)
         {
             health = enemy.unlockedFeathers[0].health;
         }
@@ -815,17 +843,17 @@ public class Depressed : EffectBuff
 
     public override void OnEnter()
     {
-        if(player != null)
+        if (player != null)
         {
             player.cardGenerateCooldown += 1;
-            baseColor=player.cardGenerateText.color;
-            player.cardGenerateText.color= Color.red;
+            baseColor = player.cardGenerateText.color;
+            player.cardGenerateText.color = Color.red;
         }
         if (enemy != null)
         {
             foreach (EnemyCardLine line in enemy.attackCardLineList)
             {
-                foreach(EnemyCardWithTimer ectw in line.cards)
+                foreach (EnemyCardWithTimer ectw in line.cards)
                 {
                     ectw.timer += 1;
                 }
@@ -976,12 +1004,12 @@ public class Mediocre : EffectBuff
 }
 public class Talent : EffectBuff
 {
-   private Character character;
+    private Character character;
     private float change;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        if(target.GetComponent<Character>() != null)
+        if (target.GetComponent<Character>() != null)
         {
             character = target.GetComponent<Character>();
         }
@@ -1087,7 +1115,7 @@ public class Ignore : EffectBuff
         base.OnExit();
     }
 }
-public class ImperfectWork: EffectBuff
+public class ImperfectWork : EffectBuff
 {
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
@@ -1098,7 +1126,7 @@ public class ImperfectWork: EffectBuff
 
     public override void OnEnter()
     {
-        
+
         base.OnEnter();
     }
 
@@ -1112,7 +1140,7 @@ public class ImperfectWork: EffectBuff
         base.OnExit();
     }
 }
-public class CraveRecognition: EffectBuff
+public class CraveRecognition : EffectBuff
 {
     private Enemy enemy;
     private float health;
@@ -1146,7 +1174,7 @@ public class CraveRecognition: EffectBuff
             {
                 if (enemy.unlockedFeathers.Count > 0 && health - enemy.unlockedFeathers[0].health >= 1)
                 {
-                    enemy.unlockedFeathers[0].health-=0.5f;
+                    enemy.unlockedFeathers[0].health -= 0.5f;
                     attackTimer = 0;
                 }
             }
@@ -1178,12 +1206,12 @@ public class UpLifting : EffectBuff
 
     public override void OnEnter()
     {
-        change = character.strength*0.1f;
+        change = character.strength * 0.1f;
         if (change > 1)
         {
             change = 1;
         }
-        character.strength +=change;
+        character.strength += change;
         base.OnEnter();
     }
 
@@ -1234,7 +1262,7 @@ public class Toughness : EffectBuff
         base.OnExit();
     }
 }
-public class BlazingSpeed: EffectBuff
+public class BlazingSpeed : EffectBuff
 {
     private Enemy character;
     private PlayerController playerController;
@@ -1246,9 +1274,9 @@ public class BlazingSpeed: EffectBuff
         {
             character = target.GetComponent<Enemy>();
         }
-        if(target.GetComponent<PlayerController>() != null)
+        if (target.GetComponent<PlayerController>() != null)
         {
-            playerController = target.GetComponent<PlayerController>(); 
+            playerController = target.GetComponent<PlayerController>();
         }
         this.timer = 16f;
     }
@@ -1263,7 +1291,7 @@ public class BlazingSpeed: EffectBuff
         if (playerController != null)
         {
             change = playerController.walkSpeed * 0.1f;
-            playerController.walkSpeed += change; 
+            playerController.walkSpeed += change;
         }
         base.OnEnter();
     }
@@ -1363,7 +1391,7 @@ public class Steadfast : EffectBuff
         {
             player.cardGenerateCooldown -= 1;
             baseColor = player.cardGenerateText.color;
-            player.cardGenerateText.color = Color.green;       
+            player.cardGenerateText.color = Color.green;
         }
         if (enemy != null)
         {
@@ -1673,7 +1701,7 @@ public class PoisonBuff : EffectBuff
                 bufftimer = 1;
             }
         }
-        }
+    }
 
     public override void OnExit()
     {
@@ -1694,41 +1722,24 @@ public class JusticeBuff : EffectBuff
     public override void OnEnter()
     {
         base.OnEnter();
-        foreach(GameObject attackBody in target.attackBodyObjList)
-        {
-            attackbodyOriNum++;
-        }
-        if (attackbodyOriNum == 0)
-        {
-            yes = true;
-        }
+        attackbodyOriNum = target.attackBodyObjList.Count;
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
-        attackbodyNewNum = 0;
-        foreach (GameObject attackBody in target.attackBodyObjList)
-        {
-            attackbodyNewNum++;
-        }
-        if(attackbodyNewNum >attackbodyOriNum)
+        attackbodyNewNum = target.attackBodyObjList.Count;
+        if (attackbodyNewNum > attackbodyOriNum)
         {
             target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().damage *= 2;
             timer = 0;
         }
-        if (attackbodyNewNum == 0)
+        if (attackbodyNewNum < attackbodyOriNum)
         {
-            yes = true;
+            attackbodyOriNum = attackbodyNewNum;
         }
-        if (yes) {
-            if (target.attackBodyObjList.Count != 0)
-            {
-                target.attackBodyObjList[0].GetComponent<AttackBody>().damage *= 2;
-                timer = 0;
-            }
-            }
-        }
+
+    }
 
     public override void OnExit()
     {
