@@ -561,6 +561,7 @@ GameObject:
   - component: {fileID: 1891233999512855963}
   - component: {fileID: 4673684415430246125}
   - component: {fileID: 5744593612972357413}
+  - component: {fileID: 3619685356104510822}
   - component: {fileID: 5933158148038593431}
   m_Layer: 5
   m_Name: EquipmentPanel
@@ -687,6 +688,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3619685356104510822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583657142484838520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b4abaf49b445f459bf16f962acb8ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5933158148038593431
 MonoBehaviour:
   m_ObjectHideFlags: 0

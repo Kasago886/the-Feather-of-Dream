@@ -20,7 +20,6 @@ public class InputListener : MonoBehaviour
     GameObject GrayPanel;
 
     [HideInInspector] public AnimationBoolManager cardPanelAnimationManager;
-    AnimationBoolManager equipmentPanelAnimationManager;
 
     Dictionary<InputListenerState, IListenerState> states = new();
     [HideInInspector] public IListenerState currentState;
@@ -64,7 +63,6 @@ public class InputListener : MonoBehaviour
         {
             cardPanelAnimationManager = GameObject.FindGameObjectWithTag(Consts.CardPanelTag).GetComponent<AnimationBoolManager>();
             equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
-            equipmentPanelAnimationManager = equipmentPanelManager.gameObject.GetComponent<AnimationBoolManager>();
 
             currentState = states[InputListenerState.normal];
         }
@@ -116,16 +114,12 @@ public class InputListener : MonoBehaviour
             Time.timeScale = 1.0f;
             GrayPanel.SetActive(false);
             cardPanelAnimationManager.SetFalse("appear");
-            cardPanelAnimationManager.SetSpeed(1);
-            equipmentPanelAnimationManager.SetSpeed(1);
         }
         else
         {
             Time.timeScale = 0.1f;
             GrayPanel.SetActive(true);
             cardPanelAnimationManager.SetTrue("appear");
-            cardPanelAnimationManager.SetSpeed(10);
-            equipmentPanelAnimationManager.SetSpeed(10);
         }
     }
 
