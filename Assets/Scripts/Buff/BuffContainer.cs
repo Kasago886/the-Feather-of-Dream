@@ -56,6 +56,8 @@ public class BuffContainer
         {"脆弱",typeof(Fragile) },//使对象降低10%的韧性，最高不超过2点韧性，持续16s
         {"迟缓",typeof(Sluggish) },//使对象降低10%速度，持续16s
         {"凝重",typeof(Grave) },//使对象降低10%起跳速度，持续16s
+        {"中毒",typeof(PoisonBuff) },//使对象每秒扣除1滴血，持续5s
+        {"正义",typeof(JusticeBuff) },//使玩家下一张攻击卡攻击力翻倍
     };
 
     /*

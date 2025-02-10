@@ -1641,4 +1641,98 @@ public class Grave : EffectBuff
         base.OnExit();
     }
 }
+public class PoisonBuff : EffectBuff
+{
+    float bufftimer;
+    Enemy enemy;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        bufftimer = 1;
+        this.timer = 5.1f;
+        enemy = target.GetComponent<Enemy>();
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (bufftimer > 0)
+        {
+            bufftimer -= Time.deltaTime;
+        }
+        else
+        {
+            if (enemy.unlockedFeathers[0] != null)
+            {
+                enemy.unlockedFeathers[0].health -= 4f;
+                bufftimer = 1;
+            }
+        }
+        }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class JusticeBuff : EffectBuff
+{
+    int attackbodyOriNum;
+    int attackbodyNewNum;
+    bool yes;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 9999;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        foreach(GameObject attackBody in target.attackBodyObjList)
+        {
+            attackbodyOriNum++;
+        }
+        if (attackbodyOriNum == 0)
+        {
+            yes = true;
+        }
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        attackbodyNewNum = 0;
+        foreach (GameObject attackBody in target.attackBodyObjList)
+        {
+            attackbodyNewNum++;
+        }
+        if(attackbodyNewNum >attackbodyOriNum)
+        {
+            target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().damage *= 2;
+            timer = 0;
+        }
+        if (attackbodyNewNum == 0)
+        {
+            yes = true;
+        }
+        if (yes) {
+            if (target.attackBodyObjList.Count != 0)
+            {
+                target.attackBodyObjList[0].GetComponent<AttackBody>().damage *= 2;
+                timer = 0;
+            }
+            }
+        }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
 #endregion
