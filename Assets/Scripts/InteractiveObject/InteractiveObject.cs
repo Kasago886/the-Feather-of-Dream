@@ -156,6 +156,8 @@ public class InteractiveObject : MonoBehaviour
         if (!triggered || !onceTrigger)
         {
             triggered = true;
+            HideNoticer();
+
             unityEvent?.Invoke();
         }
     }

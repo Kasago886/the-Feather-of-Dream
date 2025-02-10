@@ -74,47 +74,29 @@ public class EquipmentPanelManager : MonoBehaviour
         SetUpPlayerInfo();
 
         //featherEquip
-        int count = 0;
-        for (int i = 0; i < 5; i++)
+        //清空
+        for (int i = 0; i < featherEquipContent.childCount; i++)
         {
-            Transform parent = featherEquipContent.GetChild(i);
-            ItemPlace ip = parent.GetComponent<ItemPlace>();
-            //清空
+            ItemPlace ip = featherEquipContent.GetChild(i).GetComponent<ItemPlace>();
             ip.Clear();
-
-            //防止超出索引
-            if (count >= archive.equipedFeather.items.Length)
-                continue;
-
-            //对应位置
-            if (i == archive.equipedFeather.items[count].position)
-            {
-                GenerateSingleItem(ip, archive.equipedFeather.items[count]);
-
-                count++;
-            }
+        }
+        //生成
+        foreach (ItemInfo itemInfo in archive.equipedFeather.items)
+        {
+            ItemPlace ip = featherEquipContent.GetChild(itemInfo.position).GetComponent<ItemPlace>();
+            GenerateSingleItem(ip, itemInfo);
         }
 
         //brokenFeatherEquip
-        count = 0;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < brokenFeatherEquipContent.childCount; i++)
         {
-            Transform parent = brokenFeatherEquipContent.GetChild(i);
-            ItemPlace ip = parent.GetComponent<ItemPlace>();
-            //清空
+            ItemPlace ip = brokenFeatherEquipContent.GetChild(i).GetComponent<ItemPlace>();
             ip.Clear();
-
-            //防止超出索引
-            if (count >= archive.equipedBrokenFeather.items.Length)
-                continue;
-
-            //对应位置
-            if (i == archive.equipedBrokenFeather.items[count].position)
-            {
-                GenerateSingleItem(ip, archive.equipedBrokenFeather.items[count]);
-
-                count++;
-            }
+        }
+        foreach (ItemInfo itemInfo in archive.equipedBrokenFeather.items)
+        {
+            ItemPlace ip = brokenFeatherEquipContent.GetChild(itemInfo.position).GetComponent<ItemPlace>();
+            GenerateSingleItem(ip, itemInfo);
         }
 
         //items
@@ -157,6 +139,7 @@ public class EquipmentPanelManager : MonoBehaviour
 
         //刷新
         GenerateItems(archiveManager.currentArchive);
+        ArchiveManager.DebugArchiveRead(archiveManager.currentArchive);
     }
     public void AddItem(ItemInfo newinfo)
     {
@@ -336,38 +319,31 @@ public class EquipmentPanelManager : MonoBehaviour
     void GenerateItems(Archive archive)
     {
         //清空
-        int count = itemContent.childCount;
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < itemContent.childCount; i++)
         {
-            Destroy(itemContent.GetChild(i).gameObject);
+            ItemPlace ip = itemContent.GetChild(i).GetComponent<ItemPlace>();
+            ip.Clear();
         }
-        count = 0;
-        //预留足够空位置(30个)
-        int addition = 30;
-        for (int i = 0; addition > 0 || count < archive.items.items.Length; i++)
+        //预留足够位置(n+30个)
+        int requireIpNum = archive.items.items.Length + 30;
+        int currentIpNum = itemContent.childCount;
+        int addition = requireIpNum - currentIpNum;
+        for (int i = 0; i < addition; i++)
         {
-            //添加物品
-            GameObject parent = Instantiate(itemPlaceObj, itemContent, false);
-            ItemPlace ip = parent.GetComponent<ItemPlace>();
-
-            //防止超出索引
-            if (count >= archive.items.items.Length)
+            //添加位置
+            Instantiate(itemPlaceObj, itemContent, false);
+        }
+        //生成
+        foreach (ItemInfo itemInfo in archive.items.items)
+        {
+            //位置在更后面
+            while (itemInfo.position >= itemContent.childCount)
             {
-                addition--;
-                continue;
+                Instantiate(itemPlaceObj, itemContent, false);
             }
 
-            //对应位置
-            if (i == archive.items.items[count].position)
-            {
-                GenerateSingleItem(ip, archive.items.items[count]);
-
-                count++;
-            }
-            else
-            {
-                addition--;
-            }
+            ItemPlace ip = itemContent.GetChild(itemInfo.position).GetComponent<ItemPlace>();
+            GenerateSingleItem(ip, itemInfo);
         }
     }
 
@@ -378,25 +354,22 @@ public class EquipmentPanelManager : MonoBehaviour
     void GenerateEncyclopedia(Archive archive)
     {
         //清空
-        int count = encyclopediaContent.childCount;
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < encyclopediaContent.childCount; i++)
         {
-            Destroy(encyclopediaContent.GetChild(i).gameObject);
+            ItemPlace ip = encyclopediaContent.GetChild(i).GetComponent<ItemPlace>();
+            ip.Clear();
         }
-        count = 0;
-        for (int i = 0; count < archive.encyclopedia.items.Length; i++)
+        //生成
+        foreach (ItemInfo itemInfo in archive.encyclopedia.items)
         {
-            //添加物品
-            GameObject parent = Instantiate(itemPlaceObj, encyclopediaContent, false);
-            ItemPlace ip = parent.GetComponent<ItemPlace>();
-
-            //对应位置
-            if (i == archive.encyclopedia.items[count].position)
+            //位置在更后面
+            while (itemInfo.position >= encyclopediaContent.childCount)
             {
-                GenerateSingleItem(ip, archive.encyclopedia.items[count]);
-
-                count++;
+                Instantiate(itemPlaceObj, encyclopediaContent, false);
             }
+
+            ItemPlace ip = encyclopediaContent.GetChild(itemInfo.position).GetComponent<ItemPlace>();
+            GenerateSingleItem(ip, itemInfo);
         }
     }
 

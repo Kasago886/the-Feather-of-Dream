@@ -1,1 +1,112 @@
-{"index":1,"levelInfo":{"level":11,"title":"第一层","archivePoint":0,"littleRedRidingHood":true},"timeInfo":{"year":2025,"month":2,"day":10,"hour":14,"minute":15,"second":14},"playerInfo":{"level":0,"currentExp":0,"maxExp":0,"feather":3,"dream":5,"tenacity":0,"strength":0},"equipedFeather":{"items":[{"itemName":"测试之羽","information":"平平无奇的羽翼\n\n韧性+0\n力量+0","type":0,"isDreamizable":false,"dreamizeCost":0,"dreamizedFeather":null,"imageName":"testIcon","buffName":"测试装备羽","featherHealth":100.0,"position":0},{"itemName":"测试之羽","information":"平平无奇的羽翼\n\n韧性+0\n力量+0","type":0,"isDreamizable":false,"dreamizeCost":0,"dreamizedFeather":null,"imageName":"testIcon","buffName":"测试装备羽","featherHealth":100.0,"position":1}]},"equipedBrokenFeather":{"items":[]},"items":{"items":[{"itemName":"测试之物","information":"平平无奇的物品，没有任何作用","type":2,"isDreamizable":false,"dreamizeCost":0,"dreamizedFeather":null,"imageName":"testIcon","buffName":"","featherHealth":0.0,"position":0},{"itemName":"风洞实验场的钥匙","information":"专门为轻信他人的“小红帽”们准备的备用钥匙。","type":2,"isDreamizable":false,"dreamizeCost":0,"dreamizedFeather":null,"imageName":"key","buffName":"","featherHealth":0.0,"position":1}]},"encyclopedia":{"items":[{"itemName":"测试之图鉴","information":"平平无奇的图鉴，啥也不是","type":3,"isDreamizable":false,"dreamizeCost":0,"dreamizedFeather":null,"imageName":"testIcon","buffName":"","featherHealth":0.0,"position":0}]}}
+{
+    "index": 1,
+    "levelInfo": {
+        "level": 11,
+        "title": "第一层",
+        "archivePoint": 0,
+        "littleRedRidingHood": true
+    },
+    "timeInfo": {
+        "year": 2025,
+        "month": 2,
+        "day": 10,
+        "hour": 14,
+        "minute": 15,
+        "second": 14
+    },
+    "playerInfo": {
+        "level": 0,
+        "currentExp": 0,
+        "maxExp": 0,
+        "feather": 3,
+        "dream": 5,
+        "tenacity": 0,
+        "strength": 0
+    },
+    "equipedFeather": {
+        "items": [
+            {
+                "itemName": "测试之羽",
+                "information": "平平无奇的羽翼\n\n韧性+0\n力量+0",
+                "type": 0,
+                "isDreamizable": false,
+                "dreamizeCost": 0,
+                "dreamizedFeather": null,
+                "imageName": "testIcon",
+                "buffName": "测试装备羽",
+                "featherHealth": 100.0,
+                "position": 0
+            },
+            {
+                "itemName": "测试之羽",
+                "information": "平平无奇的羽翼\n\n韧性+0\n力量+0",
+                "type": 0,
+                "isDreamizable": false,
+                "dreamizeCost": 0,
+                "dreamizedFeather": null,
+                "imageName": "testIcon",
+                "buffName": "测试装备羽",
+                "featherHealth": 100.0,
+                "position": 1
+            }
+        ]
+    },
+    "equipedBrokenFeather": {
+        "items": []
+    },
+    "items": {
+        "items": [
+            {
+                "itemName": "测试之物",
+                "information": "平平无奇的物品，没有任何作用",
+                "type": 2,
+                "isDreamizable": false,
+                "dreamizeCost": 0,
+                "dreamizedFeather": null,
+                "imageName": "testIcon",
+                "buffName": "",
+                "featherHealth": 0.0,
+                "position": 0
+            },
+            {
+                "itemName": "测试之残羽",
+                "information": "平平无奇的残羽\n\n韧性+0\n力量+0",
+                "type": 1,
+                "isDreamizable": true,
+                "dreamizeCost": 1,
+                "dreamizedFeather": {
+                    "itemName": "测试之羽",
+                    "information": "平平无奇的羽翼\n\n韧性+0\n力量+0",
+                    "type": 0,
+                    "isDreamizable": false,
+                    "dreamizeCost": 0,
+                    "dreamizedFeather": null,
+                    "imageName": "testIcon",
+                    "buffName": "测试装备羽",
+                    "featherHealth": 100.0,
+                    "position": 0
+                },
+                "imageName": "testIcon",
+                "buffName": "测试装备",
+                "featherHealth": 0.0,
+                "position": 13
+            }
+        ]
+    },
+    "encyclopedia": {
+        "items": [
+            {
+                "itemName": "测试之图鉴",
+                "information": "平平无奇的图鉴，啥也不是",
+                "type": 3,
+                "isDreamizable": false,
+                "dreamizeCost": 0,
+                "dreamizedFeather": null,
+                "imageName": "testIcon",
+                "buffName": "",
+                "featherHealth": 0.0,
+                "position": 0
+            }
+        ]
+    }
+}

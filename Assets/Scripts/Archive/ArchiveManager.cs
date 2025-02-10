@@ -295,11 +295,13 @@ public class ArchiveManager : MonoBehaviour
     static public void DebugArchiveRead(int index)
     {
         Archive archive = GetArchive(index);
-
-        Debug.Log("level:"+archive.playerInfo.level);
-        Debug.Log("feather:" + archive.playerInfo.feather);
-        Debug.Log("tenacity:"+archive.playerInfo.tenacity);
-        Debug.Log("strength:"+archive.playerInfo.strength);
+        string data = JsonConvert.SerializeObject(archive);
+        Debug.Log(data);
+    }
+    static public void DebugArchiveRead(Archive archive)
+    {
+        string data = JsonConvert.SerializeObject(archive);
+        Debug.Log(data);
     }
 
     /// <summary>
