@@ -256,7 +256,7 @@ MonoBehaviour:
   id: 2
   name: "\u827E\u8389\u4E4B\u5251"
   rarity: 1
-  description: "\u62D4\u7FBDx1: 5s\n\u827E\u8389\u4E4B\u5251: 5s\n- \u4F24\u5BB310\n\n"
+  description: "\u62D4\u7FBDx1: 10s\n\u827E\u8389\u4E4B\u5251: 10s\n- \u4F24\u5BB310\n\n"
   backGroundStory: 
   b0: 1
   b1: 1
@@ -330,7 +330,7 @@ MonoBehaviour:
       m_Calls: []
   buffsEnemy: []
   buffNamesEnemy:
-  - "\u62D4\u7FBD5s"
+  - "\u62D4\u7FBD10s"
   customMode: 0
   pleaseChooseOneMethod: 1
   targetTransform: {fileID: 0}

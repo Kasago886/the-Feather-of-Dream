@@ -18,6 +18,7 @@ public class EquipmentListenerState : IListenerState
             listener.equipmentPanelManager.SwitchShow();
 
             listener.StateTransition(InputListenerState.normal);
+            return;
         }
     }
 }

@@ -29,6 +29,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 
     [HideInInspector] public bool isEquiped;
     [HideInInspector] public string imageName;
+    [HideInInspector] public Feather itemFeather;
 
     Image image;
     Transform canvas;
@@ -37,6 +38,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     EquipmentPanelManager equipmentPanelManager;
     Player player;
     EquipmentFeatherBuff equipmentFeatherBuff;
+    ItemHealth itemHealth;
 
     /// <summary>
     /// 根据数据初始化
@@ -62,7 +64,6 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         Resources.UnloadUnusedAssets();
 
         buffName = itemInfo.buffName;
-        featherHealth = itemInfo.featherHealth;
 
         if (type == ItemType.Feather)
         {
@@ -75,7 +76,16 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
             equipmentFeatherBuff = BuffContainer.GetBuffInstance(buffName) as EquipmentFeatherBuff;
             equipmentFeatherBuff.Init(player);
             equipmentFeatherBuff.feather.item = this;
-            equipmentFeatherBuff.feather.health = featherHealth;
+            equipmentFeatherBuff.feather.health = itemInfo.featherHealth;
+
+            itemFeather = equipmentFeatherBuff.feather;
+
+            if (itemHealth == null)
+            {
+                itemHealth = transform.GetChild(0).GetComponent<ItemHealth>();
+            }
+            itemHealth.gameObject.SetActive(true);
+            itemHealth.feather = equipmentFeatherBuff.feather;
         }
     }
 
@@ -108,7 +118,14 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 
         info.imageName = image.sprite.name;
         info.buffName = buffName;
-        info.featherHealth = featherHealth;
+        if (itemFeather == null)
+        {
+            info.featherHealth = featherHealth;
+        }
+        else
+        {
+            info.featherHealth = itemFeather.health;
+        }
         return info;
     }
 
@@ -118,8 +135,8 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
-        //不允许拖动图鉴
-        if (type == ItemType.Encyclopedia)
+        //不允许拖动图鉴 不允许拖动/卸下艾莉之羽
+        if (type == ItemType.Encyclopedia || itemName == "艾莉之羽")
         {
             parent = transform.parent;
             return;
@@ -147,27 +164,26 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <param name="eventData"></param>
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (eventData != null && type != ItemType.Encyclopedia)
-        {
-            //保证是左键松开
-            if (eventData.button == PointerEventData.InputButton.Left)
-            {
-                GameObject upGo = eventData.pointerCurrentRaycast.gameObject;
-                Transpose(upGo);
-
-                isHover = false;
-                image.raycastTarget = true;
-            }
-        }
-        else
+        //手动触发时自动归位 不允许拖动图鉴 不允许拖动/卸下艾莉之羽
+        if (eventData == null || type == ItemType.Encyclopedia || itemName == "艾莉之羽")
         {
             //程序手动触发
             Transpose(null);
 
             isHover = false;
             image.raycastTarget = true;
+            return;
         }
-        
+
+        //保证是左键松开
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            GameObject upGo = eventData.pointerCurrentRaycast.gameObject;
+            Transpose(upGo);
+
+            isHover = false;
+            image.raycastTarget = true;
+        }
     }
 
     /// <summary>
@@ -191,7 +207,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         if (!isTransposed)
         {
             transform.SetParent(parent);
-            transform.SetAsFirstSibling();
+            transform.SetAsLastSibling();
         }
 
         equipmentPanelManager.OnClickItem(this, GetComponentInParent<ItemPlace>());

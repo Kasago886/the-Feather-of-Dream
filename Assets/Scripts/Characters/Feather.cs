@@ -12,7 +12,7 @@ public class Feather
 
     public virtual void TakeDamage(float damage)
     {
-        health -= damage;
+        health -= damage;//需要为负数，以便于character计算伤害，在character中有归零
 
         if (hpUI != null)
         {
@@ -45,8 +45,7 @@ public class EquipmentFeather : Feather
     {
         base.TakeDamage(damage);
 
-        Debug.Log(item.itemName);
-        item.featherHealth = health;
+        Debug.Log(item.itemName+":"+health);
     }
 }
 

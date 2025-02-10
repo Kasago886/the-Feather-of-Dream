@@ -34,6 +34,7 @@ public class EquipmentPanelManager : MonoBehaviour
     public GameObject donotTouchPanel;
 
     [HideInInspector] public List<Item> itemsOnHand = new List<Item>();
+    [HideInInspector] public bool setuped = false;
 
     ArchiveManager archiveManager;
     ItemPlace selectedItemPlace = null;
@@ -48,13 +49,46 @@ public class EquipmentPanelManager : MonoBehaviour
         animationBoolManager = GetComponent<AnimationBoolManager>();
         player = FindAnyObjectByType<Player>();
 
-        SetupPanel();
+        if (!setuped)
+        {
+            SetupPanel();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (selectedItemPlace != null)
+        {
+            if (selectedItemPlace.content != null)
+            {
+                Item item = selectedItemPlace.content;
+                if (item.type == ItemType.Feather)
+                {
+                    /// 最后三行格式化
+                    /// \n
+                    /// 生命值：\n
+                    /// 100.0/100
+                    string[] lines = itemInformation.text.Split('\n');
+                    if (lines.Length >= 4)
+                    {
+                        if (lines[^2].Length >= 4)
+                        {
+                            if (lines[^2][..4] == "生命值：" && lines[^3] == "")
+                            {
+                                int index = itemInformation.text.LastIndexOf('\n');
+                                itemInformation.text = itemInformation.text[..index];
+                                index = itemInformation.text.LastIndexOf('\n');
+                                itemInformation.text = itemInformation.text[..index];
+                                index = itemInformation.text.LastIndexOf('\n');
+                                itemInformation.text = itemInformation.text[..index];
+                            }
+                        }
+                    }
+                    itemInformation.text += "\n\n生命值：\n" + item.itemFeather.health.ToString("F1") + "/" + item.itemFeather.maxHealth;
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -62,6 +96,12 @@ public class EquipmentPanelManager : MonoBehaviour
     /// </summary>
     public void SetupPanel()
     {
+        if (!setuped)
+        {
+            archiveManager = FindAnyObjectByType<ArchiveManager>();
+            animationBoolManager = GetComponent<AnimationBoolManager>();
+            player = FindAnyObjectByType<Player>();
+        }
         if (!player.setUped)
         {
             player.SetUp();
@@ -109,6 +149,8 @@ public class EquipmentPanelManager : MonoBehaviour
         equipButton.SetActive(false);
         dreamizeButton.SetActive(false);
         unequipButton.SetActive(false);
+
+        setuped = true;
     }
 
     /// <summary>
@@ -395,7 +437,11 @@ public class EquipmentPanelManager : MonoBehaviour
         if (item.isEquiped)
         {
             equipButton.SetActive(false);
-            unequipButton.SetActive(true);
+
+            if (item.itemName != "艾莉之羽")
+            {
+                unequipButton.SetActive(true);
+            }
         }
         else
         {

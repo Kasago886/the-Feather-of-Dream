@@ -627,6 +627,7 @@ MonoBehaviour:
   itemPlaceObj: {fileID: 564733258690450943, guid: 0e4b881822481aa44980068e03b9ab77, type: 3}
   donotTouchPanel: {fileID: 5237687415125300663}
   itemsOnHand: []
+  setuped: 0
 --- !u!222 &1891233999512855963
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1286,8 +1287,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1777160747301331455}
   m_HandleRect: {fileID: 2522135768547039197}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.6148282
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1886,7 +1887,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 201.5, y: 0}
-  m_SizeDelta: {x: 403, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &586609593689933675
 CanvasRenderer:
@@ -1929,7 +1930,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u53EA\u662F\u666E\u666E\u901A\u901A\u7684\u6D4B\u8BD5\u6587\u672C\u3002\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15"
+  m_Text: 
 --- !u!114 &4550291179827014632
 MonoBehaviour:
   m_ObjectHideFlags: 0

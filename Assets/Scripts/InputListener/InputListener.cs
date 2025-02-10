@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public enum InputListenerState
 {
-    normal, equipment, option, boxMap,death
+    normal,card, equipment, option, boxMap,death
 }
 
 public class InputListener : MonoBehaviour
@@ -20,6 +20,8 @@ public class InputListener : MonoBehaviour
     GameObject GrayPanel;
 
     [HideInInspector] public AnimationBoolManager cardPanelAnimationManager;
+    AnimationBoolManager equipmentPanelAnimationManager;
+
     Dictionary<InputListenerState, IListenerState> states = new();
     [HideInInspector] public IListenerState currentState;
 
@@ -48,6 +50,7 @@ public class InputListener : MonoBehaviour
         }
 
         states[InputListenerState.normal] = new NormalListenerState(this);
+        states[InputListenerState.card] = new CardListenerState(this);
         states[InputListenerState.equipment] = new EquipmentListenerState(this);
         states[InputListenerState.option] = new OptionListenerState(this);
         states[InputListenerState.boxMap] = new BoxMapListenerState(this);
@@ -61,6 +64,7 @@ public class InputListener : MonoBehaviour
         {
             cardPanelAnimationManager = GameObject.FindGameObjectWithTag(Consts.CardPanelTag).GetComponent<AnimationBoolManager>();
             equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
+            equipmentPanelAnimationManager = equipmentPanelManager.gameObject.GetComponent<AnimationBoolManager>();
 
             currentState = states[InputListenerState.normal];
         }
@@ -87,10 +91,12 @@ public class InputListener : MonoBehaviour
             if (isBoxMap)
             {
                 StateTransition(InputListenerState.boxMap);
+                return;
             }
             else
             {
                 StateTransition(InputListenerState.normal);
+                return;
             }
         }
         else
@@ -99,6 +105,7 @@ public class InputListener : MonoBehaviour
             PausePanel.SetActive(true);
 
             StateTransition(InputListenerState.option);
+            return;
         }
     }
 
@@ -110,6 +117,7 @@ public class InputListener : MonoBehaviour
             GrayPanel.SetActive(false);
             cardPanelAnimationManager.SetFalse("appear");
             cardPanelAnimationManager.SetSpeed(1);
+            equipmentPanelAnimationManager.SetSpeed(1);
         }
         else
         {
@@ -117,6 +125,7 @@ public class InputListener : MonoBehaviour
             GrayPanel.SetActive(true);
             cardPanelAnimationManager.SetTrue("appear");
             cardPanelAnimationManager.SetSpeed(10);
+            equipmentPanelAnimationManager.SetSpeed(10);
         }
     }
 
@@ -126,5 +135,6 @@ public class InputListener : MonoBehaviour
         DeathPanel.SetActive(true);
 
         StateTransition(InputListenerState.death);
+        return;
     }
 }

@@ -38,19 +38,39 @@ public class ArchiveManager : MonoBehaviour
         {
             ReadArchive(0);
         }
-        Debug.Log("Level Index:"+currentArchive.index);
 
-        //保存当前关卡信息
-        if (title != "")
+        if (currentArchive != null)
         {
-            currentArchive.levelInfo.title = title;
-        }
+            Debug.Log("Level Index:" + currentArchive.index);
 
-        //记录点
-        if (archivePointers.Count > currentArchive.levelInfo.archivePoint && currentArchive.levelInfo.archivePoint != -1 && player != null)
-        {
-            Debug.Log(currentArchive.levelInfo.archivePoint);
-            player.transform.position = archivePointers[currentArchive.levelInfo.archivePoint].position;
+            //保存当前关卡信息
+            if (title != "")
+            {
+                currentArchive.levelInfo.title = title;
+            }
+
+            //记录点
+            if (archivePointers.Count > currentArchive.levelInfo.archivePoint && currentArchive.levelInfo.archivePoint != -1 && player != null)
+            {
+                Debug.Log(currentArchive.levelInfo.archivePoint);
+                player.transform.position = archivePointers[currentArchive.levelInfo.archivePoint].position;
+            }
+
+            //新存档截图
+            if (currentArchive.levelInfo.level == -1)
+            {
+                //EquipmentPanel先更新，防止初始测试Item覆盖存档
+                if (equipmentPanelManager != null)
+                {
+                    if (!equipmentPanelManager.setuped)
+                    {
+                        equipmentPanelManager.SetupPanel();
+                    }
+                }
+
+                currentArchive.levelInfo.level = 0;
+                SaveCurrentArchive();
+            }
         }
     }
 

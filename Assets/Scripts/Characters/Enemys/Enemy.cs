@@ -112,10 +112,10 @@ public class Enemy : Character
     {
         base.AIUpdate();
 
-        currentState.OnUpdate();
-
         if (!isDead)
         {
+            currentState.OnUpdate();
+
             if (!(forcebackTimer > 0))
             {
                 attackCooldownTimer -= Time.deltaTime;

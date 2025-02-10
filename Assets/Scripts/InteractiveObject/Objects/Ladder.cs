@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -40,7 +41,9 @@ public class Ladder : InteractiveObject
     {
         base.OnTriggerExit2D(collision);
 
-
-        controller.animator.SetBool(Consts.IsClimbAnimatorArgument, false);
+        if (!gameObject.IsDestroyed())
+        {
+            controller.animator.SetBool(Consts.IsClimbAnimatorArgument, false);
+        }
     }
 }

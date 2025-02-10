@@ -40,7 +40,7 @@ public class ItemPlace : MonoBehaviour
         else
         {
             item.transform.SetParent(previousParent, false);
-            item.transform.SetAsFirstSibling();
+            item.transform.SetAsLastSibling();
         }
     }
 
@@ -48,13 +48,13 @@ public class ItemPlace : MonoBehaviour
     {
         //Ìí¼Ó
         item.transform.SetParent(transform, false);
-        item.transform.SetAsFirstSibling();
+        item.transform.SetAsLastSibling();
 
         //½»»»
         if (content != null)
         {
             content.transform.SetParent(previousParent, false);
-            content.transform.SetAsFirstSibling();
+            content.transform.SetAsLastSibling();
         }
 
         if (previousParent != null)

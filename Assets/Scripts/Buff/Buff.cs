@@ -235,7 +235,7 @@ public class ElliesSwordAttackBuff : AttackBuff
     {
         base.Init(target, timer, isPermanent);
 
-        this.timer = 5;
+        this.timer = 10;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/Ellie'sSwordAttackBody");
         //Debug.Log(attackBody);
     }

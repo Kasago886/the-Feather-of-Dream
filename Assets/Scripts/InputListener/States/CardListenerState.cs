@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class NormalListenerState : IListenerState
+public class CardListenerState : IListenerState
 {
     InputListener listener;
-    public NormalListenerState(InputListener listener)
+    public CardListenerState(InputListener listener)
     {
         this.listener = listener;
     }
@@ -26,15 +26,7 @@ public class NormalListenerState : IListenerState
         {
             listener.SwitchCardPanel();
 
-            listener.StateTransition(InputListenerState.card);
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            listener.equipmentPanelManager.SwitchShow();
-            listener.playerController.StateMove(0);
-
-            listener.StateTransition(InputListenerState.equipment);
+            listener.StateTransition(InputListenerState.normal);
             return;
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))

@@ -191,6 +191,7 @@ public class Character : MonoBehaviour
                 if (feather.health <= 0)
                 {
                     damage = -feather.health;
+                    feather.health = 0;
                     unlockedFeathers.RemoveAt(0);
                 }
                 else

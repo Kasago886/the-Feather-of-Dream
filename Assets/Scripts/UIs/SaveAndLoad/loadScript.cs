@@ -97,7 +97,7 @@ public class loadScript : MonoBehaviour
             //新建存档
             ArchiveManager archiveManager = FindAnyObjectByType<ArchiveManager>();
             Archive newArchive = new Archive();
-            newArchive.levelInfo.level = 0;
+            newArchive.levelInfo.level = -1;
 
             List<ItemInfo> equipedFeather = new List<ItemInfo>();
             equipedFeather.Add(ElliesFeather.GetItemInfo());
