@@ -2099,7 +2099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BoundingShape2D: {fileID: 0}
+  m_BoundingShape2D: {fileID: 1234927323}
   m_Damping: 0.5
   m_MaxWindowSize: -1
   m_Padding: 0
@@ -5082,7 +5082,7 @@ Transform:
   m_GameObject: {fileID: 1190897046}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -109.8, y: 25.2, z: -10}
+  m_LocalPosition: {x: -96.04279, y: 25.2067, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5754,10 +5754,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 100.0202, y: -11.519207}
-      - {x: 100.09936, y: 11.580684}
-      - {x: -99.995155, y: 11.540866}
-      - {x: -100.01576, y: -11.578968}
+    - - {x: 115.689095, y: -51.74115}
+      - {x: 115.325645, y: 46.375034}
+      - {x: -115.275085, y: 46.16335}
+      - {x: -115.12391, y: -52.020065}
   m_UseDelaunayMesh: 0
 --- !u!4 &1234927324
 Transform:

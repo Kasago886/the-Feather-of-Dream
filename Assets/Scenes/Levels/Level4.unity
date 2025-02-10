@@ -2275,7 +2275,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1636000227}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 15
+    OrthographicSize: 20
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -5157,7 +5157,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5182,7 +5182,7 @@ Transform:
   m_GameObject: {fileID: 1190897046}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -147.79364, y: -20.53746, z: -10}
+  m_LocalPosition: {x: -138.87082, y: -15.507879, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5332,10 +5332,10 @@ PolygonCollider2D:
       - {x: 56.59794, y: 34.392384}
       - {x: -174.08392, y: 35.358715}
       - {x: -174.56218, y: -35.626213}
-    - - {x: 178.12392, y: -224.4735}
+    - - {x: 178.12392, y: -234.50539}
       - {x: 177.87508, y: -185.70212}
       - {x: 66.20274, y: -185.89702}
-      - {x: 66.127464, y: -224.59987}
+      - {x: 66.15625, y: -234.44832}
   m_UseDelaunayMesh: 0
 --- !u!4 &1234927324
 Transform:
@@ -5672,7 +5672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2942113000702380673, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
       propertyPath: enterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -2942113000702380673, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
       propertyPath: enterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5888,7 +5888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2942113000702380673, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
       propertyPath: enterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -2942113000702380673, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
       propertyPath: enterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
