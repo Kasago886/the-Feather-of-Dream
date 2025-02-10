@@ -140,7 +140,7 @@ public class InteractiveObject : MonoBehaviour
     /// 这个方法是玩家离开触发器后，将自身从玩家控制交互的链表清除的方法
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerExit2D(Collider2D collision)
+    protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         if (keyTrigger && !mouseTrigger && mode2 && !noticer.IsDestroyed())
         {

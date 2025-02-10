@@ -29,4 +29,5 @@ public class Consts
     public const string IsJumpingAnimatorArgument = "isJumping";
     public const string IsAirAnimatorArgument = "isAir";
     public const string YSpeedAnimatorArgument = "ySpeed";
+    public const string IsClimbAnimatorArgument = "isClimb";
 }

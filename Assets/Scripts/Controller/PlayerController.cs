@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Player player;
     Collider2D[] colliders;
-    Animator animator;
+    [HideInInspector]public Animator animator;
 
     //states
     Dictionary<ControllerStateType, ControllerState> stateDict = new Dictionary<ControllerStateType, ControllerState>();
@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
         if (sprintCooldownTimer > 0)
         {
             sprintCooldownTimer -= Time.deltaTime;
+
         }
         if (sprintDurationTimer > 0)
         {
@@ -233,6 +234,7 @@ public class PlayerController : MonoBehaviour
             StateTransition(ControllerStateType.Sprinting);
 
             player.isSprinting = true;
+            animator.Play("Sprint");
         }
     }
     public void StateSprint()
