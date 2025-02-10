@@ -17,6 +17,7 @@ public class InputListener : MonoBehaviour
     [HideInInspector]public EquipmentPanelManager equipmentPanelManager;
     GameObject PausePanel;
     GameObject DeathPanel;
+    GameObject GrayPanel;
 
     [HideInInspector] public AnimationBoolManager cardPanelAnimationManager;
     Dictionary<InputListenerState, IListenerState> states = new();
@@ -38,6 +39,10 @@ public class InputListener : MonoBehaviour
                 else if (obj.CompareTag(Consts.DeathPanelTag) && obj.scene == gameObject.scene)
                 {
                     DeathPanel = obj;
+                }
+                else if (obj.CompareTag(Consts.GrayPanelTag) && obj.scene == gameObject.scene)
+                {
+                    GrayPanel = obj;
                 }
             }
         }
@@ -94,6 +99,24 @@ public class InputListener : MonoBehaviour
             PausePanel.SetActive(true);
 
             StateTransition(InputListenerState.option);
+        }
+    }
+
+    public void SwitchCardPanel()
+    {
+        if (GrayPanel.activeInHierarchy)
+        {
+            Time.timeScale = 1.0f;
+            GrayPanel.SetActive(false);
+            cardPanelAnimationManager.SetFalse("appear");
+            cardPanelAnimationManager.SetSpeed(1);
+        }
+        else
+        {
+            Time.timeScale = 0.1f;
+            GrayPanel.SetActive(true);
+            cardPanelAnimationManager.SetTrue("appear");
+            cardPanelAnimationManager.SetSpeed(10);
         }
     }
 

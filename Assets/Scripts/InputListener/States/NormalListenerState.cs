@@ -24,7 +24,7 @@ public class NormalListenerState : IListenerState
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            listener.cardPanelAnimationManager.SwitchValue("appear");
+            listener.SwitchCardPanel();
         }
         if (Input.GetKeyDown(KeyCode.Tab))
         {

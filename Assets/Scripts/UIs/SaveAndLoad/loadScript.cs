@@ -10,6 +10,7 @@ public class loadScript : MonoBehaviour
 
     public Text text;
     public Image image;
+    public Item ElliesFeather;
 
     int index = 0;
     Archive archive = null;
@@ -96,7 +97,14 @@ public class loadScript : MonoBehaviour
             //新建存档
             ArchiveManager archiveManager = FindAnyObjectByType<ArchiveManager>();
             Archive newArchive = new Archive();
-            newArchive.levelInfo.level = -1;
+            newArchive.levelInfo.level = 0;
+
+            List<ItemInfo> equipedFeather = new List<ItemInfo>();
+            equipedFeather.Add(ElliesFeather.GetItemInfo());
+            newArchive.equipedFeather.items = equipedFeather.ToArray();
+            newArchive.equipedBrokenFeather.items = new List<ItemInfo>().ToArray();
+            newArchive.items.items = new List<ItemInfo>().ToArray();
+            newArchive.encyclopedia.items = new List<ItemInfo>().ToArray();
 
             archiveManager.currentArchive = newArchive;
             archiveManager.SaveCurrentArchive(index);

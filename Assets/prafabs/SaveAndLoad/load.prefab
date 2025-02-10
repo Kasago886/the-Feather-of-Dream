@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 507957170702687080}
   image: {fileID: 7291593363348560226}
+  ElliesFeather: {fileID: 1240171927397317818, guid: 464cb960120c00b47babdefcf17767b0, type: 3}
 --- !u!222 &1796644331852564528
 CanvasRenderer:
   m_ObjectHideFlags: 0

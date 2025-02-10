@@ -45,7 +45,7 @@ public class EquipmentFeather : Feather
     {
         base.TakeDamage(damage);
 
-        Debug.Log(item);
+        Debug.Log(item.itemName);
         item.featherHealth = health;
     }
 }
@@ -55,6 +55,16 @@ public class TestEquipmentFeather : EquipmentFeather
     new public static float MaxHealth = 100;
 
     public TestEquipmentFeather(float hp = 100): base(hp)
+    {
+        maxHealth = MaxHealth;
+    }
+}
+
+public class EllieEquipmentFeather : EquipmentFeather
+{
+    new public static float MaxHealth = 100;
+
+    public EllieEquipmentFeather(float hp = 100) : base(hp)
     {
         maxHealth = MaxHealth;
     }

@@ -25,4 +25,9 @@ public class AnimationBoolManager : MonoBehaviour
     {
         animator.SetBool(argument,!animator.GetBool(argument));
     }
+
+    public void SetSpeed(float speed)
+    {
+        animator.speed = speed;
+    }
 }

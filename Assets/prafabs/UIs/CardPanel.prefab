@@ -925,6 +925,7 @@ MonoBehaviour:
   cardsList:
   - {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
   - {fileID: 4056058898571058497, guid: 5a394e9de2650c5449bfbca809b22c67, type: 3}
+  - {fileID: 4056058898571058497, guid: a7d50205ec499aa4aa01560c8b5eccf8, type: 3}
   positionNumber: 5
 --- !u!1 &6739074154161203536
 GameObject:

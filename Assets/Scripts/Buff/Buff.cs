@@ -136,6 +136,31 @@ public class TestEquipmentFeatherBuff : EquipmentFeatherBuff
         Debug.Log("testEquipmentFeatherBuff removed!");
     }
 }
+
+public class EllieEquipmentFeatherBuff : EquipmentFeatherBuff
+{
+    Player player;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.feather = new EllieEquipmentFeather();
+        this.player = target as Player;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+        player.cardGenerateList.Add("°¬ÀòÖ®½£");
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+    }
+}
 #endregion
 
 #region ¹¥»÷buff
@@ -202,6 +227,17 @@ public class TestEnemyAttackBuff : AttackBuff
 
         this.timer = 10;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/testEnemyAttackBody");
+    }
+}
+public class ElliesSwordAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/Ellie'sSwordAttackBody");
+        //Debug.Log(attackBody);
     }
 }
 

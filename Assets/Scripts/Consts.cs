@@ -13,6 +13,7 @@ public class Consts
     public const string CardPanelTag = "CardPanel";
     public const string PausePanelTag = "PausePanel";
     public const string DeathPanelTag = "DeathPanel";
+    public const string GrayPanelTag = "GrayPanel";
 
     public const string PlayerLayer = "Player";
     public const string EnemyLayer = "Enemy";

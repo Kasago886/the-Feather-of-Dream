@@ -12,8 +12,7 @@ TagManager:
   - CardPanel
   - PausePanel
   - DeathPanel
-  - EffectSlider
-  - BGMSlider
+  - GrayPanel
   layers:
   - Default
   - TransparentFX

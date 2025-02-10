@@ -21,6 +21,8 @@ public class BuffContainer
         {"拔羽10s", typeof(UnlockFeather10sBuff) },
         {"拔羽15s", typeof(UnlockFeather15sBuff) },
         {"拔羽20s", typeof(UnlockFeather20sBuff) },
+        {"艾莉之羽", typeof(EllieEquipmentFeatherBuff) },
+        {"艾莉之剑", typeof(ElliesSwordAttackBuff) },
         {"王子之剑", typeof(PrinceSwordAttackBuff) },
         {"侍卫短剑", typeof(PrinceGuardSwordAttackBuff) },
         {"王子权柄", typeof(PrincePowerEffectBuff) },

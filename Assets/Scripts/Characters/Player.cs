@@ -55,6 +55,7 @@ public class Player : Character
         cardGenerateText = GameObject.FindGameObjectWithTag(Consts.CardGenerateTextTag).GetComponent<Text>();
 
         List<int> levelInfo = level_maxExp_tenacity_strength[archiveManager.currentArchive.playerInfo.level];
+        archiveManager.currentArchive.playerInfo.maxExp = levelInfo[0];
         baseTenacity = levelInfo[1];
         baseStrength = levelInfo[2];
 
@@ -135,6 +136,9 @@ public class Player : Character
         {
             archiveManager.currentArchive.playerInfo.currentExp -= archiveManager.currentArchive.playerInfo.maxExp;
             archiveManager.currentArchive.playerInfo.level += 1;
+
+            List<int> levelInfo = level_maxExp_tenacity_strength[archiveManager.currentArchive.playerInfo.level];
+            archiveManager.currentArchive.playerInfo.maxExp = levelInfo[0];
 
             upgrade = true;
         }
