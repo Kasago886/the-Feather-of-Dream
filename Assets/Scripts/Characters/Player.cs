@@ -22,6 +22,8 @@ public class Player : Character
 
     ArchiveManager archiveManager;
     EquipmentPanelManager equipmentPanelManager;
+    InputListener inputListener;
+    PlayerController playerController;
 
     static Dictionary<int,List<int>> level_maxExp_tenacity_strength = new Dictionary<int, List<int>>
     {
@@ -35,6 +37,8 @@ public class Player : Character
     new private void Start()
     {
         base.Start();
+        inputListener = FindAnyObjectByType<InputListener>();
+        playerController = GetComponent<PlayerController>();
 
         if (!setUped)
             SetUp();
@@ -207,5 +211,13 @@ public class Player : Character
 
             featherNumText.text = (feathers.Count + unlockedFeathers.Count).ToString();
         }
+    }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+
+        playerController.OnDie();
+        inputListener.OnDeath();
     }
 }

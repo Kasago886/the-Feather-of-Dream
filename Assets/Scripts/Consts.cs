@@ -11,9 +11,8 @@ public class Consts
     public const string GroundTag = "Ground";
     public const string CardGenerateTextTag = "CardGenerateText";
     public const string CardPanelTag = "CardPanel";
-    public const string BGMSliderTag = "BGMSlider";
-    public const string EffectSliderTag = "EffectSlider";
     public const string PausePanelTag = "PausePanel";
+    public const string DeathPanelTag = "DeathPanel";
 
     public const string PlayerLayer = "Player";
     public const string EnemyLayer = "Enemy";

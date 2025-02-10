@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public enum InputListenerState
 {
-    normal, equipment, option, boxMap
+    normal, equipment, option, boxMap,death
 }
 
 public class InputListener : MonoBehaviour
@@ -16,6 +16,7 @@ public class InputListener : MonoBehaviour
     public PlayerController playerController;
     [HideInInspector]public EquipmentPanelManager equipmentPanelManager;
     GameObject PausePanel;
+    GameObject DeathPanel;
 
     [HideInInspector] public AnimationBoolManager cardPanelAnimationManager;
     Dictionary<InputListenerState, IListenerState> states = new();
@@ -34,6 +35,10 @@ public class InputListener : MonoBehaviour
                 {
                     PausePanel = obj;
                 }
+                else if (obj.CompareTag(Consts.DeathPanelTag) && obj.scene == gameObject.scene)
+                {
+                    DeathPanel = obj;
+                }
             }
         }
 
@@ -41,6 +46,7 @@ public class InputListener : MonoBehaviour
         states[InputListenerState.equipment] = new EquipmentListenerState(this);
         states[InputListenerState.option] = new OptionListenerState(this);
         states[InputListenerState.boxMap] = new BoxMapListenerState(this);
+        states[InputListenerState.death] = new DeathListenerState(this);
 
         if (isBoxMap)
         {
@@ -89,5 +95,13 @@ public class InputListener : MonoBehaviour
 
             StateTransition(InputListenerState.option);
         }
+    }
+
+    public void OnDeath()
+    {
+        Time.timeScale = 0;
+        DeathPanel.SetActive(true);
+
+        StateTransition(InputListenerState.death);
     }
 }
