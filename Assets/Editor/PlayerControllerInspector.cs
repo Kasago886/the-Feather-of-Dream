@@ -11,7 +11,6 @@ public class PlayerControllerInspector : Editor
 {
     PlayerController playerController;
 
-    bool showBottom;
     Vector2 bottomCenter;
 
     SerializedProperty attackEventProperty;
@@ -27,6 +26,7 @@ public class PlayerControllerInspector : Editor
     //自定义Inspector面板
     public override void OnInspectorGUI()
     {
+        Undo.RecordObject(playerController, "Change Player");
         //垂直方向布局
         EditorGUILayout.BeginVertical();
 
@@ -39,8 +39,8 @@ public class PlayerControllerInspector : Editor
 
 
         EditorGUILayout.LabelField("判定设置");
-        showBottom = EditorGUILayout.Foldout(showBottom, "落地判定");
-        if (showBottom)
+        playerController.showBottom = EditorGUILayout.Foldout(playerController.showBottom, "落地判定");
+        if (playerController.showBottom)
         {
             bottomCenter = EditorGUILayout.Vector2Field("BottomCenter",new Vector2(playerController.bottomCenterX,playerController.bottomCenterY));
             playerController.bottomCenterX = bottomCenter.x;

@@ -165,7 +165,7 @@ public class InteractiveObject : MonoBehaviour
     /// </summary>
     public void ShowNoticer()
     {
-        if (isNoticer)
+        if (isNoticer && !(onceTrigger && triggered))
         {
             noticer.SetActive(true);
         }

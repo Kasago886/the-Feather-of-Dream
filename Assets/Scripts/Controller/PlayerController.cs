@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     Player player;
     Collider2D[] colliders;
     [HideInInspector]public Animator animator;
+    [HideInInspector]public bool showBottom;
 
     //states
     Dictionary<ControllerStateType, ControllerState> stateDict = new Dictionary<ControllerStateType, ControllerState>();

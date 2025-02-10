@@ -34,7 +34,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4597096914865473480}
   m_Father: {fileID: 0}
@@ -102,6 +102,9 @@ MonoBehaviour:
   cardController: {fileID: 0}
   cardGenerateText: {fileID: 0}
   isSprinting: 0
+  baseTenacity: 0
+  baseStrength: 0
+  setUped: 0
 --- !u!114 &206331674388102575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,11 +118,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 10
-  jumpSpeed: 14
+  jumpSpeed: 20
   sprintSpeed: 50
   sprintDuration: 0.2
   sprintCooldown: 0.3
-  bottomCenterX: -0.125
+  bottomCenterX: -0.12
   bottomCenterY: -2.5
   bottomSize: {x: 2.1, y: 0.2}
   attackEvent:
@@ -138,6 +141,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   attackCooldown: 0.5
+  animator: {fileID: 0}
+  showBottom: 1
 --- !u!114 &128682768631732230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +355,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 416da2e0dab731f42b6c720dbb8f9965, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

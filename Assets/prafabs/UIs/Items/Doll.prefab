@@ -51,15 +51,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: "\u5E03\u5A03\u5A03"
-  information: "\u7F8E\u4E3D\u7684\u5E03\u5A03\u5A03\uFF0C\u80CC\u540E\u7EE3\u7740\u4E00\u884C\u5C0F\u5B57\u3002\n\u201CBeauty's
+  information: "\u7F8E\u4E3D\u7684\u5E03\u5A03\u5A03\uFF0C\u80CC\u540E\u7EE3\u7740\u4E00\u884C\u5C0F\u5B57\uFF1A\n\u201CBeauty's
     Fake, Truths Hide\u201D"
   type: 2
   isDreamizable: 0
   dreamizeCost: 0
   dreamizedFeather: {fileID: 0}
+  dreamizedFeatherInfo:
+    itemName: 
+    information: 
+    type: 0
+    isDreamizable: 0
+    dreamizeCost: 0
+    imageName: 
+    buffName: 
+    featherHealth: 0
+    position: 0
   buffName: 
   featherHealth: 0
   isEquiped: 0
+  imageName: 
 --- !u!222 &5828613731064432972
 CanvasRenderer:
   m_ObjectHideFlags: 0
