@@ -131,4 +131,9 @@ public class InputListener : MonoBehaviour
         StateTransition(InputListenerState.death);
         return;
     }
+
+    public bool CompareStateType(InputListenerState state)
+    {
+        return states[state].Equals(currentState);
+    }
 }

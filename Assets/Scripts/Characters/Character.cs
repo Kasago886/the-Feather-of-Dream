@@ -87,6 +87,7 @@ public class Character : MonoBehaviour
             AIUpdate();
             ForcebackUpdate();
         }
+        UIUpdate();
     }
 
     /// <summary>
@@ -499,6 +500,14 @@ public class Character : MonoBehaviour
     /// 更新AI
     /// </summary>
     public virtual void AIUpdate()
+    {
+
+    }
+
+    /// <summary>
+    /// 更新UI
+    /// </summary>
+    public virtual void UIUpdate()
     {
 
     }

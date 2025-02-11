@@ -23,7 +23,7 @@ public class Player : Character
     ArchiveManager archiveManager;
     EquipmentPanelManager equipmentPanelManager;
     InputListener inputListener;
-    PlayerController playerController;
+    [HideInInspector] public PlayerController playerController;
 
     static Dictionary<int,List<int>> level_maxExp_tenacity_strength = new Dictionary<int, List<int>>
     {
@@ -196,7 +196,6 @@ public class Player : Character
         base.RemoveFeather(feather);
         archiveManager.currentArchive.playerInfo.feather = feathers.Count + unlockedFeathers.Count;
     }
-    #endregion
 
     /// <summary>
     /// 展示血条
@@ -214,6 +213,7 @@ public class Player : Character
             feather.hpUI = hpUI;
         }
     }
+    #endregion
 
     /// <summary>
     /// 受伤后更新羽数量

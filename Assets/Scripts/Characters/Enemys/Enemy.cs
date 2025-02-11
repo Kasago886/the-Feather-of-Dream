@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mail;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -61,6 +62,9 @@ public class Enemy : Character
 
     [HideInInspector] public Player player;
 
+    EnemyUIScroll enemyUIScroll;
+    InputListener inputListener;
+
     //states
     protected Dictionary<EnemyStateType, EnemyState> stateDict = new();
     protected EnemyState currentState;
@@ -69,6 +73,8 @@ public class Enemy : Character
     {
         base.Start();
         player = FindAnyObjectByType<Player>();
+        enemyUIScroll = FindAnyObjectByType<EnemyUIScroll>();
+        inputListener = FindAnyObjectByType<InputListener>();
 
         injuryEvent.AddListener(new UnityAction(TransitionToInjury));
 
@@ -138,6 +144,43 @@ public class Enemy : Character
                     ectw.timer -= Time.deltaTime;
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// 更新UI
+    /// </summary>
+    public override void UIUpdate()
+    {
+        bool showUI = false;
+
+        //被拔羽时
+        if (unlockedFeathers.Count > 0)
+        {
+            showUI = true;
+        }
+        //使用卡牌且在视野内时
+        if (inputListener.CompareStateType(InputListenerState.card))
+        {
+            if (CheckPlayerInSight())
+            {
+                showUI = true;
+            }
+        }
+
+        //死亡时取消UI
+        if (isDead)
+        {
+            showUI = false;
+        }
+        
+        if (showUI)
+        {
+            enemyUIScroll.AddEnemyUI(this);
+        }
+        else
+        {
+            enemyUIScroll.RemoveEnemyUI(this);
         }
     }
 
@@ -398,6 +441,27 @@ public class Enemy : Character
 
         //经验
         player.AddExp(exp);
+    }
+
+
+    /// <summary>
+    /// 展示血条
+    /// </summary>
+    /// <param name="feather"></param>
+    public override void ShowUnlockFeather(Feather feather)
+    {
+        base.ShowUnlockFeather(feather);
+        if (hpScroll != null)
+        {
+            if (!hpScroll.gameObject.IsDestroyed())
+            {
+                HpUI hpUI = hpScroll.AddHp();
+                hpUI.testTime = feather.lockTimer;
+                hpUI.testHp = feather.health;
+                hpUI.testHpMax = feather.maxHealth;
+                feather.hpUI = hpUI;
+            }
+        }
     }
 
     private void OnDrawGizmosSelected()
