@@ -5,6 +5,13 @@ using System.IO;
 using System;
 using Newtonsoft.Json;
 
+
+
+public enum FlagType
+{
+    tutorialDone, littleRedRidingHood, level11DreamBottleUsed
+}
+
 public class ArchiveManager : MonoBehaviour
 {
     public string title = "";
@@ -292,6 +299,55 @@ public class ArchiveManager : MonoBehaviour
         tex.LoadImage(arr);
         tex.Apply();
         return tex;
+    }
+
+    /// <summary>
+    /// 检查状态
+    /// </summary>
+    /// <param name="flag">状态类型</param>
+    /// <param name="setFlag">修改状态，默认不修改</param>
+    /// <param name="set">修改后的状态，默认true</param>
+    /// <returns>修改前的状态</returns>
+    static public bool CheckFlag(FlagType flag, bool setFlag = false, bool set = true)
+    {
+        ArchiveManager archiveManager = FindAnyObjectByType<ArchiveManager>();
+        switch(flag)
+        {
+            case FlagType.littleRedRidingHood:
+                if (archiveManager.currentArchive.levelInfo.littleRedRidingHood)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.littleRedRidingHood = set;
+                }
+                return false;
+
+            case FlagType.tutorialDone:
+                if (archiveManager.currentArchive.levelInfo.tutorialDone)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.tutorialDone = set;
+                }
+                return false;
+
+            case FlagType.level11DreamBottleUsed:
+                if (archiveManager.currentArchive.levelInfo.level11DreamBottleUsed)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.level11DreamBottleUsed = set;
+                }
+                return false;
+        }
+        Debug.LogError("Flag undefined:" + flag.ToString());
+        return false;
     }
 
     /// <summary>

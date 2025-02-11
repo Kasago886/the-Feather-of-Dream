@@ -8,8 +8,14 @@ public class PlayerDistanceDetector : MonoBehaviour
     public float distance;
     public UnityEvent enterEvent;
     public UnityEvent exitEvent;
+    [Header("仅执行一次（勾选后仅执行enterEvent）")]
+    public bool onceTrriger;
+    [Header("需要Flag（勾选后仅执行enterEvent）")]
+    public bool flagOnly;
+    public FlagType flagType;
 
     bool isEntered = false;
+    bool isTrriggered = false;
     Transform player;
     // Start is called before the first frame update
     void Start()
@@ -20,12 +26,22 @@ public class PlayerDistanceDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isEntered && Vector2.Distance(transform.position, player.position) <= distance)
+        if (!isEntered && Vector2.Distance(transform.position, player.position) <= distance && !(flagOnly && ArchiveManager.CheckFlag(flagType)) && !(onceTrriger && isTrriggered))
         {
+            isEntered = true;
+            isTrriggered = true;
+
+            if (flagOnly)
+            {
+                ArchiveManager.CheckFlag(flagType,true);
+            }
+
             enterEvent?.Invoke();
         }
-        else if (isEntered && Vector2.Distance(transform.position, player.position) > distance)
+        else if (isEntered && Vector2.Distance(transform.position, player.position) > distance && !flagOnly && !onceTrriger)
         {
+            isEntered = false;
+
             exitEvent?.Invoke();
         }
     }

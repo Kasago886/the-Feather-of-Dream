@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8010309870145944334}
+  - component: {fileID: 6401978850248809394}
   - component: {fileID: 386084743115995698}
   - component: {fileID: 217477637071530855}
   - component: {fileID: 8932509396181946290}
   - component: {fileID: 4365846292785012782}
-  - component: {fileID: 6401978850248809394}
   m_Layer: 0
   m_Name: dreamBottle
   m_TagString: NormalInteractiveObject
@@ -36,6 +36,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6401978850248809394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603187700081626242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316b701e62415eb49be90cf40f62ece5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  mouseTrigger: 0
+  keyTrigger: 1
+  mode1: 0
+  maxDistance: 2
+  moreLimit: 0
+  maxDistanceOfHorizontal: 0
+  maxDistanceOfVertical: 0
+  mode2: 1
+  nameOfKey: e
+  isKeepPush: 0
+  onceTrigger: 0
+  isNoticer: 1
+  noticer: {fileID: 5697553654017046295, guid: f018f4f299052334eaf80ff569a425ec, type: 3}
+  type: 0
 --- !u!212 &386084743115995698
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -185,31 +214,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6401978850248809394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603187700081626242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 316b701e62415eb49be90cf40f62ece5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unityEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  mouseTrigger: 0
-  keyTrigger: 1
-  mode1: 0
-  maxDistance: 2
-  moreLimit: 0
-  maxDistanceOfHorizontal: 0
-  maxDistanceOfVertical: 0
-  mode2: 1
-  nameOfKey: e
-  isKeepPush: 0
-  onceTrigger: 0
-  isNoticer: 1
-  noticer: {fileID: 5697553654017046295, guid: f018f4f299052334eaf80ff569a425ec, type: 3}

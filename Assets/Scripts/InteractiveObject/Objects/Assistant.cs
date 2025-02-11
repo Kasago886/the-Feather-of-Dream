@@ -38,7 +38,7 @@ public class Assistant : MonoBehaviour
             //½Ì³Ì
             if (archiveManager.currentArchive.levelInfo.level == 0)
             {
-                if (!startTutorialed && !archiveManager.currentArchive.levelInfo.tutorialDone)
+                if (!startTutorialed && !ArchiveManager.CheckFlag(FlagType.tutorialDone))
                 {
                     dialog.Read("Tutorial/Tutorial1");
 

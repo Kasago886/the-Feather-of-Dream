@@ -1,1 +1,54 @@
-{"index":2,"levelInfo":{"level":0,"title":"第一层","archivePoint":0,"littleRedRidingHood":false},"timeInfo":{"year":2025,"month":2,"day":10,"hour":20,"minute":43,"second":39},"playerInfo":{"level":0,"currentExp":0,"maxExp":20,"feather":1,"dream":0,"tenacity":0,"strength":0},"equipedFeather":{"items":[{"itemName":"艾莉之羽","information":"源自灵魂的羽翼，此心何往？\n\n卡牌：\n艾莉之剑","type":0,"isDreamizable":false,"dreamizeCost":0,"dreamizedFeather":null,"imageName":"feather","buffName":"艾莉之羽","featherHealth":100.0,"position":0}]},"equipedBrokenFeather":{"items":[]},"items":{"items":[]},"encyclopedia":{"items":[]}}
+{
+    "index": 2,
+    "levelInfo": {
+        "level": 11,
+        "title": "第一层",
+        "archivePoint": 0,
+        "tutorialDone": false,
+        "littleRedRidingHood": false,
+        "level11DreamBottleUsed": true
+    },
+    "timeInfo": {
+        "year": 2025,
+        "month": 2,
+        "day": 11,
+        "hour": 17,
+        "minute": 15,
+        "second": 40
+    },
+    "playerInfo": {
+        "level": 0,
+        "currentExp": 0,
+        "maxExp": 20,
+        "feather": 1,
+        "dream": 1,
+        "tenacity": 0,
+        "strength": 0
+    },
+    "equipedFeather": {
+        "items": [
+            {
+                "itemName": "艾莉之羽",
+                "information": "源自灵魂的羽翼，此心何往？\n\n卡牌：\n艾莉之剑",
+                "type": 0,
+                "isDreamizable": false,
+                "dreamizeCost": 0,
+                "dreamizedFeather": null,
+                "imageName": "feather",
+                "buffName": "艾莉之羽",
+                "featherHealth": 89.5,
+                "position": 0
+            }
+        ]
+    },
+    "equipedBrokenFeather": {
+        "items": []
+    },
+    "items": {
+        "items": [
+        ]
+    },
+    "encyclopedia": {
+        "items": []
+    }
+}

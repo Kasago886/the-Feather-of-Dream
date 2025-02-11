@@ -10,7 +10,7 @@ public enum NPCState
 
 public class NPC : InteractiveObject
 {
-    public NPCState state;
+    public FlagType state;
 
     public string dialogFileName;
     public UnityEvent endEvent;
@@ -22,13 +22,11 @@ public class NPC : InteractiveObject
     bool gotThing = false;
     Dialog dialog;
     EquipmentPanelManager equipmentPanelManager;
-    ArchiveManager archiveManager;
     protected override void Start()
     {
         base.Start();
         dialog = FindAnyObjectByType<Dialog>();
         equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
-        archiveManager = FindAnyObjectByType<ArchiveManager>();
 
         CheckState();
 
@@ -69,21 +67,11 @@ public class NPC : InteractiveObject
 
     void CheckState()
     {
-        switch (state)
-        {
-            case NPCState.LittleRedRidingHood:
-                gotThing = archiveManager.currentArchive.levelInfo.littleRedRidingHood;
-                break;
-        }
+        gotThing = ArchiveManager.CheckFlag(state);
     }
 
     void SetState()
     {
-        switch (state)
-        {
-            case NPCState.LittleRedRidingHood:
-                archiveManager.currentArchive.levelInfo.littleRedRidingHood = gotThing;
-                break;
-        }
+        ArchiveManager.CheckFlag(state,true,gotThing);
     }
 }
