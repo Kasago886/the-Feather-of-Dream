@@ -61,6 +61,11 @@ public class ArchiveManager : MonoBehaviour
             {
                 Debug.Log(currentArchive.levelInfo.archivePoint);
                 player.transform.position = archivePointers[currentArchive.levelInfo.archivePoint].position;
+                Assistant assistant = FindAnyObjectByType<Assistant>();
+                if (assistant != null)
+                {
+                    assistant.transform.position = player.transform.position + new Vector3(-1,1);
+                }
             }
 
             //ÐÂ´æµµ½ØÍ¼

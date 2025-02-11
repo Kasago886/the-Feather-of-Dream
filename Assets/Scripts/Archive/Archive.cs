@@ -78,4 +78,6 @@ public struct LevelInfo
     public bool tutorialDone;
     public bool littleRedRidingHood;
     public bool level11DreamBottleUsed;
+
+    public bool AssistantDestroyed;
 }

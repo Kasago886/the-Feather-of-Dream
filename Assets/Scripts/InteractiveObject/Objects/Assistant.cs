@@ -28,6 +28,12 @@ public class Assistant : MonoBehaviour
         animator = GetComponent<Animator>();
         archiveManager = FindAnyObjectByType<ArchiveManager>();
         dialog = FindAnyObjectByType<Dialog>();
+
+        if (archiveManager.currentArchive.levelInfo.AssistantDestroyed)
+        {
+            isBoom = true;
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
