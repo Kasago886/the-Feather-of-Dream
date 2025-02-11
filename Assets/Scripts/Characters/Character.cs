@@ -260,7 +260,7 @@ public class Character : MonoBehaviour
     {
         if (attackTrans == null)
         {
-            OnForceback(Vector3.zero);
+            OnForceback(transform.position);
         }
         else
         {
