@@ -187,6 +187,46 @@ public class Dialog : MonoBehaviour
                         }
                     }
 
+                    //识别换行符和反斜杠
+                    string newtext = "";
+                    bool checknext = false;
+                    foreach (char c in sayText)
+                    {
+                        if (c == '\\')
+                        {
+                            checknext = true;
+                        }
+                        else
+                        {
+                            if (checknext)
+                            {
+                                if (c == '\\')
+                                {
+                                    newtext += '\\';
+                                }
+                                else if (c == 'n')
+                                {
+                                    newtext += '\n';
+                                }
+                                else
+                                {
+                                    newtext = newtext + '\\' + c;
+                                }
+
+                                checknext = false;
+                            }
+                            else
+                            {
+                                newtext += c;
+                            }
+                        }
+                    }
+                    if(checknext)
+                    {
+                        newtext += '\\';
+                    }
+                    sayText = newtext;
+
                     //如果正在说，则直接显示完当前行
                     if (ifsaying)
                     {

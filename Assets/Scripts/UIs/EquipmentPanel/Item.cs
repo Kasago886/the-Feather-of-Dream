@@ -9,7 +9,7 @@ using UnityEngine.Events;
 [Serializable]
 public enum ItemType
 {
-    Feather,BrokenFeather,Other,Encyclopedia
+    Feather,BrokenFeather,Other,Encyclopedia, MemoryFeather
 }
 
 public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
@@ -26,6 +26,8 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 
     public string buffName;
     public float featherHealth;
+
+    public string dialogName;
 
     [HideInInspector] public bool isEquiped;
     [HideInInspector] public string imageName;
@@ -87,6 +89,8 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
             itemHealth.gameObject.SetActive(true);
             itemHealth.feather = equipmentFeatherBuff.feather;
         }
+
+        dialogName = itemInfo.dialogName;
     }
 
     /// <summary>
@@ -126,6 +130,9 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         {
             info.featherHealth = itemFeather.health;
         }
+
+        info.dialogName = dialogName;
+
         return info;
     }
 

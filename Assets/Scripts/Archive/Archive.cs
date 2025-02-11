@@ -44,8 +44,9 @@ public class ItemInfo
     public string imageName;
 
     public string buffName;
-
     public float featherHealth;
+
+    public string dialogName;
 
     public int position;
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class EquipmentPanelManager : MonoBehaviour
@@ -25,6 +26,7 @@ public class EquipmentPanelManager : MonoBehaviour
     public GameObject unequipButton;
     public GameObject dreamizeButton;
     public Text dreamizeCost;
+    public GameObject memorizeButton;
 
     public Transform encyclopediaContent;
 
@@ -41,6 +43,7 @@ public class EquipmentPanelManager : MonoBehaviour
     bool isShow = false;
     AnimationBoolManager animationBoolManager;
     Player player;
+    Dialog dialog;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +51,7 @@ public class EquipmentPanelManager : MonoBehaviour
         archiveManager = FindAnyObjectByType<ArchiveManager>();
         animationBoolManager = GetComponent<AnimationBoolManager>();
         player = FindAnyObjectByType<Player>();
+        dialog = FindAnyObjectByType<Dialog>();
 
         if (!setuped)
         {
@@ -149,6 +153,7 @@ public class EquipmentPanelManager : MonoBehaviour
         equipButton.SetActive(false);
         dreamizeButton.SetActive(false);
         unequipButton.SetActive(false);
+        memorizeButton.SetActive(false);
 
         setuped = true;
     }
@@ -483,6 +488,19 @@ public class EquipmentPanelManager : MonoBehaviour
             dreamizeButton.SetActive(false);
         }
 
+        //memorizeButton
+        if (item.type == ItemType.MemoryFeather)
+        {
+            memorizeButton.GetComponent<Button>().onClick.RemoveAllListeners();
+            UnityAction action = () => { dialog.Read(item.dialogName); };
+            memorizeButton.GetComponent<Button>().onClick.AddListener(action);
+
+            memorizeButton.SetActive(true);
+        }
+        else
+        {
+            memorizeButton.SetActive(false);
+        }
     }
 
     /// <summary>
