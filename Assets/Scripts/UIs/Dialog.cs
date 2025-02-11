@@ -74,7 +74,7 @@ public class Dialog : MonoBehaviour
             }
 
             //计时器
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
 
             //每隔nextTime秒就显示下一个字
             if (ifsaying && (timer >= nextTime))
