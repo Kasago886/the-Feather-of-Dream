@@ -30,6 +30,7 @@ public class HpUi2_FollowEnemy : MonoBehaviour
         viewPortRectTransform = viewPort.GetComponent<RectTransform>();
         contentRectTransform = content.GetComponent<RectTransform>();
         scrollViewRectTransform.SetParent(GameObject.Find("Canvas").GetComponent<RectTransform>());
+        scrollViewRectTransform.SetAsFirstSibling();
         viewPortRectTransform.SetParent(scrollViewRectTransform);
         contentRectTransform.SetParent(viewPortRectTransform);
         scrollViewRectTransform.sizeDelta = new Vector2(90, 120);

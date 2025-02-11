@@ -75,6 +75,19 @@ public class Player : Character
         CardGenerateUpdate();
     }
 
+    /// <summary>
+    /// 攻击动画
+    /// </summary>
+    public override void OnAttack()
+    {
+        base.OnAttack();
+
+        if (attackBodyObjList.Count > 0)
+        {
+            animator.Play("Attack");
+        }
+    }
+
     #region Card
     /// <summary>
     /// 更新卡牌生成
@@ -217,11 +230,23 @@ public class Player : Character
         }
     }
 
+    /// <summary>
+    /// 死亡
+    /// </summary>
     public override void OnDeath()
     {
         base.OnDeath();
 
         playerController.OnDie();
+
+        animator.SetBool(Consts.IsDeadAnimatorArgument, true);
+    }
+
+    /// <summary>
+    /// 死亡界面
+    /// </summary>
+    public void DeathPanel()
+    {
         inputListener.OnDeath();
     }
 }
