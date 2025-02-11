@@ -232,7 +232,7 @@ public class Dialog : MonoBehaviour
         }
     }
 
-    public void Read(string TextFile)
+    public void Read(string TextFile, UnityEvent endUnityEvent = null)
     {
         try
         {
@@ -248,6 +248,9 @@ public class Dialog : MonoBehaviour
             wrongtext = "DialogText '" + textFile + "' doesn't exist!";
             Debug.LogError(wrongtext);
         }
+
+        endEvent?.Invoke();
+        endEvent = endUnityEvent;
 
         //¶¯»­
         animator.SetBool("appear", true);

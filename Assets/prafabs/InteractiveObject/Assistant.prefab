@@ -135,7 +135,7 @@ MonoBehaviour:
   followPlayer: 1
   followDistanceMax: 5
   followDistanceMin: 2
-  followForce: 2
+  followForce: 500
 --- !u!50 &7618937164582698708
 Rigidbody2D:
   serializedVersion: 4

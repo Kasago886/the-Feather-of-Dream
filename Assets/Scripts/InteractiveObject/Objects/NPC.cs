@@ -51,20 +51,17 @@ public class NPC : InteractiveObject
                         gotThing = true;
                         SetState();
 
-                        dialog.endEvent = endEvent2;
-                        dialog.Read(gotThingDialogFileName);
+                        dialog.Read(gotThingDialogFileName, endEvent2);
                     }
                 }
 
                 if (!gotThing)
                 {
-                    dialog.endEvent = endEvent;
-                    dialog.Read(dialogFileName);
+                    dialog.Read(dialogFileName, endEvent);
                 }
             }
             else
             {
-                dialog.endEvent = null;
                 dialog.Read(dialogFileName3);
             }
         }

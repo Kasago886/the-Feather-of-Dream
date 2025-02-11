@@ -11,11 +11,14 @@ public class Assistant : MonoBehaviour
     public float followForce;
 
     bool isBoom = false;
+    bool startTutorialed = false;
 
     Player player;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
     Animator animator;
+    ArchiveManager archiveManager;
+    Dialog dialog;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,8 @@ public class Assistant : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        archiveManager = FindAnyObjectByType<ArchiveManager>();
+        dialog = FindAnyObjectByType<Dialog>();
     }
 
     // Update is called once per frame
@@ -30,6 +35,17 @@ public class Assistant : MonoBehaviour
     {
         if (!isBoom)
         {
+            //ΩÃ≥Ã
+            if (archiveManager.currentArchive.levelInfo.level == 0)
+            {
+                if (!startTutorialed && !archiveManager.currentArchive.levelInfo.tutorialDone)
+                {
+                    dialog.Read("Tutorial/Tutorial1");
+
+                    startTutorialed = true;
+                    followPlayer = true;
+                }
+            }
             //∏˙ÀÊÕÊº“
             if (followPlayer)
             {
@@ -67,7 +83,7 @@ public class Assistant : MonoBehaviour
                         //øøΩ¸
                         if (direction.sqrMagnitude > followDistanceMax * followDistanceMax)
                         {
-                            Vector2 force = direction.normalized * (direction.magnitude - followDistanceMax) * followForce;
+                            Vector2 force = direction.normalized * (direction.magnitude - followDistanceMax) * followForce * Time.deltaTime;
                             rb.AddForce(force, ForceMode2D.Force);
                         }
                         //‘∂¿Î
@@ -78,15 +94,24 @@ public class Assistant : MonoBehaviour
                             {
                                 direction += new Vector2(0, followDistanceMin * 2);
                             }
-                            Vector2 force = direction.normalized * (direction.magnitude - followDistanceMin) * followForce;
+                            Vector2 force = direction.normalized * (direction.magnitude - followDistanceMin) * followForce * Time.deltaTime;
                             rb.AddForce(force, ForceMode2D.Force);
                         }
                     }
                 }
             }
+            
         }
     }
 
+    public void Tutorial(int step)
+    {
+        dialog.Read("Tutorial/Tutorial"+step);
+    }
+
+    /// <summary>
+    /// ±¨’®
+    /// </summary>
     public void Boom()
     {
         isBoom = true;

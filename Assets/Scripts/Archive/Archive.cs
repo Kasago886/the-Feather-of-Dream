@@ -75,5 +75,6 @@ public struct LevelInfo
 
     public int archivePoint;
 
+    public bool tutorialDone;
     public bool littleRedRidingHood;
 }
