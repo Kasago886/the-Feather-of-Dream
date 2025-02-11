@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Assistant : MonoBehaviour
 {
@@ -46,7 +47,13 @@ public class Assistant : MonoBehaviour
             {
                 if (!startTutorialed && !ArchiveManager.CheckFlag(FlagType.tutorialDone))
                 {
-                    dialog.Read("Tutorial/Tutorial1");
+                    PlayerController playerController = player.GetComponent<PlayerController>();
+                    playerController.SetPause(true);
+
+                    UnityEvent unityEvent = new();
+                    unityEvent.AddListener(playerController.SwitchPause);
+
+                    dialog.Read("Tutorial/Tutorial1",unityEvent);
 
                     startTutorialed = true;
                     followPlayer = true;
