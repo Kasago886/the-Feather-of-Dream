@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class Bullet : MonoBehaviour
@@ -20,7 +21,7 @@ public class Bullet : MonoBehaviour
     public Vector2 destroySize;
 
     public Vector2 direction;
-
+    public UnityEvent whatHappenWhenHit;
     [HideInInspector] public float damage;
 
     Rigidbody2D rb;
@@ -77,11 +78,13 @@ public class Bullet : MonoBehaviour
             else if (collision.tag == Consts.PlayerTag && isEnemyBullet)
             {
                 collision.GetComponent<Player>().TakeDamage(damage);
+                whatHappenWhenHit?.Invoke();
                 Destroy(gameObject);
             }
             else if (collision.tag == Consts.EnemyTag && !isEnemyBullet)
             {
                 collision.GetComponent<Enemy>().TakeDamage(damage);
+                whatHappenWhenHit?.Invoke();
                 Destroy(gameObject);
             }
         }

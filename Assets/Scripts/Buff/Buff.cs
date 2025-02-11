@@ -359,6 +359,24 @@ public class TheMisunderstoodWerewolfBuff : AttackBuff
         this.attackBody = Resources.Load<GameObject>("AttackBodys/TheMisunderstoodWerewolfAttackBody 1");
     }
 }
+public class HunterFeatherAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 7;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunter/HunterFeatherAttackBody");
+    }
+}
+public class HunterFeatherAttackBuffGun : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 7;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunter/HunterFeatherAttackBodyGun");
+    }
+}
 #endregion
 
 #region °ÎÓðbuff
@@ -1695,9 +1713,9 @@ public class PoisonBuff : EffectBuff
         }
         else
         {
-            if (enemy.unlockedFeathers[0] != null)
+            if (enemy.unlockedFeathers.Count>0)
             {
-                enemy.unlockedFeathers[0].health -= 4f;
+                enemy.unlockedFeathers[0].health -= 1f;
                 bufftimer = 1;
             }
         }
