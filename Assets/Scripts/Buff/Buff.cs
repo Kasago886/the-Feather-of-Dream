@@ -189,6 +189,35 @@ public class EllieEquipmentFeatherBuff : EquipmentFeatherBuff
 
     }
 }
+public class HunterEquipmentFeatherBuff : EquipmentFeatherBuff
+{
+    Player player;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+        player.cardGenerateList.Add("¿ñÁÔÖ®Ç¹");
+        player.cardGenerateList.Add("ÊÉÑªØ°Ê×");
+        player.cardGenerateList.Add("Æğ¶¯");
+        player.cardGenerateList.Add("ÁÔÉ±");
+        player.strength += 10;
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.cardGenerateList.Remove("¿ñÁÔÖ®Ç¹");
+        player.cardGenerateList.Remove("ÊÉÑªØ°Ê×");
+        player.cardGenerateList.Remove("Æğ¶¯");
+        player.cardGenerateList.Remove("ÁÔÉ±");
+
+    }
+}
 #endregion
 
 #region ¹¥»÷buff
@@ -1977,6 +2006,84 @@ public class Heal3 : EffectBuff
         {
             character.unlockedFeathers[0].health+=oriHealth- character.unlockedFeathers[0].health;
         }
+    }
+}
+public class HunterFeatherEffectBuff : EffectBuff
+{
+   private Player player;
+    private PlayerCardController cardController;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            player = target.GetComponent<Player>();
+        }
+        this.timer = 60;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        cardController =player.cardController;
+        int ran = Random.Range(1, 3);
+        if (cardController.GetCardOrNot()&&ran==1)
+        {
+            cardController.GetCard("¿ñÁÔÖ®Ç¹");
+        }
+        else if (cardController.GetCardOrNot() && ran == 2)
+        {
+            cardController.GetCard("ÊÉÑªØ°Ê×");
+        }
+        if (player.attackBodyObjList.Count >= 2) {
+            player.cardGenerateCooldownTimer = 0;
+        }
+        timer = 0;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class HunterFeatherEffectBuff1 : EffectBuff
+{
+    private Player player;
+    private int num;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            player = target.GetComponent<Player>();
+        }
+        this.timer = 5;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        num = player.attackBodyObjList.Count;
+        player.strength += 10 * (num + 1);
+        player.tenacity += 10 * (num + 1);
+       
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.strength -= 10 * (num + 1);
+        player.tenacity -= 10 * (num + 1);
     }
 }
 #endregion
