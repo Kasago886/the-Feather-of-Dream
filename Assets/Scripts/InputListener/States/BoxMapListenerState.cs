@@ -15,10 +15,35 @@ public class BoxMapListenerState : IListenerState
 
     public void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             listener.SwitchPausePanel();
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (listener.equipmentPanelManager != null)
+            {
+                listener.equipmentPanelManager.SwitchShow();
+
+                listener.StateTransition(InputListenerState.equipment);
+                return;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            listener.playerIn21.Move(Vector3.left);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            listener.playerIn21.Move(Vector3.right);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            listener.playerIn21.Move(Vector3.down);
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            listener.playerIn21.Move(Vector3.up);
         }
     }
 }

@@ -311,6 +311,11 @@ public class Dialog : MonoBehaviour
         dialogFare();
     }
 
+    public void Read(string TextFile)
+    {
+        Read(TextFile, null);
+    }
+
     void dialogEnd()
     {
         //¶¯»­

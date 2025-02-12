@@ -25,7 +25,7 @@ public class Player : Character
     InputListener inputListener;
     [HideInInspector] public PlayerController playerController;
 
-    static Dictionary<int,List<int>> level_maxExp_tenacity_strength = new Dictionary<int, List<int>>
+    static public Dictionary<int,List<int>> level_maxExp_tenacity_strength = new Dictionary<int, List<int>>
     {
         {0,new List<int> {20,0,0}},
         {1,new List<int> {20,10,10}},

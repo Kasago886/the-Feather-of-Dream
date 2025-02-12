@@ -75,19 +75,31 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
             }
 
             Debug.Log(buffName);
-            equipmentFeatherBuff = BuffContainer.GetBuffInstance(buffName) as EquipmentFeatherBuff;
-            equipmentFeatherBuff.Init(player);
-            equipmentFeatherBuff.feather.item = this;
-            equipmentFeatherBuff.feather.health = itemInfo.featherHealth;
+            Feather feather;
+            if (player == null)
+            {
+                feather = new Feather();
+                feather.maxHealth = itemInfo.featherMaxHealth;
+                feather.health = itemInfo.featherHealth;
+            }
+            else
+            {
+                equipmentFeatherBuff = BuffContainer.GetBuffInstance(buffName) as EquipmentFeatherBuff;
+                equipmentFeatherBuff.Init(player);
+                equipmentFeatherBuff.feather.item = this;
+                equipmentFeatherBuff.feather.health = itemInfo.featherHealth;
 
-            itemFeather = equipmentFeatherBuff.feather;
+                feather = equipmentFeatherBuff.feather;
+            }
+
+            itemFeather = feather;
 
             if (itemHealth == null)
             {
                 itemHealth = transform.GetChild(0).GetComponent<ItemHealth>();
             }
             itemHealth.gameObject.SetActive(true);
-            itemHealth.feather = equipmentFeatherBuff.feather;
+            itemHealth.feather = feather;
         }
 
         dialogName = itemInfo.dialogName;
@@ -125,10 +137,12 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         if (itemFeather == null)
         {
             info.featherHealth = featherHealth;
+            info.featherMaxHealth = featherHealth;
         }
         else
         {
             info.featherHealth = itemFeather.health;
+            info.featherMaxHealth = itemFeather.maxHealth;
         }
 
         info.dialogName = dialogName;
@@ -228,9 +242,15 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <param name="equipState"></param>
     public void SetEquipState(bool equipState)
     {
+        isEquiped = equipState;
+
         if (player == null)
         {
             player = FindAnyObjectByType<Player>();
+        }
+        if (player == null)
+        {
+            return;
         }
 
         //Debug.Log(buffName);
@@ -260,8 +280,6 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
                 player.AddBuff(buffName);
             }
         }
-
-        isEquiped = equipState;
     }
 
     // Start is called before the first frame update

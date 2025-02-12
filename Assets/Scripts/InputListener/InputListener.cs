@@ -14,6 +14,7 @@ public class InputListener : MonoBehaviour
 {
     public bool isBoxMap;
     public PlayerController playerController;
+    public PlayerIn21 playerIn21;
     [HideInInspector]public EquipmentPanelManager equipmentPanelManager;
     GameObject PausePanel;
     GameObject DeathPanel;
@@ -27,6 +28,8 @@ public class InputListener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
+
         //找到PausePanel（被隐藏了所以不能用FindGameObjectWithTag）
         GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
         foreach (GameObject obj in objects)
@@ -62,7 +65,6 @@ public class InputListener : MonoBehaviour
         else
         {
             cardPanelAnimationManager = GameObject.FindGameObjectWithTag(Consts.CardPanelTag).GetComponent<AnimationBoolManager>();
-            equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
 
             currentState = states[InputListenerState.normal];
         }

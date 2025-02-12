@@ -67,7 +67,7 @@ public class EquipmentPanelManager : MonoBehaviour
             if (selectedItemPlace.content != null)
             {
                 Item item = selectedItemPlace.content;
-                if (item.type == ItemType.Feather)
+                if (item.type == ItemType.Feather && item.itemFeather != null)
                 {
                     /// 最后三行格式化
                     /// \n
@@ -106,9 +106,12 @@ public class EquipmentPanelManager : MonoBehaviour
             animationBoolManager = GetComponent<AnimationBoolManager>();
             player = FindAnyObjectByType<Player>();
         }
-        if (!player.setUped)
+        if (player != null)
         {
-            player.SetUp();
+            if (!player.setUped)
+            {
+                player.SetUp();
+            }
         }
 
         selectedItemPlace = null;
@@ -337,8 +340,17 @@ public class EquipmentPanelManager : MonoBehaviour
         }
         expNumber.text = playerInfo.currentExp.ToString() + "/" + playerInfo.maxExp.ToString();
         expProgress.sizeDelta = new Vector2(300 * playerInfo.currentExp / playerInfo.maxExp, expProgress.sizeDelta.y);
-        tenacity.text = player.tenacity.ToString();
-        strength.text = player.strength.ToString();
+        if (player != null)
+        {
+            tenacity.text = player.tenacity.ToString();
+            strength.text = player.strength.ToString();
+        }
+        else
+        {
+            List<int> levelInfo = Player.level_maxExp_tenacity_strength[archiveManager.currentArchive.playerInfo.level];
+            tenacity.text = levelInfo[1].ToString();
+            strength.text = levelInfo[2].ToString();
+        }
         feather.text = playerInfo.feather.ToString();
 
         dream.text = playerInfo.dream.ToString();

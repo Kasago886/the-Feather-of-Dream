@@ -17,8 +17,16 @@ public class EquipmentListenerState : IListenerState
         {
             listener.equipmentPanelManager.SwitchShow();
 
-            listener.StateTransition(InputListenerState.normal);
-            return;
+            if (listener.isBoxMap)
+            {
+                listener.StateTransition(InputListenerState.boxMap);
+                return;
+            }
+            else
+            {
+                listener.StateTransition(InputListenerState.normal);
+                return;
+            }
         }
     }
 }

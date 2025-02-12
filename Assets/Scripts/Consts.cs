@@ -14,11 +14,13 @@ public class Consts
     public const string PausePanelTag = "PausePanel";
     public const string DeathPanelTag = "DeathPanel";
     public const string GrayPanelTag = "GrayPanel";
+    public const string PushBoxTag = "PushBox";
 
     public const string PlayerLayer = "Player";
     public const string EnemyLayer = "Enemy";
     public const string WallLayer = "Wall";
     public const string InteractiveObjectLayer = "InteractiveObject";
+    public const string PushBoxLayer = "PushBox";
 
     public const string CurrentArchivePlayerPrefTag = "Current Archive";
     public const string BGMPlayerPrefTag = "BGM";

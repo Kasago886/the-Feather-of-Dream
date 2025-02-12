@@ -45,6 +45,7 @@ public class ItemInfo
 
     public string buffName;
     public float featherHealth;
+    public float featherMaxHealth;
 
     public string dialogName;
 

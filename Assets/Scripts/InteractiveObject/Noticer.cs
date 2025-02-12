@@ -45,6 +45,8 @@ public class Noticer : MonoBehaviour
         else
         {
             screenPos = Camera.main.WorldToScreenPoint(target.transform.position);
+            Debug.Log(target.transform.position);
+            Debug.Log(screenPos);
         }
         transform.position = screenPos;
     }
