@@ -60,6 +60,8 @@ public class BuffContainer
         {"正义",typeof(JusticeBuff) },//使玩家下一张攻击卡攻击力翻倍
         {"噬血匕首",typeof(HunterFeatherAttackBuff) },
         {"狂猎之枪",typeof(HunterFeatherAttackBuffGun) },
+        {"灼伤",typeof(Scorch) },//使对象每0.1秒扣除0.1滴血，持续6s，buff持续期间如果被施加新的灼伤则持续时间延长6s
+        {"烈焰",typeof(Scorch) },
     };
 
     /*

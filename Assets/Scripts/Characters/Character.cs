@@ -25,6 +25,12 @@ public class Character : MonoBehaviour
     public float strength;
     [HideInInspector]
     public float oriStrength;
+    [Header("Òì³£¿¹ÐÔ")]
+    public float abnormalityResistance;
+    [Header("×ÆÉËµÖ¿¹")]
+    public float burnResistance;
+    [HideInInspector]
+    public int[] burnNumber = new int[2];
 
     public bool injuryForceback;
     public float forcebackForce;

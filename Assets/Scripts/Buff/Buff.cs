@@ -577,7 +577,7 @@ public class TinWoodmanEffectBuff : EffectBuff
         buffTimer += Time.deltaTime;
         if (buffTimer > 2)
         {
-            enemy.strength += oriStrength / 10;
+            enemy.strength += enemy.oriStrength/10;
             buffTimer = 0;
         }
     }
@@ -1761,6 +1761,92 @@ public class JusticeBuff : EffectBuff
 
     public override void OnExit()
     {
+        base.OnExit();
+    }
+}
+public class Scorch : EffectBuff
+{
+    private Character character;
+    private float attackTimer;
+    private int buffNumber;
+    private bool isAddBuff;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 0.1f;
+        foreach (var buff in character.buffList)
+        {
+            if (buff.name == "×ÆÉË")
+            {
+                buff.timer += 6f;
+                buffNumber++;
+            }
+            if (buff.name == "ÁÒÑæ")
+            {
+                isAddBuff = true;
+            }
+        }
+        character.burnNumber[1] = buffNumber;
+        if(buffNumber>=10&& character.burnNumber[0]<10&&!isAddBuff)
+        {
+            character.AddBuff("ÁÒÑæ");
+        }
+        character.burnNumber[0]=buffNumber;
+    }
+
+    public override void OnEnter()
+    {    
+        base.OnEnter();      
+    }
+
+    public override void OnUpdate()
+    {
+        attackTimer += Time.deltaTime;
+        if(attackTimer > 0.1f&&character.unlockedFeathers.Count>0)
+        {
+            character.unlockedFeathers[0].health -= 0.1f*Mathf.Pow(2, -character.abnormalityResistance / 100)*(1-character.burnResistance*0.1f);
+        }
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class Burn : EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 60;
+    }
+
+    public override void OnEnter()
+    {
+        change = character.abnormalityResistance / 4;
+        character.abnormalityResistance -= change;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        character.abnormalityResistance += change;
         base.OnExit();
     }
 }
