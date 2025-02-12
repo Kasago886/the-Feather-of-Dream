@@ -26,7 +26,10 @@ public class PlayerDistanceDetector : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform;
 
-        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        if (tagDetect)
+        {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+        }
     }
 
     // Update is called once per frame

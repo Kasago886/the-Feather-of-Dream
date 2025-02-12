@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Box : InteractiveObject
 {
-    public Item getItem;
+    public List<Item> getItem;
     public string dialogFileName;
     public bool onlyItem;
 
@@ -19,15 +19,29 @@ public class Box : InteractiveObject
         equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
         dialog = FindAnyObjectByType<Dialog>();
 
-        if (onlyItem && equipmentPanelManager.HasItem(getItem))
+        if (onlyItem)
         {
-            triggered = true;
+            bool hasAll = true;
+            foreach (Item item in getItem)
+            {
+                if (!equipmentPanelManager.HasItem(item))
+                {
+                    hasAll = false;
+                }
+            }
+            triggered = hasAll;
         }
     }
 
     public void GetItem()
     {
-        equipmentPanelManager.AddItem(getItem);
+        foreach (Item item in getItem)
+        {
+            if (!(onlyItem && equipmentPanelManager.HasItem(item)))
+            {
+                equipmentPanelManager.AddItem(item);
+            }
+        }
         dialog.Read(dialogFileName);
     }
 }

@@ -2339,10 +2339,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1857317980109570137, guid: 2e4f1199bfa0b044d9ea27a903fc0b23, type: 3}
-      propertyPath: followPlayer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2921441780039926410, guid: 2e4f1199bfa0b044d9ea27a903fc0b23, type: 3}
       propertyPath: m_LocalPosition.x
       value: -106.9
@@ -173556,6 +173552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isBoxMap: 0
   playerController: {fileID: 1987884398}
+  playerIn21: {fileID: 0}
   equipmentPanelManager: {fileID: 0}
   cardPanelAnimationManager: {fileID: 0}
 --- !u!4 &2140482257
