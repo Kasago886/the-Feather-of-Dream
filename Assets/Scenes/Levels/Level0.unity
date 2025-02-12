@@ -10163,6 +10163,9 @@ MonoBehaviour:
       littleRedRidingHood: 0
       level11DreamBottleUsed: 0
       weirdDwarf: 0
+      level21DreamBottleUsed: 0
+      level21StartDialogRead: 0
+      whaleKilled: 0
       AssistantDestroyed: 0
     timeInfo:
       year: 0
@@ -12106,7 +12109,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1857317980109570137, guid: 2e4f1199bfa0b044d9ea27a903fc0b23, type: 3}
       propertyPath: followPlayer
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2921441780039926410, guid: 2e4f1199bfa0b044d9ea27a903fc0b23, type: 3}
       propertyPath: m_LocalPosition.x

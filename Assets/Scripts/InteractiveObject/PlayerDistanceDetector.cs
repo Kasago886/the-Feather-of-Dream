@@ -1,8 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
+[Serializable]
+public struct FlagCondition
+{
+    public FlagType flagType;
+    public bool opposite;
+}
 public class PlayerDistanceDetector : MonoBehaviour
 {
     public float distance;
@@ -10,12 +18,19 @@ public class PlayerDistanceDetector : MonoBehaviour
     public UnityEvent exitEvent;
     [Header("仅执行一次（勾选后仅执行enterEvent）")]
     public bool onceTrriger;
-    [Header("需要Flag（勾选后仅执行enterEvent）")]
-    public bool flagOnly;
+    [Header("需要Flag或Condition（勾选后仅执行enterEvent）")]
+    [Header("Flag为false时执行，且执行后为true")]
+    public bool flagNeed;
     public FlagType flagType;
+
+    [Header("Condition为true时执行,执行后不改变值\n勾选oppositie选项则Condition为false时执行")]
+    public bool conditionsNeed;
+    public FlagCondition[] conditions;
     [Header("按标签检测，勾选则忽略玩家")]
     public bool tagDetect;
     public string targetTag;
+    [Header("开始时若目标不在范围内则自我摧毁")]
+    public bool startDetect;
 
     List<Transform> enteredObj = new();
     bool isTrriggered = false;
@@ -30,6 +45,32 @@ public class PlayerDistanceDetector : MonoBehaviour
         {
             targets = GameObject.FindGameObjectsWithTag(targetTag);
         }
+
+        if (startDetect)
+        {
+            bool startEnter = false;
+            if (tagDetect)
+            {
+                foreach (GameObject go in targets)
+                {
+                    if (EnterDetect(go.transform))
+                    {
+                        startEnter = true;
+                    }
+                }
+            }
+            else
+            {
+                if (EnterDetect(player))
+                {
+                    startEnter = true;
+                }
+            }
+            if (!startEnter)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -39,38 +80,105 @@ public class PlayerDistanceDetector : MonoBehaviour
         {
             foreach (GameObject go in targets)
             {
-                Detect(go.transform);
+                if (EnterDetect(go.transform))
+                {
+                    EnterFunc(go.transform);
+                }
+                if (ExitDetect(go.transform))
+                {
+                    ExitFunc(go.transform);
+                }
             }
         }
         else
         {
-            Detect(player);
+            if (EnterDetect(player.transform))
+            {
+                EnterFunc(player.transform);
+            }
+            if (ExitDetect(player.transform))
+            {
+                ExitFunc(player.transform);
+            }
         }
     }
 
-    void Detect(Transform targetTrans)
+    void EnterFunc(Transform targetTrans)
     {
-        if (!enteredObj.Contains(targetTrans) && Vector2.Distance(transform.position, targetTrans.position) <= distance && !(flagOnly && ArchiveManager.CheckFlag(flagType)) && !(onceTrriger && isTrriggered))
+        enteredObj.Add(targetTrans);
+        isTrriggered = true;
+
+        if (flagNeed)
         {
-            enteredObj.Add(targetTrans);
-            isTrriggered = true;
-
-            if (flagOnly)
-            {
-                ArchiveManager.CheckFlag(flagType, true);
-            }
-
-            enterEvent?.Invoke();
+            ArchiveManager.CheckFlag(flagType, true);
         }
-        else if (enteredObj.Contains(targetTrans) && Vector2.Distance(transform.position, targetTrans.position) > distance && !flagOnly && !onceTrriger)
+
+        enterEvent?.Invoke();
+    }
+    void ExitFunc(Transform targetTrans)
+    {
+        enteredObj.Remove(targetTrans);
+
+        if (enteredObj.Count == 0)
         {
-            enteredObj.Remove(targetTrans);
+            exitEvent?.Invoke();
+        }
+    }
 
-            if (enteredObj.Count == 0 )
+    bool EnterDetect(Transform targetTrans)
+    {
+        if (!enteredObj.Contains(targetTrans)
+            && Vector2.Distance(transform.position, targetTrans.position) <= distance 
+            && !(flagNeed && ArchiveManager.CheckFlag(flagType))
+            && !(conditionsNeed && !CheckConditions(conditions))
+            && !(onceTrriger && isTrriggered))
+        {
+            return true;
+        }
+        return false;
+    }
+    bool ExitDetect(Transform targetTrans)
+    {
+        if (enteredObj.Contains(targetTrans)
+            && Vector2.Distance(transform.position, targetTrans.position) > distance
+            && !flagNeed
+            && !conditionsNeed
+            && !onceTrriger)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    bool CheckConditions(FlagCondition[] conditions)
+    {
+        bool allSatisfied = true;
+        foreach(FlagCondition condition in conditions)
+        {
+            /// CheckFlag  | opposite  | satisfied
+            /// true         false       true
+            /// true         true        false
+            /// false        false       false
+            /// false        true        true
+            FlagType flagType = condition.flagType;
+            bool opposite = condition.opposite;
+
+            //Debug.Log(flagType);
+            //Debug.Log("checkflagtype="+ArchiveManager.CheckFlag(flagType));
+            //Debug.Log("opposite="+opposite);
+            if (ArchiveManager.CheckFlag(flagType) == opposite)
             {
-                exitEvent?.Invoke();
+                Debug.Log("allsatisfied=false");
+                allSatisfied = false;
+                break;
             }
         }
+        return allSatisfied;
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

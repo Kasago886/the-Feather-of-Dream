@@ -274,6 +274,11 @@ public class Dialog : MonoBehaviour
 
     public void Read(string TextFile, UnityEvent endUnityEvent = null)
     {
+        if (animator == null)
+        {
+            Start();
+        }
+
         try
         {
             //获取文本

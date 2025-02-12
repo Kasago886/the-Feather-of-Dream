@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 public enum FlagType
 {
-    tutorialDone, littleRedRidingHood, level11DreamBottleUsed,weirdDwarf
+    tutorialDone, littleRedRidingHood, level11DreamBottleUsed,weirdDwarf, level21DreamBottleUsed, level21StartDialogRead, whaleKilled
 }
 
 public class ArchiveManager : MonoBehaviour
@@ -359,6 +359,40 @@ public class ArchiveManager : MonoBehaviour
                 if (setFlag)
                 {
                     archiveManager.currentArchive.levelInfo.weirdDwarf = set;
+                }
+                return false;
+
+            case FlagType.level21DreamBottleUsed:
+                if (archiveManager.currentArchive.levelInfo.level21DreamBottleUsed)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.level21DreamBottleUsed = set;
+                }
+                return false;
+
+            case FlagType.level21StartDialogRead:
+                if (archiveManager.currentArchive.levelInfo.level21StartDialogRead)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.level21StartDialogRead = set;
+                }
+                return false;
+
+
+            case FlagType.whaleKilled:
+                if (archiveManager.currentArchive.levelInfo.whaleKilled)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.whaleKilled = set;
                 }
                 return false;
         }
