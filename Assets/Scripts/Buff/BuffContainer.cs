@@ -61,7 +61,10 @@ public class BuffContainer
         {"噬血匕首",typeof(HunterFeatherAttackBuff) },
         {"狂猎之枪",typeof(HunterFeatherAttackBuffGun) },
         {"灼伤",typeof(Scorch) },//使对象每0.1秒扣除0.1滴血，持续6s，buff持续期间如果被施加新的灼伤则持续时间延长6s
-        {"烈焰",typeof(Scorch) },
+        {"烈焰",typeof(Burn) },//触发条件：对象的灼伤抵抗小于5并且对象的灼伤层数大于10，效果：使对象的异常抗性减半，持续时间60s
+        {"治愈Ⅰ型",typeof(Heal1) },//在有羽解锁的条件下，每0.1s回复0.2点生命值，持续12秒
+        {"治愈Ⅱ型",typeof(Heal2) },//在有羽解锁的条件下，每0.1s回复0.3点生命值，持续30秒，如果受到伤害立即停止
+        {"治愈Ⅲ型",typeof(Heal3) },//在有羽解锁的条件下，持续30s，buff结束时回复等同于buff持续期间所受伤害的生命值
     };
 
     /*

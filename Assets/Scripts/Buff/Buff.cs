@@ -1791,7 +1791,7 @@ public class Scorch : EffectBuff
             }
         }
         character.burnNumber[1] = buffNumber;
-        if(buffNumber>=10&& character.burnNumber[0]<10&&!isAddBuff)
+        if(buffNumber>=10&&character.burnResistance<5&&character.burnNumber[0]<10&&!isAddBuff)
         {
             character.AddBuff("ÁÒÑæ");
         }
@@ -1834,7 +1834,7 @@ public class Burn : EffectBuff
 
     public override void OnEnter()
     {
-        change = character.abnormalityResistance / 4;
+        change = character.abnormalityResistance / 2;
         character.abnormalityResistance -= change;
         base.OnEnter();
     }
@@ -1848,6 +1848,135 @@ public class Burn : EffectBuff
     {
         character.abnormalityResistance += change;
         base.OnExit();
+    }
+}
+public class Heal1 : EffectBuff
+{
+    private Character character;
+    private float healingTimer;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 12;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (healingTimer > 0.1f)
+        {
+            if(character.unlockedFeathers.Count > 0)
+            {
+                character.unlockedFeathers[0].health += 0.2f;
+            }
+            healingTimer = 0;
+        }
+        else
+        {
+            healingTimer += Time.deltaTime;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class Heal2 : EffectBuff
+{
+    private Character character;
+    private float healingTimer;
+    private float health;
+    private int useNumber;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 30;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (character.unlockedFeathers.Count > 0 && health > character.unlockedFeathers[0].health&&useNumber>0)
+        {
+            timer = 0;
+        }
+        if (healingTimer > 0.1f)
+        {
+            if (character.unlockedFeathers.Count > 0)
+            {
+                character.unlockedFeathers[0].health += 0.3f;
+                health = character.unlockedFeathers[0].health;
+                useNumber++;
+            }
+            healingTimer = 0;
+        }
+        else
+        {
+            healingTimer += Time.deltaTime;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class Heal3 : EffectBuff
+{
+    private Character character;
+    private float oriHealth;
+    private bool first;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 30;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if(!first&&character.unlockedFeathers.Count>0)
+        {
+            first = true;
+            oriHealth = character.unlockedFeathers[0].health;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        if (first && character.unlockedFeathers.Count > 0&& character.unlockedFeathers[0].health<=oriHealth)
+        {
+            character.unlockedFeathers[0].health+=oriHealth- character.unlockedFeathers[0].health;
+        }
     }
 }
 #endregion
