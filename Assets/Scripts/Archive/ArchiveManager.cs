@@ -21,7 +21,7 @@ public class ArchiveManager : MonoBehaviour
     [HideInInspector] public Archive currentArchive = null;
 
     EquipmentPanelManager equipmentPanelManager = null;
-    Player player;
+    GameObject player;
 
     static string path = Application.dataPath + "/Archives";
     static string archiveScreenShotPath = Application.dataPath + "/Archives/ArchiveScreenShot";
@@ -29,7 +29,7 @@ public class ArchiveManager : MonoBehaviour
     public void Awake()
     {
         equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
-        player = FindAnyObjectByType<Player>();
+        player = GameObject.FindGameObjectWithTag(Consts.PlayerTag);
 
         //´´½¨Â·¾¶
         createDictory(path);

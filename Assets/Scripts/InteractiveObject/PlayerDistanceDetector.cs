@@ -13,36 +13,60 @@ public class PlayerDistanceDetector : MonoBehaviour
     [Header("需要Flag（勾选后仅执行enterEvent）")]
     public bool flagOnly;
     public FlagType flagType;
+    [Header("按标签检测，勾选则忽略玩家")]
+    public bool tagDetect;
+    public string targetTag;
 
-    bool isEntered = false;
+    List<Transform> enteredObj = new();
     bool isTrriggered = false;
     Transform player;
+    GameObject[] targets;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform;
+
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isEntered && Vector2.Distance(transform.position, player.position) <= distance && !(flagOnly && ArchiveManager.CheckFlag(flagType)) && !(onceTrriger && isTrriggered))
+        if (tagDetect)
         {
-            isEntered = true;
+            foreach (GameObject go in targets)
+            {
+                Detect(go.transform);
+            }
+        }
+        else
+        {
+            Detect(player);
+        }
+    }
+
+    void Detect(Transform targetTrans)
+    {
+        if (!enteredObj.Contains(targetTrans) && Vector2.Distance(transform.position, targetTrans.position) <= distance && !(flagOnly && ArchiveManager.CheckFlag(flagType)) && !(onceTrriger && isTrriggered))
+        {
+            enteredObj.Add(targetTrans);
             isTrriggered = true;
 
             if (flagOnly)
             {
-                ArchiveManager.CheckFlag(flagType,true);
+                ArchiveManager.CheckFlag(flagType, true);
             }
 
             enterEvent?.Invoke();
         }
-        else if (isEntered && Vector2.Distance(transform.position, player.position) > distance && !flagOnly && !onceTrriger)
+        else if (enteredObj.Contains(targetTrans) && Vector2.Distance(transform.position, targetTrans.position) > distance && !flagOnly && !onceTrriger)
         {
-            isEntered = false;
+            enteredObj.Remove(targetTrans);
 
-            exitEvent?.Invoke();
+            if (enteredObj.Count == 0 )
+            {
+                exitEvent?.Invoke();
+            }
         }
     }
 
