@@ -34,6 +34,9 @@ public class HpUi2_FollowEnemy : MonoBehaviour
         viewPortRectTransform.SetParent(scrollViewRectTransform);
         contentRectTransform.SetParent(viewPortRectTransform);
         scrollViewRectTransform.sizeDelta = new Vector2(90, 120);
+        scrollViewRectTransform.anchorMin = new Vector2(0.5f, 0);
+        scrollViewRectTransform.anchorMax = new Vector2(0.5f, 0);
+        scrollViewRectTransform.pivot = new Vector2(0, 0);
         viewPortRectTransform.sizeDelta = new Vector2(90, 120);
         viewPortRectTransform.anchorMin = Vector2.zero;
         viewPortRectTransform.anchorMax = Vector2.one;
@@ -67,8 +70,8 @@ public class HpUi2_FollowEnemy : MonoBehaviour
         if (sprite != null)
         {
             scrollViewRectTransform.position = Camera.main.WorldToScreenPoint(new Vector3(
-                gameObject.transform.position.x + spriteRenderer.transform.localScale.x * sprite.rect.width / sprite.pixelsPerUnit / 2,
-                gameObject.transform.position.y + spriteRenderer.transform.localScale.y * sprite.rect.height / sprite.pixelsPerUnit, 0));
+                gameObject.transform.position.x ,
+                gameObject.transform.position.y + spriteRenderer.transform.localScale.y * sprite.rect.height / sprite.pixelsPerUnit /2, 0));
         }
         AddHpUi();
         Controller();       
