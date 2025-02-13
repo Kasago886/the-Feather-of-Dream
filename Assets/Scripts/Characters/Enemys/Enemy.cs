@@ -60,6 +60,8 @@ public class Enemy : Character
     public DropItem[] dropItems;
     public int exp;
 
+    public FlagType flag;
+
     [HideInInspector] public Player player;
 
     EnemyUIScroll enemyUIScroll;
@@ -72,6 +74,14 @@ public class Enemy : Character
     new protected void Start()
     {
         base.Start();
+
+        //flag
+        if (ArchiveManager.CheckFlag(flag))
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         player = FindAnyObjectByType<Player>();
         enemyUIScroll = FindAnyObjectByType<EnemyUIScroll>();
         inputListener = FindAnyObjectByType<InputListener>();
@@ -441,6 +451,9 @@ public class Enemy : Character
 
         //О­бщ
         player.AddExp(exp);
+
+        //flag
+        ArchiveManager.CheckFlag(flag,true,true);
     }
 
 

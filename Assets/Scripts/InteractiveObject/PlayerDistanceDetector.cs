@@ -168,7 +168,7 @@ public class PlayerDistanceDetector : MonoBehaviour
             //Debug.Log("opposite="+opposite);
             if (ArchiveManager.CheckFlag(flagType) == opposite)
             {
-                Debug.Log("allsatisfied=false");
+                //Debug.Log("allsatisfied=false");
                 allSatisfied = false;
                 break;
             }

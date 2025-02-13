@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 public enum FlagType
 {
-    tutorialDone, littleRedRidingHood, level11DreamBottleUsed,weirdDwarf, level21DreamBottleUsed, level21StartDialogRead, whaleKilled
+    tutorialDone, littleRedRidingHood, level11DreamBottleUsed,weirdDwarf, level21DreamBottleUsed, level21StartDialogRead, whaleKilled, tinWoodmanKilled
 }
 
 public class ArchiveManager : MonoBehaviour
@@ -393,6 +393,17 @@ public class ArchiveManager : MonoBehaviour
                 if (setFlag)
                 {
                     archiveManager.currentArchive.levelInfo.whaleKilled = set;
+                }
+                return false;
+
+            case FlagType.tinWoodmanKilled:
+                if (archiveManager.currentArchive.levelInfo.tinWoodmanKilled)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.tinWoodmanKilled = set;
                 }
                 return false;
         }

@@ -84,6 +84,7 @@ public struct LevelInfo
     public bool level21DreamBottleUsed;
     public bool level21StartDialogRead;
     public bool whaleKilled;
+    public bool tinWoodmanKilled;
 
     public bool AssistantDestroyed;
 }

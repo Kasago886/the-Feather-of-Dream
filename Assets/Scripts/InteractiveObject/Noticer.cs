@@ -53,10 +53,10 @@ public class Noticer : MonoBehaviour
         }
         transform.position = screenPos;
     }
-
+    /*
     private void OnDestroy()
     {
         Debug.Log("Noticer destroyed. Target: " + (target ? target.name : "null") 
             + "\nParent: " + transform.parent);
-    }
+    }*/
 }

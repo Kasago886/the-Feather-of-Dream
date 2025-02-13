@@ -54,7 +54,7 @@ MonoBehaviour:
   hpScroll: {fileID: 0}
   isDefaultFeather: 1
   defaultFeatherNum: 1
-  defaultFeatherHealth: 200
+  defaultFeatherHealth: 100
   tenacity: 6
   oriTenacity: 0
   strength: 5
@@ -79,7 +79,19 @@ MonoBehaviour:
       m_Calls: []
   deathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -8182439864993843726}
+        m_TargetAssemblyTypeName: TinWoodman, Assembly-CSharp
+        m_MethodName: SetTutorialDone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   deathSound: {fileID: 8300000, guid: a623994b80a09d64784cfc2f4025890b, type: 3}
   buffList: []
   isDead: 0
@@ -115,6 +127,7 @@ MonoBehaviour:
     timer: 0
   dropItems: []
   exp: 5
+  flag: 7
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:
