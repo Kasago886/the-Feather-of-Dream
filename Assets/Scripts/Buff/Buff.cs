@@ -47,7 +47,7 @@ public class Buff
     }
 }
 
-#region 装备buff
+#region 装备残羽buff
 /// <summary>
 /// 装备buff基类
 /// </summary>
@@ -188,6 +188,7 @@ public class EllieEquipmentFeatherBuff : EquipmentFeatherBuff
     {
         base.OnExit();
 
+        player.cardGenerateList.Remove("艾莉之剑");
     }
 }
 public class HunterEquipmentFeatherBuff : EquipmentFeatherBuff
