@@ -88,6 +88,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
                 equipmentFeatherBuff.Init(player);
                 equipmentFeatherBuff.feather.item = this;
                 equipmentFeatherBuff.feather.health = itemInfo.featherHealth;
+                player.AddBuff(equipmentFeatherBuff);
 
                 feather = equipmentFeatherBuff.feather;
             }
