@@ -162,6 +162,10 @@ public class Card : MonoBehaviour
     {
         if (ConditionsOfUseCard() && enemyUse)
         {
+            if (enemyName.Length > 5)
+            {
+                enemyName = "敌人";
+            }
             effects?.Invoke();
             Captions(enemyName + "使用了" + name, false);
             EnemyEffectOnPlayer();
@@ -1302,19 +1306,41 @@ public class Card : MonoBehaviour
     }
     private void Captions(string text, bool isPlayer)
     {
-        //GameObject captions = new GameObject("Captions", typeof(RectTransform), typeof(DynamicTextBackground));
-        GameObject textObject = new GameObject("Text", typeof(Text));
-        //GameObject backGroud = new GameObject("Background", typeof(Image));
-        //RectTransform rectTransform1 = captions.GetComponent<RectTransform>();
-        RectTransform rectTransform2 = textObject.GetComponent<RectTransform>();
-        //RectTransform rectTransform3= backGroud.GetComponent<RectTransform>();
-        //DynamicTextBackground dynamicTextBackground=captions.GetComponent<DynamicTextBackground>();
-        //dynamicTextBackground.textComponent=textObject.GetComponent<Text>();
-        //dynamicTextBackground.backgroundImage=backGroud.GetComponent<Image>();
-        Text text1 = textObject.GetComponent<Text>();
-        rectTransform2.SetParent(GameObject.Find("textScrollContent").GetComponent<RectTransform>());
-        //rectTransform3.SetParent(rectTransform1);
-        //rectTransform2.SetParent(rectTransform1);
+        //GameObject textObject = new GameObject("Text", typeof(Text));
+        //RectTransform rectTransform2 = textObject.GetComponent<RectTransform>();
+        //Text text1 = textObject.GetComponent<Text>();
+        //rectTransform2.SetParent(GameObject.Find("textScrollContent").GetComponent<RectTransform>());
+        //if (isPlayer)
+        //{
+        //    text1.color = Color.blue;
+        //}
+        //else
+        //{
+        //    text1.color = Color.red;
+        //}
+        //text1.text = text;
+        //Font defaultFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        //if (defaultFont != null)
+        //{
+        //    text1.font = defaultFont;
+        //}
+        //text1.fontSize = 21;
+        //text1.fontStyle = FontStyle.Bold;
+        //text1.alignment = TextAnchor.MiddleCenter;
+        //// 自动调整文本框大小以适应内容
+        //ContentSizeFitter contentSizeFitter = textObject.AddComponent<ContentSizeFitter>();
+        //contentSizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+        //contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+        //// 确保文本框在Scroll View中正确显示
+        //rectTransform2.anchorMin = Vector2.zero;
+        //rectTransform2.anchorMax = Vector2.one;
+        //rectTransform2.pivot = Vector2.up;
+        //rectTransform2.sizeDelta = Vector2.zero;
+        ////rectTransform2.position = rectTransform1.position;
+        //Destroy(textObject, 1f);
+        GameObject caption=Instantiate(Resources.Load<Text>("Caption").gameObject, GameObject.Find("textScrollContent").GetComponent<RectTransform>());
+        Text text1=caption.GetComponent<Text>();
+        text1.text=text;
         if (isPlayer)
         {
             text1.color = Color.blue;
@@ -1323,26 +1349,7 @@ public class Card : MonoBehaviour
         {
             text1.color = Color.red;
         }
-        text1.text = text;
-        Font defaultFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        if (defaultFont != null)
-        {
-            text1.font = defaultFont;
-        }
-        text1.fontSize = 21;
-        text1.fontStyle = FontStyle.Bold;
-        text1.alignment = TextAnchor.MiddleCenter;
-        // 自动调整文本框大小以适应内容
-        ContentSizeFitter contentSizeFitter = textObject.AddComponent<ContentSizeFitter>();
-        contentSizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
-        contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-        // 确保文本框在Scroll View中正确显示
-        rectTransform2.anchorMin = Vector2.zero;
-        rectTransform2.anchorMax = Vector2.one;
-        rectTransform2.pivot = Vector2.up;
-        rectTransform2.sizeDelta = Vector2.zero;
-        //rectTransform2.position = rectTransform1.position;
-        Destroy(textObject, 1f);
+        Destroy(caption,3f);
     }
     private void OnDrawGizmos()
     {

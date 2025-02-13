@@ -23,9 +23,9 @@ public class Player : Character
     ArchiveManager archiveManager;
     EquipmentPanelManager equipmentPanelManager;
     InputListener inputListener;
-    PlayerController playerController;
+    [HideInInspector] public PlayerController playerController;
 
-    static Dictionary<int,List<int>> level_maxExp_tenacity_strength = new Dictionary<int, List<int>>
+    static public Dictionary<int,List<int>> level_maxExp_tenacity_strength = new Dictionary<int, List<int>>
     {
         {0,new List<int> {20,0,0}},
         {1,new List<int> {20,10,10}},
@@ -73,6 +73,19 @@ public class Player : Character
         base.AIUpdate();
 
         CardGenerateUpdate();
+    }
+
+    /// <summary>
+    /// 攻击动画
+    /// </summary>
+    public override void OnAttack()
+    {
+        base.OnAttack();
+
+        if (attackBodyObjList.Count > 0)
+        {
+            animator.Play("Attack");
+        }
     }
 
     #region Card
@@ -183,7 +196,6 @@ public class Player : Character
         base.RemoveFeather(feather);
         archiveManager.currentArchive.playerInfo.feather = feathers.Count + unlockedFeathers.Count;
     }
-    #endregion
 
     /// <summary>
     /// 展示血条
@@ -201,6 +213,7 @@ public class Player : Character
             feather.hpUI = hpUI;
         }
     }
+    #endregion
 
     /// <summary>
     /// 受伤后更新羽数量
@@ -217,11 +230,23 @@ public class Player : Character
         }
     }
 
+    /// <summary>
+    /// 死亡
+    /// </summary>
     public override void OnDeath()
     {
         base.OnDeath();
 
         playerController.OnDie();
+
+        animator.SetBool(Consts.IsDeadAnimatorArgument, true);
+    }
+
+    /// <summary>
+    /// 死亡界面
+    /// </summary>
+    public void DeathPanel()
+    {
         inputListener.OnDeath();
     }
 }

@@ -5,19 +5,18 @@ using UnityEngine;
 public class Noticer : MonoBehaviour
 {
     public GameObject target;
+
+    GameObject targetSpriteObj;
+    SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
-        transform.SetParent(GameObject.FindAnyObjectByType<Canvas>().transform, false);
+        Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        transform.SetParent(canvas.transform, false);
         transform.SetAsFirstSibling();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        GameObject targetSpriteObj = target;
-
-        SpriteRenderer spriteRenderer = target.GetComponent<SpriteRenderer>();
+        targetSpriteObj = target;
+        spriteRenderer = target.GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
         {
             for (int i = 0; i < target.transform.childCount; i++)
@@ -32,7 +31,11 @@ public class Noticer : MonoBehaviour
                 }
             }
         }
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
         Vector2 screenPos;
         if (spriteRenderer != null)
         {
@@ -45,7 +48,15 @@ public class Noticer : MonoBehaviour
         else
         {
             screenPos = Camera.main.WorldToScreenPoint(target.transform.position);
+            //Debug.Log(target.transform.position);
+            //Debug.Log(screenPos);
         }
         transform.position = screenPos;
     }
+    /*
+    private void OnDestroy()
+    {
+        Debug.Log("Noticer destroyed. Target: " + (target ? target.name : "null") 
+            + "\nParent: " + transform.parent);
+    }*/
 }

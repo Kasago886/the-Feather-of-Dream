@@ -139,7 +139,14 @@ MonoBehaviour:
   defaultFeatherNum: 1
   defaultFeatherHealth: 100
   tenacity: 0
+  oriTenacity: 0
   strength: 0
+  oriStrength: 0
+  abnormalityResistance: 0
+  burnResistance: 0
+  burnNumber: 0000000000000000
+  traumaResistance: 0
+  traumaNumber: 0000000000000000
   injuryForceback: 1
   forcebackForce: 1
   forcebackDuration: 0.1
@@ -167,8 +174,9 @@ MonoBehaviour:
   runSpeed: 5
   jumpSpeed: 7
   attackCooldown: 2
+  attackCooldownTimer: 0
   searchType: 0
-  wallDetect: 0
+  wallDetect: 1
   keepDistanceWhenNotArmed: 1
   searchDistance: 20
   minDistance: 3
@@ -182,6 +190,9 @@ MonoBehaviour:
     cooldown: 0
     timer: 0
   effectCardLineList: []
+  dropItems: []
+  exp: 0
+  flag: 0
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:

@@ -5,6 +5,13 @@ using System.IO;
 using System;
 using Newtonsoft.Json;
 
+
+
+public enum FlagType
+{
+    tutorialDone, littleRedRidingHood, level11DreamBottleUsed,weirdDwarf, level21DreamBottleUsed, level21StartDialogRead, whaleKilled, tinWoodmanKilled
+}
+
 public class ArchiveManager : MonoBehaviour
 {
     public string title = "";
@@ -14,7 +21,7 @@ public class ArchiveManager : MonoBehaviour
     [HideInInspector] public Archive currentArchive = null;
 
     EquipmentPanelManager equipmentPanelManager = null;
-    Player player;
+    GameObject player;
 
     static string path = Application.dataPath + "/Archives";
     static string archiveScreenShotPath = Application.dataPath + "/Archives/ArchiveScreenShot";
@@ -22,7 +29,7 @@ public class ArchiveManager : MonoBehaviour
     public void Awake()
     {
         equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
-        player = FindAnyObjectByType<Player>();
+        player = GameObject.FindGameObjectWithTag(Consts.PlayerTag);
 
         //创建路径
         createDictory(path);
@@ -54,6 +61,11 @@ public class ArchiveManager : MonoBehaviour
             {
                 Debug.Log(currentArchive.levelInfo.archivePoint);
                 player.transform.position = archivePointers[currentArchive.levelInfo.archivePoint].position;
+                Assistant assistant = FindAnyObjectByType<Assistant>();
+                if (assistant != null)
+                {
+                    assistant.transform.position = player.transform.position + new Vector3(-1,1);
+                }
             }
 
             //新存档截图
@@ -292,6 +304,111 @@ public class ArchiveManager : MonoBehaviour
         tex.LoadImage(arr);
         tex.Apply();
         return tex;
+    }
+
+    /// <summary>
+    /// 检查状态
+    /// </summary>
+    /// <param name="flag">状态类型</param>
+    /// <param name="setFlag">修改状态，默认不修改</param>
+    /// <param name="set">修改后的状态，默认true</param>
+    /// <returns>修改前的状态</returns>
+    static public bool CheckFlag(FlagType flag, bool setFlag = false, bool set = true)
+    {
+        ArchiveManager archiveManager = FindAnyObjectByType<ArchiveManager>();
+        switch(flag)
+        {
+            case FlagType.littleRedRidingHood:
+                if (archiveManager.currentArchive.levelInfo.littleRedRidingHood)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.littleRedRidingHood = set;
+                }
+                return false;
+
+            case FlagType.tutorialDone:
+                if (archiveManager.currentArchive.levelInfo.tutorialDone)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.tutorialDone = set;
+                }
+                return false;
+
+            case FlagType.level11DreamBottleUsed:
+                if (archiveManager.currentArchive.levelInfo.level11DreamBottleUsed)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.level11DreamBottleUsed = set;
+                }
+                return false;
+
+            case FlagType.weirdDwarf:
+                if (archiveManager.currentArchive.levelInfo.weirdDwarf)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.weirdDwarf = set;
+                }
+                return false;
+
+            case FlagType.level21DreamBottleUsed:
+                if (archiveManager.currentArchive.levelInfo.level21DreamBottleUsed)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.level21DreamBottleUsed = set;
+                }
+                return false;
+
+            case FlagType.level21StartDialogRead:
+                if (archiveManager.currentArchive.levelInfo.level21StartDialogRead)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.level21StartDialogRead = set;
+                }
+                return false;
+
+
+            case FlagType.whaleKilled:
+                if (archiveManager.currentArchive.levelInfo.whaleKilled)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.whaleKilled = set;
+                }
+                return false;
+
+            case FlagType.tinWoodmanKilled:
+                if (archiveManager.currentArchive.levelInfo.tinWoodmanKilled)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.tinWoodmanKilled = set;
+                }
+                return false;
+        }
+        Debug.LogError("Flag undefined:" + flag.ToString());
+        return false;
     }
 
     /// <summary>

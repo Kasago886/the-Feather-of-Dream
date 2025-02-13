@@ -74,7 +74,7 @@ public class Dialog : MonoBehaviour
             }
 
             //计时器
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
 
             //每隔nextTime秒就显示下一个字
             if (ifsaying && (timer >= nextTime))
@@ -187,6 +187,46 @@ public class Dialog : MonoBehaviour
                         }
                     }
 
+                    //识别换行符和反斜杠
+                    string newtext = "";
+                    bool checknext = false;
+                    foreach (char c in sayText)
+                    {
+                        if (c == '\\')
+                        {
+                            checknext = true;
+                        }
+                        else
+                        {
+                            if (checknext)
+                            {
+                                if (c == '\\')
+                                {
+                                    newtext += '\\';
+                                }
+                                else if (c == 'n')
+                                {
+                                    newtext += '\n';
+                                }
+                                else
+                                {
+                                    newtext = newtext + '\\' + c;
+                                }
+
+                                checknext = false;
+                            }
+                            else
+                            {
+                                newtext += c;
+                            }
+                        }
+                    }
+                    if(checknext)
+                    {
+                        newtext += '\\';
+                    }
+                    sayText = newtext;
+
                     //如果正在说，则直接显示完当前行
                     if (ifsaying)
                     {
@@ -232,8 +272,13 @@ public class Dialog : MonoBehaviour
         }
     }
 
-    public void Read(string TextFile)
+    public void Read(string TextFile, UnityEvent endUnityEvent = null)
     {
+        if (animator == null)
+        {
+            Start();
+        }
+
         try
         {
             //获取文本
@@ -248,6 +293,9 @@ public class Dialog : MonoBehaviour
             wrongtext = "DialogText '" + textFile + "' doesn't exist!";
             Debug.LogError(wrongtext);
         }
+
+        endEvent?.Invoke();
+        endEvent = endUnityEvent;
 
         //动画
         animator.SetBool("appear", true);
@@ -266,6 +314,11 @@ public class Dialog : MonoBehaviour
         //开始更新
         ifPause = false;
         dialogFare();
+    }
+
+    public void Read(string TextFile)
+    {
+        Read(TextFile, null);
     }
 
     void dialogEnd()

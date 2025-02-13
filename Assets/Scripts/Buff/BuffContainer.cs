@@ -22,6 +22,7 @@ public class BuffContainer
         {"拔羽15s", typeof(UnlockFeather15sBuff) },
         {"拔羽20s", typeof(UnlockFeather20sBuff) },
         {"艾莉之羽", typeof(EllieEquipmentFeatherBuff) },
+        {"疯猎之残羽", typeof(HunterEquipmentFeatherBuff) },
         {"艾莉之剑", typeof(ElliesSwordAttackBuff) },
         {"王子之剑", typeof(PrinceSwordAttackBuff) },
         {"侍卫短剑", typeof(PrinceGuardSwordAttackBuff) },
@@ -56,8 +57,24 @@ public class BuffContainer
         {"脆弱",typeof(Fragile) },//使对象降低10%的韧性，最高不超过2点韧性，持续16s
         {"迟缓",typeof(Sluggish) },//使对象降低10%速度，持续16s
         {"凝重",typeof(Grave) },//使对象降低10%起跳速度，持续16s
-        {"中毒",typeof(PoisonBuff) },//使对象每秒扣除1滴血，持续5s
+        {"中毒",typeof(PoisonBuff) },//使对象每秒扣除5滴血，持续5s
         {"正义",typeof(JusticeBuff) },//使玩家下一张攻击卡攻击力翻倍
+        {"噬血匕首",typeof(HunterFeatherAttackBuff) },
+        {"狂猎之枪",typeof(HunterFeatherAttackBuffGun) },
+        {"起动",typeof(HunterFeatherEffectBuff) },
+        {"猎杀",typeof(HunterFeatherEffectBuff1) },
+        {"灼伤",typeof(Scorch) },//使对象每0.1秒扣除0.1滴血，持续6s，buff持续期间如果被施加新的灼伤则持续时间延长6s
+        {"烈焰",typeof(Burn) },//触发条件：对象的灼伤抵抗小于5并且对象的灼伤层数大于10，效果：使对象的异常抗性减半，持续时间60s
+        {"治愈Ⅰ型",typeof(Heal1) },//在有羽解锁的条件下，每0.1s回复0.2点生命值，持续12秒
+        {"治愈Ⅱ型",typeof(Heal2) },//在有羽解锁的条件下，每0.1s回复0.3点生命值，持续30秒，如果受到伤害立即停止
+        {"治愈Ⅲ型",typeof(Heal3) },//在有羽解锁的条件下，持续30s，buff结束时回复等同于buff持续期间所受伤害的生命值
+        {"随机Buff",typeof(RandomBuff) },
+        {"异常抵抗",typeof(AbnormalResistance) },//使对象提高10%的异常抗性，持续16s
+        {"异常脆弱",typeof(AbnormalFragility) },//使对象降低10%的异常抗性，持续16s
+        {"灼伤抵抗",typeof(BurnResistance) },//使对象提高1点灼伤抵抗，持续16s
+        {"灼伤脆弱",typeof(BurnFragility) },//使对象降低1点灼伤抵抗，持续16s
+        {"伤痕抵抗",typeof(TraumaResistance) },//使对象提高1点伤痕抗性，持续16s
+        {"伤痕脆弱",typeof(TraumaFragility) },//使对象降低1点伤痕抗性，持续16s
     };
 
     /*

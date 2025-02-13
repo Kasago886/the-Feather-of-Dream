@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 [System.Serializable]
 public class Buff
 {
@@ -46,7 +47,7 @@ public class Buff
     }
 }
 
-#region ×°±¸buff
+#region ×°±¸²ÐÓðbuff
 /// <summary>
 /// ×°±¸buff»ùÀà
 /// </summary>
@@ -86,7 +87,35 @@ public class TestEquipmentBuff : EquipmentBuff
         Debug.Log("TestEquipmentBuff is Removed!");
     }
 }
+public class CrazyHunterEquipmentBuff : EquipmentBuff
+{
+    bool isUpdated = false;
+    Player player;
 
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player=target.GetComponent<Player>();
+        player.tenacity += 10;
+        
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (!isUpdated)
+        {
+            Debug.Log("TestEquipmentBuff is updated succesfully!");
+            isUpdated = true;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        Debug.Log("TestEquipmentBuff is Removed!");
+    }
+}
 #endregion
 
 #region ×°±¸Óðbuff
@@ -158,6 +187,36 @@ public class EllieEquipmentFeatherBuff : EquipmentFeatherBuff
     public override void OnExit()
     {
         base.OnExit();
+
+        player.cardGenerateList.Remove("°¬ÀòÖ®½£");
+    }
+}
+public class HunterEquipmentFeatherBuff : EquipmentFeatherBuff
+{
+    Player player;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+        player.cardGenerateList.Add("¿ñÁÔÖ®Ç¹");
+        player.cardGenerateList.Add("ÊÉÑªØ°Ê×");
+        player.cardGenerateList.Add("Æð¶¯");
+        player.cardGenerateList.Add("ÁÔÉ±");
+        player.strength += 10;
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.cardGenerateList.Remove("¿ñÁÔÖ®Ç¹");
+        player.cardGenerateList.Remove("ÊÉÑªØ°Ê×");
+        player.cardGenerateList.Remove("Æð¶¯");
+        player.cardGenerateList.Remove("ÁÔÉ±");
 
     }
 }
@@ -292,10 +351,10 @@ public class CrazyHunterAttackBuff1 : AttackBuff
         this.timer = 1;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunter/CrazyHunterAttackBodyTrap");
         target.GetComponent<Enemy>().attackCooldownTimer = 0;
-       
+
     }
 }
-    public class TinWoodmanAttackBuff : AttackBuff
+public class TinWoodmanAttackBuff : AttackBuff
 {
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
@@ -329,6 +388,33 @@ public class TheMisunderstoodWerewolfBuff : AttackBuff
         base.Init(target, timer, isPermanent);
         this.timer = 7;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/TheMisunderstoodWerewolfAttackBody 1");
+    }
+}
+public class HunterFeatherAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 7;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunter/HunterFeatherAttackBody");
+    }
+}
+public class HunterFeatherAttackBuffGun : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 7;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/CrazyHunter/HunterFeatherAttackBodyGun");
+    }
+}
+public class BurningDocumentsAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 12;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/BurningDocumentsAttackBody");
     }
 }
 #endregion
@@ -502,7 +588,7 @@ public class CrazyHunterEffectBuff : EffectBuff
         target.GetComponent<Enemy>().strength = 0;
     }
 }
-    public class TinWoodmanEffectBuff : EffectBuff
+public class TinWoodmanEffectBuff : EffectBuff
 {
     private float buffTimer;
     private float oriStrength;
@@ -531,7 +617,7 @@ public class CrazyHunterEffectBuff : EffectBuff
         buffTimer += Time.deltaTime;
         if (buffTimer > 2)
         {
-            enemy.strength += oriStrength / 10;
+            enemy.strength += enemy.oriStrength/10;
             buffTimer = 0;
         }
     }
@@ -668,29 +754,39 @@ public class DwarfsEffectBuff : EffectBuff
 }
 public class Trauma : EffectBuff
 {
-    private Player player;
-    private Enemy enemy;
+    private Character character;
     private float health;
     private float attackTimer;
+    private int buffNumber;
+    private bool isAddBuff;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        if (target.GetComponent<Player>() != null )
+        if (target.GetComponent<Character>() != null)
         {
-            player = target.GetComponent<Player>();
-            if (player.unlockedFeathers.Count > 0)
+            character = target.GetComponent<Player>();
+            if (character.unlockedFeathers.Count > 0)
             {
-                health = player.unlockedFeathers[0].health;
+                health = character.unlockedFeathers[0].health;
             }
         }
-        if (target.GetComponent<Enemy>() != null)
+        foreach (var buff in character.buffList)
         {
-            enemy = target.GetComponent<Enemy>();
-            if (enemy.unlockedFeathers.Count > 0)
+            if (buff.name == "ÉËºÛ")
             {
-                health = enemy.unlockedFeathers[0].health;
+                buffNumber++;
+            }
+            if (buff.name == "ÁÑÏ¶")
+            {
+                isAddBuff = true;
             }
         }
+        character.traumaNumber[1] = buffNumber;
+        if (buffNumber >= 10 && character.traumaResistance < 5 && character.traumaNumber[0] < 10 && !isAddBuff)
+        {
+            character.AddBuff("ÁÑÏ¶");
+        }
+        character.traumaNumber[0] = buffNumber;
         this.timer = 999999;
     }
 
@@ -705,11 +801,11 @@ public class Trauma : EffectBuff
         attackTimer += Time.deltaTime;
         if (attackTimer > 0.1f)
         {
-            if (player != null)
+            if (character != null)
             {
-                if ( player.unlockedFeathers.Count > 0&&health - player.unlockedFeathers[0].health >= 1)
+                if (character.unlockedFeathers.Count > 0 && health - character.unlockedFeathers[0].health >= 1)
                 {
-                    player.unlockedFeathers[0].health--;
+                    character.unlockedFeathers[0].health-=Mathf.Pow(2, -character.abnormalityResistance / 100) * (1 - character.traumaResistance * 0.1f);
                     attackTimer = 0;
                     if (Random.Range(0, 3) > 1)
                     {
@@ -717,26 +813,10 @@ public class Trauma : EffectBuff
                     }
                 }
             }
-            if (enemy != null)
-            {
-                if (enemy.unlockedFeathers.Count > 0&&health - enemy.unlockedFeathers[0].health >= 1)
-                {
-                    enemy.unlockedFeathers[0].health--;
-                    attackTimer = 0;
-                    if (Random.Range(0, 3) > 1)
-                    {
-                        this.timer=0;
-                    }
-                }
-            }
         }
-        if(player != null && player.unlockedFeathers.Count > 0)
+        if (character != null && character.unlockedFeathers.Count > 0)
         {
-            health = player.unlockedFeathers[0].health;
-        }
-        if(enemy != null && enemy.unlockedFeathers.Count > 0)
-        {
-            health = enemy.unlockedFeathers[0].health;
+            health = character.unlockedFeathers[0].health;
         }
     }
 
@@ -815,17 +895,17 @@ public class Depressed : EffectBuff
 
     public override void OnEnter()
     {
-        if(player != null)
+        if (player != null)
         {
             player.cardGenerateCooldown += 1;
-            baseColor=player.cardGenerateText.color;
-            player.cardGenerateText.color= Color.red;
+            baseColor = player.cardGenerateText.color;
+            player.cardGenerateText.color = Color.red;
         }
         if (enemy != null)
         {
             foreach (EnemyCardLine line in enemy.attackCardLineList)
             {
-                foreach(EnemyCardWithTimer ectw in line.cards)
+                foreach (EnemyCardWithTimer ectw in line.cards)
                 {
                     ectw.timer += 1;
                 }
@@ -976,12 +1056,12 @@ public class Mediocre : EffectBuff
 }
 public class Talent : EffectBuff
 {
-   private Character character;
+    private Character character;
     private float change;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        if(target.GetComponent<Character>() != null)
+        if (target.GetComponent<Character>() != null)
         {
             character = target.GetComponent<Character>();
         }
@@ -1087,7 +1167,7 @@ public class Ignore : EffectBuff
         base.OnExit();
     }
 }
-public class ImperfectWork: EffectBuff
+public class ImperfectWork : EffectBuff
 {
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
@@ -1098,7 +1178,7 @@ public class ImperfectWork: EffectBuff
 
     public override void OnEnter()
     {
-        
+
         base.OnEnter();
     }
 
@@ -1112,7 +1192,7 @@ public class ImperfectWork: EffectBuff
         base.OnExit();
     }
 }
-public class CraveRecognition: EffectBuff
+public class CraveRecognition : EffectBuff
 {
     private Enemy enemy;
     private float health;
@@ -1146,7 +1226,7 @@ public class CraveRecognition: EffectBuff
             {
                 if (enemy.unlockedFeathers.Count > 0 && health - enemy.unlockedFeathers[0].health >= 1)
                 {
-                    enemy.unlockedFeathers[0].health-=0.5f;
+                    enemy.unlockedFeathers[0].health -= 0.5f;
                     attackTimer = 0;
                 }
             }
@@ -1178,12 +1258,12 @@ public class UpLifting : EffectBuff
 
     public override void OnEnter()
     {
-        change = character.strength*0.1f;
+        change = character.strength * 0.1f;
         if (change > 1)
         {
             change = 1;
         }
-        character.strength +=change;
+        character.strength += change;
         base.OnEnter();
     }
 
@@ -1234,7 +1314,7 @@ public class Toughness : EffectBuff
         base.OnExit();
     }
 }
-public class BlazingSpeed: EffectBuff
+public class BlazingSpeed : EffectBuff
 {
     private Enemy character;
     private PlayerController playerController;
@@ -1246,9 +1326,9 @@ public class BlazingSpeed: EffectBuff
         {
             character = target.GetComponent<Enemy>();
         }
-        if(target.GetComponent<PlayerController>() != null)
+        if (target.GetComponent<PlayerController>() != null)
         {
-            playerController = target.GetComponent<PlayerController>(); 
+            playerController = target.GetComponent<PlayerController>();
         }
         this.timer = 16f;
     }
@@ -1263,7 +1343,7 @@ public class BlazingSpeed: EffectBuff
         if (playerController != null)
         {
             change = playerController.walkSpeed * 0.1f;
-            playerController.walkSpeed += change; 
+            playerController.walkSpeed += change;
         }
         base.OnEnter();
     }
@@ -1363,7 +1443,7 @@ public class Steadfast : EffectBuff
         {
             player.cardGenerateCooldown -= 1;
             baseColor = player.cardGenerateText.color;
-            player.cardGenerateText.color = Color.green;       
+            player.cardGenerateText.color = Color.green;
         }
         if (enemy != null)
         {
@@ -1667,13 +1747,13 @@ public class PoisonBuff : EffectBuff
         }
         else
         {
-            if (enemy.unlockedFeathers[0] != null)
+            if (enemy.unlockedFeathers.Count>0)
             {
-                enemy.unlockedFeathers[0].health -= 4f;
+                enemy.unlockedFeathers[0].health -= 1f;
                 bufftimer = 1;
             }
         }
-        }
+    }
 
     public override void OnExit()
     {
@@ -1694,44 +1774,607 @@ public class JusticeBuff : EffectBuff
     public override void OnEnter()
     {
         base.OnEnter();
-        foreach(GameObject attackBody in target.attackBodyObjList)
-        {
-            attackbodyOriNum++;
-        }
-        if (attackbodyOriNum == 0)
-        {
-            yes = true;
-        }
+        attackbodyOriNum = target.attackBodyObjList.Count;
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
-        attackbodyNewNum = 0;
-        foreach (GameObject attackBody in target.attackBodyObjList)
-        {
-            attackbodyNewNum++;
-        }
-        if(attackbodyNewNum >attackbodyOriNum)
+        attackbodyNewNum = target.attackBodyObjList.Count;
+        if (attackbodyNewNum > attackbodyOriNum)
         {
             target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().damage *= 2;
             timer = 0;
         }
-        if (attackbodyNewNum == 0)
+        if (attackbodyNewNum < attackbodyOriNum)
         {
-            yes = true;
+            attackbodyOriNum = attackbodyNewNum;
         }
-        if (yes) {
-            if (target.attackBodyObjList.Count != 0)
-            {
-                target.attackBodyObjList[0].GetComponent<AttackBody>().damage *= 2;
-                timer = 0;
-            }
-            }
-        }
+
+    }
 
     public override void OnExit()
     {
+        base.OnExit();
+    }
+}
+public class Scorch : EffectBuff
+{
+    private Character character;
+    private float attackTimer;
+    private int buffNumber;
+    private bool isAddBuff;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 0.1f;
+        foreach (var buff in character.buffList)
+        {
+            if (buff.name == "×ÆÉË")
+            {
+                buff.timer += 6f;
+                buffNumber++;
+            }
+            if (buff.name == "ÁÒÑæ")
+            {
+                isAddBuff = true;
+            }
+        }
+        character.burnNumber[1] = buffNumber;
+        if(buffNumber>=10&&character.burnResistance<5&&character.burnNumber[0]<10&&!isAddBuff)
+        {
+            character.AddBuff("ÁÒÑæ");
+        }
+        character.burnNumber[0]=buffNumber;
+    }
+
+    public override void OnEnter()
+    {    
+        base.OnEnter();      
+    }
+
+    public override void OnUpdate()
+    {
+        attackTimer += Time.deltaTime;
+        if(attackTimer > 0.1f&&character.unlockedFeathers.Count>0)
+        {
+            character.unlockedFeathers[0].health -= 0.1f*Mathf.Pow(2, -character.abnormalityResistance / 100)*(1-character.burnResistance*0.1f);
+        }
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class Burn : EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 60;
+    }
+
+    public override void OnEnter()
+    {
+        change = character.abnormalityResistance / 2;
+        character.abnormalityResistance -= change;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        character.abnormalityResistance += change;
+        base.OnExit();
+    }
+}
+public class Heal1 : EffectBuff
+{
+    private Character character;
+    private float healingTimer;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 12;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (healingTimer > 0.1f)
+        {
+            if(character.unlockedFeathers.Count > 0)
+            {
+                character.unlockedFeathers[0].health += 0.2f;
+            }
+            healingTimer = 0;
+        }
+        else
+        {
+            healingTimer += Time.deltaTime;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class Heal2 : EffectBuff
+{
+    private Character character;
+    private float healingTimer;
+    private float health;
+    private int useNumber;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 30;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (character.unlockedFeathers.Count > 0 && health > character.unlockedFeathers[0].health&&useNumber>0)
+        {
+            timer = 0;
+        }
+        if (healingTimer > 0.1f)
+        {
+            if (character.unlockedFeathers.Count > 0)
+            {
+                character.unlockedFeathers[0].health += 0.3f;
+                health = character.unlockedFeathers[0].health;
+                useNumber++;
+            }
+            healingTimer = 0;
+        }
+        else
+        {
+            healingTimer += Time.deltaTime;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class Heal3 : EffectBuff
+{
+    private Character character;
+    private float oriHealth;
+    private bool first;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 30;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if(!first&&character.unlockedFeathers.Count>0)
+        {
+            first = true;
+            oriHealth = character.unlockedFeathers[0].health;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        if (first && character.unlockedFeathers.Count > 0&& character.unlockedFeathers[0].health<=oriHealth)
+        {
+            character.unlockedFeathers[0].health+=oriHealth- character.unlockedFeathers[0].health;
+        }
+    }
+}
+public class HunterFeatherEffectBuff : EffectBuff
+{
+   private Player player;
+    private PlayerCardController cardController;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            player = target.GetComponent<Player>();
+        }
+        this.timer = 60;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        cardController =player.cardController;
+        int ran = Random.Range(1, 3);
+        if (cardController.GetCardOrNot()&&ran==1)
+        {
+            cardController.GetCard("¿ñÁÔÖ®Ç¹");
+        }
+        else if (cardController.GetCardOrNot() && ran == 2)
+        {
+            cardController.GetCard("ÊÉÑªØ°Ê×");
+        }
+        if (player.attackBodyObjList.Count >= 2) {
+            player.cardGenerateCooldownTimer = 0;
+        }
+        timer = 0;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class HunterFeatherEffectBuff1 : EffectBuff
+{
+    private Player player;
+    private int num;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Player>() != null)
+        {
+            player = target.GetComponent<Player>();
+        }
+        this.timer = 5;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        num = player.attackBodyObjList.Count;
+        player.strength += 10 * (num + 1);
+        player.tenacity += 10 * (num + 1);
+       
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.strength -= 10 * (num + 1);
+        player.tenacity -= 10 * (num + 1);
+    }
+}
+public class RandomBuff : EffectBuff
+{
+    private Character character;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+            int n = Random.Range(0, 30);
+            switch (n)
+            {
+                case 0:character.AddBuff("ÖÎÓú¢óÐÍ");break;
+                case 1: character.AddBuff("ÖÎÓú¢òÐÍ"); break;
+                case 2: character.AddBuff("ÖÎÓú¢ñÐÍ"); break;
+                case 3: character.AddBuff("×ÆÉË"); break;
+                case 4: character.AddBuff("ÕýÒå"); break;
+                case 5: character.AddBuff("ÖÐ¶¾"); break;
+                case 6: character.AddBuff("ÄýÖØ"); break;
+                case 7: character.AddBuff("³Ù»º"); break;
+                case 8: character.AddBuff("´àÈõ"); break;
+                case 9: character.AddBuff("Î®ÃÒ"); break;
+                case 10: character.AddBuff("×¿Ô½"); break;
+                case 11: character.AddBuff("¼á¶¨"); break;
+                case 12: character.AddBuff("Çá½¡"); break;
+                case 13: character.AddBuff("ÉñËÙ"); break;
+                case 14: character.AddBuff("¼áÈÍ"); break;
+                case 15: character.AddBuff("Õñ·Ü"); break;
+                case 16: character.AddBuff("²©Ñ§"); break;
+                case 17: character.AddBuff("²Å»ª"); break;
+                case 18: character.AddBuff("·²Ó¹"); break;
+                case 19: character.AddBuff("±ÀÀ£"); break;
+                case 20: character.AddBuff("ÓÇÓô"); break;
+                case 21: character.AddBuff("¾ª»Ì"); break;
+                case 22: character.AddBuff("ÉËºÛ"); break;
+                case 23: character.AddBuff("ÂéÄ¾"); break;
+                case 24: character.AddBuff("Òì³£µÖ¿¹"); break;
+                case 25: character.AddBuff("Òì³£´àÈõ"); break;
+                case 26: character.AddBuff("×ÆÉËµÖ¿¹"); break;
+                case 27: character.AddBuff("×ÆÉË´àÈõ"); break;
+                case 28: character.AddBuff("ÉËºÛµÖ¿¹"); break;
+                case 29: character.AddBuff("ÉËºÛ´àÈõ"); break;
+            }
+        }
+        this.timer = 0;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+       
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class AbnormalResistance: EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        if (character != null)
+        {
+            change = character.abnormalityResistance * 0.1f;
+            character.abnormalityResistance += change;
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (character != null)
+        {
+            character.abnormalityResistance -= change;
+        }
+        base.OnExit();
+    }
+}
+public class AbnormalFragility: EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        if (character != null)
+        {
+            change = character.abnormalityResistance * 0.1f;
+            character.abnormalityResistance -= change;
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (character != null)
+        {
+            character.abnormalityResistance += change;
+        }
+        base.OnExit();
+    }
+}
+public class BurnResistance: EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        if (character != null)
+        {
+            character.burnResistance++;
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (character != null)
+        {
+            character.burnResistance--;
+        }
+        base.OnExit();
+    }
+}
+public class BurnFragility: EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        if (character != null)
+        {
+            character.burnResistance--;
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (character != null)
+        {
+            character.burnResistance++;
+        }
+        base.OnExit();
+    }
+}
+public class TraumaResistance : EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        if (character != null)
+        {
+            character.traumaResistance++;
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (character != null)
+        {
+            character.traumaResistance--;
+        }
+        base.OnExit();
+    }
+}
+public class TraumaFragility : EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 16f;
+    }
+
+    public override void OnEnter()
+    {
+        if (character != null)
+        {
+            character.traumaResistance--;
+        }
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        if (character != null)
+        {
+            character.traumaResistance++;
+        }
         base.OnExit();
     }
 }

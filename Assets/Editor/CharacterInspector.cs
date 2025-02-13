@@ -64,6 +64,9 @@ public class CharacterInspector : Editor
         {
             character.tenacity = EditorGUILayout.FloatField("»Õ–‘", character.tenacity);
             character.strength = EditorGUILayout.FloatField("¡¶¡ø", character.strength);
+            character.abnormalityResistance = EditorGUILayout.FloatField("“Ï≥£øπ–‘", character.abnormalityResistance);
+            character.burnResistance = EditorGUILayout.FloatField("◊∆…Àµ÷øπ", character.burnResistance);
+            character.traumaResistance= EditorGUILayout.FloatField("…À∫€µ÷øπ", character.traumaResistance);
         }
         EditorGUILayout.EndFoldoutHeaderGroup();
 

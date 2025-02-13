@@ -44,8 +44,10 @@ public class ItemInfo
     public string imageName;
 
     public string buffName;
-
     public float featherHealth;
+    public float featherMaxHealth;
+
+    public string dialogName;
 
     public int position;
 }
@@ -75,5 +77,14 @@ public struct LevelInfo
 
     public int archivePoint;
 
+    public bool tutorialDone;
     public bool littleRedRidingHood;
+    public bool level11DreamBottleUsed;
+    public bool weirdDwarf;
+    public bool level21DreamBottleUsed;
+    public bool level21StartDialogRead;
+    public bool whaleKilled;
+    public bool tinWoodmanKilled;
+
+    public bool AssistantDestroyed;
 }

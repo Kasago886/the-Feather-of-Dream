@@ -17,10 +17,12 @@ public class Teleportor : InteractiveObject
     public float size;
 
     CameraManager cameraManager;
+    Assistant assistant;
     protected override void Start()
     {
         base.Start();
         cameraManager = FindAnyObjectByType<CameraManager>();
+        assistant = FindAnyObjectByType<Assistant>();
 
         TeleportPosition3 = TeleportPosition;
     }
@@ -46,6 +48,10 @@ public class Teleportor : InteractiveObject
     {
         yield return null;
         player.transform.position = position;
+        if (assistant != null)
+        {
+            assistant.transform.position = position + new Vector3(-1,1);
+        }
 
         if (isCameraChange)
             cameraManager.SetCameraSize(size);

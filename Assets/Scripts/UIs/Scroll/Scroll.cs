@@ -25,13 +25,15 @@ public class Scroll : MonoBehaviour
     public virtual void Update()
     {
     }
-    public void Additem(RectTransform item)
+    public virtual Transform Additem(RectTransform item)
     {
         Transform temp = Instantiate(item).transform;
         temp.SetParent(contentTransform);
         temp.localPosition = Vector3.zero;
         temp.localRotation = Quaternion.identity;
         temp.localScale = Vector3.one;
+
+        return temp;
     }
 
     public HpUI AddHp()

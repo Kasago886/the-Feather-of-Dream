@@ -36,6 +36,7 @@ public class EnemyInspector : CharacterInspector
         //垂直方向布局
         EditorGUILayout.BeginVertical();
 
+        enemy.flag = (FlagType)EditorGUILayout.EnumPopup("对应的存档flag", enemy.flag);
         EditorGUILayout.LabelField("属性", EditorStyles.boldLabel);
         enemy.enemyName = EditorGUILayout.TextField("名字",enemy.enemyName);
         enemy.runSpeed = EditorGUILayout.FloatField("移动速度",enemy.runSpeed);

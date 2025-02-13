@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class TinWoodman : Enemy
 {
-    
+    public void SetTutorialDone()
+    {
+        ArchiveManager.CheckFlag(FlagType.tutorialDone,true,true);
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class EquipmentPanelManager : MonoBehaviour
@@ -25,6 +26,7 @@ public class EquipmentPanelManager : MonoBehaviour
     public GameObject unequipButton;
     public GameObject dreamizeButton;
     public Text dreamizeCost;
+    public GameObject memorizeButton;
 
     public Transform encyclopediaContent;
 
@@ -41,6 +43,7 @@ public class EquipmentPanelManager : MonoBehaviour
     bool isShow = false;
     AnimationBoolManager animationBoolManager;
     Player player;
+    Dialog dialog;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +51,7 @@ public class EquipmentPanelManager : MonoBehaviour
         archiveManager = FindAnyObjectByType<ArchiveManager>();
         animationBoolManager = GetComponent<AnimationBoolManager>();
         player = FindAnyObjectByType<Player>();
+        dialog = FindAnyObjectByType<Dialog>();
 
         if (!setuped)
         {
@@ -63,7 +67,7 @@ public class EquipmentPanelManager : MonoBehaviour
             if (selectedItemPlace.content != null)
             {
                 Item item = selectedItemPlace.content;
-                if (item.type == ItemType.Feather)
+                if (item.type == ItemType.Feather && item.itemFeather != null)
                 {
                     /// 最后三行格式化
                     /// \n
@@ -102,9 +106,12 @@ public class EquipmentPanelManager : MonoBehaviour
             animationBoolManager = GetComponent<AnimationBoolManager>();
             player = FindAnyObjectByType<Player>();
         }
-        if (!player.setUped)
+        if (player != null)
         {
-            player.SetUp();
+            if (!player.setUped)
+            {
+                player.SetUp();
+            }
         }
 
         selectedItemPlace = null;
@@ -149,6 +156,7 @@ public class EquipmentPanelManager : MonoBehaviour
         equipButton.SetActive(false);
         dreamizeButton.SetActive(false);
         unequipButton.SetActive(false);
+        memorizeButton.SetActive(false);
 
         setuped = true;
     }
@@ -332,8 +340,17 @@ public class EquipmentPanelManager : MonoBehaviour
         }
         expNumber.text = playerInfo.currentExp.ToString() + "/" + playerInfo.maxExp.ToString();
         expProgress.sizeDelta = new Vector2(300 * playerInfo.currentExp / playerInfo.maxExp, expProgress.sizeDelta.y);
-        tenacity.text = player.tenacity.ToString();
-        strength.text = player.strength.ToString();
+        if (player != null)
+        {
+            tenacity.text = player.tenacity.ToString();
+            strength.text = player.strength.ToString();
+        }
+        else
+        {
+            List<int> levelInfo = Player.level_maxExp_tenacity_strength[archiveManager.currentArchive.playerInfo.level];
+            tenacity.text = levelInfo[1].ToString();
+            strength.text = levelInfo[2].ToString();
+        }
         feather.text = playerInfo.feather.ToString();
 
         dream.text = playerInfo.dream.ToString();
@@ -483,6 +500,19 @@ public class EquipmentPanelManager : MonoBehaviour
             dreamizeButton.SetActive(false);
         }
 
+        //memorizeButton
+        if (item.type == ItemType.MemoryFeather)
+        {
+            memorizeButton.GetComponent<Button>().onClick.RemoveAllListeners();
+            UnityAction action = () => { dialog.Read(item.dialogName); };
+            memorizeButton.GetComponent<Button>().onClick.AddListener(action);
+
+            memorizeButton.SetActive(true);
+        }
+        else
+        {
+            memorizeButton.SetActive(false);
+        }
     }
 
     /// <summary>

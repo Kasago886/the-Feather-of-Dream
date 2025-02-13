@@ -53,6 +53,10 @@ public class ItemInspector : Editor
                 EditorGUILayout.PropertyField(dreamizedFeather, new UnityEngine.GUIContent("梦羽"));
             }
         }
+        if (item.type == ItemType.MemoryFeather)
+        {
+            item.dialogName = EditorGUILayout.TextField("剧情文件名", item.dialogName);
+        }
 
         EditorGUILayout.LabelField("详细信息");
         item.information = EditorGUILayout.TextArea(item.information);

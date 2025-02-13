@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: "\u827E\u8389\u4E4B\u7FBD"
-  information: "\u6E90\u81EA\u7075\u9B42\u7684\u7FBD\u7FFC\uFF0C\u6B64\u5FC3\u4F55\u5F80\uFF1F\n\n\u5361\u724C\uFF1A\n\u827E\u8389\u4E4B\u5251"
+  information: "\u6E90\u81EA\u7075\u9B42\u7684\u7FBD\u7FFC\uFF0C\u6B64\u5FC3\u4F55\u5F80\uFF1F\n\n\u4E0D\u53EF\u5378\u4E0B\n\n\u5361\u724C\uFF1A\n\u827E\u8389\u4E4B\u5251"
   type: 0
   isDreamizable: 0
   dreamizeCost: 0

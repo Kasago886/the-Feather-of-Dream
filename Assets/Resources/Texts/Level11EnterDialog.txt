@@ -1,0 +1,3 @@
+[clear]`咔嚓
+Player`门被反锁了。
+LittleRedRidingHood`祝你玩得开心，嘻嘻！

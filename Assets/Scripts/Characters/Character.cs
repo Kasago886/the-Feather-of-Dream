@@ -25,6 +25,16 @@ public class Character : MonoBehaviour
     public float strength;
     [HideInInspector]
     public float oriStrength;
+    [Header("异常抗性")]
+    public float abnormalityResistance;
+    [Header("灼伤抵抗")]
+    public float burnResistance;
+    [HideInInspector]
+    public int[] burnNumber = new int[2];
+    [Header("伤痕抵抗")]
+    public float traumaResistance;
+    [HideInInspector]
+    public int[] traumaNumber = new int[2];
 
     public bool injuryForceback;
     public float forcebackForce;
@@ -87,6 +97,7 @@ public class Character : MonoBehaviour
             AIUpdate();
             ForcebackUpdate();
         }
+        UIUpdate();
     }
 
     /// <summary>
@@ -260,7 +271,7 @@ public class Character : MonoBehaviour
     {
         if (attackTrans == null)
         {
-            OnForceback(Vector3.zero);
+            OnForceback(transform.position);
         }
         else
         {
@@ -499,6 +510,14 @@ public class Character : MonoBehaviour
     /// 更新AI
     /// </summary>
     public virtual void AIUpdate()
+    {
+
+    }
+
+    /// <summary>
+    /// 更新UI
+    /// </summary>
+    public virtual void UIUpdate()
     {
 
     }

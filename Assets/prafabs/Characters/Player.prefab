@@ -144,6 +144,11 @@ MonoBehaviour:
   oriTenacity: 0
   strength: 0
   oriStrength: 0
+  abnormalityResistance: 0
+  burnResistance: 0
+  burnNumber: 0000000000000000
+  traumaResistance: 0
+  traumaNumber: 0000000000000000
   injuryForceback: 0
   forcebackForce: 1
   forcebackDuration: 0.1
@@ -181,7 +186,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   featherNumText: {fileID: 0}
   cardGenerateList: []
-  cardGenerateCooldown: 2
+  cardGenerateCooldown: 5
   cardGenerateCooldownTimer: 0
   cardController: {fileID: 0}
   cardGenerateText: {fileID: 0}
@@ -189,6 +194,7 @@ MonoBehaviour:
   baseTenacity: 0
   baseStrength: 0
   setUped: 0
+  playerController: {fileID: 0}
 --- !u!114 &206331674388102575
 MonoBehaviour:
   m_ObjectHideFlags: 0

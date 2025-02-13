@@ -13,6 +13,9 @@ TagManager:
   - PausePanel
   - DeathPanel
   - GrayPanel
+  - EffectSlider
+  - BGMSlider
+  - PushBox
   layers:
   - Default
   - TransparentFX
@@ -25,7 +28,7 @@ TagManager:
   - 
   - Enemy
   - InteractiveObject
-  - 
+  - PushBox
   - 
   - 
   - 
