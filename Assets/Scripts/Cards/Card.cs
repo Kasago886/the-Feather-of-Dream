@@ -1349,7 +1349,7 @@ public class Card : MonoBehaviour
         {
             text1.color = Color.red;
         }
-        Destroy(caption,1f);
+        Destroy(caption,3f);
     }
     private void OnDrawGizmos()
     {

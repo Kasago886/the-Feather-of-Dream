@@ -107,7 +107,14 @@ MonoBehaviour:
   defaultFeatherNum: 1
   defaultFeatherHealth: 200
   tenacity: 6
+  oriTenacity: 0
   strength: 5
+  oriStrength: 0
+  abnormalityResistance: 0
+  burnResistance: 0
+  burnNumber: 0000000000000000
+  traumaResistance: 0
+  traumaNumber: 0000000000000000
   injuryForceback: 1
   forcebackForce: 0.5
   forcebackDuration: 0.1
@@ -130,27 +137,35 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   rb: {fileID: 0}
   effectAudioSource: {fileID: 0}
+  animator: {fileID: 0}
   enemyName: "\u635F\u574F\u7684\u60F3\u8981\u4FEE\u590D\u81EA\u5DF1\u7684\u94C1\u76AE\u4EBA"
   runSpeed: 4
   jumpSpeed: 5
   attackCooldown: 2
+  attackCooldownTimer: 0
   searchType: 0
-  wallDetect: 0
+  wallDetect: 1
   keepDistanceWhenNotArmed: 1
   searchDistance: 20
   minDistance: 2
   attackCardUseDistance: 10
-  attackCardCooldown: 6
   effectCardUseDistance: 10
-  effectCardCooldown: 8
-  isSingleAttackCardCooldown: 0
-  isSingleEffectCardCooldown: 0
-  attackCardsWithTimer: []
-  effectCardsWithTimer: []
-  attackCards:
-  - {fileID: 9089400354537118898}
-  effectCards:
-  - {fileID: 1989135429949325356}
+  attackCardLineList:
+  - cards:
+    - card: {fileID: 9089400354537118898}
+      cooldown: 7
+      timer: 0
+    cooldown: 0
+    timer: 0
+  effectCardLineList:
+  - cards:
+    - card: {fileID: 1989135429949325356}
+      cooldown: 35
+      timer: 0
+    cooldown: 0
+    timer: 0
+  dropItems: []
+  exp: 5
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:
