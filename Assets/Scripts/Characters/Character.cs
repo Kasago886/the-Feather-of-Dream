@@ -31,6 +31,10 @@ public class Character : MonoBehaviour
     public float burnResistance;
     [HideInInspector]
     public int[] burnNumber = new int[2];
+    [Header("…À∫€µ÷øπ")]
+    public float traumaResistance;
+    [HideInInspector]
+    public int[] traumaNumber = new int[2];
 
     public bool injuryForceback;
     public float forcebackForce;

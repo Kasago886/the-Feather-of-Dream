@@ -12,7 +12,6 @@ public class BuffNameAndNumber
 public class AttackBodyBuffAdderController : MonoBehaviour
 {
     public List<BuffNameAndNumber> buffNameAndNumber=new List<BuffNameAndNumber>();
-
     [HideInInspector]
     public AttackBodyBuffAdder theAttackBody;
     private bool late;

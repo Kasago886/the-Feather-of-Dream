@@ -178,7 +178,7 @@ MonoBehaviour:
   id: 0
   name: "\u63A9\u76D6\u4E00\u5207\u7684\u70C8\u7130"
   rarity: 1
-  description: "\u4E3A\u81EA\u8EAB\u65BD\u52A01\u5C42\"\u707C\u4F24\""
+  description: "\u4E3A\u81EA\u8EAB\u65BD\u52A01\u5C42\"\u707C\u4F24\",\u5E76\u4EE4\n\u4E0B\u4E00\u6B21\u653B\u51FB\u4E3A\u73A9\u5BB6\u65BD\u52A05\u5C42\n\u201C\u707C\u4F24\u201D"
   backGroundStory: 
   b0: 1
   b1: 1

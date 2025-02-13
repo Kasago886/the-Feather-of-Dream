@@ -68,6 +68,13 @@ public class BuffContainer
         {"治愈Ⅰ型",typeof(Heal1) },//在有羽解锁的条件下，每0.1s回复0.2点生命值，持续12秒
         {"治愈Ⅱ型",typeof(Heal2) },//在有羽解锁的条件下，每0.1s回复0.3点生命值，持续30秒，如果受到伤害立即停止
         {"治愈Ⅲ型",typeof(Heal3) },//在有羽解锁的条件下，持续30s，buff结束时回复等同于buff持续期间所受伤害的生命值
+        {"随机Buff",typeof(RandomBuff) },
+        {"异常抵抗",typeof(AbnormalResistance) },//使对象提高10%的异常抗性，持续16s
+        {"异常脆弱",typeof(AbnormalFragility) },//使对象降低10%的异常抗性，持续16s
+        {"灼伤抵抗",typeof(BurnResistance) },//使对象提高1点灼伤抵抗，持续16s
+        {"灼伤脆弱",typeof(BurnFragility) },//使对象降低1点灼伤抵抗，持续16s
+        {"伤痕抵抗",typeof(TraumaResistance) },//使对象提高1点伤痕抗性，持续16s
+        {"伤痕脆弱",typeof(TraumaFragility) },//使对象降低1点伤痕抗性，持续16s
     };
 
     /*
