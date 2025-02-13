@@ -164,7 +164,7 @@ public class Card : MonoBehaviour
         {
             if (enemyName.Length > 5)
             {
-                enemyName = "梦者";
+                enemyName = "敌人";
             }
             effects?.Invoke();
             Captions(enemyName + "使用了" + name, false);
