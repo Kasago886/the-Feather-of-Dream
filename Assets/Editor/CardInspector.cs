@@ -296,7 +296,10 @@ public class CardInspector : Editor
         }
         EditorGUILayout.EndVertical();
 
-        serializedObject.ApplyModifiedProperties();
-        EditorUtility.SetDirty(card);
+        if (GUI.changed)
+        {
+            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(card);
+        }
     }
 }
