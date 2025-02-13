@@ -40,7 +40,7 @@ public class EquipmentPanelManager : MonoBehaviour
 
     ArchiveManager archiveManager;
     ItemPlace selectedItemPlace = null;
-    bool isShow = false;
+    [HideInInspector]public bool isShow = false;
     AnimationBoolManager animationBoolManager;
     Player player;
     Dialog dialog;

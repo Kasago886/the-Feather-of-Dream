@@ -16,16 +16,19 @@ public class EquipmentListenerState : IListenerState
         if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
         {
             listener.equipmentPanelManager.SwitchShow();
-
-            if (listener.isBoxMap)
+            
+            if (!listener.equipmentPanelManager.isShow)
             {
-                listener.StateTransition(InputListenerState.boxMap);
-                return;
-            }
-            else
-            {
-                listener.StateTransition(InputListenerState.normal);
-                return;
+                if (listener.isBoxMap)
+                {
+                    listener.StateTransition(InputListenerState.boxMap);
+                    return;
+                }
+                else
+                {
+                    listener.StateTransition(InputListenerState.normal);
+                    return;
+                }
             }
         }
     }

@@ -25,8 +25,11 @@ public class BoxMapListenerState : IListenerState
             {
                 listener.equipmentPanelManager.SwitchShow();
 
-                listener.StateTransition(InputListenerState.equipment);
-                return;
+                if (listener.equipmentPanelManager.isShow)
+                {
+                    listener.StateTransition(InputListenerState.equipment);
+                    return;
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.A))
