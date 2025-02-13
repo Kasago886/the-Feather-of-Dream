@@ -199,14 +199,36 @@ public class InteractiveObject : MonoBehaviour
         {
             if (Input.GetKey(nameOfKey))
             {
-                Interact();
+                Player p = player.GetComponent<Player>();
+                if (p != null)
+                {
+                    if (!p.isDead)
+                    {
+                        Interact();
+                    }
+                }
+                else
+                {
+                    Interact();
+                }
             }
         }
         else
         {
             if (Input.GetKeyDown(nameOfKey))
             {
-                Interact();
+                Player p = player.GetComponent<Player>();
+                if (p != null)
+                {
+                    if (!p.isDead)
+                    {
+                        Interact();
+                    }
+                }
+                else
+                {
+                    Interact();
+                }
             }
         }
     }
