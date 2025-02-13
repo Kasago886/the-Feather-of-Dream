@@ -16566,6 +16566,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
+      propertyPath: maxDistance
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: lockedDialog
       value: doorLocked
       objectReference: {fileID: 0}
@@ -16591,11 +16595,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4073656887174430166, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -54.3
+      value: -54.9
       objectReference: {fileID: 0}
     - target: {fileID: 4073656887174430166, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 41
+      value: 38.33
       objectReference: {fileID: 0}
     - target: {fileID: 4073656887174430166, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17907,6 +17911,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
+      propertyPath: maxDistance
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: lockedDialog
       value: doorLocked
       objectReference: {fileID: 0}
@@ -17932,11 +17940,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4073656887174430166, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 54.4
+      value: 54.88
       objectReference: {fileID: 0}
     - target: {fileID: 4073656887174430166, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 27
+      value: 24.79
       objectReference: {fileID: 0}
     - target: {fileID: 4073656887174430166, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -102586,6 +102594,7 @@ MonoBehaviour:
       level21DreamBottleUsed: 0
       level21StartDialogRead: 0
       whaleKilled: 0
+      tinWoodmanKilled: 0
       AssistantDestroyed: 0
     timeInfo:
       year: 0
