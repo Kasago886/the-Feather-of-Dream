@@ -1282,7 +1282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contentTransform: {fileID: 0}
-  itemTransform: {fileID: 4803567398920384309, guid: 2c9105a39e74bcb41a9d8228fcf85b5b, type: 3}
+  itemTransform: {fileID: 4803567398920384309, guid: b3ec0af9c8c65904385552d1d1a367e5, type: 3}
 --- !u!1 &8826690178136449313
 GameObject:
   m_ObjectHideFlags: 0
