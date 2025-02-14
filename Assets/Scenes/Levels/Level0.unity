@@ -9243,6 +9243,42 @@ MonoBehaviour:
   - name: "\u51DD\u91CD"
     description: "\u4F7F\u5BF9\u8C61\u964D\u4F4E10%\u8D77\u8DF3\n\u901F\u5EA6\uFF0C\u6301\u7EED16s"
     buffPrefab: {fileID: 6051908474743900384, guid: bad8008b88feeba4cb5cc52fec226acd, type: 3}
+  - name: "\u707C\u4F24"
+    description: "\u4F7F\u5BF9\u8C61\u6BCF0.1\u79D2\u6263\u9664\n0.1\u6EF4\u8840\uFF0C\u6301\u7EED6s\uFF0C\nbuff\u6301\u7EED\u671F\u95F4\u5982\u679C\u88AB\n\u65BD\u52A0\u65B0\u7684\u707C\u4F24\u5219\u6301\u7EED\n\u65F6\u95F4\u5EF6\u957F6s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 83d57b5fca6481e498f94541ac77cd30, type: 3}
+  - name: "\u70C8\u7130"
+    description: "\u4F7F\u5BF9\u8C61\u7684\u5F02\u5E38\u6297\u6027\u51CF\n\u534A\uFF0C\u6301\u7EED\u65F6\u95F460s"
+    buffPrefab: {fileID: 6051908474743900384, guid: f93388a9d2c4bb842b1d0b3287f4c2ee, type: 3}
+  - name: "\u6CBB\u6108\u2160\u578B"
+    description: "\u5728\u6709\u7FBD\u89E3\u9501\u7684\u6761\u4EF6\u4E0B\n\uFF0C\u6BCF0.1s\u56DE\u590D0.2\u70B9\n\u751F\u547D\u503C\uFF0C\u6301\u7EED12\u79D2"
+    buffPrefab: {fileID: 6051908474743900384, guid: dfb620c4e2699d54fa60d308bcda2ec1, type: 3}
+  - name: "\u6CBB\u6108\u2161\u578B"
+    description: "\u5728\u6709\u7FBD\u89E3\u9501\u7684\u6761\u4EF6\u4E0B\n\uFF0C\u6BCF0.1s\u56DE\u590D0.3\u70B9\n\u751F\u547D\u503C\uFF0C\u6301\u7EED30\u79D2\uFF0C\n\u5982\u679C\u53D7\u5230\u4F24\u5BB3\u7ACB\u5373\u505C\n\u6B62"
+    buffPrefab: {fileID: 6051908474743900384, guid: 058811ca6e296fa4dbbceec6d0477b15, type: 3}
+  - name: "\u6CBB\u6108\u2162\u578B"
+    description: "\u5728\u6709\u7FBD\u89E3\u9501\u7684\u6761\u4EF6\u4E0B\n\uFF0C\u6301\u7EED30s\uFF0Cbuff\u7ED3\n\u675F\u65F6\u56DE\u590D\u7B49\u540C\u4E8Ebuff\n\u6301\u7EED\u671F\u95F4\u6240\u53D7\u4F24\u5BB3\u7684\n\u751F\u547D\u503C"
+    buffPrefab: {fileID: 6051908474743900384, guid: 996a67b77d26ed442997dab06840b73b, type: 3}
+  - name: "\u5F02\u5E38\u62B5\u6297"
+    description: "\u4F7F\u5BF9\u8C61\u63D0\u9AD810%\u7684\u5F02\n\u5E38\u6297\u6027\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: f6e3c91925e441442893a9262d60b1f6, type: 3}
+  - name: "\u5F02\u5E38\u8106\u5F31"
+    description: "\u4F7F\u5BF9\u8C61\u964D\u4F4E10%\u7684\u5F02\n\u5E38\u6297\u6027\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: a29df65320f1fca4097c65459f1c5c90, type: 3}
+  - name: "\u707C\u4F24\u62B5\u6297"
+    description: "\u4F7F\u5BF9\u8C61\u63D0\u9AD81\u70B9\u707C\u4F24\n\u62B5\u6297\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: da00643f410ac5d4688f65dd41889008, type: 3}
+  - name: "\u707C\u4F24\u8106\u5F31"
+    description: "\u4F7F\u5BF9\u8C61\u964D\u4F4E1\u70B9\u707C\u4F24\n\u62B5\u6297\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 396ec822cc02c6f478e717940e5ba890, type: 3}
+  - name: "\u4F24\u75D5\u62B5\u6297"
+    description: "\u4F7F\u5BF9\u8C61\u63D0\u9AD81\u70B9\u4F24\u75D5\n\u6297\u6027\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 0496f46b86d19524a8dc5e3a93eaf4cb, type: 3}
+  - name: "\u4F24\u75D5\u8106\u5F31"
+    description: "\u4F7F\u5BF9\u8C61\u964D\u4F4E1\u70B9\u4F24\u75D5\n\u6297\u6027\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 7f909f8d3cd163c489f3a6455724648d, type: 3}
+  - name: "\u88C2\u9699"
+    description: "\u4F7F\u5BF9\u8C61\u5728n\u6B21\u53D7\u51FB\u540E\uFF0C\n\u53D7\u5230n*\u4F24\u75D5\u5C42\u6570\u7684\u4F24\n\u5BB3\uFF0C\u6301\u7EED\u65F6\u95F4\u65E0\u9650\u81F3\n\u53D1\u6325\u4F5C\u7528"
+    buffPrefab: {fileID: 6051908474743900384, guid: e89c2858047c78e478350ea280492e0b, type: 3}
 --- !u!1 &1708250739
 GameObject:
   m_ObjectHideFlags: 0
