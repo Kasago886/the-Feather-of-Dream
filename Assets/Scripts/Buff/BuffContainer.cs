@@ -75,6 +75,7 @@ public class BuffContainer
         {"灼伤脆弱",typeof(BurnFragility) },//使对象降低1点灼伤抵抗，持续16s
         {"伤痕抵抗",typeof(TraumaResistance) },//使对象提高1点伤痕抗性，持续16s
         {"伤痕脆弱",typeof(TraumaFragility) },//使对象降低1点伤痕抗性，持续16s
+        {"烈焰",typeof(Burn) },//触发条件：对象的灼伤抵抗小于5并且对象的灼伤层数大于10，效果：使对象的异常抗性减半，持续时间60s
     };
 
     /*

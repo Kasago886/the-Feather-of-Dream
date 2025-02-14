@@ -2378,4 +2378,54 @@ public class TraumaFragility : EffectBuff
         base.OnExit();
     }
 }
+public class Fissure : EffectBuff
+{
+    private Character character;
+    private float health,attackTimer,number;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 9999999999;
+    }
+
+    public override void OnEnter()
+    {     
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if(character.unlockedFeathers.Count > 0 && health - character.unlockedFeathers[0].health >= 1)
+        {
+            number++;
+        }
+        if (number >= 3 && Random.Range(3, 13) < number&&character.unlockedFeathers.Count>0)
+        {
+            timer = 0;
+        }
+        if (character.unlockedFeathers.Count > 0)
+        {
+            health=character.unlockedFeathers[0].health;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        int buffNumber = 0;
+        foreach (var buff in character.buffList)
+        {
+            if (buff.name == "ик╨ш")
+            {
+                buffNumber++;
+            }
+        }
+        character.unlockedFeathers[0].health -= buffNumber * number * Mathf.Pow(2, -character.abnormalityResistance / 100);
+    }
+}
 #endregion
