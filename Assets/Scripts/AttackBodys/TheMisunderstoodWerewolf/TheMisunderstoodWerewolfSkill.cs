@@ -26,15 +26,14 @@ public class TheMisunderstoodWerewolfSkill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("UseSkill=" + useSkill);
         if(useSkill)
         {
-            Debug.Log("useSkill");
             timer += Time.deltaTime;
             lineRenderer.enabled = true;
             lineRenderer.startWidth = 0.1f;
             lineRenderer.endWidth = 0.1f;
             r += speed*Time.deltaTime;
-            Debug.Log("R="+r);
             lineRenderer.positionCount = 361;
             for (int i = 0; i < 361; i++)
             {
@@ -50,9 +49,12 @@ public class TheMisunderstoodWerewolfSkill : MonoBehaviour
             if (r > limitR)
             {
                 r = 0;
-                useSkill = false;
-                lineRenderer.enabled = false;
+                useSkill = false; 
             }
+        }
+        else
+        {
+            lineRenderer.enabled = false;
         }
     }
 }

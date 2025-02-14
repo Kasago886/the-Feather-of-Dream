@@ -764,7 +764,7 @@ public class Trauma : EffectBuff
         base.Init(target, timer, isPermanent);
         if (target.GetComponent<Character>() != null)
         {
-            character = target.GetComponent<Player>();
+            character = target.GetComponent<Character>();
             if (character.unlockedFeathers.Count > 0)
             {
                 health = character.unlockedFeathers[0].health;
@@ -840,18 +840,18 @@ public class Terrified : EffectBuff
         {
             enemy = target.GetComponent<Enemy>();
         }
-        this.timer = 0;
+        this.timer = 1;
     }
 
     public override void OnEnter()
     {
         if (player != null && player.unlockedFeathers.Count > 0)
         {
-            player.unlockedFeathers[0].health -= 1f;
+            player.unlockedFeathers[0].health -= 1.5f;
         }
         if (enemy != null && enemy.unlockedFeathers.Count > 0)
         {
-            enemy.unlockedFeathers[0].health -= 1f;
+            enemy.unlockedFeathers[0].health -= 1.5f;
         }
         base.OnEnter();
     }
@@ -865,11 +865,11 @@ public class Terrified : EffectBuff
     {
         if (player != null && player.unlockedFeathers.Count > 0)
         {
-            player.unlockedFeathers[0].health += 1f;
+            player.unlockedFeathers[0].health += 1.5f;
         }
         if (enemy != null && enemy.unlockedFeathers.Count > 0)
         {
-            enemy.unlockedFeathers[0].health += 1f;
+            enemy.unlockedFeathers[0].health += 1.5f;
         }
         base.OnExit();
     }
@@ -2426,6 +2426,37 @@ public class Fissure : EffectBuff
             }
         }
         character.unlockedFeathers[0].health -= buffNumber * number * Mathf.Pow(2, -character.abnormalityResistance / 100);
+    }
+}
+public class BurningDocumentsEffectBuff1: EffectBuff
+{
+    private Character character;
+    private float health, attackTimer, number;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 999999999999;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        character.abnormalityResistance += 100;
+        character.burnResistance += 5;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
     }
 }
 #endregion

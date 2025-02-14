@@ -286,10 +286,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffNameAndNumber:
-  - effectOnPlayer: 0
+  - effectOnPlayer: 1
     effectOnEnemy: 0
-    name: 
-    number: 00000000000000000000000000000000
+    name: "\u707C\u4F24"
+    number: 05000000
   theAttackBody: {fileID: 0}
 --- !u!114 &7048944131886058621
 MonoBehaviour:
