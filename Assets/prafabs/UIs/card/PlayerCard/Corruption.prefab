@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Name
-      value: Card0 Variant
+      value: Corruption
       objectReference: {fileID: 0}
     - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Pivot.x
@@ -106,11 +106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: description
-      value: "\u4F7F\u5BF9\u8C61\u62D4\u7FBD\u5E76\u4E2D\u6BD25s"
+      value: "\u62D4\u7FBD5s\n\u8150\u8D25\u8513\u5EF6\uFF1A\n\u653B\u51FB\u529B\uFF1A2\n\u4E3A\u51FB\u4E2D\u7684\u76EE\u6807\u6DFB\u52A0\u4E00\u5C42\u4E2D\u6BD2"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effortOnEnmey
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNames.Array.size
@@ -118,7 +118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effortOnPlayerAndEnemy
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNames.Array.data[0]
@@ -127,6 +127,22 @@ PrefabInstance:
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNames.Array.data[1]
       value: "\u62D4\u7FBD5s"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNamesEnemy.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNamesEnemy.Array.data[0]
+      value: "\u62D4\u7FBD5s"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNamesEnemy.Array.data[1]
+      value: "\u62D4\u7FBD5s"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNamesPlayer.Array.data[0]
+      value: "\u8150\u8D25\u8513\u5EF6"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

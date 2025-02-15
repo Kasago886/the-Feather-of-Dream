@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,13 +9,13 @@ public class Bullet : MonoBehaviour
 {
     public bool isEnemyBullet;
     public float speed;
-    public int bounceTime;
 
     public bool autoDestroy = false;
     public float destroyTimer = 10;
 
     public bool isSplit = false;
     public GameObject splitBullet;
+    public int bounceTime;
 
     public bool ignoreWallCollision;
     public Vector3 destroyCenter;
@@ -25,6 +26,7 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public float damage;
 
     Rigidbody2D rb;
+    Enemy collisionEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +53,20 @@ public class Bullet : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+    }
+
+    public void AddBuffToTarget(string buffName)
+    {
+        if (isEnemyBullet)
+        {
+            Player player = GetComponent<Player>();
+            player.AddBuff(buffName);
+        }
+        else
+        {
+            collisionEnemy.AddBuff(buffName);
+            Debug.Log(buffName);
         }
     }
 
@@ -83,7 +99,8 @@ public class Bullet : MonoBehaviour
             }
             else if (collision.tag == Consts.EnemyTag && !isEnemyBullet)
             {
-                collision.GetComponent<Enemy>().TakeDamage(damage);
+                collisionEnemy = collision.GetComponent<Enemy>();
+                collisionEnemy.TakeDamage(damage);
                 whatHappenWhenHit?.Invoke();
                 Destroy(gameObject);
             }

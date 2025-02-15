@@ -22,6 +22,7 @@ public class BuffContainer
         {"°ÎÓğ15s", typeof(UnlockFeather15sBuff) },
         {"°ÎÓğ20s", typeof(UnlockFeather20sBuff) },
         {"°¬ÀòÖ®Óğ", typeof(EllieEquipmentFeatherBuff) },
+        {"¸¯°ÜÂûÑÓ",typeof(CorruptionAttackBuff) },
         {"·èÁÔÖ®²ĞÓğ", typeof(HunterEquipmentFeatherBuff) },
         {"ÌúÆ¤ÈË²ĞÓğ", typeof(TinWoodmanEquipmentBuff) },
         {"°¬ÀòÖ®½£", typeof(ElliesSwordAttackBuff) },

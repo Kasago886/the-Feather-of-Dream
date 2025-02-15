@@ -450,6 +450,18 @@ public class BurningDocumentsAttackBuff : AttackBuff
         this.attackBody = Resources.Load<GameObject>("AttackBodys/BurningDocumentsAttackBody");
     }
 }
+
+
+public class CorruptionAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 5;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/PoisonAttackBody");
+    }
+}
 #endregion
 
 #region °ÎÓðbuff
