@@ -70,7 +70,7 @@ public class Lift : InteractiveObject
         }
         else
         {
-            if (lockedDialog != "")
+            if (lockedDialog != "" && dialog.ifPause)
             {
                 dialog.Read(lockedDialog);
             }
