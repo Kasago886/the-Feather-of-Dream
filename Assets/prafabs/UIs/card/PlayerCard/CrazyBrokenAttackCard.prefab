@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Name
-      value: Corruption 1
+      value: CrazyBrokenAttackCard
       objectReference: {fileID: 0}
     - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Pivot.x
@@ -102,15 +102,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: click
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: description
-      value: "\u62D4\u7FBDx1,10s\n\u566C\u8840\u5315\u9996\uFF1A\n\u653B\u51FB\u529B\uFF1A10\n\u6BCF\u6B21\u653B\u51FB\u56DE\u590D\u6B64\u653B\u51FB\u66FF\u8EAB\u653B\u51FB\u529B50%\u7684\u8840\u91CF"
+      value: "\u62D4\u7FBDx1,10s\n\u566C\u8840\u5315\u9996"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effortOnEnmey
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: backGroundStory
+      value: "\u62D4\u7FBDx1,10s\n- \u566C\u8840\u5315\u9996\n\u653B\u51FB\u529B\uFF1A10\n\u6BCF\u6B21\u653B\u51FB\u56DE\u590D\u6B64\u653B\u51FB\u66FF\u8EAB\u653B\u51FB\u529B50%\u7684\u8840\u91CF"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNames.Array.size

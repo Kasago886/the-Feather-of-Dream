@@ -106,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: description
-      value: "\u62D4\u7FBDx1,10s\n\u827E\u8389\u4E4B\u5251\uFF1A\n\u653B\u51FB\u529B\uFF1A10\n\n"
+      value: "\u62D4\u7FBDx1,10s\n\u827E\u8389\u4E4B\u5251\n\n"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effortOnEnmey
@@ -118,11 +118,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: backGroundStory
-      value: 
+      value: "\u62D4\u7FBDx1,10s\n- \u827E\u8389\u4E4B\u5251\n\u653B\u51FB\u529B\uFF1A10"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: dragOnCharactor
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNames.Array.size

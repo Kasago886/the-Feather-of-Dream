@@ -257,7 +257,7 @@ MonoBehaviour:
   name: "\u6D4B\u8BD5\u62D4\u7FBD"
   rarity: 1
   description: "\u62D4\u51FA\u654C\u4EBA\u76841\u6839\u7FBD\n\u5E76\u4E3A\u81EA\u8EAB\u6DFB\u52A0\u653B\u51FB\u66FF\u8EAB"
-  backGroundStory: 12233
+  backGroundStory: 
   b0: 1
   b1: 1
   b2: 1

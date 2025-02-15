@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Name
-      value: CrazyBrokenAttackCard 2
+      value: CrazyBrokenEffectCard
       objectReference: {fileID: 0}
     - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Pivot.x
@@ -102,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: click
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: description
@@ -115,6 +115,10 @@ PrefabInstance:
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effortOnPlayer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: backGroundStory
+      value: "\u968F\u673A\u83B7\u53D6\u4E00\u5F20\u201C\u566C\u8840\u5315\u9996\u201D\u6216\u201C\u72C2\u730E\u4E4B\u67AA\u201D\n\u81EA\u8EAB\u62E5\u6709\u62E5\u6709\u4E24\u4E2A\u53CA\u4EE5\u4E0A\u653B\u51FB\u66FF\u8EAB\u7684\u573A\u5408\uFF0C\n\u989D\u5916\u83B7\u5F97\u4E00\u5F20\u5361\u3002"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNames.Array.size

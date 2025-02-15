@@ -106,11 +106,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: description
-      value: "\u62D4\u7FBD5s\n\u8150\u8D25\u8513\u5EF6\uFF1A\n\u653B\u51FB\u529B\uFF1A2\n\u4E3A\u51FB\u4E2D\u7684\u76EE\u6807\u6DFB\u52A0\u4E00\u5C42\u4E2D\u6BD2"
+      value: "\u62D4\u7FBDx1,5s\n\u8150\u8D25\u8513\u5EF6"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effortOnEnmey
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: backGroundStory
+      value: "\u62D4\u7FBDx1,5s\n- \u8150\u8D25\u8513\u5EF6\n\u653B\u51FB\u529B\uFF1A2\n\u4E3A\u51FB\u4E2D\u7684\u76EE\u6807\u6DFB\u52A0\u4E00\u5C42\u4E2D\u6BD2\n\u4E2D\u6BD2\uFF1A\u6BCF\u79D2\u53D7\u4F245\u70B9\uFF0C\u6301\u7EED5s"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNames.Array.size

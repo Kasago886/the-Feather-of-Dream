@@ -1398,5 +1398,16 @@ public class Card : MonoBehaviour
     {
         return true;
     }
+
+    private void OnDestroy()
+    {
+        if (detailInfoObj != null)
+        {
+            if (!detailInfoObj.gameObject.IsDestroyed())
+            {
+                detailInfoObj.gameObject.SetActive(false);
+            }
+        }
+    }
 }
 
