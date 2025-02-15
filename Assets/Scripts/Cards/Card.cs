@@ -126,9 +126,20 @@ public class Card : MonoBehaviour
         oriPlace = rectTransform.localPosition;
         spMaterial = new Dictionary<SpriteRenderer, Material>();
 
-        detailInfoObj = GameObject.FindGameObjectWithTag(Consts.DetailInfoTag);
-        titleText = detailInfoObj.transform.Find("TitleText").GetComponent<Text>();
-        detailInfoText = detailInfoObj.transform.Find("DetailText").GetComponent<Text>();
+        //找到卡牌信息显示UI（被隐藏了所以不能用FindGameObjectWithTag）
+        GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject obj in objects)
+        {
+            if (obj != null)
+            {
+                if (obj.CompareTag(Consts.DetailInfoTag) && obj.scene == gameObject.scene)
+                {
+                    detailInfoObj = obj;
+                }
+            }
+        }
+        titleText = detailInfoObj.transform.GetChild(1).GetComponent<Text>();
+        detailInfoText = detailInfoObj.transform.GetChild(2).GetComponent<Text>();
     }
     // Update is called once per frame
     void Update()
