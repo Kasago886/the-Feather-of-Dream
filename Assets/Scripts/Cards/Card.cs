@@ -83,7 +83,7 @@ public class Card : MonoBehaviour
     private List<string> buffCaptions = new List<string>();
     private string enemyName;
     private float timer;
-    private int haveChoose = -1, onlyOne,useNumber;
+    private int haveChoose = -1, onlyOne, useNumber;
     private List<Material> oriMaterial;
     private Dictionary<SpriteRenderer, Material> spMaterial;
     private Collider2D[] enemiesThatBeenChoose1;
@@ -144,11 +144,11 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (effortNumber == finalTarget.Count && finalTarget.Count > 0 && isRandom&& Input.GetMouseButtonDown(0))
+        if (effortNumber == finalTarget.Count && finalTarget.Count > 0 && isRandom && Input.GetMouseButtonDown(0))
         {
             endChoose = true;
         }
-        if (!choose&&!endChoose)
+        if (!choose && !endChoose)
         {
             for (int i = 0; i < finalTarget.Count; i++)
             {
@@ -328,7 +328,7 @@ public class Card : MonoBehaviour
                 {
                     s.Key.material = s.Value;
                 }
-                PlayerCardController.cantUseCard= false;
+                PlayerCardController.cantUseCard = false;
             }
             else
             {
@@ -632,7 +632,7 @@ public class Card : MonoBehaviour
     {
         if (!choose)
         {
-            effortTarget.Clear();         
+            effortTarget.Clear();
         }
         if (choose && isRandom)
         {
@@ -643,9 +643,9 @@ public class Card : MonoBehaviour
                     Captions("Çëµã»÷Íæ¼Ò", true);
                     onlyOne = 1;
                 }
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && GameObject.FindGameObjectWithTag(Consts.PlayerTag) != null)
                 {
-                    Bounds bound = effortTarget[0].bounds;
+                    Bounds bound = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<BoxCollider2D>().bounds;
                     if (bound.Contains(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)))
                     {
                         whatHappenWhenBeChoosen?.Invoke();
@@ -830,7 +830,7 @@ public class Card : MonoBehaviour
     private void BothEffortWhenDragEnd()
     {
         if (effortOnPlayerAndEnemy)
-        {                         
+        {
             List<int> enemiesWhoHaveBeenEfforted = new List<int>();
             Collider2D[] enemiesThatBeenChoose = null;
             if (!customMode)
@@ -1295,20 +1295,20 @@ public class Card : MonoBehaviour
             }
         }
         List<Transform> targetsTransform = new List<Transform>();
-        for (int i = 0;i<enemiesThatBeenChoose1.Length;i++)
+        for (int i = 0; i < enemiesThatBeenChoose1.Length; i++)
         {
-            if(Vector2.Distance(enemiesThatBeenChoose1[i].transform.position, Camera.main.ScreenToWorldPoint(transform.position)) < minDistance)
+            if (Vector2.Distance(enemiesThatBeenChoose1[i].transform.position, Camera.main.ScreenToWorldPoint(transform.position)) < minDistance)
             {
                 targetsTransform.Add(enemiesThatBeenChoose1[i].transform);
             }
         }
-        if(targetsTransform.Count > 1)
+        if (targetsTransform.Count > 1)
         {
-            for (int i = 0; i < targetsTransform.Count-1; i++)
+            for (int i = 0; i < targetsTransform.Count - 1; i++)
             {
-                if (Vector2.Distance(targetsTransform[i].transform.position, Camera.main.ScreenToWorldPoint(transform.position)) < Vector2.Distance(targetsTransform[i + 1].transform.position, Camera.main.ScreenToWorldPoint(transform.position))) 
-                { targetsTransform.RemoveAt(i + 1); } 
-                else 
+                if (Vector2.Distance(targetsTransform[i].transform.position, Camera.main.ScreenToWorldPoint(transform.position)) < Vector2.Distance(targetsTransform[i + 1].transform.position, Camera.main.ScreenToWorldPoint(transform.position)))
+                { targetsTransform.RemoveAt(i + 1); }
+                else
                 { targetsTransform.RemoveAt(i); }
                 i--;
             }
@@ -1329,7 +1329,7 @@ public class Card : MonoBehaviour
         {
             foreach (var s in spMaterial)
             {
-                s.Key.material=s.Value;
+                s.Key.material = s.Value;
             }
         }
     }
@@ -1367,9 +1367,9 @@ public class Card : MonoBehaviour
         //rectTransform2.sizeDelta = Vector2.zero;
         ////rectTransform2.position = rectTransform1.position;
         //Destroy(textObject, 1f);
-        GameObject caption=Instantiate(Resources.Load<Text>("Caption").gameObject, GameObject.Find("textScrollContent").GetComponent<RectTransform>());
-        Text text1=caption.GetComponent<Text>();
-        text1.text=text;
+        GameObject caption = Instantiate(Resources.Load<Text>("Caption").gameObject, GameObject.Find("textScrollContent").GetComponent<RectTransform>());
+        Text text1 = caption.GetComponent<Text>();
+        text1.text = text;
         if (isPlayer)
         {
             text1.color = Color.blue;
@@ -1378,7 +1378,7 @@ public class Card : MonoBehaviour
         {
             text1.color = Color.red;
         }
-        Destroy(caption,3f);
+        Destroy(caption, 3f);
     }
     private void OnDrawGizmos()
     {
