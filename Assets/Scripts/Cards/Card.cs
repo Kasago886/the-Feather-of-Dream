@@ -87,6 +87,12 @@ public class Card : MonoBehaviour
     private List<Material> oriMaterial;
     private Dictionary<SpriteRenderer, Material> spMaterial;
     private Collider2D[] enemiesThatBeenChoose1;
+
+    //显示详细信息的UI
+    private GameObject detailInfoObj;
+    private Text titleText;
+    private Text detailInfoText;
+
     void Start()
     {
         parent = gameObject.transform.parent;
@@ -119,6 +125,10 @@ public class Card : MonoBehaviour
         }
         oriPlace = rectTransform.localPosition;
         spMaterial = new Dictionary<SpriteRenderer, Material>();
+
+        detailInfoObj = GameObject.FindGameObjectWithTag(Consts.DetailInfoTag);
+        titleText = detailInfoObj.transform.Find("TitleText").GetComponent<Text>();
+        detailInfoText = detailInfoObj.transform.Find("DetailText").GetComponent<Text>();
     }
     // Update is called once per frame
     void Update()
@@ -194,6 +204,10 @@ public class Card : MonoBehaviour
         glowControl.useGlowEffect = true;
         shake = true;
         shakeTimer = 0;
+
+        detailInfoObj.SetActive(true);
+        titleText.text = name;
+        detailInfoText.text = backGroundStory;
     }
     /// <summary>
     /// 当玩家鼠标离开该物体中的时候执行该函数
@@ -212,6 +226,8 @@ public class Card : MonoBehaviour
         rectTransform.localScale = new Vector3(rectTransform.localScale.x / 1.3f, rectTransform.localScale.y / 1.3f, rectTransform.localScale.z);
         glowControl.useGlowEffect = false;
         shake = false;
+
+        detailInfoObj.SetActive(false);
     }
     /// <summary>
     /// 当玩家点击该物体的时候执行该函数

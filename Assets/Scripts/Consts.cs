@@ -15,6 +15,7 @@ public class Consts
     public const string DeathPanelTag = "DeathPanel";
     public const string GrayPanelTag = "GrayPanel";
     public const string PushBoxTag = "PushBox";
+    public const string DetailInfoTag = "DetailInfo";
 
     public const string PlayerLayer = "Player";
     public const string EnemyLayer = "Enemy";

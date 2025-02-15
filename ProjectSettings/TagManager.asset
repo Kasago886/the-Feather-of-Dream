@@ -16,6 +16,7 @@ TagManager:
   - EffectSlider
   - BGMSlider
   - PushBox
+  - DetailInfo
   layers:
   - Default
   - TransparentFX
