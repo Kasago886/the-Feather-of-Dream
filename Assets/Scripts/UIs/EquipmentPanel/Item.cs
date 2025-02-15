@@ -243,7 +243,6 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     /// <param name="equipState"></param>
     public void SetEquipState(bool equipState)
     {
-        isEquiped = equipState;
 
         if (player == null)
         {
@@ -251,11 +250,13 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         }
         if (player == null)
         {
+            isEquiped = equipState;
             return;
         }
 
         //Debug.Log(buffName);
         //Debug.Log(isEquiped);
+        //Debug.Log(type);
         //п╤об
         if (isEquiped && !equipState)
         {
@@ -281,6 +282,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
                 player.AddBuff(buffName);
             }
         }
+        isEquiped = equipState;
     }
 
     // Start is called before the first frame update

@@ -115,6 +115,11 @@ MonoBehaviour:
   oriTenacity: 0
   strength: 7
   oriStrength: 0
+  abnormalityResistance: 0
+  burnResistance: 0
+  burnNumber: 0000000000000000
+  traumaResistance: 0
+  traumaNumber: 0000000000000000
   injuryForceback: 1
   forcebackForce: 0.5
   forcebackDuration: 0.1
@@ -180,6 +185,8 @@ MonoBehaviour:
     cooldown: 0
     timer: 0
   dropItems: []
+  exp: 0
+  flag: 0
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:

@@ -358,7 +358,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8858817156406675246
@@ -838,14 +838,14 @@ MonoBehaviour:
   content: {fileID: 4014656445167158585}
   cardsList:
   - {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
-  - {fileID: 4056058898571058497, guid: 5a394e9de2650c5449bfbca809b22c67, type: 3}
-  - {fileID: 4056058898571058497, guid: a7d50205ec499aa4aa01560c8b5eccf8, type: 3}
-  - {fileID: 4056058898571058497, guid: c77030528513fae44838a9a34b695e5b, type: 3}
-  - {fileID: 4056058898571058497, guid: ded3e8dcf2a590c4aba1eb3e7b72d2bd, type: 3}
-  - {fileID: 4056058898571058497, guid: 1bf56662b02c1084dadb3d761cabc8f0, type: 3}
-  - {fileID: 4056058898571058497, guid: dc846e0fdb444ee46ab94025bf74d136, type: 3}
-  - {fileID: 4056058898571058497, guid: 0ae66ce71d273b849b1a0f948d8d9722, type: 3}
-  - {fileID: 4056058898571058497, guid: bd5acccc6a93546468fc4140f10b1ab4, type: 3}
+  - {fileID: 1162189182979539126, guid: 2f950820fffd5a744a697d0d8965f23a, type: 3}
+  - {fileID: 2899552797067365366, guid: 267f6557277b2f94b86b3b593eac8078, type: 3}
+  - {fileID: 2899552797067365366, guid: 02845285d745af64d829f431f1456e97, type: 3}
+  - {fileID: 2899552797067365366, guid: a5f52d0a5b4c37447a08bea8223ddb58, type: 3}
+  - {fileID: 2899552797067365366, guid: d8b2ea11925b79245bbfdac0db98a0cd, type: 3}
+  - {fileID: 2899552797067365366, guid: d0b28ebda1d6b2e49975cfa84a145bf3, type: 3}
+  - {fileID: 2899552797067365366, guid: 351e948ef7cb7db48937f47befdd431f, type: 3}
+  - {fileID: 2899552797067365366, guid: 77503bd64290daa42a2802b966818904, type: 3}
   positionNumber: 5
 --- !u!114 &8697865203250608714
 MonoBehaviour:

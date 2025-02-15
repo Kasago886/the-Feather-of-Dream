@@ -23,6 +23,7 @@ public class BuffContainer
         {"拔羽20s", typeof(UnlockFeather20sBuff) },
         {"艾莉之羽", typeof(EllieEquipmentFeatherBuff) },
         {"疯猎之残羽", typeof(HunterEquipmentFeatherBuff) },
+        {"铁皮人残羽", typeof(TinWoodmanEquipmentBuff) },
         {"艾莉之剑", typeof(ElliesSwordAttackBuff) },
         {"王子之剑", typeof(PrinceSwordAttackBuff) },
         {"侍卫短剑", typeof(PrinceGuardSwordAttackBuff) },
@@ -78,6 +79,7 @@ public class BuffContainer
         {"裂隙",typeof(Fissure) },//触发条件：对象的伤痕抵抗小于5并且对象的伤痕层数大于13，效果：使对象在n次受击后，受到n*伤痕层数的伤害，持续时间无限至发挥作用
         {"永不妥协",typeof(BurningDocumentsEffectBuff1) },//增加100点异常抗性与5点火焰抗性，持续时间无限
         {"吞噬一切的烈火",typeof(BurningDocumentsAttackBuff) },
+        {"铁心",typeof(IronHeartEffectBuff) },//韧性增加50，持续10s
     };
 
     /*

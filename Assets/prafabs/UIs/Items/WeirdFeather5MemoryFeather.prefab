@@ -66,6 +66,7 @@ MonoBehaviour:
     imageName: 
     buffName: 
     featherHealth: 0
+    featherMaxHealth: 0
     dialogName: 
     position: 0
   buffName: 
@@ -101,7 +102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7e25f88f9db421d4b87f3137faea2ec0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7078d2e54c8f859419c7ec1aa16d85f2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

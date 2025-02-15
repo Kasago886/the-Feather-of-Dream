@@ -62,36 +62,42 @@ public class EquipmentPanelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (selectedItemPlace != null)
+        if (isShow)
         {
-            if (selectedItemPlace.content != null)
+            if (selectedItemPlace != null)
             {
-                Item item = selectedItemPlace.content;
-                if (item.type == ItemType.Feather && item.itemFeather != null)
+                if (selectedItemPlace.content != null)
                 {
-                    /// 最后三行格式化
-                    /// \n
-                    /// 生命值：\n
-                    /// 100.0/100
-                    string[] lines = itemInformation.text.Split('\n');
-                    if (lines.Length >= 4)
+                    Item item = selectedItemPlace.content;
+                    if (item.type == ItemType.Feather && item.itemFeather != null)
                     {
-                        if (lines[^2].Length >= 4)
+                        /// 最后三行格式化
+                        /// \n
+                        /// 生命值：\n
+                        /// 100.0/100
+                        string[] lines = itemInformation.text.Split('\n');
+                        if (lines.Length >= 4)
                         {
-                            if (lines[^2][..4] == "生命值：" && lines[^3] == "")
+                            if (lines[^2].Length >= 4)
                             {
-                                int index = itemInformation.text.LastIndexOf('\n');
-                                itemInformation.text = itemInformation.text[..index];
-                                index = itemInformation.text.LastIndexOf('\n');
-                                itemInformation.text = itemInformation.text[..index];
-                                index = itemInformation.text.LastIndexOf('\n');
-                                itemInformation.text = itemInformation.text[..index];
+                                if (lines[^2][..4] == "生命值：" && lines[^3] == "")
+                                {
+                                    int index = itemInformation.text.LastIndexOf('\n');
+                                    itemInformation.text = itemInformation.text[..index];
+                                    index = itemInformation.text.LastIndexOf('\n');
+                                    itemInformation.text = itemInformation.text[..index];
+                                    index = itemInformation.text.LastIndexOf('\n');
+                                    itemInformation.text = itemInformation.text[..index];
+                                }
                             }
                         }
+                        itemInformation.text += "\n\n生命值：\n" + item.itemFeather.health.ToString("F1") + "/" + item.itemFeather.maxHealth;
                     }
-                    itemInformation.text += "\n\n生命值：\n" + item.itemFeather.health.ToString("F1") + "/" + item.itemFeather.maxHealth;
                 }
             }
+
+            SetUpPlayerInfo();
+            //Debug.Log(player.tenacity);
         }
     }
 

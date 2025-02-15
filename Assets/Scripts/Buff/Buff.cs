@@ -116,6 +116,35 @@ public class CrazyHunterEquipmentBuff : EquipmentBuff
         Debug.Log("TestEquipmentBuff is Removed!");
     }
 }
+public class TinWoodmanEquipmentBuff : EquipmentBuff
+{
+    Player player;
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player = target.GetComponent<Player>();
+        player.tenacity += 10;
+
+        player.cardGenerateList.Add("铁心");
+
+        //Debug.Log("add");
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player = target.GetComponent<Player>();
+        player.tenacity -= 10;
+
+        player.cardGenerateList.Remove("铁心");
+    }
+}
 #endregion
 
 #region 装备羽buff
@@ -182,6 +211,8 @@ public class EllieEquipmentFeatherBuff : EquipmentFeatherBuff
         base.OnEnter();
 
         player.cardGenerateList.Add("艾莉之剑");
+        player.cardGenerateList.Add("腐败");
+        player.cardGenerateList.Add("正义");
     }
 
     public override void OnExit()
@@ -189,6 +220,8 @@ public class EllieEquipmentFeatherBuff : EquipmentFeatherBuff
         base.OnExit();
 
         player.cardGenerateList.Remove("艾莉之剑");
+        player.cardGenerateList.Remove("腐败");
+        player.cardGenerateList.Remove("正义");
     }
 }
 public class HunterEquipmentFeatherBuff : EquipmentFeatherBuff
@@ -2458,6 +2491,33 @@ public class BurningDocumentsEffectBuff1: EffectBuff
     public override void OnExit()
     {
         base.OnExit();
+    }
+}
+
+public class IronHeartEffectBuff : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 10;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.tenacity += 50;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        target.tenacity -= 50;
     }
 }
 #endregion
