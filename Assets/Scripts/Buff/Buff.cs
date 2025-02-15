@@ -87,33 +87,38 @@ public class TestEquipmentBuff : EquipmentBuff
         Debug.Log("TestEquipmentBuff is Removed!");
     }
 }
-public class CrazyHunterEquipmentBuff : EquipmentBuff
+public class HunterEquipmentBuff : EquipmentBuff
 {
-    bool isUpdated = false;
     Player player;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+    }
 
     public override void OnEnter()
     {
-        base.OnEnter();
         player=target.GetComponent<Player>();
-        player.tenacity += 10;
-        
-    }
+        base.OnEnter();
+        player.cardGenerateList.Add("¿ñÁÔÖ®Ç¹");
+        player.cardGenerateList.Add("ÊÉÑªØ°Ê×");
+        player.cardGenerateList.Add("Æð¶¯");
+        player.cardGenerateList.Add("ÁÔÉ±");
+        player.strength += 10;
 
+
+    }
     public override void OnUpdate()
     {
-        base.OnUpdate();
-        if (!isUpdated)
-        {
-            Debug.Log("TestEquipmentBuff is updated succesfully!");
-            isUpdated = true;
         }
-    }
-
     public override void OnExit()
     {
         base.OnExit();
-        Debug.Log("TestEquipmentBuff is Removed!");
+        player.strength-= 10;
+        player.cardGenerateList.Remove("¿ñÁÔÖ®Ç¹");
+        player.cardGenerateList.Remove("ÊÉÑªØ°Ê×");
+        player.cardGenerateList.Remove("Æð¶¯");
+        player.cardGenerateList.Remove("ÁÔÉ±");
+
     }
 }
 public class TinWoodmanEquipmentBuff : EquipmentBuff
@@ -143,6 +148,35 @@ public class TinWoodmanEquipmentBuff : EquipmentBuff
         player.tenacity -= 10;
 
         player.cardGenerateList.Remove("ÌúÐÄ");
+    }
+}
+public class DwarfsEquipmentBuff : EquipmentBuff
+{
+    Player player;
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player = target.GetComponent<Player>();
+        player.tenacity += 5;
+
+        player.cardGenerateList.Add("ÊÖÇÉ");
+
+        //Debug.Log("add");
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player = target.GetComponent<Player>();
+        player.tenacity -= 5;
+
+        player.cardGenerateList.Remove("ÊÖÇÉ");
     }
 }
 #endregion
@@ -224,35 +258,7 @@ public class EllieEquipmentFeatherBuff : EquipmentFeatherBuff
         player.cardGenerateList.Remove("ÕýÒå");
     }
 }
-public class HunterEquipmentFeatherBuff : EquipmentFeatherBuff
-{
-    Player player;
-    public override void Init(Character target, float timer = 0, bool isPermanent = false)
-    {
-        base.Init(target, timer, isPermanent);
-    }
 
-    public override void OnEnter()
-    {
-        base.OnEnter();
-
-        player.cardGenerateList.Add("¿ñÁÔÖ®Ç¹");
-        player.cardGenerateList.Add("ÊÉÑªØ°Ê×");
-        player.cardGenerateList.Add("Æð¶¯");
-        player.cardGenerateList.Add("ÁÔÉ±");
-        player.strength += 10;
-    }
-
-    public override void OnExit()
-    {
-        base.OnExit();
-        player.cardGenerateList.Remove("¿ñÁÔÖ®Ç¹");
-        player.cardGenerateList.Remove("ÊÉÑªØ°Ê×");
-        player.cardGenerateList.Remove("Æð¶¯");
-        player.cardGenerateList.Remove("ÁÔÉ±");
-
-    }
-}
 #endregion
 
 #region ¹¥»÷buff
@@ -460,6 +466,17 @@ public class CorruptionAttackBuff : AttackBuff
 
         this.timer = 5;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/PoisonAttackBody");
+    }
+}
+public class ContaminatedCloneAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 8;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/ContaminatedCloneAttackBody");
+        target.GetComponent<Character>().abnormalityResistance += Random.Range(-5, 15);
     }
 }
 #endregion
@@ -2530,6 +2547,67 @@ public class IronHeartEffectBuff : EffectBuff
     {
         base.OnExit();
         target.tenacity -= 50;
+    }
+}
+public class DwarfsFeatherEffectBuff : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 8;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.GetComponent<Player>().cardGenerateCooldown *= 0.8f;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        target.GetComponent<Player>().cardGenerateCooldown /= 0.8f;
+    }
+}
+public class ContaminatedCloneEffectBuff : EffectBuff
+{
+    Enemy enemy;
+    float abnormalityResistance;
+    float addStrength;
+    float addTenacity;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        enemy = target.GetComponent<Enemy>();
+        this.abnormalityResistance = enemy.abnormalityResistance;
+        this.timer = 10;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();  
+        addStrength=Random.Range(-50+abnormalityResistance,30+abnormalityResistance);
+        addTenacity=Random.Range(-50+abnormalityResistance,30+abnormalityResistance);
+        enemy.strength += addStrength;
+        enemy.tenacity+=addTenacity;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        enemy.strength -= addStrength;
+        enemy.tenacity -= addTenacity;
     }
 }
 #endregion

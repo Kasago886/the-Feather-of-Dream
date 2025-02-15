@@ -630,6 +630,7 @@ MonoBehaviour:
   donotTouchPanel: {fileID: 5237687415125300663}
   itemsOnHand: []
   setuped: 0
+  isShow: 0
 --- !u!222 &1891233999512855963
 CanvasRenderer:
   m_ObjectHideFlags: 0

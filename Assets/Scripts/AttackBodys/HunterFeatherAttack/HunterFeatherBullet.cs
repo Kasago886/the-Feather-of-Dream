@@ -15,11 +15,10 @@ public class HunterFeatherBullet : MonoBehaviour
 
         foreach (var hitCollider in colliders)
         {
-            Debug.Log("7");
+            
             if (hitCollider.gameObject != gameObject && hitCollider.gameObject.GetComponent<Enemy>())
             {
                 Enemy = hitCollider.GetComponent<Enemy>();
-                Debug.Log("6");
             }
             if (Enemy != null)
             {

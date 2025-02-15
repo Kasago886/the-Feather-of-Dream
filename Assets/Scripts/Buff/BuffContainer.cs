@@ -23,8 +23,9 @@ public class BuffContainer
         {"拔羽20s", typeof(UnlockFeather20sBuff) },
         {"艾莉之羽", typeof(EllieEquipmentFeatherBuff) },
         {"腐败蔓延",typeof(CorruptionAttackBuff) },
-        {"疯猎之残羽", typeof(HunterEquipmentFeatherBuff) },
+        {"疯猎之残羽", typeof(HunterEquipmentBuff) },
         {"铁皮人残羽", typeof(TinWoodmanEquipmentBuff) },
+        {"小矮人残羽",typeof(DwarfsEquipmentBuff) },
         {"艾莉之剑", typeof(ElliesSwordAttackBuff) },
         {"王子之剑", typeof(PrinceSwordAttackBuff) },
         {"侍卫短剑", typeof(PrinceGuardSwordAttackBuff) },
@@ -80,7 +81,11 @@ public class BuffContainer
         {"裂隙",typeof(Fissure) },//触发条件：对象的伤痕抵抗小于5并且对象的伤痕层数大于13，效果：使对象在n次受击后，受到n*伤痕层数的伤害，持续时间无限至发挥作用
         {"永不妥协",typeof(BurningDocumentsEffectBuff1) },//增加100点异常抗性与5点火焰抗性，持续时间无限
         {"吞噬一切的烈火",typeof(BurningDocumentsAttackBuff) },
+        {"污染之瘤",typeof(ContaminatedCloneAttackBuff) },
+        {"不稳定突变",typeof(ContaminatedCloneEffectBuff) },//使对象根据自身异常抗性随机获得力量和韧性效果，持续10s
         {"铁心",typeof(IronHeartEffectBuff) },//韧性增加50，持续10s
+        {"巧手",typeof(DwarfsFeatherEffectBuff) },//使玩家获取卡牌冷却-20%
+        
     };
 
     /*
