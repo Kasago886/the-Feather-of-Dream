@@ -76,6 +76,8 @@ public class BuffContainer
         {"伤痕抵抗",typeof(TraumaResistance) },//使对象提高1点伤痕抗性，持续16s
         {"伤痕脆弱",typeof(TraumaFragility) },//使对象降低1点伤痕抗性，持续16s
         {"裂隙",typeof(Fissure) },//触发条件：对象的伤痕抵抗小于5并且对象的伤痕层数大于13，效果：使对象在n次受击后，受到n*伤痕层数的伤害，持续时间无限至发挥作用
+        {"永不妥协",typeof(BurningDocumentsEffectBuff1) },//增加100点异常抗性与5点火焰抗性，持续时间无限
+        {"吞噬一切的烈火",typeof(BurningDocumentsAttackBuff) },
     };
 
     /*

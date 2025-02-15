@@ -7,12 +7,6 @@ public enum User
     玩家,
     敌人
 }
-public enum DUser
-{
-    玩家,
-    敌人,
-    双方
-}
 public class AttackBodyBuffAdder : MonoBehaviour
 {
     [Header("使用者")]
@@ -38,6 +32,7 @@ public class AttackBodyBuffAdder : MonoBehaviour
         {
             enemy= GetComponent<AttackBody>().whatBeAttack[0].GetComponent<Enemy>();
         }
+        //Debug.Log(gameObject.name + "buff=" + nextToPlayer.Count);
     }
     public void AddBuff()
     {

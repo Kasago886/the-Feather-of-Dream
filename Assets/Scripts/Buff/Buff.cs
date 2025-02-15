@@ -1811,7 +1811,7 @@ public class Scorch : EffectBuff
         {
             character = target.GetComponent<Character>();
         }
-        this.timer = 0.1f;
+        this.timer = 6f;
         foreach (var buff in character.buffList)
         {
             if (buff.name == "×ÆÉË")
@@ -1843,6 +1843,7 @@ public class Scorch : EffectBuff
         if(attackTimer > 0.1f&&character.unlockedFeathers.Count>0)
         {
             character.unlockedFeathers[0].health -= 0.1f*Mathf.Pow(2, -character.abnormalityResistance / 100)*(1-character.burnResistance*0.1f);
+            attackTimer = 0;
         }
         base.OnUpdate();
     }

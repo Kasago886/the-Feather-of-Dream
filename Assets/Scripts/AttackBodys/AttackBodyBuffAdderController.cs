@@ -12,6 +12,7 @@ public class BuffNameAndNumber
 public class AttackBodyBuffAdderController : MonoBehaviour
 {
     public List<BuffNameAndNumber> buffNameAndNumber=new List<BuffNameAndNumber>();
+    public string charactorName;
     [HideInInspector]
     public AttackBodyBuffAdder theAttackBody;
     private bool late;
@@ -31,6 +32,10 @@ public class AttackBodyBuffAdderController : MonoBehaviour
                 }
             }
             late = false;
+        }
+        if(GameObject.Find(charactorName + "AttackBody(Clone)")!=null&&GameObject.Find(charactorName+"AttackBody(Clone)").GetComponent<AttackBodyBuffAdder>()!=null)
+        {
+            theAttackBody = GameObject.Find(charactorName + "AttackBody(Clone)").GetComponent<AttackBodyBuffAdder>();
         }
     }
     public void AddBuff()

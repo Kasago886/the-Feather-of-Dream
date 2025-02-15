@@ -26,7 +26,6 @@ public class TheMisunderstoodWerewolfSkill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("UseSkill=" + useSkill);
         if(useSkill)
         {
             timer += Time.deltaTime;

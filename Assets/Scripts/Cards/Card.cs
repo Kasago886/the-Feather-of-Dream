@@ -167,6 +167,8 @@ public class Card : MonoBehaviour
                 enemyName = "敌人";
             }
             effects?.Invoke();
+            effectsEnemy?.Invoke();
+            effectsPlayer?.Invoke();
             Captions(enemyName + "使用了" + name, false);
             EnemyEffectOnPlayer();
             EnemyEffectOnSelf();
