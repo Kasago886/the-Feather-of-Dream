@@ -100,9 +100,12 @@ public class Bullet : MonoBehaviour
             else if (collision.tag == Consts.EnemyTag && !isEnemyBullet)
             {
                 collisionEnemy = collision.GetComponent<Enemy>();
-                collisionEnemy.TakeDamage(damage);
-                whatHappenWhenHit?.Invoke();
-                Destroy(gameObject);
+                if (!collisionEnemy.isDead)
+                {
+                    collisionEnemy.TakeDamage(damage);
+                    whatHappenWhenHit?.Invoke();
+                    Destroy(gameObject);
+                }
             }
         }
     }
