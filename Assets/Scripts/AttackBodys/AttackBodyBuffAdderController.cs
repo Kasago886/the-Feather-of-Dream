@@ -7,7 +7,7 @@ public class BuffNameAndNumber
     public bool effectOnPlayer;
     public bool effectOnEnemy;
     public string name;
-    public List<int> number = new List<int>();
+    public List<int> number;
 }
 public class AttackBodyBuffAdderController : MonoBehaviour
 {
@@ -24,10 +24,20 @@ public class AttackBodyBuffAdderController : MonoBehaviour
             {
                 if (buff.effectOnPlayer)
                 {
-                    theAttackBody.nextToPlayer.Add(new AttackBuffDict(buff.name, buff.number));
+                    List<int> number = new List<int>();
+                    for(int i = 0; i < buff.number.Count; i++)
+                    {
+                        number.Add(buff.number[i]);
+                    }
+                    theAttackBody.nextToPlayer.Add(new AttackBuffDict(buff.name,number));
                 }
                 if (buff.effectOnEnemy)
                 {
+                    List<int> number = new List<int>();
+                    for (int i = 0; i < buff.number.Count; i++)
+                    {
+                        number.Add(buff.number[i]);
+                    }
                     theAttackBody.nextToEnemy.Add(new AttackBuffDict(buff.name,buff.number));
                 }
             }
@@ -46,10 +56,20 @@ public class AttackBodyBuffAdderController : MonoBehaviour
             {
                 if (buff.effectOnPlayer)
                 {
+                    List<int> number = new List<int>();
+                    for (int i = 0; i < buff.number.Count; i++)
+                    {
+                        number.Add(buff.number[i]);
+                    }
                     theAttackBody.nextToPlayer.Add(new AttackBuffDict(buff.name, buff.number));
                 }
                 if (buff.effectOnEnemy)
                 {
+                    List<int> number = new List<int>();
+                    for (int i = 0; i < buff.number.Count; i++)
+                    {
+                        number.Add(buff.number[i]);
+                    }
                     theAttackBody.nextToEnemy.Add(new AttackBuffDict(buff.name, buff.number));
                 }
             }
