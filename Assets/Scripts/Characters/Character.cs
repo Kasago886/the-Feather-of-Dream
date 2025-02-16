@@ -397,6 +397,7 @@ public class Character : MonoBehaviour
 
             feathers.RemoveAt(i);
 
+            //Debug.Log("unlockFeather:" + gameObject);
             ShowUnlockFeather(feather);
 
             count++;

@@ -168,6 +168,7 @@ public class Enemy : Character
         //被拔羽时
         if (unlockedFeathers.Count > 0)
         {
+            //Debug.Log(enemyName);
             showUI = true;
         }
         //使用卡牌且在视野内时
@@ -468,6 +469,7 @@ public class Enemy : Character
     public override void ShowUnlockFeather(Feather feather)
     {
         base.ShowUnlockFeather(feather);
+        //Debug.Log("hpscroll:" + hpScroll);
         if (hpScroll != null)
         {
             if (!hpScroll.gameObject.IsDestroyed())
@@ -476,6 +478,7 @@ public class Enemy : Character
 
                 foreach (var item in unlockedFeathers)
                 {
+                    Debug.Log("hpscroll:" +enemyName);
                     HpUI hpUI = hpScroll.AddHp();
                     hpUI.testTime = item.lockTimer;
                     hpUI.testHp = item.health;

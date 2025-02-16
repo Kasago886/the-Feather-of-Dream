@@ -214,7 +214,7 @@ public class Player : Character
         {
             hpScroll.ClearAllContent();
 
-            Debug.Log(unlockedFeathers.Count);
+            //Debug.Log(unlockedFeathers.Count);
             foreach (var item in unlockedFeathers)
             {
                 HpUI hpUI = hpScroll.AddHp();

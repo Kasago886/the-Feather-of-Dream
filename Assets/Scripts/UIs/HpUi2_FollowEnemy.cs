@@ -69,6 +69,7 @@ public class HpUi2_FollowEnemy : MonoBehaviour
     {
         if (sprite != null)
         {
+            //Debug.Log("SpriteRenderer:" + spriteRenderer.transform.parent);
             scrollViewRectTransform.position = Camera.main.WorldToScreenPoint(new Vector3(
                 gameObject.transform.position.x ,
                 gameObject.transform.position.y + spriteRenderer.transform.localScale.y * sprite.rect.height / sprite.pixelsPerUnit /2, 0));
@@ -80,6 +81,7 @@ public class HpUi2_FollowEnemy : MonoBehaviour
     {
         if (enemy.unlockedFeathers.Count > content.transform.childCount)
         {
+            Debug.Log("hpui2followenemy:"+enemy.enemyName);
             GameObject hpUiObject = Instantiate(HpPrefab);
             RectTransform transform = hpUiObject.GetComponent<RectTransform>();
             transform.localScale /= 4;
