@@ -144,6 +144,23 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(effortTarget.Count>0)
+        {
+            foreach (var item in effortTarget)
+            {
+                if (item == null)
+                {
+                    effortTarget.Remove(item);
+                }
+            }
+        }
+        else
+        {
+            if (choose)
+            {
+                choose = false;
+            }
+        }
         if (effortNumber == finalTarget.Count && finalTarget.Count > 0 && isRandom && Input.GetMouseButtonDown(0))
         {
             endChoose = true;
@@ -510,7 +527,7 @@ public class Card : MonoBehaviour
                 {
                     if (theNearestNumber != -1)
                     {
-                        if (Vector2.Distance(transform.position, enemiesWhoInCameralist[i].transform.position) < Vector2.Distance(transform.position, enemiesWhoInCameralist[theNearestNumber].transform.position))
+                        if (Vector2.Distance(Camera.main.ScreenToWorldPoint(transform.position), enemiesWhoInCameralist[i].transform.position) < Vector2.Distance(Camera.main.ScreenToWorldPoint(transform.position), enemiesWhoInCameralist[theNearestNumber].transform.position))
                         {
                             theNearestNumber = i;
                         }
@@ -881,7 +898,7 @@ public class Card : MonoBehaviour
                 {
                     if (theNearestNumber != -1)
                     {
-                        if (Vector2.Distance(transform.position, enemiesWhoInCameralist[i].transform.position) < Vector2.Distance(transform.position, enemiesWhoInCameralist[theNearestNumber].transform.position))
+                        if (Vector2.Distance(Camera.main.ScreenToWorldPoint(transform.position), enemiesWhoInCameralist[i].transform.position) < Vector2.Distance(Camera.main.ScreenToWorldPoint(transform.position), enemiesWhoInCameralist[theNearestNumber].transform.position))
                         {
                             theNearestNumber = i;
                         }

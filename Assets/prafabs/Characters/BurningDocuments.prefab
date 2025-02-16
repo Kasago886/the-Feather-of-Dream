@@ -192,6 +192,7 @@ MonoBehaviour:
   dropItems: []
   exp: 1
   flag: 0
+  refreshable: 1
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:

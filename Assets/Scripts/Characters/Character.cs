@@ -123,7 +123,7 @@ public class Character : MonoBehaviour
         {
             GameObject instance = Instantiate(obj, transform.position, Quaternion.identity);
             AttackBody attackBody = instance.GetComponent<AttackBody>();
-            if (instance.GetComponentInChildren<AttackBodyBuffAdder>() != null)
+            if (instance.GetComponent<AttackBodyBuffAdder>() != null)
             {
                 AttackBodyBuffAdder attack = instance.GetComponent<AttackBodyBuffAdder>();
                 if (gameObject.GetComponentsInChildren<AttackBodyBuffAdderController>().Length > 0)
@@ -464,18 +464,12 @@ public class Character : MonoBehaviour
     /// 添加Buff
     /// </summary>
     /// <param name="buff"></param>
-    public void AddBuff(string buffName)
+    public virtual void AddBuff(string buffName)
     {
         Buff buff = BuffContainer.GetBuffInstance(buffName) as Buff;
-        if (buff == null)
-        {
-            Debug.LogError("Buff不存在：" + buffName);
-        }
         buff.Init(this);
         buff.name = buffName;
-        AddBuff(buff);
-        //Debug.Log("应当添加" + buffName);
-        //Debug.Log("实际添加" + buff.name);
+        AddBuff(buff);       
     }
     public void AddBuff(Buff buff)
     {

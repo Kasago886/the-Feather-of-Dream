@@ -150,11 +150,24 @@ MonoBehaviour:
   minDistance: 0
   attackCardUseDistance: 10
   effectCardUseDistance: 30
-  attackCardLineList: []
-  effectCardLineList: []
+  attackCardLineList:
+  - cards:
+    - card: {fileID: 5506687811506750245}
+      cooldown: 6
+      timer: 0
+    cooldown: 0
+    timer: 0
+  effectCardLineList:
+  - cards:
+    - card: {fileID: 779453297404367150}
+      cooldown: 12
+      timer: 0
+    cooldown: 0
+    timer: 0
   dropItems: []
   exp: 0
   flag: 0
+  refreshable: 1
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:
@@ -343,6 +356,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4588654699946276693, guid: 4a5e0ae1e0461994597de42321876414, type: 3}
   m_PrefabInstance: {fileID: 2132586420370814397}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5506687811506750245 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5905300409946437272, guid: 4a5e0ae1e0461994597de42321876414, type: 3}
+  m_PrefabInstance: {fileID: 2132586420370814397}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e18d51474219541baa0e293a6ee587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8109234236551293706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -440,6 +464,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d59e7072ab0e2f428f9cff31eb65020, type: 3}
+--- !u!114 &779453297404367150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8816048291622435364, guid: 6d59e7072ab0e2f428f9cff31eb65020, type: 3}
+  m_PrefabInstance: {fileID: 8109234236551293706}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e18d51474219541baa0e293a6ee587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4882181281647953605 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3695546064802377167, guid: 6d59e7072ab0e2f428f9cff31eb65020, type: 3}
