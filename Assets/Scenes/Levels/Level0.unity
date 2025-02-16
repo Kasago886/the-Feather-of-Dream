@@ -9500,6 +9500,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8862263978718443295, guid: 133dd2d94ccb73a41aa801937b18f4e2, type: 3}
+      propertyPath: flag
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10084,6 +10088,9 @@ MonoBehaviour:
       level21StartDialogRead: 0
       whaleKilled: 0
       tinWoodmanKilled: 0
+      fragPrinceKilled: 0
+      fragGuard1Killed: 0
+      fragGuard2Killed: 0
       AssistantDestroyed: 0
     timeInfo:
       year: 0
@@ -11493,10 +11500,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1787445593}
     m_Modifications:
-    - target: {fileID: 805193453528322032, guid: 55f887a983cb4e44a8eb17ffa3af1a87, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 4356163914080244744, guid: 55f887a983cb4e44a8eb17ffa3af1a87, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

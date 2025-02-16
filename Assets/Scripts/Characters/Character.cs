@@ -8,6 +8,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.TextCore.Text;
 
+public struct Shield
+{
+    public float health;
+    public float timer;
+}
+
 public class Character : MonoBehaviour
 {
     //血条
@@ -66,6 +72,8 @@ public class Character : MonoBehaviour
 
     public Animator animator;
 
+    public List<Shield> shields = new();
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -93,6 +101,7 @@ public class Character : MonoBehaviour
         if (!isDead)
         {
             BuffUpdate();
+            ShieldUpdate();
             FeatherUpdate();
             AIUpdate();
             ForcebackUpdate();
@@ -157,6 +166,25 @@ public class Character : MonoBehaviour
     {
         if (!isDead)
         {
+            //护盾抗伤
+            while (shields.Count > 0 && damage > 0)
+            {
+                Shield shield = shields[0];
+                shield.health -= damage;
+
+                //Debug.Log(damage);
+
+                if (shield.health <= 0)
+                {
+                    damage = -shield.health;
+                    shields.RemoveAt(0);
+                }
+                else
+                {
+                    damage = 0;
+                }
+            }
+
             //受伤事件
             if (unlockedFeathers.Count > 0 && damage > 0)
             {
@@ -289,6 +317,23 @@ public class Character : MonoBehaviour
             OnForceback(beAttackedTrans);
 
             forcebackTimer -= Time.deltaTime;
+        }
+    }
+
+    /// <summary>
+    /// 更新护盾
+    /// </summary>
+    public void ShieldUpdate()
+    {
+        for (int i = shields.Count - 1; i >= 0; i--)
+        {
+            Shield shield = shields[i];
+            shield.timer -= Time.deltaTime;
+
+            if (shield.timer < 0)
+            {
+                shields.RemoveAt(i);
+            }
         }
     }
 

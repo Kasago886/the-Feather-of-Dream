@@ -85,6 +85,9 @@ public struct LevelInfo
     public bool level21StartDialogRead;
     public bool whaleKilled;
     public bool tinWoodmanKilled;
+    public bool fragPrinceKilled;
+    public bool fragGuard1Killed;
+    public bool fragGuard2Killed;
 
     public bool AssistantDestroyed;
 }

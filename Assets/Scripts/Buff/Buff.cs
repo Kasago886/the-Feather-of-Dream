@@ -179,6 +179,35 @@ public class DwarfsEquipmentBuff : EquipmentBuff
         player.cardGenerateList.Remove("手巧");
     }
 }
+public class FragPrinceEquipmentBuff : EquipmentBuff
+{
+    Player player;
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player = target.GetComponent<Player>();
+        player.tenacity += 5;
+        player.strength += 5;
+
+        player.cardGenerateList.Add("护卫");
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player = target.GetComponent<Player>();
+        player.tenacity -= 5;
+        player.strength -= 5;
+
+        player.cardGenerateList.Remove("护卫");
+    }
+}
 #endregion
 
 #region 装备羽buff
@@ -2608,6 +2637,35 @@ public class ContaminatedCloneEffectBuff : EffectBuff
         base.OnExit();
         enemy.strength -= addStrength;
         enemy.tenacity -= addTenacity;
+    }
+}
+public class ShieldEffectBuff : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 10;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.GetComponent<Player>().shields.Add(new Shield()
+        {
+            health = 20,
+            timer = 10
+        });
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
     }
 }
 #endregion

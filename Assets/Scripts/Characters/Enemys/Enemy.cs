@@ -61,6 +61,7 @@ public class Enemy : Character
     public int exp;
 
     public FlagType flag;
+    public bool refreshable;
 
     [HideInInspector] public Player player;
 
@@ -76,7 +77,7 @@ public class Enemy : Character
         base.Start();
 
         //flag
-        if (ArchiveManager.CheckFlag(flag))
+        if (ArchiveManager.CheckFlag(flag) && !refreshable)
         {
             gameObject.SetActive(false);
             return;
@@ -453,7 +454,10 @@ public class Enemy : Character
         player.AddExp(exp);
 
         //flag
-        ArchiveManager.CheckFlag(flag,true,true);
+        if (!refreshable)
+        {
+            ArchiveManager.CheckFlag(flag, true, true);
+        }
     }
 
 

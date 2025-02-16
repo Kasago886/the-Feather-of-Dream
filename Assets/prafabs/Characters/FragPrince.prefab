@@ -113,9 +113,11 @@ MonoBehaviour:
       timer: 0
     cooldown: 0
     timer: 0
-  dropItems: []
-  exp: 0
-  flag: 0
+  dropItems:
+  - {fileID: 2158636381633551328, guid: 496df441375bfd546b34e2e3b0dbbfa3, type: 3}
+  exp: 10
+  flag: 8
+  refreshable: 0
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:

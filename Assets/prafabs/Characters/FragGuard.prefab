@@ -191,8 +191,9 @@ MonoBehaviour:
     timer: 0
   effectCardLineList: []
   dropItems: []
-  exp: 0
-  flag: 0
+  exp: 5
+  flag: 9
+  refreshable: 0
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:

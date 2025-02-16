@@ -25,6 +25,7 @@ public class BuffContainer
         {"腐败蔓延",typeof(CorruptionAttackBuff) },
         {"疯猎之残羽", typeof(HunterEquipmentBuff) },
         {"铁皮人残羽", typeof(TinWoodmanEquipmentBuff) },
+        {"王子残羽",typeof(FragPrinceEquipmentBuff) },
         {"小矮人残羽",typeof(DwarfsEquipmentBuff) },
         {"艾莉之剑", typeof(ElliesSwordAttackBuff) },
         {"王子之剑", typeof(PrinceSwordAttackBuff) },
@@ -85,7 +86,7 @@ public class BuffContainer
         {"不稳定突变",typeof(ContaminatedCloneEffectBuff) },//使对象根据自身异常抗性随机获得力量和韧性效果，持续10s
         {"铁心",typeof(IronHeartEffectBuff) },//韧性增加50，持续10s
         {"巧手",typeof(DwarfsFeatherEffectBuff) },//使玩家获取卡牌冷却-20%
-        
+        {"护盾",typeof(ShieldEffectBuff) },//获得血量20，持续10s的护盾
     };
 
     /*
