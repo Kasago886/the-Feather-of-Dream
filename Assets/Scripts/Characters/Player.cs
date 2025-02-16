@@ -20,6 +20,10 @@ public class Player : Character
     [HideInInspector] public int baseStrength;
     [HideInInspector] public bool setUped = false;
 
+    float healthRecoverTimer = 0;
+    float healthRecoverCooldown = 5;
+    float healthRecoverSpeed = 0.1f;
+
     ArchiveManager archiveManager;
     EquipmentPanelManager equipmentPanelManager;
     InputListener inputListener;
@@ -73,6 +77,7 @@ public class Player : Character
         base.AIUpdate();
 
         CardGenerateUpdate();
+        HealthRecoverUpdate();
     }
 
     /// <summary>
@@ -227,6 +232,51 @@ public class Player : Character
             base.TakeDamage(damage, attackTrans);
 
             featherNumText.text = (feathers.Count + unlockedFeathers.Count).ToString();
+            healthRecoverTimer = healthRecoverCooldown;
+        }
+    }
+
+    void HealthRecoverUpdate()
+    {
+        healthRecoverTimer -= Time.deltaTime;
+        //一段时间不受伤时回血
+        if (healthRecoverTimer < 0)
+        {
+            //找到血量不满的羽
+            Feather recoverFeather = null;
+            if (feathers.Count > 0)
+            {
+                foreach (Feather feather in feathers)
+                {
+                    if (feather.health < feather.maxHealth)
+                    {
+                        recoverFeather = feather;
+                        break;
+                    }
+                }
+
+            }
+            if (recoverFeather != null && unlockedFeathers.Count > 0)
+            {
+                foreach (Feather feather in unlockedFeathers)
+                {
+                    if (feather.health < feather.maxHealth)
+                    {
+                        recoverFeather = feather;
+                        break;
+                    }
+                }
+            }
+
+            //回血
+            if (recoverFeather != null)
+            {
+                recoverFeather.health += healthRecoverSpeed;
+                if (recoverFeather.health > recoverFeather.maxHealth)
+                {
+                    recoverFeather.health = recoverFeather.maxHealth;
+                }
+            }
         }
     }
 
