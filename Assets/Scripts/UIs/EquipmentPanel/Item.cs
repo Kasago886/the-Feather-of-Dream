@@ -26,6 +26,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 
     public string buffName;
     public float featherHealth;
+    float featherMaxHealth;
 
     public string dialogName;
 
@@ -66,42 +67,8 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         Resources.UnloadUnusedAssets();
 
         buffName = itemInfo.buffName;
-
-        if (type == ItemType.Feather)
-        {
-            if (player == null)
-            {
-                player = FindAnyObjectByType<Player>();
-            }
-
-            Debug.Log(buffName);
-            Feather feather;
-            if (player == null)
-            {
-                feather = new Feather();
-                feather.maxHealth = itemInfo.featherMaxHealth;
-                feather.health = itemInfo.featherHealth;
-            }
-            else
-            {
-                equipmentFeatherBuff = BuffContainer.GetBuffInstance(buffName) as EquipmentFeatherBuff;
-                equipmentFeatherBuff.Init(player);
-                equipmentFeatherBuff.feather.item = this;
-                equipmentFeatherBuff.feather.health = itemInfo.featherHealth;
-                player.AddBuff(equipmentFeatherBuff);
-
-                feather = equipmentFeatherBuff.feather;
-            }
-
-            itemFeather = feather;
-
-            if (itemHealth == null)
-            {
-                itemHealth = transform.GetChild(0).GetComponent<ItemHealth>();
-            }
-            itemHealth.gameObject.SetActive(true);
-            itemHealth.feather = feather;
-        }
+        featherHealth = itemInfo.featherHealth;
+        featherMaxHealth = itemInfo.featherMaxHealth;
 
         dialogName = itemInfo.dialogName;
     }
@@ -135,6 +102,11 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 
         info.imageName = image.sprite.name;
         info.buffName = buffName;
+        /// 羽的信息获取方式
+        /// 1.预制体获取：
+        /// itemFeather不存在，因此从预制体的featherHealth获取最大生命
+        /// 2.实例获取：
+        /// itemFeather存在，从feather实例获取当前生命与最大生命
         if (itemFeather == null)
         {
             info.featherHealth = featherHealth;
@@ -275,6 +247,25 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         {
             if (type == ItemType.Feather)
             {
+                //buff设置
+                equipmentFeatherBuff = BuffContainer.GetBuffInstance(buffName) as EquipmentFeatherBuff;
+                equipmentFeatherBuff.Init(player);
+                equipmentFeatherBuff.feather.item = this;
+
+                //实例获取羽信息
+                if (itemFeather != null)
+                {
+                    equipmentFeatherBuff.feather = itemFeather as EquipmentFeather;
+                }
+                //预制体获取羽信息
+                else
+                {
+                    equipmentFeatherBuff.feather.health = featherHealth;
+                    equipmentFeatherBuff.feather.maxHealth = featherMaxHealth;
+
+                    itemFeather = equipmentFeatherBuff.feather;
+                }
+
                 player.AddBuff(equipmentFeatherBuff);
             }
             else if (type == ItemType.BrokenFeather)
@@ -300,6 +291,32 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         if (isHover)
         {
             transform.position = Input.mousePosition;
+        }
+
+        //装备界面血量
+        if (itemHealth == null)
+        {
+            itemHealth = transform.GetChild(0).GetComponent<ItemHealth>();
+        }
+        if (itemHealth.feather == null)
+        {
+            Feather feather = null;
+            if (player == null)
+            {
+                feather = new Feather();
+                feather.maxHealth = featherMaxHealth;
+                feather.health = featherHealth;
+            }
+            else if (itemFeather != null)
+            {
+                feather = itemFeather;
+            }
+
+            if (feather != null)
+            {
+                itemHealth.gameObject.SetActive(true);
+                itemHealth.feather = feather;
+            }
         }
     }
 }

@@ -21,8 +21,8 @@ public class Player : Character
     [HideInInspector] public bool setUped = false;
 
     float healthRecoverTimer = 0;
-    float healthRecoverCooldown = 5;
-    float healthRecoverSpeed = 0.1f;
+    float healthRecoverCooldown = 10;
+    float healthRecoverSpeed = 1;
 
     ArchiveManager archiveManager;
     EquipmentPanelManager equipmentPanelManager;
@@ -190,6 +190,7 @@ public class Player : Character
     public override void AddFeather(Feather feather)
     {
         base.AddFeather(feather);
+        Debug.Log("add feather:" + feather.GetType());
         archiveManager.currentArchive.playerInfo.feather = feathers.Count + unlockedFeathers.Count;
     }
     /// <summary>
@@ -211,11 +212,17 @@ public class Player : Character
         base.ShowUnlockFeather(feather);
         if (hpScroll != null)
         {
-            HpUI hpUI = hpScroll.AddHp();
-            hpUI.testTime = feather.lockTimer;
-            hpUI.testHp = feather.health;
-            hpUI.testHpMax = feather.maxHealth;
-            feather.hpUI = hpUI;
+            hpScroll.ClearAllContent();
+
+            Debug.Log(unlockedFeathers.Count);
+            foreach (var item in unlockedFeathers)
+            {
+                HpUI hpUI = hpScroll.AddHp();
+                hpUI.testTime = item.lockTimer;
+                hpUI.testHp = item.health;
+                hpUI.testHpMax = item.maxHealth;
+                item.hpUI = hpUI;
+            }
         }
     }
     #endregion
@@ -236,6 +243,9 @@ public class Player : Character
         }
     }
 
+    /// <summary>
+    /// »ØÑª
+    /// </summary>
     void HealthRecoverUpdate()
     {
         healthRecoverTimer -= Time.deltaTime;
@@ -271,7 +281,7 @@ public class Player : Character
             //»ØÑª
             if (recoverFeather != null)
             {
-                recoverFeather.health += healthRecoverSpeed;
+                recoverFeather.health += healthRecoverSpeed * Time.deltaTime;
                 if (recoverFeather.health > recoverFeather.maxHealth)
                 {
                     recoverFeather.health = recoverFeather.maxHealth;

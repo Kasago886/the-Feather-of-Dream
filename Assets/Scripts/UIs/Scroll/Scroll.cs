@@ -46,4 +46,12 @@ public class Scroll : MonoBehaviour
 
         return temp.GetComponent<HpUI>();
     }
+
+    public void ClearAllContent()
+    {
+        for (int i = 0; i< contentTransform.childCount; i++)
+        {
+            Destroy(contentTransform.GetChild(i).gameObject);
+        }
+    }
 }

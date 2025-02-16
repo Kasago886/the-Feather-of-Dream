@@ -472,11 +472,16 @@ public class Enemy : Character
         {
             if (!hpScroll.gameObject.IsDestroyed())
             {
-                HpUI hpUI = hpScroll.AddHp();
-                hpUI.testTime = feather.lockTimer;
-                hpUI.testHp = feather.health;
-                hpUI.testHpMax = feather.maxHealth;
-                feather.hpUI = hpUI;
+                hpScroll.ClearAllContent();
+
+                foreach (var item in unlockedFeathers)
+                {
+                    HpUI hpUI = hpScroll.AddHp();
+                    hpUI.testTime = item.lockTimer;
+                    hpUI.testHp = item.health;
+                    hpUI.testHpMax = item.maxHealth;
+                    item.hpUI = hpUI;
+                }
             }
         }
     }
