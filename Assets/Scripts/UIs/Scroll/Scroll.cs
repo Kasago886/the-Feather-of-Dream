@@ -49,6 +49,11 @@ public class Scroll : MonoBehaviour
 
     public void ClearAllContent()
     {
+        if (contentTransform == null)
+        {
+            Start();
+        }
+
         for (int i = 0; i< contentTransform.childCount; i++)
         {
             Destroy(contentTransform.GetChild(i).gameObject);

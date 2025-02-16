@@ -7,6 +7,30 @@ using UnityEngine.UI;
 public class EnemyUIScroll : Scroll
 {
     Dictionary<Enemy, Transform> dict = new();
+
+    public override void Update()
+    {
+        base.Update();
+
+        foreach(Enemy enemy in dict.Keys)
+        {
+            if (enemy.hpScroll == null)
+            {
+                Transform trans = dict[enemy];
+                Scroll enemyUnlockedFeatherScroll = trans.Find("enemyHPScrollView").GetComponent<Scroll>();
+                enemy.hpScroll = enemyUnlockedFeatherScroll;
+            }
+            else if (enemy.hpScroll.gameObject.IsDestroyed())
+            {
+                Transform trans = dict[enemy];
+                Scroll enemyUnlockedFeatherScroll = trans.Find("enemyHPScrollView").GetComponent<Scroll>();
+                enemy.hpScroll = enemyUnlockedFeatherScroll;
+            }
+
+            enemy.ShowUnlockFeather(null);
+        }
+    }
+
     public void AddEnemyUI(Enemy enemy)
     {
         if (!dict.ContainsKey(enemy))
@@ -33,6 +57,7 @@ public class EnemyUIScroll : Scroll
             }
             enemy.hpScroll = enemyUnlockedFeatherScroll;
         }
+
     }
 
     public void RemoveEnemyUI(Enemy enemy)
