@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8444481756513469687}
   - component: {fileID: 715790033513042778}
+  - component: {fileID: -6115649945672707146}
   - component: {fileID: 5149134748665874945}
   - component: {fileID: 8702231866184511059}
   - component: {fileID: 2839530922545388383}
@@ -43,7 +44,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53726181187038591}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64ca987230c1a7740814fc0c79e2314a, type: 3}
   m_Name: 
@@ -63,6 +64,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   damage: 10
+--- !u!114 &-6115649945672707146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53726181187038591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78eae2b695d6264d9105eec3f699c21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 8
+  buffs:
+  - "\u51E1\u5EB8"
+  - "\u968F\u673ABuff"
 --- !u!212 &5149134748665874945
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -508,6 +508,15 @@ public class ContaminatedCloneAttackBuff : AttackBuff
         target.GetComponent<Character>().abnormalityResistance += Random.Range(-5, 15);
     }
 }
+public class NeprizAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 17;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/Nepriz/NeprizAttackBody");
+    }
+}
 #endregion
 
 #region °ÎÓðbuff
@@ -1815,13 +1824,13 @@ public class Grave : EffectBuff
 public class PoisonBuff : EffectBuff
 {
     float bufftimer;
-    Enemy enemy;
+    Character character;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
         bufftimer = 1;
         this.timer = 5.1f;
-        enemy = target.GetComponent<Enemy>();
+        character = target.GetComponent<Character>();
     }
 
     public override void OnEnter()
@@ -1838,9 +1847,9 @@ public class PoisonBuff : EffectBuff
         }
         else
         {
-            if (enemy.unlockedFeathers.Count>0)
+            if (character.unlockedFeathers.Count>0)
             {
-                enemy.unlockedFeathers[0].health -= 1f;
+                character.unlockedFeathers[0].health -= 1f;
                 bufftimer = 1;
             }
         }

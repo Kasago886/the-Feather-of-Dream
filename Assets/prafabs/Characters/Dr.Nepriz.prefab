@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5194438090788217055}
-  - component: {fileID: 5128290654602833240}
   - component: {fileID: 1021564070518008926}
+  - component: {fileID: 4939784656188387847}
   - component: {fileID: 1114919163909731784}
   - component: {fileID: 7659605523863590511}
   - component: {fileID: 710059253058778342}
@@ -36,73 +36,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5128290654602833240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2990081651964721786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b596010f663a0004f9931061de4f2443, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpScroll: {fileID: 0}
-  isDefaultFeather: 1
-  defaultFeatherNum: 1
-  defaultFeatherHealth: 100
-  tenacity: 1
-  oriTenacity: 0
-  strength: 1
-  oriStrength: 0
-  abnormalityResistance: 666
-  burnResistance: 8
-  burnNumber: 0000000000000000
-  traumaResistance: 8
-  traumaNumber: 0000000000000000
-  injuryForceback: 0
-  forcebackForce: 0
-  forcebackDuration: 0
-  forcebackTimer: 0
-  attackBodyObjList: []
-  attackSound: {fileID: 0}
-  injuryEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  injurySound: {fileID: 0}
-  healEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  deathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  deathSound: {fileID: 0}
-  buffList: []
-  isDead: 0
-  spriteRenderer: {fileID: 0}
-  rb: {fileID: 0}
-  effectAudioSource: {fileID: 0}
-  animator: {fileID: 0}
-  enemyName: test Enemy
-  runSpeed: 0
-  jumpSpeed: 0
-  attackCooldown: 0
-  attackCooldownTimer: 0
-  searchType: 0
-  wallDetect: 0
-  keepDistanceWhenNotArmed: 0
-  searchDistance: 35
-  minDistance: 0
-  attackCardUseDistance: 35
-  effectCardUseDistance: 35
-  attackCardLineList: []
-  effectCardLineList: []
-  dropItems: []
-  exp: 0
-  flag: 12
-  refreshable: 0
-  player: {fileID: 0}
 --- !u!212 &1021564070518008926
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -155,6 +88,73 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4939784656188387847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2990081651964721786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c244b0853423e6a4a80ab15b956b9188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpScroll: {fileID: 0}
+  isDefaultFeather: 1
+  defaultFeatherNum: 4
+  defaultFeatherHealth: 100
+  tenacity: 1
+  oriTenacity: 0
+  strength: 1
+  oriStrength: 0
+  abnormalityResistance: 1000
+  burnResistance: 8
+  burnNumber: 0000000000000000
+  traumaResistance: 8
+  traumaNumber: 0000000000000000
+  injuryForceback: 0
+  forcebackForce: 0
+  forcebackDuration: 0
+  forcebackTimer: 0
+  attackBodyObjList: []
+  attackSound: {fileID: 0}
+  injuryEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  injurySound: {fileID: 0}
+  healEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  deathSound: {fileID: 0}
+  buffList: []
+  isDead: 0
+  spriteRenderer: {fileID: 0}
+  rb: {fileID: 0}
+  effectAudioSource: {fileID: 0}
+  animator: {fileID: 0}
+  enemyName: Dr.Nepriz
+  runSpeed: 7
+  jumpSpeed: 8
+  attackCooldown: 1
+  attackCooldownTimer: 0
+  searchType: 0
+  wallDetect: 0
+  keepDistanceWhenNotArmed: 1
+  searchDistance: 35
+  minDistance: 30
+  attackCardUseDistance: 35
+  effectCardUseDistance: 35
+  attackCardLineList: []
+  effectCardLineList: []
+  dropItems: []
+  exp: 0
+  flag: 0
+  refreshable: 0
+  player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:
   serializedVersion: 4
