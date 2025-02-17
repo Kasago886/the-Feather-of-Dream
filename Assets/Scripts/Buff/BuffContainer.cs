@@ -87,6 +87,7 @@ public class BuffContainer
         {"铁心",typeof(IronHeartEffectBuff) },//韧性增加50，持续10s
         {"巧手",typeof(DwarfsFeatherEffectBuff) },//使玩家获取卡牌冷却-20%
         {"护盾",typeof(ShieldEffectBuff) },//获得血量20，持续10s的护盾
+        {"戒愚者",typeof(NeprizAttackBuff) },
     };
 
     /*
