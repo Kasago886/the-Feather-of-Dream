@@ -7312,6 +7312,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1645036921}
     m_Modifications:
     - target: {fileID: -3745091629035965235, guid: fcf63767b80589c42a032f67915207fc, type: 3}
+      propertyPath: dropItems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3745091629035965235, guid: fcf63767b80589c42a032f67915207fc, type: 3}
+      propertyPath: dropItems.Array.data[1]
+      value: 
+      objectReference: {fileID: 2158636381633551328, guid: 4f78b5f30b808d043921d83c568fc961, type: 3}
+    - target: {fileID: -3745091629035965235, guid: fcf63767b80589c42a032f67915207fc, type: 3}
       propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3013559218936343641}

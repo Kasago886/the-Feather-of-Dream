@@ -2286,7 +2286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: lockedDialog
-      value: BrokenLift
+      value: liftBroken
       objectReference: {fileID: 0}
     - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: targetLevelIndex
@@ -173643,6 +173643,7 @@ MonoBehaviour:
       crazyHunterKilled: 0
       burningDocuments1Killed: 0
       burningDocuments2Killed: 0
+      wolfKilled: 0
       AssistantDestroyed: 0
     timeInfo:
       year: 0
