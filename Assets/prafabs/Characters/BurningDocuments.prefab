@@ -160,7 +160,7 @@ MonoBehaviour:
   attackCooldown: 1.5
   attackCooldownTimer: 0
   searchType: 0
-  wallDetect: 0
+  wallDetect: 1
   keepDistanceWhenNotArmed: 1
   searchDistance: 30
   minDistance: 25
@@ -190,7 +190,7 @@ MonoBehaviour:
     cooldown: 0
     timer: 0
   dropItems: []
-  exp: 1
+  exp: 10
   flag: 0
   refreshable: 1
   player: {fileID: 0}

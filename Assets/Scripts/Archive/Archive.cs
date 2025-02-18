@@ -89,6 +89,8 @@ public struct LevelInfo
     public bool fragGuard1Killed;
     public bool fragGuard2Killed;
     public bool crazyHunterKilled;
+    public bool burningDocuments1Killed;
+    public bool burningDocuments2Killed;
 
     public bool AssistantDestroyed;
 }
