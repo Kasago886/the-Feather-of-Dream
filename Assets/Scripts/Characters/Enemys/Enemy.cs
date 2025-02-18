@@ -79,6 +79,7 @@ public class Enemy : Character
         //flag
         if (ArchiveManager.CheckFlag(flag) && !refreshable)
         {
+            deathEvent?.Invoke();
             gameObject.SetActive(false);
             return;
         }
@@ -478,7 +479,7 @@ public class Enemy : Character
 
                 foreach (var item in unlockedFeathers)
                 {
-                    Debug.Log("hpscroll:" +enemyName);
+                    //Debug.Log("hpscroll:" +enemyName);
                     HpUI hpUI = hpScroll.AddHp();
                     hpUI.testTime = item.lockTimer;
                     hpUI.testHp = item.health;

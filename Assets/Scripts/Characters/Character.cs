@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.TextCore.Text;
 
-public struct Shield
+public class Shield
 {
     public float health;
     public float timer;
@@ -328,7 +328,11 @@ public class Character : MonoBehaviour
         for (int i = shields.Count - 1; i >= 0; i--)
         {
             Shield shield = shields[i];
+
+            //Debug.Log(i + ":before:" + shield.health + "/" + shield.timer);
             shield.timer -= Time.deltaTime;
+
+            //Debug.Log(i+":after:"+shield.health + "/" + shield.timer);
 
             if (shield.timer < 0)
             {

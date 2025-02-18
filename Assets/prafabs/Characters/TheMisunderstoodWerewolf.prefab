@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2990081651964721786
+--- !u!1 &1021086895183442025
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5194438090788217055}
-  - component: {fileID: 1021564070518008926}
-  - component: {fileID: -3745091629035965235}
-  - component: {fileID: 1114919163909731784}
-  - component: {fileID: 7659605523863590511}
-  - component: {fileID: 710059253058778342}
+  - component: {fileID: 1664280311159790893}
+  - component: {fileID: 4768015960134033684}
   m_Layer: 9
-  m_Name: TheMisunderstoodWerewolf
-  m_TagString: Enemy
+  m_Name: Image
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5194438090788217055
+--- !u!4 &1664280311159790893
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2990081651964721786}
+  m_GameObject: {fileID: 1021086895183442025}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.58, y: -3.681052, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5228467319151689370}
-  - {fileID: 3938960616696477849}
-  - {fileID: 1716247926752461399}
-  - {fileID: 6695996318095266388}
-  - {fileID: 2645458684053413087}
-  - {fileID: 858169281939208184}
-  - {fileID: 8879615558261728286}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 5194438090788217055}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1021564070518008926
+--- !u!212 &4768015960134033684
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2990081651964721786}
+  m_GameObject: {fileID: 1021086895183442025}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -84,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.9896518, g: 1, b: 0.68867916, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e272950414361fc4581cbc536f26295b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,6 +84,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2990081651964721786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5194438090788217055}
+  - component: {fileID: -3745091629035965235}
+  - component: {fileID: 1114919163909731784}
+  - component: {fileID: 7659605523863590511}
+  - component: {fileID: 710059253058778342}
+  - component: {fileID: 7246142233196755970}
+  m_Layer: 9
+  m_Name: TheMisunderstoodWerewolf
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5194438090788217055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2990081651964721786}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.58, y: -3.681052, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1664280311159790893}
+  - {fileID: 5228467319151689370}
+  - {fileID: 3938960616696477849}
+  - {fileID: 1716247926752461399}
+  - {fileID: 6695996318095266388}
+  - {fileID: 2645458684053413087}
+  - {fileID: 858169281939208184}
+  - {fileID: 8879615558261728286}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-3745091629035965235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,9 +217,10 @@ MonoBehaviour:
       timer: 0
     cooldown: 0
     timer: 0
-  dropItems: []
-  exp: 0
-  flag: 0
+  dropItems:
+  - {fileID: 2158636381633551328, guid: ccd5c8ce2611b0b4c818d5ca6805e91a, type: 3}
+  exp: 15
+  flag: 14
   refreshable: 0
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
@@ -248,7 +282,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.119490504, y: -0.2257042}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -259,7 +293,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6638346, y: 5.1157684}
   m_EdgeRadius: 0
 --- !u!114 &710059253058778342
 MonoBehaviour:
@@ -274,6 +308,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HpPrefab: {fileID: 1766162527712917300, guid: 2c9105a39e74bcb41a9d8228fcf85b5b, type: 3}
+--- !u!95 &7246142233196755970
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2990081651964721786}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 999e11329d4b1c14e98ae62e16c01755, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6555209074641375246
 GameObject:
   m_ObjectHideFlags: 0

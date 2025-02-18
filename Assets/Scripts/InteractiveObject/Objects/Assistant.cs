@@ -119,7 +119,10 @@ public class Assistant : MonoBehaviour
 
     public void Tutorial(int step)
     {
-        dialog.Read("Tutorial/Tutorial"+step);
+        if (!ArchiveManager.CheckFlag(FlagType.tutorialDone))
+        {
+            dialog.Read("Tutorial/Tutorial" + step);
+        }
     }
 
     /// <summary>
