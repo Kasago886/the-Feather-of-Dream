@@ -76,4 +76,9 @@ public class Lift : InteractiveObject
             }
         }
     }
+
+    public void SetLocked(bool locked)
+    {
+        this.Lock = locked;
+    }
 }

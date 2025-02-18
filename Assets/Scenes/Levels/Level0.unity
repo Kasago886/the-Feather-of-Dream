@@ -7311,6 +7311,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1645036921}
     m_Modifications:
+    - target: {fileID: -3745091629035965235, guid: fcf63767b80589c42a032f67915207fc, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3013559218936343641}
     - target: {fileID: 2990081651964721786, guid: fcf63767b80589c42a032f67915207fc, type: 3}
       propertyPath: m_Name
       value: TheMisunderstoodWerewolf
@@ -11792,6 +11796,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4073656887174430166, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
   m_PrefabInstance: {fileID: 3013559218936343639}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3013559218936343641 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
+  m_PrefabInstance: {fileID: 3013559218936343639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e7d037a6843c0b468282fd2f862f17e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5761770325885759950
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -176,29 +176,13 @@ public class EquipmentPanelManager : MonoBehaviour
         Debug.Log(item);
         //找到空位置
         ItemInfo newinfo = item.GetItemInfo();
-        List<int> positions = new List<int>();
-        foreach(ItemInfo itemInfo in archiveManager.currentArchive.items.items)
-        {
-            positions.Add(itemInfo.position);
-        }
-        int newposition = 0;
-        while (positions.Contains(newposition))
-        {
-            newposition++;
-        }
-        newinfo.position = newposition;
-
-        //添加新物品
-        List<ItemInfo> itemInfos = archiveManager.currentArchive.items.items.ToList();
-        itemInfos.Add(newinfo);
-        archiveManager.currentArchive.items.items = itemInfos.ToArray();
-
-        //刷新
-        GenerateItems(archiveManager.currentArchive);
-        ArchiveManager.DebugArchiveRead(archiveManager.currentArchive);
+        AddItem(newinfo);
     }
     public void AddItem(ItemInfo newinfo)
     {
+        //保存原先状态
+        archiveManager.currentArchive = SaveItemsState(archiveManager.currentArchive);
+
         //找到空位置
         List<int> positions = new List<int>();
         foreach (ItemInfo itemInfo in archiveManager.currentArchive.items.items)
@@ -305,6 +289,8 @@ public class EquipmentPanelManager : MonoBehaviour
     /// <param name="item"></param>
     public void AddEncyclopedia(Item item)
     {
+        //保存原先状态
+        archiveManager.currentArchive = SaveItemsState(archiveManager.currentArchive);
         //找到空位置
         ItemInfo newinfo = item.GetItemInfo();
         List<int> positions = new List<int>();

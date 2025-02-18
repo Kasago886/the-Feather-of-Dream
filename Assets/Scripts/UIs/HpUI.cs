@@ -27,6 +27,8 @@ public class HpUI : MonoBehaviour
         if (x < 0) x = 0;
         hpBox.localScale = new Vector3(x, 1, 1);
         delhpBox.localScale = new Vector3(x, 1, 1);
+
+        Update();
     }
 
     // Update is called once per frame
@@ -84,7 +86,7 @@ public class HpUI : MonoBehaviour
     {
 
         float x = testHp / testHpMax;
-        if (x < 0)
+        if (x <= 0)
         {
             x = 0;
             Destroy(gameObject);
