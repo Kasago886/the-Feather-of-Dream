@@ -158,7 +158,7 @@ MonoBehaviour:
   injuryEvent:
     m_PersistentCalls:
       m_Calls: []
-  injurySound: {fileID: 0}
+  injurySound: {fileID: 8300000, guid: 58048ac41ad14ea43918c363d77cae68, type: 3}
   healEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -178,7 +178,7 @@ MonoBehaviour:
   attackCooldown: 2
   attackCooldownTimer: 0
   searchType: 0
-  wallDetect: 0
+  wallDetect: 1
   keepDistanceWhenNotArmed: 1
   searchDistance: 20
   minDistance: 5
