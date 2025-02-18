@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 public enum FlagType
 {
     tutorialDone, littleRedRidingHood, level11DreamBottleUsed,weirdDwarf, level21DreamBottleUsed, level21StartDialogRead, whaleKilled, tinWoodmanKilled,
-    fragPrinceKilled, fragGuard1Killed, fragGuard2Killed, crazyHunterKilled, burningDocuments1Killed, burningDocuments2Killed
+    fragPrinceKilled, fragGuard1Killed, fragGuard2Killed, crazyHunterKilled, burningDocuments1Killed, burningDocuments2Killed, wolfKilled
 }
 
 public class ArchiveManager : MonoBehaviour
@@ -319,6 +319,16 @@ public class ArchiveManager : MonoBehaviour
         ArchiveManager archiveManager = FindAnyObjectByType<ArchiveManager>();
         switch(flag)
         {
+            case FlagType.wolfKilled:
+                if (archiveManager.currentArchive.levelInfo.wolfKilled)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.wolfKilled = set;
+                }
+                return false;
             case FlagType.burningDocuments1Killed:
                 if (archiveManager.currentArchive.levelInfo.burningDocuments1Killed)
                 {

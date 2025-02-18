@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
-  immediateAttack: 1
+  immediateAttack: 0
   damage: 5
   attackType: 0
   attackCenter: {x: 1.5, y: 0}
@@ -141,6 +141,7 @@ MonoBehaviour:
   whatHappenWhenAttack:
     m_PersistentCalls:
       m_Calls: []
+  whatBeAttack: []
   isleft: 0
   addDamage: 0
 --- !u!95 &8876494479822081963
