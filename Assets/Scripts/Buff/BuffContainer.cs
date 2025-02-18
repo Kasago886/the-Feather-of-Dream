@@ -27,6 +27,7 @@ public class BuffContainer
         {"铁皮人残羽", typeof(TinWoodmanEquipmentBuff) },
         {"王子残羽",typeof(FragPrinceEquipmentBuff) },
         {"小矮人残羽",typeof(DwarfsEquipmentBuff) },
+        {"污染克隆残羽",typeof(ContaminatedCloneEquipmentBuff) },
         {"艾莉之剑", typeof(ElliesSwordAttackBuff) },
         {"王子之剑", typeof(PrinceSwordAttackBuff) },
         {"侍卫短剑", typeof(PrinceGuardSwordAttackBuff) },

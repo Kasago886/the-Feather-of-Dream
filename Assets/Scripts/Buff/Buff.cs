@@ -97,7 +97,7 @@ public class HunterEquipmentBuff : EquipmentBuff
 
     public override void OnEnter()
     {
-        player=target.GetComponent<Player>();
+        player = target.GetComponent<Player>();
         base.OnEnter();
         player.cardGenerateList.Add("¿ñÁÔÖ®Ç¹");
         player.cardGenerateList.Add("ÊÉÑªØ°Ê×");
@@ -109,11 +109,11 @@ public class HunterEquipmentBuff : EquipmentBuff
     }
     public override void OnUpdate()
     {
-        }
+    }
     public override void OnExit()
     {
         base.OnExit();
-        player.strength-= 10;
+        player.strength -= 10;
         player.cardGenerateList.Remove("¿ñÁÔÖ®Ç¹");
         player.cardGenerateList.Remove("ÊÉÑªØ°Ê×");
         player.cardGenerateList.Remove("Æð¶¯");
@@ -208,6 +208,38 @@ public class FragPrinceEquipmentBuff : EquipmentBuff
         player.cardGenerateList.Remove("»¤ÎÀ");
     }
 }
+public class ContaminatedCloneEquipmentBuff : EquipmentBuff
+{
+    Player player;
+    PlayerController controller;
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player = target.GetComponent<Player>();
+        controller = target.GetComponent<PlayerController>();
+        controller.walkSpeed += 1;
+        player.cardGenerateList.Add("ÎÛ×Ç");
+
+        //Debug.Log("add");
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player = target.GetComponent<Player>();
+        controller = target.GetComponent<PlayerController>();
+        player.tenacity -= 5;
+        controller.walkSpeed -= 1;
+        player.cardGenerateList.Remove("ÎÛ×Ç");
+    }
+}
+
 #endregion
 
 #region ×°±¸Óðbuff
@@ -717,7 +749,7 @@ public class TinWoodmanEffectBuff : EffectBuff
         buffTimer += Time.deltaTime;
         if (buffTimer > 2)
         {
-            enemy.strength += enemy.oriStrength/10;
+            enemy.strength += enemy.oriStrength / 10;
             buffTimer = 0;
         }
     }
@@ -905,7 +937,7 @@ public class Trauma : EffectBuff
             {
                 if (character.unlockedFeathers.Count > 0 && health - character.unlockedFeathers[0].health >= 1)
                 {
-                    character.unlockedFeathers[0].health-=Mathf.Pow(2, -character.abnormalityResistance / 100) * (1 - character.traumaResistance * 0.1f);
+                    character.unlockedFeathers[0].health -= Mathf.Pow(2, -character.abnormalityResistance / 100) * (1 - character.traumaResistance * 0.1f);
                     attackTimer = 0;
                     if (Random.Range(0, 3) > 1)
                     {
@@ -1847,7 +1879,7 @@ public class PoisonBuff : EffectBuff
         }
         else
         {
-            if (character.unlockedFeathers.Count>0)
+            if (character.unlockedFeathers.Count > 0)
             {
                 character.unlockedFeathers[0].health -= 1f;
                 bufftimer = 1;
@@ -1925,24 +1957,24 @@ public class Scorch : EffectBuff
             }
         }
         character.burnNumber[1] = buffNumber;
-        if(buffNumber>=10&&character.burnResistance<5&&character.burnNumber[0]<10&&!isAddBuff)
+        if (buffNumber >= 10 && character.burnResistance < 5 && character.burnNumber[0] < 10 && !isAddBuff)
         {
             character.AddBuff("ÁÒÑæ");
         }
-        character.burnNumber[0]=buffNumber;
+        character.burnNumber[0] = buffNumber;
     }
 
     public override void OnEnter()
-    {    
-        base.OnEnter();      
+    {
+        base.OnEnter();
     }
 
     public override void OnUpdate()
     {
         attackTimer += Time.deltaTime;
-        if(attackTimer > 0.1f&&character.unlockedFeathers.Count>0)
+        if (attackTimer > 0.1f && character.unlockedFeathers.Count > 0)
         {
-            character.unlockedFeathers[0].health -= 0.1f*Mathf.Pow(2, -character.abnormalityResistance / 100)*(1-character.burnResistance*0.1f);
+            character.unlockedFeathers[0].health -= 0.1f * Mathf.Pow(2, -character.abnormalityResistance / 100) * (1 - character.burnResistance * 0.1f);
             attackTimer = 0;
         }
         base.OnUpdate();
@@ -2009,7 +2041,7 @@ public class Heal1 : EffectBuff
         base.OnUpdate();
         if (healingTimer > 0.1f)
         {
-            if(character.unlockedFeathers.Count > 0)
+            if (character.unlockedFeathers.Count > 0)
             {
                 character.unlockedFeathers[0].health += 0.2f;
             }
@@ -2050,7 +2082,7 @@ public class Heal2 : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (character.unlockedFeathers.Count > 0 && health > character.unlockedFeathers[0].health&&useNumber>0)
+        if (character.unlockedFeathers.Count > 0 && health > character.unlockedFeathers[0].health && useNumber > 0)
         {
             timer = 0;
         }
@@ -2098,7 +2130,7 @@ public class Heal3 : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if(!first&&character.unlockedFeathers.Count>0)
+        if (!first && character.unlockedFeathers.Count > 0)
         {
             first = true;
             oriHealth = character.unlockedFeathers[0].health;
@@ -2108,15 +2140,15 @@ public class Heal3 : EffectBuff
     public override void OnExit()
     {
         base.OnExit();
-        if (first && character.unlockedFeathers.Count > 0&& character.unlockedFeathers[0].health<=oriHealth)
+        if (first && character.unlockedFeathers.Count > 0 && character.unlockedFeathers[0].health <= oriHealth)
         {
-            character.unlockedFeathers[0].health+=oriHealth- character.unlockedFeathers[0].health;
+            character.unlockedFeathers[0].health += oriHealth - character.unlockedFeathers[0].health;
         }
     }
 }
 public class HunterFeatherEffectBuff : EffectBuff
 {
-   private Player player;
+    private Player player;
     private PlayerCardController cardController;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
@@ -2131,9 +2163,9 @@ public class HunterFeatherEffectBuff : EffectBuff
     public override void OnEnter()
     {
         base.OnEnter();
-        cardController =player.cardController;
+        cardController = player.cardController;
         int ran = Random.Range(1, 3);
-        if (cardController.GetCardOrNot()&&ran==1)
+        if (cardController.GetCardOrNot() && ran == 1)
         {
             cardController.GetCard("¿ñÁÔÖ®Ç¹");
         }
@@ -2141,7 +2173,8 @@ public class HunterFeatherEffectBuff : EffectBuff
         {
             cardController.GetCard("ÊÉÑªØ°Ê×");
         }
-        if (player.attackBodyObjList.Count >= 2) {
+        if (player.attackBodyObjList.Count >= 2)
+        {
             player.cardGenerateCooldownTimer = 0;
         }
         timer = 0;
@@ -2177,7 +2210,7 @@ public class HunterFeatherEffectBuff1 : EffectBuff
         num = player.attackBodyObjList.Count;
         player.strength += 10 * (num + 1);
         player.tenacity += 10 * (num + 1);
-       
+
     }
 
     public override void OnUpdate()
@@ -2204,7 +2237,7 @@ public class RandomBuff : EffectBuff
             int n = Random.Range(0, 30);
             switch (n)
             {
-                case 0:character.AddBuff("ÖÎÓú¢óÐÍ");break;
+                case 0: character.AddBuff("ÖÎÓú¢óÐÍ"); break;
                 case 1: character.AddBuff("ÖÎÓú¢òÐÍ"); break;
                 case 2: character.AddBuff("ÖÎÓú¢ñÐÍ"); break;
                 case 3: character.AddBuff("×ÆÉË"); break;
@@ -2247,7 +2280,7 @@ public class RandomBuff : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-       
+
     }
 
     public override void OnExit()
@@ -2255,7 +2288,7 @@ public class RandomBuff : EffectBuff
         base.OnExit();
     }
 }
-public class AbnormalResistance: EffectBuff
+public class AbnormalResistance : EffectBuff
 {
     private Character character;
     private float change;
@@ -2293,7 +2326,7 @@ public class AbnormalResistance: EffectBuff
         base.OnExit();
     }
 }
-public class AbnormalFragility: EffectBuff
+public class AbnormalFragility : EffectBuff
 {
     private Character character;
     private float change;
@@ -2331,7 +2364,7 @@ public class AbnormalFragility: EffectBuff
         base.OnExit();
     }
 }
-public class BurnResistance: EffectBuff
+public class BurnResistance : EffectBuff
 {
     private Character character;
     private float change;
@@ -2368,7 +2401,7 @@ public class BurnResistance: EffectBuff
         base.OnExit();
     }
 }
-public class BurnFragility: EffectBuff
+public class BurnFragility : EffectBuff
 {
     private Character character;
     private float change;
@@ -2482,7 +2515,7 @@ public class TraumaFragility : EffectBuff
 public class Fissure : EffectBuff
 {
     private Character character;
-    private float health,attackTimer,number;
+    private float health, attackTimer, number;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -2494,24 +2527,24 @@ public class Fissure : EffectBuff
     }
 
     public override void OnEnter()
-    {     
+    {
         base.OnEnter();
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if(character.unlockedFeathers.Count > 0 && health - character.unlockedFeathers[0].health >= 1)
+        if (character.unlockedFeathers.Count > 0 && health - character.unlockedFeathers[0].health >= 1)
         {
             number++;
         }
-        if (number >= 3 && Random.Range(3, 13) < number&&character.unlockedFeathers.Count>0)
+        if (number >= 3 && Random.Range(3, 13) < number && character.unlockedFeathers.Count > 0)
         {
             timer = 0;
         }
         if (character.unlockedFeathers.Count > 0)
         {
-            health=character.unlockedFeathers[0].health;
+            health = character.unlockedFeathers[0].health;
         }
     }
 
@@ -2529,7 +2562,7 @@ public class Fissure : EffectBuff
         character.unlockedFeathers[0].health -= buffNumber * number * Mathf.Pow(2, -character.abnormalityResistance / 100);
     }
 }
-public class BurningDocumentsEffectBuff1: EffectBuff
+public class BurningDocumentsEffectBuff1 : EffectBuff
 {
     private Character character;
     private float health, attackTimer, number;
@@ -2629,11 +2662,11 @@ public class ContaminatedCloneEffectBuff : EffectBuff
 
     public override void OnEnter()
     {
-        base.OnEnter();  
-        addStrength=Random.Range(-50+abnormalityResistance,30+abnormalityResistance);
-        addTenacity=Random.Range(-50+abnormalityResistance,30+abnormalityResistance);
+        base.OnEnter();
+        addStrength = Random.Range(-50 + abnormalityResistance, 30 + abnormalityResistance);
+        addTenacity = Random.Range(-50 + abnormalityResistance, 30 + abnormalityResistance);
         enemy.strength += addStrength;
-        enemy.tenacity+=addTenacity;
+        enemy.tenacity += addTenacity;
     }
 
     public override void OnUpdate()

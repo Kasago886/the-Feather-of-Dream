@@ -106,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: description
-      value: "\u968F\u673A\u83B7\u53D6\u4E00\u5F20\u201C\u566C\u8840\u5315\u9996\u201D\u6216\u201C\u72C2\u730E\u4E4B\u67AA\u201D\n\u81EA\u8EAB\u62E5\u6709\u62E5\u6709\u4E24\u4E2A\u53CA\u4EE5\u4E0A\u653B\u51FB\u66FF\u8EAB\u7684\u573A\u5408\uFF0C\n\u989D\u5916\u83B7\u5F97\u4E00\u5F20\u5361\u3002"
+      value: "\u62BD\u53D6\u7279\u5B9A\u653B\u51FB\u5361\uFF0C\u62E5\u6709\u591A\u5F20\u653B\u51FB\u66FF\u8EAB\u65F6\u989D\u5916\u62BD\u4E00\u5F20"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effortOnEnmey
