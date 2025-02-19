@@ -92,6 +92,7 @@ public struct LevelInfo
     public bool burningDocuments1Killed;
     public bool burningDocuments2Killed;
     public bool wolfKilled;
+    public bool finalBossKilled;
 
     public bool AssistantDestroyed;
 }

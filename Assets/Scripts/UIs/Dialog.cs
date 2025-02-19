@@ -36,30 +36,38 @@ public class Dialog : MonoBehaviour
     //当前行的总有效文字（已显示+未显示）
     string sayText;
     //暂停播放
-    [HideInInspector]public bool ifPause;
+    [HideInInspector]public bool ifPause = true;
 
     //设置报错信息，便于检查
     string wrongtext;
     string information;
     string textFile;
 
+    bool setuped = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        if (!setuped)
+        {
+            animator = GetComponent<Animator>();
 
-        //初始化
-        ifsaying = false;
-        said = "";
-        saidlen = 1;
-        timer = 0;
-        nextTime = 0.05f;
-        sayText = "";
-        ifPause = true;
+            //初始化
+            ifsaying = false;
+            said = "";
+            saidlen = 1;
+            timer = 0;
+            nextTime = 0.05f;
+            sayText = "";
+            ifPause = true;
+            //Debug.Log(ifPause);
 
-        //初始化错误信息
-        wrongtext = "Error";
-        information = "";
+            //初始化错误信息
+            wrongtext = "Error";
+            information = "";
+
+            setuped = true;
+        }
     }
 
     // Update is called once per frame
@@ -75,6 +83,10 @@ public class Dialog : MonoBehaviour
 
             //计时器
             timer += Time.unscaledDeltaTime;
+
+            //Debug.Log("ifsaying:" + ifsaying);
+            //Debug.Log("timer:" + timer+" nextTime:"+nextTime);
+            //Debug.Log("sayText:"+sayText);
 
             //每隔nextTime秒就显示下一个字
             if (ifsaying && (timer >= nextTime))
@@ -313,6 +325,7 @@ public class Dialog : MonoBehaviour
 
         //开始更新
         ifPause = false;
+        //Debug.Log(ifPause);
         dialogFare();
     }
 
@@ -327,6 +340,7 @@ public class Dialog : MonoBehaviour
         animator.SetBool("appear", false);
 
         ifPause = true;
+        //Debug.Log(ifPause);
 
         //对话结束
         endEvent?.Invoke();

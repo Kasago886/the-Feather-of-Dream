@@ -103,6 +103,7 @@ public class Bullet : MonoBehaviour
                 if (!collisionEnemy.isDead)
                 {
                     collisionEnemy.TakeDamage(damage);
+                    Debug.Log("takedamage:" + collisionEnemy.enemyName);
                     whatHappenWhenHit?.Invoke();
                     Destroy(gameObject);
                 }

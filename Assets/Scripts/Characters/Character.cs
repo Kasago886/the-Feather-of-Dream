@@ -164,6 +164,8 @@ public class Character : MonoBehaviour
     /// <param name="damage"></param>
     public virtual void TakeDamage(float damage, Transform attackTrans = null)
     {
+        //Debug.Log("gameObject:" + gameObject);
+        //Debug.Log("isdead:"+isDead);
         if (!isDead)
         {
             //ª§∂‹øπ…À
