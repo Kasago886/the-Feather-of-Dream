@@ -5094,6 +5094,10 @@ PrefabInstance:
       value: box
       objectReference: {fileID: 0}
     - target: {fileID: 3412526213166522134, guid: be07d04a28d5c4e48a461f9e88fbac0b, type: 3}
+      propertyPath: dialogFileName
+      value: 3-1Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 3412526213166522134, guid: be07d04a28d5c4e48a461f9e88fbac0b, type: 3}
       propertyPath: getItem.Array.size
       value: 2
       objectReference: {fileID: 0}
