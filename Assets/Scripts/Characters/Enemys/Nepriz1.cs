@@ -29,4 +29,8 @@ public class Nepriz1 : Enemy
             AddBuff(buff);
         }
     }
+    public void ChangeState()
+    {
+        Instantiate(Resources.Load<GameObject>("AttackBodys/Nepriz/Nepriz 2").transform);
+    }
 }

@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class NeprizBullet1Controller : MonoBehaviour
 {
-    public string buffName;
-    public int number;
-   public void AddBuff()
+    private bool b;
+    private void Update()
     {
-        NeprizBullet1.isAddBuff = true;
-        if(NeprizBullet1.buffNameAndNumber.ContainsKey(buffName))
+        if (GameObject.Find("NeprizAttackBody(Clone)") != null)
         {
-            NeprizBullet1.buffNameAndNumber[buffName] += number;
+            AttackBody attackBody = GameObject.Find("NeprizAttackBody(Clone)").GetComponent<AttackBody>();
+            attackBody.bullet = Resources.Load<GameObject>("AttackBodys/Nepriz/NeprizBullet 1.prefab");
+            b =false;
         }
-        else
+    }
+    public void AddBuff()
+    {
+        if (GameObject.Find("NeprizAttackBody(Clone)") != null)
         {
-            NeprizBullet1.buffNameAndNumber.Add(buffName, number);
+            AttackBody attackBody=GameObject.Find("NeprizAttackBody(Clone)").GetComponent<AttackBody>();
+            attackBody.bullet = Resources.Load<GameObject>("AttackBodys/Nepriz/NeprizBullet 1.prefab");
         }
     }
 }

@@ -47,6 +47,10 @@ public class NeprizAttackBody : MonoBehaviour
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, new Vector2(transform.position.x, transform.position.y - 1000));
         }
+        if(GameObject.Find("Dr.Nepriz1")==null&& GameObject.Find("Dr.Nepriz2(Clone)") == null)
+        {
+            Destroy(gameObject);
+        }
     }
     private void ChangeColor(GameObject bullet)
     {
