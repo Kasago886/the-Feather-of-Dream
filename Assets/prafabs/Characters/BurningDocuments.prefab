@@ -128,7 +128,7 @@ MonoBehaviour:
   injuryEvent:
     m_PersistentCalls:
       m_Calls: []
-  injurySound: {fileID: 0}
+  injurySound: {fileID: 8300000, guid: 5fa3a3c1666a859429c2fd0406e160ae, type: 3}
   healEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -147,7 +147,7 @@ MonoBehaviour:
           m_StringArgument: "\u7740\u706B\u7684\u6863\u6848"
           m_BoolArgument: 0
         m_CallState: 2
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 5a7e800ee3cec9c468657df27e06ce9f, type: 3}
   buffList: []
   isDead: 0
   spriteRenderer: {fileID: 0}
@@ -193,6 +193,7 @@ MonoBehaviour:
   exp: 10
   flag: 0
   refreshable: 1
+  encyclopedia: {fileID: 0}
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:
