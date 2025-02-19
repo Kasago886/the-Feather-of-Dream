@@ -14,6 +14,7 @@ public class EnemyInspector : CharacterInspector
     SerializedProperty attackCardLineList;
     SerializedProperty effectCardLineList;
     SerializedProperty dropItems;
+    SerializedProperty encyclopedia;
 
     new private void OnEnable()
     {
@@ -25,6 +26,7 @@ public class EnemyInspector : CharacterInspector
         attackCardLineList = serializedObject.FindProperty("attackCardLineList");
         effectCardLineList = serializedObject.FindProperty("effectCardLineList");
         dropItems = serializedObject.FindProperty("dropItems");
+        encyclopedia = serializedObject.FindProperty("encyclopedia");
     }
 
     //自定义Inspector面板
@@ -38,6 +40,10 @@ public class EnemyInspector : CharacterInspector
 
         enemy.flag = (FlagType)EditorGUILayout.EnumPopup("对应的存档flag", enemy.flag);
         enemy.refreshable = EditorGUILayout.Toggle("常态刷新无需flag",enemy.refreshable);
+        EditorGUILayout.PropertyField(encyclopedia, new UnityEngine.GUIContent("图鉴"), true);
+
+        EditorGUILayout.Space(10);
+
         EditorGUILayout.LabelField("属性", EditorStyles.boldLabel);
         enemy.enemyName = EditorGUILayout.TextField("名字",enemy.enemyName);
         enemy.runSpeed = EditorGUILayout.FloatField("移动速度",enemy.runSpeed);

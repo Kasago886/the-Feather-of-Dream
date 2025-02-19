@@ -92,8 +92,10 @@ public class PlayerDistanceDetector : MonoBehaviour
         }
         else
         {
+            //Debug.Log("detecting player");
             if (EnterDetect(player.transform))
             {
+                //Debug.Log("player enter");
                 EnterFunc(player.transform);
             }
             if (ExitDetect(player.transform))

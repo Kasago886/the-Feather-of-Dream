@@ -205,6 +205,7 @@ MonoBehaviour:
   exp: 0
   flag: 11
   refreshable: 0
+  encyclopedia: {fileID: 6192604590485203915, guid: b978720e5025a2f41855a7b25fd62a7b, type: 3}
   player: {fileID: 0}
   attackWay: 0
 --- !u!50 &1114919163909731784

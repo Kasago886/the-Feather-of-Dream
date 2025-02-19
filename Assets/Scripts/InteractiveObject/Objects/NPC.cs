@@ -19,6 +19,9 @@ public class NPC : InteractiveObject
     public UnityEvent endEvent2;
     public string dialogFileName3;
 
+    [Header("Í¼¼ø")]
+    public Item encyclopedia;
+
     bool gotThing = false;
     Dialog dialog;
     EquipmentPanelManager equipmentPanelManager;
@@ -38,6 +41,13 @@ public class NPC : InteractiveObject
     public override void Interact()
     {
         base.Interact();
+
+        //Í¼¼ø
+        if (encyclopedia != null)
+        {
+            equipmentPanelManager.AddEncyclopedia(encyclopedia);
+        }
+
         if (dialog.ifPause)
         {
             if (!gotThing)

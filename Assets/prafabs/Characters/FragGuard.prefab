@@ -194,6 +194,7 @@ MonoBehaviour:
   exp: 5
   flag: 9
   refreshable: 0
+  encyclopedia: {fileID: 6192604590485203915, guid: 8714dbd01cfb4de45aed9f867d3b283b, type: 3}
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:

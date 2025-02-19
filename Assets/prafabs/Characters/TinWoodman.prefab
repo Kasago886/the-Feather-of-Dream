@@ -141,6 +141,8 @@ MonoBehaviour:
   - {fileID: 2158636381633551328, guid: 1d34369f1a6c75942a1c7ec0834af0ae, type: 3}
   exp: 5
   flag: 7
+  refreshable: 0
+  encyclopedia: {fileID: 6192604590485203915, guid: 7916554852dfac34dbc2a8d1ad3a1320, type: 3}
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:

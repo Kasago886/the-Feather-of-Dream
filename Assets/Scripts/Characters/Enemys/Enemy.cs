@@ -62,11 +62,13 @@ public class Enemy : Character
 
     public FlagType flag;
     public bool refreshable;
+    public Item encyclopedia;
 
     [HideInInspector] public Player player;
 
     EnemyUIScroll enemyUIScroll;
     InputListener inputListener;
+    EquipmentPanelManager equipmentPanelManager;
 
     //states
     protected Dictionary<EnemyStateType, EnemyState> stateDict = new();
@@ -87,6 +89,7 @@ public class Enemy : Character
         player = FindAnyObjectByType<Player>();
         enemyUIScroll = FindAnyObjectByType<EnemyUIScroll>();
         inputListener = FindAnyObjectByType<InputListener>();
+        equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
 
         injuryEvent.AddListener(new UnityAction(TransitionToInjury));
 
@@ -190,6 +193,12 @@ public class Enemy : Character
         if (showUI)
         {
             enemyUIScroll.AddEnemyUI(this);
+
+            //¼ÓÈëÍ¼¼ø
+            if (encyclopedia != null && equipmentPanelManager != null)
+            {
+                equipmentPanelManager.AddEncyclopedia(encyclopedia);
+            }
         }
         else
         {

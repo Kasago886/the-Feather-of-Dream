@@ -66,6 +66,8 @@ public class Player : Character
         tenacity = baseTenacity;
         strength = baseStrength;
 
+        featherNumText.text = (archiveManager.currentArchive.equipedFeather.items.Length).ToString();
+
         setUped = true;
     }
 

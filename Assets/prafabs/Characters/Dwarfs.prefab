@@ -117,6 +117,7 @@ MonoBehaviour:
   exp: 5
   flag: 0
   refreshable: 1
+  encyclopedia: {fileID: 6192604590485203915, guid: ea7fcdb42c2f02e4ba1053dafa01f2f0, type: 3}
   player: {fileID: 0}
   DwarfsNumber: 0
 --- !u!50 &1114919163909731784

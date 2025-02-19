@@ -289,8 +289,17 @@ public class EquipmentPanelManager : MonoBehaviour
     /// <param name="item"></param>
     public void AddEncyclopedia(Item item)
     {
+        Debug.Log("add Encyc:"+item.name);
+        //有图鉴则不执行
+        if (HasEncyclopedia(item))
+        {
+            return;
+        }
         //保存原先状态
         archiveManager.currentArchive = SaveItemsState(archiveManager.currentArchive);
+
+        //ArchiveManager.DebugArchiveRead(archiveManager.currentArchive);
+        
         //找到空位置
         ItemInfo newinfo = item.GetItemInfo();
         List<int> positions = new List<int>();
@@ -308,10 +317,28 @@ public class EquipmentPanelManager : MonoBehaviour
         //添加新物品
         List<ItemInfo> itemInfos = archiveManager.currentArchive.encyclopedia.items.ToList();
         itemInfos.Add(newinfo);
-        archiveManager.currentArchive.items.items = itemInfos.ToArray();
+        archiveManager.currentArchive.encyclopedia.items = itemInfos.ToArray();
 
+        //ArchiveManager.DebugArchiveRead(archiveManager.currentArchive);
         //刷新
         GenerateEncyclopedia(archiveManager.currentArchive);
+    }
+    /// <summary>
+    /// 是否拥有图鉴
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public bool HasEncyclopedia(Item item)
+    {
+        List<ItemInfo> itemInfos = GetItemInfos(encyclopediaContent);
+        foreach (ItemInfo itemInfo in itemInfos)
+        {
+            if (itemInfo.itemName == item.itemName && itemInfo.information == item.information)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>
