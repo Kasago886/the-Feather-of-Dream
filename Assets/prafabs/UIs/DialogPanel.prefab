@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 6690727738421858025}
   - component: {fileID: 1946545870808061193}
   - component: {fileID: 712352718963757390}
+  - component: {fileID: 3982521778230042634}
   m_Layer: 5
   m_Name: DialogPanel
   m_TagString: Untagged
@@ -301,3 +302,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b4abaf49b445f459bf16f962acb8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3982521778230042634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4888411729628317003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 057dc8d9fd0ed984d95c33d477efcd5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderType: 2
+  slider: {fileID: 0}
+  valueText: {fileID: 0}

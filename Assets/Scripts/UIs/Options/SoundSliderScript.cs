@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public enum SoundSliderType
 {
-    bgm,effect
+    bgm,effect,neither
 }
 public class SoundSliderScript : MonoBehaviour
 {
@@ -31,6 +31,13 @@ public class SoundSliderScript : MonoBehaviour
         {
             slider.value = PlayerPrefs.GetFloat(Consts.EffectPlayerPrefTag, 80f);
             SetEffect();
+        }
+        else
+        {
+            float volume = PlayerPrefs.GetFloat(Consts.BGMPlayerPrefTag, 50f);
+            bgmAudio.volume = volume / 100;
+            volume = PlayerPrefs.GetFloat(Consts.EffectPlayerPrefTag, 80f);
+            effectAudio.volume = volume / 100;
         }
     }
 

@@ -41,7 +41,7 @@ public class Ladder : InteractiveObject
     {
         base.OnTriggerExit2D(collision);
 
-        if (!gameObject.IsDestroyed())
+        if (!gameObject.IsDestroyed() && !controller.IsDestroyed())
         {
             controller.animator.SetBool(Consts.IsClimbAnimatorArgument, false);
         }
