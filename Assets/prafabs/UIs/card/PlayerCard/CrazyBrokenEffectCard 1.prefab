@@ -105,6 +105,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: rarity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: description
       value: "\u7531\u653B\u51FB\u66FF\u8EAB\u6570\u83B7\u5F97\u97E7\u6027\u53CA\u529B\u91CF"
       objectReference: {fileID: 0}

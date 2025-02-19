@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -124,10 +125,37 @@ public class Player : Character
     {
         if (cardGenerateList.Count > 0 && cardController.GetCardOrNot())
         {
-            int index = Random.Range(0, cardGenerateList.Count);
-            string card = cardGenerateList[index];
+            /// 根据稀有度设置权重范围
+            /// 权重份数 = 6 - 稀有度
+            /// 例：A,B,C,D的权重为1,2,3,4
+            /// 则对应数据为：
+            /// i | cardNameWithEndIndex | index (Range)
+            ///   | Key        | Value   | 
+            ///   | endIndexes |         |
+            /// 0   5            A          0 -  4
+            /// 1   9            B          5 -  8
+            /// 2   12           C          9 - 11
+            /// 3   14           D         12 - 13
+            Dictionary<int, string> cardNameWithEndindex = new();
+            int endIndex = 0;
+            foreach (string cardName in cardGenerateList)
+            {
+                endIndex += 6 - cardController.GetRarity(cardName);
+                cardNameWithEndindex[endIndex] = cardName;
+            }
+            List<int> endIndexes = cardNameWithEndindex.Keys.ToList();
 
-            cardController.GetCard(card);
+            int index = Random.Range(0, endIndexes[^1]);
+            for (int i = 0; i < endIndexes.Count; i++)
+            {
+                endIndex = endIndexes[i];
+                if (endIndex > index)
+                {
+                    string cardName = cardNameWithEndindex[endIndex];
+                    cardController.GetCard(cardName);
+                    break;
+                }
+            }
         }
     }
     #endregion

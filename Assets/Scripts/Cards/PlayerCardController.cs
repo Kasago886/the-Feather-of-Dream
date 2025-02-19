@@ -253,6 +253,19 @@ public class PlayerCardController : MonoBehaviour
             Destroy(g);
         }
     }
+
+    /// <summary>
+    /// 获取稀有度
+    /// </summary>
+    /// <param name="cardName"></param>
+    /// <returns></returns>
+    public int GetRarity(string cardName)
+    {
+        Card card = idToCard[nameToID[cardName]].GetComponent<Card>();
+        int rarity = card.rarity;
+        return rarity;
+    }
+
     /// <summary>
     /// 调用本函数增加玩家手牌
     /// </summary>
