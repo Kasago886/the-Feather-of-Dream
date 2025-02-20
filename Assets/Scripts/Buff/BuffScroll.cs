@@ -38,7 +38,7 @@ public class BuffScroll : MonoBehaviour
     {
         AddGameObject();
     }
-    private void AddGameObject()
+    public void AddGameObject()
     {
         Dictionary<string, float> newDict = GetBuffNumber();
         List<string> list = new List<string>();
