@@ -238,6 +238,64 @@ public class ContaminatedCloneEquipmentBuff : EquipmentBuff
         controller.walkSpeed -= 1;
         player.cardGenerateList.Remove("ÎÛ×Ç");
     }
+    public class FragPrinceEquipmentBuff : EquipmentBuff
+{
+    Player player;
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player = target.GetComponent<Player>();
+        player.tenacity += 5;
+        player.strength += 5;
+
+        player.cardGenerateList.Add("»¤ÎÀ");
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player = target.GetComponent<Player>();
+        player.tenacity -= 5;
+        player.strength -= 5;
+
+        player.cardGenerateList.Remove("»¤ÎÀ");
+    }
+}
+    public class EnslavedDwarfsEquipmentBuff : EquipmentBuff
+    {
+        Player player;
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            player = target.GetComponent<Player>();
+            player.tenacity += 5;
+
+            player.cardGenerateList.Add("ÆÆÁ´·´»÷");
+            player.cardGenerateList.Add("¼ÏËøÅ­ÌÎ");
+        }
+
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            player = target.GetComponent<Player>();
+            player.tenacity -= 5;
+
+            player.cardGenerateList.Remove("ÆÆÁ´·´»÷");
+            player.cardGenerateList.Remove("¼ÏËøÅ­ÌÎ");
+        }
+    }
 }
 
 #endregion
@@ -2836,6 +2894,72 @@ public class ShieldEffectBuff : EffectBuff
             health = 20,
             timer = 10
         });
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class EnslavedDwarfsBrokenEffectBuff : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.timer = 8;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.GetComponent<Character>().strength -= 20;
+      
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        target.GetComponent<Character>().strength += 20;
+    }
+}
+public class EnslavedDwarfsBrokenEffectBuff1 : EffectBuff
+{
+    Character character;
+    float Bufftimer = 1;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        character = target.GetComponent<Character>();
+        this.timer = 8;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        if (Bufftimer < 0)
+        {
+            foreach (Feather feather in character.unlockedFeathers)
+            {
+                feather.health -= 10;
+            }
+            Bufftimer = 1;
+        }
+        else
+        {
+            Bufftimer -= Time.deltaTime;
+        }
+
     }
 
     public override void OnUpdate()

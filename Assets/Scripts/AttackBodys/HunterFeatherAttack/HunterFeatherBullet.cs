@@ -22,7 +22,11 @@ public class HunterFeatherBullet : MonoBehaviour
             }
             if (Enemy != null)
             {
-                Enemy.AddBuff("ÖÐ¶¾");
+                int ran = Random.Range(0, 100);
+                if (ran < 30)
+                {
+                    Enemy.AddBuff("ÖÐ¶¾");
+                }
             }
         }
     }

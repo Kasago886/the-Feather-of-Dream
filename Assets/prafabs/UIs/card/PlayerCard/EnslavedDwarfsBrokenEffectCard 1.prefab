@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1186491776476845751
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_Name
+      value: EnslavedDwarfsBrokenEffectCard 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -273.82507
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -221.33427
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: id
+      value: 111
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: name
+      value: "\u67B7\u9501\u6012\u6D9B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: click
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: rarity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: description
+      value: "\u5BF9\u6700\u591A\u4E09\u4E2A\u76EE\u6807\u62D4\u7FBD\uFF0C\u5E76\u4F7F\u5176\u97E7\u6027\u964D\u4F4E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: effortOnEnmey
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: effortOnPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: backGroundStory
+      value: "\u5BF9\u6700\u591A\u4E09\u4E2A\u76EE\u6807\u62D4\u7FBD10s\n\u5E76\u51CF\u5C11\u517620\u97E7\u6027\uFF0C\u6301\u7EED8s"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: effortOnOneEnemy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: effortOnMoreEnemies
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: effortOnPlayerAndEnemy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNames.Array.data[0]
+      value: "\u8D77\u4E49"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNames.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNamesEnemy.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: theNumberOfEffortedEnemies
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNamesEnemy.Array.data[0]
+      value: "\u5F02\u5E38\u8106\u5F31"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNamesEnemy.Array.data[1]
+      value: "\u62D4\u7FBD5s"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNamesPlayer.Array.data[0]
+      value: "\u5F02\u5E38\u62B5\u6297"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 350700635b044014fadf42800ddd9d84, type: 3}

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ContaminatedCloneEquipmentBuff;
 
 public class BuffContainer
 {
@@ -28,6 +29,7 @@ public class BuffContainer
         {"王子残羽",typeof(FragPrinceEquipmentBuff) },
         {"小矮人残羽",typeof(DwarfsEquipmentBuff) },
         {"污染克隆残羽",typeof(ContaminatedCloneEquipmentBuff) },
+        {"奴役矮人残羽",typeof(EnslavedDwarfsEquipmentBuff) },
         {"艾莉之剑", typeof(ElliesSwordAttackBuff) },
         {"王子之剑", typeof(PrinceSwordAttackBuff) },
         {"侍卫短剑", typeof(PrinceGuardSwordAttackBuff) },
@@ -65,7 +67,7 @@ public class BuffContainer
         {"凝重",typeof(Grave) },//使对象降低10%起跳速度，持续16s
         {"中毒",typeof(PoisonBuff) },//使对象每秒扣除5滴血，持续5s
         {"正义",typeof(JusticeBuff) },//使玩家下一张攻击卡攻击力翻倍
-        {"噬血匕首",typeof                                                                                                                                                             (HunterFeatherAttackBuff) },
+        {"噬血匕首",typeof(HunterFeatherAttackBuff) },
         {"狂猎之枪",typeof(HunterFeatherAttackBuffGun) },
         {"起动",typeof(HunterFeatherEffectBuff) },
         {"猎杀",typeof(HunterFeatherEffectBuff1) },
@@ -90,6 +92,8 @@ public class BuffContainer
         {"巧手",typeof(DwarfsFeatherEffectBuff) },//使玩家获取卡牌冷却-20%
         {"护盾",typeof(ShieldEffectBuff) },//获得血量20，持续10s的护盾
         {"戒愚者",typeof(NeprizAttackBuff) },
+        {"反抗",typeof(EnslavedDwarfsBrokenEffectBuff) },
+        {"起义",typeof(EnslavedDwarfsBrokenEffectBuff1) },
     };
 
     /*
