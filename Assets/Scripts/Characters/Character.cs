@@ -389,7 +389,7 @@ public class Character : MonoBehaviour
     /// <param name="num"></param>
     public void UnlockFeather(int num, float time)
     {
-        //Debug.Log(num.ToString()+" "+time.ToString());
+        Debug.Log(num.ToString()+" "+time.ToString());
 
         int count = 0;
         int i = feathers.Count - 1;

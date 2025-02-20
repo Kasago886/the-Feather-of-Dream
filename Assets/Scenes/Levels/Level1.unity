@@ -5127,6 +5127,10 @@ PrefabInstance:
       propertyPath: flag
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 3869344565067547722, guid: 24cb278759c67264f9da5837d8ea1c0d, type: 3}
+      propertyPath: refreshable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5194438090788217055, guid: 24cb278759c67264f9da5837d8ea1c0d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -83.5
@@ -173644,6 +173648,7 @@ MonoBehaviour:
       burningDocuments1Killed: 0
       burningDocuments2Killed: 0
       wolfKilled: 0
+      finalBossKilled: 0
       AssistantDestroyed: 0
     timeInfo:
       year: 0
@@ -174959,17 +174964,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: BurningDocuments
       objectReference: {fileID: 0}
-    - target: {fileID: 3869344565067547722, guid: 24cb278759c67264f9da5837d8ea1c0d, type: 3}
-      propertyPath: flag
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 5194438090788217055, guid: 24cb278759c67264f9da5837d8ea1c0d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 5194438090788217055, guid: 24cb278759c67264f9da5837d8ea1c0d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14.1
+      value: -13.54
       objectReference: {fileID: 0}
     - target: {fileID: 5194438090788217055, guid: 24cb278759c67264f9da5837d8ea1c0d, type: 3}
       propertyPath: m_LocalPosition.z
