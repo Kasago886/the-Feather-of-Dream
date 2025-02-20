@@ -6307,15 +6307,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2942113000702380673, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
       propertyPath: targetTag
-      value: PushBox
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -2942113000702380673, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
       propertyPath: anotherFlag
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2942113000702380673, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
-      propertyPath: startDetect
+      propertyPath: onceTrriger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2942113000702380673, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
+      propertyPath: startDetect
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2942113000702380673, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
       propertyPath: conditionsNeed
