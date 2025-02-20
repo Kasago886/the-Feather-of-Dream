@@ -7,6 +7,9 @@ using UnityEngine.Events;
 public class FinalBossSteps : MonoBehaviour
 {
     public string sneakAttackDialog;
+    public string phase2Dialog;
+    public string phase3Dialog;
+    public string endDialog;
     public float force;
     public Transform targetLU;
     public Transform targetMU;
@@ -14,6 +17,10 @@ public class FinalBossSteps : MonoBehaviour
     public Transform targetLD;
     public Transform targetRD;
     public GameObject attacks;
+    public GameObject childAttacks1;
+    public GameObject childAttacks2;
+    public GameObject codeAttack;
+    public GameObject fireParticle;
 
     bool moving = false;
     int step = 0;
@@ -27,6 +34,7 @@ public class FinalBossSteps : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
     FinalBoss finalBoss;
+    ExitPanelManager exitPanelManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,11 +43,34 @@ public class FinalBossSteps : MonoBehaviour
         finalBoss = GetComponent<FinalBoss>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        exitPanelManager = FindAnyObjectByType<ExitPanelManager>();
         
         target = targetMU;
 
         StartCoroutine(ExecuteAfterStart());
     }
+
+    /// <summary>
+    /// -=| steps |=-
+    ///     0      对话
+    ///     
+    /// 1-4循环
+    ///     1、3   空中发射攻击
+    ///     2、4   地面冲刺攻击
+    ///     
+    ///     5      对话
+    ///     
+    /// 6-9循环
+    ///     6、8   空中释放小怪
+    ///     7、9   地面发射代码
+    ///     
+    ///     10      对话
+    ///     
+    ///     11     地面战斗
+    ///     
+    ///     12      对话
+    ///     13      Ending
+    /// </summary>
 
     // Update is called once per frame
     void Update()
@@ -84,8 +115,24 @@ public class FinalBossSteps : MonoBehaviour
 
             case 4:
                 LandAttack(1, -1);
-
                 break;
+
+            case 6:
+                ChildAttacks(7,childAttacks1);
+                break;
+
+            case 7:
+                CodeAttack(8);
+                break;
+
+            case 8:
+                ChildAttacks(9,childAttacks2);
+                break;
+
+            case 9:
+                CodeAttack(6);
+                break;
+
         }
     }
 
@@ -110,6 +157,38 @@ public class FinalBossSteps : MonoBehaviour
             case 4:
                 SetLandAttack(targetRD);
                 break;
+
+            case 6:
+                SetChildAttacks(targetMU);
+                break;
+
+            case 7:
+                SetLandAttack(targetRD);
+                break;
+
+            case 8:
+                SetChildAttacks(targetMU);
+                break;
+
+            case 9:
+                SetLandAttack(targetLD);
+                break;
+
+            case 11:
+                moving = false;
+                rb.gravityScale = 2;
+                finalBoss.unattackable = false;
+                finalBoss.enemyAI = true;
+                finalBoss.AddFeather(new DefautFeather(100));
+                finalBoss.runSpeed = 7;
+
+                fireParticle.SetActive(false);
+
+                break;
+
+            case 13:
+                exitPanelManager.LoadScene("EndingScene");
+                break;
         }
     }
 
@@ -117,7 +196,48 @@ public class FinalBossSteps : MonoBehaviour
     {
         if (step >= 0 && step <= 4)
         {
+            finalBoss.collisionAttack = false;
+            finalBoss.OnMove(0);
+            moving = true;
+            target = targetMU;
+            UnityEvent unityEvent = new();
+            unityEvent.AddListener(() => { SetStep(6); });
+            dialog.Read(phase2Dialog, unityEvent);
+
             SetStep(5);
+        }
+        else if (step >= 5 && step <= 9)
+        {
+            finalBoss.collisionAttack = false;
+            finalBoss.OnMove(0);
+            moving = true;
+            target = targetMU;
+            UnityEvent unityEvent = new();
+            unityEvent.AddListener(() => { SetStep(11); });
+            dialog.Read(phase3Dialog, unityEvent);
+
+            SetStep(10);
+        }
+        else if (step == 11)
+        {
+            finalBoss.enemyAI = false;
+            finalBoss.unattackable = true;
+            finalBoss.isDead = true;
+
+            GameObject[] enemys = GameObject.FindGameObjectsWithTag(Consts.EnemyTag);
+            foreach (GameObject enemy in enemys)
+            {
+                if (enemy.GetComponent<FinalBoss>() == null)
+                {
+                    enemy.SetActive(false);
+                }
+            }
+
+            UnityEvent unityEvent = new();
+            unityEvent.AddListener(() => { SetStep(13); });
+            dialog.Read(endDialog, unityEvent);
+
+            SetStep(12);
         }
     }
 
@@ -170,6 +290,58 @@ public class FinalBossSteps : MonoBehaviour
             finalBoss.collisionAttack = true;
             moving = false;
             finalBoss.OnMove(direction);
+        }
+    }
+
+    void SetCodeAttack(Transform targetTransform)
+    {
+        timer1 = 3;
+        timer2 = 10;
+        player.UnlockFeather(1, 5);
+        target = targetTransform;
+    }
+    void CodeAttack(int nextStep)
+    {
+        timer1 -= Time.deltaTime;
+        timer2 -= Time.deltaTime;
+        if (timer2 < 0)
+        {
+            SetStep(nextStep);
+            return;
+        }
+        if (timer1 < 0)
+        {
+            GameObject attackbodys = Instantiate(codeAttack);
+            attackbodys.transform.position = transform.position;
+            attackbodys.GetComponent<AttackBody>().isleft = spriteRenderer.flipX;
+
+            timer1 = timer2 + 1;
+        }
+    }
+
+    void SetChildAttacks(Transform targetTransform)
+    {
+        finalBoss.OnMove(0);
+        moving = true;
+        timer1 = 3;
+        timer2 = 10;
+        target = targetTransform;
+    }
+    void ChildAttacks(int nextStep, GameObject childAttack)
+    {
+        timer1 -= Time.deltaTime;
+        timer2 -= Time.deltaTime;
+        if (timer2 < 0)
+        {
+            SetStep(nextStep);
+            return;
+        }
+        if (timer1 < 0)
+        {
+            GameObject attackbodys = Instantiate(childAttack);
+            attackbodys.transform.position = transform.position;
+
+            timer1 = timer2 + 1;
         }
     }
 

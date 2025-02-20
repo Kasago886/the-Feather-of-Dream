@@ -110,4 +110,14 @@ public class Bullet : MonoBehaviour
             }
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+
+        Gizmos.DrawLine(destroyCenter + new Vector3(-destroySize.x / 2, destroySize.y / 2, 0), destroyCenter + new Vector3(destroySize.x / 2, destroySize.y / 2, 0));
+        Gizmos.DrawLine(destroyCenter + new Vector3(-destroySize.x / 2, -destroySize.y / 2, 0), destroyCenter + new Vector3(destroySize.x / 2, -destroySize.y / 2, 0));
+        Gizmos.DrawLine(destroyCenter + new Vector3(destroySize.x / 2, destroySize.y / 2, 0), destroyCenter + new Vector3(destroySize.x / 2, -destroySize.y / 2, 0));
+        Gizmos.DrawLine(destroyCenter + new Vector3(-destroySize.x / 2, destroySize.y / 2, 0), destroyCenter + new Vector3(-destroySize.x / 2, -destroySize.y / 2, 0));
+    }
 }

@@ -289,12 +289,12 @@ public class EquipmentPanelManager : MonoBehaviour
     /// <param name="item"></param>
     public void AddEncyclopedia(Item item)
     {
-        Debug.Log("add Encyc:"+item.name);
         //有图鉴则不执行
         if (HasEncyclopedia(item))
         {
             return;
         }
+        Debug.Log("add Encyc:" + item.name);
         //保存原先状态
         archiveManager.currentArchive = SaveItemsState(archiveManager.currentArchive);
 

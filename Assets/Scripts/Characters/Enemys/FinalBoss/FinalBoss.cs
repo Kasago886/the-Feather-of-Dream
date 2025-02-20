@@ -7,6 +7,7 @@ public class FinalBoss : Enemy
 {
     public bool unattackable = false;
     public bool collisionAttack = false;
+    public bool enemyAI = false;
 
     FinalBossSteps finalBossSteps;
 
@@ -17,11 +18,15 @@ public class FinalBoss : Enemy
 
         unattackable = false;
         collisionAttack = false;
+        enemyAI = false;
     }
 
     public override void AIUpdate()
     {
-
+        if (enemyAI)
+        {
+            base.AIUpdate();
+        }
     }
 
     public void SetUnattackable(bool unattackable)
@@ -31,6 +36,7 @@ public class FinalBoss : Enemy
 
     public override void TakeDamage(float damage, Transform attackTrans = null)
     {
+        Debug.Log("unattackable:" + unattackable);
         if (!unattackable)
         {
             base.TakeDamage(damage, attackTrans);
@@ -39,8 +45,8 @@ public class FinalBoss : Enemy
 
     public override void OnDeath()
     {
-        finalBossSteps.NextPhase();
         AddFeather(new DefautFeather(defaultFeatherHealth));
+        finalBossSteps.NextPhase();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
