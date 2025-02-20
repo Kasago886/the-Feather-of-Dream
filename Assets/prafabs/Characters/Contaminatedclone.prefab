@@ -113,9 +113,10 @@ MonoBehaviour:
     cooldown: 0
     timer: 0
   dropItems: []
-  exp: 0
+  exp: 10
   flag: 0
-  refreshable: 0
+  refreshable: 1
+  encyclopedia: {fileID: 0}
   player: {fileID: 0}
 --- !u!212 &1021564070518008926
 SpriteRenderer:
