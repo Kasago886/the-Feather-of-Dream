@@ -253,6 +253,13 @@ public class PlayerCardController : MonoBehaviour
             Destroy(g);
         }
     }
+    private void Update()
+    {
+        if (positionNumber < 1)
+        {
+            positionNumber = 1;
+        }
+    }
 
     /// <summary>
     /// 获取稀有度

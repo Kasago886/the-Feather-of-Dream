@@ -167,7 +167,7 @@ public class ImperfectWorkChoice : MonoBehaviour
         {
             if (buffScroll.buffImformation[i].name == "è¦´ÃÖ®×÷")
             {
-                buffScroll.buffImformation[i].description += descrabption;
+                buffScroll.buffImformation[i].description += descrabption+"\n";
             }
         }
         buffScroll.AddGameObject();
