@@ -1129,6 +1129,7 @@ public class Mediocre : EffectBuff
     private PlayerCardController playerCardController;
     private Enemy enemy;
     private Color baseColor;
+    private bool b;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -1141,6 +1142,11 @@ public class Mediocre : EffectBuff
             enemy = target.GetComponent<Enemy>();
         }
         this.timer = 60;
+        if(GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
+        {
+            this.timer = 99999999999;
+            b = false;
+        }
     }
 
     public override void OnEnter()
@@ -1165,6 +1171,11 @@ public class Mediocre : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
+        if(b&& GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
+        {
+            this.timer = 99999999999;
+            b = false;
+        }
     }
 
     public override void OnExit()
