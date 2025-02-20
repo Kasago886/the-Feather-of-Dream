@@ -494,6 +494,7 @@ public class Enemy : Character
                     hpUI.testHp = item.health;
                     hpUI.testHpMax = item.maxHealth;
                     item.hpUI = hpUI;
+                    hpUI.targetFeather = item;
                 }
             }
         }

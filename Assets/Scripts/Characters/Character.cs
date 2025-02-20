@@ -165,6 +165,7 @@ public class Character : MonoBehaviour
     public virtual void TakeDamage(float damage, Transform attackTrans = null)
     {
         //Debug.Log("gameObject:" + gameObject);
+        //Debug.Log("damage:"+damage);
         //Debug.Log("isdead:"+isDead);
         if (!isDead)
         {
@@ -241,7 +242,13 @@ public class Character : MonoBehaviour
                 }
             }
             //检查是否失去所有羽毛
-            //Debug.Log("unlock feathers:"+unlockedFeathers.Count.ToString() + "\nfeathers:" + feathers.Count.ToString());
+            /*
+            Debug.Log("unlock feathers:"+unlockedFeathers.Count.ToString() + "\nfeathers:" + feathers.Count.ToString());
+            if (unlockedFeathers.Count > 0)
+            {
+                Debug.Log("unlockfeathers[0].health:" + unlockedFeathers[0].health);
+            }*/
+
             if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
             {
                 OnDeath();
@@ -472,6 +479,8 @@ public class Character : MonoBehaviour
     /// <param name="buff"></param>
     public virtual void AddBuff(string buffName)
     {
+        //Debug.Log(buffName);
+
         Buff buff = BuffContainer.GetBuffInstance(buffName) as Buff;
         buff.Init(this);
         buff.name = buffName;
@@ -557,7 +566,31 @@ public class Character : MonoBehaviour
     /// </summary>
     public virtual void AIUpdate()
     {
-
+        //清除血量小于等于0的羽
+        for (int i = feathers.Count - 1; i >= 0; i--)
+        {
+            Feather feather = feathers[i];
+            if (feather.hpUI != null)
+            {
+                feather.hpUI.testHp = feather.health;
+            }
+            if (feather.health <= 0)
+            {
+                feathers.Remove(feather);
+            }
+        }
+        for (int i = unlockedFeathers.Count - 1; i >= 0; i--)
+        {
+            Feather feather = unlockedFeathers[i];
+            if (feather.hpUI != null)
+            {
+                feather.hpUI.testHp = feather.health;
+            }
+            if (feather.health <= 0)
+            {
+                feathers.Remove(feather);
+            }
+        }
     }
 
     /// <summary>

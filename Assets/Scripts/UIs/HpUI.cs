@@ -15,6 +15,8 @@ public class HpUI : MonoBehaviour
     private Transform hpBox;//血条图片
     private Transform delhpBox;//延迟血条图片
     public Text timeText;
+
+    public Feather targetFeather;
     // Start is called before the first frame update
     private void Start()
     {
@@ -84,7 +86,10 @@ public class HpUI : MonoBehaviour
     //检查血量变化控制血条
     private void check()
     {
-
+        if (targetFeather != null)
+        {
+            testHp = targetFeather.health;
+        }
         float x = testHp / testHpMax;
         if (x <= 0)
         {

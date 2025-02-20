@@ -81,6 +81,8 @@ public class Player : Character
 
         CardGenerateUpdate();
         HealthRecoverUpdate();
+
+        Debug.Log("unlock feathers:" + unlockedFeathers.Count.ToString() + "\nfeathers:" + feathers.Count.ToString());
     }
 
     /// <summary>
@@ -252,6 +254,7 @@ public class Player : Character
                 hpUI.testHp = item.health;
                 hpUI.testHpMax = item.maxHealth;
                 item.hpUI = hpUI;
+                hpUI.targetFeather = item;
             }
         }
     }
