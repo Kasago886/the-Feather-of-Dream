@@ -5,7 +5,7 @@ using UnityEngine;
 public class ImperfectWorkUi : MonoBehaviour
 {
     public bool b, b1, b2, b3, b4;
-    public GameObject g1, g2, g3, g4, g5;
+    public GameObject g1, g2, g3, g4;
     void Update()
     {
         if (b)

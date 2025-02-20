@@ -1415,25 +1415,25 @@ public class ImperfectWork : EffectBuff
             }
             if (!b1 && health < healthMax * 4 / 5)
             {
-                Time.timeScale = 0;
+                Time.timeScale = 0.001f;
                 Change();
                 b1 = true;
             }
             if (!b2 && health < healthMax * 3 / 5)
             {
-                Time.timeScale = 0;
+                Time.timeScale = 0.001f;
                 Change();
                 b2 = true;
             }
             if (!b3 && health < healthMax * 2 / 5)
             {
-                Time.timeScale = 0;
+                Time.timeScale = 0.001f;
                 Change();
                 b3 = true;
             }
             if (!b4 && health < healthMax * 1 / 5)
             {
-                Time.timeScale = 0;
+                Time.timeScale = 0.001f;
                 Change();
                 b4 = true;
             }

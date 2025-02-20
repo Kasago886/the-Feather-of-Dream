@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+[Serializable]
 public class NormalProperity
 {
     public bool effectOnPlayer;
@@ -22,6 +25,7 @@ public class NormalProperity
     public List<ChangeTimer> attackTimerList;
     public List<ChangeTimer> skillTimerList;
 }
+[Serializable]
 public class ChangeTimer
 {
     public int skillNumber;
@@ -30,14 +34,19 @@ public class ChangeTimer
 
 public class ImperfectWorkChoice : MonoBehaviour
 {
+    public Material gb1;
     public string descrabption;
     public List<BuffNameAndNumber> buffNameAndNumbers;
     public List<NormalProperity> normalProperity;
     private Player player;
     private Nepriz2 nepriz2;
+    private Image image;
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        image = GetComponent<Image>();
+        animator = GetComponentInParent<Animator>();
         if (GameObject.FindGameObjectWithTag(Consts.PlayerTag) != null)
         {
             player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
@@ -46,6 +55,8 @@ public class ImperfectWorkChoice : MonoBehaviour
         {
             nepriz2 = GameObject.Find("Nepriz1 2(Clone)").GetComponent<Nepriz2>();
         }
+        animator.SetBool("appear",true);
+        animator.speed = 1 / Time.timeScale;
     }
     void Update()
     {
@@ -139,8 +150,18 @@ public class ImperfectWorkChoice : MonoBehaviour
         }
         AddDescrabption();
     }
+    public void Enter()
+    {
+        image.material = gb1;
+    }
+    public void Exit()
+    {
+        image.material = null;
+    }
     void AddDescrabption()
     {
+        Time.timeScale = 1;
+        gameObject.transform.parent.gameObject.SetActive(false);
         BuffScroll buffScroll = GameObject.Find("BuffScrollView").GetComponent<BuffScroll>();
         for (int i = 0; i < buffScroll.buffImformation.Count; i++)
         {
