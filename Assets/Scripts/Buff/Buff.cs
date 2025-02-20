@@ -2936,7 +2936,7 @@ public class EnslavedDwarfsBrokenEffectBuff : EffectBuff
 public class EnslavedDwarfsBrokenEffectBuff1 : EffectBuff
 {
     Character character;
-    float Bufftimer = 1;
+    float bufftimer = 1;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -2947,24 +2947,24 @@ public class EnslavedDwarfsBrokenEffectBuff1 : EffectBuff
     public override void OnEnter()
     {
         base.OnEnter();
-        if (Bufftimer < 0)
-        {
-            foreach (Feather feather in character.unlockedFeathers)
-            {
-                feather.health -= 10;
-            }
-            Bufftimer = 1;
-        }
-        else
-        {
-            Bufftimer -= Time.deltaTime;
-        }
-
+        
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
+        if (bufftimer > 0)
+        {
+            bufftimer -= Time.deltaTime;
+        }
+        else
+        {
+            foreach (Feather feather in character.unlockedFeathers)
+            {
+                feather.health -= 10;
+            }
+            bufftimer = 1;
+        }
     }
 
     public override void OnExit()

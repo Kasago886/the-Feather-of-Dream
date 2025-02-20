@@ -134,7 +134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNames.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effortOnPlayerAndEnemy
@@ -142,11 +142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNames.Array.data[0]
-      value: "\u8D77\u4E49"
+      value: "\u53CD\u6297"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNames.Array.data[1]
-      value: 
+      value: "\u62D4\u7FBD10s"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesEnemy.Array.size
