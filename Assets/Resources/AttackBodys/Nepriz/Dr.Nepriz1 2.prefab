@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5194438090788217055}
   - component: {fileID: 1021564070518008926}
-  - component: {fileID: 4939784656188387847}
+  - component: {fileID: 7645782661319830072}
   - component: {fileID: 1114919163909731784}
   - component: {fileID: 7659605523863590511}
   - component: {fileID: 710059253058778342}
@@ -93,7 +93,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4939784656188387847
+--- !u!114 &7645782661319830072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,18 +102,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2990081651964721786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c244b0853423e6a4a80ab15b956b9188, type: 3}
+  m_Script: {fileID: 11500000, guid: aab93e8a88b426e48b2f9b7b17c5d4d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hpScroll: {fileID: 0}
-  isDefaultFeather: 1
-  defaultFeatherNum: 4
+  isDefaultFeather: 0
+  defaultFeatherNum: 0
   defaultFeatherHealth: 100
-  tenacity: 1
+  tenacity: 10
   oriTenacity: 0
   strength: 1
   oriStrength: 0
-  abnormalityResistance: 1000
+  abnormalityResistance: 10000
   burnResistance: 8
   burnNumber: 0000000000000000
   traumaResistance: 8
@@ -133,19 +133,7 @@ MonoBehaviour:
       m_Calls: []
   deathEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4939784656188387847}
-        m_TargetAssemblyTypeName: Nepriz1, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   deathSound: {fileID: 0}
   buffList: []
   isDead: 0
@@ -154,7 +142,7 @@ MonoBehaviour:
   effectAudioSource: {fileID: 0}
   animator: {fileID: 0}
   enemyName: Dr.Nepriz
-  runSpeed: 7
+  runSpeed: 6
   jumpSpeed: 8
   attackCooldown: 1
   attackCooldownTimer: 0
@@ -162,47 +150,18 @@ MonoBehaviour:
   wallDetect: 0
   keepDistanceWhenNotArmed: 1
   searchDistance: 35
-  minDistance: 30
-  attackCardUseDistance: 35
-  effectCardUseDistance: 35
-  attackCardLineList:
-  - cards:
-    - card: {fileID: 4844809393931276451}
-      cooldown: 18
-      timer: 0
-    cooldown: 0
-    timer: 0
-  - cards:
-    - card: {fileID: 3287445856833660667}
-      cooldown: 32
-      timer: 0
-    cooldown: 0
-    timer: 0
-  effectCardLineList:
-  - cards:
-    - card: {fileID: 6036376171126879144}
-      cooldown: 4.5
-      timer: 0
-    cooldown: 0
-    timer: 0
-  - cards:
-    - card: {fileID: 1908082549706984299}
-      cooldown: 4.5
-      timer: 0
-    cooldown: 0
-    timer: 0
-  - cards:
-    - card: {fileID: 5360649784241819889}
-      cooldown: 26
-      timer: 0
-    cooldown: 0
-    timer: 0
+  minDistance: 20
+  attackCardUseDistance: 0
+  effectCardUseDistance: 0
+  attackCardLineList: []
+  effectCardLineList: []
   dropItems: []
   exp: 0
   flag: 0
   refreshable: 0
   encyclopedia: {fileID: 0}
   player: {fileID: 0}
+  mediocreNumber: 
 --- !u!50 &1114919163909731784
 Rigidbody2D:
   serializedVersion: 4
@@ -385,17 +344,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 929babb462819aa4689992e166f403fb, type: 3}
---- !u!114 &4844809393931276451 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7063637173366311077, guid: 929babb462819aa4689992e166f403fb, type: 3}
-  m_PrefabInstance: {fileID: 2394557019219662854}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e18d51474219541baa0e293a6ee587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &8075522211292657446 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5848249873419317024, guid: 929babb462819aa4689992e166f403fb, type: 3}
@@ -510,17 +458,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17b38e9d1aaf2454daac64cfe97eb7c3, type: 3}
---- !u!114 &5360649784241819889 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7063637173366311077, guid: 17b38e9d1aaf2454daac64cfe97eb7c3, type: 3}
-  m_PrefabInstance: {fileID: 2910396310311688276}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e18d51474219541baa0e293a6ee587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &8740051191320147828 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5848249873419317024, guid: 17b38e9d1aaf2454daac64cfe97eb7c3, type: 3}
@@ -623,17 +560,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b47bc431a3dc0e42b7189500e0941df, type: 3}
---- !u!114 &6036376171126879144 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7063637173366311077, guid: 2b47bc431a3dc0e42b7189500e0941df, type: 3}
-  m_PrefabInstance: {fileID: 3585587342655109901}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e18d51474219541baa0e293a6ee587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &6983879016436044845 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5848249873419317024, guid: 2b47bc431a3dc0e42b7189500e0941df, type: 3}
@@ -741,17 +667,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5848249873419317024, guid: 21d98afcc6a4ab44ba53bf4c4bb88e11, type: 3}
   m_PrefabInstance: {fileID: 5735419901562596958}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3287445856833660667 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7063637173366311077, guid: 21d98afcc6a4ab44ba53bf4c4bb88e11, type: 3}
-  m_PrefabInstance: {fileID: 5735419901562596958}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e18d51474219541baa0e293a6ee587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8682318229056930766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -849,17 +764,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b0d804479715ea4baa52992e0d3eb1c, type: 3}
---- !u!114 &1908082549706984299 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7063637173366311077, guid: 1b0d804479715ea4baa52992e0d3eb1c, type: 3}
-  m_PrefabInstance: {fileID: 8682318229056930766}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e18d51474219541baa0e293a6ee587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &2978253931856522478 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5848249873419317024, guid: 1b0d804479715ea4baa52992e0d3eb1c, type: 3}

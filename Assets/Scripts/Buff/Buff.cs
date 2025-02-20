@@ -1129,7 +1129,7 @@ public class Mediocre : EffectBuff
     private PlayerCardController playerCardController;
     private Enemy enemy;
     private Color baseColor;
-    private bool b;
+    private bool b=true;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -1142,7 +1142,7 @@ public class Mediocre : EffectBuff
             enemy = target.GetComponent<Enemy>();
         }
         this.timer = 60;
-        if(GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
+        if (GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
         {
             this.timer = 99999999999;
             b = false;
@@ -1171,7 +1171,7 @@ public class Mediocre : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if(b&& GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
+        if (b && GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
         {
             this.timer = 99999999999;
             b = false;
@@ -1236,6 +1236,37 @@ public class Talent : EffectBuff
         base.OnExit();
     }
 }
+public class Talent1 : EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 29.7f;
+    }
+
+    public override void OnEnter()
+    {
+        change = character.tenacity * 9;
+        character.tenacity *= 10;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    { 
+        base.OnExit();
+    }
+}
 public class Erudite : EffectBuff
 {
     private Character character;
@@ -1272,6 +1303,37 @@ public class Erudite : EffectBuff
         {
             character.strength /= 2;
         }
+        base.OnExit();
+    }
+}
+public class Erudite1 : EffectBuff
+{
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 29.7f;
+    }
+
+    public override void OnEnter()
+    {
+        change = character.strength;
+        character.strength *= 2;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
         base.OnExit();
     }
 }
@@ -1312,10 +1374,23 @@ public class Ignore : EffectBuff
 }
 public class ImperfectWork : EffectBuff
 {
+    private Nepriz2 nepriz2;
+    private Player player;
+    private float healthMax;
+    private bool b1, b2, b3, b4;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
         isPermanent = true;
+        if (GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
+        {
+            nepriz2 = GameObject.Find("Dr.Nepriz1 2(Clone)").GetComponent<Nepriz2>();
+            foreach (var item in nepriz2.feathers)
+            {
+                healthMax += item.health;
+            }
+        }
+        player = target.GetComponent<Player>();
         this.timer = 99999999999;
     }
 
@@ -1327,12 +1402,64 @@ public class ImperfectWork : EffectBuff
 
     public override void OnUpdate()
     {
+        if (nepriz2 == null)
+        {
+            timer = 0;
+        }
+        else
+        {
+            float health = 0;
+            foreach (var item in nepriz2.feathers)
+            {
+                health += item.health;
+            }
+            if (!b1 && health < healthMax * 4 / 5)
+            {
+                Time.timeScale = 0;
+                Change();
+                b1 = true;
+            }
+            if (!b2 && health < healthMax * 3 / 5)
+            {
+                Time.timeScale = 0;
+                Change();
+                b2 = true;
+            }
+            if (!b3 && health < healthMax * 2 / 5)
+            {
+                Time.timeScale = 0;
+                Change();
+                b3 = true;
+            }
+            if (!b4 && health < healthMax * 1 / 5)
+            {
+                Time.timeScale = 0;
+                Change();
+                b4 = true;
+            }
+        }
         base.OnUpdate();
     }
 
     public override void OnExit()
     {
         base.OnExit();
+    }
+    private void Change()
+    {
+        int n = 0;
+        foreach (var item in nepriz2.buffList)
+        {
+            if (item.name == "·²Ó¹")
+            {
+                item.timer = 0;
+                n++;
+            }
+        }
+        for (int i = 0; i < n; i++)
+        {
+            nepriz2.AddBuff("¿ÊÇóÈÏ¿É");
+        }
     }
 }
 public class CraveRecognition : EffectBuff

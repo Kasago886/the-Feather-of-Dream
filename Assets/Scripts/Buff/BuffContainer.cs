@@ -64,7 +64,7 @@ public class BuffContainer
         {"凝重",typeof(Grave) },//使对象降低10%起跳速度，持续16s
         {"中毒",typeof(PoisonBuff) },//使对象每秒扣除5滴血，持续5s
         {"正义",typeof(JusticeBuff) },//使玩家下一张攻击卡攻击力翻倍
-        {"噬血匕首",typeof(HunterFeatherAttackBuff) },
+        {"噬血匕首",typeof                                                                                                                                                             (HunterFeatherAttackBuff) },
         {"狂猎之枪",typeof(HunterFeatherAttackBuffGun) },
         {"起动",typeof(HunterFeatherEffectBuff) },
         {"猎杀",typeof(HunterFeatherEffectBuff1) },
