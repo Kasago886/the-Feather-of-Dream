@@ -6335,7 +6335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2942113000702380673, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
       propertyPath: conditions.Array.data[0].flagType
-      value: 6
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: -2942113000702380673, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
       propertyPath: conditions.Array.data[0].opposite
@@ -26552,6 +26552,8 @@ MonoBehaviour:
       burningDocuments1Killed: 0
       burningDocuments2Killed: 0
       wolfKilled: 0
+      finalBossKilled: 0
+      contaminateCloneKilled: 0
       AssistantDestroyed: 0
     timeInfo:
       year: 0
