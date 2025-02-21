@@ -16340,6 +16340,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5739560225221844557, guid: 55f887a983cb4e44a8eb17ffa3af1a87, type: 3}
+      propertyPath: cardsList.Array.size
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739560225221844557, guid: 55f887a983cb4e44a8eb17ffa3af1a87, type: 3}
+      propertyPath: cardsList.Array.data[15]
+      value: 
+      objectReference: {fileID: 2899552797067365366, guid: 4fdb53e0cce4fc44fb4cb880a82253eb, type: 3}
+    - target: {fileID: 5739560225221844557, guid: 55f887a983cb4e44a8eb17ffa3af1a87, type: 3}
+      propertyPath: cardsList.Array.data[16]
+      value: 
+      objectReference: {fileID: 2899552797067365366, guid: 5d2ab3422149efc478f8d8db5e04613e, type: 3}
+    - target: {fileID: 5739560225221844557, guid: 55f887a983cb4e44a8eb17ffa3af1a87, type: 3}
+      propertyPath: cardsList.Array.data[17]
+      value: 
+      objectReference: {fileID: 2899552797067365366, guid: 2e59fba9db25b3c438c47ae3e39fa661, type: 3}
     - target: {fileID: 6541597767823899636, guid: 55f887a983cb4e44a8eb17ffa3af1a87, type: 3}
       propertyPath: m_Name
       value: CardPanel
