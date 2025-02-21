@@ -55,14 +55,14 @@ public class BuffContainer
         {"不被认可",typeof(Ignore) },//使敌人的技能时间间隔增加0.05s，最高99层，仅限Boss被污染的高级员工1阶段
         {"瑕疵之作",typeof(ImperfectWork) },//当Boss被污染的高级员工2阶段失去一定量的血量时，使玩家选择一个debuff，持续时间：Boss被污染的高级员工2阶段开始至其被击杀
         {"渴求认可",typeof(CraveRecognition) },//当Boss被污染的高级员工2阶段失去一定量的血量时，"凡庸"按一定比例转化为"渴求认可"，每次受击扣除0.5滴血，持续时间无限
-        {"振奋",typeof(UpLifting) },//使对象增加10%的力量，最高不超过1点力量，持续16s
-        {"坚韧",typeof(Toughness) },//使对象增加10%的韧性，最高不超过2点韧性，持续16s
+        {"振奋",typeof(UpLifting) },//使对象增加10%的力量，最高不超过10点力量，持续16s
+        {"坚韧",typeof(Toughness) },//使对象增加10%的韧性，最高不超过20点韧性，持续16s
         {"神速",typeof(BlazingSpeed) },//使对象加10%速度，持续16s
         {"轻健",typeof(Agile) },//使对象加10%起跳速度，持续16s
         {"坚定",typeof(Steadfast) },//使玩家的获得卡牌的时间间隔增加1秒，使敌人使用攻击牌的间隔增加1秒，持续12秒
         {"卓越",typeof(Superb) },//使玩家增加一个卡槽，使敌人的效果牌使用时间间隔-3s，持续1分钟
-        {"萎靡",typeof(Lethargic) },//使对象降低10%的力量，最高不超过1点力量，持续16s
-        {"脆弱",typeof(Fragile) },//使对象降低10%的韧性，最高不超过2点韧性，持续16s
+        {"萎靡",typeof(Lethargic) },//使对象降低10%的力量，最高不超过10点力量，持续16s
+        {"脆弱",typeof(Fragile) },//使对象降低10%的韧性，最高不超过20点韧性，持续16s
         {"迟缓",typeof(Sluggish) },//使对象降低10%速度，持续16s
         {"凝重",typeof(Grave) },//使对象降低10%起跳速度，持续16s
         {"中毒",typeof(PoisonBuff) },//使对象每秒扣除5滴血，持续5s
@@ -71,7 +71,7 @@ public class BuffContainer
         {"狂猎之枪",typeof(HunterFeatherAttackBuffGun) },
         {"起动",typeof(HunterFeatherEffectBuff) },
         {"猎杀",typeof(HunterFeatherEffectBuff1) },
-        {"灼伤",typeof(Scorch) },//使对象每0.1秒扣除0.1滴血，持续6s，buff持续期间如果被施加新的灼伤则持续时间延长6s
+        {"灼伤",typeof(Scorch) },//使对象每0.1秒扣除0.1滴血，持续12s，buff持续期间如果被施加新的灼伤则持续时间延长6s
         {"烈焰",typeof(Burn) },//触发条件：对象的灼伤抵抗小于5并且对象的灼伤层数大于10，效果：使对象的异常抗性减半，持续时间60s
         {"治愈Ⅰ型",typeof(Heal1) },//在有羽解锁的条件下，每0.1s回复0.2点生命值，持续12秒
         {"治愈Ⅱ型",typeof(Heal2) },//在有羽解锁的条件下，每0.1s回复0.3点生命值，持续30秒，如果受到伤害立即停止
@@ -94,6 +94,8 @@ public class BuffContainer
         {"戒愚者",typeof(NeprizAttackBuff) },
         {"反抗",typeof(EnslavedDwarfsBrokenEffectBuff) },
         {"起义",typeof(EnslavedDwarfsBrokenEffectBuff1) },
+        {"炙热的真相",typeof(BurningDocumentsEquipmentBuff) },
+        {"罪证",typeof(BurningDocumentsFeatherBuff) },
     };
 
     /*

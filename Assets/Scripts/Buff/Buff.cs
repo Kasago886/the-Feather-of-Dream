@@ -296,6 +296,44 @@ public class ContaminatedCloneEquipmentBuff : EquipmentBuff
             player.cardGenerateList.Remove("枷锁怒涛");
         }
     }
+    public class BurningDocumentsEquipmentBuff : EquipmentBuff
+    {
+        Player player;
+        private float timer;
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            player = target.GetComponent<Player>();
+            player.tenacity += 15;
+            player.burnResistance += 2;
+            player.traumaResistance -= 2;
+
+            player.cardGenerateList.Add("悲剧");
+            player.cardGenerateList.Add("真相");
+            player.cardGenerateList.Add("否认");
+        }
+
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+            timer += Time.deltaTime;
+            if (timer > 12)
+            {
+                timer = 0;
+                player.AddBuff("灼伤");
+            }
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            player.tenacity -= 15;
+
+            player.cardGenerateList.Remove("悲剧");
+            player.cardGenerateList.Remove("真相");
+            player.cardGenerateList.Remove("否认");
+        }
+    }
 }
 
 #endregion
@@ -348,6 +386,64 @@ public class TestEquipmentFeatherBuff : EquipmentFeatherBuff
     }
 }
 
+public class BurningDocumentsFeatherBuff : EquipmentFeatherBuff
+{
+    Player player;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.feather = new EllieEquipmentFeather();
+        this.player = target as Player;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        //档案 机能    档案 情感    档案 体质    档案 疾病    档案 免疫
+        //档案 适应    档案 温度    档案 饮食    档案 交际    档案 遗传
+        //档案 排异    档案 反馈    档案 表征    档案 死亡    档案 机密
+        player.cardGenerateList.Add("档案 机能");
+        player.cardGenerateList.Add("档案 情感");
+        player.cardGenerateList.Add("档案 体质");
+        player.cardGenerateList.Add("档案 疾病");
+        player.cardGenerateList.Add("档案 免疫");
+        player.cardGenerateList.Add("档案 适应");
+        player.cardGenerateList.Add("档案 温度");
+        player.cardGenerateList.Add("档案 饮食");
+        player.cardGenerateList.Add("档案 交际");
+        player.cardGenerateList.Add("档案 遗传");
+        player.cardGenerateList.Add("档案 排异");
+        player.cardGenerateList.Add("档案 反馈");
+        player.cardGenerateList.Add("档案 表征");
+        player.cardGenerateList.Add("档案 死亡");
+        player.cardGenerateList.Add("档案 机密");
+        player.tenacity += 15;
+        player.abnormalityResistance += 10;
+        player.burnResistance += 4;
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+        player.cardGenerateList.Remove("档案 机能");
+        player.cardGenerateList.Remove("档案 情感");
+        player.cardGenerateList.Remove("档案 体质");
+        player.cardGenerateList.Remove("档案 疾病");
+        player.cardGenerateList.Remove("档案 免疫");
+        player.cardGenerateList.Remove("档案 适应");
+        player.cardGenerateList.Remove("档案 温度");
+        player.cardGenerateList.Remove("档案 饮食");
+        player.cardGenerateList.Remove("档案 交际");
+        player.cardGenerateList.Remove("档案 遗传");
+        player.cardGenerateList.Remove("档案 排异");
+        player.cardGenerateList.Remove("档案 反馈");
+        player.cardGenerateList.Remove("档案 表征");
+        player.cardGenerateList.Remove("档案 死亡");
+        player.cardGenerateList.Remove("档案 机密");
+    }
+}
 public class EllieEquipmentFeatherBuff : EquipmentFeatherBuff
 {
     Player player;
@@ -1602,9 +1698,9 @@ public class UpLifting : EffectBuff
     public override void OnEnter()
     {
         change = character.strength * 0.1f;
-        if (change > 1)
+        if (change > 10)
         {
-            change = 1;
+            change = 10;
         }
         character.strength += change;
         base.OnEnter();
@@ -1638,9 +1734,9 @@ public class Toughness : EffectBuff
     public override void OnEnter()
     {
         change = character.tenacity * 0.1f;
-        if (change > 2)
+        if (change > 20)
         {
-            change = 2;
+            change = 20;
         }
         character.tenacity += change;
         base.OnEnter();
@@ -1905,9 +2001,9 @@ public class Lethargic : EffectBuff
     public override void OnEnter()
     {
         change = character.strength * 0.1f;
-        if (change > 1)
+        if (change > 10)
         {
-            change = 1;
+            change = 10;
         }
         character.strength -= change;
         base.OnEnter();
@@ -1941,9 +2037,9 @@ public class Fragile : EffectBuff
     public override void OnEnter()
     {
         change = character.tenacity * 0.1f;
-        if (change > 2)
+        if (change > 20)
         {
-            change = 2;
+            change = 20;
         }
         character.tenacity -= change;
         base.OnEnter();
