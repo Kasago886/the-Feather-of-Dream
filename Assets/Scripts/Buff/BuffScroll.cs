@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 [System.Serializable]
 public class BuffImformation
 {
@@ -53,7 +54,6 @@ public class BuffScroll : MonoBehaviour
         }
         for (int i = 0;i < list.Count;i++)
         {
-            //Debug.Log(list[i] + "»¹´æÔÚ");
             buffNameDict.Remove(list[i]);
         }
         foreach (var item in newDict)
@@ -69,6 +69,7 @@ public class BuffScroll : MonoBehaviour
             else
             {
                 buffDescDict[item.Key].gameObject.GetComponentInChildren<Text>().text = newDict[item.Key].ToString();
+                buffDescDict[item.Key].text= nameToImformation[item.Key].name + "\n" + nameToImformation[item.Key].description;
             }
         }
     }

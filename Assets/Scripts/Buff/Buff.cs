@@ -239,34 +239,34 @@ public class ContaminatedCloneEquipmentBuff : EquipmentBuff
         player.cardGenerateList.Remove("污浊");
     }
     public class FragPrinceEquipmentBuff : EquipmentBuff
-{
-    Player player;
-
-    public override void OnEnter()
     {
-        base.OnEnter();
-        player = target.GetComponent<Player>();
-        player.tenacity += 5;
-        player.strength += 5;
+        Player player;
 
-        player.cardGenerateList.Add("护卫");
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            player = target.GetComponent<Player>();
+            player.tenacity += 5;
+            player.strength += 5;
+
+            player.cardGenerateList.Add("护卫");
+        }
+
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            player = target.GetComponent<Player>();
+            player.tenacity -= 5;
+            player.strength -= 5;
+
+            player.cardGenerateList.Remove("护卫");
+        }
     }
-
-    public override void OnUpdate()
-    {
-        base.OnUpdate();
-    }
-
-    public override void OnExit()
-    {
-        base.OnExit();
-        player = target.GetComponent<Player>();
-        player.tenacity -= 5;
-        player.strength -= 5;
-
-        player.cardGenerateList.Remove("护卫");
-    }
-}
     public class EnslavedDwarfsEquipmentBuff : EquipmentBuff
     {
         Player player;
@@ -1187,7 +1187,7 @@ public class Mediocre : EffectBuff
     private PlayerCardController playerCardController;
     private Enemy enemy;
     private Color baseColor;
-    private bool b=true;
+    private bool b = true;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -1321,7 +1321,7 @@ public class Talent1 : EffectBuff
     }
 
     public override void OnExit()
-    { 
+    {
         base.OnExit();
     }
 }
@@ -1435,6 +1435,7 @@ public class ImperfectWork : EffectBuff
     private Nepriz2 nepriz2;
     private Player player;
     private float healthMax;
+    private ImperfectWorkUi ui;
     private bool b1, b2, b3, b4;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
@@ -1448,8 +1449,17 @@ public class ImperfectWork : EffectBuff
                 healthMax += item.health;
             }
         }
+        ui = GameObject.Find("ImperfectWorkUi").GetComponent<ImperfectWorkUi>();
+        ui.b = true;
         player = target.GetComponent<Player>();
         this.timer = 99999999999;
+        foreach (var buff in player.buffList)
+        {
+            if (buff.name == "瑕疵之作")
+            {
+                this.timer = 0;
+            }
+        }
     }
 
     public override void OnEnter()
@@ -1473,27 +1483,31 @@ public class ImperfectWork : EffectBuff
             }
             if (!b1 && health < healthMax * 4 / 5)
             {
-                Time.timeScale = 0.001f;
+                Time.timeScale = 0.0001f;
                 Change();
                 b1 = true;
+                ui.b1 = true;
             }
             if (!b2 && health < healthMax * 3 / 5)
             {
-                Time.timeScale = 0.001f;
+                Time.timeScale = 0.0001f;
                 Change();
                 b2 = true;
+                ui.b2 = true;
             }
             if (!b3 && health < healthMax * 2 / 5)
             {
-                Time.timeScale = 0.001f;
+                Time.timeScale = 0.0001f;
                 Change();
                 b3 = true;
+                ui.b3 = true;
             }
             if (!b4 && health < healthMax * 1 / 5)
             {
-                Time.timeScale = 0.001f;
+                Time.timeScale = 0.0001f;
                 Change();
                 b4 = true;
+                ui.b4 = true;
             }
         }
         base.OnUpdate();
@@ -1501,6 +1515,7 @@ public class ImperfectWork : EffectBuff
 
     public override void OnExit()
     {
+        ui.b = false;
         base.OnExit();
     }
     private void Change()
@@ -2919,7 +2934,7 @@ public class EnslavedDwarfsBrokenEffectBuff : EffectBuff
     {
         base.OnEnter();
         target.GetComponent<Character>().strength -= 20;
-      
+
     }
 
     public override void OnUpdate()
@@ -2947,7 +2962,7 @@ public class EnslavedDwarfsBrokenEffectBuff1 : EffectBuff
     public override void OnEnter()
     {
         base.OnEnter();
-        
+
     }
 
     public override void OnUpdate()

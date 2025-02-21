@@ -42,6 +42,7 @@ public class ImperfectWorkChoice : MonoBehaviour
     private Nepriz2 nepriz2;
     private Image image;
     private Animator animator;
+    private bool b,b1;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,16 +52,20 @@ public class ImperfectWorkChoice : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
         }
-        if (GameObject.Find("Nepriz1 2(Clone)") != null)
+        if (GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
         {
-            nepriz2 = GameObject.Find("Nepriz1 2(Clone)").GetComponent<Nepriz2>();
+            nepriz2 = GameObject.Find("Dr.Nepriz1 2(Clone)").GetComponent<Nepriz2>();
         }
         animator.SetBool("appear",true);
         animator.speed = 1 / Time.timeScale;
     }
     void Update()
     {
-
+        if (b && !b1)
+        {
+            AddDescrabption();
+            b1 = true;
+        }
     }
     public void AddBuff()
     {
@@ -87,7 +92,7 @@ public class ImperfectWorkChoice : MonoBehaviour
                 }
             }
         }
-        AddDescrabption();
+        b = true;
     }
     public void AddProperity()
     {
@@ -148,7 +153,7 @@ public class ImperfectWorkChoice : MonoBehaviour
                 }
             }
         }
-        AddDescrabption();
+        b=true;
     }
     public void Enter()
     {

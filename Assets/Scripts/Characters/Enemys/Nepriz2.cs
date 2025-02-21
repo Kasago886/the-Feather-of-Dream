@@ -8,6 +8,7 @@ public class Nepriz2 : Enemy
     private int listNumber;
     private void Start()
     {
+        base.Start();
         mediocreNumber = new List<int>();
         injuryEvent.AddListener(ChangeBuff);
     }
