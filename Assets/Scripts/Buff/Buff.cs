@@ -1681,6 +1681,49 @@ public class CraveRecognition : EffectBuff
         base.OnExit();
     }
 }
+public class UpLifting_ : EffectBuff
+{
+    private int attackbodyNewNum, attackbodyOriNum;
+    private Character character;
+    private float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 999999999;
+    }
+
+    public override void OnEnter()
+    {
+        change = character.strength * 0.1f;
+        character.strength += change;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        attackbodyNewNum = target.attackBodyObjList.Count;
+        if (attackbodyNewNum > attackbodyOriNum)
+        {
+            target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().damage += change;
+            timer = 0;
+        }
+        if (attackbodyNewNum < attackbodyOriNum)
+        {
+            attackbodyOriNum = attackbodyNewNum;
+        }
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        character.strength -= change;
+        base.OnExit();
+    }
+}
 public class UpLifting : EffectBuff
 {
     private Character character;
@@ -3076,6 +3119,64 @@ public class EnslavedDwarfsBrokenEffectBuff1 : EffectBuff
             }
             bufftimer = 1;
         }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class Death : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        Collider2D[] collider2Ds = Physics2D.OverlapAreaAll(new Vector2(Camera.main.transform.position.x - (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y + Camera.main.orthographicSize),
+                        new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
+        for (int i = 0; i < collider2Ds.Length; i++)
+        {
+            int n1=0, n2=0, n3=0;
+            Enemy enemy=collider2Ds[i].GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                for (int j = 0; j < enemy.buffList.Count; j++)
+                {
+                    if(enemy.buffList[j].name=="×ÆÉË")
+                    {
+                        n1++;
+                    }
+                    if (enemy.buffList[j].name == "ÉËºÛ")
+                    {
+                        n2++;
+                    }
+                    if (enemy.buffList[j].name == "ÖÐ¶¾")
+                    {
+                        n3++;
+                    }
+                }
+            }
+            if (n1 >= 10 || n2 >= 10 || n3 >= 5)
+            {
+                enemy.tenacity -= enemy.tenacity / 5;
+                enemy.strength -= enemy.strength / 5;
+                for (int j = 0;j < enemy.buffList.Count; j++)
+                {
+                    enemy.buffList[j].timer = 0;
+                }
+                break;
+            }
+        }
+        this.timer = 3;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
     }
 
     public override void OnExit()
