@@ -24,6 +24,7 @@ public class InputListener : MonoBehaviour
 
     Dictionary<InputListenerState, IListenerState> states = new();
     [HideInInspector] public IListenerState currentState;
+    InputListenerState beforePauseState;
 
     // Start is called before the first frame update
     void Start()
@@ -88,19 +89,24 @@ public class InputListener : MonoBehaviour
             Time.timeScale = 1.0f;
             PausePanel.SetActive(false);
 
-            if (isBoxMap)
+            if (beforePauseState == InputListenerState.card)
             {
-                StateTransition(InputListenerState.boxMap);
-                return;
+                Time.timeScale = 0.1f;
             }
-            else
-            {
-                StateTransition(InputListenerState.normal);
-                return;
-            }
+
+            StateTransition(beforePauseState);
+            return;
         }
         else
         {
+            foreach (var state in states)
+            {
+                if (state.Value == currentState)
+                {
+                    beforePauseState = state.Key;
+                }
+            }
+
             Time.timeScale = 0;
             PausePanel.SetActive(true);
 
