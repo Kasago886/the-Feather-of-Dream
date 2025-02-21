@@ -6931,6 +6931,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7852406554837677055, guid: 2c90cf3bb29a31c49a97e5821ddefa92, type: 3}
+      propertyPath: flag
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7852406554837677055, guid: 2c90cf3bb29a31c49a97e5821ddefa92, type: 3}
+      propertyPath: refreshable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7852406554837677055, guid: 2c90cf3bb29a31c49a97e5821ddefa92, type: 3}
+      propertyPath: dropItems.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7852406554837677055, guid: 2c90cf3bb29a31c49a97e5821ddefa92, type: 3}
+      propertyPath: dropItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 2158636381633551328, guid: 1b6e5efe14f67194fa177b6e1405668c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14284,6 +14300,9 @@ MonoBehaviour:
       wolfKilled: 0
       finalBossKilled: 0
       contaminateCloneKilled: 0
+      drNeprizKilled: 0
+      enslavedDwarfKilled: 0
+      dwarfKilled: 0
       AssistantDestroyed: 0
     timeInfo:
       year: 0

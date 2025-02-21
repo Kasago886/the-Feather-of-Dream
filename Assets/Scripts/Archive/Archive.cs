@@ -94,6 +94,9 @@ public struct LevelInfo
     public bool wolfKilled;
     public bool finalBossKilled;
     public bool contaminateCloneKilled;
+    public bool drNeprizKilled;
+    public bool enslavedDwarfKilled;
+    public bool dwarfKilled;
 
     public bool AssistantDestroyed;
 }

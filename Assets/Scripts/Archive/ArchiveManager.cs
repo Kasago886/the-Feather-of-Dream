@@ -11,7 +11,7 @@ public enum FlagType
 {
     tutorialDone, littleRedRidingHood, level11DreamBottleUsed,weirdDwarf, level21DreamBottleUsed, level21StartDialogRead, whaleKilled, tinWoodmanKilled,
     fragPrinceKilled, fragGuard1Killed, fragGuard2Killed, crazyHunterKilled, burningDocuments1Killed, burningDocuments2Killed, wolfKilled, finalBossKilled,
-    contaminateCloneKilled, AssistantDestroyed
+    contaminateCloneKilled, AssistantDestroyed, drNeprizKilled, enslavedDwarfKilled, dwarfKilled
 }
 
 public class ArchiveManager : MonoBehaviour
@@ -320,6 +320,36 @@ public class ArchiveManager : MonoBehaviour
         ArchiveManager archiveManager = FindAnyObjectByType<ArchiveManager>();
         switch(flag)
         {
+            case FlagType.enslavedDwarfKilled:
+                if (archiveManager.currentArchive.levelInfo.enslavedDwarfKilled)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.enslavedDwarfKilled = set;
+                }
+                return false;
+            case FlagType.dwarfKilled:
+                if (archiveManager.currentArchive.levelInfo.dwarfKilled)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.drNeprizKilled = set;
+                }
+                return false;
+            case FlagType.drNeprizKilled:
+                if (archiveManager.currentArchive.levelInfo.drNeprizKilled)
+                {
+                    return true;
+                }
+                if (setFlag)
+                {
+                    archiveManager.currentArchive.levelInfo.drNeprizKilled = set;
+                }
+                return false;
             case FlagType.AssistantDestroyed:
                 if (archiveManager.currentArchive.levelInfo.AssistantDestroyed)
                 {

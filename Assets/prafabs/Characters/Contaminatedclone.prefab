@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpScroll: {fileID: 0}
-  isDefaultFeather: 0
-  defaultFeatherNum: 0
+  isDefaultFeather: 1
+  defaultFeatherNum: 1
   defaultFeatherHealth: 100
   tenacity: 0
   oriTenacity: 0
