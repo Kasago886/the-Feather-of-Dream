@@ -480,7 +480,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F7F\u73A9\u5BB6\u589E\u52A05%\u7684\u97E7\u6027\u548C\u4F7F\u201C\u770B\uFF01\u53C8\u4E00\u4E2A\u201D\u7684\u4F7F\u7528\u65F6\u95F4\u95F4\u9694\u964D\u4F4E70%"
+  m_Text: "\u4F7F\u73A9\u5BB6\u589E\u52A05%\u7684\u97E7\u6027\u548C\n\u4F7F\u201C\u770B\uFF01\u53C8\u4E00\u4E2A\u201D\u7684\u4F7F\u7528\u65F6\n\u95F4\u95F4\u9694\u964D\u4F4E70%"
 --- !u!222 &71628517
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -626,7 +626,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F7F\u73A9\u5BB6\u51CF\u5C1140%\u89E3\u9501\u7FBD\u7684\u751F\u547D\u503C\u548C\u4EE4Dr.Nepriz\u7684\u97E7\u6027\u964D\u4F4E99%"
+  m_Text: "\u4F7F\u73A9\u5BB6\u51CF\u5C1140%\u89E3\u9501\u7FBD\u7684\n\u751F\u547D\u503C\u548C\u4EE4Dr.Nepriz\u7684\u97E7\n\u6027\u964D\u4F4E99%"
 --- !u!222 &110396129
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2271,7 +2271,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F7F\u73A9\u5BB6\u964D\u4F4E30%\u7684\u529B\u91CF\u548C\u4F7F\u201C\u8BA4\u540C\u6211\uFF01\uFF01\uFF01.\u201D\u7684\u4F7F\u7528\u65F6\u95F4\u95F4\u9694\u589E\u52A015s"
+  m_Text: "\u4F7F\u73A9\u5BB6\u964D\u4F4E30%\u7684\u529B\u91CF\u548C\u4F7F\n\u201C\u8BA4\u540C\u6211\uFF01\uFF01\uFF01.\u201D\u7684\u4F7F\u7528\u65F6\u95F4\n\u95F4\u9694\u589E\u52A015s"
 --- !u!222 &315663894
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2554,7 +2554,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4EE4Dr.Nepriz\u7684\u529B\u91CF\u589E\u52A0200%\u5E76\u5BF9\u5176\u65BD\u52A099\u5C42\u201C\u707C\u4F24\u201D\u4E0E\u201C\u4F24\u75D5\u201D"
+  m_Text: "\u4EE4Dr.Nepriz\u7684\u529B\u91CF\u589E\u52A0200%\n\u5E76\u5BF9\u5176\u65BD\u52A099\u5C42\u201C\u707C\u4F24\u201D\u4E0E\u201C\u4F24\u75D5\u201D"
 --- !u!222 &333775551
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4769,7 +4769,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F7F\u73A9\u5BB6\u83B7\u5F977\u5C42\u201C\u51E1\u5EB8\u201D\u548C\u4EE4Dr.Nepriz\u83B7\u5F975\u5C42\u201C\u6E34\u6C42\u8BA4\u53EF\u201D"
+  m_Text: "\u4F7F\u73A9\u5BB6\u83B7\u5F977\u5C42\u201C\u51E1\u5EB8\u201D\u548C\u4EE4\nDr.Nepriz\u83B7\u5F975\u5C42\u201C\u6E34\u6C42\u8BA4\u53EF\u201D"
 --- !u!222 &684644170
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5766,7 +5766,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F7F\u73A9\u5BB6\u83B7\u5F973\u5C42\u201C\u51E1\u5EB8\u201D\u548C\u4EE4Dr.Nepriz\u83B7\u5F973\u5C42\u201C\u840E\u9761\u201D"
+  m_Text: "\u4F7F\u73A9\u5BB6\u83B7\u5F973\u5C42\u201C\u51E1\u5EB8\u201D\u548C\u4EE4\nDr.Nepriz\u83B7\u5F973\u5C42\u201C\u840E\u9761\u201D"
 --- !u!222 &783208654
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6870,7 +6870,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F7F\u73A9\u5BB6\u83B7\u5F978\u70B9\u201C\u4F24\u75D5\u201D\u548C\u4EE4Dr.Nepriz\u83B7\u5F975\u5C42\u201C\u5F02\u5E38\u8106\u5F31\u201D"
+  m_Text: "\u4F7F\u73A9\u5BB6\u83B7\u5F978\u70B9\u201C\u4F24\u75D5\u201D\u548C\u4EE4\nDr.Nepriz\u83B7\u5F975\u5C42\u201C\u5F02\u5E38\u8106\u5F31\u201D"
 --- !u!222 &945570639
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12444,7 +12444,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F7F\u73A9\u5BB6\u89E3\u9501\u7FBD\u4E0E\u672A\u89E3\u9501\u7FBD\u7684\u751F\u547D\u503C\u5747\u964D\u4F4E99%\u548C\u4EE4Dr.Nepriz\u7684\u97E7\u6027\u964D\u81F30\u70B9"
+  m_Text: "\u4F7F\u73A9\u5BB6\u89E3\u9501\u7FBD\u4E0E\u672A\u89E3\u9501\u7FBD\n\u7684\u751F\u547D\u503C\u5747\u964D\u4F4E99%\u548C\u4EE4\nDr.Nepriz\u7684\u97E7\u6027\u964D\u81F30\u70B9"
 --- !u!222 &1664777587
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13998,7 +13998,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F7F\u73A9\u5BB6\u589E\u52A02\u70B9\u529B\u91CF\u548C\u4EE4Dr.Nepriz\u83B7\u5F971\u5C42\u201C\u624D\u534E\u201D"
+  m_Text: "\u4F7F\u73A9\u5BB6\u589E\u52A02\u70B9\u529B\u91CF\u548C\u4EE4\nDr.Nepriz\u83B7\u5F971\u5C42\u201C\u624D\u534E\u201D"
 --- !u!222 &1914532659
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14606,7 +14606,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F7F\u73A9\u5BB6\u51CF\u5C1140%\u7684\u5F02\u5E38\u6297\u6027\u548C\u4EE4Dr.Nepriz\u83B7\u5F979\u5C42\u201C\u707C\u4F24\u201D"
+  m_Text: "\u4F7F\u73A9\u5BB6\u51CF\u5C1140%\u7684\u5F02\u5E38\u6297\u6027\n\u548C\u4EE4Dr.Nepriz\u83B7\u5F979\u5C42\u201C\u707C\u4F24\u201D"
 --- !u!222 &1942409424
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15788,7 +15788,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F7F\u73A9\u5BB6\u964D\u4F4E10%\u7684\u97E7\u6027\u548C\u4F7F\u201C\u6211\u81EA\u535A\u5B66...\u201D\u7684\u4F7F\u7528\u65F6\u95F4\u95F4\u9694\u589E\u52A05s"
+  m_Text: "\u4F7F\u73A9\u5BB6\u964D\u4F4E10%\u7684\u97E7\u6027\u548C\u4F7F\n\u201C\u6211\u81EA\u535A\u5B66...\u201D\u7684\u4F7F\u7528\u65F6\u95F4\u95F4\n\u9694\u589E\u52A05s"
 --- !u!222 &2129926369
 CanvasRenderer:
   m_ObjectHideFlags: 0
