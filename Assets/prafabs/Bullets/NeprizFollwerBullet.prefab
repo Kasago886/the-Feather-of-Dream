@@ -161,6 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78eae2b695d6264d9105eec3f699c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectOnPlayer: 1
+  effectOnEnemy: 0
   damage: 8
   buffs:
   - "\u51E1\u5EB8"

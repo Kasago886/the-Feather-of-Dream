@@ -65,6 +65,7 @@ MonoBehaviour:
   sneakAttackDialog: FinalBossSneakAttack
   phase2Dialog: FinalBossSPhase2
   phase3Dialog: FinalBossSPhase3
+  endDialog: 
   force: 1
   targetLU: {fileID: 0}
   targetMU: {fileID: 0}

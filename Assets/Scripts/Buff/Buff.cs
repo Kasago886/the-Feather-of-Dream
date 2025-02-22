@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using UnityEngine.WSA;
+using static UnityEditor.Experimental.GraphView.GraphView;
 [System.Serializable]
 public class Buff
 {
@@ -238,104 +240,113 @@ public class ContaminatedCloneEquipmentBuff : EquipmentBuff
         controller.walkSpeed -= 1;
         player.cardGenerateList.Remove("污浊");
     }
-    public class FragPrinceEquipmentBuff : EquipmentBuff
+}
+public class EnslavedDwarfsEquipmentBuff : EquipmentBuff
+{
+    Player player;
+
+    public override void OnEnter()
     {
-        Player player;
+        base.OnEnter();
+        player = target.GetComponent<Player>();
+        player.tenacity += 5;
 
-        public override void OnEnter()
-        {
-            base.OnEnter();
-            player = target.GetComponent<Player>();
-            player.tenacity += 5;
-            player.strength += 5;
-
-            player.cardGenerateList.Add("护卫");
-        }
-
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
-            player = target.GetComponent<Player>();
-            player.tenacity -= 5;
-            player.strength -= 5;
-
-            player.cardGenerateList.Remove("护卫");
-        }
+        player.cardGenerateList.Add("破链反击");
+        player.cardGenerateList.Add("枷锁怒涛");
     }
-    public class EnslavedDwarfsEquipmentBuff : EquipmentBuff
+
+    public override void OnUpdate()
     {
-        Player player;
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
-            player = target.GetComponent<Player>();
-            player.tenacity += 5;
-
-            player.cardGenerateList.Add("破链反击");
-            player.cardGenerateList.Add("枷锁怒涛");
-        }
-
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
-            player = target.GetComponent<Player>();
-            player.tenacity -= 5;
-
-            player.cardGenerateList.Remove("破链反击");
-            player.cardGenerateList.Remove("枷锁怒涛");
-        }
+        base.OnUpdate();
     }
-    public class BurningDocumentsEquipmentBuff : EquipmentBuff
+
+    public override void OnExit()
     {
-        Player player;
-        private float timer;
-        public override void OnEnter()
-        {
-            base.OnEnter();
-            player = target.GetComponent<Player>();
-            player.tenacity += 15;
-            player.burnResistance += 2;
-            player.traumaResistance -= 2;
+        base.OnExit();
+        player = target.GetComponent<Player>();
+        player.tenacity -= 5;
 
-            player.cardGenerateList.Add("悲剧");
-            player.cardGenerateList.Add("真相");
-            player.cardGenerateList.Add("否认");
-        }
-
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
-            timer += Time.deltaTime;
-            if (timer > 12)
-            {
-                timer = 0;
-                player.AddBuff("灼伤");
-            }
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
-            player.tenacity -= 15;
-
-            player.cardGenerateList.Remove("悲剧");
-            player.cardGenerateList.Remove("真相");
-            player.cardGenerateList.Remove("否认");
-        }
+        player.cardGenerateList.Remove("破链反击");
+        player.cardGenerateList.Remove("枷锁怒涛");
     }
 }
+public class BurningDocumentsEquipmentBuff : EquipmentBuff
+{
+    Player player;
+    private float timer1;
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player = target.GetComponent<Player>();
+        player.tenacity += 15;
+        player.burnResistance += 2;
+        player.traumaResistance -= 2;
 
+        player.cardGenerateList.Add("悲剧");
+        player.cardGenerateList.Add("真相");
+        player.cardGenerateList.Add("否认");
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        timer += Time.deltaTime;
+        if (timer > 12)
+        {
+            timer = 0;
+            player.AddBuff("灼伤");
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.tenacity -= 15;
+        player.burnResistance -= 2;
+        player.traumaResistance += 2;
+        player.cardGenerateList.Remove("悲剧");
+        player.cardGenerateList.Remove("真相");
+        player.cardGenerateList.Remove("否认");
+    }
+}
+public class NeprizEquipmentBuff : EquipmentBuff
+{
+    Player player;
+    private PlayerCardController playerCardController;
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player = target.GetComponent<Player>();
+        player.tenacity += 20;
+        player.strength += 10;
+        if (GameObject.Find("CardPanel") != null)
+        {
+            playerCardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
+            playerCardController.positionNumber--;
+        }
+        player.cardGenerateList.Add("痴愚者");
+        player.cardGenerateList.Add("蒙昧者");
+        player.cardGenerateList.Add("自欺者");
+        player.cardGenerateList.Add("释然者");
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.tenacity -= 20;
+        player.strength -= 10;
+        playerCardController.positionNumber++;
+        player.cardGenerateList.Remove("痴愚者");
+        player.cardGenerateList.Remove("蒙昧者");
+        player.cardGenerateList.Remove("自欺者");
+        player.cardGenerateList.Remove("释然者");
+    }
+}
 #endregion
 
 #region 装备羽buff
@@ -442,8 +453,173 @@ public class BurningDocumentsFeatherBuff : EquipmentFeatherBuff
         player.cardGenerateList.Remove("档案 表征");
         player.cardGenerateList.Remove("档案 死亡");
         player.cardGenerateList.Remove("档案 机密");
+        player.tenacity -= 15;
+        player.abnormalityResistance -= 10;
+        player.burnResistance -= 4;
     }
 }
+public class AddFollower : MonoBehaviour
+{
+    public GameObject follower;
+    public void Add()
+    {
+        follower=Instantiate(Resources.Load<GameObject>("AttackBodys / Nepriz / Follwer.prefab"),new Vector3( Camera.main.transform.position.x, Camera.main.transform.position.y,0), Quaternion.identity);
+    }
+    public void Del()
+    {
+        if (follower != null)
+        {
+            Destroy(follower);
+        }
+    }
+}
+public class NeprizFeatherBuff : EquipmentFeatherBuff 
+{
+    Player player;
+    private PlayerCardController cardController;
+    private float health;
+    private float timer1, timer2;
+    private float featherCount;
+    private List<string> debuffContain = new List<string> { "伤痕", "忧郁", "崩溃", "凡庸", "萎靡",
+        "脆弱", "迟缓", "凝重", "中毒", "灼伤", "异常脆弱" };
+    private AddFollower follower;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.feather = new EllieEquipmentFeather();
+        this.player = target as Player;
+        cardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
+        target.gameObject.AddComponent<AddFollower>();
+        follower=target.GetComponent<AddFollower>();
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player.cardGenerateList.Add("档案 机能");
+        player.cardGenerateList.Add("档案 情感");
+        player.cardGenerateList.Add("档案 体质");
+        player.cardGenerateList.Add("档案 疾病");
+        player.cardGenerateList.Add("档案 免疫");
+        player.cardGenerateList.Add("档案 适应");
+        player.cardGenerateList.Add("档案 温度");
+        player.cardGenerateList.Add("档案 饮食");
+        player.cardGenerateList.Add("档案 交际");
+        player.cardGenerateList.Add("档案 遗传");
+        player.cardGenerateList.Add("档案 排异");
+        player.cardGenerateList.Add("档案 反馈");
+        player.cardGenerateList.Add("档案 表征");
+        player.cardGenerateList.Add("档案 死亡");
+        player.cardGenerateList.Add("档案 机密");
+        player.tenacity += 30;
+        player.strength += 20;
+        player.abnormalityResistance += 10;
+        cardController.AddPosition();
+        follower.Add();
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        timer1 += Time.deltaTime;
+        timer2 += Time.deltaTime;
+        //心防
+        if (timer1 > 5)
+        {
+            timer1 = 0;
+            float health0 = 0;
+            if (featherCount == player.feathers.Count)
+            {
+                float debuffNumber = 0;
+                for (int i = 0; i < player.feathers.Count; i++)
+                {
+                    health0 += player.feathers[i].health;
+                }
+                if (health - health0 > 0)
+                {
+                    foreach (var buff in player.buffList)
+                    {
+                        if (debuffContain.Contains(buff.name))
+                        {
+                            debuffNumber++;
+                        }
+                    }
+                }
+                player.shields.Add(new Shield() { health = health0 * debuffNumber / 10, timer = 999999999 });
+            }
+            featherCount = player.feathers.Count;
+            health = health0;
+        }
+        //自扰
+        if (timer2 > 60)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                int n = Random.Range(0, 30);
+                switch (n)
+                {
+                    case 0: player.AddBuff("治愈Ⅲ型"); break;
+                    case 1: player.AddBuff("治愈Ⅱ型"); break;
+                    case 2: player.AddBuff("治愈Ⅰ型"); break;
+                    case 3: player.AddBuff("灼伤");i--; break;
+                    case 4: player.AddBuff("正义"); break;
+                    case 5: player.AddBuff("中毒"); i--; break;
+                    case 6: player.AddBuff("凝重"); i--; break;
+                    case 7: player.AddBuff("迟缓"); i--; break;
+                    case 8: player.AddBuff("脆弱"); i--; break;
+                    case 9: player.AddBuff("萎靡"); i--; break;
+                    case 10: player.AddBuff("卓越"); break;
+                    case 11: player.AddBuff("坚定"); break;
+                    case 12: player.AddBuff("轻健"); break;
+                    case 13: player.AddBuff("神速"); break;
+                    case 14: player.AddBuff("坚韧"); break;
+                    case 15: player.AddBuff("振奋"); break;
+                    case 16: player.AddBuff("博学"); break;
+                    case 17: player.AddBuff("才华"); break;
+                    case 18: player.AddBuff("凡庸"); i--; break;
+                    case 19: player.AddBuff("崩溃"); i--; break;
+                    case 20: player.AddBuff("忧郁"); i--; break;
+                    case 21: player.AddBuff("惊惶"); i--; break;
+                    case 22: player.AddBuff("伤痕"); i--; break;
+                    case 23: player.AddBuff("麻木"); break;
+                    case 24: player.AddBuff("异常抵抗"); break;
+                    case 25: player.AddBuff("异常脆弱"); i--; break;
+                    case 26: player.AddBuff("灼伤抵抗"); break;
+                    case 27: player.AddBuff("灼伤脆弱"); i--; break;
+                    case 28: player.AddBuff("伤痕抵抗"); break;
+                    case 29: player.AddBuff("伤痕脆弱"); i--; break;
+                }
+            }
+            timer2 = 0;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+        player.cardGenerateList.Remove("档案 机能");
+        player.cardGenerateList.Remove("档案 情感");
+        player.cardGenerateList.Remove("档案 体质");
+        player.cardGenerateList.Remove("档案 疾病");
+        player.cardGenerateList.Remove("档案 免疫");
+        player.cardGenerateList.Remove("档案 适应");
+        player.cardGenerateList.Remove("档案 温度");
+        player.cardGenerateList.Remove("档案 饮食");
+        player.cardGenerateList.Remove("档案 交际");
+        player.cardGenerateList.Remove("档案 遗传");
+        player.cardGenerateList.Remove("档案 排异");
+        player.cardGenerateList.Remove("档案 反馈");
+        player.cardGenerateList.Remove("档案 表征");
+        player.cardGenerateList.Remove("档案 死亡");
+        player.cardGenerateList.Remove("档案 机密");
+        player.tenacity -= 30;
+        player.strength -= 20;
+        player.abnormalityResistance -= 10;
+        cardController.DelPosition();
+        follower.Del();
+    }
+}
+
 public class EllieEquipmentFeatherBuff : EquipmentFeatherBuff
 {
     Player player;
@@ -1287,7 +1463,7 @@ public class Mediocre : EffectBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        if (target.GetComponent<Player>() != null)
+        if (GameObject.Find("CardPanel") != null)
         {
             playerCardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
         }
@@ -1307,7 +1483,7 @@ public class Mediocre : EffectBuff
     {
         if (playerCardController != null)
         {
-            playerCardController.positionNumber--;
+            playerCardController.DelPosition();
         }
         if (enemy != null)
         {
@@ -1336,7 +1512,7 @@ public class Mediocre : EffectBuff
     {
         if (playerCardController != null)
         {
-            playerCardController.positionNumber++;
+            playerCardController.AddPosition();
         }
         if (enemy != null)
         {
@@ -1988,7 +2164,7 @@ public class Superb : EffectBuff
     {
         if (playerCardController != null)
         {
-            playerCardController.positionNumber++;
+            playerCardController.AddPosition();
         }
         if (enemy != null)
         {
@@ -2012,7 +2188,7 @@ public class Superb : EffectBuff
     {
         if (playerCardController != null)
         {
-            playerCardController.positionNumber--;
+            playerCardController.DelPosition();
         }
         if (enemy != null)
         {
@@ -3135,13 +3311,13 @@ public class Death : EffectBuff
                         new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize * Camera.main.aspect), Camera.main.transform.position.y - Camera.main.orthographicSize), LayerMask.GetMask(Consts.EnemyLayer));
         for (int i = 0; i < collider2Ds.Length; i++)
         {
-            int n1=0, n2=0, n3=0;
-            Enemy enemy=collider2Ds[i].GetComponent<Enemy>();
+            int n1 = 0, n2 = 0, n3 = 0;
+            Enemy enemy = collider2Ds[i].GetComponent<Enemy>();
             if (enemy != null)
             {
                 for (int j = 0; j < enemy.buffList.Count; j++)
                 {
-                    if(enemy.buffList[j].name=="灼伤")
+                    if (enemy.buffList[j].name == "灼伤")
                     {
                         n1++;
                     }
@@ -3159,7 +3335,7 @@ public class Death : EffectBuff
             {
                 enemy.tenacity -= enemy.tenacity / 5;
                 enemy.strength -= enemy.strength / 5;
-                for (int j = 0;j < enemy.buffList.Count; j++)
+                for (int j = 0; j < enemy.buffList.Count; j++)
                 {
                     enemy.buffList[j].timer = 0;
                 }
@@ -3182,6 +3358,43 @@ public class Death : EffectBuff
     public override void OnExit()
     {
         base.OnExit();
+    }
+}
+public class Relieve : EffectBuff
+{
+    Character character;
+    float change;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        character = target.GetComponent<Character>();
+        this.timer = 60;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        if (character.tenacity > 0)
+        {
+            change = character.tenacity / 10;
+            character.strength += change;
+            character.tenacity = 0;
+        }
+        else
+        {
+            character.tenacity += 10;
+        }
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        character.strength -= change;
     }
 }
 #endregion

@@ -98,6 +98,8 @@ public class BuffContainer
         {"炙热的真相",typeof(BurningDocumentsEquipmentBuff) },
         {"罪证",typeof(BurningDocumentsFeatherBuff) },
         {"死亡",typeof(Death) },
+        {"庸人自扰",typeof(NeprizEquipmentBuff) },
+        {"释然",typeof(Relieve) },//如果对象的韧性为正时，将对象的韧性/10转换为力量，持续60s(注意：使用之后韧性归零)，如果韧性为不为正时则+10韧性
     };
 
     /*
