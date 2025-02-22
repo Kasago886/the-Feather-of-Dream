@@ -495,22 +495,18 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
 
     public override void OnEnter()
     {
+        //选题定向 文献回顾    设计规划 获取批准    收集数据
+         // 数据分析    得出结论 撰写报告    发表分享
         base.OnEnter();
-        player.cardGenerateList.Add("档案 机能");
-        player.cardGenerateList.Add("档案 情感");
-        player.cardGenerateList.Add("档案 体质");
-        player.cardGenerateList.Add("档案 疾病");
-        player.cardGenerateList.Add("档案 免疫");
-        player.cardGenerateList.Add("档案 适应");
-        player.cardGenerateList.Add("档案 温度");
-        player.cardGenerateList.Add("档案 饮食");
-        player.cardGenerateList.Add("档案 交际");
-        player.cardGenerateList.Add("档案 遗传");
-        player.cardGenerateList.Add("档案 排异");
-        player.cardGenerateList.Add("档案 反馈");
-        player.cardGenerateList.Add("档案 表征");
-        player.cardGenerateList.Add("档案 死亡");
-        player.cardGenerateList.Add("档案 机密");
+        player.cardGenerateList.Add("选题定向");
+        player.cardGenerateList.Add("文献回顾");
+        player.cardGenerateList.Add("设计规划");
+        player.cardGenerateList.Add("获取批准");
+        player.cardGenerateList.Add("收集数据");
+        player.cardGenerateList.Add("数据分析");
+        player.cardGenerateList.Add("得出结论");
+        player.cardGenerateList.Add("撰写报告");
+        player.cardGenerateList.Add("发表分享");
         player.tenacity += 30;
         player.strength += 20;
         player.abnormalityResistance += 10;
@@ -597,21 +593,18 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
     {
         base.OnExit();
 
-        player.cardGenerateList.Remove("档案 机能");
-        player.cardGenerateList.Remove("档案 情感");
-        player.cardGenerateList.Remove("档案 体质");
-        player.cardGenerateList.Remove("档案 疾病");
-        player.cardGenerateList.Remove("档案 免疫");
-        player.cardGenerateList.Remove("档案 适应");
-        player.cardGenerateList.Remove("档案 温度");
-        player.cardGenerateList.Remove("档案 饮食");
-        player.cardGenerateList.Remove("档案 交际");
-        player.cardGenerateList.Remove("档案 遗传");
-        player.cardGenerateList.Remove("档案 排异");
-        player.cardGenerateList.Remove("档案 反馈");
-        player.cardGenerateList.Remove("档案 表征");
-        player.cardGenerateList.Remove("档案 死亡");
-        player.cardGenerateList.Remove("档案 机密");
+        player.cardGenerateList.Remove("选题定向");
+        player.cardGenerateList.Remove("文献回顾");
+        player.cardGenerateList.Remove("设计规划");
+        player.cardGenerateList.Remove("获取批准");
+        player.cardGenerateList.Remove("收集数据");
+        player.cardGenerateList.Remove("数据分析");
+        player.cardGenerateList.Remove("得出结论");
+        player.cardGenerateList.Remove("撰写报告");
+        if (player.cardGenerateList.Contains("发表分享"))
+        {
+            player.cardGenerateList.Remove("发表分享");
+        }
         player.tenacity -= 30;
         player.strength -= 20;
         player.abnormalityResistance -= 10;
@@ -3395,6 +3388,71 @@ public class Relieve : EffectBuff
     {
         base.OnExit();
         character.strength -= change;
+    }
+}
+public class Defend : EffectBuff
+{
+    Character character;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        character = target.GetComponent<Character>();
+        float change=0;
+        character.shields.Add(new Shield() { health = character.tenacity / 20, timer = 9999999 });
+        this.timer = 0;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class Rethink : EffectBuff
+{
+    Character character;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        character = target.GetComponent<Character>();
+        if (character.tenacity < 0)
+        {
+            character.tenacity = -character.tenacity;
+        }
+        else
+        {
+            if(target.GetComponent<Player>() != null)
+            {
+                 Player player = target.GetComponent<Player>();
+                player.GenerateCard();
+                player.AddBuff("坚韧");
+            }
+        }
+        this.timer = 0;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
     }
 }
 #endregion

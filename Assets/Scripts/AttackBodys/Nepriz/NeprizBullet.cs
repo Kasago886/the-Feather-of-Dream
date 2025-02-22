@@ -7,7 +7,7 @@ public class NeprizBullet : MonoBehaviour
     public bool effectOnPlayer;
     public bool effectOnEnemy;
     public float damage;
-    public string[] buffs;
+    public List<string> buffs;
     private void Start()
     {
         Destroy(gameObject,10f);
@@ -18,7 +18,7 @@ public class NeprizBullet : MonoBehaviour
         {
             Player player = collision.gameObject.GetComponent<Player>();
             player.TakeDamage(damage);
-            for (int i = 0; i < buffs.Length; i++)
+            for (int i = 0; i < buffs.Count; i++)
             {
                 player.AddBuff(buffs[i]);
             }
@@ -28,7 +28,7 @@ public class NeprizBullet : MonoBehaviour
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
-            for (int i = 0; i < buffs.Length; i++)
+            for (int i = 0; i < buffs.Count; i++)
             {
                 enemy.AddBuff(buffs[i]);
             }

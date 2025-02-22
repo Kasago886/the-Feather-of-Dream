@@ -100,6 +100,9 @@ public class BuffContainer
         {"死亡",typeof(Death) },
         {"庸人自扰",typeof(NeprizEquipmentBuff) },
         {"释然",typeof(Relieve) },//如果对象的韧性为正时，将对象的韧性/10转换为力量，持续60s(注意：使用之后韧性归零)，如果韧性为不为正时则+10韧性
+        {"实验中",typeof (NeprizFeatherBuff) },
+        {"守护",typeof (Defend) },//获得等同于韧性5%的护盾
+        {"反省",typeof (Rethink) },//如果对象韧性为负则将其韧性转为正，如果不为正则抽一张牌
     };
 
     /*

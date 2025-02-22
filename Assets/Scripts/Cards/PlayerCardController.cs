@@ -238,6 +238,8 @@ public class PlayerCardController : MonoBehaviour
     [Header("初始生成数量")]
     public int positionNumber;
     public static bool cantUseCard;
+    [HideInInspector]
+    public int remainingSlotCount {  get; private set; }    
     private Dictionary<string, int> nameToID = new();
     private Dictionary<int, GameObject> idToCard = new();
     private RectTransform rectTransform;
@@ -259,6 +261,7 @@ public class PlayerCardController : MonoBehaviour
         {
             positionNumber = 1;
         }
+        remainingSlotCount=positionNumber-content.transform.childCount;
     }
 
     /// <summary>
@@ -272,7 +275,45 @@ public class PlayerCardController : MonoBehaviour
         int rarity = card.rarity;
         return rarity;
     }
-
+    /// <summary>
+    /// 调用本函数增加玩家手牌
+    /// </summary>
+    /// <param name="cardName"></param>
+    /// <returns>
+    /// 返还是否成功添加
+    /// </returns>
+    public bool GetCard(string cardName,bool b)
+    {
+        if (nameToID.ContainsKey(cardName))
+        {
+            return GetCard(nameToID[cardName],true);
+        }
+        else
+        {
+            return false;
+        }
+    }
+    /// <summary>
+    /// 调用本函数增加玩家手牌
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="b"></param>
+    /// <returns>
+    /// 返还是否成功添加
+    /// </returns>
+    public bool GetCard(int id,bool b)
+    {
+        if (content.transform.childCount < positionNumber && idToCard.ContainsKey(id))
+        {
+            RectTransform rectTransform1 = Instantiate(idToCard[id], content.transform).GetComponent<RectTransform>();
+            rectTransform1.SetParent(rectTransform);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     /// <summary>
     /// 调用本函数增加玩家手牌
     /// </summary>

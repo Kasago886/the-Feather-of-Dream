@@ -5,6 +5,10 @@ using UnityEngine;
 public class Follower : MonoBehaviour
 {
     public GameObject bullet;
+    [HideInInspector]
+    public List<string> buffNameAndNumbers = new List<string>();
+    [HideInInspector]
+    public float damage;
     private List<GameObject> enemys;
     private GameObject enemy;
     private GameObject player;
@@ -39,7 +43,7 @@ public class Follower : MonoBehaviour
             if (enemy != null)
             {
                 timer += Time.deltaTime;
-                if (Mathf.Abs(enemy.transform.position.x - transform.position.x) <= 1 && timer > 5)
+                if (Mathf.Abs(enemy.transform.position.x - transform.position.x) <= 1 && timer > 10)
                 {
                     ChangeColor(bullet);
                     timer = 0;
@@ -129,6 +133,12 @@ public class Follower : MonoBehaviour
         if (bullet != null)
         {
             GameObject bulletInstance = Instantiate(bullet, transform.position, Quaternion.identity);
+            NeprizBullet neprizBullet=bulletInstance.GetComponent<NeprizBullet>();
+            neprizBullet.damage += damage;
+            foreach (var buff in buffNameAndNumbers)
+            {
+                neprizBullet.buffs.Add(buff);
+            }
             Rigidbody2D bulletRB = bulletInstance.GetComponent<Rigidbody2D>();
             bulletRB.velocity = new Vector3(0, -1000, 0);
         }
