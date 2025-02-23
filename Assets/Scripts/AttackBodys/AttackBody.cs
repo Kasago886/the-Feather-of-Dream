@@ -30,6 +30,7 @@ public class AttackBody : MonoBehaviour
 
     [HideInInspector]public bool isleft;
     [HideInInspector] public float addDamage = 0;
+    [HideInInspector] public List<string> buffNames;
 
     Vector3 center;
 
@@ -67,6 +68,10 @@ public class AttackBody : MonoBehaviour
                 foreach (Collider2D target in targets)
                 {
                     target.GetComponent<Character>().TakeDamage(damage + addDamage, transform);
+                    foreach (var buff in buffNames)
+                    {
+                        target.GetComponent<Character>().AddBuff(buff); 
+                    }
                     whatHappenWhenAttack?.Invoke();
                     whatBeAttack.Add(target.gameObject);
                 }

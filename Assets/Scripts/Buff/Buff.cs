@@ -400,6 +400,10 @@ public class TestEquipmentFeatherBuff : EquipmentFeatherBuff
 public class BurningDocumentsFeatherBuff : EquipmentFeatherBuff
 {
     Player player;
+    private int oriNumber;
+    private int oriCount;
+    int attackbodyOriNum;
+    int attackbodyNewNum;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -432,8 +436,45 @@ public class BurningDocumentsFeatherBuff : EquipmentFeatherBuff
         player.tenacity += 15;
         player.abnormalityResistance += 10;
         player.burnResistance += 4;
+        attackbodyOriNum = target.attackBodyObjList.Count;
     }
-
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        //·×·ÉÖ®Ò³
+        if (player.buffList.Count !=oriCount)
+        {
+            List<string> list = new List<string>();
+            foreach (var buff in player.buffList)
+            {
+                if (list.Count == 0)
+                {
+                    list.Add(buff.name);
+                }
+                else if(!list.Contains(buff.name))
+                {
+                    list.Add(buff.name);
+                }
+            }
+            player.strength += list.Count - oriNumber;
+            oriNumber=list.Count;
+            oriCount=player.buffList.Count;
+        }
+        //²ÏÊ³Ö®»ð
+        attackbodyNewNum = target.attackBodyObjList.Count;
+        if (attackbodyNewNum > attackbodyOriNum)
+        {
+            target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("×ÆÉË");
+            if (Random.Range(0, 10) >= 8)
+            {
+                player.AddBuff("×ÆÉË");
+            }
+        }
+        if (attackbodyNewNum < attackbodyOriNum)
+        {
+            attackbodyOriNum = attackbodyNewNum;
+        }
+    }
     public override void OnExit()
     {
         base.OnExit();
