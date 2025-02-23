@@ -81,7 +81,6 @@ public class HpUi2_FollowEnemy : MonoBehaviour
     {
         if (enemy.unlockedFeathers.Count > content.transform.childCount)
         {
-            //Debug.Log("hpui2followenemy:"+enemy.enemyName);
             GameObject hpUiObject = Instantiate(HpPrefab);
             RectTransform transform = hpUiObject.GetComponent<RectTransform>();
             transform.localScale /= 4;

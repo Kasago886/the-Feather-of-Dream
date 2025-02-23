@@ -575,7 +575,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: -17}
+  m_SizeDelta: {x: 22.1868, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &6754901111766555437
 CanvasRenderer:
@@ -919,6 +919,7 @@ GameObject:
   - component: {fileID: 5230700378054015898}
   - component: {fileID: 535433063322118077}
   - component: {fileID: 3874375950048216239}
+  - component: {fileID: 1365902056518685307}
   m_Layer: 5
   m_Name: enemyBuffScrollView
   m_TagString: Untagged
@@ -944,8 +945,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 200}
+  m_AnchoredPosition: {x: 0, y: -21.25}
+  m_SizeDelta: {x: 100, y: 157.5}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &8896465003209973631
 CanvasRenderer:
@@ -1029,6 +1030,132 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contentTransform: {fileID: 0}
   itemTransform: {fileID: 7594677367494607155, guid: 0e8efc8a168b3e145a8849d877f92243, type: 3}
+--- !u!114 &1365902056518685307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6889267353131228644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f6484752646eb42b9157c6e1c0c655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  contentRectTransform: {fileID: 1571151735145537782}
+  buffImformation:
+  - name: "\u4F24\u75D5"
+    description: "\u5728\u6709\u7FBD\u89E3\u9501\u7684\u6761\u4EF6\u4E0B\n\uFF0C\u53D7\u5230\u4E0D\u4F4E\u4E8E1\u70B9\u4F24\n\u5BB3\u540E\u6263\u96641\u6EF4\u8840\uFF0C\u5E76\n\u67091/3\u7684\u6982\u7387\u89E3\u9664\u8BE5\nbuff"
+    buffPrefab: {fileID: 6051908474743900384, guid: 209ae3ea1d3ec704b879f597596c73a5, type: 3}
+  - name: "\u5FE7\u90C1"
+    description: "\u4F7F\u73A9\u5BB6\u7684\u83B7\u5F97\u5361\u724C\u7684\n\u65F6\u95F4\u95F4\u9694\u589E\u52A01\u79D2\uFF0C\n\u4F7F\u654C\u4EBA\u4F7F\u7528\u653B\u51FB\u724C\u7684\n\u95F4\u9694\u589E\u52A01\u79D2\uFF0C\u6301\u7EED\n12\u79D2"
+    buffPrefab: {fileID: 6051908474743900384, guid: 10c723a59fb9fce4c996866fba69fd9f, type: 3}
+  - name: "\u5D29\u6E83"
+    description: "\u4F7F\u73A9\u5BB6\u6216\u654C\u4EBA\u7684\u529B\u91CF\n\u548C\u97E7\u6027\u964D\u4F4E\u521D\u59CB\u6700\u521D\n\u529B\u91CF\u548C\u97E7\u6027\u768410%\uFF0C\n\u6301\u7EED13\u79D2"
+    buffPrefab: {fileID: 6051908474743900384, guid: b54bb48b869d7934cb495dd4aea0d48f, type: 3}
+  - name: "\u51E1\u5EB8"
+    description: "\u4F7F\u73A9\u5BB6\u51CF\u5C11\u4E00\u4E2A\u5361\u69FD\n\uFF0C\u4F7F\u654C\u4EBA\u7684\u6548\u679C\u724C\u4F7F\n\u7528\u65F6\u95F4\u95F4\u9694+3s\uFF0C\u6301\n\u7EED1\u5206\u949F"
+    buffPrefab: {fileID: 6051908474743900384, guid: f40d0476d70158b4db5623bd5a23d6d3, type: 3}
+  - name: "\u624D\u534E"
+    description: "\u4F7F\u5BF9\u8C61\u97E7\u6027\u4E5810\uFF0C\u6301\n\u7EED29.7s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 5cc852aacef6ee04487e6391832b4636, type: 3}
+  - name: "\u535A\u5B66"
+    description: "\u4F7F\u5BF9\u8C61\u529B\u91CF\u4E582\uFF0C\u6301\n\u7EED29.7s"
+    buffPrefab: {fileID: 6051908474743900384, guid: f338cac69cda8db47a911ce724e0e566, type: 3}
+  - name: "\u7455\u75B5\u4E4B\u4F5C"
+    description: 
+    buffPrefab: {fileID: 6051908474743900384, guid: 4a05273740a7e134ea633ca91714987c, type: 3}
+  - name: "\u632F\u594B"
+    description: "\u4F7F\u5BF9\u8C61\u589E\u52A010%\u7684\u529B\n\u91CF\uFF0C\u6700\u9AD8\u4E0D\u8D85\u8FC71\u70B9\n\u529B\u91CF\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: c5ec90d462c3f12489708123e402180e, type: 3}
+  - name: "\u575A\u97E7"
+    description: "\u4F7F\u5BF9\u8C61\u589E\u52A010%\u7684\u97E7\n\u6027\uFF0C\u6700\u9AD8\u4E0D\u8D85\u8FC72\u70B9\n\u97E7\u6027\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 35118e3ba2384314d897e33f008ee800, type: 3}
+  - name: "\u795E\u901F"
+    description: "\u4F7F\u5BF9\u8C61\u52A010%\u901F\u5EA6\uFF0C\n\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 2d04db0d9687b9748b8398f3b029931a, type: 3}
+  - name: "\u8F7B\u5065"
+    description: "\u4F7F\u5BF9\u8C61\u52A010%\u8D77\u8DF3\u901F\n\u5EA6\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 155259d1d9f73c547ba6ffb8053831a0, type: 3}
+  - name: "\u575A\u5B9A"
+    description: "\u4F7F\u73A9\u5BB6\u7684\u83B7\u5F97\u5361\u724C\u7684\n\u65F6\u95F4\u95F4\u9694\u51CF\u5C111\u79D2\uFF0C\n\u4F7F\u654C\u4EBA\u4F7F\u7528\u653B\u51FB\u724C\u7684\n\u95F4\u9694\u51CF\u5C111\u79D2\uFF0C\u6301\u7EED\n12\u79D2"
+    buffPrefab: {fileID: 6051908474743900384, guid: fcbfb5020b599ba46b0c6604e1339194, type: 3}
+  - name: "\u5353\u8D8A"
+    description: "\u4F7F\u73A9\u5BB6\u589E\u52A0\u4E00\u4E2A\u5361\u69FD\n\uFF0C\u4F7F\u654C\u4EBA\u7684\u6548\u679C\u724C\u4F7F\n\u7528\u65F6\u95F4\u95F4\u9694-3s\uFF0C\u6301\n\u7EED1\u5206\u949F"
+    buffPrefab: {fileID: 6051908474743900384, guid: 88ca694dcbba1a941a18d98b51c6e757, type: 3}
+  - name: "\u840E\u9761"
+    description: "\u4F7F\u5BF9\u8C61\u964D\u4F4E10%\u7684\u529B\n\u91CF\uFF0C\u6700\u9AD8\u4E0D\u8D85\u8FC71\u70B9\n\u529B\u91CF\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 5fd193f1655dc7743a42ceb0c0f06c35, type: 3}
+  - name: "\u8106\u5F31"
+    description: "\u4F7F\u5BF9\u8C61\u964D\u4F4E10%\u7684\u97E7\n\u6027\uFF0C\u6700\u9AD8\u4E0D\u8D85\u8FC72\u70B9\n\u97E7\u6027\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: cead13d5fae505448b7f5f0895671e14, type: 3}
+  - name: "\u8FDF\u7F13"
+    description: "\u4F7F\u5BF9\u8C61\u964D\u4F4E10%\u901F\u5EA6\n\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 886db31d52d2c0f48881a24c299d83a5, type: 3}
+  - name: "\u51DD\u91CD"
+    description: "\u4F7F\u5BF9\u8C61\u964D\u4F4E10%\u8D77\u8DF3\n\u901F\u5EA6\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: bad8008b88feeba4cb5cc52fec226acd, type: 3}
+  - name: "\u707C\u4F24"
+    description: "\u4F7F\u5BF9\u8C61\u6BCF0.1\u79D2\u6263\u9664\n0.1\u6EF4\u8840\uFF0C\u6301\u7EED6s\uFF0C\nbuff\u6301\u7EED\u671F\u95F4\u5982\u679C\u88AB\n\u65BD\u52A0\u65B0\u7684\u707C\u4F24\u5219\u6301\u7EED\n\u65F6\u95F4\u5EF6\u957F6s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 83d57b5fca6481e498f94541ac77cd30, type: 3}
+  - name: "\u70C8\u7130"
+    description: "\u4F7F\u5BF9\u8C61\u7684\u5F02\u5E38\u6297\u6027\u51CF\n\u534A\uFF0C\u6301\u7EED\u65F6\u95F460s"
+    buffPrefab: {fileID: 6051908474743900384, guid: f93388a9d2c4bb842b1d0b3287f4c2ee, type: 3}
+  - name: "\u6CBB\u6108\u2160\u578B"
+    description: "\u5728\u6709\u7FBD\u89E3\u9501\u7684\u6761\u4EF6\u4E0B\n\uFF0C\u6BCF0.1s\u56DE\u590D0.2\u70B9\n\u751F\u547D\u503C\uFF0C\u6301\u7EED12\u79D2"
+    buffPrefab: {fileID: 6051908474743900384, guid: dfb620c4e2699d54fa60d308bcda2ec1, type: 3}
+  - name: "\u6CBB\u6108\u2161\u578B"
+    description: "\u5728\u6709\u7FBD\u89E3\u9501\u7684\u6761\u4EF6\u4E0B\n\uFF0C\u6BCF0.1s\u56DE\u590D0.3\u70B9\n\u751F\u547D\u503C\uFF0C\u6301\u7EED30\u79D2\uFF0C\n\u5982\u679C\u53D7\u5230\u4F24\u5BB3\u7ACB\u5373\u505C\n\u6B62"
+    buffPrefab: {fileID: 6051908474743900384, guid: 058811ca6e296fa4dbbceec6d0477b15, type: 3}
+  - name: "\u6CBB\u6108\u2162\u578B"
+    description: "\u5728\u6709\u7FBD\u89E3\u9501\u7684\u6761\u4EF6\u4E0B\n\uFF0C\u6301\u7EED30s\uFF0Cbuff\u7ED3\n\u675F\u65F6\u56DE\u590D\u7B49\u540C\u4E8Ebuff\n\u6301\u7EED\u671F\u95F4\u6240\u53D7\u4F24\u5BB3\u7684\n\u751F\u547D\u503C"
+    buffPrefab: {fileID: 6051908474743900384, guid: 996a67b77d26ed442997dab06840b73b, type: 3}
+  - name: "\u5F02\u5E38\u62B5\u6297"
+    description: "\u4F7F\u5BF9\u8C61\u63D0\u9AD810%\u7684\u5F02\n\u5E38\u6297\u6027\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: f6e3c91925e441442893a9262d60b1f6, type: 3}
+  - name: "\u5F02\u5E38\u8106\u5F31"
+    description: "\u4F7F\u5BF9\u8C61\u964D\u4F4E10%\u7684\u5F02\n\u5E38\u6297\u6027\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: a29df65320f1fca4097c65459f1c5c90, type: 3}
+  - name: "\u707C\u4F24\u62B5\u6297"
+    description: "\u4F7F\u5BF9\u8C61\u63D0\u9AD81\u70B9\u707C\u4F24\n\u62B5\u6297\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: da00643f410ac5d4688f65dd41889008, type: 3}
+  - name: "\u707C\u4F24\u8106\u5F31"
+    description: "\u4F7F\u5BF9\u8C61\u964D\u4F4E1\u70B9\u707C\u4F24\n\u62B5\u6297\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 396ec822cc02c6f478e717940e5ba890, type: 3}
+  - name: "\u4F24\u75D5\u62B5\u6297"
+    description: "\u4F7F\u5BF9\u8C61\u63D0\u9AD81\u70B9\u4F24\u75D5\n\u6297\u6027\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 0496f46b86d19524a8dc5e3a93eaf4cb, type: 3}
+  - name: "\u4F24\u75D5\u8106\u5F31"
+    description: "\u4F7F\u5BF9\u8C61\u964D\u4F4E1\u70B9\u4F24\u75D5\n\u6297\u6027\uFF0C\u6301\u7EED16s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 7f909f8d3cd163c489f3a6455724648d, type: 3}
+  - name: "\u88C2\u9699"
+    description: "\u4F7F\u5BF9\u8C61\u5728n\u6B21\u53D7\u51FB\u540E\uFF0C\n\u53D7\u5230n*\u4F24\u75D5\u5C42\u6570\u7684\u4F24\n\u5BB3\uFF0C\u6301\u7EED\u65F6\u95F4\u65E0\u9650\u81F3\n\u53D1\u6325\u4F5C\u7528"
+    buffPrefab: {fileID: 6051908474743900384, guid: e89c2858047c78e478350ea280492e0b, type: 3}
+  - name: "\u632F\u594B+"
+    description: "\u4F7F\u5BF9\u8C61\u589E\u52A010%\u7684\u529B\u91CF\uFF0C\n\u6301\u7EED\u81F3\u4E0B\u6B21\u653B\u51FB"
+    buffPrefab: {fileID: 6051908474743900384, guid: e9689e698a6fc984daf2b89393b7ca4e, type: 3}
+  - name: "\u94C1\u5FC3"
+    description: "\u97E7\u6027\u589E\u52A050\uFF0C\u6301\u7EED10s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 8d713639ba375f8489aff36c0b707dd9, type: 3}
+  - name: "\u62A4\u76FE"
+    description: "\u83B7\u5F97\u8840\u91CF20\uFF0C\u6301\u7EED10s\n\u7684\u62A4\u76FE"
+    buffPrefab: {fileID: 6051908474743900384, guid: 6ee2aab630ddf0a4882bf9536589276c, type: 3}
+  - name: "\u91CA\u7136"
+    description: "\u5982\u679C\u5BF9\u8C61\u7684\u97E7\u6027\u4E3A\u6B63\u65F6\uFF0C\n\u5C06\u5BF9\u8C61\u7684\u97E7\u6027/10\u8F6C\u6362\n\u4E3A\u529B\u91CF\uFF0C\u6301\u7EED60s(\u6CE8\u610F\n\uFF1A\u4F7F\u7528\u4E4B\u540E\u97E7\u6027\u5F52\u96F6)\uFF0C\n\u5982\u679C\u97E7\u6027\u4E3A\u4E0D\u4E3A\u6B63\u65F6\u5219\n+10\u97E7\u6027"
+    buffPrefab: {fileID: 6051908474743900384, guid: 52c1af88f0f333c4db3cf8c5513c70b2, type: 3}
+  - name: "\u4E0D\u88AB\u8BA4\u53EF"
+    description: "\u4F7F\u654C\u4EBA\u7684\u6280\u80FD\u65F6\u95F4\u95F4\u9694\u589E\n\u52A00.05s\uFF0C\u6700\u9AD899\u5C42"
+    buffPrefab: {fileID: 6051908474743900384, guid: 59f663fd79de9ca42b623ef02828b1ed, type: 3}
+  - name: "\u6E34\u6C42\u8BA4\u53EF"
+    description: "\u5F53Boss2\u9636\u6BB5\u5931\u53BB\u4E00\u5B9A\u91CF\n\u7684\u8840\u91CF\u65F6\uFF0C\"\u51E1\u5EB8\"\u6309\u4E00\u5B9A\n\u6BD4\u4F8B\u8F6C\u5316\u4E3A\"\u6E34\u6C42\u8BA4\u53EF\"\uFF0C\n\u6BCF\u6B21\u53D7\u51FB\u6263\u96640.5\u6EF4\u8840\uFF0C\n\u6301\u7EED\u65F6\u95F4\u65E0\u9650"
+    buffPrefab: {fileID: 6051908474743900384, guid: f6915ba31a508b6468686c446e9e42af, type: 3}
+  - name: "\u4FEE\u8865\u7A7A\u865A"
+    description: "\u7ACB\u5373\u6263\u96642.5%\u5355\u4E2A\u89E3\u9501\u7FBD\n\u7684\u8840\u91CF\uFF0C\u6BCF2\u79D2\u589E\u52A01\u5C42\u529B\n\u91CF\uFF0Cbuff\u6301\u7EED6\u79D2\uFF0C6\u79D2\u5185\n\u5982\u82E5\u5355\u4E2A\u89E3\u9501\u7FBD\u53D7\u5230\u8D85\u8FC7\n20\u70B9\u751F\u547D\u503C\uFF0C\u5219\u5168\u4F53\u5355\u4E2A\n\u89E3\u9501\u7FBD\u4E00\u5171\u6263\u966440\u70B9\u751F\u547D\n\u503C"
+    buffPrefab: {fileID: 6051908474743900384, guid: 7707632943431624198d379db0484ece, type: 3}
+  - name: "\u60CA\u60F6"
+    description: "\u5728\u6709\u7FBD\u89E3\u9501\u7684\u6761\u4EF6\u4E0B\uFF0C\n\u7ACB\u5373\u53D7\u52301\u70B9\u4F24\u5BB3\uFF0C\u5E76\n\u56DE\u590D1\u6EF4\u8840\uFF0C\u73A9\u5BB6\u548C\u654C\n\u4EBA\u901A\u7528"
+    buffPrefab: {fileID: 6051908474743900384, guid: d63b692caa7a3d44bafa99514c760239, type: 3}
 --- !u!1 &7089285176439379269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,8 +1325,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 30}
-  m_SizeDelta: {x: -200, y: -75}
+  m_AnchoredPosition: {x: 0, y: 55}
+  m_SizeDelta: {x: -200, y: -100}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &1621309250255785756
 CanvasRenderer:

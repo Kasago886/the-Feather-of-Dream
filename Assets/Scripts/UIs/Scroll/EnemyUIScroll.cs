@@ -56,6 +56,9 @@ public class EnemyUIScroll : Scroll
                 feather.hpUI = hpUI;
             }
             enemy.hpScroll = enemyUnlockedFeatherScroll;
+
+            EnemyBuffView enemyBuffView= trans.Find("enemyBuffScrollView").GetComponent<EnemyBuffView>();
+            enemyBuffView.enemy = enemy;
         }
 
     }

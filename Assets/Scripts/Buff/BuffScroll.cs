@@ -37,7 +37,10 @@ public class BuffScroll : MonoBehaviour
     }
     void Update()
     {
-        AddGameObject();
+        if (player != null)
+        {
+            AddGameObject();
+        }
     }
     public void AddGameObject()
     {
