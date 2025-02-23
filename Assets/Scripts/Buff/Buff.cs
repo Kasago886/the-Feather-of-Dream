@@ -481,7 +481,7 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
     private float timer1, timer2;
     private float featherCount;
     private List<string> debuffContain = new List<string> { "…À∫€", "”«”Ù", "±¿¿£", "∑≤”π", "ŒÆ√“",
-        "¥‡»ı", "≥Ÿª∫", "ƒ˝÷ÿ", "÷–∂æ", "◊∆…À", "“Ï≥£¥‡»ı" };
+        "¥‡»ı", "≥Ÿª∫", "ƒ˝÷ÿ", "÷–∂æ", "◊∆…À", "“Ï≥£¥‡»ı","◊∆…À¥‡»ı","…À∫€¥‡»ı" };
     private AddFollower follower;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
@@ -1678,7 +1678,7 @@ public class Ignore : EffectBuff
             {
                 foreach (EnemyCardWithTimer ectw in line.cards)
                 {
-                    ectw.timer += 0.05f;
+                    ectw.cooldown += 0.05f;
                 }
             }
         }

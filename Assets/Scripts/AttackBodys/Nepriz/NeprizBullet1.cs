@@ -24,10 +24,10 @@ public class NeprizBullet1 : MonoBehaviour
                 attackBody.bullet = Resources.Load<GameObject>("AttackBodys/Nepriz/NeprizBullet.prefab");
             }
         }
-        else if(notDelete && collision.gameObject.tag == Consts.PlayerTag&&GameObject.Find("Dr.Nepriz1 (Clone)") !=null)
+        else if (notDelete && collision.gameObject.tag == Consts.PlayerTag && GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
         {
             Player player = collision.gameObject.GetComponent<Player>();
-            Nepriz2 nepriz2 = GameObject.Find("Dr.Nepriz1 (Clone)").GetComponent<Nepriz2>();
+            Nepriz2 nepriz2 = GameObject.Find("Dr.Nepriz1 2(Clone)").GetComponent<Nepriz2>();
             if (nepriz2.mediocreNumber.Count > 0)
             {
                 player.AddBuff("·²Ó¹");

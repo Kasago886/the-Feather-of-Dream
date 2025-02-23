@@ -357,7 +357,7 @@ public class PlayerCardController : MonoBehaviour
     public void DelPosition(int i = 1)
     {
         positionNumber -= i;
-        while(content.transform.childCount > positionNumber)
+        while(content.transform.childCount > positionNumber&& content.transform.childCount>0)
         {
             Destroy(content.transform.GetChild(content.transform.childCount-1));
         }

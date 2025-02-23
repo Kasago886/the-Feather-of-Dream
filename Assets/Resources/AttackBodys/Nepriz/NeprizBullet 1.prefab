@@ -48,16 +48,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ca987230c1a7740814fc0c79e2314a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnemyBullet: 0
+  isEnemyBullet: 1
   speed: 20
   autoDestroy: 1
   destroyTimer: 30
   isSplit: 0
   splitBullet: {fileID: 53726181187038591}
   bounceTime: 3
-  ignoreWallCollision: 0
+  ignoreWallCollision: 1
   destroyCenter: {x: 0, y: 0, z: 0}
-  destroySize: {x: 0, y: 0}
+  destroySize: {x: 1000, y: 1000}
   direction: {x: 0, y: 0}
   whatHappenWhenHit:
     m_PersistentCalls:
@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6722c6da0091254428eab55502a4d2e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notDelete: 0
   buffNameAndNumber:
   - effectOnPlayer: 1
     effectOnEnemy: 0

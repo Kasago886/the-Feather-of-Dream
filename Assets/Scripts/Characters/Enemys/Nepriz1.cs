@@ -5,7 +5,7 @@ using UnityEngine;
 public class Nepriz1 : Enemy
 {
     private List<string> debuffContain = new List<string> { "ÉËºÛ", "ÓÇÓô", "±ÀÀ£", "·²Ó¹", "Î®ÃÒ", 
-        "´àÈõ", "³Ù»º", "ÄıÖØ", "ÖĞ¶¾", "×ÆÉË", "Òì³£´àÈõ" };
+        "´àÈõ", "³Ù»º", "ÄıÖØ", "ÖĞ¶¾", "×ÆÉË", "Òì³£´àÈõ","×ÆÉË´àÈõ","ÉËºÛ´àÈõ" };
     private int ignoreNumber;
     private void Start()
     {
