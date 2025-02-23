@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.WSA;
@@ -345,6 +346,43 @@ public class NeprizEquipmentBuff : EquipmentBuff
         player.cardGenerateList.Remove("蒙昧者");
         player.cardGenerateList.Remove("自欺者");
         player.cardGenerateList.Remove("释然者");
+    }
+}
+public class TheMisunderstoodWerewolfEquipmentBuff : EquipmentBuff
+{
+    Player player;
+    private PlayerCardController playerCardController;
+    public override void OnEnter()
+    {
+        //误解 成见    倒施 罪人
+        base.OnEnter();
+        player = target.GetComponent<Player>();
+        player.tenacity += 10;
+        player.strength += 5;
+        player.abnormalityResistance += 10;
+        player.traumaResistance += 2;
+        player.cardGenerateList.Add("误解");
+        player.cardGenerateList.Add("成见");
+        player.cardGenerateList.Add("倒施");
+        player.cardGenerateList.Add("罪人");
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.tenacity -= 10;
+        player.strength -= 5;
+        player.abnormalityResistance -= 10;
+        player.traumaResistance -= 2;
+        player.cardGenerateList.Remove("误解");
+        player.cardGenerateList.Remove("成见");
+        player.cardGenerateList.Remove("倒施");
+        player.cardGenerateList.Remove("罪人");
     }
 }
 #endregion
@@ -1255,6 +1293,7 @@ public class Trauma : EffectBuff
     private float attackTimer;
     private int buffNumber;
     private bool isAddBuff;
+    public float damage = 1;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -1301,7 +1340,7 @@ public class Trauma : EffectBuff
             {
                 if (character.unlockedFeathers.Count > 0 && health - character.unlockedFeathers[0].health >= 1)
                 {
-                    character.unlockedFeathers[0].health -= Mathf.Pow(2, -character.abnormalityResistance / 100) * (1 - character.traumaResistance * 0.1f);
+                    character.unlockedFeathers[0].health -= damage*Mathf.Pow(2, -character.abnormalityResistance / 100) * (1 - character.traumaResistance * 0.1f);
                     attackTimer = 0;
                     if (Random.Range(0, 3) > 1)
                     {
@@ -3489,6 +3528,133 @@ public class Rethink : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class Misunderstanding : EffectBuff
+{
+    Character character;
+    public int grade=1;
+    private int buffCount1;
+    private int buffCount2;
+    private bool b1, b2;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 99999999999;
+        character = target.GetComponent<Character>();
+        foreach (var buff in character.buffList)
+        {
+            if (buff.name == "误解")
+            {
+                ((Misunderstanding)buff).grade++;
+                this.timer= 0;   
+            }
+        }
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (grade > 3)
+        {
+            grade = 3;
+        }
+        if (grade >= 1)
+        {
+            if(character.buffList.Count !=buffCount1)
+            {
+                if(character.buffList.Count>buffCount1)
+                {
+                    for(int i = buffCount1;  i < character.buffList.Count; i++)
+                    {
+                        if (character.buffList[i].name == "伤痕"&& ((Trauma)character.buffList[i]).damage==1)
+                        {
+                            ((Trauma)character.buffList[i]).damage++;
+                        }
+                    }
+                }
+                buffCount1 = character.buffList.Count;
+            }
+        }
+        if(grade >= 2)
+        {
+            if (!b1)
+            {
+                character.abnormalityResistance -= 20;
+                b1 = true;
+            }
+            if (character.buffList.Count != buffCount2)
+            {
+                if (character.buffList.Count > buffCount2)
+                {
+                    for (int i = buffCount2; i < character.buffList.Count; i++)
+                    {
+                        if (character.buffList[i].name == "伤痕" && ((Trauma)character.buffList[i]).damage < 3)
+                        {
+                            ((Trauma)character.buffList[i]).damage++;
+                        }
+                    }
+                }
+                buffCount2 = character.buffList.Count;
+            }
+        }
+        if(grade==3)
+        {
+            if (!b2)
+            {
+                character.abnormalityResistance -= character.abnormalityResistance / 4;
+                character.traumaResistance -= 3;
+                b2 = true;
+            }
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class DoingThingsInACompletelyWrongOrOppositeWay : EffectBuff
+{
+    int attackbodyOriNum;
+    int attackbodyNewNum;
+    bool yes;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 9999;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        attackbodyOriNum = target.attackBodyObjList.Count;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        attackbodyNewNum = target.attackBodyObjList.Count;
+        if (attackbodyNewNum > attackbodyOriNum)
+        {
+            target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("伤痕");
+            timer = 0;
+        }
+        if (attackbodyNewNum < attackbodyOriNum)
+        {
+            attackbodyOriNum = attackbodyNewNum;
+        }
+
     }
 
     public override void OnExit()

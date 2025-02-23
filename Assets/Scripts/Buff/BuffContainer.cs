@@ -103,6 +103,11 @@ public class BuffContainer
         {"实验中",typeof (NeprizFeatherBuff) },
         {"守护",typeof (Defend) },//获得等同于韧性5%的护盾
         {"反省",typeof (Rethink) },//如果对象韧性为负则将其韧性转为正，如果不为正则抽一张牌
+        {"误解",typeof (Misunderstanding) },//增强“伤痕”，持续时间无限，只能有1层，重复获得“误解”可以提高其等级
+        //1级：增加1点“伤痕”伤害  2级：增加2点“伤痕”伤害，并降低20点异常抵抗  3级：增加2点“伤痕”伤害，并在降低20点异常抵抗的基础上降低10%的
+        //异常抵抗并降低3点伤痕抵抗
+        {"倒施",typeof (DoingThingsInACompletelyWrongOrOppositeWay) },//使对象下一次攻击附带1层“伤痕”
+        {"山中人",typeof (TheMisunderstoodWerewolfEquipmentBuff) }
     };
 
     /*

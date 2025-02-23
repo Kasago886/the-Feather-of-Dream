@@ -183,7 +183,7 @@ MonoBehaviour:
   type: 1
   isDreamizable: 1
   dreamizeCost: 1
-  dreamizedFeather: {fileID: 1240171927397317818, guid: b50cb35eea8da7a4382368d877f2f4a3, type: 3}
+  dreamizedFeather: {fileID: 1240171927397317818, guid: 121519e0d126e8c498588afa22a3b8d7, type: 3}
   dreamizedFeatherInfo:
     itemName: 
     information: 
@@ -196,7 +196,7 @@ MonoBehaviour:
     featherMaxHealth: 0
     dialogName: 
     position: 0
-  buffName: "\u5EB8\u4EBA\u81EA\u6270"
+  buffName: "\u5C71\u4E2D\u4EBA"
   featherHealth: 0
   dialogName: 
   isEquiped: 0
