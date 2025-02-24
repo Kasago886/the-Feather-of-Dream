@@ -133211,9 +133211,11 @@ MonoBehaviour:
       tutorialDone: 0
       littleRedRidingHood: 0
       level11DreamBottleUsed: 0
+      level11DreamBottleUsed2: 0
       weirdDwarf: 0
       level21DreamBottleUsed: 0
       level21StartDialogRead: 0
+      level31DreamBottleUsed: 0
       whaleKilled: 0
       tinWoodmanKilled: 0
       fragPrinceKilled: 0
@@ -133998,6 +134000,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dr.Nepriz
       objectReference: {fileID: 0}
+    - target: {fileID: 4939784656188387847, guid: 7317bf7a7e57da1479ce99fe694ec8b0, type: 3}
+      propertyPath: exp
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939784656188387847, guid: 7317bf7a7e57da1479ce99fe694ec8b0, type: 3}
+      propertyPath: flag
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939784656188387847, guid: 7317bf7a7e57da1479ce99fe694ec8b0, type: 3}
+      propertyPath: dropItems.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939784656188387847, guid: 7317bf7a7e57da1479ce99fe694ec8b0, type: 3}
+      propertyPath: dropItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 2158636381633551328, guid: f484bb44be00b094183f56debb979238, type: 3}
     - target: {fileID: 5194438090788217055, guid: 7317bf7a7e57da1479ce99fe694ec8b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.6442585
@@ -134392,6 +134410,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4080184018405968041, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632284893851722583, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632284893851722583, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632284893851722583, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8824751904438267974, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}

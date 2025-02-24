@@ -2408,6 +2408,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632259659}
   m_CullTransparentMesh: 1
+--- !u!1001 &686896818
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1343325458}
+    m_Modifications:
+    - target: {fileID: 1603187700081626242, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: m_Name
+      value: dreamBottle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401978850248809394, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: type
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+--- !u!4 &686896819 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+  m_PrefabInstance: {fileID: 686896818}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &702587426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4153,6 +4219,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7632284893851722583, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632284893851722583, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632284893851722583, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8824751904438267974, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
       propertyPath: player
       value: 
@@ -5348,6 +5426,7 @@ Transform:
   - {fileID: 629758073}
   - {fileID: 1277305228}
   - {fileID: 1212351340}
+  - {fileID: 686896819}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1364770560
@@ -55645,9 +55724,11 @@ MonoBehaviour:
       tutorialDone: 0
       littleRedRidingHood: 0
       level11DreamBottleUsed: 0
+      level11DreamBottleUsed2: 0
       weirdDwarf: 0
       level21DreamBottleUsed: 0
       level21StartDialogRead: 0
+      level31DreamBottleUsed: 0
       whaleKilled: 0
       tinWoodmanKilled: 0
       fragPrinceKilled: 0

@@ -7503,6 +7503,10 @@ PrefabInstance:
       propertyPath: type
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6401978850248809394, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
+      propertyPath: dreamNum
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8010309870145944334, guid: 75b3cd8d1ed64c7459356372ffa371d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 83.84796
@@ -26544,6 +26548,7 @@ MonoBehaviour:
       tutorialDone: 0
       littleRedRidingHood: 0
       level11DreamBottleUsed: 0
+      level11DreamBottleUsed2: 0
       weirdDwarf: 0
       level21DreamBottleUsed: 0
       level21StartDialogRead: 0
@@ -26558,6 +26563,9 @@ MonoBehaviour:
       wolfKilled: 0
       finalBossKilled: 0
       contaminateCloneKilled: 0
+      drNeprizKilled: 0
+      enslavedDwarfKilled: 0
+      dwarfKilled: 0
       AssistantDestroyed: 0
     timeInfo:
       year: 0

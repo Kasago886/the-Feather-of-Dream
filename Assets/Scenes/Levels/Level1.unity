@@ -4995,6 +4995,10 @@ PrefabInstance:
       propertyPath: refreshable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3869344565067547722, guid: 24cb278759c67264f9da5837d8ea1c0d, type: 3}
+      propertyPath: dropItems.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5194438090788217055, guid: 24cb278759c67264f9da5837d8ea1c0d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -83.5
@@ -172700,6 +172704,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7632284893851722583, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632284893851722583, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632284893851722583, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8824751904438267974, guid: 1da2fa09900499842a16aa6edce373f7, type: 3}
       propertyPath: player
       value: 
@@ -173406,9 +173422,11 @@ MonoBehaviour:
       tutorialDone: 0
       littleRedRidingHood: 0
       level11DreamBottleUsed: 0
+      level11DreamBottleUsed2: 0
       weirdDwarf: 0
       level21DreamBottleUsed: 0
       level21StartDialogRead: 0
+      level31DreamBottleUsed: 0
       whaleKilled: 0
       tinWoodmanKilled: 0
       fragPrinceKilled: 0
@@ -174734,7 +174752,7 @@ PrefabInstance:
     - target: {fileID: 3869344565067547722, guid: 24cb278759c67264f9da5837d8ea1c0d, type: 3}
       propertyPath: dropItems.Array.data[0]
       value: 
-      objectReference: {fileID: 2158636381633551328, guid: aed6d9ec329f72c4fbc4a4157722c749, type: 3}
+      objectReference: {fileID: 2158636381633551328, guid: eb2ae3f7f614fca498a2c1d408f9c6b7, type: 3}
     - target: {fileID: 5194438090788217055, guid: 24cb278759c67264f9da5837d8ea1c0d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 29

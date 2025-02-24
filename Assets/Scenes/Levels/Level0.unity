@@ -10394,6 +10394,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1645036921}
     m_Modifications:
     - target: {fileID: -3745091629035965235, guid: fcf63767b80589c42a032f67915207fc, type: 3}
+      propertyPath: dropItems.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -3745091629035965235, guid: fcf63767b80589c42a032f67915207fc, type: 3}
+      propertyPath: dropItems.Array.data[2]
+      value: 
+      objectReference: {fileID: 2158636381633551328, guid: a80ada09f89b6bd44962091a695b48dd, type: 3}
+    - target: {fileID: -3745091629035965235, guid: fcf63767b80589c42a032f67915207fc, type: 3}
       propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3013559218936343641}
@@ -13510,9 +13518,11 @@ MonoBehaviour:
       tutorialDone: 0
       littleRedRidingHood: 0
       level11DreamBottleUsed: 0
+      level11DreamBottleUsed2: 0
       weirdDwarf: 0
       level21DreamBottleUsed: 0
       level21StartDialogRead: 0
+      level31DreamBottleUsed: 0
       whaleKilled: 0
       tinWoodmanKilled: 0
       fragPrinceKilled: 0

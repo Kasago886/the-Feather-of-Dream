@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class DreamBottle : InteractiveObject {
 
     public FlagType type;
+    public int dreamNum = 1;
+
     private Player player_;
     Dialog dialog;
 
@@ -38,7 +40,7 @@ public class DreamBottle : InteractiveObject {
             else
             {
                 ArchiveManager archiveManager = FindAnyObjectByType<ArchiveManager>();
-                archiveManager.currentArchive.playerInfo.dream += 1;
+                archiveManager.currentArchive.playerInfo.dream += dreamNum;
                 EquipmentPanelManager equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
                 equipmentPanelManager.SetUpPlayerInfo();
             }
