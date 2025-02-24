@@ -297,9 +297,7 @@ MonoBehaviour:
   cardNumber: 0
   buffName: 
   buffNameWhenReduceCard: 0
-  buffNameWhenHaveBuff:
-  - "\u5F02\u5E38\u62B5\u6297"
-  - "\u575A\u97E7"
+  buffNameWhenHaveBuff: []
 --- !u!114 &-2109026004425444879
 MonoBehaviour:
   m_ObjectHideFlags: 0

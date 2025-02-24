@@ -722,7 +722,7 @@ public class MisunderstoodWerewolfFeatherBuff : EquipmentFeatherBuff
         player.cardGenerateList.Add("×ïÈË");
         player.cardGenerateList.Add("°ÁÂı");
         player.cardGenerateList.Add("Æ«¼û");
-        player.cardGenerateList.Add("°§ÉË");
+        player.cardGenerateList.Add("ÎŞ¹¼");
         player.cardGenerateList.Add("ÓÇÓô");
         player.tenacity += 10;
         player.strength += 15;
@@ -802,7 +802,7 @@ public class MisunderstoodWerewolfFeatherBuff : EquipmentFeatherBuff
         player.cardGenerateList.Remove("×ïÈË");
         player.cardGenerateList.Remove("°ÁÂı");
         player.cardGenerateList.Remove("Æ«¼û");
-        player.cardGenerateList.Remove("°§ÉË");
+        player.cardGenerateList.Remove("ÎŞ¹¼");
         player.cardGenerateList.Remove("ÓÇÓô");
         player.tenacity -= 10;
         player.strength -= 15;
@@ -3885,6 +3885,56 @@ public class MentalAnguish : EffectBuff
     public override void OnExit()
     {
         base.OnExit();
+    }
+}
+public class Fissure5 : EffectBuff
+{
+    private Character character;
+    private float health, attackTimer, number=5;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 9999999999;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (character.unlockedFeathers.Count > 0 && health - character.unlockedFeathers[0].health >= 1)
+        {
+            number++;
+        }
+        if (number >= 3 && Random.Range(3, 13) < number && character.unlockedFeathers.Count > 0)
+        {
+            timer = 0;
+        }
+        if (character.unlockedFeathers.Count > 0)
+        {
+            health = character.unlockedFeathers[0].health;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        int buffNumber = 0;
+        foreach (var buff in character.buffList)
+        {
+            if (buff.name == "ÉËºÛ")
+            {
+                buffNumber++;
+            }
+        }
+        character.unlockedFeathers[0].health -= buffNumber * number * Mathf.Pow(2, -character.abnormalityResistance / 100);
     }
 }
 #endregion

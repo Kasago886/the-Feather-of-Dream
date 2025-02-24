@@ -113,6 +113,7 @@ public class BuffContainer
         {"聚梦",typeof (ExperimentAttackEffectBuff) },
         {"心灵苦痛",typeof (MentalAnguish) },//使对象减少1点异常抗性
         {"局中人",typeof (MisunderstoodWerewolfFeatherBuff) },
+        {"裂隙Ⅴ",typeof (Fissure5) },//充能5级的裂隙
     };
 
     /*

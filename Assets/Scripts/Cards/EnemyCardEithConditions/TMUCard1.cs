@@ -11,9 +11,23 @@ public class TMUCard1 : MonoBehaviour
     }
     public void RandomGet()
     {
-        if (Random.Range(0, 3) > 1)
+        if (Random.Range(0, 4) < 1)
         {
             GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>().AddBuff("ŒÛΩ‚");
         }
+    }
+    public void GetTradege()
+    {
+        PlayerCardController playerCardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
+        bool b = false;
+        foreach(GameObject card in playerCardController.cardsList)
+        {
+            if (card.GetComponent<Card>().name == "ŒÛΩ‚")
+            {
+                b = true;
+                break;
+            }
+        }
+        playerCardController.GetCard("È‰");
     }
 }
