@@ -65,6 +65,7 @@ public class BuffContainer
         {"萎靡",typeof(Lethargic) },//使对象降低10%的力量，最高不超过10点力量，持续16s
         {"脆弱",typeof(Fragile) },//使对象降低10%的韧性，最高不超过20点韧性，持续16s
         {"迟缓",typeof(Sluggish) },//使对象降低10%速度，持续16s
+        {"减速",typeof(Slowness) },//使对象降低10%速度，持续2s
         {"凝重",typeof(Grave) },//使对象降低10%起跳速度，持续16s
         {"中毒",typeof(PoisonBuff) },//使对象每秒扣除5滴血，持续5s
         {"正义",typeof(JusticeBuff) },//使玩家下一张攻击卡攻击力翻倍
@@ -111,6 +112,9 @@ public class BuffContainer
         {"散梦",typeof (ExperimentPlayerAttackBuff) },
         {"聚梦替身",typeof (ExperimentPlayerAttackBuff1) },
         {"聚梦",typeof (ExperimentAttackEffectBuff) },
+        {"梦崩",typeof (ExperimentEffectBuff) },//使自身攻击速度+400%，持续1s
+        {"梦身",typeof (ExperimentEffectBuff1) },//蓄力2s，获得10s20点护盾，被任意攻击打断后为玩家添加护盾
+        {"梦缠",typeof (ExperimentEffectBuff2) },//持续5s，玩家每次使用冲刺使自身速度-10%，持续2s
         {"心灵苦痛",typeof (MentalAnguish) },//使对象减少1点异常抗性
         {"局中人",typeof (MisunderstoodWerewolfFeatherBuff) },
         {"裂隙Ⅴ",typeof (Fissure5) },//充能5级的裂隙
