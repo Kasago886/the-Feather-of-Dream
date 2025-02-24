@@ -107,7 +107,10 @@ public class BuffContainer
         //1级：增加1点“伤痕”伤害  2级：增加2点“伤痕”伤害，并降低20点异常抵抗  3级：增加2点“伤痕”伤害，并在降低20点异常抵抗的基础上降低10%的
         //异常抵抗并降低3点伤痕抵抗
         {"倒施",typeof (DoingThingsInACompletelyWrongOrOppositeWay) },//使对象下一次攻击附带1层“伤痕”
-        {"山中人",typeof (TheMisunderstoodWerewolfEquipmentBuff) }
+        {"山中人",typeof (TheMisunderstoodWerewolfEquipmentBuff) },
+        {"散梦",typeof (ExperimentPlayerAttackBuff) },
+        {"聚梦替身",typeof (ExperimentPlayerAttackBuff1) },
+        {"聚梦",typeof (ExperimentAttackEffectBuff) },
     };
 
     /*

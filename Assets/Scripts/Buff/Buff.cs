@@ -951,6 +951,24 @@ public class NeprizAttackBuff : AttackBuff
         this.attackBody = Resources.Load<GameObject>("AttackBodys/Nepriz/NeprizAttackBody");
     }
 }
+public class ExperimentPlayerAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 5;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/ExperimentPlayer/ExperimentPlayerAttackBody");
+    }
+}
+public class ExperimentPlayerAttackBuff1 : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 5;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/ExperimentPlayer/ExperimentPlayerAttackBody1");
+    }
+}
 #endregion
 
 #region °ÎÓðbuff
@@ -2495,7 +2513,6 @@ public class JusticeBuff : EffectBuff
 {
     int attackbodyOriNum;
     int attackbodyNewNum;
-    bool yes;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -3628,7 +3645,6 @@ public class DoingThingsInACompletelyWrongOrOppositeWay : EffectBuff
 {
     int attackbodyOriNum;
     int attackbodyNewNum;
-    bool yes;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -3655,6 +3671,53 @@ public class DoingThingsInACompletelyWrongOrOppositeWay : EffectBuff
             attackbodyOriNum = attackbodyNewNum;
         }
 
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class ExperimentAttackEffectBuff : EffectBuff
+{
+    Character character;
+    Player Player;
+    float oriHp;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        character = target.GetComponent<Character>();
+        this.timer = 5;
+        if (character.feathers.Count != 0)
+        {
+            oriHp = character.feathers[0].health;
+        }
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (character.feathers[0].health < oriHp)
+        {
+            timer = 0;
+        }
+        if (timer <= 0.5f&&timer>0)
+        {
+            timer = 0;
+            target.gameObject.transform.position = GameObject.Find("Player").transform.position;
+        }
+        foreach (GameObject attackBody in character.attackBodyObjList)
+        {
+            if (attackBody.name == "ExperimentPlayerAttackBody1")
+            {
+                attackBody.GetComponent<AttackBody>().damage += Time.deltaTime;
+            }
+        }
     }
 
     public override void OnExit()
