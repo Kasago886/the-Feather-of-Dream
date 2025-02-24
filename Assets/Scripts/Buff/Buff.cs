@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.WSA;
@@ -480,7 +481,7 @@ public class BurningDocumentsFeatherBuff : EquipmentFeatherBuff
     {
         base.OnUpdate();
         //纷飞之页
-        if (player.buffList.Count !=oriCount)
+        if (player.buffList.Count != oriCount)
         {
             List<string> list = new List<string>();
             foreach (var buff in player.buffList)
@@ -489,14 +490,14 @@ public class BurningDocumentsFeatherBuff : EquipmentFeatherBuff
                 {
                     list.Add(buff.name);
                 }
-                else if(!list.Contains(buff.name))
+                else if (!list.Contains(buff.name))
                 {
                     list.Add(buff.name);
                 }
             }
             player.strength += list.Count - oriNumber;
-            oriNumber=list.Count;
-            oriCount=player.buffList.Count;
+            oriNumber = list.Count;
+            oriCount = player.buffList.Count;
         }
         //蚕食之火
         attackbodyNewNum = target.attackBodyObjList.Count;
@@ -535,6 +536,7 @@ public class BurningDocumentsFeatherBuff : EquipmentFeatherBuff
         player.tenacity -= 15;
         player.abnormalityResistance -= 10;
         player.burnResistance -= 4;
+        player.strength -= oriCount;
     }
 }
 public class AddFollower : MonoBehaviour
@@ -542,7 +544,7 @@ public class AddFollower : MonoBehaviour
     public GameObject follower;
     public void Add()
     {
-        follower=Instantiate(Resources.Load<GameObject>("AttackBodys / Nepriz / Follwer.prefab"),new Vector3( Camera.main.transform.position.x, Camera.main.transform.position.y,0), Quaternion.identity);
+        follower = Instantiate(Resources.Load<GameObject>("AttackBodys / Nepriz / Follwer.prefab"), new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0), Quaternion.identity);
     }
     public void Del()
     {
@@ -552,7 +554,7 @@ public class AddFollower : MonoBehaviour
         }
     }
 }
-public class NeprizFeatherBuff : EquipmentFeatherBuff 
+public class NeprizFeatherBuff : EquipmentFeatherBuff
 {
     Player player;
     private PlayerCardController cardController;
@@ -569,13 +571,13 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
         this.player = target as Player;
         cardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
         target.gameObject.AddComponent<AddFollower>();
-        follower=target.GetComponent<AddFollower>();
+        follower = target.GetComponent<AddFollower>();
     }
 
     public override void OnEnter()
     {
         //选题定向 文献回顾    设计规划 获取批准    收集数据
-         // 数据分析    得出结论 撰写报告    发表分享
+        // 数据分析    得出结论 撰写报告    发表分享
         base.OnEnter();
         player.cardGenerateList.Add("选题定向");
         player.cardGenerateList.Add("文献回顾");
@@ -635,7 +637,7 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
                     case 0: player.AddBuff("治愈Ⅲ型"); break;
                     case 1: player.AddBuff("治愈Ⅱ型"); break;
                     case 2: player.AddBuff("治愈Ⅰ型"); break;
-                    case 3: player.AddBuff("灼伤");i--; break;
+                    case 3: player.AddBuff("灼伤"); i--; break;
                     case 4: player.AddBuff("正义"); break;
                     case 5: player.AddBuff("中毒"); i--; break;
                     case 6: player.AddBuff("凝重"); i--; break;
@@ -689,6 +691,143 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
         player.abnormalityResistance -= 10;
         cardController.DelPosition();
         follower.Del();
+    }
+}
+public class MisunderstoodWerewolfFeatherBuff : EquipmentFeatherBuff
+{
+    Player player;
+    private PlayerCardController cardController;
+    private float timer1;
+    private float oriBuffNumber;
+    private int oriCount;
+    private bool isFirst=true;
+    int attackbodyOriNum;
+    int attackbodyNewNum;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.feather = new EllieEquipmentFeather();
+        this.player = target as Player;
+        cardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
+    }
+
+    public override void OnEnter()
+    {
+        //误解    成见    倒施    罪人    傲慢    偏见    哀伤    忧郁
+        //韧性+10    力量+15    异常抗性+20    伤痕抗性+4     卡牌卡槽+1
+        base.OnEnter();
+        player.cardGenerateList.Add("误解");
+        player.cardGenerateList.Add("成见");
+        player.cardGenerateList.Add("倒施");
+        player.cardGenerateList.Add("罪人");
+        player.cardGenerateList.Add("傲慢");
+        player.cardGenerateList.Add("偏见");
+        player.cardGenerateList.Add("哀伤");
+        player.cardGenerateList.Add("忧郁");
+        player.tenacity += 10;
+        player.strength += 15;
+        player.abnormalityResistance += 20;
+        player.traumaResistance += 4;
+        //生而为狼
+        player.AddBuff("误解");
+        cardController.AddPosition();
+        attackbodyOriNum = target.attackBodyObjList.Count;
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        //生而为狼
+        attackbodyNewNum = target.attackBodyObjList.Count;
+        if (attackbodyNewNum > attackbodyOriNum)
+        {
+            target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("伤痕");
+            target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("心灵苦痛");
+            timer = 0;
+        }
+        if (attackbodyNewNum < attackbodyOriNum)
+        {
+            attackbodyOriNum = attackbodyNewNum;
+        }
+        timer1 += Time.deltaTime;
+        //忧郁创伤
+        if (player.buffList.Count != oriCount)
+        {
+            float debuffNumber = 0;
+            foreach (var buff in player.buffList)
+            {
+                if (buff.name == "伤痕")
+                {
+                    debuffNumber++;
+                }
+            }
+            if (debuffNumber > 0 && debuffNumber != oriBuffNumber)
+            {
+                player.tenacity += debuffNumber - oriBuffNumber;
+                player.abnormalityResistance += debuffNumber - oriBuffNumber;
+                oriBuffNumber = debuffNumber;
+                if (!isFirst)
+                {
+                    player.strength -= 5;
+                }
+                isFirst = true;
+            }
+            if (isFirst && debuffNumber == 0)
+            {
+                player.strength += 5;
+                isFirst=false;
+            }
+            oriCount=player.buffList.Count;
+        }
+        //无辜者
+        if(timer1>40)
+        {
+            foreach(var feather in player.unlockedFeathers)
+            {
+                if(feather.health<feather.maxHealth/5)
+                {
+                    player.shields.Add(new Shield() { health = 150,timer= 17 });
+                    break;            
+                }
+            }
+            timer1 = 0;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.cardGenerateList.Remove("误解");
+        player.cardGenerateList.Remove("成见");
+        player.cardGenerateList.Remove("倒施");
+        player.cardGenerateList.Remove("罪人");
+        player.cardGenerateList.Remove("傲慢");
+        player.cardGenerateList.Remove("偏见");
+        player.cardGenerateList.Remove("哀伤");
+        player.cardGenerateList.Remove("忧郁");
+        player.tenacity -= 10;
+        player.strength -= 15;
+        player.abnormalityResistance -= 20;
+        player.traumaResistance -= 4;
+        if (!isFirst)
+        {
+            player.strength -= 5;
+        }
+        for (int i = 0; i < player.buffList.Count; i++)
+        {
+            if (player.buffList[i].name == "误解")
+            {
+                if (((Misunderstanding)player.buffList[i]).grade == 1)
+                {
+                    player.buffList.RemoveAt(i);
+                }
+                else
+                {
+                    ((Misunderstanding)player.buffList[i]).grade--;
+                }
+                break;
+            }
+        }
+        cardController.DelPosition();
     }
 }
 
@@ -1358,7 +1497,7 @@ public class Trauma : EffectBuff
             {
                 if (character.unlockedFeathers.Count > 0 && health - character.unlockedFeathers[0].health >= 1)
                 {
-                    character.unlockedFeathers[0].health -= damage*Mathf.Pow(2, -character.abnormalityResistance / 100) * (1 - character.traumaResistance * 0.1f);
+                    character.unlockedFeathers[0].health -= damage * Mathf.Pow(2, -character.abnormalityResistance / 100) * (1 - character.traumaResistance * 0.1f);
                     attackTimer = 0;
                     if (Random.Range(0, 3) > 1)
                     {
@@ -3494,7 +3633,7 @@ public class Defend : EffectBuff
     {
         base.Init(target, timer, isPermanent);
         character = target.GetComponent<Character>();
-        float change=0;
+        float change = 0;
         character.shields.Add(new Shield() { health = character.tenacity / 20, timer = 9999999 });
         this.timer = 0;
     }
@@ -3527,9 +3666,9 @@ public class Rethink : EffectBuff
         }
         else
         {
-            if(target.GetComponent<Player>() != null)
+            if (target.GetComponent<Player>() != null)
             {
-                 Player player = target.GetComponent<Player>();
+                Player player = target.GetComponent<Player>();
                 player.GenerateCard();
                 player.AddBuff("坚韧");
             }
@@ -3555,7 +3694,7 @@ public class Rethink : EffectBuff
 public class Misunderstanding : EffectBuff
 {
     Character character;
-    public int grade=1;
+    public int grade = 1;
     private int buffCount1;
     private int buffCount2;
     private bool b1, b2;
@@ -3569,7 +3708,7 @@ public class Misunderstanding : EffectBuff
             if (buff.name == "误解")
             {
                 ((Misunderstanding)buff).grade++;
-                this.timer= 0;   
+                this.timer = 0;
             }
         }
     }
@@ -3588,13 +3727,13 @@ public class Misunderstanding : EffectBuff
         }
         if (grade >= 1)
         {
-            if(character.buffList.Count !=buffCount1)
+            if (character.buffList.Count != buffCount1)
             {
-                if(character.buffList.Count>buffCount1)
+                if (character.buffList.Count > buffCount1)
                 {
-                    for(int i = buffCount1;  i < character.buffList.Count; i++)
+                    for (int i = buffCount1; i < character.buffList.Count; i++)
                     {
-                        if (character.buffList[i].name == "伤痕"&& ((Trauma)character.buffList[i]).damage==1)
+                        if (character.buffList[i].name == "伤痕" && ((Trauma)character.buffList[i]).damage == 1)
                         {
                             ((Trauma)character.buffList[i]).damage++;
                         }
@@ -3603,7 +3742,7 @@ public class Misunderstanding : EffectBuff
                 buffCount1 = character.buffList.Count;
             }
         }
-        if(grade >= 2)
+        if (grade >= 2)
         {
             if (!b1)
             {
@@ -3625,7 +3764,7 @@ public class Misunderstanding : EffectBuff
                 buffCount2 = character.buffList.Count;
             }
         }
-        if(grade==3)
+        if (grade == 3)
         {
             if (!b2)
             {
@@ -3720,6 +3859,29 @@ public class ExperimentAttackEffectBuff : EffectBuff
         }
     }
 
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+}
+public class MentalAnguish : EffectBuff
+{
+    private Character character;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        character = target.GetComponent<Character>();
+        character.abnormalityResistance--;
+        this.timer = 0;
+    }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
     public override void OnExit()
     {
         base.OnExit();

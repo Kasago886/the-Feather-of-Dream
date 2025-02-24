@@ -111,6 +111,8 @@ public class BuffContainer
         {"散梦",typeof (ExperimentPlayerAttackBuff) },
         {"聚梦替身",typeof (ExperimentPlayerAttackBuff1) },
         {"聚梦",typeof (ExperimentAttackEffectBuff) },
+        {"心灵苦痛",typeof (MentalAnguish) },//使对象减少1点异常抗性
+        {"局中人",typeof (MisunderstoodWerewolfFeatherBuff) },
     };
 
     /*
