@@ -130,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: backGroundStory
-      value: 
+      value: "\"\u4F24\u75D5\"\uFF1A\u5728\u6709\u7FBD\u89E3\u9501\u7684\u6761\u4EF6\u4E0B\uFF0C\u53D7\u5230\u4E0D\n\u4F4E\u4E8E1\u70B9\u4F24\u5BB3\u540E\u6263\u96641\u6EF4\u8840\uFF0C\u5E76\u67091/3\u7684\u6982\n\u7387\u89E3\u9664\u8BE5buff"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: dragOnCharactor

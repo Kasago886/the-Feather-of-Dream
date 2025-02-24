@@ -257,9 +257,9 @@ public class PlayerCardController : MonoBehaviour
     }
     private void Update()
     {
-        if (positionNumber < 1)
+        if (positionNumber < 0)
         {
-            positionNumber = 1;
+            positionNumber = 0;
         }
         remainingSlotCount=positionNumber-content.transform.childCount;
     }
