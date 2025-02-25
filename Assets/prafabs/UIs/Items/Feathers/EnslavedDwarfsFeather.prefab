@@ -195,7 +195,7 @@ MonoBehaviour:
     featherMaxHealth: 0
     dialogName: 
     position: 0
-  buffName: "007\uFF01no\uFF01"
+  buffName: "007\uFF1Fno\uFF01"
   featherHealth: 200
   dialogName: 
   isEquiped: 0

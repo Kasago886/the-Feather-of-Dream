@@ -700,7 +700,7 @@ public class MisunderstoodWerewolfFeatherBuff : EquipmentFeatherBuff
     private float timer1;
     private float oriBuffNumber;
     private int oriCount;
-    private bool isFirst=true;
+    private bool isFirst = true;
     int attackbodyOriNum;
     int attackbodyNewNum;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
@@ -742,7 +742,6 @@ public class MisunderstoodWerewolfFeatherBuff : EquipmentFeatherBuff
         {
             target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("伤痕");
             target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("心灵苦痛");
-            timer = 0;
         }
         if (attackbodyNewNum < attackbodyOriNum)
         {
@@ -774,19 +773,19 @@ public class MisunderstoodWerewolfFeatherBuff : EquipmentFeatherBuff
             if (isFirst && debuffNumber == 0)
             {
                 player.strength += 5;
-                isFirst=false;
+                isFirst = false;
             }
-            oriCount=player.buffList.Count;
+            oriCount = player.buffList.Count;
         }
         //无辜者
-        if(timer1>40)
+        if (timer1 > 40)
         {
-            foreach(var feather in player.unlockedFeathers)
+            foreach (var feather in player.unlockedFeathers)
             {
-                if(feather.health<feather.maxHealth/5)
+                if (feather.health < feather.maxHealth / 5)
                 {
-                    player.shields.Add(new Shield() { health = 150,timer= 17 });
-                    break;            
+                    player.shields.Add(new Shield() { health = 150, timer = 17 });
+                    break;
                 }
             }
             timer1 = 0;
@@ -828,6 +827,93 @@ public class MisunderstoodWerewolfFeatherBuff : EquipmentFeatherBuff
             }
         }
         cardController.DelPosition();
+    }
+}
+public class EnslavedDwarfsFeatherBuff : EquipmentFeatherBuff
+{
+    Player player;
+    private PlayerCardController cardController;
+    private float timer1;
+    private float strengthChange, tenacityChange;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.feather = new EllieEquipmentFeather();
+        this.player = target as Player;
+        cardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
+    }
+
+    public override void OnEnter()
+    {
+        //        韧性 + 10    力量 + 5
+        //获得被动“麻木之心”
+        //每20s获得1层麻木
+        //获得被动“反抗之意”
+        //当玩家不持有卡牌时，使玩家的力量增加30 %，当玩家卡牌槽
+        //已满时，使玩家韧性增加50 %
+        //卡牌：
+        //        破链反击
+        //        枷锁怒涛
+        //破除奴性
+        //笼中怒吼
+
+        base.OnEnter();
+        player.cardGenerateList.Add("破链反击");
+        player.cardGenerateList.Add("枷锁怒涛");
+        player.cardGenerateList.Add("破除奴性");
+        player.cardGenerateList.Add("笼中怒吼");
+        player.tenacity += 10;
+        player.strength += 5;
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        //麻木之心
+        if (timer1 > 20)
+        {
+            player.AddBuff("麻木");
+            timer1 = 0;
+        }
+        //反抗之意
+        if (cardController.remainingSlotCount == 0)
+        {
+            tenacityChange = player.tenacity / 2;
+            player.tenacity += tenacityChange;
+        }
+        else
+        {
+            player.tenacity -= tenacityChange;
+            tenacityChange = 0;
+        }
+        if (cardController.remainingSlotCount == cardController.positionNumber)
+        {
+            strengthChange = player.strength * 0.3f;
+            player.strength += strengthChange;
+        }
+        else
+        {
+            player.strength -= strengthChange;
+            strengthChange = 0;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.cardGenerateList.Remove("破链反击");
+        player.cardGenerateList.Remove("枷锁怒涛");
+        player.cardGenerateList.Remove("破除奴性");
+        player.cardGenerateList.Remove("笼中怒吼");
+        player.tenacity -= 10;
+        player.strength -= 5;
+        if (tenacityChange != 0)
+        {
+            player.tenacity -= tenacityChange;
+        }
+        if (strengthChange != 0)
+        {
+            player.strength -= strengthChange;
+        }
     }
 }
 
@@ -2989,7 +3075,7 @@ public class RandomBuff : EffectBuff
         if (target.GetComponent<Character>() != null)
         {
             character = target.GetComponent<Character>();
-            int n = Random.Range(0, 30);
+            int n = Random.Range(0, 42);
             switch (n)
             {
                 case 0: character.AddBuff("治愈Ⅲ型"); break;
@@ -3022,6 +3108,18 @@ public class RandomBuff : EffectBuff
                 case 27: character.AddBuff("灼伤脆弱"); break;
                 case 28: character.AddBuff("伤痕抵抗"); break;
                 case 29: character.AddBuff("伤痕脆弱"); break;
+                case 30: character.AddBuff("正义"); break;
+                case 31: character.AddBuff("铁心"); break;
+                case 32: character.AddBuff("巧手"); break;
+                case 33: character.AddBuff("护盾"); break;
+                case 34: character.AddBuff("释然"); break;
+                case 35: character.AddBuff("守护"); break;
+                case 36: character.AddBuff("反省"); break;
+                case 37: character.AddBuff("误解"); break;
+                case 38: character.AddBuff("不稳定突变"); break;
+                case 39: character.AddBuff("倒施"); break;
+                case 40: character.AddBuff("梦缠"); break;
+                case 41: character.AddBuff("心灵苦痛"); break;
             }
         }
         this.timer = 0;
@@ -3845,7 +3943,7 @@ public class ExperimentAttackEffectBuff : EffectBuff
         {
             timer = 0;
         }
-        if (timer <= 0.5f&&timer>0)
+        if (timer <= 0.5f && timer > 0)
         {
             timer = 0;
             target.gameObject.transform.position = GameObject.Find("Player").transform.position;
@@ -3886,7 +3984,7 @@ public class ExperimentEffectBuff : EffectBuff
     {
         base.OnUpdate();
 
-       
+
     }
 
     public override void OnExit()
@@ -3944,7 +4042,7 @@ public class ExperimentEffectBuff1 : EffectBuff
     public override void OnExit()
     {
         base.OnExit();
-    
+
     }
 }
 public class ExperimentEffectBuff2 : EffectBuff
@@ -3966,7 +4064,7 @@ public class ExperimentEffectBuff2 : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if ( Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             player.AddBuff("减速");
         }
@@ -4056,7 +4154,7 @@ public class MentalAnguish : EffectBuff
 public class Fissure5 : EffectBuff
 {
     private Character character;
-    private float health, attackTimer, number=5;
+    private float health, attackTimer, number = 5;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);

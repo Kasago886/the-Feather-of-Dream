@@ -103,7 +103,7 @@ public class BuffContainer
         {"释然",typeof(Relieve) },//如果对象的韧性为正时，将对象的韧性/10转换为力量，持续60s(注意：使用之后韧性归零)，如果韧性为不为正时则+10韧性
         {"实验中",typeof (NeprizFeatherBuff) },
         {"守护",typeof (Defend) },//获得等同于韧性5%的护盾
-        {"反省",typeof (Rethink) },//如果对象韧性为负则将其韧性转为正，如果不为正则抽一张牌
+        {"反省",typeof (Rethink) },//如果对象韧性为负则将其韧性转为正，如果为正则抽一张牌
         {"误解",typeof (Misunderstanding) },//增强“伤痕”，持续时间无限，只能有1层，重复获得“误解”可以提高其等级
         //1级：增加1点“伤痕”伤害  2级：增加2点“伤痕”伤害，并降低20点异常抵抗  3级：增加2点“伤痕”伤害，并在降低20点异常抵抗的基础上降低10%的
         //异常抵抗并降低3点伤痕抵抗
@@ -118,6 +118,7 @@ public class BuffContainer
         {"心灵苦痛",typeof (MentalAnguish) },//使对象减少1点异常抗性
         {"局中人",typeof (MisunderstoodWerewolfFeatherBuff) },
         {"裂隙Ⅴ",typeof (Fissure5) },//充能5级的裂隙
+        {"007?no!",typeof (EnslavedDwarfsFeatherBuff) },
     };
 
     /*
