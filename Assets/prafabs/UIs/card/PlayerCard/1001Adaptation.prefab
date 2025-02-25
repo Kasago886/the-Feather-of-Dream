@@ -13,8 +13,20 @@ PrefabInstance:
       value: 1001Adaptation
       objectReference: {fileID: 0}
     - target: {fileID: 5564923598690722616, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 8e19cf951dbb18a4fa9a03f4e3515d78, type: 3}
+    - target: {fileID: 5564923598690722616, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_FontData.m_BestFit
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564923598690722616, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564923598690722616, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Pivot.x
@@ -296,6 +308,26 @@ PrefabInstance:
       propertyPath: effectsPlayer.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8848506671254137145, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -14.5051
+      objectReference: {fileID: 0}
+    - target: {fileID: 8848506671254137145, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -116.4651
+      objectReference: {fileID: 0}
+    - target: {fileID: 8848506671254137145, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.9800987
+      objectReference: {fileID: 0}
+    - target: {fileID: 8848506671254137145, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -9.4086
+      objectReference: {fileID: 0}
+    - target: {fileID: 9067393774502167802, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 8e19cf951dbb18a4fa9a03f4e3515d78, type: 3}
     - target: {fileID: 9067393774502167802, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_FontData.m_BestFit
       value: 1

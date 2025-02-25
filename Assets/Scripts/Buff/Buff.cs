@@ -447,7 +447,7 @@ public class BurningDocumentsFeatherBuff : EquipmentFeatherBuff
     {
         base.Init(target, timer, isPermanent);
 
-        this.feather = new EllieEquipmentFeather();
+        this.feather = new EllieEquipmentFeather(200);
         this.player = target as Player;
     }
 
@@ -544,7 +544,7 @@ public class AddFollower : MonoBehaviour
     public GameObject follower;
     public void Add()
     {
-        follower = Instantiate(Resources.Load<GameObject>("AttackBodys / Nepriz / Follwer.prefab"), new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0), Quaternion.identity);
+        follower = Instantiate(Resources.Load<GameObject>("AttackBodys/Nepriz/Follwer"), new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0), Quaternion.identity);
     }
     public void Del()
     {
@@ -567,7 +567,7 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.feather = new EllieEquipmentFeather();
+        this.feather = new EllieEquipmentFeather(120);
         this.player = target as Player;
         cardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
         target.gameObject.AddComponent<AddFollower>();
@@ -627,17 +627,17 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
             health = health0;
         }
         //自扰
-        if (timer2 > 60)
+        if (timer2 > 16)
         {
             for (int i = 0; i < 3; i++)
             {
-                int n = Random.Range(0, 30);
+                int n = Random.Range(0, 42);
                 switch (n)
                 {
                     case 0: player.AddBuff("治愈Ⅲ型"); break;
                     case 1: player.AddBuff("治愈Ⅱ型"); break;
                     case 2: player.AddBuff("治愈Ⅰ型"); break;
-                    case 3: player.AddBuff("灼伤"); i--; break;
+                    case 3: player.AddBuff("灼伤");i--; break;
                     case 4: player.AddBuff("正义"); break;
                     case 5: player.AddBuff("中毒"); i--; break;
                     case 6: player.AddBuff("凝重"); i--; break;
@@ -664,6 +664,18 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
                     case 27: player.AddBuff("灼伤脆弱"); i--; break;
                     case 28: player.AddBuff("伤痕抵抗"); break;
                     case 29: player.AddBuff("伤痕脆弱"); i--; break;
+                    case 30: player.AddBuff("正义"); break;
+                    case 31: player.AddBuff("铁心"); break;
+                    case 32: player.AddBuff("巧手"); break;
+                    case 33: player.AddBuff("护盾"); break;
+                    case 34: player.AddBuff("释然"); i--; break;
+                    case 35: player.AddBuff("守护"); break;
+                    case 36: player.AddBuff("反省"); break;
+                    case 37: player.AddBuff("误解"); i--; break;
+                    case 38: player.AddBuff("不稳定突变"); break;
+                    case 39: player.AddBuff("倒施"); break;
+                    case 40: player.AddBuff("梦缠"); i--; break;
+                    case 41: player.AddBuff("心灵苦痛"); i--; break;
                 }
             }
             timer2 = 0;
@@ -706,7 +718,7 @@ public class MisunderstoodWerewolfFeatherBuff : EquipmentFeatherBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.feather = new EllieEquipmentFeather();
+        this.feather = new EllieEquipmentFeather(300);
         this.player = target as Player;
         cardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
     }
@@ -838,7 +850,7 @@ public class EnslavedDwarfsFeatherBuff : EquipmentFeatherBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.feather = new EllieEquipmentFeather();
+        this.feather = new EllieEquipmentFeather(200);
         this.player = target as Player;
         cardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
     }
@@ -953,6 +965,7 @@ public class TinWoodmanFeatherBuff : EquipmentFeatherBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
+        this.feather = new EllieEquipmentFeather(220);
         this.player = target as Player;
     }
 
@@ -962,7 +975,7 @@ public class TinWoodmanFeatherBuff : EquipmentFeatherBuff
         player.strength += 2;
         player.strength -= 10;
         player.cardGenerateList.Add("铁心");
-        oriBuffNumber=player.buffList.Count;
+        oriBuffNumber = player.buffList.Count;
     }
     public override void OnUpdate()
     {

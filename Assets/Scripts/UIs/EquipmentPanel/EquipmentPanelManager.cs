@@ -12,7 +12,10 @@ public class EquipmentPanelManager : MonoBehaviour
     public Text expNumber;
     public RectTransform expProgress;
     public Text tenacity;
+    public Text abnormalityResistance;
     public Text strength;
+    public Text traumaResistance;
+    public Text burnResistance;
     public Text feather;
     public Text dream;
     public Transform featherEquipContent;
@@ -361,8 +364,11 @@ public class EquipmentPanelManager : MonoBehaviour
         expProgress.sizeDelta = new Vector2(300 * playerInfo.currentExp / playerInfo.maxExp, expProgress.sizeDelta.y);
         if (player != null)
         {
-            tenacity.text = player.tenacity.ToString();
-            strength.text = player.strength.ToString();
+            tenacity.text = ((int)player.tenacity).ToString();
+            strength.text = ((int)player.strength).ToString();
+            abnormalityResistance.text=((int)player.abnormalityResistance).ToString();
+            traumaResistance.text=player.traumaResistance.ToString();
+            burnResistance.text = player.burnResistance.ToString();
         }
         else
         {

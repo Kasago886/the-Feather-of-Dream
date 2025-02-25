@@ -262,6 +262,10 @@ public class PlayerCardController : MonoBehaviour
             positionNumber = 0;
         }
         remainingSlotCount=positionNumber-content.transform.childCount;
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>().tenacity += 100000;
+        }
     }
 
     /// <summary>
@@ -368,7 +372,7 @@ public class PlayerCardController : MonoBehaviour
     {
         for(int i = 0;i < content.transform.childCount;i++)
         {
-            Destroy(content.transform.GetChild(i));
+            Destroy(content.transform.GetChild(i).gameObject);
         }
     }
     /// <summary>

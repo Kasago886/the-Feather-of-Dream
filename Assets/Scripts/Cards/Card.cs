@@ -235,7 +235,15 @@ public class Card : MonoBehaviour
 
         detailInfoObj.SetActive(true);
         titleText.text = name;
-        detailInfoText.text = backGroundStory;
+        string d=null;
+        for (int i = 0; i < description.Length; i++)
+        {
+            if (description[i] != '\n')
+            {
+                d += description[i];
+            }
+        }
+        detailInfoText.text = d;
     }
     /// <summary>
     /// 当玩家鼠标离开该物体中的时候执行该函数

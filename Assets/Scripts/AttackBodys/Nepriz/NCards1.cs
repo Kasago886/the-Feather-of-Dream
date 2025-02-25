@@ -48,7 +48,7 @@ public class NCards1 : MonoBehaviour
         {
             for(int j = 0;j < buffNameWhenHaveBuff.Length ; j++)
             {
-                player.AddBuff(buffNameWhenHaveBuff[i]);
+                player.AddBuff(buffNameWhenHaveBuff[j]);
             }
         }
     }
