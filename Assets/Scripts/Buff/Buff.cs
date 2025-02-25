@@ -386,6 +386,36 @@ public class TheMisunderstoodWerewolfEquipmentBuff : EquipmentBuff
         player.cardGenerateList.Remove("罪人");
     }
 }
+public class ExperimentPlayerEquipmentBuff : EquipmentBuff
+{
+    Player player;
+    PlayerController PlayerController;
+    private PlayerCardController playerCardController;
+    public override void OnEnter()
+    {
+        //误解 成见    倒施 罪人
+        base.OnEnter();
+        player = target.GetComponent<Player>();
+        PlayerController = target.GetComponent<PlayerController>();
+        PlayerController.walkSpeed += 1;
+        player.cardGenerateList.Add("凝聚");
+        player.cardGenerateList.Add("破立");
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        PlayerController.walkSpeed -= 1;
+        player.cardGenerateList.Remove("凝聚");
+        player.cardGenerateList.Remove("破立");
+
+    }
+}
 #endregion
 
 #region 装备羽buff
@@ -4202,6 +4232,7 @@ public class MentalAnguish : EffectBuff
         base.OnExit();
     }
 }
+
 public class Fissure5 : EffectBuff
 {
     private Character character;
@@ -4250,6 +4281,106 @@ public class Fissure5 : EffectBuff
             }
         }
         character.unlockedFeathers[0].health -= buffNumber * number * Mathf.Pow(2, -character.abnormalityResistance / 100);
+    }
+}
+public class Condensation : EffectBuff
+{
+    private Character character;
+    PlayerController PlayerController;
+    float removeTen;
+    float removeSpeed;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        character = target.GetComponent<Character>();
+        PlayerController = target.GetComponent<PlayerController>();
+        this.timer = 3;
+        removeTen = 40;
+        removeSpeed = PlayerController.walkSpeed / 1.25f;
+    }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        character.tenacity -= removeTen;
+        PlayerController.walkSpeed -= removeSpeed;
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+    public override void OnExit()
+    {
+        base.OnExit();
+        character.tenacity += removeTen;
+        PlayerController.walkSpeed += removeSpeed;
+        character.AddBuff("兴奋");
+    }
+}
+public class Excited : EffectBuff
+{
+    private Character character;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            character = target.GetComponent<Character>();
+        }
+        this.timer = 10f;
+    }
+
+    public override void OnEnter()
+    {
+        character.strength += 50;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        character.strength -= 50;
+        base.OnExit();
+    }
+}
+public class Parry : EffectBuff
+{
+    private Character character;
+    float oriHp;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);      
+        this.timer = 0.5f;
+        character = target.GetComponent<Character>();
+        oriHp = character.feathers[0].health;
+    }
+
+    public override void OnEnter()
+    {
+        character.tenacity += 300;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (character.feathers[0].health > oriHp)
+        {
+            oriHp = character.feathers[0].health;
+        }
+        if (character.feathers[0].health < oriHp)
+        {
+            character.AddBuff("兴奋");
+        }
+    }
+
+    public override void OnExit()
+    {
+        character.tenacity -= 300;
+        base.OnExit();
     }
 }
 #endregion

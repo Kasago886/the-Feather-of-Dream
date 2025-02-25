@@ -30,6 +30,7 @@ public class BuffContainer
         {"小矮人残羽",typeof(DwarfsEquipmentBuff) },
         {"污染克隆残羽",typeof(ContaminatedCloneEquipmentBuff) },
         {"奴役矮人残羽",typeof(EnslavedDwarfsEquipmentBuff) },
+        {"故“我”之残羽",typeof(ExperimentPlayerEquipmentBuff) },
         {"艾莉之剑", typeof(ElliesSwordAttackBuff) },
         {"王子之剑", typeof(PrinceSwordAttackBuff) },
         {"侍卫短剑", typeof(PrinceGuardSwordAttackBuff) },
@@ -120,6 +121,9 @@ public class BuffContainer
         {"裂隙Ⅴ",typeof (Fissure5) },//充能5级的裂隙
         {"007?no!",typeof (EnslavedDwarfsFeatherBuff) },
         {"修补自我",typeof (TinWoodmanFeatherBuff) },
+        {"凝聚",typeof (Condensation) },
+        {"兴奋",typeof (Excited) },
+        {"破立",typeof (Parry) },
 
     };
 
