@@ -180,9 +180,9 @@ MonoBehaviour:
   itemName: "\u94C1\u76AE\u4EBA\u6B8B\u7FBD"
   information: "\u51B0\u51B7\u7684\u80F8\u819B\u7A7A\u7A7A\u8361\u8361\uFF0C\u771F\u6B63\u7684\u5FC3\u810F\u53C8\u5728\u4F55\u65B9\uFF1F\n\n\u97E7\u6027+10\n\n\u5361\u724C\uFF1A\n\u94C1\u5FC3"
   type: 1
-  isDreamizable: 0
+  isDreamizable: 1
   dreamizeCost: 1
-  dreamizedFeather: {fileID: 1240171927397317818, guid: 3f752d1b02561264a85719512c565f18, type: 3}
+  dreamizedFeather: {fileID: 1240171927397317818, guid: 78459bae25231e0419a7c93cea52e253, type: 3}
   dreamizedFeatherInfo:
     itemName: 
     information: 

@@ -946,6 +946,44 @@ public class EllieEquipmentFeatherBuff : EquipmentFeatherBuff
         player.cardGenerateList.Remove("正义");
     }
 }
+public class TinWoodmanFeatherBuff : EquipmentFeatherBuff
+{
+    Player player;
+    private float oriBuffNumber;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.player = target as Player;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player.strength += 2;
+        player.strength -= 10;
+        player.cardGenerateList.Add("铁心");
+        oriBuffNumber=player.buffList.Count;
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (player.buffList.Count != oriBuffNumber)
+        {
+            if (player.feathers.Count > 0)
+            {
+                player.feathers[0].health += Mathf.Abs(player.buffList.Count - oriBuffNumber);
+                oriBuffNumber = player.buffList.Count;
+            }
+        }
+    }
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.strength -= 10;
+        player.tenacity -= 2;
+        player.cardGenerateList.Remove("艾莉之剑");
+    }
+}
 
 #endregion
 

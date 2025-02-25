@@ -119,6 +119,8 @@ public class BuffContainer
         {"局中人",typeof (MisunderstoodWerewolfFeatherBuff) },
         {"裂隙Ⅴ",typeof (Fissure5) },//充能5级的裂隙
         {"007?no!",typeof (EnslavedDwarfsFeatherBuff) },
+        {"修补自我",typeof (TinWoodmanFeatherBuff) },
+
     };
 
     /*
