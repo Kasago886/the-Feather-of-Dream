@@ -592,7 +592,7 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
     private float timer1, timer2;
     private float featherCount;
     private List<string> debuffContain = new List<string> { "ÉËºÛ", "ÓÇÓô", "±ÀÀ£", "·²Ó¹", "Î®ÃÒ",
-        "´àÈõ", "³Ù»º", "ÄıÖØ", "ÖĞ¶¾", "×ÆÉË", "Òì³£´àÈõ","×ÆÉË´àÈõ","ÉËºÛ´àÈõ" };
+        "´àÈõ", "³Ù»º", "ÄıÖØ", "ÖĞ¶¾", "×ÆÉË", "Òì³£´àÈõ","×ÆÉË´àÈõ","ÉËºÛ´àÈõ" ,"Îó½â", "ÃÎ²ø","ĞÄÁé¿àÍ´","ÊÍÈ»"};
     private AddFollower follower;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
@@ -667,7 +667,7 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
                     case 0: player.AddBuff("ÖÎÓú¢óĞÍ"); break;
                     case 1: player.AddBuff("ÖÎÓú¢òĞÍ"); break;
                     case 2: player.AddBuff("ÖÎÓú¢ñĞÍ"); break;
-                    case 3: player.AddBuff("×ÆÉË");i--; break;
+                    case 3: player.AddBuff("×ÆÉË"); i--; break;
                     case 4: player.AddBuff("ÕıÒå"); break;
                     case 5: player.AddBuff("ÖĞ¶¾"); i--; break;
                     case 6: player.AddBuff("ÄıÖØ"); i--; break;
@@ -857,13 +857,13 @@ public class MisunderstoodWerewolfFeatherBuff : EquipmentFeatherBuff
         {
             if (player.buffList[i].name == "Îó½â")
             {
-                if (((Misunderstanding)player.buffList[i]).grade == 1)
+                if (((Misunderstanding)player.buffList[i]).number == 1)
                 {
                     player.buffList.RemoveAt(i);
                 }
                 else
                 {
-                    ((Misunderstanding)player.buffList[i]).grade--;
+                    ((Misunderstanding)player.buffList[i]).number--;
                 }
                 break;
             }
@@ -3446,7 +3446,7 @@ public class TraumaFragility : EffectBuff
         base.OnExit();
     }
 }
-public class Fissure : EffectBuff
+public class Fissure : EffectBuff, Energize
 {
     private Character character;
     private float health, attackTimer, number;
@@ -3494,6 +3494,10 @@ public class Fissure : EffectBuff
             }
         }
         character.unlockedFeathers[0].health -= buffNumber * number * Mathf.Pow(2, -character.abnormalityResistance / 100);
+    }
+    public float GetNumber()
+    {
+        return number;
     }
 }
 public class BurningDocumentsEffectBuff1 : EffectBuff
@@ -3582,15 +3586,15 @@ public class DwarfsFeatherEffectBuff : EffectBuff
 }
 public class ContaminatedCloneEffectBuff : EffectBuff
 {
-    Enemy enemy;
+    Character character;
     float abnormalityResistance;
     float addStrength;
     float addTenacity;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        enemy = target.GetComponent<Enemy>();
-        this.abnormalityResistance = enemy.abnormalityResistance;
+        character = target.GetComponent<Character>();
+        this.abnormalityResistance = character.abnormalityResistance;
         this.timer = 10;
     }
 
@@ -3599,8 +3603,8 @@ public class ContaminatedCloneEffectBuff : EffectBuff
         base.OnEnter();
         addStrength = Random.Range(-50 + abnormalityResistance, 30 + abnormalityResistance);
         addTenacity = Random.Range(-50 + abnormalityResistance, 30 + abnormalityResistance);
-        enemy.strength += addStrength;
-        enemy.tenacity += addTenacity;
+        character.strength += addStrength;
+        character.tenacity += addTenacity;
     }
 
     public override void OnUpdate()
@@ -3611,8 +3615,8 @@ public class ContaminatedCloneEffectBuff : EffectBuff
     public override void OnExit()
     {
         base.OnExit();
-        enemy.strength -= addStrength;
-        enemy.tenacity -= addTenacity;
+        character.strength -= addStrength;
+        character.tenacity -= addTenacity;
     }
 }
 public class ShieldEffectBuff : EffectBuff
@@ -3870,10 +3874,10 @@ public class Rethink : EffectBuff
         base.OnExit();
     }
 }
-public class Misunderstanding : EffectBuff
+public class Misunderstanding : EffectBuff, Energize
 {
     Character character;
-    public int grade = 1;
+    public int number = 1;
     private int buffCount1;
     private int buffCount2;
     private bool b1, b2;
@@ -3886,7 +3890,7 @@ public class Misunderstanding : EffectBuff
         {
             if (buff.name == "Îó½â")
             {
-                ((Misunderstanding)buff).grade++;
+                ((Misunderstanding)buff).number++;
                 this.timer = 0;
             }
         }
@@ -3900,11 +3904,11 @@ public class Misunderstanding : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (grade > 3)
+        if (number > 3)
         {
-            grade = 3;
+            number = 3;
         }
-        if (grade >= 1)
+        if (number >= 1)
         {
             if (character.buffList.Count != buffCount1)
             {
@@ -3921,7 +3925,7 @@ public class Misunderstanding : EffectBuff
                 buffCount1 = character.buffList.Count;
             }
         }
-        if (grade >= 2)
+        if (number >= 2)
         {
             if (!b1)
             {
@@ -3943,7 +3947,7 @@ public class Misunderstanding : EffectBuff
                 buffCount2 = character.buffList.Count;
             }
         }
-        if (grade == 3)
+        if (number == 3)
         {
             if (!b2)
             {
@@ -3957,6 +3961,10 @@ public class Misunderstanding : EffectBuff
     public override void OnExit()
     {
         base.OnExit();
+    }
+    public float GetNumber()
+    {
+        return number;
     }
 }
 public class DoingThingsInACompletelyWrongOrOppositeWay : EffectBuff
@@ -4233,7 +4241,10 @@ public class MentalAnguish : EffectBuff
     }
 }
 
-public class Fissure5 : EffectBuff
+
+
+public class Fissure5 : EffectBuff, Energize
+
 {
     private Character character;
     private float health, attackTimer, number = 5;
@@ -4281,6 +4292,10 @@ public class Fissure5 : EffectBuff
             }
         }
         character.unlockedFeathers[0].health -= buffNumber * number * Mathf.Pow(2, -character.abnormalityResistance / 100);
+    }
+    public float GetNumber()
+    {
+        return number;
     }
 }
 public class Condensation : EffectBuff
@@ -4384,3 +4399,8 @@ public class Parry : EffectBuff
     }
 }
 #endregion
+public interface Energize
+{
+    float GetNumber();
+}
+

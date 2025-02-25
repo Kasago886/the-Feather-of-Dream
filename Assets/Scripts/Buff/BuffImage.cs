@@ -19,6 +19,11 @@ public class BuffImage : MonoBehaviour
         description = FindInactiveChild(GameObject.Find("Canvas").GetComponent<Transform>(), "buffDescription");
         description.SetActive(false);
     }
+    private void OnDestroy()
+    {
+        description = FindInactiveChild(GameObject.Find("Canvas").GetComponent<Transform>(), "buffDescription");
+        description.SetActive(false);
+    }
     public GameObject FindInactiveChild(Transform parent, string name)
     {
         foreach (Transform child in parent)

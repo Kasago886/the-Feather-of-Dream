@@ -67,7 +67,18 @@ public class BuffScroll : MonoBehaviour
                 GameObject g = Instantiate(nameToImformation[item.Key].buffPrefab,contentRectTransform);
                 g.GetComponent<BuffImage>().text = nameToImformation[item.Key].name+"\n"+ nameToImformation[item.Key].description;
                 buffDescDict.Add(item.Key, g.GetComponent<BuffImage>());
-                buffDescDict[item.Key].gameObject.GetComponentInChildren<Text>().text = newDict[item.Key].ToString();
+                buffDescDict[item.Key].gameObject.transform.GetChild(0).GetComponent<Text>().text = newDict[item.Key].ToString();
+                if (BuffContainer.buffDictionary[item.Key] is Energize)
+                {
+                    foreach (var buff in player.buffList)
+                    {
+                        if (buff.name == item.Key)
+                        {
+                            buffDescDict[item.Key].gameObject.transform.GetChild(1).GetComponent<Text>().text = ((Energize)buff).GetNumber().ToString();
+                            buffDescDict[item.Key].text = $"\n“—≥‰ƒ‹{((Energize)buff).GetNumber()}≤„";
+                        }
+                    }
+                }
             }
             else
             {
