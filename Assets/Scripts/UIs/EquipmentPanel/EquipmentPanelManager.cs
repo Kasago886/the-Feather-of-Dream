@@ -16,6 +16,8 @@ public class EquipmentPanelManager : MonoBehaviour
     public Text strength;
     public Text traumaResistance;
     public Text burnResistance;
+    public Text shieldCount;
+    public Text shieldNumber;
     public Text feather;
     public Text dream;
     public Transform featherEquipContent;
@@ -369,6 +371,23 @@ public class EquipmentPanelManager : MonoBehaviour
             abnormalityResistance.text=((int)player.abnormalityResistance).ToString();
             traumaResistance.text=player.traumaResistance.ToString();
             burnResistance.text = player.burnResistance.ToString();
+            if(player.shields.Count > 0)
+            {
+                shieldCount.text=player.shields.Count.ToString();
+                if (player.shields[0].timer < 9999)
+                {
+                    shieldNumber.text = player.shields[0].health.ToString() + "/" + ((int)player.shields[0].timer).ToString() + "s";
+                }
+                else
+                {
+                    shieldNumber.text = player.shields[0].health.ToString() + "/сю╬ц";
+                }
+            }
+            else
+            {
+                shieldCount.text = null;
+                shieldNumber.text = 0.ToString();
+            }
         }
         else
         {

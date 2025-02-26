@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 
 public class PlayerCardController : MonoBehaviour
@@ -243,9 +240,11 @@ public class PlayerCardController : MonoBehaviour
     private Dictionary<string, int> nameToID = new();
     private Dictionary<int, GameObject> idToCard = new();
     private RectTransform rectTransform;
+    private  Text slotNumberText;
     private void Start()
     {
         rectTransform=content.GetComponent<RectTransform>();
+        slotNumberText = GameObject.Find("slotNumberText").GetComponent<Text>();
         for (int i = 0; i < cardsList.Length; i++)
         {
             GameObject g= Instantiate(cardsList[i]);
@@ -262,9 +261,10 @@ public class PlayerCardController : MonoBehaviour
             positionNumber = 0;
         }
         remainingSlotCount=positionNumber-content.transform.childCount;
+        slotNumberText.text=positionNumber.ToString();
         if (Input.GetKeyDown(KeyCode.K))
         {
-            GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>().AddBuff("裂隙Ⅴ");
+            GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>().shields.Add(new Shield() { health = 99999, timer = 9999999 });
         }
     }
 
@@ -361,9 +361,9 @@ public class PlayerCardController : MonoBehaviour
     public void DelPosition(int i = 1)
     {
         positionNumber -= i;
-        while(content.transform.childCount > positionNumber&& content.transform.childCount>0)
+        while (content.transform.childCount > positionNumber && content.transform.childCount > 0)
         {
-            Destroy(content.transform.GetChild(content.transform.childCount-1));
+            DestroyImmediate(content.transform.GetChild(content.transform.childCount - 1).gameObject);
         }
     }
     /// 调用本函数清空玩家手牌

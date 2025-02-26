@@ -667,7 +667,7 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
                     case 0: player.AddBuff("治愈Ⅲ型"); break;
                     case 1: player.AddBuff("治愈Ⅱ型"); break;
                     case 2: player.AddBuff("治愈Ⅰ型"); break;
-                    case 3: player.AddBuff("灼伤"); i--; break;
+                    case 3: player.AddBuff("灼伤");i--;  break;
                     case 4: player.AddBuff("正义"); break;
                     case 5: player.AddBuff("中毒"); i--; break;
                     case 6: player.AddBuff("凝重"); i--; break;
