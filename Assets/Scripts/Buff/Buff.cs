@@ -1027,6 +1027,53 @@ public class TinWoodmanFeatherBuff : EquipmentFeatherBuff
         player.cardGenerateList.Remove("艾莉之剑");
     }
 }
+public class CrazyHunterEquipmentFeatherBuff : EquipmentFeatherBuff
+{
+    Player player;
+    int AttackBodyNum;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.feather = new EllieEquipmentFeather(150);
+        this.player = target as Player;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player.strength += 6;
+        player.tenacity += 6;
+        player.cardGenerateList.Add("狂猎之枪");
+        player.cardGenerateList.Add("噬血匕首");
+        player.cardGenerateList.Add("起动");
+        player.cardGenerateList.Add("连动");
+        player.cardGenerateList.Add("百解");
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (AttackBodyNum != player.attackBodyObjList.Count)
+        {
+            player.strength -= 5 * AttackBodyNum;
+            AttackBodyNum = player.attackBodyObjList.Count;
+            player.strength += 5 * AttackBodyNum;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.strength -= 5 * AttackBodyNum;
+        player.strength -= 6;
+        player.tenacity -= 6;
+        player.cardGenerateList.Remove("狂猎之枪");
+        player.cardGenerateList.Remove("噬血匕首");
+        player.cardGenerateList.Remove("起动");
+        player.cardGenerateList.Remove("连动");
+        player.cardGenerateList.Remove("百解");
+    }
+}
 
 #endregion
 
@@ -4028,6 +4075,7 @@ public class ExperimentAttackEffectBuff : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
+        if(character.feathers.Count!=0)
         if (character.feathers[0].health < oriHp)
         {
             timer = 0;
@@ -4057,7 +4105,7 @@ public class ExperimentEffectBuff : EffectBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.timer = 1;
+        this.timer =1.5f;
         Enemy = target.GetComponent<Enemy>();
 
     }
@@ -4065,7 +4113,7 @@ public class ExperimentEffectBuff : EffectBuff
     public override void OnEnter()
     {
         base.OnEnter();
-        Enemy.attackCooldown /= 5;
+        Enemy.attackCooldown /= 10;
         Enemy.attackCooldownTimer = 0;
     }
 
@@ -4079,7 +4127,7 @@ public class ExperimentEffectBuff : EffectBuff
     public override void OnExit()
     {
         base.OnExit();
-        Enemy.attackCooldown *= 5;
+        Enemy.attackCooldown *= 10;
     }
 }
 public class ExperimentEffectBuff1 : EffectBuff
@@ -4107,6 +4155,7 @@ public class ExperimentEffectBuff1 : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
+        if(Enemy.feathers.Count!=0)
         if (Enemy.feathers[0].health < oriHp)
         {
             timer = 0;
@@ -4396,6 +4445,87 @@ public class Parry : EffectBuff
     {
         character.tenacity -= 300;
         base.OnExit();
+    }
+}
+public class HunterFeatherEffectBuff2 : EffectBuff
+{
+    Player player;
+    float totalDamage;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 0;
+        player = target.GetComponent<Player>();
+
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        foreach(Buff buff in player.buffList)
+        {
+            if(buff is AttackBuff attackBuff)
+            {
+                player.RemoveBuff(attackBuff);
+                player.AddBuff(attackBuff);
+            }
+        }
+        foreach(GameObject attackBody in player.attackBodyObjList)
+        {
+            totalDamage += attackBody.GetComponent<AttackBody>().damage/2;
+        }
+        foreach (GameObject attackBody in player.attackBodyObjList)
+        {
+            attackBody.GetComponent<AttackBody>().damage = totalDamage + attackBody.GetComponent<AttackBody>().damage / 2;
+        }
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+    }
+}
+public class HunterFeatherEffectBuff3 : EffectBuff
+{
+    Player player;
+    float totalDamage;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 0;
+        player = target.GetComponent<Player>();
+
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        foreach (GameObject attackBody in player.attackBodyObjList)
+        {
+            totalDamage += attackBody.GetComponent<AttackBody>().damage * 2;
+        }
+        player.shields.Add(new Shield()
+        {
+            health = totalDamage,
+            timer = 10
+        });
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
     }
 }
 #endregion

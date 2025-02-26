@@ -74,6 +74,8 @@ public class BuffContainer
         {"狂猎之枪",typeof(HunterFeatherAttackBuffGun) },
         {"起动",typeof(HunterFeatherEffectBuff) },
         {"猎杀",typeof(HunterFeatherEffectBuff1) },
+        {"连动",typeof(HunterFeatherEffectBuff2) },
+        {"百解",typeof(HunterFeatherEffectBuff3) },
         {"灼伤",typeof(Scorch) },//使对象每0.1秒扣除0.1滴血，持续12s，buff持续期间如果被施加新的灼伤则持续时间延长6s
         {"烈焰",typeof(Burn) },//触发条件：对象的灼伤抵抗小于5并且对象的灼伤层数大于10，效果：使对象的异常抗性减半，持续时间60s
         {"治愈Ⅰ型",typeof(Heal1) },//在有羽解锁的条件下，每0.1s回复0.2点生命值，持续12秒
@@ -113,7 +115,7 @@ public class BuffContainer
         {"散梦",typeof (ExperimentPlayerAttackBuff) },
         {"聚梦替身",typeof (ExperimentPlayerAttackBuff1) },
         {"聚梦",typeof (ExperimentAttackEffectBuff) },
-        {"梦崩",typeof (ExperimentEffectBuff) },//使自身攻击速度+400%，持续1s
+        {"梦崩",typeof (ExperimentEffectBuff) },//使自身攻击速度+900%，持续1.5s
         {"梦身",typeof (ExperimentEffectBuff1) },//蓄力2s，获得10s20点护盾，被任意攻击打断后为玩家添加护盾
         {"梦缠",typeof (ExperimentEffectBuff2) },//持续5s，玩家每次使用冲刺使自身速度-10%，持续2s
         {"心灵苦痛",typeof (MentalAnguish) },//使对象减少1点异常抗性
