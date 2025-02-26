@@ -99,6 +99,7 @@ public struct LevelInfo
     public bool drNeprizKilled;
     public bool enslavedDwarfKilled;
     public bool dwarfKilled;
+    public bool experimentPlayerKilled;
 
     public bool AssistantDestroyed;
 }
