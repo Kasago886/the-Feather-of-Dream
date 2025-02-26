@@ -32,6 +32,7 @@ public class EquipmentPanelManager : MonoBehaviour
     public GameObject dreamizeButton;
     public Text dreamizeCost;
     public GameObject memorizeButton;
+    public GameObject reinforceButton;
 
     public Transform encyclopediaContent;
 
@@ -49,6 +50,7 @@ public class EquipmentPanelManager : MonoBehaviour
     AnimationBoolManager animationBoolManager;
     Player player;
     Dialog dialog;
+    Animator reinforceButtonAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +59,7 @@ public class EquipmentPanelManager : MonoBehaviour
         animationBoolManager = GetComponent<AnimationBoolManager>();
         player = FindAnyObjectByType<Player>();
         dialog = FindAnyObjectByType<Dialog>();
+        reinforceButtonAnimator = reinforceButton.GetComponent<Animator>();
 
         if (!setuped)
         {
@@ -537,11 +540,25 @@ public class EquipmentPanelManager : MonoBehaviour
                     dreamizeButton.GetComponent<Button>().interactable = true;
                 }
                 dreamizeCost.text = "ÏûºÄ£º" + item.dreamizeCost.ToString();
+                reinforceButtonAnimator.SetBool("play",true);
+                ReinforceButton reinforceButtonInformation = reinforceButton.GetComponent<ReinforceButton>();
+                if (item.dreamizedFeather != null)
+                {
+                    reinforceButtonInformation.information = item.dreamizedFeather.dreamizedFeatherInfo.information;
+                    reinforceButtonInformation.itemName = item.dreamizedFeather.dreamizedFeatherInfo.itemName;
+                }
+                reinforceButtonInformation.oriName = item.itemName;
+                reinforceButtonInformation.oriInformation = item.information;
+                reinforceButtonInformation.open = false;
+                reinforceButtonInformation.button.gameObject.SetActive(true);
             }
         }
         else
         {
             dreamizeButton.SetActive(false);
+            reinforceButtonAnimator.SetBool("play", false);
+            ReinforceButton reinforceButtonInformation = reinforceButton.GetComponent<ReinforceButton>();
+            reinforceButtonInformation.button.gameObject.SetActive(false);
         }
 
         //memorizeButton
