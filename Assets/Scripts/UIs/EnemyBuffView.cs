@@ -1,5 +1,6 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,11 +60,39 @@ public class EnemyBuffView : MonoBehaviour
                 g.GetComponent<RectTransform>().localScale = new Vector2(g.GetComponent<RectTransform>().localScale.x / 2, g.GetComponent<RectTransform>().localScale.y / 2);
                 buffDescDict.Add(item.Key, g.GetComponent<BuffImage>());
                 buffDescDict[item.Key].gameObject.GetComponentInChildren<Text>().text = newDict[item.Key].ToString();
+                if (BuffContainer.buffDictionary.TryGetValue(item.Key, out Type classType))
+                {
+                    if (classType.GetInterfaces().Any(i => i == typeof(Energize)))
+                    {
+                        foreach (var buff in enemy.buffList)
+                        {
+                            if (buff.name == item.Key)
+                            {
+                                buffDescDict[item.Key].gameObject.transform.GetChild(1).GetComponent<Text>().text = ((Energize)buff).GetNumber().ToString();
+                                buffDescDict[item.Key].text += $"\n已充能{((Energize)buff).GetNumber()}层";
+                            }
+                        }
+                    }
+                }
             }
             else
             {
                 buffDescDict[item.Key].gameObject.GetComponentInChildren<Text>().text = newDict[item.Key].ToString();
                 buffDescDict[item.Key].text = nameToImformation[item.Key].name + "\n" + nameToImformation[item.Key].description;
+                if (BuffContainer.buffDictionary.TryGetValue(item.Key, out Type classType))
+                {
+                    if (classType.GetInterfaces().Any(i => i == typeof(Energize)))
+                    {
+                        foreach (var buff in enemy.buffList)
+                        {
+                            if (buff.name == item.Key)
+                            {
+                                buffDescDict[item.Key].gameObject.transform.GetChild(1).GetComponent<Text>().text = ((Energize)buff).GetNumber().ToString();
+                                buffDescDict[item.Key].text += $"\n已充能{((Energize)buff).GetNumber()}层";
+                            }
+                        }
+                    }
+                }
             }
         }
     }
