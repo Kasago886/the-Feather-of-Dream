@@ -4528,6 +4528,114 @@ public class HunterFeatherEffectBuff3 : EffectBuff
 
     }
 }
+public class ExperimentPlayerFeatherBuff : EffectBuff
+{
+    private Character character;
+    private float removeSpeed;
+    private float removeJumpSpeed;
+    private float buffTimer;
+    private float oriHealth;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        if (target.GetComponent<Character>() != null)
+        {
+            timer = 5;
+            character = target.GetComponent<Character>();
+            removeSpeed = target.GetComponent<PlayerController>().walkSpeed / 1.25f;
+            removeJumpSpeed = target.GetComponent<PlayerController>().jumpSpeed / 1.25f;
+        }
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.GetComponent<PlayerController>().walkSpeed -= removeSpeed;
+        target.GetComponent<PlayerController>().jumpSpeed -= removeJumpSpeed;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (character.feathers.Count != 0)
+        {
+            if (character.feathers[0].health > oriHealth)
+            {
+                oriHealth = character.feathers[0].health;
+            }
+            if (character.feathers[0].health < oriHealth||Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                timer = 0;
+            }
+        }
+        if (buffTimer > 0)
+        {
+            buffTimer -= Time.deltaTime;
+        }
+        else
+        {
+            character.AddBuff("รฮิด");
+            buffTimer = 0.5f;
+        }
+        
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        target.GetComponent<PlayerController>().walkSpeed += removeSpeed;
+        target.GetComponent<PlayerController>().jumpSpeed += removeJumpSpeed;
+    }
+}
+public class DreamSource : EffectBuff
+{
+    int DreamSourceNum;
+    Character character;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 10;
+        character = target.GetComponent<Character>();
+
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        character.tenacity += 5;
+        character.strength += 5;
+       
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        int num = 0;
+        foreach(Buff buff in character.buffList)
+        {
+            if (buff.name == "รฮิด")
+            {
+                num++;
+            }
+        }
+        if (num > DreamSourceNum)
+        {
+            timer = 10;
+            DreamSourceNum = num;
+        }
+        else
+        {
+            timer -= Time.deltaTime;
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        character.strength -= 5;
+        character.tenacity -= 5;
+    }
+}
 #endregion
 public interface Energize
 {

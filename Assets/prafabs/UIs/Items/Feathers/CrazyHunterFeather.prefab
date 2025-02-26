@@ -197,7 +197,7 @@ MonoBehaviour:
     dialogName: 
     position: 0
   buffName: "\u75AF\u730E\u4E4B\u7FBD"
-  featherHealth: 220
+  featherHealth: 150
   dialogName: 
   isEquiped: 0
   imageName: 

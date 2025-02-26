@@ -118,6 +118,8 @@ public class BuffContainer
         {"梦崩",typeof (ExperimentEffectBuff) },//使自身攻击速度+900%，持续1.5s
         {"梦身",typeof (ExperimentEffectBuff1) },//蓄力2s，获得10s20点护盾，被任意攻击打断后为玩家添加护盾
         {"梦缠",typeof (ExperimentEffectBuff2) },//持续5s，玩家每次使用冲刺使自身速度-10%，持续2s
+        {"梦源",typeof (DreamSource) },//持续10s,使玩家力量+5，韧性+5，当再次获得梦源时持续时间重置
+        {"凝梦",typeof (ExperimentPlayerFeatherBuff) },//使自身速度与跳跃速度-80%，每0.5s获得一次梦源，最多5s，被攻击或冲刺提前结束buff。
         {"心灵苦痛",typeof (MentalAnguish) },//使对象减少1点异常抗性
         {"局中人",typeof (MisunderstoodWerewolfFeatherBuff) },
         {"裂隙Ⅴ",typeof (Fissure5) },//充能5级的裂隙
