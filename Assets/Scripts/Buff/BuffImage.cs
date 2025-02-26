@@ -10,19 +10,28 @@ public class BuffImage : MonoBehaviour
     public string text;
     public void Enter()
     {
-        description = FindInactiveChild(GameObject.Find("Canvas").GetComponent<Transform>(), "buffDescription");
-        description.SetActive(true);
-        description.GetComponentInChildren<Text>().text= text;
+        if (GameObject.Find("Canvas") != null)
+        {
+            description = FindInactiveChild(GameObject.Find("Canvas").GetComponent<Transform>(), "buffDescription");
+            description.SetActive(true);
+            description.GetComponentInChildren<Text>().text = text;
+        }
     }
     public void Exit()
     {
-        description = FindInactiveChild(GameObject.Find("Canvas").GetComponent<Transform>(), "buffDescription");
-        description.SetActive(false);
+        if (GameObject.Find("Canvas") != null)
+        {
+            description = FindInactiveChild(GameObject.Find("Canvas").GetComponent<Transform>(), "buffDescription");
+            description.SetActive(false);
+        }
     }
     private void OnDestroy()
     {
-        description = FindInactiveChild(GameObject.Find("Canvas").GetComponent<Transform>(), "buffDescription");
-        description.SetActive(false);
+        if (GameObject.Find("Canvas") != null)
+        {
+            description = FindInactiveChild(GameObject.Find("Canvas").GetComponent<Transform>(), "buffDescription");
+            description.SetActive(false);
+        }
     }
     public GameObject FindInactiveChild(Transform parent, string name)
     {

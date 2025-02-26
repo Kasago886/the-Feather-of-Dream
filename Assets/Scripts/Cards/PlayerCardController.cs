@@ -264,7 +264,7 @@ public class PlayerCardController : MonoBehaviour
         remainingSlotCount=positionNumber-content.transform.childCount;
         if (Input.GetKeyDown(KeyCode.K))
         {
-            GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>().tenacity += 100000;
+            GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>().AddBuff("ÁÑÏ¶¢õ");
         }
     }
 
