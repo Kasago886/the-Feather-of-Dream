@@ -37,11 +37,11 @@ public class Nepriz2 : Enemy
             {
                 if (player.buffList[i].name == "∑≤”π")
                 {
-                    player.buffList.RemoveAt(i);
+                    player.buffList[i].timer = 0;
                     break;
                 }
             }
-            AddBuff("∑≤”π");
+            AddBuff("ø «Û»œø…");
         }
     }
 }

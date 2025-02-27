@@ -29,8 +29,13 @@ public class Nepriz1 : Enemy
             AddBuff(buff);
         }
     }
+    public override void OnDeath()
+    {
+        isDead = true;
+        deathEvent?.Invoke();
+    }
     public void ChangeState()
     {
-        Instantiate(Resources.Load<GameObject>("AttackBodys/Nepriz/Nepriz 2").transform);
+        Instantiate(Resources.Load<GameObject>("AttackBodys/Nepriz/Dr.Nepriz1 2"),transform);
     }
 }
