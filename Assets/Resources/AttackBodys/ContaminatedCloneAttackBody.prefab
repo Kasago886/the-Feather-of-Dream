@@ -134,7 +134,7 @@ MonoBehaviour:
   immediateAttack: 0
   damage: 5
   attackType: 0
-  attackCenter: {x: 2, y: 0}
+  attackCenter: {x: 3, y: 0}
   attackRegion: {x: 3, y: 3}
   bullet: {fileID: 0}
   isAiming: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   whatBeAttack: []
   isleft: 0
   addDamage: 0
+  buffNames: []
 --- !u!95 &566541823881012613
 Animator:
   serializedVersion: 5
