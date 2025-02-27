@@ -2552,6 +2552,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1343325458}
     m_Modifications:
     - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
+      propertyPath: Lock
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
+      propertyPath: lockedDialog
+      value: doorLockedByEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: targetLevelIndex
       value: 4
       objectReference: {fileID: 0}
@@ -2613,6 +2621,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4073656887174430166, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
   m_PrefabInstance: {fileID: 620874603}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &620874605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
+  m_PrefabInstance: {fileID: 620874603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e7d037a6843c0b468282fd2f862f17e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &629758073 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8010309870145944334, guid: 33b2372913d444b40aebc90e54339d1c, type: 3}
@@ -3291,6 +3310,34 @@ PrefabInstance:
     - target: {fileID: 5194438090788217055, guid: f6fb68ab73f3b5544bf2095982cb3d29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028727354492274196, guid: f6fb68ab73f3b5544bf2095982cb3d29, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028727354492274196, guid: f6fb68ab73f3b5544bf2095982cb3d29, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028727354492274196, guid: f6fb68ab73f3b5544bf2095982cb3d29, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 620874605}
+    - target: {fileID: 9028727354492274196, guid: f6fb68ab73f3b5544bf2095982cb3d29, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028727354492274196, guid: f6fb68ab73f3b5544bf2095982cb3d29, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetLocked
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028727354492274196, guid: f6fb68ab73f3b5544bf2095982cb3d29, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Lift, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028727354492274196, guid: f6fb68ab73f3b5544bf2095982cb3d29, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

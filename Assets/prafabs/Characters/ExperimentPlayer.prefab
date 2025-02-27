@@ -127,10 +127,12 @@ MonoBehaviour:
     timer: 0
   dropItems:
   - {fileID: 2158636381633551328, guid: ff9a8181e17631d43be78ae98bc91fc0, type: 3}
+  - {fileID: 2158636381633551328, guid: 3130a2df695bf44468ae4d5ee1b86851, type: 3}
+  - {fileID: 2158636381633551328, guid: 796c79e9b46116b40a67be1105c86588, type: 3}
   exp: 15
   flag: 23
   refreshable: 0
-  encyclopedia: {fileID: 0}
+  encyclopedia: {fileID: 6192604590485203915, guid: ec4e656dc9025bb47a3dae109c89b1fa, type: 3}
   player: {fileID: 0}
 --- !u!50 &1114919163909731784
 Rigidbody2D:
