@@ -54,9 +54,9 @@ MonoBehaviour:
   isSplit: 0
   splitBullet: {fileID: 0}
   bounceTime: 0
-  ignoreWallCollision: 0
-  destroyCenter: {x: 0, y: 0, z: 0}
-  destroySize: {x: 0, y: 0}
+  ignoreWallCollision: 1
+  destroyCenter: {x: 122, y: -205, z: 0}
+  destroySize: {x: 113, y: 40}
   direction: {x: 0, y: 0}
   whatHappenWhenHit:
     m_PersistentCalls:
@@ -103,7 +103,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ba0efb6d5f687de47ad1815f95599a13, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f42328867f04db84fa464a3e8fbeb7aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -173,6 +173,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.008213187}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.27824074

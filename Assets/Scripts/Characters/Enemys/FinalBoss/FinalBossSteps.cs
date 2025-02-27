@@ -9,6 +9,7 @@ public class FinalBossSteps : MonoBehaviour
     public string sneakAttackDialog;
     public string phase2Dialog;
     public string phase3Dialog;
+    public string phase3_2Dialog;
     public string endDialog;
     public float force;
     public Transform targetLU;
@@ -21,6 +22,7 @@ public class FinalBossSteps : MonoBehaviour
     public GameObject childAttacks2;
     public GameObject codeAttack;
     public GameObject fireParticle;
+    public BulletsRain bulletsRain;
 
     bool moving = false;
     int step = 0;
@@ -143,34 +145,42 @@ public class FinalBossSteps : MonoBehaviour
         switch (step)
         {
             case 1:
+                bulletsRain.rainType = BulletsRain.RainType.RtoL;
                 SetSkyAttacks(targetLU);
                 break;
 
             case 2:
+                bulletsRain.rainType = BulletsRain.RainType.pause;
                 SetLandAttack(targetLD);
                 break;
 
             case 3:
+                bulletsRain.rainType = BulletsRain.RainType.LtoR;
                 SetSkyAttacks(targetRU);
                 break;
             
             case 4:
+                bulletsRain.rainType = BulletsRain.RainType.pause;
                 SetLandAttack(targetRD);
                 break;
 
             case 6:
+                bulletsRain.rainType = BulletsRain.RainType.BothToBoth;
                 SetChildAttacks(targetMU);
                 break;
 
             case 7:
+                bulletsRain.rainType = BulletsRain.RainType.pause;
                 SetLandAttack(targetRD);
                 break;
 
             case 8:
+                bulletsRain.rainType = BulletsRain.RainType.BothToBoth;
                 SetChildAttacks(targetMU);
                 break;
 
             case 9:
+                bulletsRain.rainType = BulletsRain.RainType.pause;
                 SetLandAttack(targetLD);
                 break;
 
@@ -196,6 +206,7 @@ public class FinalBossSteps : MonoBehaviour
     {
         if (step >= 0 && step <= 4)
         {
+            bulletsRain.rainType = BulletsRain.RainType.pause;
             finalBoss.collisionAttack = false;
             finalBoss.OnMove(0);
             moving = true;
@@ -208,21 +219,25 @@ public class FinalBossSteps : MonoBehaviour
         }
         else if (step >= 5 && step <= 9)
         {
+            bulletsRain.rainType = BulletsRain.RainType.pause;
             finalBoss.collisionAttack = false;
             finalBoss.OnMove(0);
             moving = true;
             target = targetMU;
             UnityEvent unityEvent = new();
-            unityEvent.AddListener(() => { SetStep(11); });
+            unityEvent.AddListener(() => {StartCoroutine(Phase3_2()); });
             dialog.Read(phase3Dialog, unityEvent);
+            finalBoss.animator.Play("DreamPowerAppear");
 
             SetStep(10);
         }
         else if (step == 11)
         {
+            bulletsRain.rainType = BulletsRain.RainType.pause;
             finalBoss.enemyAI = false;
             finalBoss.unattackable = true;
             finalBoss.isDead = true;
+            finalBoss.animator.SetBool(Consts.IsDeadAnimatorArgument, true);
 
             GameObject[] enemys = GameObject.FindGameObjectsWithTag(Consts.EnemyTag);
             foreach (GameObject enemy in enemys)
@@ -359,6 +374,16 @@ public class FinalBossSteps : MonoBehaviour
 
             moving = true;
         }
+    }
+
+    private IEnumerator Phase3_2()
+    {
+        yield return null; // µÈ´ýÒ»Ö¡
+
+        UnityEvent unityEvent = new();
+        unityEvent.AddListener(() => { SetStep(11); });
+        dialog.Read(phase3_2Dialog, unityEvent);
+        finalBoss.animator.SetBool("DreamPowerDisappear", true);
     }
 
 }
