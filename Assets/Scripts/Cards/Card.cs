@@ -13,7 +13,7 @@ public enum targetMethod
 }
 [RequireComponent(typeof(EventTrigger))]
 [RequireComponent(typeof(GlowControl))]
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour,IPointerClickHandler
 {
     public int id;
     new public string name;
@@ -87,6 +87,7 @@ public class Card : MonoBehaviour
     private List<Material> oriMaterial;
     private Dictionary<SpriteRenderer, Material> spMaterial;
     private Collider2D[] enemiesThatBeenChoose1;
+    private bool b;
 
     //显示详细信息的UI
     private GameObject detailInfoObj;
@@ -276,7 +277,7 @@ public class Card : MonoBehaviour
     {
         if (click)
         {
-            if (ConditionsOfUseCard())
+            if (ConditionsOfUseCard()&&!b)
             {
                 if (effortNumber == finalTarget.Count && finalTarget.Count > 0 && isRandom)
                 {
@@ -314,7 +315,15 @@ public class Card : MonoBehaviour
             }
             else
             {
-                Captions("当前无法使用", true);
+                if (!b)
+                {
+                    Captions("当前无法使用", true);
+                }
+                else
+                {
+                    Captions("请按下弃牌键弃牌或者右键卡牌放弃弃牌", true);
+                }
+
             }
         }
     }
@@ -1362,7 +1371,7 @@ public class Card : MonoBehaviour
             }
         }
     }
-    private void Captions(string text, bool isPlayer)
+    public void Captions(string text, bool isPlayer)
     {
         //GameObject textObject = new GameObject("Text", typeof(Text));
         //RectTransform rectTransform2 = textObject.GetComponent<RectTransform>();
@@ -1426,6 +1435,20 @@ public class Card : MonoBehaviour
     public virtual bool ConditionsOfUseCard()
     {
         return true;
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (b)
+            {
+                b = false;
+            }
+            else
+            {
+                b = true;
+            }
+        }
     }
 
     private void OnDestroy()

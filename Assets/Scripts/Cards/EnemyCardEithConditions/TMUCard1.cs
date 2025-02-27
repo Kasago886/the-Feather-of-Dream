@@ -19,15 +19,9 @@ public class TMUCard1 : MonoBehaviour
     public void GetTradege()
     {
         PlayerCardController playerCardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
-        bool b = false;
-        foreach(GameObject card in playerCardController.cardsList)
+        if (playerCardController.GetCardNumber("ќуљв") > 0)
         {
-            if (card.GetComponent<Card>().name == "ќуљв")
-            {
-                b = true;
-                break;
-            }
+            playerCardController.GetCard("йд");
         }
-        playerCardController.GetCard("йд");
     }
 }

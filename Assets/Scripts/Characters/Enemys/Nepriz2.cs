@@ -41,7 +41,7 @@ public class Nepriz2 : Enemy
                     break;
                 }
             }
-            AddBuff("ø «Û»œø…");
+            AddBuff("∑≤”π");
         }
     }
 }

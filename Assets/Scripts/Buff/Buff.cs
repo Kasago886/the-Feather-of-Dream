@@ -2361,9 +2361,9 @@ public class UpLifting : EffectBuff
     public override void OnEnter()
     {
         change = character.strength * 0.1f;
-        if (change > 10)
+        if (change > 6)
         {
-            change = 10;
+            change = 6;
         }
         character.strength += change;
         base.OnEnter();
@@ -2397,9 +2397,9 @@ public class Toughness : EffectBuff
     public override void OnEnter()
     {
         change = character.tenacity * 0.1f;
-        if (change > 20)
+        if (change > 12)
         {
-            change = 20;
+            change = 12;
         }
         character.tenacity += change;
         base.OnEnter();
@@ -2664,9 +2664,13 @@ public class Lethargic : EffectBuff
     public override void OnEnter()
     {
         change = character.strength * 0.1f;
-        if (change > 10)
+        if (change > 6)
         {
-            change = 10;
+            change = 6;
+        }
+        if(character.strength<character.oriStrength*0.05)
+        {
+            change = 0;
         }
         character.strength -= change;
         base.OnEnter();
@@ -2700,9 +2704,13 @@ public class Fragile : EffectBuff
     public override void OnEnter()
     {
         change = character.tenacity * 0.1f;
-        if (change > 20)
+        if (change > 12)
         {
-            change = 20;
+            change = 12;
+        }
+        if (character.tenacity < character.oriTenacity * 0.05)
+        {
+            change = 0;
         }
         character.tenacity -= change;
         base.OnEnter();

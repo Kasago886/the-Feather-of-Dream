@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class NCards1 : MonoBehaviour
 {
+    public bool onlyOne;
     public int cardNumber;
     public string buffName,buffNameWhenReduceCard;
     public string[] buffNameWhenHaveBuff;
-   public void GetCards()
+    private PlayerCardController cC;
+    private void Start()
+    {
+        if(onlyOne)
+        {
+            cC= GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
+            if (cC.GetCardNumber(GetComponent<Card>().name) > 0)
+            {
+                Destroy(gameObject);
+                cC.GetCard(GetComponent<Player>().cardGenerateList[Random.Range(0, GetComponent<Player>().cardGenerateList.Count)]);
+            }
+        }
+    }
+    public void GetCards()
     {
         PlayerCardController cardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
         Player player=GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();

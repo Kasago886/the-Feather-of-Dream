@@ -428,4 +428,31 @@ public class PlayerCardController : MonoBehaviour
     {
         ReduceCard(nameToID[name], reduceNumber);
     }
+    /// <summary>
+    /// 调用本函数查询玩家手上持有某id的卡的数量
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public int GetCardNumber(int id)
+    {
+        int n = 0;
+        for (int i = 0;i < content.transform.childCount; i++)
+        {
+            Card card=transform.GetChild(i).GetComponent<Card>();
+            if (card.id == id)
+            {
+                n++;
+            }
+        }
+        return n;
+    }
+    /// <summary>
+    /// 调用本函数查询玩家手上持有某名字的卡的数量
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public int GetCardNumber(string name)
+    {
+        return GetCardNumber(nameToID[name]);
+    }
 }

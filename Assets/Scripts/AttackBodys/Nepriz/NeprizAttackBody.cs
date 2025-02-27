@@ -5,7 +5,7 @@ using UnityEngine;
 public class NeprizAttackBody : MonoBehaviour
 {
     public GameObject bullet;
-    private Transform attackBodyTransform;
+    private Transform attackBodyTransform, enemyTransform;
     private LineRenderer lineRenderer;
     private Rigidbody2D rb;
     private float timer;
@@ -13,7 +13,10 @@ public class NeprizAttackBody : MonoBehaviour
     private bool ismove;
     void Start()
     {
-        Destroy(gameObject,60);
+        if (GameObject.Find("Dr.Nepriz1") == null)
+        { enemyTransform = GameObject.Find("Dr.Nepriz2(Clone)").GetComponent<Transform>(); }
+        else { enemyTransform = GameObject.Find("Dr.Nepriz1").GetComponent<Transform>(); }
+        Destroy(gameObject, 60);
         player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
         attackBodyTransform = GetComponent<Transform>();
         lineRenderer = GetComponent<LineRenderer>();
@@ -22,17 +25,17 @@ public class NeprizAttackBody : MonoBehaviour
         ismove = true;
         if (player != null)
         {
-            attackBodyTransform.position = new Vector2(player.transform.position.x, Camera.main.transform.position.y + Camera.main.orthographicSize+10);
+            attackBodyTransform.position = new Vector2(player.transform.position.x, Camera.main.transform.position.y + Camera.main.orthographicSize + 10);
         }
     }
     private void Update()
     {
         timer += Time.deltaTime;
-        if(Mathf.Abs(player.transform.position.x - transform.position.x) <= 1&&timer>5)
+        if (Mathf.Abs(player.transform.position.x - transform.position.x) <= 1 && timer > 5)
         {
             ChangeColor(bullet);
             timer = 0;
-            ismove=false;
+            ismove = false;
             rb.velocity = Vector3.zero;
             Invoke("ReturnMove", 1f);
         }
@@ -41,15 +44,19 @@ public class NeprizAttackBody : MonoBehaviour
             lineRenderer.startColor = Color.yellow;
             lineRenderer.endColor = Color.yellow;
         }
-        if (ismove) 
+        if (ismove)
         {
             rb.velocity = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(Camera.main.transform.position.y + Camera.main.orthographicSize + 10 - transform.position.y, player.transform.position.x - transform.position.x) * Mathf.Rad2Deg)) * new Vector2(4, 0);
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, new Vector2(transform.position.x, transform.position.y - 1000));
         }
-        if(GameObject.Find("Dr.Nepriz1")==null&& GameObject.Find("Dr.Nepriz2(Clone)") == null)
-        {
+        if (GameObject.Find("Dr.Nepriz1") == null && GameObject.Find("Dr.Nepriz2(Clone)") == null)
+        {      
             Destroy(gameObject);
+        }
+        if (enemyTransform != null && Mathf.Abs(enemyTransform.position.x - transform.position.x) > 100)
+        {                    
+            Destroy(gameObject);      
         }
     }
     private void ChangeColor(GameObject bullet)
