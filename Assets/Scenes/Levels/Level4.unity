@@ -2493,6 +2493,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514454044}
   m_CullTransparentMesh: 1
+--- !u!1 &584838786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 584838787}
+  - component: {fileID: 584838788}
+  m_Layer: 0
+  m_Name: BulletsRain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &584838787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584838786}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1645036921}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &584838788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584838786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981930d4d9d2ef84982e2232f64f8394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 53726181187038591, guid: e6b048eecc2ab294f8cac6f966e0bf0b, type: 3}
+  damage: 5
+  leftDownPos: {x: 65, y: -225}
+  size: {x: 113, y: 40}
+  column: 5
+  row: 5
+  speed: {x: 10, y: 20}
+  coolDown: 0.2
+  rainType: 0
 --- !u!4 &593621952 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8010309870145944334, guid: 9bd7935e8ebb6574496cbebbd6bdb6fc, type: 3}
@@ -228175,6 +228228,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 584838787}
   - {fileID: 6856683856250707971}
   - {fileID: 827973279}
   m_Father: {fileID: 0}
@@ -230634,6 +230688,10 @@ PrefabInstance:
       propertyPath: targetRU
       value: 
       objectReference: {fileID: 1265649149}
+    - target: {fileID: 5333187175927802037, guid: e3387e6341efbba41b7c762e5d863076, type: 3}
+      propertyPath: bulletsRain
+      value: 
+      objectReference: {fileID: 584838788}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
