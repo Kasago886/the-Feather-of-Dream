@@ -1074,6 +1074,64 @@ public class CrazyHunterEquipmentFeatherBuff : EquipmentFeatherBuff
         player.cardGenerateList.Remove("∞ŸΩ‚");
     }
 }
+public class ExperimentPlayerEquipmentFeatherBuff : EquipmentFeatherBuff
+{
+    Player player;
+    float oriHealth = 0;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+
+        this.feather = new EllieEquipmentFeather(300);
+        this.player = target as Player;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player.GetComponent<PlayerController>().walkSpeed += 2;
+        player.GetComponent<PlayerController>().sprintCooldown -=0.2f;
+        player.cardGenerateList.Add("Õ˘√Œ÷ÆΩ£");
+        player.cardGenerateList.Add("√Œ∆∆");
+        player.cardGenerateList.Add("ƒ˝√Œ");
+        player.cardGenerateList.Add(" Õ√Œ");
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (oriHealth == 0 && player.unlockedFeathers.Count != 0)
+        {
+            oriHealth = player.unlockedFeathers[0].health;
+        }
+        if (oriHealth != 0 && player.unlockedFeathers.Count == 0)
+        {
+            oriHealth = 0;
+        }
+        if (player.unlockedFeathers.Count != 0)
+        {
+            if (oriHealth < player.unlockedFeathers[0].health)
+            {
+                oriHealth = player.unlockedFeathers[0].health;
+            }
+            if (player.unlockedFeathers[0].health < oriHealth)
+            {
+                player.AddBuff("√Œ‘¥");
+                oriHealth = player.unlockedFeathers[0].health;
+            }
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.GetComponent<PlayerController>().walkSpeed -= 2;
+        player.GetComponent<PlayerController>().sprintCooldown +=0.2f;
+        player.cardGenerateList.Remove("Õ˘√Œ÷ÆΩ£");
+        player.cardGenerateList.Remove("√Œ∆∆");
+        player.cardGenerateList.Remove("ƒ˝√Œ");
+        player.cardGenerateList.Remove(" Õ√Œ");
+    }
+}
 
 #endregion
 
@@ -1320,6 +1378,15 @@ public class ExperimentPlayerAttackBuff1 : AttackBuff
         base.Init(target, timer, isPermanent);
         this.timer = 5;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/ExperimentPlayer/ExperimentPlayerAttackBody1");
+    }
+}
+public class ExperimentPlayerFeatherAttackBuff : AttackBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 8;
+        this.attackBody = Resources.Load<GameObject>("AttackBodys/ExperimentPlayer/ExperimentPlayerFeatherAttackBody");
     }
 }
 #endregion
@@ -4600,10 +4667,14 @@ public class ExperimentPlayerFeatherBuff : EffectBuff
             {
                 oriHealth = character.unlockedFeathers[0].health;
             }
-            if (character.unlockedFeathers[0].health < oriHealth || Input.GetKeyDown(KeyCode.LeftShift))
+            if (character.unlockedFeathers[0].health < oriHealth )
             {
                 timer = 0;
             }
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            timer = 0;
         }
         if (buffTimer > 0)
         {
@@ -4648,7 +4719,7 @@ public class DreamSource : EffectBuff
     {
         base.OnUpdate();
         int num = 0;
-        
+
         foreach (Buff buff in character.buffList)
         {
             if (buff.name == "√Œ‘¥")
@@ -4656,6 +4727,7 @@ public class DreamSource : EffectBuff
                 num++;
             }
         }
+        Debug.Log(num);
         if (num > DreamSourceNum)
         {
             timer = 10;
@@ -4663,6 +4735,7 @@ public class DreamSource : EffectBuff
         }
         else
         {
+            DreamSourceNum = num;
             timer -= Time.deltaTime;
         }
     }
@@ -4677,10 +4750,12 @@ public class DreamSource : EffectBuff
 public class ExperimentPlayerFeatherBuff1 : EffectBuff
 {
     Character character;
+    int Num = 0;
+
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.timer = 10;
+        this.timer = 15;
         character = target.GetComponent<Character>();
 
     }
@@ -4688,7 +4763,23 @@ public class ExperimentPlayerFeatherBuff1 : EffectBuff
     public override void OnEnter()
     {
         base.OnEnter();
-
+        foreach (Buff buff in character.buffList)
+        {
+            if (buff.name == "√Œ‘¥" && Num < 5)
+            {
+                character.RemoveBuff("√Œ‘¥");
+                Num++;
+            }
+        }
+        character.shields.Add(new Shield() { health = 10 +5 * Num * Num, timer = 15 });
+        if (Num >= 3)
+        {
+            target.GetComponent<Player>().GenerateCard();
+        }
+        if(Num == 5)
+        {
+            target.GetComponent<PlayerController>().walkSpeed += 3;
+        }
     }
 
     public override void OnUpdate()
@@ -4698,9 +4789,65 @@ public class ExperimentPlayerFeatherBuff1 : EffectBuff
 
     public override void OnExit()
     {
+        if (Num == 5)
+        {
+            target.GetComponent<PlayerController>().walkSpeed -= 3;
+        }
         base.OnExit();
     }
 }
+public class ExperimentPlayerFeatherBuff2 : EffectBuff
+{
+    private Character character;
+    float oriHealth = 0;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 0.5f;
+        character = target.GetComponent<Character>();
+    }
+
+    public override void OnEnter()
+    {
+        character.tenacity += 300;
+        base.OnEnter();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (oriHealth == 0 && character.unlockedFeathers.Count != 0)
+        {
+            oriHealth = character.unlockedFeathers[0].health;
+        }
+        if (oriHealth != 0 && character.unlockedFeathers.Count == 0)
+        {
+            oriHealth = 0;
+        }
+        if (character.unlockedFeathers.Count != 0)
+        {
+            if (oriHealth < character.unlockedFeathers[0].health)
+            {
+                oriHealth = character.unlockedFeathers[0].health;
+            }
+            if (character.unlockedFeathers[0].health < oriHealth)
+            {
+                for(int i=0; i < 6; i++)
+                {
+                    character.AddBuff("√Œ‘¥");
+                }
+                timer = 0;
+            }
+        }
+    }
+
+    public override void OnExit()
+    {
+        character.tenacity -= 300;
+        base.OnExit();
+    }
+}
+
 #endregion
 public interface Energize
 {

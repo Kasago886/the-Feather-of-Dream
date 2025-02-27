@@ -178,7 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: "\u6545\u201C\u6211\u201D\u4E4B\u7FBD"
-  information: "\n\u51B2\u523A\u51B7\u5374-20%\n\u901F\u5EA6+2\n\u88AB\u52A8\uFF1A\u6BCF\u6B21\u8840\u91CF\u964D\u4F4E\u65F6\u97E7\u6027+10\uFF0C\u6301\u7EED0.3s\n\u5361\u724C\uFF1A\n"
+  information: "\n\u51B2\u523A\u51B7\u5374-0.2s\n\u901F\u5EA6+2\n\u88AB\u52A8\uFF1A\u6BCF\u6B21\u8840\u91CF\u964D\u4F4E\u65F6\u589E\u52A0\u4E00\u5C42\u201C\u68A6\u6E90\u201D\n\u5361\u724C\uFF1A\u68A6\u7834
+    \u5F80\u68A6\u4E4B\u5251 \u51DD\u68A6 \u91CA\u68A6\n"
   type: 0
   isDreamizable: 0
   dreamizeCost: 0
@@ -196,7 +197,7 @@ MonoBehaviour:
     dialogName: 
     position: 0
   buffName: "\u6545\u201C\u6211\u201D\u4E4B\u7FBD"
-  featherHealth: 220
+  featherHealth: 300
   dialogName: 
   isEquiped: 0
   imageName: 

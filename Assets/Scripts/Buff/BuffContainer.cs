@@ -23,6 +23,8 @@ public class BuffContainer
         {"拔羽15s", typeof(UnlockFeather15sBuff) },
         {"拔羽20s", typeof(UnlockFeather20sBuff) },
         {"艾莉之羽", typeof(EllieEquipmentFeatherBuff) },
+        {"故“我”之羽", typeof(ExperimentPlayerEquipmentFeatherBuff) },
+        {"疯猎之羽", typeof(CrazyHunterEquipmentFeatherBuff) },
         {"腐败蔓延",typeof(CorruptionAttackBuff) },
         {"疯猎之残羽", typeof(HunterEquipmentBuff) },
         {"铁皮人残羽", typeof(TinWoodmanEquipmentBuff) },
@@ -120,6 +122,9 @@ public class BuffContainer
         {"梦缠",typeof (ExperimentEffectBuff2) },//持续5s，玩家每次使用冲刺使自身速度-10%，持续2s
         {"梦源",typeof (DreamSource) },//持续10s,使玩家力量+5，韧性+5，当再次获得梦源时持续时间重置
         {"凝梦",typeof (ExperimentPlayerFeatherBuff) },//使自身速度与跳跃速度-80%，每0.5s获得一次梦源，最多5s，被攻击或冲刺提前结束buff。
+        {"释梦",typeof (ExperimentPlayerFeatherBuff1) },//扣除n层最多10层梦源，获得10+n^2点持续15s的护盾，扣除梦源超过5层时获得一张卡牌，扣除10层梦源时移动速度+3，持续15s
+        {"梦破",typeof (ExperimentPlayerFeatherBuff2) },//韧性+300，持续0.3s，buff存在期间被攻击获得6层梦源
+        {"往梦之剑",typeof (ExperimentPlayerFeatherAttackBuff) },//韧性+300，持续0.3s，buff存在期间被攻击获得6层梦源
         {"心灵苦痛",typeof (MentalAnguish) },//使对象减少1点异常抗性
         {"局中人",typeof (MisunderstoodWerewolfFeatherBuff) },
         {"裂隙Ⅴ",typeof (Fissure5) },//充能5级的裂隙
