@@ -242,6 +242,10 @@ public class Card : MonoBehaviour
             {
                 d += description[i];
             }
+            else
+            {
+                d += " ";
+            }
         }
         detailInfoText.text = d;
     }

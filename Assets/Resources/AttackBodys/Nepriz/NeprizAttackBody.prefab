@@ -144,6 +144,7 @@ MonoBehaviour:
   whatBeAttack: []
   isleft: 0
   addDamage: 0
+  buffNames: []
 --- !u!95 &8876494479822081963
 Animator:
   serializedVersion: 5
@@ -154,7 +155,7 @@ Animator:
   m_GameObject: {fileID: 5463133022128078969}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7fae0a38d5398d340924b05dc844629b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
