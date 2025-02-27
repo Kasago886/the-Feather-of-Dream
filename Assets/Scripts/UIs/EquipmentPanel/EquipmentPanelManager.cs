@@ -50,7 +50,6 @@ public class EquipmentPanelManager : MonoBehaviour
     AnimationBoolManager animationBoolManager;
     Player player;
     Dialog dialog;
-    Animator reinforceButtonAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -58,8 +57,6 @@ public class EquipmentPanelManager : MonoBehaviour
         archiveManager = FindAnyObjectByType<ArchiveManager>();
         animationBoolManager = GetComponent<AnimationBoolManager>();
         player = FindAnyObjectByType<Player>();
-        dialog = FindAnyObjectByType<Dialog>();
-        reinforceButtonAnimator = reinforceButton.GetComponent<Animator>();
 
         if (!setuped)
         {
@@ -540,23 +537,27 @@ public class EquipmentPanelManager : MonoBehaviour
                     dreamizeButton.GetComponent<Button>().interactable = true;
                 }
                 dreamizeCost.text = "ÏûºÄ£º" + item.dreamizeCost.ToString();
-                reinforceButtonAnimator.SetBool("play",true);
+                reinforceButton.SetActive(true);
                 ReinforceButton reinforceButtonInformation = reinforceButton.GetComponent<ReinforceButton>();
                 if (item.dreamizedFeather != null)
                 {
-                    reinforceButtonInformation.information = item.dreamizedFeather.dreamizedFeatherInfo.information;
-                    reinforceButtonInformation.itemName = item.dreamizedFeather.dreamizedFeatherInfo.itemName;
+                    ItemInfo dreamizedFeatherInfo;
+                    if (item.dreamizedFeather != null)
+                    {
+                        dreamizedFeatherInfo = item.dreamizedFeather.GetItemInfo();
+                        reinforceButtonInformation.information = dreamizedFeatherInfo.information;
+                        reinforceButtonInformation.itemName = dreamizedFeatherInfo.itemName;
+                    }
                 }
                 reinforceButtonInformation.oriName = item.itemName;
                 reinforceButtonInformation.oriInformation = item.information;
                 reinforceButtonInformation.open = false;
-                reinforceButtonInformation.button.gameObject.SetActive(true);
+                InvokeButton();
             }
         }
         else
         {
             dreamizeButton.SetActive(false);
-            reinforceButtonAnimator.SetBool("play", false);
             ReinforceButton reinforceButtonInformation = reinforceButton.GetComponent<ReinforceButton>();
             reinforceButtonInformation.button.gameObject.SetActive(false);
         }
@@ -741,5 +742,10 @@ public class EquipmentPanelManager : MonoBehaviour
             }
         }
         return null;
+    }
+    void InvokeButton()
+    {
+        ReinforceButton reinforceButtonInformation = reinforceButton.GetComponent<ReinforceButton>();
+        reinforceButtonInformation.button.gameObject.SetActive(true);
     }
 }
