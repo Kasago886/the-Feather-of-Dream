@@ -667,7 +667,7 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
                     case 0: player.AddBuff("治愈Ⅲ型"); break;
                     case 1: player.AddBuff("治愈Ⅱ型"); break;
                     case 2: player.AddBuff("治愈Ⅰ型"); break;
-                    case 3: player.AddBuff("灼伤");i--;  break;
+                    case 3: player.AddBuff("灼伤"); i--; break;
                     case 4: player.AddBuff("正义"); break;
                     case 5: player.AddBuff("中毒"); i--; break;
                     case 6: player.AddBuff("凝重"); i--; break;
@@ -4075,11 +4075,11 @@ public class ExperimentAttackEffectBuff : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if(character.feathers.Count!=0)
-        if (character.feathers[0].health < oriHp)
-        {
-            timer = 0;
-        }
+        if (character.feathers.Count != 0)
+            if (character.feathers[0].health < oriHp)
+            {
+                timer = 0;
+            }
         if (timer <= 0.5f && timer > 0)
         {
             timer = 0;
@@ -4105,7 +4105,7 @@ public class ExperimentEffectBuff : EffectBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.timer =1.5f;
+        this.timer = 1.5f;
         Enemy = target.GetComponent<Enemy>();
 
     }
@@ -4132,38 +4132,48 @@ public class ExperimentEffectBuff : EffectBuff
 }
 public class ExperimentEffectBuff1 : EffectBuff
 {
-    Enemy Enemy;
-    float oriHp;
+    Character character;
+    float oriHealth = 0;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
         this.timer = 2.5f;
-        Enemy = target.GetComponent<Enemy>();
+        character = target.GetComponent<Enemy>();
 
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
-        if (Enemy.feathers.Count != 0)
-        {
-            oriHp = Enemy.feathers[0].health;
-        }
 
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if(Enemy.feathers.Count!=0)
-        if (Enemy.feathers[0].health < oriHp)
+        if (oriHealth == 0 && character.unlockedFeathers.Count != 0)
         {
-            timer = 0;
-            GameObject.Find("Player").GetComponent<Player>().shields.Add(new Shield()
+            oriHealth = character.unlockedFeathers[0].health;
+        }
+        if (oriHealth != 0 && character.unlockedFeathers.Count == 0)
+        {
+            oriHealth = 0;
+        }
+        if (character.unlockedFeathers.Count != 0)
+        {
+            if (oriHealth < character.unlockedFeathers[0].health)
             {
-                health = 20,
-                timer = 10
-            });
+                oriHealth = character.unlockedFeathers[0].health;
+            }
+            if (character.unlockedFeathers[0].health < oriHealth)
+            {
+                timer = 0;
+                GameObject.Find("Player").GetComponent<Player>().shields.Add(new Shield()
+                {
+                    health = 20,
+                    timer = 10
+                });
+            }
         }
         if (timer <= 0.5f && timer > 0)
         {
@@ -4413,13 +4423,12 @@ public class Excited : EffectBuff
 public class Parry : EffectBuff
 {
     private Character character;
-    float oriHp;
+    float oriHealth = 0;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
-        base.Init(target, timer, isPermanent);      
+        base.Init(target, timer, isPermanent);
         this.timer = 0.5f;
         character = target.GetComponent<Character>();
-        oriHp = character.feathers[0].health;
     }
 
     public override void OnEnter()
@@ -4431,13 +4440,25 @@ public class Parry : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (character.feathers[0].health > oriHp)
+        if (oriHealth == 0 && character.unlockedFeathers.Count != 0)
         {
-            oriHp = character.feathers[0].health;
+            oriHealth = character.unlockedFeathers[0].health;
         }
-        if (character.feathers[0].health < oriHp)
+        if (oriHealth != 0 && character.unlockedFeathers.Count == 0)
         {
-            character.AddBuff("兴奋");
+            oriHealth = 0;
+        }
+        if (character.unlockedFeathers.Count != 0)
+        {
+            if (oriHealth < character.unlockedFeathers[0].health)
+            {
+                oriHealth = character.unlockedFeathers[0].health;
+            }
+            if (character.unlockedFeathers[0].health < oriHealth)
+            {
+                character.AddBuff("兴奋");
+                timer = 0;
+            }
         }
     }
 
@@ -4462,17 +4483,17 @@ public class HunterFeatherEffectBuff2 : EffectBuff
     public override void OnEnter()
     {
         base.OnEnter();
-        foreach(Buff buff in player.buffList)
+        foreach (Buff buff in player.buffList)
         {
-            if(buff is AttackBuff attackBuff)
+            if (buff is AttackBuff attackBuff)
             {
                 player.RemoveBuff(attackBuff);
                 player.AddBuff(attackBuff);
             }
         }
-        foreach(GameObject attackBody in player.attackBodyObjList)
+        foreach (GameObject attackBody in player.attackBodyObjList)
         {
-            totalDamage += attackBody.GetComponent<AttackBody>().damage/2;
+            totalDamage += attackBody.GetComponent<AttackBody>().damage / 2;
         }
         foreach (GameObject attackBody in player.attackBodyObjList)
         {
@@ -4534,13 +4555,13 @@ public class ExperimentPlayerFeatherBuff : EffectBuff
     private float removeSpeed;
     private float removeJumpSpeed;
     private float buffTimer;
-    private float oriHealth;
+    private float oriHealth = 0;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
+        this.timer = 5;
         if (target.GetComponent<Character>() != null)
         {
-            timer = 5;
             character = target.GetComponent<Character>();
             removeSpeed = target.GetComponent<PlayerController>().walkSpeed / 1.25f;
             removeJumpSpeed = target.GetComponent<PlayerController>().jumpSpeed / 1.25f;
@@ -4557,13 +4578,21 @@ public class ExperimentPlayerFeatherBuff : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (character.feathers.Count != 0)
+        if (oriHealth == 0 && character.unlockedFeathers.Count != 0)
         {
-            if (character.feathers[0].health > oriHealth)
+            oriHealth = character.unlockedFeathers[0].health;
+        }
+        if (oriHealth != 0 && character.unlockedFeathers.Count == 0)
+        {
+            oriHealth = 0;
+        }
+        if (character.unlockedFeathers.Count != 0)
+        {
+            if (oriHealth < character.unlockedFeathers[0].health)
             {
-                oriHealth = character.feathers[0].health;
+                oriHealth = character.unlockedFeathers[0].health;
             }
-            if (character.feathers[0].health < oriHealth||Input.GetKeyDown(KeyCode.LeftShift))
+            if (character.unlockedFeathers[0].health < oriHealth || Input.GetKeyDown(KeyCode.LeftShift))
             {
                 timer = 0;
             }
@@ -4577,7 +4606,7 @@ public class ExperimentPlayerFeatherBuff : EffectBuff
             character.AddBuff("梦源");
             buffTimer = 0.5f;
         }
-        
+
     }
 
     public override void OnExit()
@@ -4604,14 +4633,15 @@ public class DreamSource : EffectBuff
         base.OnEnter();
         character.tenacity += 5;
         character.strength += 5;
-       
+
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
         int num = 0;
-        foreach(Buff buff in character.buffList)
+        
+        foreach (Buff buff in character.buffList)
         {
             if (buff.name == "梦源")
             {
@@ -4634,6 +4664,33 @@ public class DreamSource : EffectBuff
         base.OnExit();
         character.strength -= 5;
         character.tenacity -= 5;
+    }
+}
+public class ExperimentPlayerFeatherBuff1 : EffectBuff
+{
+    Character character;
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 10;
+        character = target.GetComponent<Character>();
+
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
     }
 }
 #endregion

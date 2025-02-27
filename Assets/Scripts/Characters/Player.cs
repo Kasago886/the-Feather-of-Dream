@@ -82,7 +82,7 @@ public class Player : Character
         CardGenerateUpdate();
         HealthRecoverUpdate();
 
-        Debug.Log("unlock feathers:" + unlockedFeathers.Count.ToString() + "\nfeathers:" + feathers.Count.ToString());
+        //Debug.Log("unlock feathers:" + unlockedFeathers.Count.ToString() + "\nfeathers:" + feathers.Count.ToString());
     }
 
     /// <summary>
