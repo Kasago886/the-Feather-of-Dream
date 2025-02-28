@@ -35,7 +35,7 @@ public class DreamBottle : InteractiveObject {
 
             if (player_ != null)
             {
-                player_.AddDream(1);
+                player_.AddDream(dreamNum);
             }
             else
             {

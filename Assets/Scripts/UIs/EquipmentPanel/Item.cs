@@ -64,7 +64,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         Sprite sprite = Resources.Load<Sprite>("ItemIcon/" + itemInfo.imageName);
         //Debug.Log(sprite);
         image.sprite = sprite;
-        Resources.UnloadUnusedAssets();
+        //Resources.UnloadUnusedAssets();
 
         buffName = itemInfo.buffName;
         featherHealth = itemInfo.featherHealth;
@@ -93,6 +93,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
             if (dreamizedFeather != null)
             {
                 info.dreamizedFeather = dreamizedFeather.GetItemInfo();
+                Debug.Log("DreamizedFeatherInfo:"+info.dreamizedFeather);
             }
             else if (dreamizedFeatherInfo != null)
             {
