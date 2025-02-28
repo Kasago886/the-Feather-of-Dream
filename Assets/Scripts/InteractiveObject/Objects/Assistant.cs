@@ -13,6 +13,9 @@ public class Assistant : MonoBehaviour
 
     bool isBoom = false;
     bool startTutorialed = false;
+    bool pauseEverything = false;
+    float pauseSpeed = 0.0001f;
+    float beforePauseSpeed = 1;
 
     Player player;
     Rigidbody2D rb;
@@ -113,6 +116,16 @@ public class Assistant : MonoBehaviour
                     }
                 }
             }
+
+            //近似暂停（为了部分动画正常播放）
+            if (pauseEverything)
+            {
+                if (Time.timeScale != beforePauseSpeed && Time.timeScale != pauseSpeed && Time.timeScale != 0)
+                {
+                    beforePauseSpeed = Time.timeScale;
+                }
+                Time.timeScale = pauseSpeed;
+            }
             
         }
     }
@@ -121,7 +134,15 @@ public class Assistant : MonoBehaviour
     {
         if (!ArchiveManager.CheckFlag(FlagType.tutorialDone))
         {
-            dialog.Read("Tutorial/Tutorial" + step);
+            beforePauseSpeed = Time.timeScale;
+            pauseEverything = true;
+
+            UnityEvent unityEvent = new();
+            unityEvent.AddListener(() => { 
+                Time.timeScale = GetBeforePauseSpeed(); 
+                pauseEverything = false; 
+            });
+            dialog.Read("Tutorial/Tutorial" + step,unityEvent);
         }
     }
 
@@ -136,6 +157,11 @@ public class Assistant : MonoBehaviour
         rb.drag = 0;
 
         animator.Play("AssistantBoom");
+    }
+
+    float GetBeforePauseSpeed()
+    {
+        return beforePauseSpeed;
     }
 
     private void OnDrawGizmosSelected()

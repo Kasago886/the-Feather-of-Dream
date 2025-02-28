@@ -498,11 +498,7 @@ public class EquipmentPanelManager : MonoBehaviour
         if (item.isEquiped)
         {
             equipButton.SetActive(false);
-
-            if (item.itemName != "°¬ÀòÖ®Óð")
-            {
-                unequipButton.SetActive(true);
-            }
+            unequipButton.SetActive(true);
         }
         else
         {
@@ -519,6 +515,11 @@ public class EquipmentPanelManager : MonoBehaviour
                 equipButton.SetActive(false);
             }
 
+            unequipButton.SetActive(false);
+        }
+        if (item.itemName == "°¬ÀòÖ®Óð")
+        {
+            equipButton.SetActive(false);
             unequipButton.SetActive(false);
         }
 

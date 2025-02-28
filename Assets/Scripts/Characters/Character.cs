@@ -329,6 +329,13 @@ public class Character : MonoBehaviour
 
             forcebackTimer -= Time.deltaTime;
         }
+        else
+        {
+            if (beAttackedTrans != null)
+            {
+                beAttackedTrans = null;
+            }
+        }
     }
 
     /// <summary>

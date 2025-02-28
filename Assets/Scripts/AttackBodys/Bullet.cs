@@ -93,7 +93,7 @@ public class Bullet : MonoBehaviour
             }
             else if (collision.tag == Consts.PlayerTag && isEnemyBullet)
             {
-                collision.GetComponent<Player>().TakeDamage(damage);
+                collision.GetComponent<Player>().TakeDamage(damage,transform);
                 whatHappenWhenHit?.Invoke();
                 Destroy(gameObject);
             }
@@ -102,7 +102,7 @@ public class Bullet : MonoBehaviour
                 collisionEnemy = collision.GetComponent<Enemy>();
                 if (!collisionEnemy.isDead)
                 {
-                    collisionEnemy.TakeDamage(damage);
+                    collisionEnemy.TakeDamage(damage, transform);
                     Debug.Log("takedamage:" + collisionEnemy.enemyName);
                     whatHappenWhenHit?.Invoke();
                     Destroy(gameObject);
