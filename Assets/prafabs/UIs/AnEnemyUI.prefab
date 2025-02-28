@@ -1189,6 +1189,15 @@ MonoBehaviour:
   - name: "\u68A6\u6E90"
     description: "\u6301\u7EED10s,\u4F7F\u73A9\u5BB6\u529B\u91CF\n+5\uFF0C\u97E7\u6027+5\uFF0C\u5F53\u518D\u6B21\n\u83B7\u5F97\u68A6\u6E90\u65F6\u6301\u7EED\u65F6\u95F4\n\u91CD\u7F6E"
     buffPrefab: {fileID: 6051908474743900384, guid: 5f2a0f20d35a59f46b02cfe60d16726d, type: 3}
+  - name: "\u7834\u7ACB"
+    description: "\u83B7\u5F97\u201C\u7834\u7ACB\u201D0.5s\uFF0C\u82E5\n\u6B64\u671F\u95F4\u88AB\u653B\u51FB\uFF0C\u83B7\u5F97\n\u201C\u5174\u594B\u201D"
+    buffPrefab: {fileID: 6051908474743900384, guid: 7f89299a9dd82a04f99e00e193d05ff1, type: 3}
+  - name: "\u5174\u594B"
+    description: "\u83B7\u5F9750\u70B9\u529B\u91CF\uFF0C\u6301\u7EED\n10s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 7f89299a9dd82a04f99e00e193d05ff1, type: 3}
+  - name: "\u51DD\u805A"
+    description: "\u4F7F\u81EA\u8EAB\u901F\u5EA6\u964D\u4F4E80%\uFF0C\n\u97E7\u6027-40\uFF0C\u6301\u7EED3\u79D2\u540E\n\u83B7\u5F97\u5174\u594B"
+    buffPrefab: {fileID: 6051908474743900384, guid: 7f89299a9dd82a04f99e00e193d05ff1, type: 3}
 --- !u!1 &7089285176439379269
 GameObject:
   m_ObjectHideFlags: 0

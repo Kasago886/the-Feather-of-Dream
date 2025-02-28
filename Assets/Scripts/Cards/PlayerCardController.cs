@@ -262,10 +262,6 @@ public class PlayerCardController : MonoBehaviour
         }
         remainingSlotCount=positionNumber-content.transform.childCount;
         slotNumberText.text=positionNumber.ToString();
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>().shields.Add(new Shield() { health = 99999, timer = 9999999 });
-        }
     }
 
     /// <summary>
@@ -438,7 +434,7 @@ public class PlayerCardController : MonoBehaviour
         int n = 0;
         for (int i = 0;i < content.transform.childCount; i++)
         {
-            Card card=transform.GetChild(i).GetComponent<Card>();
+            Card card= content.transform.GetChild(i).GetComponent<Card>();
             if (card.id == id)
             {
                 n++;

@@ -31,7 +31,7 @@ public class NeprizAttackBody : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (Mathf.Abs(player.transform.position.x - transform.position.x) <= 1 && timer > 5)
+        if (Mathf.Abs(player.transform.position.x - transform.position.x) <= 0.5f && timer > 5)
         {
             ChangeColor(bullet);
             timer = 0;

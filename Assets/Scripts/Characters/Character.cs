@@ -105,6 +105,7 @@ public class Character : MonoBehaviour
             FeatherUpdate();
             AIUpdate();
             ForcebackUpdate();
+            ClearShield();
         }
         UIUpdate();
     }
@@ -169,6 +170,7 @@ public class Character : MonoBehaviour
         //Debug.Log("isdead:"+isDead);
         if (!isDead)
         {
+
             //»¤¶Ü¿¹ÉË
             while (shields.Count > 0 && damage > 0)
             {
@@ -599,5 +601,16 @@ public class Character : MonoBehaviour
     public virtual void UIUpdate()
     {
 
+    }
+    private void ClearShield()
+    {
+        for (int i = 0; i < shields.Count; i++)
+        {
+            if (shields[i].health == 0)
+            {
+                shields.RemoveAt(i);
+                i--;
+            }
+        }
     }
 }

@@ -43,7 +43,7 @@ public class Follower : MonoBehaviour
             if (enemy != null)
             {
                 timer += Time.deltaTime;
-                if (Mathf.Abs(enemy.transform.position.x - transform.position.x) <= 1 && timer > 10)
+                if (Mathf.Abs(enemy.transform.position.x - transform.position.x) <= 0.5f && timer > 10)
                 {
                     ChangeColor(bullet);
                     timer = 0;
