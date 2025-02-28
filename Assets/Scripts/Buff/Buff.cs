@@ -4794,7 +4794,6 @@ public class DreamSource : EffectBuff
                 num++;
             }
         }
-        Debug.Log(num);
         if (num > DreamSourceNum)
         {
             timer = 10;
