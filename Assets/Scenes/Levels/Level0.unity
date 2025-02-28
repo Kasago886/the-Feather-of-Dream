@@ -4283,6 +4283,10 @@ PrefabInstance:
       propertyPath: targetLevelIndex
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 1859238398552156307, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2685040565029839138, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: m_Name
       value: Lift (2)
@@ -10217,11 +10221,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1798979130975056823, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 75
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 1798979130975056823, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 495
+      value: 497
       objectReference: {fileID: 0}
     - target: {fileID: 1873056012038482416, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10237,7 +10241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1873056012038482416, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 640.4159
+      value: 643.4159
       objectReference: {fileID: 0}
     - target: {fileID: 2522135768547039197, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchorMax.x
@@ -10305,11 +10309,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3970839549448215180, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 75
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 3970839549448215180, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 302
+      value: 303
       objectReference: {fileID: 0}
     - target: {fileID: 4005528054150405591, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10337,7 +10341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4302934993989423955, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 75
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 4302934993989423955, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -10813,7 +10817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9165645140460325637, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 37.5
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 9165645140460325637, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_SizeDelta.y
@@ -13282,6 +13286,10 @@ PrefabInstance:
     - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: targetLevelIndex
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859238398552156307, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2685040565029839138, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: m_Name
@@ -16209,14 +16217,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
       propertyPath: Lock
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
-      propertyPath: lockedDialog
-      value: doorLockedByEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243087936342920140, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}
-      propertyPath: targetLevelIndex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2685040565029839138, guid: 722bcef6e6baba542a6313bc968301c5, type: 3}

@@ -17,6 +17,7 @@ public class Lift : InteractiveObject
     ArchiveManager archiveManager;
     EquipmentPanelManager equipmentPanelManager;
     Dialog dialog;
+    Animator animator;
     protected override void Start()
     {
         base.Start();
@@ -24,6 +25,7 @@ public class Lift : InteractiveObject
         archiveManager = FindObjectOfType<ArchiveManager>();
         equipmentPanelManager = FindObjectOfType<EquipmentPanelManager>();
         dialog = FindObjectOfType<Dialog>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     public override void Interact()
@@ -52,6 +54,11 @@ public class Lift : InteractiveObject
 
         if (!Lock)
         {
+            if (animator != null)
+            {
+                animator.Play("open");
+            }
+
             //±£´æ
             archiveManager.SaveCurrentArchive(level: targetLevelIndex, archivePoint: targetArchivePoint); 
             

@@ -37,7 +37,7 @@ public class Noticer : MonoBehaviour
     void Update()
     {
         Vector2 screenPos;
-        if (spriteRenderer != null)
+        if (false && spriteRenderer != null )//有bug，不准备修了
         {
             Sprite sprite = spriteRenderer.sprite;
             screenPos = Camera.main.WorldToScreenPoint(
