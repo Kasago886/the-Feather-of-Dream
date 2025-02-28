@@ -3607,15 +3607,82 @@ public class Fissure : EffectBuff, Energize
     public override void OnExit()
     {
         base.OnExit();
-        int buffNumber = 0;
+        int buffNumber1 = 0;
+        int buffNumber2=0;
         foreach (var buff in character.buffList)
         {
             if (buff.name == "…À∫€")
             {
-                buffNumber++;
+                buffNumber1++;
+            }
+            if(buff.name == "ŒÛΩ‚")
+            {
+                buffNumber2 = ((Misunderstanding)buff).number;
             }
         }
-        character.unlockedFeathers[0].health -= buffNumber * number * Mathf.Pow(2, -character.abnormalityResistance / 100);
+        if (buffNumber2 == 0)
+        {
+            float damege = buffNumber1 * buffNumber2 * Mathf.Pow(2, -character.abnormalityResistance / 100);
+            float hasAttack = 0;
+            for (int i = 0; i < character.feathers.Count; i++)
+            {
+                if (damege == hasAttack)
+                {
+                    break;
+                }
+                if (damege - hasAttack >= character.feathers[i].health)
+                {
+                    hasAttack += character.feathers[i].health;
+                    character.feathers[i].health = 0;
+                }
+                else
+                {
+                    character.feathers[i].health -= damege - hasAttack;
+                }
+            }
+        }
+        if (buffNumber2 == 1)
+        {
+            float damege = 2 *buffNumber1 * number * buffNumber2*Mathf.Pow(2, -character.abnormalityResistance / 100);
+            float hasAttack = 0;
+            for (int i = 0; i < character.feathers.Count; i++)
+            {
+                if (damege == hasAttack)
+                {
+                    break;
+                }
+                if (damege - hasAttack >= character.feathers[i].health)
+                {
+                    hasAttack += character.feathers[i].health;
+                    character.feathers[i].health = 0;
+                }
+                else
+                {
+                    character.feathers[i].health -= damege - hasAttack;
+                }
+            }
+        }
+        if (buffNumber2 > 1)
+        {
+            float damege = 3 * buffNumber1 * number * buffNumber2 * Mathf.Pow(2, -character.abnormalityResistance / 100);
+            float hasAttack = 0;
+            for (int i = 0; i < character.feathers.Count; i++)
+            {
+                if (damege == hasAttack)
+                {
+                    break;
+                }
+                if (damege - hasAttack >= character.feathers[i].health)
+                {
+                    hasAttack += character.feathers[i].health;
+                    character.feathers[i].health = 0;
+                }
+                else
+                {
+                    character.feathers[i].health -= damege - hasAttack;
+                }
+            }
+        }
     }
     public float GetNumber()
     {
