@@ -32,10 +32,8 @@ public class DefautFeather : Feather
 
 public class EquipmentFeather : Feather
 {
-    public static float MaxHealth = 100;
-
     public Item item = null;
-    public EquipmentFeather(float hp = 100)
+    public EquipmentFeather(float hp = 100, float MaxHealth = 100)
     {
         maxHealth = MaxHealth;
         health = hp;
@@ -51,7 +49,7 @@ public class EquipmentFeather : Feather
 
 public class TestEquipmentFeather : EquipmentFeather
 {
-    new public static float MaxHealth = 100;
+    public static float MaxHealth = 100;
 
     public TestEquipmentFeather(float hp = 100): base(hp)
     {
@@ -61,7 +59,7 @@ public class TestEquipmentFeather : EquipmentFeather
 
 public class EllieEquipmentFeather : EquipmentFeather
 {
-    new public static float MaxHealth = 100;
+    public static float MaxHealth = 100;
 
     public EllieEquipmentFeather(float hp = 100) : base(hp)
     {

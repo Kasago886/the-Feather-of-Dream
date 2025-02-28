@@ -299,7 +299,7 @@ public class Player : Character
                 }
 
             }
-            if (recoverFeather != null && unlockedFeathers.Count > 0)
+            if (recoverFeather == null && unlockedFeathers.Count > 0)
             {
                 foreach (Feather feather in unlockedFeathers)
                 {
