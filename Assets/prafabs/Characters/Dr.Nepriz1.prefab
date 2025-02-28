@@ -146,7 +146,8 @@ MonoBehaviour:
       timer: 0
     cooldown: 0
     timer: 0
-  dropItems: []
+  dropItems:
+  - {fileID: 2158636381633551328, guid: f484bb44be00b094183f56debb979238, type: 3}
   exp: 5
   flag: 18
   refreshable: 0
