@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemHealth : MonoBehaviour
 {
+    public Text healthText;
     public Transform health;
     public Feather feather;
 
@@ -36,6 +38,14 @@ public class ItemHealth : MonoBehaviour
                 }
             }
             health.transform.localScale = new Vector3(ratio, 1, 1);
+            if (feather.health == feather.maxHealth)
+            {
+                healthText.text = null;
+            }
+            else
+            {
+                healthText.text=feather.health.ToString();
+            }
         }
     }
 }

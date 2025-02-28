@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Name
-      value: Simpleton
+      value: 1041Simpleton
       objectReference: {fileID: 0}
     - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Pivot.x
@@ -178,7 +178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: theNumberOfEffortedEnemies
@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.data[1]
-      value: "\u968F\u673ABuff"
+      value: "\u827E\u8389\u4E4B\u5251"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.data[2]

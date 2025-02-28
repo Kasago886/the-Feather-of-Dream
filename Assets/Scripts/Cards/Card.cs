@@ -1460,6 +1460,7 @@ public class Card : MonoBehaviour,IPointerClickHandler
                 detailInfoObj.gameObject.SetActive(false);
             }
         }
+        PlayerCardController.cantUseCard = false;
     }
 }
 

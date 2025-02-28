@@ -17,7 +17,7 @@ public class NCards1 : MonoBehaviour
             if (cC.GetCardNumber(GetComponent<Card>().name) > 0)
             {
                 Destroy(gameObject);
-                cC.GetCard(GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>().cardGenerateList[Random.Range(0, GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>().cardGenerateList.Count)]);
+                cC.GetCard(GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>().cardGenerateList[Random.Range(0, GameObject.FindGameObjectWithTag(Consts.PlayerTag).       GetComponent<Player>().cardGenerateList.Count)]);
             }
         }
     }

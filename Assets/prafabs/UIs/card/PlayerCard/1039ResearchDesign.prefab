@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Name
-      value: ResearchDesign
+      value: 1039ResearchDesign
       objectReference: {fileID: 0}
     - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Pivot.x
@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effects.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effectsPlayer.m_PersistentCalls.m_Calls.Array.size
@@ -237,7 +237,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: effects.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effects.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2348380783439737458}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: effects.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 2348380783439737458}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
@@ -245,8 +253,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: effects.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effects.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ClearCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: effects.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: GetCards
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effectsPlayer.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -261,7 +277,15 @@ PrefabInstance:
       value: NCards1, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: effects.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NCards1, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: effects.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: effects.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -289,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368bf11dd1c9efc4cb71423b23f541a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onlyOne: 0
   cardNumber: 2
   buffName: 
   buffNameWhenReduceCard: "\u575A\u97E7"

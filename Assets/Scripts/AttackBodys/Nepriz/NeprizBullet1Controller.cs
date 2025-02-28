@@ -10,7 +10,7 @@ public class NeprizBullet1Controller : MonoBehaviour
         if (GameObject.Find("NeprizAttackBody(Clone)") != null)
         {
             AttackBody attackBody = GameObject.Find("NeprizAttackBody(Clone)").GetComponent<AttackBody>();
-            attackBody.bullet = Resources.Load<GameObject>("AttackBodys/Nepriz/NeprizBullet 1.prefab");
+            attackBody.bullet = Resources.Load<GameObject>("AttackBodys/Nepriz/NeprizBullet 1");
             b =false;
         }
     }
@@ -19,7 +19,7 @@ public class NeprizBullet1Controller : MonoBehaviour
         if (GameObject.Find("NeprizAttackBody(Clone)") != null)
         {
             AttackBody attackBody=GameObject.Find("NeprizAttackBody(Clone)").GetComponent<AttackBody>();
-            attackBody.bullet = Resources.Load<GameObject>("AttackBodys/Nepriz/NeprizBullet 1.prefab");
+            attackBody.bullet = Resources.Load<GameObject>("AttackBodys/Nepriz/NeprizBullet 1");
         }
     }
 }

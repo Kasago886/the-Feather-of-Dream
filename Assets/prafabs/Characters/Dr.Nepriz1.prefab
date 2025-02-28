@@ -130,13 +130,13 @@ MonoBehaviour:
   effectCardLineList:
   - cards:
     - card: {fileID: 6036376171126879144}
-      cooldown: 4.5
+      cooldown: 9.9
       timer: 0
     cooldown: 0
     timer: 0
   - cards:
     - card: {fileID: 1908082549706984299}
-      cooldown: 4.5
+      cooldown: 9.9
       timer: 0
     cooldown: 0
     timer: 0

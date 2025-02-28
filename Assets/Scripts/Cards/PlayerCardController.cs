@@ -236,18 +236,18 @@ public class PlayerCardController : MonoBehaviour
     public int positionNumber;
     public static bool cantUseCard;
     [HideInInspector]
-    public int remainingSlotCount {  get; private set; }    
+    public int remainingSlotCount { get; private set; }
     private Dictionary<string, int> nameToID = new();
     private Dictionary<int, GameObject> idToCard = new();
     private RectTransform rectTransform;
-    private  Text slotNumberText;
+    private Text slotNumberText;
     private void Start()
     {
-        rectTransform=content.GetComponent<RectTransform>();
+        rectTransform = content.GetComponent<RectTransform>();
         slotNumberText = GameObject.Find("slotNumberText").GetComponent<Text>();
         for (int i = 0; i < cardsList.Length; i++)
         {
-            GameObject g= Instantiate(cardsList[i]);
+            GameObject g = Instantiate(cardsList[i]);
             Card c = g.GetComponent<Card>();
             idToCard.Add(c.id, cardsList[i]);
             nameToID.Add(c.name, c.id);
@@ -260,8 +260,8 @@ public class PlayerCardController : MonoBehaviour
         {
             positionNumber = 0;
         }
-        remainingSlotCount=positionNumber-content.transform.childCount;
-        slotNumberText.text=positionNumber.ToString();
+        remainingSlotCount = positionNumber - content.transform.childCount;
+        slotNumberText.text = positionNumber.ToString();
     }
 
     /// <summary>
@@ -282,11 +282,11 @@ public class PlayerCardController : MonoBehaviour
     /// <returns>
     /// 返还是否成功添加
     /// </returns>
-    public bool GetCard(string cardName,bool b)
+    public bool GetCard(string cardName, bool b)
     {
         if (nameToID.ContainsKey(cardName))
         {
-            return GetCard(nameToID[cardName],true);
+            return GetCard(nameToID[cardName], true);
         }
         else
         {
@@ -301,7 +301,7 @@ public class PlayerCardController : MonoBehaviour
     /// <returns>
     /// 返还是否成功添加
     /// </returns>
-    public bool GetCard(int id,bool b)
+    public bool GetCard(int id, bool b)
     {
         if (content.transform.childCount < positionNumber && idToCard.ContainsKey(id))
         {
@@ -335,8 +335,8 @@ public class PlayerCardController : MonoBehaviour
     /// </param>
     public void GetCard(int id)
     {
-        if (content.transform.childCount < positionNumber&&idToCard.ContainsKey(id))
-        {            
+        if (content.transform.childCount < positionNumber && idToCard.ContainsKey(id))
+        {
             RectTransform rectTransform1 = Instantiate(idToCard[id], content.transform).GetComponent<RectTransform>();
             rectTransform1.SetParent(rectTransform);
         }
@@ -344,7 +344,7 @@ public class PlayerCardController : MonoBehaviour
     /// <summary>
     /// 增加卡槽
     /// </summary>
-    public void AddPosition(int i=1)
+    public void AddPosition(int i = 1)
     {
         positionNumber += i;
     }
@@ -366,7 +366,7 @@ public class PlayerCardController : MonoBehaviour
     /// </summary>
     public void ClearCard()
     {
-        for(int i = 0;i < content.transform.childCount;i++)
+        for (int i = 0; i < content.transform.childCount; i++)
         {
             Destroy(content.transform.GetChild(i).gameObject);
         }
@@ -377,18 +377,15 @@ public class PlayerCardController : MonoBehaviour
     /// <returns></returns>
     public bool GetCardOrNot()
     {
-        if(cantUseCard&& content.transform.childCount < positionNumber-1)
+        if (cantUseCard && content.transform.childCount < positionNumber - 1)
         {
             return true;
         }
-        else if (content.transform.childCount < positionNumber&&!cantUseCard)
+        else if (content.transform.childCount < positionNumber && !cantUseCard)
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
     /// <summary>
     /// 调用本函数以减少玩家手牌
@@ -401,7 +398,7 @@ public class PlayerCardController : MonoBehaviour
     /// </param>
     public void ReduceCard(int id, int reduceNumber = 1)
     {
-        int n=0;
+        int n = 0;
         for (int i = 0; i < content.transform.childCount; i++)
         {
             if (content.transform.GetChild(i).GetComponent<Card>().id == id && n < reduceNumber)
@@ -432,9 +429,9 @@ public class PlayerCardController : MonoBehaviour
     public int GetCardNumber(int id)
     {
         int n = 0;
-        for (int i = 0;i < content.transform.childCount; i++)
+        for (int i = 0; i < content.transform.childCount; i++)
         {
-            Card card= content.transform.GetChild(i).GetComponent<Card>();
+            Card card = content.transform.GetChild(i).GetComponent<Card>();
             if (card.id == id)
             {
                 n++;

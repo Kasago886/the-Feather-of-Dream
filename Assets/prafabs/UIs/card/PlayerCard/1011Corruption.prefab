@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Name
-      value: Corruption
+      value: 1011Corruption
       objectReference: {fileID: 0}
     - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Pivot.x
@@ -137,6 +137,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNamesPlayer.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesEnemy.Array.data[0]
       value: "\u62D4\u7FBD5s"
       objectReference: {fileID: 0}
@@ -147,6 +151,10 @@ PrefabInstance:
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.data[0]
       value: "\u8150\u8D25\u8513\u5EF6"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
+      propertyPath: buffNamesPlayer.Array.data[1]
+      value: "\u827E\u8389\u4E4B\u5251"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
