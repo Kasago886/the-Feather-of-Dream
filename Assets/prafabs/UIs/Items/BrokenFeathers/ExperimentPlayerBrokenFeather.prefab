@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: "\u6545\u201C\u6211\u201D\u4E4B\u6B8B\u7FBD"
-  information: "\n\u901F\u5EA6+1\n\n\u5361\u724C\uFF1A\n\u51DD\u805A\n\u7834\u7ACB"
+  information: "\u6211\uFF1F\u4F60\uFF01\n\n\u901F\u5EA6+1\n\n\u5361\u724C\uFF1A\n\u51DD\u805A\n\u7834\u7ACB"
   type: 1
   isDreamizable: 1
   dreamizeCost: 1

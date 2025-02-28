@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: "\u75AF\u730E\u4E4B\u7FBD"
-  information: "\n\u97E7\u6027+6\n\u529B\u91CF+6\n\u88AB\u52A8\uFF1A\u6BCF\u62E5\u6709\u4E00\u4E2A\u653B\u51FB\u66FF\u8EAB\uFF0C\u83B7\u5F975\u70B9\u529B\u91CF\u3002\n\u5361\u724C\uFF1A\u566C\u8840\u5315\u9996\n\u72C2\u730E\u4E4B\u67AA\n\u8D77\u52A8
+  information: "\u75AF\u5B50\uFF1F\u90A3\u53C8\u5982\u4F55\uFF1F\u6211\u53EF\u662F\uFF0C\u6751\u5E84\u7684\u82F1\u96C4\u554A\u54C8\u54C8\uFF01\u6CA1\u6709\u4E00\u5339\u72FC\uFF0C\u53EF\u4EE5\u5728\u6211\u9762\u524D\u4F5C\u6076\uFF01\n\n\u97E7\u6027+6\n\u529B\u91CF+6\n\u88AB\u52A8\uFF1A\u6BCF\u62E5\u6709\u4E00\u4E2A\u653B\u51FB\u66FF\u8EAB\uFF0C\u83B7\u5F975\u70B9\u529B\u91CF\u3002\n\u5361\u724C\uFF1A\u566C\u8840\u5315\u9996\n\u72C2\u730E\u4E4B\u67AA\n\u8D77\u52A8
     \u8FDE\u52A8 \u767E\u89E3\n"
   type: 0
   isDreamizable: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1d13b35b3786ee644945b47abd0b47c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 467b900c8b93b174fa74541799cb1ee4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
