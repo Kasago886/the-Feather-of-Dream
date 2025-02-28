@@ -474,7 +474,7 @@ public class BurningDocumentsFeatherBuff : EquipmentFeatherBuff
     {
         base.Init(target, timer, isPermanent);
 
-        this.feather = new EllieEquipmentFeather(200);
+        this.feather = new EquipmentFeather(200);
         this.player = target as Player;
     }
 
@@ -594,7 +594,7 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.feather = new EllieEquipmentFeather(120);
+        this.feather = new EquipmentFeather(120);
         this.player = target as Player;
         cardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
         target.gameObject.AddComponent<AddFollower>();
@@ -745,7 +745,7 @@ public class MisunderstoodWerewolfFeatherBuff : EquipmentFeatherBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.feather = new EllieEquipmentFeather(300);
+        this.feather = new EquipmentFeather(300);
         this.player = target as Player;
         cardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
     }
@@ -877,7 +877,7 @@ public class EnslavedDwarfsFeatherBuff : EquipmentFeatherBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.feather = new EllieEquipmentFeather(200);
+        this.feather = new EquipmentFeather(200);
         this.player = target as Player;
         cardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
     }
@@ -992,7 +992,7 @@ public class TinWoodmanFeatherBuff : EquipmentFeatherBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.feather = new EllieEquipmentFeather(220);
+        this.feather = new EquipmentFeather(220);
         this.player = target as Player;
     }
 
@@ -1032,7 +1032,7 @@ public class CrazyHunterEquipmentFeatherBuff : EquipmentFeatherBuff
     {
         base.Init(target, timer, isPermanent);
 
-        this.feather = new EllieEquipmentFeather(150);
+        this.feather = new EquipmentFeather(150);
         this.player = target as Player;
     }
 
@@ -1079,7 +1079,7 @@ public class ExperimentPlayerEquipmentFeatherBuff : EquipmentFeatherBuff
     {
         base.Init(target, timer, isPermanent);
 
-        this.feather = new EllieEquipmentFeather(300);
+        this.feather = new EquipmentFeather(300);
         this.player = target as Player;
     }
 

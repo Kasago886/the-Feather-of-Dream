@@ -33,10 +33,9 @@ public class DefautFeather : Feather
 public class EquipmentFeather : Feather
 {
     public Item item = null;
-    public EquipmentFeather(float hp = 100, float MaxHealth = 100)
+    public EquipmentFeather(float MaxHealth = 100)
     {
         maxHealth = MaxHealth;
-        health = hp;
     }
 
     public override void TakeDamage(float damage)
@@ -51,7 +50,7 @@ public class TestEquipmentFeather : EquipmentFeather
 {
     public static float MaxHealth = 100;
 
-    public TestEquipmentFeather(float hp = 100): base(hp)
+    public TestEquipmentFeather()
     {
         maxHealth = MaxHealth;
     }
@@ -61,7 +60,7 @@ public class EllieEquipmentFeather : EquipmentFeather
 {
     public static float MaxHealth = 100;
 
-    public EllieEquipmentFeather(float hp = 100) : base(hp)
+    public EllieEquipmentFeather()
     {
         maxHealth = MaxHealth;
     }
