@@ -2955,7 +2955,7 @@ public class JusticeBuff : EffectBuff
         if (attackbodyNewNum > attackbodyOriNum)
         {
             target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().damage *= 2;
-            timer = 0;
+            target.RemoveBuff("ХэТе");
         }
         if (attackbodyNewNum < attackbodyOriNum)
         {

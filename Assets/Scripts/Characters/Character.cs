@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Timers;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -74,6 +75,7 @@ public class Character : MonoBehaviour
 
     public List<Shield> shields = new();
 
+    private float oriHealth;
     // Start is called before the first frame update
     protected void Start()
     {
@@ -108,6 +110,7 @@ public class Character : MonoBehaviour
             ClearShield();
         }
         UIUpdate();
+        DamageUI();
     }
 
     /// <summary>
@@ -617,6 +620,30 @@ public class Character : MonoBehaviour
             {
                 shields.RemoveAt(i);
                 i--;
+            }
+        }
+    }
+    private void DamageUI()
+    {
+        if (oriHealth == 0 && unlockedFeathers.Count != 0)
+        {
+            oriHealth = unlockedFeathers[0].health;
+        }
+        if (oriHealth != 0 && unlockedFeathers.Count == 0)
+        {
+            oriHealth = 0;
+        }
+        if (unlockedFeathers.Count != 0)
+        {
+            if (oriHealth < unlockedFeathers[0].health)
+            {
+                oriHealth =unlockedFeathers[0].health;
+            }
+            if (unlockedFeathers[0].health < oriHealth)
+            {
+                Debug.Log(oriHealth - unlockedFeathers[0].health);
+                DamageUIManager.Instance.ShowText(((int)(oriHealth - unlockedFeathers[0].health)).ToString(), transform.position,Color.red);
+                oriHealth = unlockedFeathers[0].health;
             }
         }
     }
