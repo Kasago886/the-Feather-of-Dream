@@ -366,6 +366,16 @@ public class Enemy : Character
         {
             attackCooldownTimer = attackCooldown;
 
+            Vector2 direction = player.transform.position - transform.position;
+            if (direction.x < 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (direction.x > 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+
             base.OnAttack();
         }
     }
