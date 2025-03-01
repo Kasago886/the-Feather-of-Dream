@@ -306,7 +306,7 @@ public class Enemy : Character
             AttackBody attackBody = attackBodyObj.GetComponent<AttackBody>();
             if (attackBody.GetTargetsInAttackRegion(transform.position, spriteRenderer.flipX).Length > 0)
             {
-                Debug.Log("In AttackRegion" + attackBody.gameObject);
+                //Debug.Log("In AttackRegion" + attackBody.gameObject);
                 return true;
             }
         }
