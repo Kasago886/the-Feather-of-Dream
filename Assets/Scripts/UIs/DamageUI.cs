@@ -20,8 +20,8 @@ public class DamageUI : MonoBehaviour
         timer += Time.deltaTime;
         if (timer < 0.2f)
         {
-            rectTransform.anchoredPosition += direction.normalized * 150 * Time.deltaTime;  
-            rectTransform.localScale +=   Time.deltaTime*rectTransform.localScale;
+            rectTransform.anchoredPosition += direction.normalized * 500 * Time.deltaTime;  
+            rectTransform.localScale +=  3f* Time.deltaTime*rectTransform.localScale;
         }
         if (timer >= 0.8f)
         {

@@ -1362,7 +1362,7 @@ public class ExperimentPlayerAttackBuff : AttackBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.timer = 5;
+        this.timer = 3;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/ExperimentPlayer/ExperimentPlayerAttackBody");
     }
 }
@@ -1371,7 +1371,7 @@ public class ExperimentPlayerAttackBuff1 : AttackBuff
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
-        this.timer = 5;
+        this.timer = 6;
         this.attackBody = Resources.Load<GameObject>("AttackBodys/ExperimentPlayer/ExperimentPlayerAttackBody1");
     }
 }
@@ -4192,16 +4192,13 @@ public class ExperimentAttackEffectBuff : EffectBuff
 {
     Character character;
     Player Player;
-    float oriHp;
+    float oriHealth;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
         character = target.GetComponent<Character>();
+        Player = GameObject.Find("Player").GetComponent<Player>();
         this.timer = 5;
-        if (character.feathers.Count != 0)
-        {
-            oriHp = character.feathers[0].health;
-        }
     }
 
     public override void OnEnter()
@@ -4212,15 +4209,34 @@ public class ExperimentAttackEffectBuff : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (character.feathers.Count != 0)
-            if (character.feathers[0].health < oriHp)
+        if (oriHealth == 0 && character.unlockedFeathers.Count != 0)
+        {
+            oriHealth = character.unlockedFeathers[0].health;
+        }
+        if (oriHealth != 0 && character.unlockedFeathers.Count == 0)
+        {
+            oriHealth = 0;
+        }
+        if (character.unlockedFeathers.Count != 0)
+        {
+            if (oriHealth < character.unlockedFeathers[0].health)
+            {
+                oriHealth = character.unlockedFeathers[0].health;
+            }
+            if (character.unlockedFeathers[0].health < oriHealth)
             {
                 timer = 0;
             }
+        }
         if (timer <= 0.5f && timer > 0)
         {
             timer = 0;
             target.gameObject.transform.position = GameObject.Find("Player").transform.position;
+            if (Player.unlockedFeathers.Count == 0)
+            {
+                Player.AddBuff("°ÎÓð10s");
+            }
+            character.GetComponent<Enemy>().attackCooldownTimer = 0;
         }
         foreach (GameObject attackBody in character.attackBodyObjList)
         {
@@ -4353,6 +4369,33 @@ public class ExperimentEffectBuff2 : EffectBuff
         {
             player.AddBuff("¼õËÙ");
         }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+    }
+}
+public class ExperimentEffectBuff3 : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 0;
+
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.GetComponent<ExperimentAttackWay>().attackWay = 1;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+       
     }
 
     public override void OnExit()

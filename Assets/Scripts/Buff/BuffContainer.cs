@@ -120,6 +120,7 @@ public class BuffContainer
         {"梦崩",typeof (ExperimentEffectBuff) },//使自身攻击速度+900%，持续1.5s
         {"梦身",typeof (ExperimentEffectBuff1) },//蓄力2s，获得10s20点护盾，被任意攻击打断后为玩家添加护盾
         {"梦缠",typeof (ExperimentEffectBuff2) },//持续5s，玩家每次使用冲刺使自身速度-10%，持续2s
+        {"梦冲",typeof (ExperimentEffectBuff3) },//跃起并冲向玩家，撞击造成50伤害
         {"梦源",typeof (DreamSource) },//持续10s,使玩家力量+5，韧性+5，当再次获得梦源时持续时间重置
         {"凝梦",typeof (ExperimentPlayerFeatherBuff) },//使自身速度与跳跃速度-80%，每0.5s获得一次梦源，最多5s，被攻击或冲刺提前结束buff。
         {"释梦",typeof (ExperimentPlayerFeatherBuff1) },//扣除n层最多10层梦源，获得10+n^2点持续15s的护盾，扣除梦源超过5层时获得一张卡牌，扣除10层梦源时移动速度+3，持续15s
