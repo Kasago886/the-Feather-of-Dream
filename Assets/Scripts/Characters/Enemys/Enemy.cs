@@ -275,7 +275,7 @@ public class Enemy : Character
     /// <returns></returns>
     public bool CheckPlayerInAttackCardDistance()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) < attackCardUseDistance)
+        if (CheckPlayerInSight(EnemySearchType.distance,attackCardUseDistance,0))
         {
             return true;
         }
@@ -288,7 +288,7 @@ public class Enemy : Character
     /// <returns></returns>
     public bool CheckPlayerInEffectCardDistance()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) < effectCardUseDistance)
+        if (CheckPlayerInSight(EnemySearchType.distance, effectCardUseDistance, 0))
         {
             return true;
         }
@@ -306,6 +306,7 @@ public class Enemy : Character
             AttackBody attackBody = attackBodyObj.GetComponent<AttackBody>();
             if (attackBody.GetTargetsInAttackRegion(transform.position, spriteRenderer.flipX).Length > 0)
             {
+                Debug.Log("In AttackRegion" + attackBody.gameObject);
                 return true;
             }
         }

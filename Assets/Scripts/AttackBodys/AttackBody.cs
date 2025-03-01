@@ -122,6 +122,7 @@ public class AttackBody : MonoBehaviour
             center.x = -attackCenter.x;
         }
         center = center + position;
+        //Debug.Log("position:" + position + "\ncenter:" + center);
 
         //有限视距
         if (attackType == AttackType.Melee)
@@ -146,7 +147,18 @@ public class AttackBody : MonoBehaviour
             {
                 Collider2D player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Collider2D>();
 
-                return new Collider2D[] { player };
+                //墙体检测
+                RaycastHit2D[] hit = Physics2D.LinecastAll(player.transform.position, center, LayerMask.GetMask(Consts.WallLayer));
+                //Debug.Log(player.transform.position + "\n" + center);
+                //Debug.Log(hit.Length);
+                if (hit.Length > 0)
+                {
+                    return new Collider2D[] { };
+                }
+                else
+                {
+                    return new Collider2D[] { player };
+                }
             }
             else
             {
@@ -154,7 +166,12 @@ public class AttackBody : MonoBehaviour
                 GameObject[] enemys = GameObject.FindGameObjectsWithTag(Consts.EnemyTag);
                 foreach (GameObject enemy in enemys)
                 {
-                    list.Add(enemy.GetComponent<Collider2D>());
+                    //墙体检测
+                    RaycastHit2D[] hit = Physics2D.LinecastAll(enemy.transform.position, center, LayerMask.GetMask(Consts.WallLayer));
+                    if (hit.Length <= 0)
+                    {
+                        list.Add(enemy.GetComponent<Collider2D>());
+                    }
                 }
 
                 return list.ToArray();
