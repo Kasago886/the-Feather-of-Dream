@@ -15,8 +15,15 @@ public class HunterFeatherAttack : MonoBehaviour
             {
                 strength = attackBody.GetComponent<AttackBody>().damage;
             }
-            if(player.unlockedFeathers.Count > 0) 
-            player.unlockedFeathers[0].health += strength / 2;
+            if(player.unlockedFeathers.Count > 0)
+            {
+                Feather feather = player.unlockedFeathers[0];
+                feather.health += strength / 2;
+                if (feather.health > feather.maxHealth)
+                {
+                    feather.health = feather.maxHealth;
+                }
+            }
         }
     }
 }
