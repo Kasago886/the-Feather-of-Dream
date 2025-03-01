@@ -229,7 +229,7 @@ public class AttackBody : MonoBehaviour
         {
             //找到最近的目标
             Collider2D target = targets[0];
-            Debug.Log(target);
+            //Debug.Log(target);
             foreach(Collider2D collider in targets)
             {
                 if (Vector2.Distance(center, collider.transform.position) < Vector2.Distance(center, target.transform.position))

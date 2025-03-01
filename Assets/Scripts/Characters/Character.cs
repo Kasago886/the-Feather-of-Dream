@@ -185,9 +185,17 @@ public class Character : MonoBehaviour
         if (!isDead)
         {
 
+            int DEBUG_WHILE_COUNT = 0;
             //»¤¶Ü¿¹ÉË
             while (shields.Count > 0 && damage > 0)
             {
+                DEBUG_WHILE_COUNT++;
+                if (DEBUG_WHILE_COUNT >= 1000)
+                {
+                    Debug.LogError("Over 1000 WHILE has been done! Check it!");
+                    break;
+                }
+
                 Shield shield = shields[0];
                 shield.health -= damage;
 
@@ -242,9 +250,17 @@ public class Character : MonoBehaviour
                 //Debug.Log(damage);
                 damage = damage * Mathf.Pow(2, -tenacity / 100);
             }
+
+            DEBUG_WHILE_COUNT = 0;
             //³ÔÉË
             while (unlockedFeathers.Count > 0 && damage > 0)
             {
+                DEBUG_WHILE_COUNT++;
+                if (DEBUG_WHILE_COUNT >= 1000)
+                {
+                    Debug.LogError("Over 1000 WHILE has been done! Check it!");
+                    break;
+                }
                 Feather feather = unlockedFeathers[0];
                 feather.TakeDamage(damage);
 
@@ -437,10 +453,17 @@ public class Character : MonoBehaviour
     {
         Debug.Log(num.ToString()+" "+time.ToString());
 
+        int DEBUG_WHILE_COUNT = 0;
         int count = 0;
         int i = feathers.Count - 1;
         while (i >= 0 && count < num)
         {
+            DEBUG_WHILE_COUNT++;
+            if (DEBUG_WHILE_COUNT >= 1000)
+            {
+                Debug.LogError("Over 1000 WHILE has been done! Check it!");
+                break;
+            }
             Feather feather = feathers[i];
             unlockedFeathers.Add(feather);
             feather.lockTimer = time;

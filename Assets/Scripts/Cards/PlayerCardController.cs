@@ -368,9 +368,17 @@ public class PlayerCardController : MonoBehaviour
     /// </param>
     public void DelPosition(int i = 1)
     {
+        int DEBUG_WHILE_COUNT = 0;
+
         positionNumber -= i;
         while (content.transform.childCount > positionNumber && content.transform.childCount > 0)
         {
+            DEBUG_WHILE_COUNT++;
+            if (DEBUG_WHILE_COUNT > 1000)
+            {
+                Debug.LogError("WHILE OVERUSED! YOU SHOULD CHECK IT!");
+                break;
+            }
             DestroyImmediate(content.transform.GetChild(content.transform.childCount - 1).gameObject);
         }
     }
