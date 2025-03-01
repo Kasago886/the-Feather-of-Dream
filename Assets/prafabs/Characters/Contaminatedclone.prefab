@@ -177,7 +177,7 @@ MonoBehaviour:
   attackCooldown: 2
   attackCooldownTimer: 0
   searchType: 0
-  wallDetect: 0
+  wallDetect: 1
   keepDistanceWhenNotArmed: 0
   searchDistance: 10
   minDistance: 1
