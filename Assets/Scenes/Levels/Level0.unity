@@ -14142,6 +14142,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 7226969462189786082, guid: 55f887a983cb4e44a8eb17ffa3af1a87, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226969462189786082, guid: 55f887a983cb4e44a8eb17ffa3af1a87, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226969462189786082, guid: 55f887a983cb4e44a8eb17ffa3af1a87, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

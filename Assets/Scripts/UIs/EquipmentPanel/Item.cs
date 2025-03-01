@@ -88,16 +88,17 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         info.isDreamizable = isDreamizable;
         info.dreamizeCost = dreamizeCost;
 
-        if (isDreamizable && dreamizedFeather != null)
+        if (isDreamizable)
         {
             if (dreamizedFeather != null)
             {
                 info.dreamizedFeather = dreamizedFeather.GetItemInfo();
-                Debug.Log("DreamizedFeatherInfo:"+info.dreamizedFeather);
+                Debug.Log("DreamizedFeatherInfo:"+info.dreamizedFeather.itemName);
             }
             else if (dreamizedFeatherInfo != null)
             {
                 info.dreamizedFeather = dreamizedFeatherInfo;
+                Debug.Log("DreamizedFeatherInfo:" + info.dreamizedFeather.itemName);
             }
         }
 

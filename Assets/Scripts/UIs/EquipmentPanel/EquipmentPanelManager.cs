@@ -538,17 +538,14 @@ public class EquipmentPanelManager : MonoBehaviour
                     dreamizeButton.GetComponent<Button>().interactable = true;
                 }
                 dreamizeCost.text = "ÏûºÄ£º" + item.dreamizeCost.ToString();
+
                 reinforceButton.SetActive(true);
                 ReinforceButton reinforceButtonInformation = reinforceButton.GetComponent<ReinforceButton>();
-                if (item.dreamizedFeather != null)
+                ItemInfo dreamizedFeatherInfo = item.GetItemInfo().dreamizedFeather;
+                if (dreamizedFeatherInfo != null)
                 {
-                    ItemInfo dreamizedFeatherInfo;
-                    if (item.dreamizedFeather != null)
-                    {
-                        dreamizedFeatherInfo = item.dreamizedFeather.GetItemInfo();
-                        reinforceButtonInformation.information = dreamizedFeatherInfo.information;
-                        reinforceButtonInformation.itemName = dreamizedFeatherInfo.itemName;
-                    }
+                    reinforceButtonInformation.information = dreamizedFeatherInfo.information;
+                    reinforceButtonInformation.itemName = dreamizedFeatherInfo.itemName;
                 }
                 reinforceButtonInformation.oriName = item.itemName;
                 reinforceButtonInformation.oriInformation = item.information;
@@ -716,9 +713,12 @@ public class EquipmentPanelManager : MonoBehaviour
                     {
                         dreamizedFeatherInfo = null;
                         Debug.LogError("Null DreamizedFeather!");
+                        return;
                     }
                     RemoveItem(item);
                     AddItem(dreamizedFeatherInfo);
+
+                    OnClickItem(selectedItemPlace.content, selectedItemPlace);
                 }
             }
         }
