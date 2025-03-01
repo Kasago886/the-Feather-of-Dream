@@ -2959,6 +2959,8 @@ public class JusticeBuff : EffectBuff
 {
     int attackbodyOriNum;
     int attackbodyNewNum;
+
+    GameObject targetAttackBodyObj = null;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -2974,18 +2976,28 @@ public class JusticeBuff : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-        attackbodyNewNum = target.attackBodyObjList.Count;
-        if (attackbodyNewNum > attackbodyOriNum)
+        if (targetAttackBodyObj == null)
         {
-            Debug.Log("已执行 正义");
-            target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().damage *= 2;
-            target.RemoveBuff("正义");
+            attackbodyNewNum = target.attackBodyObjList.Count;
+            if (attackbodyNewNum > attackbodyOriNum)
+            {
+                //Debug.Log("已执行 正义");
+                targetAttackBodyObj = target.attackBodyObjList[attackbodyNewNum - 1];
+                targetAttackBodyObj.GetComponent<AttackBody>().damage *= 2;
+            }
+            if (attackbodyNewNum < attackbodyOriNum)
+            {
+                attackbodyOriNum = attackbodyNewNum;
+            }
         }
-        if (attackbodyNewNum < attackbodyOriNum)
+        else
         {
-            attackbodyOriNum = attackbodyNewNum;
+            if (!target.attackBodyObjList.Contains(targetAttackBodyObj))
+            {
+                targetAttackBodyObj.GetComponent<AttackBody>().damage /= 2;
+                target.RemoveBuff("正义");
+            }
         }
-
     }
 
     public override void OnExit()
