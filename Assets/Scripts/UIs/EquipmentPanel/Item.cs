@@ -296,28 +296,31 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         }
 
         //装备界面血量
-        if (itemHealth == null)
+        if (type == ItemType.Feather)
         {
-            itemHealth = transform.GetChild(0).GetComponent<ItemHealth>();
-        }
-        if (itemHealth.feather == null)
-        {
-            Feather feather = null;
-            if (player == null)
+            if (itemHealth == null)
             {
-                feather = new Feather();
-                feather.maxHealth = featherMaxHealth;
-                feather.health = featherHealth;
+                itemHealth = transform.GetChild(0).GetComponent<ItemHealth>();
             }
-            else if (itemFeather != null)
+            if (itemHealth.feather == null)
             {
-                feather = itemFeather;
-            }
+                Feather feather = null;
+                if (player == null)
+                {
+                    feather = new Feather();
+                    feather.maxHealth = featherMaxHealth;
+                    feather.health = featherHealth;
+                }
+                else if (itemFeather != null)
+                {
+                    feather = itemFeather;
+                }
 
-            if (feather != null)
-            {
-                itemHealth.gameObject.SetActive(true);
-                itemHealth.feather = feather;
+                if (feather != null)
+                {
+                    itemHealth.gameObject.SetActive(true);
+                    itemHealth.feather = feather;
+                }
             }
         }
     }

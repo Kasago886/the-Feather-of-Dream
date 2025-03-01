@@ -57,6 +57,7 @@ public class EquipmentPanelManager : MonoBehaviour
         archiveManager = FindAnyObjectByType<ArchiveManager>();
         animationBoolManager = GetComponent<AnimationBoolManager>();
         player = FindAnyObjectByType<Player>();
+        dialog = FindAnyObjectByType<Dialog>();
 
         if (!setuped)
         {
@@ -564,7 +565,11 @@ public class EquipmentPanelManager : MonoBehaviour
         if (item.type == ItemType.MemoryFeather)
         {
             memorizeButton.GetComponent<Button>().onClick.RemoveAllListeners();
-            UnityAction action = () => { dialog.Read(item.dialogName); };
+            UnityAction action = () => {
+                //Debug.Log(item);
+                //Debug.Log(dialog);
+                dialog.Read(item.dialogName); 
+            };
             memorizeButton.GetComponent<Button>().onClick.AddListener(action);
 
             memorizeButton.SetActive(true);

@@ -30,13 +30,19 @@ public class Player : Character
     InputListener inputListener;
     [HideInInspector] public PlayerController playerController;
 
-    static public Dictionary<int,List<int>> level_maxExp_tenacity_strength = new Dictionary<int, List<int>>
+    static public SortedDictionary<int,List<int>> level_maxExp_tenacity_strength = new ()
     {
         {0,new List<int> {20,0,0}},
         {1,new List<int> {20,10,10}},
         {2,new List<int> {20,20,20}},
         {3,new List<int> {20,30,30}},
         {4,new List<int> {20,40,40}},
+        {5,new List<int> {20,50,50}},
+        {6,new List<int> {20,60,60}},
+        {7,new List<int> {20,70,70}},
+        {8,new List<int> {20,80,80}},
+        {9,new List<int> {20,90,90}},
+        {10,new List<int> {100,100,100}},
     };
 
     new private void Start()
@@ -187,8 +193,17 @@ public class Player : Character
             archiveManager.currentArchive.playerInfo.currentExp -= archiveManager.currentArchive.playerInfo.maxExp;
             archiveManager.currentArchive.playerInfo.level += 1;
 
-            List<int> levelInfo = level_maxExp_tenacity_strength[archiveManager.currentArchive.playerInfo.level];
-            archiveManager.currentArchive.playerInfo.maxExp = levelInfo[0];
+            if (level_maxExp_tenacity_strength.ContainsKey(archiveManager.currentArchive.playerInfo.level))
+            {
+                List<int> levelInfo = level_maxExp_tenacity_strength[archiveManager.currentArchive.playerInfo.level];
+                archiveManager.currentArchive.playerInfo.maxExp = levelInfo[0];
+            }
+            else
+            {
+                archiveManager.currentArchive.playerInfo.currentExp += archiveManager.currentArchive.playerInfo.maxExp;
+                archiveManager.currentArchive.playerInfo.level -= 1;
+                break;
+            }
 
             upgrade = true;
         }
