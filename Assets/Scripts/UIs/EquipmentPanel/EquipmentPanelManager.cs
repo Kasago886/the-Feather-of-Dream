@@ -723,7 +723,13 @@ public class EquipmentPanelManager : MonoBehaviour
                     RemoveItem(item);
                     AddItem(dreamizedFeatherInfo);
 
-                    OnClickItem(selectedItemPlace.content, selectedItemPlace);
+                    if (selectedItemPlace != null)
+                    {
+                        if (selectedItemPlace.content != null)
+                        {
+                            OnClickItem(selectedItemPlace.content, selectedItemPlace);
+                        }
+                    }
                 }
             }
         }

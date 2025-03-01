@@ -2977,6 +2977,7 @@ public class JusticeBuff : EffectBuff
         attackbodyNewNum = target.attackBodyObjList.Count;
         if (attackbodyNewNum > attackbodyOriNum)
         {
+            Debug.Log("已执行 正义");
             target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().damage *= 2;
             target.RemoveBuff("正义");
         }
@@ -4702,8 +4703,10 @@ public class HunterFeatherEffectBuff2 : EffectBuff
     public override void OnEnter()
     {
         base.OnEnter();
-        foreach (Buff buff in player.buffList)
+        for (int i = player.buffList.Count -1 ; i >= 0 ; i--)//foreach里不能修改所引用的数组
         {
+            Buff buff = player.buffList[i];
+
             if (buff is AttackBuff attackBuff)
             {
                 player.RemoveBuff(attackBuff);
