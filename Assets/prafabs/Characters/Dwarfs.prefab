@@ -68,6 +68,8 @@ MonoBehaviour:
   forcebackForce: 1
   forcebackDuration: 0.1
   forcebackTimer: 0
+  beAttackedPosition: {x: 0, y: 0}
+  isbeAttackedPosition: 0
   attackBodyObjList: []
   attackSound: {fileID: 8300000, guid: 508722e03d82b5c42ba10ea0efc293d6, type: 3}
   injuryEvent:
@@ -113,8 +115,7 @@ MonoBehaviour:
       timer: 0
     cooldown: 0
     timer: 0
-  dropItems:
-  - {fileID: 2158636381633551328, guid: 74fc4ddc17fdab045ae8fb2146de5340, type: 3}
+  dropItems: []
   exp: 5
   flag: 0
   refreshable: 1

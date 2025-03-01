@@ -33,10 +33,13 @@ public class AttackBody : MonoBehaviour
     [HideInInspector] public List<string> buffNames;
 
     Vector3 center;
+    SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
         //攻击中心的绝对位置
         center = attackCenter;
         if (isleft)
@@ -91,6 +94,7 @@ public class AttackBody : MonoBehaviour
                 {
                     Vector2 direction = GetTargetDirection(transform.position, isleft);
                     b.direction = direction;
+                    Debug.Log(direction);
                 }
                 else
                 {
@@ -136,8 +140,16 @@ public class AttackBody : MonoBehaviour
             }
             else
             {
+                List<Collider2D> list = new();
                 Collider2D[] enemys = Physics2D.OverlapBoxAll(center, attackRegion, 0f, LayerMask.GetMask(Consts.EnemyLayer));
-                return enemys;
+                foreach (Collider2D enemy in enemys)
+                {
+                    if (!enemy.GetComponent<Enemy>().isDead)
+                    {
+                        list.Add(enemy);
+                    }
+                }
+                return list.ToArray();
             }
         }
         //无限视距
@@ -166,11 +178,14 @@ public class AttackBody : MonoBehaviour
                 GameObject[] enemys = GameObject.FindGameObjectsWithTag(Consts.EnemyTag);
                 foreach (GameObject enemy in enemys)
                 {
-                    //墙体检测
-                    RaycastHit2D[] hit = Physics2D.LinecastAll(enemy.transform.position, center, LayerMask.GetMask(Consts.WallLayer));
-                    if (hit.Length <= 0)
+                    if (!enemy.GetComponent<Enemy>().isDead)
                     {
-                        list.Add(enemy.GetComponent<Collider2D>());
+                        //墙体检测
+                        RaycastHit2D[] hit = Physics2D.LinecastAll(enemy.transform.position, center, LayerMask.GetMask(Consts.WallLayer));
+                        if (hit.Length <= 0)
+                        {
+                            list.Add(enemy.GetComponent<Collider2D>());
+                        }
                     }
                 }
 
@@ -197,12 +212,24 @@ public class AttackBody : MonoBehaviour
         Collider2D[] targets = GetTargetsInAttackRegion(position, isleft);
         if (targets.Length == 0)
         {
+            if (attackType == AttackType.Gun)
+            {
+                if (isleft)
+                {
+                    return Vector2.left;
+                }
+                else
+                {
+                    return Vector2.right;
+                }
+            }
             return Vector2.zero;
         }
         else
         {
             //找到最近的目标
             Collider2D target = targets[0];
+            Debug.Log(target);
             foreach(Collider2D collider in targets)
             {
                 if (Vector2.Distance(center, collider.transform.position) < Vector2.Distance(center, target.transform.position))

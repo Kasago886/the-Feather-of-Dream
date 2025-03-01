@@ -152,6 +152,8 @@ MonoBehaviour:
   forcebackForce: 0
   forcebackDuration: 0
   forcebackTimer: 0
+  beAttackedPosition: {x: 0, y: 0}
+  isbeAttackedPosition: 0
   attackBodyObjList: []
   attackSound: {fileID: 0}
   injuryEvent:
