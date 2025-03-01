@@ -42,6 +42,9 @@ public class ItemInfo
     public ItemInfo dreamizedFeather;
 
     public string imageName;
+    public float colorR;
+    public float colorG;
+    public float colorB;
 
     public string buffName;
     public float featherHealth;

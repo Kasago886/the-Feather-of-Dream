@@ -250,6 +250,9 @@ public class EquipmentPanelManager : MonoBehaviour
     /// <returns>是否删除成功</returns>
     public bool RemoveItem(Item item)
     {
+        //保存原先状态
+        archiveManager.currentArchive = SaveItemsState(archiveManager.currentArchive);
+
         List<ItemInfo> itemInfos = GetItemInfos(itemContent);
         foreach (ItemInfo itemInfo in itemInfos)
         {

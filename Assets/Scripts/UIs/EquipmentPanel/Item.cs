@@ -32,6 +32,9 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 
     [HideInInspector] public bool isEquiped;
     [HideInInspector] public string imageName;
+    [HideInInspector] public float colorR;
+    [HideInInspector] public float colorG;
+    [HideInInspector] public float colorB;
     [HideInInspector] public Feather itemFeather;
 
     Image image;
@@ -60,10 +63,16 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         }
 
         imageName = itemInfo.imageName;
+        colorR = itemInfo.colorR;
+        colorG = itemInfo.colorG;
+        colorB = itemInfo.colorB;
+
         image = GetComponent<Image>();
         Sprite sprite = Resources.Load<Sprite>("ItemIcon/" + itemInfo.imageName);
         //Debug.Log(sprite);
         image.sprite = sprite;
+        image.color = new Color(colorR,colorG,colorB);
+
         //Resources.UnloadUnusedAssets();
 
         buffName = itemInfo.buffName;
@@ -102,7 +111,13 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
             }
         }
 
+        image = GetComponent<Image>();
         info.imageName = image.sprite.name;
+        info.colorR = image.color.r;
+        info.colorG = image.color.g;
+        info.colorB = image.color.b;
+        //Debug.Log(info.imageName+": "+info.colorR+" "+info.colorG+" "+info.colorB);
+
         info.buffName = buffName;
         /// 羽的信息获取方式
         /// 1.预制体获取：
