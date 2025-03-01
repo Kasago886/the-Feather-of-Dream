@@ -6,7 +6,7 @@ public class TMUCard1 : MonoBehaviour
 {
     public void GetCard()
     {
-        PlayerCardController playerCardController= GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
+        PlayerCardController playerCardController= GameObject.FindAnyObjectByType<PlayerCardController>();
         playerCardController.GetCard("Îó½â");
     }
     public void RandomGet()

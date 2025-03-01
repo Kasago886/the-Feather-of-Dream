@@ -46,7 +46,7 @@ public class EquipmentPanelManager : MonoBehaviour
 
     ArchiveManager archiveManager;
     ItemPlace selectedItemPlace = null;
-    [HideInInspector]public bool isShow = false;
+    [HideInInspector] public bool isShow = false;
     AnimationBoolManager animationBoolManager;
     Player player;
     Dialog dialog;
@@ -305,7 +305,7 @@ public class EquipmentPanelManager : MonoBehaviour
         archiveManager.currentArchive = SaveItemsState(archiveManager.currentArchive);
 
         //ArchiveManager.DebugArchiveRead(archiveManager.currentArchive);
-        
+
         //找到空位置
         ItemInfo newinfo = item.GetItemInfo();
         List<int> positions = new List<int>();
@@ -336,7 +336,7 @@ public class EquipmentPanelManager : MonoBehaviour
     /// <returns></returns>
     public bool HasEncyclopedia(Item item)
     {
-        List<ItemInfo> itemInfos = GetItemInfos(encyclopediaContent);                               
+        List<ItemInfo> itemInfos = GetItemInfos(encyclopediaContent);
         foreach (ItemInfo itemInfo in itemInfos)
         {
             if (itemInfo.itemName == item.itemName && itemInfo.information == item.information)
@@ -369,12 +369,12 @@ public class EquipmentPanelManager : MonoBehaviour
         {
             tenacity.text = ((int)player.tenacity).ToString();
             strength.text = ((int)player.strength).ToString();
-            abnormalityResistance.text=((int)player.abnormalityResistance).ToString();
-            traumaResistance.text=player.traumaResistance.ToString();
+            abnormalityResistance.text = ((int)player.abnormalityResistance).ToString();
+            traumaResistance.text = player.traumaResistance.ToString();
             burnResistance.text = player.burnResistance.ToString();
-            if(player.shields.Count > 0)
+            if (player.shields.Count > 0)
             {
-                shieldCount.text=player.shields.Count.ToString();
+                shieldCount.text = player.shields.Count.ToString();
                 if (player.shields[0].timer < 9999)
                 {
                     shieldNumber.text = player.shields[0].health.ToString() + "/" + ((int)player.shields[0].timer).ToString() + "s";
@@ -553,22 +553,30 @@ public class EquipmentPanelManager : MonoBehaviour
                 reinforceButtonInformation.open = false;
                 InvokeButton();
             }
+            else
+            {
+                ReinforceButton reinforceButtonInformation = reinforceButton.GetComponent<ReinforceButton>();
+                reinforceButtonInformation.button.gameObject.SetActive(false);
+            }
         }
         else
         {
             dreamizeButton.SetActive(false);
             ReinforceButton reinforceButtonInformation = reinforceButton.GetComponent<ReinforceButton>();
             reinforceButtonInformation.button.gameObject.SetActive(false);
+            reinforceButtonInformation.information = null;
+            reinforceButtonInformation.itemName = null;
         }
 
         //memorizeButton
         if (item.type == ItemType.MemoryFeather)
         {
             memorizeButton.GetComponent<Button>().onClick.RemoveAllListeners();
-            UnityAction action = () => {
+            UnityAction action = () =>
+            {
                 //Debug.Log(item);
                 //Debug.Log(dialog);
-                dialog.Read(item.dialogName); 
+                dialog.Read(item.dialogName);
             };
             memorizeButton.GetComponent<Button>().onClick.AddListener(action);
 
@@ -631,7 +639,7 @@ public class EquipmentPanelManager : MonoBehaviour
         {
             //在鼠标上的物品归位
             //foreach (Item item in itemsOnHand) //不能用foreach，因为OnPointerUp会删除列表中的元素，导致报错
-            for (int i = itemsOnHand.Count-1; i >= 0 ; i--) //应当使用for循环倒序删除，保证索引不会出错
+            for (int i = itemsOnHand.Count - 1; i >= 0; i--) //应当使用for循环倒序删除，保证索引不会出错
             {
                 Item item = itemsOnHand[i];
                 if (item != null)
@@ -669,7 +677,7 @@ public class EquipmentPanelManager : MonoBehaviour
                 }
                 else if (item.type == ItemType.BrokenFeather)
                 {
-                    FindAvailablePlace(brokenFeatherEquipContent).AddItem(item,item.transform.parent);
+                    FindAvailablePlace(brokenFeatherEquipContent).AddItem(item, item.transform.parent);
                 }
                 OnClickItem(item, item.GetComponentInParent<ItemPlace>());
             }
@@ -702,7 +710,7 @@ public class EquipmentPanelManager : MonoBehaviour
             if (selectedItemPlace.content != null)
             {
                 Item item = selectedItemPlace.content;
-                
+
                 if (item.isDreamizable)
                 {
                     ItemInfo dreamizedFeatherInfo;
@@ -747,7 +755,7 @@ public class EquipmentPanelManager : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             ItemPlace itemPlace = contentTransform.GetChild(i).gameObject.GetComponent<ItemPlace>();
-            
+
             if (itemPlace.content == null)
             {
                 return itemPlace;
