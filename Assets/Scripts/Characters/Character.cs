@@ -642,7 +642,7 @@ public class Character : MonoBehaviour
             if (unlockedFeathers[0].health < oriHealth)
             {
                 Debug.Log(oriHealth - unlockedFeathers[0].health);
-                DamageUIManager.Instance.ShowText(((int)(oriHealth - unlockedFeathers[0].health)).ToString(), transform.position,Color.red);
+                DamageUIManager.ShowText(((int)(oriHealth - unlockedFeathers[0].health)).ToString(), transform.position,Color.red);
                 oriHealth = unlockedFeathers[0].health;
             }
         }
