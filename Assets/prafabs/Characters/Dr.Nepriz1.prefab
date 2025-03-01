@@ -71,6 +71,8 @@ MonoBehaviour:
   forcebackForce: 0
   forcebackDuration: 0
   forcebackTimer: 0
+  beAttackedPosition: {x: 0, y: 0}
+  isbeAttackedPosition: 0
   attackBodyObjList: []
   attackSound: {fileID: 0}
   injuryEvent:
@@ -142,7 +144,7 @@ MonoBehaviour:
     timer: 0
   - cards:
     - card: {fileID: 5360649784241819889}
-      cooldown: 26
+      cooldown: 50
       timer: 0
     cooldown: 0
     timer: 0
