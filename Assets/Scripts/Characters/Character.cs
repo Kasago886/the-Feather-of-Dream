@@ -76,6 +76,7 @@ public class Character : MonoBehaviour
     public List<Shield> shields = new();
 
     private float oriHealth;
+    private float DamageUItimer;
     // Start is called before the first frame update
     protected void Start()
     {
@@ -110,7 +111,14 @@ public class Character : MonoBehaviour
             ClearShield();
         }
         UIUpdate();
-        DamageUI();
+        if (DamageUItimer <= 0.3f){
+            DamageUItimer += Time.deltaTime;
+        }
+        else
+        {
+            DamageUI();
+            DamageUItimer = 0;
+        }
     }
 
     /// <summary>
@@ -641,8 +649,15 @@ public class Character : MonoBehaviour
             }
             if (unlockedFeathers[0].health < oriHealth)
             {
-                Debug.Log(oriHealth - unlockedFeathers[0].health);
-                DamageUIManager.ShowText(((int)(oriHealth - unlockedFeathers[0].health)).ToString(), transform.position,Color.red);
+                if (oriHealth - unlockedFeathers[0].health >= 1)
+                {
+                    DamageUIManager.ShowText(((int)(oriHealth - unlockedFeathers[0].health)).ToString(), transform.position, Color.red);
+                }
+                if(oriHealth - unlockedFeathers[0].health < 1)
+                {
+                    DamageUIManager.ShowText((oriHealth - unlockedFeathers[0].health).ToString("F1"), transform.position, Color.red);
+
+                }
                 oriHealth = unlockedFeathers[0].health;
             }
         }

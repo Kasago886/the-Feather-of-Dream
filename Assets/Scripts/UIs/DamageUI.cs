@@ -6,13 +6,27 @@ using UnityEngine;
 public class DamageUI : MonoBehaviour
 {
     private TextMeshProUGUI text;
+    private float timer;
+    private RectTransform rectTransform;
+    Vector2 direction=new Vector2(1,1);
     private void Awake()
     {
         text = GetComponent<TextMeshProUGUI>();
+        rectTransform = GetComponent<RectTransform>();
     }
-    private void Start()
+   
+    private void Update()
     {
-        Destroy(gameObject, 0.6f);
+        timer += Time.deltaTime;
+        if (timer < 0.2f)
+        {
+            rectTransform.anchoredPosition += direction.normalized * 150 * Time.deltaTime;  
+            rectTransform.localScale +=   Time.deltaTime*rectTransform.localScale;
+        }
+        if (timer >= 0.8f)
+        {
+            Destroy(gameObject);
+        }
     }
     public void SetText(string str, Color color)
     {
