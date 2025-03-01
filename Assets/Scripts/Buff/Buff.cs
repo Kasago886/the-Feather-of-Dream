@@ -1009,7 +1009,20 @@ public class TinWoodmanFeatherBuff : EquipmentFeatherBuff
         {
             if (player.feathers.Count > 0)
             {
-                player.feathers[0].health += Mathf.Abs(player.buffList.Count - oriBuffNumber);
+                foreach (Feather feather in player.feathers)
+                {
+                    if (feather.health >= feather.maxHealth)
+                    {
+                        continue;
+                    }
+
+                    feather.health += Mathf.Abs(player.buffList.Count - oriBuffNumber);
+                    if (feather.health > feather.maxHealth)
+                    {
+                        feather.health = feather.maxHealth;
+                    }
+                    break;
+                }
                 oriBuffNumber = player.buffList.Count;
             }
         }
@@ -1019,7 +1032,7 @@ public class TinWoodmanFeatherBuff : EquipmentFeatherBuff
         base.OnExit();
         player.strength -= 10;
         player.tenacity -= 2;
-        player.cardGenerateList.Remove("°¬ÀòÖ®½£");
+        player.cardGenerateList.Remove("ÌúÐÄ");
     }
 }
 public class CrazyHunterEquipmentFeatherBuff : EquipmentFeatherBuff
@@ -1831,13 +1844,23 @@ public class Terrified : EffectBuff
 
     public override void OnExit()
     {
+        Feather feather = null;
         if (player != null && player.unlockedFeathers.Count > 0)
         {
-            player.unlockedFeathers[0].health += 1.5f;
+            feather = player.unlockedFeathers[0];
         }
         if (enemy != null && enemy.unlockedFeathers.Count > 0)
         {
-            enemy.unlockedFeathers[0].health += 1.5f;
+            feather = enemy.unlockedFeathers[0];
+        }
+
+        if (feather != null)
+        {
+            feather.health += 1.5f;
+            if (feather.health > feather.maxHealth)
+            {
+                feather.health = feather.maxHealth;
+            }
         }
         base.OnExit();
     }
@@ -3082,7 +3105,12 @@ public class Heal1 : EffectBuff
         {
             if (character.unlockedFeathers.Count > 0)
             {
-                character.unlockedFeathers[0].health += 0.2f;
+                Feather feather = character.unlockedFeathers[0];
+                feather.health += 0.2f;
+                if (feather.health > feather.maxHealth)
+                {
+                    feather.health = feather.maxHealth;
+                }
             }
             healingTimer = 0;
         }
@@ -3129,7 +3157,13 @@ public class Heal2 : EffectBuff
         {
             if (character.unlockedFeathers.Count > 0)
             {
-                character.unlockedFeathers[0].health += 0.3f;
+                Feather feather = character.unlockedFeathers[0];
+                feather.health += 0.3f;
+                if (feather.health > feather.maxHealth)
+                {
+                    feather.health = feather.maxHealth;
+                }
+
                 health = character.unlockedFeathers[0].health;
                 useNumber++;
             }
@@ -3181,7 +3215,12 @@ public class Heal3 : EffectBuff
         base.OnExit();
         if (first && character.unlockedFeathers.Count > 0 && character.unlockedFeathers[0].health <= oriHealth)
         {
-            character.unlockedFeathers[0].health += oriHealth - character.unlockedFeathers[0].health;
+            Feather feather = character.unlockedFeathers[0];
+            feather.health += oriHealth - feather.health;
+            if (feather.health > feather.maxHealth)
+            {
+                feather.health = feather.maxHealth;
+            }
         }
     }
 }
