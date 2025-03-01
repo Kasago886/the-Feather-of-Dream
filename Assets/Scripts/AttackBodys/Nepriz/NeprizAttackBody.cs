@@ -92,7 +92,7 @@ public class NeprizAttackBody : MonoBehaviour
         {
             GameObject bulletInstance = Instantiate(bullet, transform.position, Quaternion.identity);
             Rigidbody2D bulletRB = bulletInstance.GetComponent<Rigidbody2D>();
-            bulletRB.velocity = new Vector3(0, -1000, 0);
+            bulletRB.velocity = new Vector3(0, -500, 0);
         }
     }
 }

@@ -320,7 +320,7 @@ public class NeprizEquipmentBuff : EquipmentBuff
         if (GameObject.Find("CardPanel") != null)
         {
             playerCardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
-            playerCardController.positionNumber--;
+            playerCardController.DelPosition();
         }
         player.cardGenerateList.Add("≥’”ﬁ’ﬂ");
         player.cardGenerateList.Add("√…√¡’ﬂ");
@@ -336,6 +336,11 @@ public class NeprizEquipmentBuff : EquipmentBuff
     public override void OnExit()
     {
         base.OnExit();
+        if (GameObject.Find("CardPanel") != null)
+        {
+            playerCardController = GameObject.Find("CardPanel").GetComponent<PlayerCardController>();
+            playerCardController.AddPosition();
+        }
         player.tenacity -= 20;
         player.strength -= 10;
         playerCardController.positionNumber++;
@@ -529,10 +534,17 @@ public class BurningDocumentsFeatherBuff : EquipmentFeatherBuff
         attackbodyNewNum = target.attackBodyObjList.Count;
         if (attackbodyNewNum > attackbodyOriNum)
         {
-            target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("◊∆…À");
-            if (Random.Range(0, 10) >= 8)
+            int n = 0;
+            for (int i = 0; i < target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Count; i++)
             {
-                player.AddBuff("◊∆…À");
+                if (target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames[i] == "◊∆…À")
+                {
+                    n++;
+                }
+            }
+            if (n == 0)
+            {
+                target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("◊∆…À");
             }
         }
         if (attackbodyNewNum < attackbodyOriNum)
@@ -778,8 +790,27 @@ public class MisunderstoodWerewolfFeatherBuff : EquipmentFeatherBuff
         attackbodyNewNum = target.attackBodyObjList.Count;
         if (attackbodyNewNum > attackbodyOriNum)
         {
-            target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("…À∫€");
-            target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("–ƒ¡Èø‡Õ¥");
+            int n = 0;
+            int n1 = 0;
+            for (int i = 0; i < target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Count; i++)
+            {
+                if (target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames[i] == "…À∫€")
+                {
+                    n++;
+                }
+                if(target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames[i] == "–ƒ¡Èø‡Õ¥")
+                {
+                    n1++;
+                }
+            }
+            if (n < 5)
+            {
+                target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("…À∫€");
+            }
+            if (n1 == 0)
+            {
+                target.attackBodyObjList[attackbodyNewNum - 1].GetComponent<AttackBody>().buffNames.Add("–ƒ¡Èø‡Õ¥");
+            }
         }
         if (attackbodyNewNum < attackbodyOriNum)
         {
@@ -873,6 +904,7 @@ public class EnslavedDwarfsFeatherBuff : EquipmentFeatherBuff
     private PlayerCardController cardController;
     private float timer1;
     private float strengthChange, tenacityChange;
+    private bool b1,b2;
     public override void Init(Character target, float timer = 0, bool isPermanent = false)
     {
         base.Init(target, timer, isPermanent);
@@ -913,25 +945,29 @@ public class EnslavedDwarfsFeatherBuff : EquipmentFeatherBuff
             timer1 = 0;
         }
         //∑¥øπ÷Æ“‚
-        if (cardController.remainingSlotCount == 0)
+        if (cardController.remainingSlotCount == 0&&!b1)
         {
             tenacityChange = player.tenacity / 2;
             player.tenacity += tenacityChange;
+            b1=true;
         }
-        else
+        if(b1)
         {
             player.tenacity -= tenacityChange;
             tenacityChange = 0;
+            b1 = false;
         }
-        if (cardController.remainingSlotCount == cardController.positionNumber)
+        if (cardController.remainingSlotCount == cardController.positionNumber&&!b2)
         {
             strengthChange = player.strength * 0.3f;
             player.strength += strengthChange;
+            b2 = true;
         }
-        else
+        if(b2)
         {
             player.strength -= strengthChange;
             strengthChange = 0;
+            b2 = false;
         }
     }
 
@@ -2074,7 +2110,7 @@ public class Talent : EffectBuff
     public override void OnEnter()
     {
         change = character.tenacity * 9;
-        character.tenacity *= 10;
+        character.tenacity *= 5;
         base.OnEnter();
     }
 
@@ -2375,12 +2411,9 @@ public class CraveRecognition : EffectBuff
                 {
                     enemy.unlockedFeathers[0].health -= 2f;
                     attackTimer = 0;
+                    health = enemy.unlockedFeathers[0].health;
                 }
             }
-        }
-        if (enemy != null && enemy.unlockedFeathers.Count > 0)
-        {
-            health = enemy.unlockedFeathers[0].health;
         }
     }
 
@@ -3374,6 +3407,7 @@ public class RandomBuff : EffectBuff
                 case 40: character.AddBuff("√Œ≤¯"); break;
                 case 41: character.AddBuff("–ƒ¡Èø‡Õ¥"); break;
             }
+            Debug.Log("n=" + n);
         }
         this.timer = 0;
     }

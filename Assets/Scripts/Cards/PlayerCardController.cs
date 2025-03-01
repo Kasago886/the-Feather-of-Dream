@@ -256,22 +256,28 @@ public class PlayerCardController : MonoBehaviour
     }
     private void Update()
     {
-        if (positionNumber < 1)
-        {
-            positionNumber = 1;
-        }
         remainingSlotCount = positionNumber - content.transform.childCount;
+        Debug.Log("remainingSlotCount=" + remainingSlotCount);
         slotNumberText.text = positionNumber.ToString();
         //if (Input.GetKeyDown(KeyCode.V))
         //{
         //    if (FindAnyObjectByType<Nepriz2>() != null)
         //    {
-        //            FindAnyObjectByType<Nepriz2>().AddBuff("…À∫€");
-        //            FindAnyObjectByType<Nepriz2>().AddBuff("∞Œ”20s");
+        //        FindAnyObjectByType<Nepriz2>().AddBuff("…À∫€");
+        //        FindAnyObjectByType<Nepriz2>().AddBuff("∞Œ”20s");
+        //    }
+        //    if (FindAnyObjectByType<Nepriz1>() != null)
+        //    {
+        //        FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
+        //        FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
+        //        FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
+        //        FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
+        //        FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
+        //        FindAnyObjectByType<Nepriz1>().AddBuff("∞Œ”20s");
         //    }
         //    FindAnyObjectByType<Player>().tenacity += 99999;
         //    FindAnyObjectByType<Player>().strength += 10;
-        //    FindAnyObjectByType<Player>().shields.Add(new Shield() { health = 99999999,timer=999999999 });
+        //    FindAnyObjectByType<Player>().shields.Add(new Shield() { health = 99999999, timer = 999999999 });
         //    FindAnyObjectByType<Player>().AddBuff("∞¨¿Ú÷ÆΩ£");
         //}
     }
@@ -368,18 +374,29 @@ public class PlayerCardController : MonoBehaviour
     /// </param>
     public void DelPosition(int i = 1)
     {
-        int DEBUG_WHILE_COUNT = 0;
+        //int DEBUG_WHILE_COUNT = 0;
 
         positionNumber -= i;
-        while (content.transform.childCount > positionNumber && content.transform.childCount > 0)
+        if (positionNumber < 1)
         {
-            DEBUG_WHILE_COUNT++;
-            if (DEBUG_WHILE_COUNT > 1000)
+            positionNumber = 1;
+        }
+        //while (content.transform.childCount > positionNumber)
+        //{
+        //    DEBUG_WHILE_COUNT++;
+        //    if (DEBUG_WHILE_COUNT > 1000)
+        //    {
+        //        Debug.LogError("WHILE OVERUSED! YOU SHOULD CHECK IT!");
+        //        break;
+        //    }
+        //    Destroy(content.transform.GetChild(content.transform.childCount - 1).gameObject);
+        //}
+        for (int j = 0; j < content.transform.childCount; j++)
+        {
+            if (j + 1 > positionNumber)
             {
-                Debug.LogError("WHILE OVERUSED! YOU SHOULD CHECK IT!");
-                break;
+                Destroy(content.transform.GetChild(j).gameObject);
             }
-            DestroyImmediate(content.transform.GetChild(content.transform.childCount - 1).gameObject);
         }
     }
     /// µ˜”√±æ∫Ø ˝«Âø’ÕÊº“ ÷≈∆

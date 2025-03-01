@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemyBullet: 1
-  speed: 20
+  speed: 15
   autoDestroy: 1
   destroyTimer: 30
   isSplit: 0

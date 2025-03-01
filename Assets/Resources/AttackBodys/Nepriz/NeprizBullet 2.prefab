@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemyBullet: 1
-  speed: 20
+  speed: 15
   autoDestroy: 1
   destroyTimer: 30
   isSplit: 0
@@ -76,11 +76,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6722c6da0091254428eab55502a4d2e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notDelete: 1
   buffNameAndNumber:
   - effectOnPlayer: 1
     effectOnEnemy: 0
     name: "\u51E1\u5EB8"
+    number: 02000000
+  - effectOnPlayer: 1
+    effectOnEnemy: 0
+    name: "\u8106\u5F31"
+    number: 01000000
+  - effectOnPlayer: 1
+    effectOnEnemy: 0
+    name: "\u840E\u9761"
     number: 01000000
 --- !u!212 &5149134748665874945
 SpriteRenderer:

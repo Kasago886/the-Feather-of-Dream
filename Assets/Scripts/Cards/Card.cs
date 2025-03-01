@@ -345,7 +345,14 @@ public class Card : MonoBehaviour,IPointerClickHandler
                 whatHappenOnDragPlayer?.Invoke();
                 whatHappenOnDragEnemy?.Invoke();
             }
-            ShowEnemy();
+            if (!effortOnPlayer)
+            {
+                ShowEnemy();
+            }
+            else
+            {
+                ShowPlayer();
+            }
             PlayerCardController.cantUseCard = true;
         }
     }
@@ -1354,6 +1361,33 @@ public class Card : MonoBehaviour,IPointerClickHandler
         if (targetsTransform.Count > 0)
         {
             SpriteRenderer spriteRenderer = targetsTransform[0].GetComponentInChildren<SpriteRenderer>();
+            if (spriteRenderer != null && spriteRenderer.material != speacialMaterial)
+            {
+                if (!spMaterial.ContainsKey(spriteRenderer))
+                {
+                    spMaterial.Add(spriteRenderer, spriteRenderer.material);
+                }
+                spriteRenderer.material = speacialMaterial;
+            }
+        }
+        else
+        {
+            foreach (var s in spMaterial)
+            {
+                s.Key.material = s.Value;
+            }
+        }
+    }
+    private void ShowPlayer()
+    {
+        if (useNumber == 0)
+        {
+            useNumber++;
+            
+        }
+        if (GameObject.FindGameObjectWithTag(Consts.PlayerTag)!=null&& Vector2.Distance(GameObject.FindGameObjectWithTag(Consts.PlayerTag).transform.position, Camera.main.ScreenToWorldPoint(transform.position)) < minDistance)
+        {
+            SpriteRenderer spriteRenderer = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponentInChildren<SpriteRenderer>();
             if (spriteRenderer != null && spriteRenderer.material != speacialMaterial)
             {
                 if (!spMaterial.ContainsKey(spriteRenderer))

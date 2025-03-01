@@ -119,13 +119,13 @@ MonoBehaviour:
   attackCardLineList:
   - cards:
     - card: {fileID: 4844809393931276451}
-      cooldown: 18
+      cooldown: 25
       timer: 0
     cooldown: 0
     timer: 0
   - cards:
     - card: {fileID: 3287445856833660667}
-      cooldown: 32
+      cooldown: 36
       timer: 0
     cooldown: 0
     timer: 0

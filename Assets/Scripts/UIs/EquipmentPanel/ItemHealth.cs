@@ -36,16 +36,17 @@ public class ItemHealth : MonoBehaviour
                 {
                     ratio = 0;
                 }
+                if (feather.health == feather.maxHealth)
+                {
+                    healthText.text = null;
+                }
+                else 
+                { 
+                    healthText.text = feather.health.ToString();
+                }
             }
             health.transform.localScale = new Vector3(ratio, 1, 1);
-            if (feather.health == feather.maxHealth)
-            {
-                healthText.text = null;
-            }
-            else
-            {
-                healthText.text=feather.health.ToString();
-            }
+            
         }
     }
 }

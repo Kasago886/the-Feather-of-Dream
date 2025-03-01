@@ -7,6 +7,8 @@ public class Nepriz2 : Enemy
     public List<int> mediocreNumber;
     private int listNumber;
     private float skillTimer;
+    public NormalProperity N = new NormalProperity();
+    public int number;
     private void Start()
     {
         base.Start();
@@ -34,6 +36,10 @@ public class Nepriz2 : Enemy
             Change();
         }
         listNumber = buffList.Count;
+        if (tenacity > 10000)
+        {
+            tenacity = 10000;
+        }
     }
     private void ChangeBuff()
     {
@@ -65,6 +71,22 @@ public class Nepriz2 : Enemy
         for (int i = 0; i < n; i++)
         {
             AddBuff("¿ÊÇóÈÏ¿É");
+        }
+    }
+    private void OnDestroy()
+    {
+        if (GameObject.FindGameObjectWithTag(Consts.PlayerTag) != null)
+        {
+            Player player= GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent< Player>();
+            player.tenacity = N.tenacity;
+            player.strength = N.strength;
+            player.abnormalityResistance = N.abnormalityResistance;
+            player.burnResistance = N.burnResistance;
+            player.traumaResistance = N.traumaResistance;
+        }
+        if(GameObject.FindAnyObjectByType<PlayerCardController>() != null)
+        {
+            FindAnyObjectByType<PlayerCardController>().positionNumber=number;
         }
     }
 }

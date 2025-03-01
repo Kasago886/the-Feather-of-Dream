@@ -14,7 +14,7 @@ public class NeprizBullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(effectOnPlayer && collision.gameObject.tag==Consts.PlayerTag)
+        if(effectOnPlayer && (collision.gameObject.tag==Consts.PlayerTag||collision.GetComponent<Player>()!=null))
         {
             Player player = collision.gameObject.GetComponent<Player>();
             player.TakeDamage(damage);

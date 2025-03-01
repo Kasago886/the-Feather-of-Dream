@@ -8,7 +8,6 @@ public class NeprizBullet1 : MonoBehaviour
     {
         if ( collision.gameObject.tag == Consts.PlayerTag)
         {
-            Debug.Log("Collider is Player");
             Player player = collision.gameObject.GetComponent<Player>();
             foreach (var buff in buffNameAndNumber)
             {
@@ -16,10 +15,6 @@ public class NeprizBullet1 : MonoBehaviour
                 {
                     player.AddBuff(buff.name);
                 }
-            }
-            if(FindAnyObjectByType<NeprizAttackBodyController>() != null)
-            {
-                Debug.Log("!null");
             }
             FindAnyObjectByType<NeprizBullet1Controller>().b = false;
             FindAnyObjectByType<NeprizBullet1Controller>().b1 = false;
