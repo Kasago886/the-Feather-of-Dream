@@ -336,7 +336,7 @@ public class EquipmentPanelManager : MonoBehaviour
     /// <returns></returns>
     public bool HasEncyclopedia(Item item)
     {
-        List<ItemInfo> itemInfos = GetItemInfos(encyclopediaContent);
+        List<ItemInfo> itemInfos = GetItemInfos(encyclopediaContent);                               
         foreach (ItemInfo itemInfo in itemInfos)
         {
             if (itemInfo.itemName == item.itemName && itemInfo.information == item.information)

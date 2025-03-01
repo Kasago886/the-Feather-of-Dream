@@ -113,13 +113,15 @@ public class Character : MonoBehaviour
             ClearShield();
         }
         UIUpdate();
-        if (DamageUItimer <= 0.3f){
+        if (DamageUItimer <= 0.3f)
+        {
             DamageUItimer += Time.deltaTime;
         }
         else
         {
             DamageUI();
             DamageUItimer = 0;
+            DamageUI();
         }
     }
 
@@ -675,6 +677,8 @@ public class Character : MonoBehaviour
                     DamageUIManager.ShowText((oriHealth - unlockedFeathers[0].health).ToString("F1"), transform.position, Color.red);
 
                 }
+                Debug.Log(oriHealth - unlockedFeathers[0].health);
+                //DamageUIManager.Instance.ShowText(((int)(oriHealth - unlockedFeathers[0].health)).ToString(), transform.position,Color.red);
                 oriHealth = unlockedFeathers[0].health;
             }
         }

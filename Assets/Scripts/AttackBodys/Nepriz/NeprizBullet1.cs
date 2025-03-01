@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 public class NeprizBullet1 : MonoBehaviour
 {
-    public bool notDelete;
     public List<BuffNameAndNumber> buffNameAndNumber = new List<BuffNameAndNumber>();
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!notDelete && collision.gameObject.tag == Consts.PlayerTag)
+        if ( collision.gameObject.tag == Consts.PlayerTag)
         {
+            Debug.Log("Collider is Player");
             Player player = collision.gameObject.GetComponent<Player>();
             foreach (var buff in buffNameAndNumber)
             {
@@ -17,22 +17,22 @@ public class NeprizBullet1 : MonoBehaviour
                     player.AddBuff(buff.name);
                 }
             }
-            Destroy(GameObject.Find("NeprizBullet 1(Clone)"));
-            if (GameObject.Find("NeprizAttackBody(Clone)") != null)
+            if(FindAnyObjectByType<NeprizAttackBodyController>() != null)
             {
-                AttackBody attackBody = GameObject.Find("NeprizAttackBody(Clone)").GetComponent<AttackBody>();
-                attackBody.bullet = Resources.Load<GameObject>("AttackBodys/Nepriz/NeprizBullet.prefab");
+                Debug.Log("!null");
             }
-        }
-        else if (notDelete && collision.gameObject.tag == Consts.PlayerTag && GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
-        {
-            Player player = collision.gameObject.GetComponent<Player>();
-            Nepriz2 nepriz2 = GameObject.Find("Dr.Nepriz1 2(Clone)").GetComponent<Nepriz2>();
-            if (nepriz2.mediocreNumber.Count > 0)
+            FindAnyObjectByType<NeprizBullet1Controller>().b = false;
+            FindAnyObjectByType<NeprizBullet1Controller>().b1 = false;
+            if (FindAnyObjectByType<Nepriz2>() != null) 
             {
-                player.AddBuff("·²Ó¹");
-                nepriz2.buffList[nepriz2.mediocreNumber[0]].timer = 0;
+                Nepriz2 nepriz2 = FindAnyObjectByType<Nepriz2>();
+                if (nepriz2.mediocreNumber.Count > 0)
+                {
+                    player.AddBuff("·²Ó¹");
+                    nepriz2.buffList[nepriz2.mediocreNumber[0]].timer = 0;
+                }
             }
+            Destroy(GameObject.Find(gameObject.name));
         }
     }
 }

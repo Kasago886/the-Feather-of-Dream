@@ -13,10 +13,10 @@ public class NeprizAttackBody : MonoBehaviour
     private bool ismove;
     void Start()
     {
-        Nepriz1 nepriz1 = FindAnyObjectByType<Nepriz1>();
-        if (nepriz1 == null)
-        { enemyTransform = FindAnyObjectByType<Nepriz2>().transform; }
-        else { enemyTransform = nepriz1.transform; }
+        if (FindAnyObjectByType<Nepriz1>() != null)
+        { enemyTransform = FindAnyObjectByType<Nepriz1>().GetComponent<Transform>(); }
+        else if(FindAnyObjectByType<Nepriz2>() != null)
+        { enemyTransform = FindAnyObjectByType<Nepriz2>().GetComponent<Transform>(); }
         Destroy(gameObject, 60);
         player = GameObject.FindGameObjectWithTag(Consts.PlayerTag).GetComponent<Player>();
         attackBodyTransform = GetComponent<Transform>();
@@ -51,7 +51,7 @@ public class NeprizAttackBody : MonoBehaviour
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, new Vector2(transform.position.x, transform.position.y - 1000));
         }
-        if (GameObject.Find("Dr.Nepriz1") == null && GameObject.Find("Dr.Nepriz2(Clone)") == null)
+        if (FindAnyObjectByType<Nepriz2>() == null && FindAnyObjectByType<Nepriz1>() == null)
         {      
             Destroy(gameObject);
         }

@@ -6,6 +6,7 @@ public class Nepriz2 : Enemy
 {
     public List<int> mediocreNumber;
     private int listNumber;
+    private float skillTimer;
     private void Start()
     {
         base.Start();
@@ -15,6 +16,7 @@ public class Nepriz2 : Enemy
     private void Update()
     {
         base.Update();
+        skillTimer += Time.deltaTime;
         if (listNumber != buffList.Count)
         {
             mediocreNumber.Clear();
@@ -25,6 +27,11 @@ public class Nepriz2 : Enemy
                     mediocreNumber.Add(i);
                 }
             }
+        }
+        if(skillTimer>20)
+        {
+            skillTimer = 0;
+            Change();
         }
         listNumber = buffList.Count;
     }
@@ -42,6 +49,22 @@ public class Nepriz2 : Enemy
                 }
             }
             AddBuff("·²Ó¹");
+        }
+    }
+    private void Change()
+    {
+        int n = 0;
+        foreach (var item in buffList)
+        {
+            if (item.name == "·²Ó¹")
+            {
+                item.timer = 0;
+                n++;
+            }
+        }
+        for (int i = 0; i < n; i++)
+        {
+            AddBuff("¿ÊÇóÈÏ¿É");
         }
     }
 }

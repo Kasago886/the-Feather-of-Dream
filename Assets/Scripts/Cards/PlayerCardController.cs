@@ -256,12 +256,24 @@ public class PlayerCardController : MonoBehaviour
     }
     private void Update()
     {
-        if (positionNumber < 0)
+        if (positionNumber < 1)
         {
-            positionNumber = 0;
+            positionNumber = 1;
         }
         remainingSlotCount = positionNumber - content.transform.childCount;
         slotNumberText.text = positionNumber.ToString();
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    if (FindAnyObjectByType<Nepriz2>() != null)
+        //    {
+        //            FindAnyObjectByType<Nepriz2>().AddBuff("…À∫€");
+        //            FindAnyObjectByType<Nepriz2>().AddBuff("∞Œ”20s");
+        //    }
+        //    FindAnyObjectByType<Player>().tenacity += 99999;
+        //    FindAnyObjectByType<Player>().strength += 10;
+        //    FindAnyObjectByType<Player>().shields.Add(new Shield() { health = 99999999,timer=999999999 });
+        //    FindAnyObjectByType<Player>().AddBuff("∞¨¿Ú÷ÆΩ£");
+        //}
     }
 
     /// <summary>

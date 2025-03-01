@@ -57,7 +57,7 @@ public class BuffContainer
         {"博学",typeof(Erudite) },//使对象力量乘2，持续29.7s
         {"不被认可",typeof(Ignore) },//使敌人的技能时间间隔增加0.05s，最高99层，仅限Boss被污染的高级员工1阶段
         {"瑕疵之作",typeof(ImperfectWork) },//当Boss被污染的高级员工2阶段失去一定量的血量时，使玩家选择一个debuff，持续时间：Boss被污染的高级员工2阶段开始至其被击杀
-        {"渴求认可",typeof(CraveRecognition) },//当Boss被污染的高级员工2阶段失去一定量的血量时，"凡庸"按一定比例转化为"渴求认可"，每次受击扣除0.5滴血，持续时间无限
+        {"渴求认可",typeof(CraveRecognition) },//当Boss被污染的高级员工2阶段失去一定量的血量时，"凡庸"按一定比例转化为"渴求认可"，每次受击扣除2滴血，持续时间无限
         {"振奋",typeof(UpLifting) },//使对象增加10%的力量，最高不超过6点力量，持续16s
         {"振奋+",typeof(UpLifting_) },//使对象增加10%的力量，持续至下次攻击
         {"坚韧",typeof(Toughness) },//使对象增加10%的韧性，最高不超过12点韧性，持续16s

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 [System.Serializable]
 public class Buff
@@ -693,7 +694,7 @@ public class NeprizFeatherBuff : EquipmentFeatherBuff
                     case 31: player.AddBuff("铁心"); break;
                     case 32: player.AddBuff("巧手"); break;
                     case 33: player.AddBuff("护盾"); break;
-                    case 34: player.AddBuff("释然"); i--; break;
+                    case 34: player.AddBuff("随机Buff"); i--; break;
                     case 35: player.AddBuff("守护"); break;
                     case 36: player.AddBuff("反省"); break;
                     case 37: player.AddBuff("误解"); i--; break;
@@ -1098,7 +1099,7 @@ public class ExperimentPlayerEquipmentFeatherBuff : EquipmentFeatherBuff
     {
         base.OnEnter();
         player.GetComponent<PlayerController>().walkSpeed += 2;
-        player.GetComponent<PlayerController>().sprintCooldown -=0.2f;
+        player.GetComponent<PlayerController>().sprintCooldown -= 0.2f;
         player.cardGenerateList.Add("往梦之剑");
         player.cardGenerateList.Add("梦破");
         player.cardGenerateList.Add("凝梦");
@@ -1133,7 +1134,7 @@ public class ExperimentPlayerEquipmentFeatherBuff : EquipmentFeatherBuff
     {
         base.OnExit();
         player.GetComponent<PlayerController>().walkSpeed -= 2;
-        player.GetComponent<PlayerController>().sprintCooldown +=0.2f;
+        player.GetComponent<PlayerController>().sprintCooldown += 0.2f;
         player.cardGenerateList.Remove("往梦之剑");
         player.cardGenerateList.Remove("梦破");
         player.cardGenerateList.Remove("凝梦");
@@ -2001,7 +2002,7 @@ public class Mediocre : EffectBuff
             enemy = target.GetComponent<Enemy>();
         }
         this.timer = 60;
-        if (GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
+        if (GameObject.FindAnyObjectByType<Nepriz2>() != null)
         {
             this.timer = 99999999999;
             b = false;
@@ -2030,7 +2031,7 @@ public class Mediocre : EffectBuff
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (b && GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
+        if (b && GameObject.FindAnyObjectByType<Nepriz2>() != null)
         {
             this.timer = 99999999999;
             b = false;
@@ -2204,6 +2205,7 @@ public class Ignore : EffectBuff
         base.Init(target, timer, isPermanent);
         isPermanent = true;
         this.timer = 99999999999;
+        enemy = target.GetComponent<Enemy>();
     }
 
     public override void OnEnter()
@@ -2215,6 +2217,7 @@ public class Ignore : EffectBuff
                 foreach (EnemyCardWithTimer ectw in line.cards)
                 {
                     ectw.cooldown += 0.05f;
+                    Debug.Log("AddTimer");
                 }
             }
         }
@@ -2242,9 +2245,9 @@ public class ImperfectWork : EffectBuff
     {
         base.Init(target, timer, isPermanent);
         isPermanent = true;
-        if (GameObject.Find("Dr.Nepriz1 2(Clone)") != null)
+        if (GameObject.FindAnyObjectByType<Nepriz2>() != null)
         {
-            nepriz2 = GameObject.Find("Dr.Nepriz1 2(Clone)").GetComponent<Nepriz2>();
+            nepriz2 = GameObject.FindAnyObjectByType<Nepriz2>();
             foreach (var item in nepriz2.feathers)
             {
                 healthMax += item.health;
@@ -2368,9 +2371,9 @@ public class CraveRecognition : EffectBuff
         {
             if (enemy != null)
             {
-                if (enemy.unlockedFeathers.Count > 0 && health - enemy.unlockedFeathers[0].health >= 1)
+                if (enemy.unlockedFeathers.Count > 0 && health > enemy.unlockedFeathers[0].health)
                 {
-                    enemy.unlockedFeathers[0].health -= 0.5f;
+                    enemy.unlockedFeathers[0].health -= 2f;
                     attackTimer = 0;
                 }
             }
@@ -2753,7 +2756,7 @@ public class Lethargic : EffectBuff
         {
             change = 6;
         }
-        if(character.strength<character.oriStrength*0.05)
+        if (character.strength < character.oriStrength * 0.05)
         {
             change = 0;
         }
@@ -3362,7 +3365,7 @@ public class RandomBuff : EffectBuff
                 case 31: character.AddBuff("铁心"); break;
                 case 32: character.AddBuff("巧手"); break;
                 case 33: character.AddBuff("护盾"); break;
-                case 34: character.AddBuff("释然"); break;
+                case 34: character.AddBuff("随机Buff"); break;
                 case 35: character.AddBuff("守护"); break;
                 case 36: character.AddBuff("反省"); break;
                 case 37: character.AddBuff("误解"); break;
@@ -3655,14 +3658,14 @@ public class Fissure : EffectBuff, Energize
     {
         base.OnExit();
         int buffNumber1 = 0;
-        int buffNumber2=0;
+        int buffNumber2 = 0;
         foreach (var buff in character.buffList)
         {
             if (buff.name == "伤痕")
             {
                 buffNumber1++;
             }
-            if(buff.name == "误解")
+            if (buff.name == "误解")
             {
                 buffNumber2 = ((Misunderstanding)buff).number;
             }
@@ -3690,7 +3693,7 @@ public class Fissure : EffectBuff, Energize
         }
         if (buffNumber2 == 1)
         {
-            float damege = 2 *buffNumber1 * number * buffNumber2*Mathf.Pow(2, -character.abnormalityResistance / 100);
+            float damege = 2 * buffNumber1 * number * buffNumber2 * Mathf.Pow(2, -character.abnormalityResistance / 100);
             float hasAttack = 0;
             for (int i = 0; i < character.feathers.Count; i++)
             {
@@ -4079,11 +4082,7 @@ public class Rethink : EffectBuff
     {
         base.Init(target, timer, isPermanent);
         character = target.GetComponent<Character>();
-        if (character.tenacity < 0)
-        {
-            character.tenacity = -character.tenacity;
-        }
-        else
+        if (character.tenacity > 0)
         {
             if (target.GetComponent<Player>() != null)
             {
@@ -4092,6 +4091,8 @@ public class Rethink : EffectBuff
                 player.AddBuff("坚韧");
             }
         }
+        character.tenacity = Mathf.Abs(character.tenacity);
+
         this.timer = 0;
     }
 
@@ -4826,7 +4827,7 @@ public class ExperimentPlayerFeatherBuff : EffectBuff
             {
                 oriHealth = character.unlockedFeathers[0].health;
             }
-            if (character.unlockedFeathers[0].health < oriHealth )
+            if (character.unlockedFeathers[0].health < oriHealth)
             {
                 timer = 0;
             }
@@ -4929,12 +4930,12 @@ public class ExperimentPlayerFeatherBuff1 : EffectBuff
                 Num++;
             }
         }
-        character.shields.Add(new Shield() { health = 10 +5 * Num * Num, timer = 15 });
+        character.shields.Add(new Shield() { health = 10 + 5 * Num * Num, timer = 15 });
         if (Num >= 3)
         {
             target.GetComponent<Player>().GenerateCard();
         }
-        if(Num == 5)
+        if (Num == 5)
         {
             target.GetComponent<PlayerController>().walkSpeed += 3;
         }
@@ -4990,7 +4991,7 @@ public class ExperimentPlayerFeatherBuff2 : EffectBuff
             }
             if (character.unlockedFeathers[0].health < oriHealth)
             {
-                for(int i=0; i < 6; i++)
+                for (int i = 0; i < 6; i++)
                 {
                     character.AddBuff("梦源");
                 }
