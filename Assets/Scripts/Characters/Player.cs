@@ -265,11 +265,11 @@ public class Player : Character
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="attackTrans"></param>
-    public override void TakeDamage(float damage, Transform attackTrans = null)
+    public override void TakeDamage(float damage, Transform attackTrans = null, bool isAttackPosition = false)
     {
         if (!isSprinting)
         {
-            base.TakeDamage(damage, attackTrans);
+            base.TakeDamage(damage, attackTrans,isAttackPosition);
 
             featherNumText.text = (feathers.Count + unlockedFeathers.Count).ToString();
             healthRecoverTimer = healthRecoverCooldown;

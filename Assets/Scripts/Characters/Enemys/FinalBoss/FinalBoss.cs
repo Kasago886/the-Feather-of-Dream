@@ -34,12 +34,12 @@ public class FinalBoss : Enemy
         this.unattackable = unattackable;
     }
 
-    public override void TakeDamage(float damage, Transform attackTrans = null)
+    public override void TakeDamage(float damage, Transform attackTrans = null, bool isAttackPosition = false)
     {
         Debug.Log("unattackable:" + unattackable);
         if (!unattackable)
         {
-            base.TakeDamage(damage, attackTrans);
+            base.TakeDamage(damage, attackTrans,isAttackPosition);
         }
     }
 

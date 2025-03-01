@@ -48,6 +48,8 @@ public class Character : MonoBehaviour
     public float forcebackDuration;
     public float forcebackTimer = 0;
     protected Transform beAttackedTrans;
+    public Vector2 beAttackedPosition;
+    public bool isbeAttackedPosition = false;
 
     [Header("π•ª˜ÃÊ…Ì")]
     public List<GameObject> attackBodyObjList;
@@ -174,7 +176,7 @@ public class Character : MonoBehaviour
     ///  ‹…À
     /// </summary>
     /// <param name="damage"></param>
-    public virtual void TakeDamage(float damage, Transform attackTrans = null)
+    public virtual void TakeDamage(float damage, Transform attackTrans = null, bool isAttackPosition = false)
     {
         //Debug.Log("gameObject:" + gameObject);
         //Debug.Log("damage:"+damage);
@@ -214,6 +216,11 @@ public class Character : MonoBehaviour
                 if (injuryForceback)
                 {
                     beAttackedTrans = attackTrans;
+                    if (isAttackPosition)
+                    {
+                        isbeAttackedPosition = true;
+                        beAttackedPosition = attackTrans.position;
+                    }
                     forcebackTimer = forcebackDuration;
                 }
 
@@ -321,10 +328,12 @@ public class Character : MonoBehaviour
     {
         if (attackTrans == null)
         {
+            //Debug.Log(transform.position);
             OnForceback(transform.position);
         }
         else
         {
+            //Debug.Log(attackTrans.position);
             OnForceback(attackTrans.position);
         }
     }
@@ -336,7 +345,14 @@ public class Character : MonoBehaviour
     {
         if (forcebackTimer > 0)
         {
-            OnForceback(beAttackedTrans);
+            if (!isbeAttackedPosition)
+            {
+                OnForceback(beAttackedTrans);
+            }
+            else
+            {
+                OnForceback(beAttackedPosition);
+            }
 
             forcebackTimer -= Time.deltaTime;
         }
@@ -346,6 +362,8 @@ public class Character : MonoBehaviour
             {
                 beAttackedTrans = null;
             }
+            isbeAttackedPosition = false;
+            beAttackedPosition = Vector2.zero;
         }
     }
 

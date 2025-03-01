@@ -93,12 +93,12 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
             if (dreamizedFeather != null)
             {
                 info.dreamizedFeather = dreamizedFeather.GetItemInfo();
-                Debug.Log("DreamizedFeatherInfo:"+info.dreamizedFeather.itemName);
+                //Debug.Log("DreamizedFeatherInfo:"+info.dreamizedFeather.itemName);
             }
             else if (dreamizedFeatherInfo != null)
             {
                 info.dreamizedFeather = dreamizedFeatherInfo;
-                Debug.Log("DreamizedFeatherInfo:" + info.dreamizedFeather.itemName);
+                //Debug.Log("DreamizedFeatherInfo:" + info.dreamizedFeather.itemName);
             }
         }
 
