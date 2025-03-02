@@ -189,7 +189,8 @@ public class FinalBossSteps : MonoBehaviour
                 rb.gravityScale = 2;
                 finalBoss.unattackable = false;
                 finalBoss.enemyAI = true;
-                finalBoss.AddFeather(new DefautFeather(100));
+                finalBoss.AddFeather(new DefautFeather(finalBoss.defaultFeatherHealth));
+                finalBoss.AddFeather(new DefautFeather(finalBoss.defaultFeatherHealth));
                 finalBoss.runSpeed = 7;
 
                 fireParticle.SetActive(false);

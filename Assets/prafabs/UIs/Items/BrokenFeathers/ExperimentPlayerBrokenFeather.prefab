@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e62bf1603e6744c842e9a4e00df978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthText: {fileID: 0}
   health: {fileID: 8396719999954862812}
 --- !u!1 &8559550211635693324
 GameObject:
@@ -182,7 +183,7 @@ MonoBehaviour:
   type: 1
   isDreamizable: 1
   dreamizeCost: 1
-  dreamizedFeather: {fileID: 1240171927397317818, guid: 3f752d1b02561264a85719512c565f18, type: 3}
+  dreamizedFeather: {fileID: 1240171927397317818, guid: 5b42371c099b12f47904a6148077df08, type: 3}
   dreamizedFeatherInfo:
     itemName: 
     information: 
@@ -190,6 +191,9 @@ MonoBehaviour:
     isDreamizable: 0
     dreamizeCost: 0
     imageName: 
+    colorR: 0
+    colorG: 0
+    colorB: 0
     buffName: 
     featherHealth: 0
     featherMaxHealth: 0
@@ -200,6 +204,9 @@ MonoBehaviour:
   dialogName: 
   isEquiped: 0
   imageName: 
+  colorR: 0
+  colorG: 0
+  colorB: 0
 --- !u!222 &5210732619996342142
 CanvasRenderer:
   m_ObjectHideFlags: 0
