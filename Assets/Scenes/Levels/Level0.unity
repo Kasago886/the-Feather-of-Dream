@@ -1272,6 +1272,7 @@ MonoBehaviour:
     name: "\u6E34\u6C42\u8BA4\u53EF"
     number: 05000000
   normalProperity: []
+  timeNumber: 0
 --- !u!114 &224145440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1861,6 +1862,7 @@ MonoBehaviour:
     lockHealth1: -0.99
     attackTimerList: []
     skillTimerList: []
+  timeNumber: 0
 --- !u!114 &328099974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2377,6 +2379,7 @@ MonoBehaviour:
     lockHealth1: 0
     attackTimerList: []
     skillTimerList: []
+  timeNumber: 0
 --- !u!114 &380720738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2571,6 +2574,7 @@ MonoBehaviour:
     lockHealth1: 0
     attackTimerList: []
     skillTimerList: []
+  timeNumber: 0
 --- !u!114 &383381732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2964,6 +2968,7 @@ MonoBehaviour:
     lockHealth1: -0.99
     attackTimerList: []
     skillTimerList: []
+  timeNumber: 0
 --- !u!114 &408635419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3797,6 +3802,7 @@ MonoBehaviour:
     name: "\u5F02\u5E38\u8106\u5F31"
     number: 05000000
   normalProperity: []
+  timeNumber: 0
 --- !u!114 &591468430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4448,6 +4454,7 @@ MonoBehaviour:
     lockHealth1: 0
     attackTimerList: []
     skillTimerList: []
+  timeNumber: 0
 --- !u!114 &732270930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7813,6 +7820,7 @@ MonoBehaviour:
     skillTimerList:
     - skillNumber: 0
       time: 15
+  timeNumber: 0
 --- !u!114 &1222927531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8104,6 +8112,10 @@ MonoBehaviour:
   g2: {fileID: 1510688813}
   g3: {fileID: 1727448122}
   g4: {fileID: 633639778}
+  timeNumber1: 0
+  timeNumber2: 0
+  timeNumber3: 0
+  timeNumber4: 0
 --- !u!1 &1234927322
 GameObject:
   m_ObjectHideFlags: 0
@@ -10037,11 +10049,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1798979130975056823, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 75
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 1798979130975056823, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 495
+      value: 497
       objectReference: {fileID: 0}
     - target: {fileID: 1873056012038482416, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10057,7 +10069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1873056012038482416, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 640.4159
+      value: 643.4159
       objectReference: {fileID: 0}
     - target: {fileID: 2522135768547039197, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchorMax.x
@@ -10125,11 +10137,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3970839549448215180, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 75
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 3970839549448215180, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 302
+      value: 303
       objectReference: {fileID: 0}
     - target: {fileID: 4005528054150405591, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10157,7 +10169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4302934993989423955, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 75
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 4302934993989423955, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -10637,7 +10649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9165645140460325637, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 37.5
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 9165645140460325637, guid: 0af6e9e2648d39e4c871eb246e3c366b, type: 3}
       propertyPath: m_SizeDelta.y
@@ -12603,6 +12615,7 @@ MonoBehaviour:
     lockHealth1: 0
     attackTimerList: []
     skillTimerList: []
+  timeNumber: 0
 --- !u!114 &1738345476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13241,6 +13254,7 @@ MonoBehaviour:
     lockHealth1: 0
     attackTimerList: []
     skillTimerList: []
+  timeNumber: 0
 --- !u!114 &1857622238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13746,6 +13760,7 @@ MonoBehaviour:
       dream: 0
       tenacity: 0
       strength: 0
+      abnormalResitance: 0
     equipedFeather:
       items: []
     equipedBrokenFeather:
@@ -14297,6 +14312,7 @@ MonoBehaviour:
     skillTimerList:
     - skillNumber: 0
       time: 5
+  timeNumber: 0
 --- !u!114 &2044693037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15047,6 +15063,7 @@ MonoBehaviour:
     lockHealth1: 0
     attackTimerList: []
     skillTimerList: []
+  timeNumber: 0
 --- !u!114 &2089988271
 MonoBehaviour:
   m_ObjectHideFlags: 0

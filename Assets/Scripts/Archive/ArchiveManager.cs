@@ -368,7 +368,7 @@ public class ArchiveManager : MonoBehaviour
                 }
                 if (setFlag)
                 {
-                    archiveManager.currentArchive.levelInfo.drNeprizKilled = set;
+                    archiveManager.currentArchive.levelInfo.dwarfKilled = set;
                 }
                 return false;
             case FlagType.drNeprizKilled:
