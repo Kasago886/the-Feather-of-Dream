@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum User
@@ -28,11 +29,25 @@ public class AttackBodyBuffAdder : MonoBehaviour
     }
     private void Update()
     {
-        if (user == User.Íæ¼Ò  && GetComponent<AttackBody>().whatBeAttack.Count>0&& GetComponent<AttackBody>().whatBeAttack[0].GetComponent<Enemy>()!=null)
+        if (!gameObject.IsDestroyed())
         {
-            enemy= GetComponent<AttackBody>().whatBeAttack[0].GetComponent<Enemy>();
+            AttackBody attackBody = GetComponent<AttackBody>();
+            if (attackBody != null)
+            {
+                if (user == User.Íæ¼Ò && attackBody.whatBeAttack.Count > 0)
+                {
+                    GameObject enemyObj = attackBody.whatBeAttack[0];
+                    if (!enemyObj.IsDestroyed())
+                    {
+                        if (enemyObj.GetComponent<Enemy>() != null)
+                        {
+                            enemy = enemyObj.GetComponent<Enemy>();
+                        }
+                    }
+                }
+            }
+            //Debug.Log(gameObject.name + "buff=" + nextToPlayer.Count);
         }
-        //Debug.Log(gameObject.name + "buff=" + nextToPlayer.Count);
     }
     public void AddBuff()
     {

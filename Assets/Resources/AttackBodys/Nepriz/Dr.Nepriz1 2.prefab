@@ -155,11 +155,31 @@ MonoBehaviour:
   - {fileID: 2158636381633551328, guid: a2230516c526a9f40a72120fc2c853a1, type: 3}
   - {fileID: 2158636381633551328, guid: 48804ea4975087d4c8908ce600e4e621, type: 3}
   exp: 50
-  flag: 0
+  flag: 18
   refreshable: 0
   encyclopedia: {fileID: 0}
   player: {fileID: 0}
   mediocreNumber: 
+  N:
+    effectOnPlayer: 0
+    effectOnEnemy: 0
+    tenacity: 0
+    strength: 0
+    abnormalityResistance: 0
+    burnResistance: 0
+    traumaResistance: 0
+    unlockHealth: 0
+    lockHealth: 0
+    tenacity1: 0
+    strength1: 0
+    abnormalityResistance1: 0
+    burnResistance1: 0
+    traumaResistance1: 0
+    unlockHealth1: 0
+    lockHealth1: 0
+    attackTimerList: []
+    skillTimerList: []
+  number: 0
 --- !u!50 &1114919163909731784
 Rigidbody2D:
   serializedVersion: 4

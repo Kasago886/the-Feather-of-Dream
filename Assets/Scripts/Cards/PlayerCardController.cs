@@ -257,7 +257,7 @@ public class PlayerCardController : MonoBehaviour
     private void Update()
     {
         remainingSlotCount = positionNumber - content.transform.childCount;
-        Debug.Log("remainingSlotCount=" + remainingSlotCount);
+        //Debug.Log("remainingSlotCount=" + remainingSlotCount);
         slotNumberText.text = positionNumber.ToString();
         //if (Input.GetKeyDown(KeyCode.V))
         //{

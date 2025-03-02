@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 public enum targetMethod
 {
     ÖÃÈëÎïÌåTransform,
@@ -147,8 +148,17 @@ public class Card : MonoBehaviour,IPointerClickHandler
     {
         if(effortTarget.Count>0)
         {
+            /*
             foreach (var item in effortTarget)
             {
+                if (item == null)
+                {
+                    effortTarget.Remove(item);
+                }
+            }*/
+            for (int i = effortTarget.Count - 1; i >= 0; i--)
+            {
+                var item = effortTarget[i];
                 if (item == null)
                 {
                     effortTarget.Remove(item);

@@ -19,6 +19,14 @@ public class Box : InteractiveObject
         equipmentPanelManager = FindAnyObjectByType<EquipmentPanelManager>();
         dialog = FindAnyObjectByType<Dialog>();
 
+        if (equipmentPanelManager != null)
+        {
+            if (!equipmentPanelManager.setuped)
+            {
+                equipmentPanelManager.SetupPanel();
+            }
+        }
+
         if (onlyItem)
         {
             bool hasAll = true;
@@ -30,6 +38,7 @@ public class Box : InteractiveObject
                 }
             }
             triggered = hasAll;
+            Debug.Log(triggered);
         }
     }
 

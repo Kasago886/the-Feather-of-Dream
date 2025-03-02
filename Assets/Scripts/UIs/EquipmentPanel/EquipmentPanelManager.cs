@@ -220,6 +220,7 @@ public class EquipmentPanelManager : MonoBehaviour
         List<ItemInfo> itemInfos = GetItemInfos(itemContent);
         foreach (ItemInfo itemInfo in itemInfos)
         {
+            //Debug.Log("this: " + itemInfo.itemName + "\ntarget: " + item.itemName);
             if (itemInfo.itemName == item.itemName && itemInfo.information == item.information)
             {
                 return true;
