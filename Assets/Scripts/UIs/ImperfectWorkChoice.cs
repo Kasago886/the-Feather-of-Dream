@@ -38,6 +38,7 @@ public class ImperfectWorkChoice : MonoBehaviour
     public string descrabption;
     public List<BuffNameAndNumber> buffNameAndNumbers;
     public List<NormalProperity> normalProperity;
+    [HideInInspector] public float timeNumber;
     private Player player;
     private Nepriz2 nepriz2;
     private Image image;
@@ -165,7 +166,7 @@ public class ImperfectWorkChoice : MonoBehaviour
     }
     void AddDescrabption()
     {
-        Time.timeScale = 1;
+        Time.timeScale = timeNumber;
         gameObject.transform.parent.gameObject.SetActive(false);
         BuffScroll buffScroll = GameObject.Find("BuffScrollView").GetComponent<BuffScroll>();
         for (int i = 0; i < buffScroll.buffImformation.Count; i++)

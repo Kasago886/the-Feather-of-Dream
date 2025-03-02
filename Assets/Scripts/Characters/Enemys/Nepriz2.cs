@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Nepriz2 : Enemy
@@ -83,10 +84,22 @@ public class Nepriz2 : Enemy
             player.abnormalityResistance = N.abnormalityResistance;
             player.burnResistance = N.burnResistance;
             player.traumaResistance = N.traumaResistance;
+            for (int i = 0;i<player.buffList.Count;i++)
+            {
+                if (player.buffList[i].name == "è¦´ÃÖ®×÷")
+                {
+                    player.buffList[i].timer = 0;
+                    break;
+                }
+            }
         }
         if(GameObject.FindAnyObjectByType<PlayerCardController>() != null)
         {
             FindAnyObjectByType<PlayerCardController>().positionNumber=number;
+        }
+        if(FindAnyObjectByType(typeof(NeprizAttackBody)) != null)
+        {
+            Destroy(FindAnyObjectByType(typeof(NeprizAttackBody)));
         }
     }
 }

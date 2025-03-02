@@ -273,7 +273,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 497, y: 0}
-  m_SizeDelta: {x: 0, y: 130}
+  m_SizeDelta: {x: 76, y: 130}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5166940176040782576
 CanvasRenderer:
@@ -897,6 +897,7 @@ MonoBehaviour:
   featherEquipContent: {fileID: 5396776375204035154}
   brokenFeatherEquipContent: {fileID: 4017480032858728541}
   itemContent: {fileID: 7168496739411643604}
+  normalProperity: {fileID: 8150578641390923678}
   itemName: {fileID: 8318780080205151896}
   itemInformation: {fileID: 8578537950359004036}
   equipButton: {fileID: 3077995935641591630}
@@ -4772,7 +4773,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 109, y: 0}
-  m_SizeDelta: {x: 0, y: 130}
+  m_SizeDelta: {x: 76, y: 130}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7443869046457256894
 CanvasRenderer:
@@ -7127,6 +7128,7 @@ GameObject:
   - component: {fileID: 247908446874123302}
   - component: {fileID: 6107877600859852905}
   - component: {fileID: 2655095419647947449}
+  - component: {fileID: 3123972072628326356}
   m_Layer: 5
   m_Name: NormalPrepority
   m_TagString: Untagged
@@ -7236,6 +7238,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contentTransform: {fileID: 0}
   itemTransform: {fileID: 4647869831767520194}
+--- !u!114 &3123972072628326356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8150578641390923678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f4bda5258d488e49abe6b5ffe4c720a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollViewContent: {fileID: 4647869831767520194}
 --- !u!1 &8453555959799081674
 GameObject:
   m_ObjectHideFlags: 0

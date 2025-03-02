@@ -662,9 +662,14 @@ public class EquipmentPanelManager : MonoBehaviour
         }
 
         animationBoolManager.SwitchValue("appear");
+        Invoke("UpdateScrollView", 0.5f);
         isShow = !isShow;
     }
-
+    private void UpdateScrollView()
+    {
+        strength.text += "U";
+        strength.text = ((int)player.strength).ToString();
+    }
     /// <summary>
     /// 装备物品
     /// </summary>

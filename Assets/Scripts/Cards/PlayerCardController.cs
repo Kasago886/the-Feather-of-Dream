@@ -259,27 +259,27 @@ public class PlayerCardController : MonoBehaviour
         remainingSlotCount = positionNumber - content.transform.childCount;
         //Debug.Log("remainingSlotCount=" + remainingSlotCount);
         slotNumberText.text = positionNumber.ToString();
-        //if (Input.GetKeyDown(KeyCode.V))
-        //{
-        //    if (FindAnyObjectByType<Nepriz2>() != null)
-        //    {
-        //        FindAnyObjectByType<Nepriz2>().AddBuff("…À∫€");
-        //        FindAnyObjectByType<Nepriz2>().AddBuff("∞Œ”20s");
-        //    }
-        //    if (FindAnyObjectByType<Nepriz1>() != null)
-        //    {
-        //        FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
-        //        FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
-        //        FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
-        //        FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
-        //        FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
-        //        FindAnyObjectByType<Nepriz1>().AddBuff("∞Œ”20s");
-        //    }
-        //    FindAnyObjectByType<Player>().tenacity += 99999;
-        //    FindAnyObjectByType<Player>().strength += 10;
-        //    FindAnyObjectByType<Player>().shields.Add(new Shield() { health = 99999999, timer = 999999999 });
-        //    FindAnyObjectByType<Player>().AddBuff("∞¨¿Ú÷ÆΩ£");
-        //}
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            if (FindAnyObjectByType<Nepriz2>() != null)
+            {
+                FindAnyObjectByType<Nepriz2>().AddBuff("…À∫€");
+                FindAnyObjectByType<Nepriz2>().AddBuff("∞Œ”20s");
+            }
+            if (FindAnyObjectByType<Nepriz1>() != null)
+            {
+                FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
+                FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
+                FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
+                FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
+                FindAnyObjectByType<Nepriz1>().AddBuff("…À∫€");
+                FindAnyObjectByType<Nepriz1>().AddBuff("∞Œ”20s");
+            }
+            FindAnyObjectByType<Player>().tenacity += 99999;
+            FindAnyObjectByType<Player>().strength += 10;
+            FindAnyObjectByType<Player>().shields.Add(new Shield() { health = 99999999, timer = 999999999 });
+            FindAnyObjectByType<Player>().AddBuff("∞¨¿Ú÷ÆΩ£");
+        }
     }
 
     /// <summary>

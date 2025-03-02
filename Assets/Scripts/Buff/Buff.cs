@@ -2323,6 +2323,7 @@ public class ImperfectWork : EffectBuff
             }
             if (!b1 && health < healthMax * 4 / 5)
             {
+                ui.timeNumber1 = Time.timeScale;
                 Time.timeScale = 0.0001f;
                 Change();
                 b1 = true;
@@ -2330,6 +2331,7 @@ public class ImperfectWork : EffectBuff
             }
             if (!b2 && health < healthMax * 3 / 5)
             {
+                ui.timeNumber2 = Time.timeScale;
                 Time.timeScale = 0.0001f;
                 Change();
                 b2 = true;
@@ -2337,6 +2339,7 @@ public class ImperfectWork : EffectBuff
             }
             if (!b3 && health < healthMax * 2 / 5)
             {
+                ui.timeNumber3 = Time.timeScale;
                 Time.timeScale = 0.0001f;
                 Change();
                 b3 = true;
@@ -2344,6 +2347,7 @@ public class ImperfectWork : EffectBuff
             }
             if (!b4 && health < healthMax * 1 / 5)
             {
+                ui.timeNumber4 = Time.timeScale; ui.timeNumber1 = Time.timeScale;
                 Time.timeScale = 0.0001f;
                 Change();
                 b4 = true;
