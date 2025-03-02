@@ -761,6 +761,9 @@ public class EquipmentPanelManager : MonoBehaviour
                     RemoveItem(item);
                     AddItem(dreamizedFeatherInfo);
 
+                    archiveManager.currentArchive.playerInfo.dream--;
+                    SetUpPlayerInfo();
+
                     if (selectedItemPlace != null)
                     {
                         if (selectedItemPlace.content != null)
