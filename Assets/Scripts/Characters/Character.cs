@@ -654,13 +654,9 @@ public class Character : MonoBehaviour
             }
         }
 
-        Enemy enemy = this as Enemy;
-        if (enemy != null)
+        if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
         {
-            if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
-            {
-                OnDeath();
-            }
+            OnDeath();
         }
     }
 
