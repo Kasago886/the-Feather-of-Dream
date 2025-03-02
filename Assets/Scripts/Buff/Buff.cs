@@ -3089,7 +3089,7 @@ public class Scorch : EffectBuff
         attackTimer += Time.deltaTime;
         if (attackTimer > 0.1f && character.unlockedFeathers.Count > 0)
         {
-            character.unlockedFeathers[0].health -= 0.1f * Mathf.Pow(2, -character.abnormalityResistance / 100) * (1 - character.burnResistance * 0.1f);
+            character.unlockedFeathers[0].health -= 0.05f * Mathf.Pow(2, -character.abnormalityResistance / 100) * (1 - character.burnResistance * 0.1f);
             attackTimer = 0;
         }
         base.OnUpdate();

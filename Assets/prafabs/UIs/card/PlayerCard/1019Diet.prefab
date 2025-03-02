@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4056058898571058497, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Name
-      value: Diet
+      value: 1019Diet
       objectReference: {fileID: 0}
     - target: {fileID: 6564618522710615933, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: m_Pivot.x
@@ -114,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: description
-      value: "\u4F7F1\u540D\u654C\u4EBA\u83B7\u5F971\u5C42\u201C\u4E2D\u6BD2\u201D\uFF0C2\u5C42\u201C\u8106\u5F31\u201D\uFF0C\n2\u5C42\u201C\u8FDF\u7F13\u201D\u4E0E2\u5C42\u201C\u51DD\u91CD\u201D"
+      value: "\u4F7F1\u540D\u654C\u4EBA\u83B7\u5F971\u5C42\u201C\u4E2D\u6BD2\u201D\uFF0C2\u5C42\u201C\u8106\u5F31\u201D\uFF0C\n2\u5C42\u201C\u8FDF\u7F13\u201D\u4E0E2\u5C42\u201C\u51DD\u91CD\u201D\uFF0C\u4F7F\u73A9\u5BB6\u83B7\u5F971\n\u5C42\u201C\u6CBB\u6108\u2161\u578B\u201D\u4E0E1\u5C42\u201C\u4F24\u75D5\u62B5\u6297\u201D\u4E0E\u201C\u707C\u4F24\n\u62B5\u6297\u201D"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: minDistance
@@ -194,7 +194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: theNumberOfEffortedEnemies
@@ -246,19 +246,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.data[0]
-      value: "\u707C\u4F24"
+      value: "\u6CBB\u6108\u2161\u578B"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.data[1]
-      value: "\u707C\u4F24"
+      value: "\u707C\u4F24\u62B5\u6297"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.data[2]
-      value: "\u707C\u4F24"
+      value: "\u4F24\u75D5\u62B5\u6297"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.data[3]
-      value: "\u707C\u4F24\u62B5\u6297"
+      value: "\u707C\u4F24"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.data[4]

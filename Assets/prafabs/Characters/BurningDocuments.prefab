@@ -127,16 +127,16 @@ MonoBehaviour:
   effectCardLineList:
   - cards:
     - card: {fileID: 4465113619274764183}
-      cooldown: 16
+      cooldown: 22
       timer: 0
     - card: {fileID: 1068135147466520462}
       cooldown: 1e+15
       timer: 0
     - card: {fileID: 6728674000177938250}
-      cooldown: 30
+      cooldown: 35
       timer: 0
     - card: {fileID: 8035831387205099878}
-      cooldown: 32
+      cooldown: 36
       timer: 0
     cooldown: 0
     timer: 0

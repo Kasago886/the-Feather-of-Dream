@@ -114,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: description
-      value: "\u4F7F\u4E00\u540D\u654C\u4EBA\u83B7\u5F973\u5C42\u201C\u4E2D\u6BD2\u201D\u4E0E\u201C\u707C\u4F24\u201D\n\u5E76\u62D4\u7FBD15s"
+      value: "\u4F7F\u4E00\u540D\u654C\u4EBA\u83B7\u5F973\u5C42\u201C\u4E2D\u6BD2\u201D\u4E0E\u201C\u707C\u4F24\u201D\n\u5E76\u62D4\u7FBD15s\uFF0C\u5E76\u4F7F\u73A9\u5BB6\u83B7\u5F971\u5C42\u201C\u6CBB\u6108\n\u2162\u578B\u201D"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: minDistance
@@ -190,7 +190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: theNumberOfEffortedEnemies
@@ -242,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.data[1]
-      value: "\u968F\u673ABuff"
+      value: "\u6CBB\u6108\u2162\u578B"
       objectReference: {fileID: 0}
     - target: {fileID: 8308702727041960155, guid: 350700635b044014fadf42800ddd9d84, type: 3}
       propertyPath: buffNamesPlayer.Array.data[2]
