@@ -127,7 +127,7 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         if (itemFeather == null)
         {
             info.featherHealth = featherHealth;
-            info.featherMaxHealth = featherHealth;
+            info.featherMaxHealth = featherMaxHealth;
         }
         else
         {

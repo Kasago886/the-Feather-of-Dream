@@ -667,8 +667,11 @@ public class EquipmentPanelManager : MonoBehaviour
     }
     private void UpdateScrollView()
     {
-        strength.text += "U";
-        strength.text = ((int)player.strength).ToString();
+        if (player != null)
+        {
+            strength.text += "U";
+            strength.text = ((int)player.strength).ToString();
+        }
     }
     /// <summary>
     /// 装备物品

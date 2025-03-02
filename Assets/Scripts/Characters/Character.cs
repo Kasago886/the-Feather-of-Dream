@@ -653,6 +653,15 @@ public class Character : MonoBehaviour
                 feathers.Remove(feather);
             }
         }
+
+        Enemy enemy = this as Enemy;
+        if (enemy != null)
+        {
+            if (unlockedFeathers.Count <= 0 && feathers.Count <= 0)
+            {
+                OnDeath();
+            }
+        }
     }
 
     /// <summary>
