@@ -55,6 +55,7 @@ public class AttackBodyBuffAdder : MonoBehaviour
     }
     private void AddBuff1()
     {
+        Debug.Log("Add buff");
         if (player != null)
         {
             foreach (var item in nextToPlayer)

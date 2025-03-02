@@ -20,6 +20,7 @@ public class AttackBodyBuffAdderController : MonoBehaviour
     {
         if (late && theAttackBody != null)
         {
+            Debug.Log("Add111");
             foreach (var buff in buffNameAndNumber)
             {
                 if (buff.effectOnPlayer)
@@ -45,13 +46,16 @@ public class AttackBodyBuffAdderController : MonoBehaviour
         }
         if(GameObject.Find(charactorName + "AttackBody(Clone)")!=null&&GameObject.Find(charactorName+"AttackBody(Clone)").GetComponent<AttackBodyBuffAdder>()!=null)
         {
+            Debug.Log("GameObject.Find(charactorName + \"AttackBody(Clone)\")=" + GameObject.Find(charactorName + "AttackBody(Clone)"));
             theAttackBody = GameObject.Find(charactorName + "AttackBody(Clone)").GetComponent<AttackBodyBuffAdder>();
         }
     }
     public void AddBuff()
     {
+        Debug.Log("Add");
         if (theAttackBody != null)
         {
+            Debug.Log("Add111");
             foreach (var buff in buffNameAndNumber)
             {
                 if (buff.effectOnPlayer)

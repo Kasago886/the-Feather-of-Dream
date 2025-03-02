@@ -1058,7 +1058,7 @@ MonoBehaviour:
     description: "\u4F7F\u73A9\u5BB6\u51CF\u5C11\u4E00\u4E2A\u5361\u69FD\n\uFF0C\u4F7F\u654C\u4EBA\u7684\u6548\u679C\u724C\u4F7F\n\u7528\u65F6\u95F4\u95F4\u9694+3s\uFF0C\u6301\n\u7EED1\u5206\u949F"
     buffPrefab: {fileID: 6051908474743900384, guid: f40d0476d70158b4db5623bd5a23d6d3, type: 3}
   - name: "\u624D\u534E"
-    description: "\u4F7F\u5BF9\u8C61\u97E7\u6027\u4E5810\uFF0C\u6301\n\u7EED29.7s"
+    description: "\u4F7F\u5BF9\u8C61\u97E7\u6027\u4E585\uFF0C\u6301\n\u7EED29.7s"
     buffPrefab: {fileID: 6051908474743900384, guid: 5cc852aacef6ee04487e6391832b4636, type: 3}
   - name: "\u535A\u5B66"
     description: "\u4F7F\u5BF9\u8C61\u529B\u91CF\u4E582\uFF0C\u6301\n\u7EED29.7s"
