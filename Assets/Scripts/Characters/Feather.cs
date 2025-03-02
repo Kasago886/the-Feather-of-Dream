@@ -63,5 +63,6 @@ public class EllieEquipmentFeather : EquipmentFeather
     public EllieEquipmentFeather()
     {
         maxHealth = MaxHealth;
+        //Debug.Log("set maxhealth");
     }
 }

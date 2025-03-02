@@ -124,15 +124,47 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
         /// itemFeather不存在，因此从预制体的featherHealth获取最大生命
         /// 2.实例获取：
         /// itemFeather存在，从feather实例获取当前生命与最大生命
-        if (itemFeather == null)
+        if (type == ItemType.Feather)
         {
-            info.featherHealth = featherHealth;
-            info.featherMaxHealth = featherMaxHealth;
-        }
-        else
-        {
-            info.featherHealth = itemFeather.health;
-            info.featherMaxHealth = itemFeather.maxHealth;
+            if (itemFeather == null)
+            {
+                info.featherHealth = featherHealth;
+
+                if (player == null)
+                {
+                    player = FindAnyObjectByType<Player>();
+                }
+                if (player != null)
+                {
+                    //正常关卡中
+                    equipmentFeatherBuff = BuffContainer.GetBuffInstance(buffName) as EquipmentFeatherBuff;
+                    equipmentFeatherBuff.Init(player);
+
+                    if (equipmentFeatherBuff.feather != null)
+                    {
+                        info.featherMaxHealth = equipmentFeatherBuff.feather.maxHealth;
+                    }
+                }
+                else
+                {
+                    //新建存档
+                    equipmentFeatherBuff = BuffContainer.GetBuffInstance(buffName) as EquipmentFeatherBuff;
+                    equipmentFeatherBuff.Init(new Player());
+
+                    if (equipmentFeatherBuff.feather != null)
+                    {
+                        info.featherMaxHealth = equipmentFeatherBuff.feather.maxHealth;
+                    }
+                }
+            }
+            else
+            {
+                //Debug.Log(itemFeather.GetType());
+                info.featherHealth = itemFeather.health;
+                //Debug.Log(info.featherHealth);
+                info.featherMaxHealth = itemFeather.maxHealth;
+                //Debug.Log(info.featherMaxHealth);
+            }
         }
 
         info.dialogName = dialogName;
@@ -273,6 +305,9 @@ public class Item : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
                 if (itemFeather != null)
                 {
                     equipmentFeatherBuff.feather = itemFeather as EquipmentFeather;
+                    featherHealth = itemFeather.health;
+                    featherMaxHealth = itemFeather.maxHealth;
+                    Debug.Log("max: " + featherMaxHealth + "\nnow: " + featherHealth);
                 }
                 //预制体获取羽信息
                 else

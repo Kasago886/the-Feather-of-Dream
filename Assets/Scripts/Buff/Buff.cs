@@ -999,6 +999,7 @@ public class EllieEquipmentFeatherBuff : EquipmentFeatherBuff
         base.Init(target, timer, isPermanent);
 
         this.feather = new EllieEquipmentFeather();
+        //Debug.Log("max£º" + feather.maxHealth+"\nnow: "+feather.health);
         this.player = target as Player;
     }
 
