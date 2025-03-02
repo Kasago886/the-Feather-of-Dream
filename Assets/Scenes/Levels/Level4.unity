@@ -230864,6 +230864,10 @@ PrefabInstance:
       propertyPath: bulletsRain
       value: 
       objectReference: {fileID: 584838788}
+    - target: {fileID: 6148906987960761163, guid: e3387e6341efbba41b7c762e5d863076, type: 3}
+      propertyPath: defaultFeatherHealth
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
