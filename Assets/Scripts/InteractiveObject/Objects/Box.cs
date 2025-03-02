@@ -38,7 +38,7 @@ public class Box : InteractiveObject
                 }
             }
             triggered = hasAll;
-            Debug.Log(triggered);
+            //Debug.Log(triggered);
         }
     }
 

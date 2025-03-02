@@ -441,7 +441,7 @@ public class Character : MonoBehaviour
         if (feather != null)
         {
             feathers.Add(feather);
-            //Debug.Log(feather);
+            //Debug.Log("add feather: "+feather);
         }
     }
 
@@ -632,6 +632,7 @@ public class Character : MonoBehaviour
         for (int i = feathers.Count - 1; i >= 0; i--)
         {
             Feather feather = feathers[i];
+            //Debug.Log(this.GetType()+": "+feather.GetType()+" "+feather.health);
             if (feather.hpUI != null)
             {
                 feather.hpUI.testHp = feather.health;
@@ -644,13 +645,14 @@ public class Character : MonoBehaviour
         for (int i = unlockedFeathers.Count - 1; i >= 0; i--)
         {
             Feather feather = unlockedFeathers[i];
+            //Debug.Log(this.GetType() + ": " + feather.GetType() + " " + feather.health);
             if (feather.hpUI != null)
             {
                 feather.hpUI.testHp = feather.health;
             }
             if (feather.health <= 0)
             {
-                feathers.Remove(feather);
+                unlockedFeathers.Remove(feather);
             }
         }
 

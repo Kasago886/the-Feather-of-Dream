@@ -413,9 +413,16 @@ public class EquipmentPanelManager : MonoBehaviour
     /// <param name="isEquiped">物品是否被装备</param>
     void GenerateSingleItem(ItemPlace ip, ItemInfo item)
     {
+        //防止死档
+        if (item.itemName == "艾莉之羽" && item.featherHealth <= 0)
+        {
+            item.featherHealth = 0.1f;
+        }
+
         //初始化物品
         GameObject instance = Instantiate(itemObj);
         instance.GetComponent<Item>().Init(item);
+        
         //绑定到ItemPlace
         ip.AddItem(instance.GetComponent<Item>(), null);
     }
@@ -598,7 +605,18 @@ public class EquipmentPanelManager : MonoBehaviour
     public Archive SaveItemsState(Archive inputArchive)
     {
         //equipedFeather
-        inputArchive.equipedFeather.items = GetItemInfos(featherEquipContent).ToArray();
+        List<ItemInfo> itemInfos = GetItemInfos(featherEquipContent);
+        //防止死档
+        for (int i = 0; i < itemInfos.Count; i++)
+        {
+            ItemInfo info = itemInfos[i];
+            if (info.itemName == "艾莉之羽" && info.featherHealth <= 0)
+            {
+                info.featherHealth = 1;
+                break;
+            }
+        }
+        inputArchive.equipedFeather.items = itemInfos.ToArray();
         //equipedBrokenFeather
         inputArchive.equipedBrokenFeather.items = GetItemInfos(brokenFeatherEquipContent).ToArray();
         //items
