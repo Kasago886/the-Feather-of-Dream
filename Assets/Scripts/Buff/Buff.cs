@@ -1747,7 +1747,7 @@ public class DwarfsEffectBuff : EffectBuff
     {
         base.Init(target, timer, isPermanent);
         this.timer = 5;
-        //Num = target.GetComponent<Dwarfs>().DwarfsNumber;
+        Num = target.GetComponent<Dwarfs>().DwarfsNumber;
     }
 
     public override void OnEnter()

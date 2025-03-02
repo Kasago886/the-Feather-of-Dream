@@ -96,7 +96,7 @@ MonoBehaviour:
   attackCooldownTimer: 0
   searchType: 0
   wallDetect: 1
-  keepDistanceWhenNotArmed: 0
+  keepDistanceWhenNotArmed: 1
   searchDistance: 15
   minDistance: 1
   attackCardUseDistance: 10

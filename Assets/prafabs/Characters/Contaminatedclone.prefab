@@ -181,7 +181,7 @@ MonoBehaviour:
   searchType: 0
   wallDetect: 1
   keepDistanceWhenNotArmed: 0
-  searchDistance: 10
+  searchDistance: 20
   minDistance: 1
   attackCardUseDistance: 10
   effectCardUseDistance: 15
