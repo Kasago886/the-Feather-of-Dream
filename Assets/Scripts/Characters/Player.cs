@@ -19,6 +19,7 @@ public class Player : Character
     [HideInInspector] public bool isSprinting = false;
     [HideInInspector] public int baseTenacity;
     [HideInInspector] public int baseStrength;
+    [HideInInspector] public int baseAbnormalTenacity;
     [HideInInspector] public bool setUped = false;
 
     float healthRecoverTimer = 0;
@@ -32,16 +33,16 @@ public class Player : Character
 
     static public SortedDictionary<int,List<int>> level_maxExp_tenacity_strength = new ()
     {
-        {0,new List<int> {20,0,0}},
-        {1,new List<int> {20,10,10}},
-        {2,new List<int> {20,20,20}},
-        {3,new List<int> {20,30,30}},
-        {4,new List<int> {20,40,40}},
-        {5,new List<int> {20,50,50}},
-        {6,new List<int> {20,60,60}},
-        {7,new List<int> {20,70,70}},
-        {8,new List<int> {20,80,80}},
-        {9,new List<int> {20,90,90}},
+        {0,new List<int> {20,0,0,0}},
+        {1,new List<int> {20,10,10,10}},
+        {2,new List<int> {20,20,20,20}},
+        {3,new List<int> { 20, 30, 30, 30 }},
+        {4,new List<int> { 20, 40, 40, 40 }},
+        {5,new List<int> { 20, 50, 50, 50 }},
+        {6,new List<int> { 20, 60, 60, 60 }},
+        {7,new List<int> { 20, 70, 70, 70 }},
+        {8,new List<int> { 20, 80, 80, 80 }},
+        {9,new List<int> { 20, 90, 90, 90 }},
         {10,new List<int> {100,100,100}},
     };
 
@@ -69,9 +70,11 @@ public class Player : Character
         archiveManager.currentArchive.playerInfo.maxExp = levelInfo[0];
         baseTenacity = levelInfo[1];
         baseStrength = levelInfo[2];
+        baseAbnormalTenacity = levelInfo[3];
 
         tenacity = baseTenacity;
         strength = baseStrength;
+        abnormalityResistance=baseAbnormalTenacity;
 
         featherNumText.text = (archiveManager.currentArchive.equipedFeather.items.Length).ToString();
 
@@ -214,16 +217,20 @@ public class Player : Character
             //‘≠∏Ωº”÷µ
             float addTenacity = tenacity - baseTenacity;
             float addStrength = strength - baseStrength;
+            float addAbnormalTenacity=abnormalityResistance-baseAbnormalTenacity;
 
             List<int> levelInfo = level_maxExp_tenacity_strength[archiveManager.currentArchive.playerInfo.level];
             baseTenacity = levelInfo[1];
             baseStrength = levelInfo[2];
+            baseAbnormalTenacity = levelInfo[3];
 
             archiveManager.currentArchive.playerInfo.tenacity = baseTenacity;
             archiveManager.currentArchive.playerInfo.strength = baseStrength;
+            archiveManager.currentArchive.playerInfo.abnormalResitance = baseAbnormalTenacity;
 
             tenacity = baseTenacity + addTenacity;
             strength = baseStrength + addStrength;
+            abnormalityResistance = baseAbnormalTenacity + addAbnormalTenacity;
         }
 
         equipmentPanelManager.SetUpPlayerInfo();

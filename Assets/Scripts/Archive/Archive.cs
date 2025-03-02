@@ -25,6 +25,7 @@ public struct PlayerInfo
     public int dream;
     public int tenacity;
     public int strength;
+    public int abnormalResitance;
 }
 /// <summary>
 /// 物品信息
