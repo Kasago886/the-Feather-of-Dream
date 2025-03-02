@@ -279,7 +279,6 @@ public class PlayerCardController : MonoBehaviour
         //    FindAnyObjectByType<Player>().strength += 10;
         //    FindAnyObjectByType<Player>().shields.Add(new Shield() { health = 99999999, timer = 999999999 });
         //    FindAnyObjectByType<Player>().AddBuff("∞¨¿Ú÷ÆΩ£");
-        //    FindAnyObjectByType<Player>().AddExp(20);
         //}
     }
 

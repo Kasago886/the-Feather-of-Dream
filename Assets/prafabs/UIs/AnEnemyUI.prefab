@@ -1198,6 +1198,12 @@ MonoBehaviour:
   - name: "\u51DD\u805A"
     description: "\u4F7F\u81EA\u8EAB\u901F\u5EA6\u964D\u4F4E80%\uFF0C\n\u97E7\u6027-40\uFF0C\u6301\u7EED3\u79D2\u540E\n\u83B7\u5F97\u5174\u594B"
     buffPrefab: {fileID: 6051908474743900384, guid: 7f89299a9dd82a04f99e00e193d05ff1, type: 3}
+  - name: "\u4E2D\u6BD2"
+    description: "\u4F7F\u5BF9\u8C61\u6BCF\u79D2\u6263\u9664\n5\u6EF4\u8840\uFF0C\u6301\u7EED5s"
+    buffPrefab: {fileID: 6051908474743900384, guid: 09237f85dd5f9a74e98d377bfb8e8cc3, type: 3}
+  - name: "\u6B63\u4E49"
+    description: "\u4F7F\u73A9\u5BB6\u4E0B\u4E00\u5F20\u653B\n\u51FB\u5361\u653B\u51FB\u529B\u7FFB\u500D"
+    buffPrefab: {fileID: 6051908474743900384, guid: 64dc9256298922345b15ee2e88aee0b2, type: 3}
 --- !u!1 &7089285176439379269
 GameObject:
   m_ObjectHideFlags: 0
