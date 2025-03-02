@@ -4491,6 +4491,33 @@ public class ExperimentEffectBuff3 : EffectBuff
 
     }
 }
+public class ExperimentEffectBuff4 : EffectBuff
+{
+    public override void Init(Character target, float timer = 0, bool isPermanent = false)
+    {
+        base.Init(target, timer, isPermanent);
+        this.timer = 0;
+
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        target.GetComponent<ExperimentAttackWay>().attackWay = 2;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+    }
+}
 public class Slowness : EffectBuff
 {
     private Enemy character;

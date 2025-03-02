@@ -695,7 +695,7 @@ public class Character : MonoBehaviour
                 {
                     DamageUIManager.ShowText(((int)(oriHealth - unlockedFeathers[0].health)).ToString(), transform.position, Color.red);
                 }
-                if(oriHealth - unlockedFeathers[0].health < 1)
+                if(0.1f<oriHealth - unlockedFeathers[0].health&& oriHealth - unlockedFeathers[0].health < 1)
                 {
                     DamageUIManager.ShowText((oriHealth - unlockedFeathers[0].health).ToString("F1"), transform.position, Color.red);
 

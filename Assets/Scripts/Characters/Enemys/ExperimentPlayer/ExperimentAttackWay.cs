@@ -11,11 +11,13 @@ public class ExperimentAttackWay : MonoBehaviour
     private float timer2;
     public int attackWay;
     Vector2 dirction;
+    GameObject childAttack;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         player = FindAnyObjectByType<Player>();
         Init();
+        childAttack = Resources.Load<GameObject>("AttackBodys/ExperimentPlayer/ExperimentPlayerChildAttack");
     }
     private void Update()
     {
@@ -32,7 +34,7 @@ public class ExperimentAttackWay : MonoBehaviour
             rb.gravityScale = 0;
             if (timer <-1)
             {
-                timer = 0.2f;
+                timer = 0.15f;
             }
             if (timer > 0)
             {
@@ -40,7 +42,7 @@ public class ExperimentAttackWay : MonoBehaviour
             }
             if (timer < 0 && timer > -1 && timer2 < -1)
             {
-                timer2 = 0.8f;
+                timer2 = 0.9f;
                 timer = -2;
             }
             if (timer2 > 0&&timer2<=0.6f)
@@ -65,6 +67,12 @@ public class ExperimentAttackWay : MonoBehaviour
             {
                 Init();
             }
+        }
+        if (attackWay == 2)
+        {
+            Instantiate<GameObject>(childAttack,new Vector3(-3.55f,8.42f,0),Quaternion.identity);
+            Instantiate<GameObject>(childAttack,new Vector3(-11.98f,8.94f,0),Quaternion.identity);
+            attackWay = -1;
         }
     }
     private void Init()
